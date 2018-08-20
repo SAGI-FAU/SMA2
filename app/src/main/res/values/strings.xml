@@ -16,6 +16,27 @@
     <string name="no">No</string>
     <string name="smoker">Smoker</string>
     <string name="next">Next</string>
+    <string name="back">Back</string>
+    <string name="education">Education Level</string>
+    <string name="tod">Time of Diagnosis (years)</string>
+    <string name="med">Medical intake</string>
+    <string name="med_name">Medicine name</string>
+    <string name="med_dose">Dose (mg)</string>
+    <string name="med_time">Intake time</string>
+    <string name="other1">Any other speech or</string>
+    <string name="other2">Movement disorder</string>
+    <string name="___">------ ------ ------</string>
+    <string name="start">Start your exercises Today</string>
+    <string name="start2">START</string>
+    <string name="record">Record</string>
+    <string name="sustained_a">Sustained vowel /ah/</string>
+    <string name="ddk">Rapid repetition of syllables (/pa-ta-ka/)</string>
+    <string name="instructions">Show Instructions</string>
+    <string name="text3">Speech exercise 3</string>
+    <string name="readtext">Please listen and repeat the following paragraph</string>
+    <string name="monologue">Please say what you normally do in a normal day</string>
+    <string name="sentences">Please listen and repeat the following sentences</string>
+    <string name="image">Please describe what you see in the following image</string>
 
 
 </resources>
