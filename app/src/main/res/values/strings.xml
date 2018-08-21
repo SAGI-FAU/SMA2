@@ -37,6 +37,15 @@
     <string name="monologue">Please say what you normally do in a normal day</string>
     <string name="sentences">Please listen and repeat the following sentences</string>
     <string name="image">Please describe what you see in the following image</string>
+    <string name="volume">Volume</string>
+    <string name="recording">Recording Speech.</string>
+    <string name="walking">Walking exercise</string>
+    <string name="walking1">2x0, 4x10, free walk, etc.</string>
+    <string name="hand_ex">Hand tremor exercise</string>
+    <string name="hand_ex1">rst tremor, kinetic tremor, pronation / supination, etc.</string>
+    <string name="recording2">Recording Movement.</string>
+    <string name="tapping_ex">Tapping exercise</string>
+    <string name="tapping_ex1">one finger taping, two fingers tapping, sliding, etc.</string>
 
 
 </resources>
