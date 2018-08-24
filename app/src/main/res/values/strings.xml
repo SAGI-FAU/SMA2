@@ -46,6 +46,10 @@
     <string name="recording2">Recording Movement.</string>
     <string name="tapping_ex">Tapping exercise</string>
     <string name="tapping_ex1">one finger taping, two fingers tapping, sliding, etc.</string>
+    <string name="btnProfileText">Profile</string>
+    <string name="btnSettingsText">Settings</string>
+    <string name="btnExercisesText">Exercises</string>
+    <string name="btnResultsText">Results</string>
 
 
 </resources>
