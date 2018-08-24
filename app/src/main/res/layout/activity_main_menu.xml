@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background_main_menu">
+
+    <ImageButton
+        android:id="@+id/btnProfile"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_margin="0dp"
+        android:adjustViewBounds="true"
+        android:background="@android:color/background_light"
+        android:scaleType="fitCenter"
+        android:src="@drawable/btn_profile"
+        app:layout_constraintHeight_percent="0.49"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintWidth_percent="0.49" />
+
+    <ImageButton
+        android:id="@+id/btnSettings"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_margin="0dp"
+        android:adjustViewBounds="true"
+        android:background="@android:color/background_light"
+        android:gravity="bottom|center_horizontal"
+        android:scaleType="fitCenter"
+        android:src="@drawable/btn_settings"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHeight_percent="0.49"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintWidth_percent="0.49" />
+
+    <ImageButton
+        android:id="@+id/btnExercises"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_margin="0dp"
+        android:adjustViewBounds="true"
+        android:background="@android:color/background_light"
+        android:gravity="bottom|center_horizontal"
+        android:scaleType="fitCenter"
+        android:src="@drawable/btn_exercises"
+        android:text="@string/btnExercisesText"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHeight_percent="0.49"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintWidth_percent="0.49" />
+
+    <ImageButton
+        android:id="@+id/btnResults"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_margin="0dp"
+        android:adjustViewBounds="true"
+        android:background="@android:color/background_light"
+        android:gravity="bottom|center_horizontal"
+        android:scaleType="fitCenter"
+        android:src="@drawable/btn_results"
+        android:text="@string/btnResultsText"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHeight_percent="0.49"
+        app:layout_constraintWidth_percent="0.49" />
+
+    <TextView
+        android:id="@+id/textView13"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginStart="8dp"
+        android:text="@string/btnProfileText"
+        android:textSize="30dp"
+        android:textStyle="bold|italic"
+        app:layout_constraintBottom_toBottomOf="@+id/btnProfile"
+        app:layout_constraintEnd_toEndOf="@+id/btnProfile"
+        app:layout_constraintStart_toStartOf="@+id/btnProfile" />
+
+    <TextView
+        android:id="@+id/textView14"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginStart="8dp"
+        android:text="@string/btnSettingsText"
+        android:textSize="30dp"
+        android:textStyle="bold|italic"
+        app:layout_constraintBottom_toBottomOf="@+id/btnSettings"
+        app:layout_constraintEnd_toEndOf="@+id/btnSettings"
+        app:layout_constraintStart_toStartOf="@+id/btnSettings" />
+
+    <TextView
+        android:id="@+id/textView15"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginStart="8dp"
+        android:text="@string/btnExercisesText"
+        android:textSize="30dp"
+        android:textStyle="bold|italic"
+        app:layout_constraintBottom_toBottomOf="@+id/btnExercises"
+        app:layout_constraintEnd_toEndOf="@+id/btnExercises"
+        app:layout_constraintStart_toStartOf="@+id/btnExercises" />
+
+    <TextView
+        android:id="@+id/textView16"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginStart="8dp"
+        android:text="@string/btnResultsText"
+        android:textSize="30dp"
+        android:textStyle="bold|italic"
+        app:layout_constraintBottom_toBottomOf="@+id/btnResults"
+        app:layout_constraintEnd_toEndOf="@+id/btnResults"
+        app:layout_constraintStart_toStartOf="@+id/btnResults" />
+</android.support.constraint.ConstraintLayout>
