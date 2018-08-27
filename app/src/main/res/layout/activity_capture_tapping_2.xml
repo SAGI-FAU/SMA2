@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+
+    android:layout_marginLeft="16dp"
+    android:layout_marginRight="16dp"
+    tools:context="com.sma2.sma2.MainActivity">
+
+
+
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:srcCompat="@drawable/grass"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Chronometer
+        android:id="@+id/accgraph_chrono2"
+        android:textSize="40sp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:textColor="@color/colorPrimaryDark"
+        app:layout_constraintTop_toTopOf="parent"
+        />
+
+    <ImageButton
+        android:id="@+id/imageButton"
+        android:layout_width="120sp"
+        android:layout_height="120sp"
+        app:srcCompat="@drawable/bug"
+        android:adjustViewBounds="true"
+        android:background="@null"
+        android:layout_weight="1"
+        android:scaleType="fitCenter"
+        tools:layout_editor_absoluteX="180sp"
+        tools:layout_editor_absoluteY="134dp" />
+
+
+    <ImageButton
+        android:id="@+id/imageButton2"
+        android:layout_width="120sp"
+        android:layout_height="120sp"
+        app:srcCompat="@drawable/bug"
+        android:adjustViewBounds="true"
+        android:background="@null"
+        android:layout_weight="1"
+        android:scaleType="fitCenter"
+        tools:layout_editor_absoluteX="50sp"
+        tools:layout_editor_absoluteY="300sp" />
+
+
+</android.support.constraint.ConstraintLayout>

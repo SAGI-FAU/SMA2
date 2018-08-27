@@ -8,4 +8,5 @@
     <color name="colorPrimary">#FFA500</color>
     <color name="colorPrimaryDark">#FF8C00</color>
     <color name="colorAccent">#20B2AA</color>
+    <color name="colorSeek">#ff1a1a</color>
 </resources>
