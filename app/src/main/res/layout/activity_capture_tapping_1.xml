@@ -29,6 +29,10 @@
         app:layout_constraintTop_toTopOf="parent"
         />
 
+
+
+
+
     <ImageButton
         android:id="@+id/imageButton"
         android:layout_width="120sp"
@@ -36,10 +40,14 @@
         app:srcCompat="@drawable/bug"
         android:adjustViewBounds="true"
         android:background="@null"
-        android:layout_weight="1"
         android:scaleType="fitCenter"
-        tools:layout_editor_absoluteX="120sp"
-        tools:layout_editor_absoluteY="134dp" />
+        app:layout_constraintTop_toBottomOf="@id/accgraph_chrono2"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_marginTop="100sp"
+        android:layout_marginLeft="150sp"
+        android:layout_marginStart="150sp"/>
+
+
 
 
 </android.support.constraint.ConstraintLayout>

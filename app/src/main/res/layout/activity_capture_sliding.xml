@@ -54,6 +54,8 @@
         app:srcCompat="@drawable/limit_sliding"
         android:layout_marginTop="10sp"
         tools:layout_editor_absoluteX="200sp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/accgraph_chrono3"
         />
 
@@ -68,6 +70,8 @@
         tools:layout_editor_absoluteX="170sp"
         android:textSize="20sp"
         android:gravity="center"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
         android:textColor="@color/colorSeek"
 
          />
