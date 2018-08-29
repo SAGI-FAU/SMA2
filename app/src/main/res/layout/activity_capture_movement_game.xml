@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+
+    android:layout_marginLeft="16dp"
+    android:layout_marginRight="16dp"
+    tools:context="com.sma2.sma2.MainActivity">
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        app:srcCompat="@drawable/wood"
+        android:layout_marginTop="35sp"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Chronometer
+        android:id="@+id/accgraph_chrono2"
+        android:textSize="50sp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:layout_marginTop="30dp"
+        app:layout_constraintTop_toTopOf="parent"
+        />
+
+
+
+    <ImageView
+        android:id="@+id/imageView_ball"
+        android:layout_width="70sp"
+        android:layout_height="70sp"
+        android:background="@null"
+        app:srcCompat="@drawable/ball"
+        app:layout_constraintTop_toBottomOf="@id/accgraph_chrono2"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_marginTop="100sp"
+        android:layout_marginLeft="10sp"
+        android:layout_marginStart="10sp"/>
+
+
+    <ImageView
+        android:id="@+id/imageView_target"
+        android:layout_width="70sp"
+        android:layout_height="70sp"
+        android:background="@null"
+        app:srcCompat="@drawable/target"
+        app:layout_constraintTop_toBottomOf="@id/accgraph_chrono2"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_marginTop="100sp"
+        android:layout_marginLeft="250sp"
+        android:layout_marginStart="250sp"/>
+
+
+</android.support.constraint.ConstraintLayout>

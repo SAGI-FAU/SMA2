@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginLeft="16dp"
+    android:layout_marginRight="16dp"
+    tools:context="com.sma2.sma2.MainActivity">
+
+
+    <TextView
+        android:id="@+id/textView8"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/btnSettingsText"
+        android:layout_marginTop="0dp"
+        app:layout_constraintTop_toTopOf="parent"
+        android:lines="1"
+        android:textSize="30sp"
+        android:gravity="center"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent" />
+
+    <TextView
+        android:id="@+id/textView_lang"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/language"
+        android:layout_marginTop="20dp"
+        app:layout_constraintTop_toBottomOf="@+id/textView8"
+        android:lines="1"
+        android:textSize="30sp"
+        android:gravity="left"
+        app:layout_constraintLeft_toLeftOf="parent"
+         />
+
+
+
+    <RadioGroup xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/language_radio"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="0dp"
+        android:orientation="horizontal"
+        android:layout_gravity="center_horizontal"
+        app:layout_constraintTop_toBottomOf="@+id/textView_lang"
+        >
+
+        <RadioButton
+            android:id="@+id/rbSpanish"
+            android:layout_width="110sp"
+            android:layout_height="80sp"
+            android:layout_marginRight="10sp"
+            android:layout_marginEnd="10sp"
+            android:background="@drawable/spanish"
+            android:checked="true"
+            android:textSize="30sp"
+            android:button="@null"
+            />
+
+
+        <RadioButton
+            android:id="@+id/rbGerman"
+            android:layout_width="110sp"
+            android:layout_height="80sp"
+            android:layout_marginRight="10sp"
+            android:layout_marginEnd="10sp"
+            android:background="@drawable/german"
+            android:checked="true"
+            android:textSize="30sp"
+            android:button="@null"
+            />
+
+        <RadioButton
+            android:id="@+id/rbEnglish"
+            android:layout_width="110sp"
+            android:layout_height="80sp"
+            android:layout_marginRight="10sp"
+            android:layout_marginEnd="10sp"
+            android:background="@drawable/english"
+            android:checked="true"
+            android:textSize="30sp"
+            android:button="@null"
+            />
+    </RadioGroup>
+
+
+    <Button
+        android:id="@+id/button_continue3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimaryDark"
+        android:text="@string/next"
+        android:layout_marginTop="300sp"
+        android:textSize="50sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintRight_toRightOf="parent" />
+
+
+</android.support.constraint.ConstraintLayout>

@@ -18,7 +18,7 @@
     <string name="next">Next</string>
     <string name="back">Back</string>
     <string name="education">Education Level</string>
-    <string name="tod">Time of Diagnosis (years)</string>
+    <string name="tod">Year of diagnosis</string>
     <string name="med">Medical intake</string>
     <string name="med_name">Medicine name</string>
     <string name="med_dose">Dose (mg)</string>
@@ -53,6 +53,8 @@
     <string name="target">TARGET</string>
     <string name="thanks">Thank you!!!</string>
     <string name="results">See the results</string>
+    <string name="birthdate">Birth date</string>
+    <string name="language">Language</string>
 
 
 </resources>
