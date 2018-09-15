@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name">SMA2</string>
-    <string name="name">Username</string>
+    <string name="name">User name</string>
     <string name="ID">ID number</string>
     <string name="Login">LOGIN</string>
     <string name="or">OR</string>
