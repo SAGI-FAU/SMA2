@@ -162,7 +162,7 @@ class SpeechRecorder {
 
     private String getCurrentDateAsString() {
         Date date = Calendar.getInstance().getTime();
-        SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy-HH-mm");
         return dateFormat.format(date);
     }
 
