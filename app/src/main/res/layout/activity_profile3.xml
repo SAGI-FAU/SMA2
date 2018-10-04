@@ -57,15 +57,43 @@
 
 
 
+    <EditText
+        android:id="@+id/weight"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="numberSigned"
+        android:hint="@string/weight"
+        android:layout_marginTop="20dp"
+        app:layout_constraintTop_toBottomOf="@+id/other_disorder"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:backgroundTint="@color/colorPrimary"
+        />
+
+    <EditText
+        android:id="@+id/height"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="numberSigned"
+        android:hint="@string/height"
+        android:layout_marginTop="10dp"
+        app:layout_constraintTop_toBottomOf="@+id/weight"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:backgroundTint="@color/colorPrimary"
+        />
+
+
+
     <Button
-        android:id="@+id/button_continue3"
+        android:id="@+id/button_menu_settings"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@color/colorPrimaryDark"
         android:text="@string/next"
         android:layout_marginTop="220sp"
         android:textSize="50sp"
-        app:layout_constraintTop_toBottomOf="@+id/other_disorder"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintRight_toRightOf="parent" />
 
     <Button
@@ -76,7 +104,7 @@
         android:text="@string/back"
         android:layout_marginTop="220sp"
         android:textSize="50sp"
-        app:layout_constraintTop_toBottomOf="@+id/other_disorder"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent" />
 
 

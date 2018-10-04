@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
 
-    android:layout_marginLeft="16dp"
-    android:layout_marginRight="16dp"
+    android:layout_marginLeft="0dp"
+    android:layout_marginRight="0dp"
     tools:context="com.sma2.sma2.MainActivity">
 
 
@@ -15,13 +16,14 @@
     <ImageView
         android:id="@+id/imageView"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         app:srcCompat="@drawable/grass"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <Chronometer
-        android:id="@+id/accgraph_chrono2"
+    <TextView
+        android:id="@+id/accgraph_chrono3"
         android:textSize="40sp"
+        android:text="00"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
@@ -34,18 +36,18 @@
 
 
     <ImageButton
-        android:id="@+id/imageButton"
+        android:id="@+id/tapButton_1"
         android:layout_width="120sp"
         android:layout_height="120sp"
         app:srcCompat="@drawable/bug"
         android:adjustViewBounds="true"
         android:background="@null"
         android:scaleType="fitCenter"
-        app:layout_constraintTop_toBottomOf="@id/accgraph_chrono2"
+        app:layout_constraintTop_toBottomOf="@id/accgraph_chrono3"
         app:layout_constraintLeft_toLeftOf="parent"
         android:layout_marginTop="100sp"
-        android:layout_marginLeft="150sp"
-        android:layout_marginStart="150sp"/>
+        android:layout_marginLeft="100sp"
+        android:layout_marginStart="100sp"/>
 
 
 

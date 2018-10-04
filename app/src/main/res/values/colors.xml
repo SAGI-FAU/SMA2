@@ -6,7 +6,8 @@
     <color name="colorAccent">#FF4081</color>
     -->
     <color name="colorPrimary">#FFA500</color>
-    <color name="colorPrimaryDark">#FF8C00</color>
+    <color name="colorPrimaryDark">#ff8c00</color>
     <color name="colorAccent">#20B2AA</color>
     <color name="colorSeek">#ff1a1a</color>
+    <color name="white">#ffffff</color>
 </resources>

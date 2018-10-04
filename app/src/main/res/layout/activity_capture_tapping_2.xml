@@ -5,8 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
 
-    android:layout_marginLeft="16dp"
-    android:layout_marginRight="16dp"
+    android:layout_marginLeft="0dp"
+    android:layout_marginRight="0dp"
     tools:context="com.sma2.sma2.MainActivity">
 
 
@@ -14,23 +14,24 @@
 
     <ImageView
         android:id="@+id/imageView"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:srcCompat="@drawable/grass"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <Chronometer
-        android:id="@+id/accgraph_chrono2"
+    <TextView
+        android:id="@+id/accgraph_chrono4"
         android:textSize="40sp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
+        android:text="00"
         android:textColor="@color/colorPrimaryDark"
         app:layout_constraintTop_toTopOf="parent"
         />
 
     <ImageButton
-        android:id="@+id/imageButton"
+        android:id="@+id/tapButton_2_1"
         android:layout_width="120sp"
         android:layout_height="120sp"
         app:srcCompat="@drawable/bug"
@@ -38,7 +39,7 @@
         android:background="@null"
         android:layout_weight="1"
         android:scaleType="fitCenter"
-        app:layout_constraintTop_toBottomOf="@id/accgraph_chrono2"
+        app:layout_constraintTop_toBottomOf="@id/accgraph_chrono4"
         app:layout_constraintLeft_toLeftOf="parent"
         android:layout_marginTop="100sp"
         android:layout_marginLeft="150sp"
@@ -46,7 +47,7 @@
 
 
     <ImageButton
-        android:id="@+id/imageButton2"
+        android:id="@+id/tapButton_2_2"
         android:layout_width="120sp"
         android:layout_height="120sp"
         app:srcCompat="@drawable/bug"
@@ -54,11 +55,11 @@
         android:background="@null"
         android:layout_weight="1"
         android:scaleType="fitCenter"
-        app:layout_constraintTop_toBottomOf="@id/accgraph_chrono2"
+        app:layout_constraintTop_toBottomOf="@id/accgraph_chrono4"
         app:layout_constraintLeft_toLeftOf="parent"
         android:layout_marginTop="300sp"
-        android:layout_marginLeft="10sp"
-        android:layout_marginStart="10sp" />
+        android:layout_marginLeft="20sp"
+        android:layout_marginStart="20sp" />
 
 
 </android.support.constraint.ConstraintLayout>
