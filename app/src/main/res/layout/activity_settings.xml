@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:layout_marginLeft="16dp"
     android:layout_marginRight="16dp"
-    tools:context="com.sma2.sma2.MainActivity">
+    tools:context="com.sma2.sma2.SettingsActivity">
 
 
     <TextView
@@ -40,17 +40,17 @@
 
     <RadioGroup xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/language_radio"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="0dp"
         android:orientation="horizontal"
-        android:layout_gravity="center_horizontal"
+        android:layout_gravity="center"
         app:layout_constraintTop_toBottomOf="@+id/textView_lang"
         >
 
         <RadioButton
             android:id="@+id/rbSpanish"
-            android:layout_width="110sp"
+            android:layout_width="100sp"
             android:layout_height="80sp"
             android:layout_marginRight="10sp"
             android:layout_marginEnd="10sp"
@@ -63,7 +63,7 @@
 
         <RadioButton
             android:id="@+id/rbGerman"
-            android:layout_width="110sp"
+            android:layout_width="100sp"
             android:layout_height="80sp"
             android:layout_marginRight="10sp"
             android:layout_marginEnd="10sp"
@@ -75,7 +75,7 @@
 
         <RadioButton
             android:id="@+id/rbEnglish"
-            android:layout_width="110sp"
+            android:layout_width="100sp"
             android:layout_height="80sp"
             android:layout_marginRight="10sp"
             android:layout_marginEnd="10sp"
@@ -88,12 +88,23 @@
 
 
     <Button
-        android:id="@+id/button_continue3"
+        android:id="@+id/button_update_medicine"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimaryDark"
+        android:text="@string/update"
+        android:textSize="30sp"
+        app:layout_constraintTop_toBottomOf="@+id/language_radio"
+        android:layout_marginTop="50sp"
+        app:layout_constraintLeft_toLeftOf="parent" />
+
+
+    <Button
+        android:id="@+id/button_menu_settings"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@color/colorPrimaryDark"
         android:text="@string/next"
-        android:layout_marginTop="300sp"
         android:textSize="50sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintRight_toRightOf="parent" />

@@ -1,5 +1,6 @@
 package com.sma2.sma2;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -8,12 +9,15 @@ import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         //setContentView(R.layout.activity_main_menu);
         setContentView(R.layout.activity_main_menu);
         setListeners();
+
     }
 
     private void setListeners() {
@@ -25,22 +29,27 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         findViewById(R.id.txtSettings).setOnClickListener(this);
         findViewById(R.id.txtExercises).setOnClickListener(this);
         findViewById(R.id.txtResults).setOnClickListener(this);
+
     }
 
     @Override
     public void onClick(View view) {
+
         switch (view.getId()){
             case R.id.btnProfile:
             case R.id.txtProfile:
                 //TODO: Implement transition to new activity
                 break;
             case R.id.btnSettings:
+
+                open_settings();
             case R.id.txtSettings:
-                //TODO: Implement transition to new activity
+                open_settings();
                 break;
             case R.id.btnExercises:
+                open_exercises();
             case R.id.txtExercises:
-                //TODO: Implement transition to new activity
+                open_exercises();
                 break;
             case R.id.btnResults:
             case R.id.txtResults:
@@ -48,4 +57,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
         }
     }
+
+    public void open_settings(){
+        Intent intent_settings =new Intent(this, SettingsActivity.class);
+        startActivity(intent_settings);
+    }
+
+    public void open_exercises(){
+        Intent intent_exercises =new Intent(this, Start_exercises_Activity.class);
+        startActivity(intent_exercises);
+    }
+
+
 }

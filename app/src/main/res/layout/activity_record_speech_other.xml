@@ -23,7 +23,7 @@
         app:layout_constraintRight_toRightOf="parent" />
 
     <TextView
-        android:id="@+id/textView10"
+        android:id="@+id/textView_other_speech"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/monologue"
@@ -41,7 +41,7 @@
         android:layout_height="250dp"
         android:layout_marginTop="10dp"
         android:layout_marginBottom="30dp"
-        app:layout_constraintTop_toBottomOf="@+id/textView10"/>
+        app:layout_constraintTop_toBottomOf="@+id/textView_other_speech"/>
 
 
 
@@ -60,7 +60,7 @@
 
 
     <Button
-        android:id="@+id/button_record2"
+        android:id="@+id/button_record3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@color/colorPrimaryDark"

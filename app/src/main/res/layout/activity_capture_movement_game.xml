@@ -6,8 +6,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
 
-    android:layout_marginLeft="16dp"
-    android:layout_marginRight="16dp"
+    android:layout_marginLeft="0dp"
+    android:layout_marginRight="0dp"
     tools:context="com.sma2.sma2.MainActivity">
 
     <ImageView
@@ -15,16 +15,17 @@
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         app:srcCompat="@drawable/wood"
-        android:layout_marginTop="35sp"
+        android:layout_marginTop="0sp"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <Chronometer
+    <TextView
         android:id="@+id/accgraph_chrono2"
         android:textSize="50sp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:layout_marginTop="30dp"
+        android:text="00"
+        android:layout_marginTop="20sp"
         app:layout_constraintTop_toTopOf="parent"
         />
 
@@ -39,8 +40,8 @@
         app:layout_constraintTop_toBottomOf="@id/accgraph_chrono2"
         app:layout_constraintLeft_toLeftOf="parent"
         android:layout_marginTop="100sp"
-        android:layout_marginLeft="10sp"
-        android:layout_marginStart="10sp"/>
+        android:layout_marginLeft="50sp"
+        android:layout_marginStart="50sp"/>
 
 
     <ImageView
@@ -51,7 +52,7 @@
         app:srcCompat="@drawable/target"
         app:layout_constraintTop_toBottomOf="@id/accgraph_chrono2"
         app:layout_constraintLeft_toLeftOf="parent"
-        android:layout_marginTop="100sp"
+        android:layout_marginTop="300sp"
         android:layout_marginLeft="250sp"
         android:layout_marginStart="250sp"/>
 
