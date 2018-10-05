@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">SMA2</string>
+    <string name="app_name" translatable="false">Apkinson</string>
     <string name="name">User name</string>
     <string name="ID">ID number</string>
     <string name="Login">LOGIN</string>
