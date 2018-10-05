@@ -63,8 +63,8 @@ google-services.json
 
 # fastlane
 # we could use this to publish the application to beta services etc. uncomment if needed
-# fastlane/report.xml
-# fastlane/Preview.html
-# fastlane/screenshots
-# fastlane/test_output
-# fastlane/readme.md
+fastlane/report.xml
+fastlane/Preview.html
+fastlane/screenshots
+fastlane/test_output
+fastlane/readme.md

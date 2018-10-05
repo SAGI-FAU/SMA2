@@ -4,6 +4,7 @@ android {
     compileSdkVersion 26
     lintOptions {
         abortOnError false
+        checkReleaseBuilds false
     }
     defaultConfig {
         applicationId "com.sma2.sma2"
@@ -14,8 +15,20 @@ android {
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 
     }
+    signingConfigs {
+        release {
+            // You need to specify either an absolute path or include the
+            // keystore file in the same directory as the build.gradle file.
+            storeFile file("sma2.jks")
+            storePassword "PASSWORD"
+            keyAlias "sma2key"
+            keyPassword "PASSWORD"
+        }
+    }
+
     buildTypes {
         release {
+            signingConfig signingConfigs.release
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }

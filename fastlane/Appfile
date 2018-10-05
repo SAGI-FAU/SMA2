@@ -1,0 +1,2 @@
+json_key_file("/Users/bayerl/projects/SMA2/fastlane/api-6406451226572115023-913926-f93cdf53e2cd.json") # Path to the json secret file - Follow https://docs.fastlane.tools/actions/supply/#setup to get one
+package_name("com.sma2.sma2") # e.g. com.krausefx.app
