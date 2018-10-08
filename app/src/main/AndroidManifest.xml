@@ -73,7 +73,9 @@
         <activity
             android:name=".Record_mov_ball_balance">
         </activity>
-
+        <activity
+            android:name=".Profile1Activity">
+        </activity>
 
     </application>
 
