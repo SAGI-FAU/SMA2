@@ -28,7 +28,7 @@ platform :android do
         task: 'assemble',
          build_type: 'Release',
          )
-    upload_to_play_store(track: 'beta')
+    upload_to_play_store(track: 'alpha')
   
     # sh "your_script.sh"
     # You can also use other beta testing services here
