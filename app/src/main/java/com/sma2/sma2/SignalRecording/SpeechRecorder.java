@@ -96,37 +96,41 @@ class SpeechRecorder {
      * @return String whether recording was successful
      */
     public String record(){
-        short[] shorts = new short[minBufferSize];
-        AUDIO_RECORD.startRecording();
-        while (AUDIO_RECORD.getRecordingState() == AudioRecord.RECORDSTATE_RECORDING){
-            int size = AUDIO_RECORD.read(shorts, 0, minBufferSize);
-            double max = max(shorts);
-            int maxPercent = (int) (max / Short.MAX_VALUE * 100);
-            Message message = HANDLER.obtainMessage();
-            Bundle data = new Bundle();
-            data.putDouble("Volume", maxPercent);
-            message.setData(data);
-            message.sendToTarget();
-            for (int i = 0; i < size; i++){
+        Thread recordingThread = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                short[] shorts = new short[minBufferSize];
+                AUDIO_RECORD.startRecording();
+                while (AUDIO_RECORD.getRecordingState() == AudioRecord.RECORDSTATE_RECORDING){
+                    int size = AUDIO_RECORD.read(shorts, 0, minBufferSize);
+                    double max = max(shorts);
+                    int maxPercent = (int) (max / Short.MAX_VALUE * 100);
+                    Message message = HANDLER.obtainMessage();
+                    Bundle data = new Bundle();
+                    data.putDouble("Volume", maxPercent);
+                    message.setData(data);
+                    message.sendToTarget();
+                    for (int i = 0; i < size; i++){
+                        try {
+                            DATA_OUTPUT_STREAM.writeShort(shorts[i]);
+                        } catch (IOException e) {
+                            Log.e("SpeechRecorder", e.toString());
+                            AUDIO_RECORD.stop();
+                        }
+                    }
+                }
+                AUDIO_RECORD.stop();
                 try {
-                    DATA_OUTPUT_STREAM.writeShort(shorts[i]);
+                    DATA_OUTPUT_STREAM.close();
                 } catch (IOException e) {
                     Log.e("SpeechRecorder", e.toString());
-                    AUDIO_RECORD.stop();
-                    return "ERROR: Could not write audio data to pcm file";
                 }
+                WavFileWriter wavFileWriter = new WavFileWriter(SAMPLING_RATE, FILE_PCM, FILE_WAV);
+                wavFileWriter.start();
             }
-        }
-        AUDIO_RECORD.stop();
-        try {
-            DATA_OUTPUT_STREAM.close();
-        } catch (IOException e) {
-            Log.e("SpeechRecorder", e.toString());
-            return "ERROR: Could not close DataOutputStream";
-        }
-        WavFileWriter wavFileWriter = new WavFileWriter(SAMPLING_RATE, FILE_PCM, FILE_WAV);
-        wavFileWriter.start();
-        return "Successful recording";
+        });
+        recordingThread.start();
+        return "Recording started";
     }
 
     /**
