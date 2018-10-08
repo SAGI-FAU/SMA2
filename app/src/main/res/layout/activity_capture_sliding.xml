@@ -14,12 +14,13 @@
 
 
 
-    <Chronometer
-        android:id="@+id/accgraph_chrono3"
-        android:textSize="40sp"
+    <TextView
+        android:id="@+id/accgraph_chrono5"
+        android:textSize="50sp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
+        android:text="00"
         android:layout_marginTop="30sp"
         android:textColor="@color/colorPrimaryDark"
         app:layout_constraintTop_toTopOf="parent"
@@ -40,7 +41,7 @@
         android:max="200"
         android:progress="30"
         android:layout_marginTop="30sp"
-        app:layout_constraintTop_toBottomOf="@+id/accgraph_chrono3"
+        app:layout_constraintTop_toBottomOf="@+id/accgraph_chrono5"
         app:layout_constraintLeft_toLeftOf="parent"
         android:thumb="@drawable/thumb_seek"
         android:progressDrawable="@drawable/seekbar_sliding"/>
@@ -56,7 +57,7 @@
         tools:layout_editor_absoluteX="200sp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/accgraph_chrono3"
+        app:layout_constraintTop_toBottomOf="@+id/accgraph_chrono5"
         />
 
 
@@ -68,7 +69,7 @@
         android:layout_marginTop="0dp"
         app:layout_constraintTop_toBottomOf="@+id/imageView_limit"
         tools:layout_editor_absoluteX="170sp"
-        android:textSize="20sp"
+        android:textSize="30sp"
         android:gravity="center"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
