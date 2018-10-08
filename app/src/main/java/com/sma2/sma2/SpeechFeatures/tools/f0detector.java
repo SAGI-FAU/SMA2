@@ -69,16 +69,21 @@ public class f0detector {
         winlen = sel_winlen;
         winstep = sel_winstep;
         fs = Fs;
-
+        inilag = (int) Math.ceil(fs/maxf0);//lower bound lag
+        endlag = (int) Math.ceil(fs/minf0);//upper bound lag
         //Get f0 contour from signal
+        //Log.e("F0", "Inicia");
         float[] pitchC = f0_cont(sig);
+        //Log.e("F0", "Listo");
 
         //Fix contour.
         pitchC = fixf0(pitchC);
 
-        //Interpolate missing values
-        //pitchC = interpf0(pitchC);
+        //Set pitch zero for windows less than the analysis window
+        pitchC = zerof0(pitchC);
 
+        //Interpolate missing values
+        pitchC = interpf0(pitchC);
         return pitchC;
     }
 
@@ -114,9 +119,9 @@ public class f0detector {
         }
         float sig_frame[] = copyOfRange(signal, ini_frame, end_frame);
         //-----------------------------------------------------------------------------------------
-        //To compute ACF using FFT
+        //Compute ACF using FFT
         zpad = 2 * sig_frame.length;
-        ;//Append half a window length of zeroes
+        //Append half a window length of zeroes
         while ((zpad & (zpad - 1)) != 0)//Append zeroes until the number of samples is a power of two
         {
             zpad = zpad + 1;
@@ -193,35 +198,6 @@ public class f0detector {
                     f0 = (float) fs / ((float) (lag + inilag));
                 }
             }
-
-
-
-            /*
-            //----------------------------------
-            //Find the lag for the first maximum after lag=0
-            //----------------------------------
-            //Find first min val of ACF
-            int lagz = 30; //ignore from 0 up to lagz points in the ACF
-            float[] temp = Arrays.copyOfRange(NRx,lagz, NRx.length);
-            int indmin = findmin(temp);
-            indmin = indmin+lagz;
-            if (indmin != 0) {//Avoid searching for certain non-periodic signals
-                //Find Max
-                temp = Arrays.copyOfRange(NRx, indmin, NRx.length);
-                Arrays.sort(temp);
-                float Mc = temp[temp.length - 1];
-                //if (Mc > vocingthres)//Avoid voiceless seg
-                //{
-                int lag = 1;
-                for (int i = 0; i < NRx.length; i++) {
-                    if (NRx[i] == Mc) {
-                        lag = i;
-                    }
-                }
-                //Calculate f0
-                f0 = (float) fs / ((float) lag);
-                //}
-            }*/
         }
         return f0;
     }
@@ -257,6 +233,7 @@ public class f0detector {
     }
 
     //Fix contour
+    //Unusual variations in pitch in signals.
     //cont: f0cont
     public float[] fixf0(float[] cont) {
         //List maxf0 = SG.find(cont, 500, 2);//Find pitch values greater than 500Hz
@@ -287,7 +264,7 @@ public class f0detector {
     }
 
 
-    //Set f0 to zero in segments length with less than the analysis window
+    //Set f0 to zero in frames with a length less than the analysis window
     public float[] zerof0(float[] cont) {
         boolean initzero = false;
         int posIni = 0;
@@ -349,7 +326,7 @@ public class f0detector {
 
     /***
      * Voiced speech signal
-     * @param f0 pitch contourn (sig_f0)
+     * @param f0 pitch contour (sig_f0)
      * @param sigN Normalized speech signal (DC=0, Amplitude from -1 to +1)
      * @return List with the voiced segments
      * */
