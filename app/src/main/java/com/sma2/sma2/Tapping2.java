@@ -93,3 +93,5 @@ public class Tapping2 extends AppCompatActivity implements View.OnClickListener 
 
 
 }
+
+// TODO: Separate the bottoms
