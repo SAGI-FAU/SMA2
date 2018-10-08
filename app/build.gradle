@@ -1,36 +1,75 @@
 apply plugin: 'com.android.application'
 
-android {
-    compileSdkVersion 26
-    lintOptions {
-        abortOnError false
-        checkReleaseBuilds false
-    }
-    defaultConfig {
-        applicationId "com.sma2.sma2"
-        minSdkVersion 15
-        targetSdkVersion 26
-        versionCode 1
-        versionName "1.0"
-        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+if (project.hasProperty("sma2.signing") && true &&
+        rootProject.file("apikey.properties").exists()) {
 
-    }
-    signingConfigs {
-        release {
-            // You need to specify either an absolute path or include the
-            // keystore file in the same directory as the build.gradle file.
-            storeFile file("sma2.jks")
-            storePassword "PASSWORD"
-            keyAlias "sma2key"
-            keyPassword "PASSWORD"
+    android {
+        compileSdkVersion 26
+        lintOptions {
+            abortOnError false
+            checkReleaseBuilds false
+        }
+        defaultConfig {
+            applicationId "com.sma2.sma2"
+            minSdkVersion 25
+            targetSdkVersion 26
+            versionCode 1
+            versionName "1.0"
+            testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
+        }
+
+        def apikeyPropertiesFile = rootProject.file("apikey.properties")
+        def apikeyProperties = new Properties()
+        apikeyProperties.load(new FileInputStream(apikeyPropertiesFile))
+
+        signingConfigs {
+            release {
+                // You need to specify either an absolute path or include the
+                // keystore file in the same directory as the build.gradle file.
+                storeFile file(apikeyProperties['storeFile'])
+                storePassword apikeyProperties['storePassword']
+                keyAlias apikeyProperties['keyAlias']
+                keyPassword apikeyProperties['keyPassword']
+            }
+            debug {
+
+            }
+        }
+
+        buildTypes {
+            release {
+                signingConfig signingConfigs.release
+                minifyEnabled false
+                proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            }
+            debug {
+                debuggable = true
+            }
         }
     }
+} else {
+    android {
+        compileSdkVersion 26
+        lintOptions {
+            abortOnError false
+            checkReleaseBuilds false
+        }
+        defaultConfig {
+            applicationId "com.sma2.sma2"
+            minSdkVersion 25
+            targetSdkVersion 26
+            versionCode 1
+            versionName "1.0"
+            testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 
-    buildTypes {
+        }
+        buildTypes{
         release {
-            signingConfig signingConfigs.release
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+
         }
     }
 }
