@@ -10,7 +10,7 @@ import static java.util.Arrays.copyOfRange;
 
 /**
  * Created by TOMAS on 18/02/2017.
- * Modified on 08/10/2018 - Tomas
+ * Modified on 08/10/2018  for SMA2 - Tomas
  *
  * This file includes the following pre-processing procedures:
  * - Signal normalization (method: normsig).
