@@ -9,7 +9,7 @@ import org.greenrobot.greendao.annotation.Generated;
 
 
 @Entity()
-public class Exercise {
+public class ExerciseDA {
     @Id
     private  Long id;
 
@@ -19,8 +19,8 @@ public class Exercise {
     private String instructionsPath;
     private String exerciseType;
     @Generated(hash = 1795980125)
-    public Exercise(Long id, @NotNull String exerciseName, String examplePath,
-            String instructionsPath, String exerciseType) {
+    public ExerciseDA(Long id, @NotNull String exerciseName, String examplePath,
+                      String instructionsPath, String exerciseType) {
         this.id = id;
         this.exerciseName = exerciseName;
         this.examplePath = examplePath;
@@ -28,7 +28,7 @@ public class Exercise {
         this.exerciseType = exerciseType;
     }
     @Generated(hash = 1537691247)
-    public Exercise() {
+    public ExerciseDA() {
     }
     public Long getId() {
         return this.id;
