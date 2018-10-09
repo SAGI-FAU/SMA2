@@ -17,6 +17,9 @@ public class CSVFileWriter {
     private final String NEW_LINE = "\r\n";
 
     private BufferedWriter mBufferedWriter = null;
+    private String mHeaderString = "";
+
+    private final String PATH = Environment.getExternalStorageDirectory() + "/Apkinson/";
 
     private File openFile(String path, String fileName) {
 
@@ -27,6 +30,7 @@ public class CSVFileWriter {
             directory.mkdir();
         }
 
+        // Try to create File
         File file = new File(path + fileName);
         if (!file.exists()) {
             try {
@@ -44,7 +48,7 @@ public class CSVFileWriter {
     }
 
     public CSVFileWriter() {
-        String path = Environment.getExternalStorageDirectory() + "/Test/";
+        String path = PATH;
         Log.d(TAG,"Path: " + path);
         String currTime = new SimpleDateFormat("yyyy-MM-dd_HH-mm", Locale.getDefault()).format(new Date());
 
@@ -56,13 +60,16 @@ public class CSVFileWriter {
             Log.e(TAG,"ERROR opening file");
             e.printStackTrace();
         }
-
-        writeHeader();
+    }
+    public void addHeaderString(String str) {
+        mHeaderString += str;
     }
 
     public void writeHeader() {
+        //TODO: adding additional information to header like exact sensor type and sampling frequency
         try {
-            mBufferedWriter.write("Timestamp" + DELIMITER + "aX [m/s^2]" + DELIMITER + "aY [m/s^2]" + DELIMITER + "aZ [m/s^2]" + DELIMITER + "gX [rad/s]" + DELIMITER + "gY [rad/s]" + DELIMITER + "gZ [rad/s]" + DELIMITER + "mX [tesla]" + DELIMITER + "mY [tesla]" + DELIMITER + "mZ [tesla]" + DELIMITER + "r0 [a.u.]" + DELIMITER + "r1 [a.u.]" + DELIMITER + "r2 [a.u.]" + DELIMITER + "r3 [a.u.]" + NEW_LINE);
+            mHeaderString += "Timestamp" + DELIMITER + "aX [m/s^2]" + DELIMITER + "aY [m/s^2]" + DELIMITER + "aZ [m/s^2]" + DELIMITER + "gX [rad/s]" + DELIMITER + "gY [rad/s]" + DELIMITER + "gZ [rad/s]" + DELIMITER + "mX [tesla]" + DELIMITER + "mY [tesla]" + DELIMITER + "mZ [tesla]" + DELIMITER + "r0 [a.u.]" + DELIMITER + "r1 [a.u.]" + DELIMITER + "r2 [a.u.]" + DELIMITER + "r3 [a.u.]" + NEW_LINE;
+            mBufferedWriter.write(mHeaderString);
         } catch (Exception e) {
             Log.e(TAG,"ERROR writing file");
             e.printStackTrace();

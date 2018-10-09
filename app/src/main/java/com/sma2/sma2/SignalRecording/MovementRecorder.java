@@ -18,12 +18,13 @@ public class MovementRecorder implements SensorEventListener {
     private Sensor mOrientation;
     private int mSamplingFrequencyMicroSeconds = SensorManager.SENSOR_DELAY_NORMAL;
     private CSVFileWriter mCSVFileWriter;
-    private final int SYNC_ACCURACY_NS = 100000;
-    private CombinedSensorDataFrame combinedSensorDataFrame = null;
-    private static boolean mStopRecorder = false;
-    private static boolean mEnableLogging = false;
 
-    public MovementRecorder(Context context) {
+    private CombinedSensorDataFrame combinedSensorDataFrame = null;
+    private static boolean mEnableLogging = false;
+    private final int SYNC_ACCURACY_NS = 100000; // corresponds to maximum difference of 100us in timestamps
+
+    public MovementRecorder(Context context, int samplingfrequency_us) {
+        mSamplingFrequencyMicroSeconds = samplingfrequency_us;
         mSensorManager = (SensorManager) context.getSystemService(context.SENSOR_SERVICE);
         mAccelerometer = mSensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
         mGyroscope = mSensorManager.getDefaultSensor(Sensor.TYPE_GYROSCOPE);
@@ -31,6 +32,21 @@ public class MovementRecorder implements SensorEventListener {
         mOrientation = mSensorManager.getDefaultSensor(Sensor.TYPE_ROTATION_VECTOR);
 
         mCSVFileWriter = new CSVFileWriter();
+        mCSVFileWriter.addHeaderString("Sampling Distance [us] = " + samplingfrequency_us + "\r\n");
+        if (mAccelerometer != null) {
+            mCSVFileWriter.addHeaderString(new SensorInformation(mAccelerometer).toString());
+        }
+        if (mGyroscope != null) {
+            mCSVFileWriter.addHeaderString(new SensorInformation(mGyroscope).toString());
+        }
+        if (mMagnetometer != null) {
+            mCSVFileWriter.addHeaderString(new SensorInformation(mMagnetometer).toString());
+        }
+        if (mOrientation != null) {
+            mCSVFileWriter.addHeaderString(new SensorInformation(mOrientation).toString());
+        }
+        mCSVFileWriter.writeHeader();
+
     }
 
     public void setSamplingFrequency(int samplingFrequencyMicroSeconds) {
@@ -38,7 +54,6 @@ public class MovementRecorder implements SensorEventListener {
     }
 
     public void registerListeners() {
-        mStopRecorder = false;
         if (mAccelerometer != null) {
             mSensorManager.registerListener(this, mAccelerometer, mSamplingFrequencyMicroSeconds);
         }
@@ -55,20 +70,44 @@ public class MovementRecorder implements SensorEventListener {
 
     public void startLogging() {
         mEnableLogging = true;
-        mStopRecorder = false;
     }
 
-    public void finalize() {
+    public void stop() {
         mSensorManager.unregisterListener(this);
         mEnableLogging = false;
-        mStopRecorder = true;
         mCSVFileWriter.close();
+        mSensorManager = null;
+        Log.d(TAG, "stop()");
     }
 
 
     public void onAccuracyChanged(Sensor sensor, int accuracy) {
     }
 
+    public static class SensorInformation {
+
+        public String name = "";
+        public String vendor = "";
+        public float maxRange = 0.0f;
+        public float resolution = 0.0f;
+
+        public SensorInformation(Sensor sensor) {
+            this.name = sensor.getName();
+            this.maxRange = sensor.getMaximumRange();
+            this.vendor = sensor.getVendor();
+            this.resolution = sensor.getResolution();
+        }
+
+        @Override
+        public String toString() {
+            String msg = "name = " + this.name;
+            msg += ", vendor = " + this.vendor;
+            msg += ", maxRange = " + Float.toString(this.maxRange);
+            msg += ", resolution = " + Float.toString(this.resolution);
+            return msg + "\r\n";
+        }
+
+    }
 
     public static class InternalSensorDataFrame implements Comparable<InternalSensorDataFrame> {
 
@@ -218,11 +257,6 @@ public class MovementRecorder implements SensorEventListener {
 
     public void onSensorChanged(SensorEvent event) {
         InternalSensorDataFrame df = null;
-        if(mStopRecorder) {
-            mSensorManager.unregisterListener(this);
-            mStopRecorder = false;
-        }
-
         switch (event.sensor.getType()) {
             case Sensor.TYPE_ACCELEROMETER:
                 df = new InternalSensorDataFrame(event.timestamp, new double[]{event.values[0], event.values[1], event.values[2]}, event.sensor.getType());
