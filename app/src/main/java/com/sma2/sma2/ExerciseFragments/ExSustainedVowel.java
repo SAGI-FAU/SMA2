@@ -1,7 +1,7 @@
-package com.sma2.sma2;
+package com.sma2.sma2.ExerciseFragments;
 
+import android.app.Activity;
 import android.content.Context;
-import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ProgressBar;
 
+import com.sma2.sma2.R;
 import com.sma2.sma2.SignalRecording.SpeechRecorder;
 
 import java.io.File;
@@ -21,12 +22,12 @@ import java.io.File;
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
- * {@link ex_sustained_vowel.OnFragmentInteractionListener} interface
+ * {@link ExSustainedVowel.OnFragmentInteractionListener} interface
  * to handle interaction events.
- * Use the {@link ex_sustained_vowel#newInstance} factory method to
+ * Use the {@link ExSustainedVowel#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class ex_sustained_vowel extends Fragment implements Button.OnClickListener{
+public class ExSustainedVowel extends Fragment implements View.OnClickListener{
 
     private OnFragmentInteractionListener mListener;
     private Button startButton;
@@ -37,7 +38,7 @@ public class ex_sustained_vowel extends Fragment implements Button.OnClickListen
     private boolean recording = false;
     private String filePath;
 
-    public ex_sustained_vowel() {
+    public ExSustainedVowel() {
         // Required empty public constructor
     }
 
@@ -45,11 +46,11 @@ public class ex_sustained_vowel extends Fragment implements Button.OnClickListen
      * Use this factory method to create a new instance of
      * this fragment using the provided parameters.
      *
-     * @return A new instance of fragment ex_sustained_vowel.
+     * @return A new instance of fragment ExSustainedVowel.
      */
     // TODO: Rename and change types and number of parameters
-    public static ex_sustained_vowel newInstance() {
-        ex_sustained_vowel fragment = new ex_sustained_vowel();
+    public static ExSustainedVowel newInstance() {
+        ExSustainedVowel fragment = new ExSustainedVowel();
         return fragment;
     }
 
@@ -63,8 +64,11 @@ public class ex_sustained_vowel extends Fragment implements Button.OnClickListen
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_ex_sustained_vowel, container, false);
         startButton = view.findViewById(R.id.btnStartExSV);
+        startButton.setOnClickListener(this);
         doneButton = view.findViewById(R.id.btnDoneExSV);
+        doneButton.setOnClickListener(this);
         redoButton = view.findViewById(R.id.btnRedoExSV);
+        redoButton.setOnClickListener(this);
         volumeBar = view.findViewById(R.id.volumeExSV);
         recorder = SpeechRecorder.getInstance(getActivity().getApplicationContext(), new VolumeHandler(volumeBar));
         return view;
@@ -107,6 +111,12 @@ public class ex_sustained_vowel extends Fragment implements Button.OnClickListen
                 startButton.setVisibility(View.INVISIBLE);
                 doneButton.setVisibility(View.VISIBLE);
                 redoButton.setVisibility(View.VISIBLE);
+                getActivity().runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        volumeBar.setProgress(0);
+                    }
+                });
             }
         //Exercise done
         } else if (id == doneButton.getId()){
@@ -165,7 +175,7 @@ public class ex_sustained_vowel extends Fragment implements Button.OnClickListen
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
             Bundle bundle = msg.getData();
-            final int currentVolume = (int) bundle.getDouble("volume");
+            final int currentVolume = (int) bundle.getDouble("Volume");
             post(new Runnable() {
                 @Override
                 public void run() {
