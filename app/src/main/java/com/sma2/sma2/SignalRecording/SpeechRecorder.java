@@ -26,7 +26,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
-class SpeechRecorder {
+public class SpeechRecorder {
     private static Context CONTEXT;
     private static Handler HANDLER;
 
