@@ -35,15 +35,14 @@ public class ExercisesActivity extends AppCompatActivity implements ExerciseIntr
         ExerciseIntro intro = ExerciseIntro.newInstance(
                 nextExercise.getExercise().getName(),
                 nextExercise.getExercise().getInstructionVideoPath(),
-                nextExercise.getExercise().getInstructionTextPath(),
-                nextExercise.getSessionId());
+                nextExercise.getExercise().getInstructionTextPath());
 
         showFragment(intro);
     }
 
 
     @Override
-    public void onExerciseStartClicked(int scheduledExerciseId) {
+    public void onExerciseStartClicked() {
         if (nextExercise != null) {
             try {
                 showFragment(nextExercise.getExercise().getFragmentClass().newInstance());

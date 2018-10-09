@@ -17,15 +17,13 @@ public class ExerciseIntro extends Fragment {
     private String mExerciseName;
     private Uri mVideoPath;
     private Uri mInstructionPath;
-    private int mScheduledExerciseId;
 
-    public static ExerciseIntro newInstance(String exerciseName, Uri videoPath, Uri instructionPath, int scheduledExerciseId) {
+    public static ExerciseIntro newInstance(String exerciseName, Uri videoPath, Uri instructionPath) {
         ExerciseIntro fragment = new ExerciseIntro();
         Bundle args = new Bundle();
         args.putString("NAME", exerciseName);
         args.putString("VIDEO_PATH", videoPath.toString());
         args.putString("INSTRUCTION_PATH", instructionPath.toString());
-        args.putInt("SCHEDULED_EXERCISE_ID", scheduledExerciseId);
         fragment.setArguments(args);
         return fragment;
     }
@@ -37,7 +35,6 @@ public class ExerciseIntro extends Fragment {
             mExerciseName = getArguments().getString("NAME");
             mVideoPath = Uri.parse(getArguments().getString("VIDEO_PATH"));
             mInstructionPath = Uri.parse(getArguments().getString("INSTRUCTION_PATH"));
-            mScheduledExerciseId = getArguments().getInt("SCHEDULED_EXERCISE_ID");
         }
     }
 
@@ -62,7 +59,7 @@ public class ExerciseIntro extends Fragment {
             @Override
             public void onClick(View view) {
                 if (mStartClickedCallback != null) {
-                    mStartClickedCallback.onExerciseStartClicked(mScheduledExerciseId);
+                    mStartClickedCallback.onExerciseStartClicked();
                 }
             }
 
@@ -89,6 +86,6 @@ public class ExerciseIntro extends Fragment {
     }
 
     public interface OnStartClickedListener {
-        void onExerciseStartClicked(int scheduledExerciseId);
+        void onExerciseStartClicked();
     }
 }
