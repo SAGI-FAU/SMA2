@@ -92,6 +92,7 @@ public class Profile1Activity extends AppCompatActivity implements View.OnClickL
                     }
 
                     Intent intent = new Intent(Profile1Activity.this,Profile2Activity.class);
+                    intent.putExtra("UserData", userData);
                     startActivity(intent);
                 }else{
                     Toast.makeText(this,R.string.brith_date_error,Toast.LENGTH_SHORT).show();

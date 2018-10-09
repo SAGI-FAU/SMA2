@@ -79,5 +79,14 @@
     <string name="log_in">Log in successful</string>
     <string name="log_error">Username and/or User id not found</string>
     <string name="brith_date_error">Please, fill brith date</string>
+    <string name="none_item">None</string>
+    <string name="elem_item">Elementary school</string>
+    <string name="high_item">High school</string>
+    <string name="under_item">Undergraduate</string>
+    <string name="post">Postgraduate</string>
+    <string name="medicine_empty">Please, fill medicine name field</string>
+    <string name="dose_empty">Please, fill dose (mg) field</string>
+    <string name="add_medice_error">Medice was already added</string>
+    <string name="medicine_added">Added successful</string>
 
 </resources>

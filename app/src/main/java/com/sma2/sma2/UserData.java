@@ -4,17 +4,17 @@ import java.io.Serializable;
 import java.util.Date;
 
 public class UserData implements Serializable {
-    String username;
-    String userId;
-    Date birthday;
-    String gender;
-    int hand;
-    int smoker;
-    int Educational_level;
-    int year_diag;
-    String other_disorder;
-    float weight;
-    int height;
+    private String username;
+    private String userId;
+    private Date birthday;
+    private String gender;
+    private int hand;
+    private int smoker;
+    private int Educational_level;
+    private int year_diag;
+    private String other_disorder;
+    private float weight;
+    private int height;
 
     public UserData(String username, String userId) {
         this.username = username;
