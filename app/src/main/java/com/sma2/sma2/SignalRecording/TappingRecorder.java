@@ -1,6 +1,7 @@
 package com.sma2.sma2.SignalRecording;
 
 import android.content.Context;
+import android.icu.text.AlphabeticIndex;
 import android.media.AudioFormat;
 import android.media.AudioRecord;
 import android.media.MediaRecorder;
@@ -32,66 +33,118 @@ public class TappingRecorder {
     private static DataOutputStream DATA_OUTPUT_STREAM;
     private static File MOVEMENT_FOLDER;
     private static File FILE_CSV;
+    private static File FILE_CSV_error;
+
     private static String exercise;
     private OutputStreamWriter fout;
+    private BufferedWriter bw;
+    private BufferedWriter ew;
+
+    private static TappingRecorder recorder_instance=null;
 
 
-
-
-    public TappingRecorder(){
-
+    private TappingRecorder(Context context) {
+        CONTEXT=context;
         MOVEMENT_FOLDER = new File(Environment.getExternalStorageDirectory() + File.separator + "APP_NAME" + File.separator + "MOVEMENT");
-        if(!MOVEMENT_FOLDER.exists()){
+        if (!MOVEMENT_FOLDER.exists()) {
             MOVEMENT_FOLDER.mkdirs();
         }
     }
 
-
-
-    public String prepare(String exercise){
-        String date = getCurrentDateAsString();
-        FILE_CSV  = new File(MOVEMENT_FOLDER.getAbsolutePath() + File.separator + date + "_" + exercise + ".csv");
-        try {
-
-            FILE_CSV.createNewFile();
-        } catch (IOException e) {
-            Log.e("TappingRecorder", e.toString());
-            return "ERROR: Could not create file: " + FILE_CSV.getAbsolutePath();
+    public static TappingRecorder getInstance(Context context) {
+        if (recorder_instance == null){
+            recorder_instance = new TappingRecorder(context);
         }
-        OutputStream outputStream;
-        try {
-            outputStream = new FileOutputStream(FILE_CSV);
-        } catch (FileNotFoundException e) {
-            Log.e("TappingRecorder", e.toString());
-            return "ERROR: Could not create OutputStream";
-        }
-
-        return FILE_CSV.getAbsolutePath();
+        return recorder_instance;
     }
 
 
+    public String prepare(String exercise) {
+        String date = getCurrentDateAsString();
+        FILE_CSV = new File(MOVEMENT_FOLDER.getAbsolutePath() + File.separator + date + "_" + exercise + ".csv");
+        FILE_CSV_error = new File(MOVEMENT_FOLDER.getAbsolutePath() + File.separator + date + "_" + "Error" + ".csv");
 
-
-
-
-
-    public void Record(String exercise,String data_sensors){
-
-        String path =prepare(exercise);
         try {
 
+            FILE_CSV.createNewFile();
+            FILE_CSV_error.createNewFile();
+
+        } catch (IOException e) {
+            Log.e("TappingRecorder", e.toString());
+            return "ERROR: Could not create file: " + FILE_CSV.getAbsolutePath();
+
+        }
 
 
-            FileWriter fw = new FileWriter(path);
-            BufferedWriter bw = new BufferedWriter(fw);
+        try {
+
+            FileWriter fw = new FileWriter(FILE_CSV);
+            bw = new BufferedWriter(fw);
+            FileWriter f_ew = new FileWriter(FILE_CSV_error);
+            ew = new BufferedWriter(f_ew);
+
+            //return bw;
+
+        } catch (IOException e) {
+
+            e.printStackTrace();
+        }
+
+        return FILE_CSV.getAbsolutePath();
+
+    }
+
+    public void TapWriter(String data_sensors){
+
+        try {
+
             bw.write(data_sensors);
+            //return bw;
+
+        } catch (IOException e) {
+
+            e.printStackTrace();
+        }
+
+
+
+    }
+
+
+    public void ErrorWriter(String data_sensors){
+
+        try {
+
+            ew.write(data_sensors);
+            //return bw;
+
+        } catch (IOException e) {
+
+            e.printStackTrace();
+        }
+
+
+
+    }
+
+
+    public void CloseTappingDocument(){
+        try {
+
             bw.close();
 
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+    public void CloseErrorDocument(){
+        try {
 
+            ew.close();
 
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
 
@@ -107,3 +160,5 @@ public class TappingRecorder {
         return dateFormat.format(date);
     }
 }
+
+// TODO: Fix this part to save each tapping vector
