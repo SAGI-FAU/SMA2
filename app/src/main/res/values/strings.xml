@@ -30,34 +30,10 @@
     <string name="start2">START</string>
     <string name="record">Record</string>
     <string name="sustained_a">Sustained vowel /ah/</string>
-    <string name="a_ex">a</string>
     <string name="ddk">Rapid repetition of syllables (/pa-ta-ka/)</string>
-    <string name="ddk_ex">ddk</string>
     <string name="instructions">Instructions</string>
-    <string name="text3">Speech exercise 3</string>
-    <string name="readtext">Please listen and repeat the following paragraph</string>
-    <string name="monologue">Please say what you normally do in a normal day</string>
-    <string name="sentences">Please listen and repeat the following sentences</string>
-    <string name="image">Please describe what you see in the following image</string>
-    <string name="two_x_ten">2 x 10 with pause</string>
-    <string name="four_x_ten">4 x 10 with pause</string>
-    <string name="two_min_walk">Please walk during two minutes around your house</string>
     <string name="volume">Volume</string>
     <string name="recording">Recording Speech.</string>
-    <string name="walking">Walking exercise</string>
-    <string name="walking1">2x0, 4x10, free walk, etc.</string>
-    <string name="hand_ex">Hand tremor exercise</string>
-    <string name="hand_ex1">rest tremor, kinetic tremor, pronation / supination, etc.</string>
-    <string name="rest_tremor">Rest tremor</string>
-    <string name="kinetic_tremor">Kinetic tremor</string>
-    <string name="pronation_supination">Pronation / Supination</string>
-    <string name="ball_balance">Ball balance Game</string>
-    <string name="recording2">Recording Movement.</string>
-    <string name="tapping_ex">Tapping exercise</string>
-    <string name="tapping_ex1">one finger taping, two fingers tapping, sliding, etc.</string>
-    <string name="tapping_1">one finger tapping</string>
-    <string name="tapping_2">two finger tapping</string>
-    <string name="sliding">sliding</string>
     <string name="done">Done!</string>
 
     <string name="btnProfileText">Profile</string>
@@ -74,5 +50,40 @@
     <string name="update">UPDATE MEDICINE</string>
     <string name="weight">Weight (kg)</string>
     <string name="height">Height (cm)</string>
+
+    <!--Instructions for the speech and movement exercises-->
+    <!--Speech exercises-->
+    <string name="a_ex">Please say the vowel **/aaaah/** during 3 seconds</string>
+    <string name="ddk_ex">Please **REPEAT** the word **PATAKA** several times until the screen turns off.</string>
+    <string name="image_ex">Please **DESCRIBE** the **IMAGE** shown in the screen</string>
+    <string name="text_ex">Please **READ** the following text</string>
+    <string name="routine_ex">Please describe your **DAILY ROUTINE**</string>
+    <!--Movement exercises-->
+    <string name="tapping_1">Please use **ONE** finger to tap the objects in the screen</string>
+    <string name="tapping_2">Please use **TWO** fingers to tap the objects in the screen</string>
+    <string name="sliding">sliding</string>
+    <string name="ball_balance">Ball balance Game</string>
+    <string name="two_x_ten">Please put the phone on **your pocket** and then repeat the exercise shown in the video.</string>
+    <string name="four_x_ten">Please put the phone on **your pocket** and then repeat the exercise shown in the video.</string>
+    <string name="two_min_walk">Please **WALK** during two minutes **around your house**</string>
+    <string name="rest_tremor">Please **HOLD** your phone in a horizontal position during 5 seconds.</string>
+    <string name="pronation_supination">Please **HOLD** your phone in an horizontal position, then,
+                                        repeat the movements shown in the video</string>
+    <string name="kinetic_tremor">Please **HOLD** your phone in a horizontal position, then, **FLEX**
+                                  your arm and take the phone **close to your nose**, then, put it
+                                  back in the horizontal position. *Repeat 5 times**.</string>
+
+    <string name="text3">Speech exercise 3</string>
+    <string name="readtext">Please listen and repeat the following paragraph</string>
+    <string name="monologue">Please say what you normally do in a normal day</string>
+    <string name="sentences">Please listen and repeat the following sentences</string>
+    <string name="image">Please describe what you see in the following image</string>
+    <string name="walking">Walking exercise</string>
+    <string name="walking1">2x0, 4x10, free walk, etc.</string>
+    <string name="hand_ex">Hand tremor exercise</string>
+    <string name="hand_ex1">rest tremor, kinetic tremor, pronation / supination, etc.</string>
+    <string name="recording2">Recording Movement.</string>
+    <string name="tapping_ex">Tapping exercise</string>
+    <string name="tapping_ex1">one finger taping, two fingers tapping, sliding, etc.</string>
 
 </resources>
