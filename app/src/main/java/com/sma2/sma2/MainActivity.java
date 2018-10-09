@@ -1,6 +1,7 @@
 package com.sma2.sma2;
 
 import android.content.Intent;
+import android.os.Parcelable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -10,6 +11,8 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.sma2.sma2.SignalRecording.UserData;
+
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
     TextView tv_username;
@@ -17,7 +20,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     Button bt_create;
     String username;
     String userid;
-    Credentials credentials;
+    UserData userData;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,7 +72,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             Toast.makeText(this,R.string.userid_empty,Toast.LENGTH_SHORT).show();
             return false;
         }else{
-            credentials = new Credentials(username,userid);
+            userData = new UserData(username,userid);
             return true;
         }
     }
@@ -86,6 +89,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     public void open_profile1(){
         Intent intent_profile1 = new Intent(this,Profile1Activity.class);
+        intent_profile1.putExtra("UserData", userData);
         startActivity(intent_profile1);
     }
 }

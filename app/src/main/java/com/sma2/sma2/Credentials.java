@@ -1,6 +1,8 @@
 package com.sma2.sma2;
 
-public class Credentials {
+import java.io.Serializable;
+
+public class Credentials implements Serializable {
     String username;
     String userid;
 
