@@ -17,6 +17,13 @@ public class ScheduledExercise {
         this.resultPath = resultPath;
     }
 
+    public ScheduledExercise(Exercise exercise, int sessionId) {
+        this.exercise = exercise;
+        this.sessionId = sessionId;
+        this.completionDate = null;
+        this.resultPath = null;
+    }
+
     public Exercise getExercise() {
         return exercise;
     }
