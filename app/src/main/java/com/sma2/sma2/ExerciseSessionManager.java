@@ -8,8 +8,8 @@ public class ExerciseSessionManager {
         // store the current session id in the as a shared property
     }
 
-    public ArrayList<ExerciseLog> getExerciseSession() {
+    public ArrayList<ScheduledExercise> getExerciseSession() {
         // get the exercise list for the current session id
-        return new ArrayList<ExerciseLog>();
+        return new ArrayList<ScheduledExercise>();
     }
 }

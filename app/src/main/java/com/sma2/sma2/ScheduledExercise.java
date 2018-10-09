@@ -4,13 +4,13 @@ import android.net.Uri;
 
 import java.util.Date;
 
-public class ExerciseLog {
+public class ScheduledExercise {
     private Exercise exercise;
     private int sessionId;
     private Date completionDate;
     private Uri resultPath;
 
-    public ExerciseLog(Exercise exercise, int sessionId, Date completionDate, Uri resultPath) {
+    public ScheduledExercise(Exercise exercise, int sessionId, Date completionDate, Uri resultPath) {
         this.exercise = exercise;
         this.sessionId = sessionId;
         this.completionDate = completionDate;
