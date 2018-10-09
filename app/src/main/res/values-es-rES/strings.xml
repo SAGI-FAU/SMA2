@@ -1,4 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">SMA2</string>
+    <string name="name">Nombre</string>
+    <string name="ID">Identificación</string>
+    <string name="Login">Ingresar</string>
+    <string name="or">Ó</string>
+    <string name="sign_up">CREAR CUENTA</string>
+    <string name="age">Edad</string>
+    <string name="gender">Género</string>
+    <string name="male">Masculino</string>
+    <string name="female">Femenino</string>
+    <string name="hand">Mano dominante</string>
+    <string name="left">Izquierda</string>
+    <string name="right">Derecha</string>
+    <string name="yes">Sí</string>
+    <string name="no">No</string>
+    <string name="smoker">Fumador</string>
+    <string name="next">Siguiente</string>
+    <string name="back">Atrás</string>
+    <string name="education">Nivel de escolaridad</string>
+    <string name="tod">Tiempo desde el diagnóstico</string>
 </resources>
