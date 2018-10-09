@@ -49,13 +49,7 @@ public class ExerciseIntro extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_exercise_intro, container, false);
-    }
-
-    @Override
-    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
-        Log.d("TEST", mExerciseName);
-        Log.d("TEST", mInstructionPath.toString());
+        View view = inflater.inflate(R.layout.fragment_exercise_intro, container, false);
 
         // Set Title based on Intend Information
         TextView exerciseTitle = view.findViewById(R.id.exerciseTitle);
@@ -69,15 +63,18 @@ public class ExerciseIntro extends Fragment {
             // Throw runtime error
         }
 
-        // Set On Click handler for Start Button based on Intent
+        // Set On Click handler for Start Button
         Button startButton = view.findViewById(R.id.startButton);
         startButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                mStartClickedCallback.onExerciseStartClicked();
+                if (mStartClickedCallback != null) {
+                    mStartClickedCallback.onExerciseStartClicked();
+                }
             }
         });
-        super.onViewCreated(view, savedInstanceState);
+
+        return view;
     }
 
     @Override
