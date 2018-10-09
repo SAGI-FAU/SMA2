@@ -116,10 +116,15 @@ class SpeechRecorder {
                         } catch (IOException e) {
                             Log.e("SpeechRecorder", e.toString());
                             AUDIO_RECORD.stop();
+                            try {
+                                DATA_OUTPUT_STREAM.close();
+                            } catch (IOException e1) {
+                                Log.e("SpeechRecorder", e.toString());
+                            }
+                            return;
                         }
                     }
                 }
-                AUDIO_RECORD.stop();
                 try {
                     DATA_OUTPUT_STREAM.close();
                 } catch (IOException e) {
@@ -141,6 +146,7 @@ class SpeechRecorder {
         if (AUDIO_RECORD.getRecordingState() != AudioRecord.RECORDSTATE_RECORDING){
             return "Cannot stop recording. Not recording at the moment.";
         }
+        AUDIO_RECORD.stop();
         return "Stopped recording";
     }
 
@@ -170,7 +176,7 @@ class SpeechRecorder {
         return dateFormat.format(date);
     }
 
-    public static double max(short[] m) {
+    private static double max(short[] m) {
         double max = 0;
         for (int i = 0; i < m.length; i++) {
             if (Math.abs(m[i]) > max) {
