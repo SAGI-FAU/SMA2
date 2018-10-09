@@ -278,7 +278,7 @@ public class MovementRecorder implements SensorEventListener {
             combinedSensorDataFrame.addSensorData(df);
         } else {
             if (combinedSensorDataFrame != null) {
-                Log.d(TAG, combinedSensorDataFrame.toString());
+                //Log.d(TAG, combinedSensorDataFrame.toString());
                 if (mEnableLogging) {
                     mCSVFileWriter.writeDataFrame(combinedSensorDataFrame);
                 }

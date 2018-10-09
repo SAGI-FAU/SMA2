@@ -66,9 +66,8 @@ public class CSVFileWriter {
     }
 
     public void writeHeader() {
-        //TODO: adding additional information to header like exact sensor type and sampling frequency
         try {
-            mHeaderString += "Timestamp" + DELIMITER + "aX [m/s^2]" + DELIMITER + "aY [m/s^2]" + DELIMITER + "aZ [m/s^2]" + DELIMITER + "gX [rad/s]" + DELIMITER + "gY [rad/s]" + DELIMITER + "gZ [rad/s]" + DELIMITER + "mX [tesla]" + DELIMITER + "mY [tesla]" + DELIMITER + "mZ [tesla]" + DELIMITER + "r0 [a.u.]" + DELIMITER + "r1 [a.u.]" + DELIMITER + "r2 [a.u.]" + DELIMITER + "r3 [a.u.]" + NEW_LINE;
+            mHeaderString += "Timestamp [ns]" + DELIMITER + "aX [m/s^2]" + DELIMITER + "aY [m/s^2]" + DELIMITER + "aZ [m/s^2]" + DELIMITER + "gX [rad/s]" + DELIMITER + "gY [rad/s]" + DELIMITER + "gZ [rad/s]" + DELIMITER + "mX [uT]" + DELIMITER + "mY [uT]" + DELIMITER + "mZ [uT]" + DELIMITER + "r0 [a.u.]" + DELIMITER + "r1 [a.u.]" + DELIMITER + "r2 [a.u.]" + DELIMITER + "r3 [a.u.]" + NEW_LINE;
             mBufferedWriter.write(mHeaderString);
         } catch (Exception e) {
             Log.e(TAG,"ERROR writing file");
@@ -87,9 +86,9 @@ public class CSVFileWriter {
 
     public void close() {
         try {
-            //mBufferedWriter.flush();
+            mBufferedWriter.flush();
             mBufferedWriter.close();
-            //mBufferedWriter = null;
+            mBufferedWriter = null;
         } catch (Exception e) {
             Log.e(TAG, "Error on completing writer!");
             e.printStackTrace();
