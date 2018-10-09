@@ -1,31 +1,85 @@
 apply plugin: 'com.android.application'
 
-android {
-    compileSdkVersion 26
-    defaultConfig {
-        applicationId "com.sma2.sma2"
-        minSdkVersion 17
-        targetSdkVersion 26
-        versionCode 1
-        versionName "1.0"
-        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+if (project.hasProperty("sma2.signing") &&
+        rootProject.file("apikey.properties").exists()) {
+
+    android {
+        compileSdkVersion 26
+        lintOptions {
+            abortOnError false
+            checkReleaseBuilds false
+        }
+        defaultConfig {
+            applicationId "com.sma2.sma2"
+            minSdkVersion 15
+            targetSdkVersion 26
+            versionCode 1
+            versionName "1.0"
+            testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
+        }
+
+        def apikeyPropertiesFile = rootProject.file("apikey.properties")
+        def apikeyProperties = new Properties()
+        apikeyProperties.load(new FileInputStream(apikeyPropertiesFile))
+
+        signingConfigs {
+            release {
+                // You need to specify either an absolute path or include the
+                // keystore file in the same directory as the build.gradle file.
+                storeFile file(apikeyProperties['storeFile'])
+                storePassword apikeyProperties['storePassword']
+                keyAlias apikeyProperties['keyAlias']
+                keyPassword apikeyProperties['keyPassword']
+            }
+            debug {
+
+            }
+        }
+
+        buildTypes {
+            release {
+                signingConfig signingConfigs.release
+                minifyEnabled false
+                proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            }
+            debug {
+                debuggable = true
+            }
+        }
     }
-    buildTypes {
+} else {
+    android {
+        compileSdkVersion 26
+        lintOptions {
+            abortOnError false
+            checkReleaseBuilds false
+        }
+        defaultConfig {
+            applicationId "com.sma2.sma2"
+            minSdkVersion 15
+            targetSdkVersion 26
+            versionCode 1
+            versionName "1.0"
+            testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
+        }
+        buildTypes{
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+
         }
     }
 }
 
 dependencies {
-    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation 'com.android.support:appcompat-v7:26.1.0'
     implementation 'com.android.support.constraint:constraint-layout:1.1.2'
     implementation 'com.jjoe64:graphview:4.2.1'
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
-    implementation 'com.android.support:design:26.1.0'
-    implementation 'com.android.support:support-annotations:27.1.1'
 }
