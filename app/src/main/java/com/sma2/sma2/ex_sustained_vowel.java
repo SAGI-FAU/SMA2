@@ -3,10 +3,19 @@ package com.sma2.sma2;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.ProgressBar;
+
+import com.sma2.sma2.SignalRecording.SpeechRecorder;
+
+import java.io.File;
 
 
 /**
@@ -17,9 +26,16 @@ import android.view.ViewGroup;
  * Use the {@link ex_sustained_vowel#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class ex_sustained_vowel extends Fragment {
+public class ex_sustained_vowel extends Fragment implements Button.OnClickListener{
 
     private OnFragmentInteractionListener mListener;
+    private Button startButton;
+    private Button doneButton;
+    private Button redoButton;
+    private ProgressBar volumeBar;
+    private SpeechRecorder recorder;
+    private boolean recording = false;
+    private String filePath;
 
     public ex_sustained_vowel() {
         // Required empty public constructor
@@ -46,6 +62,11 @@ public class ex_sustained_vowel extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_ex_sustained_vowel, container, false);
+        startButton = view.findViewById(R.id.btnStartExSV);
+        doneButton = view.findViewById(R.id.btnDoneExSV);
+        redoButton = view.findViewById(R.id.btnRedoExSV);
+        volumeBar = view.findViewById(R.id.volumeExSV);
+        recorder = SpeechRecorder.getInstance(getActivity().getApplicationContext(), new VolumeHandler(volumeBar));
         return view;
     }
 
@@ -64,6 +85,59 @@ public class ex_sustained_vowel extends Fragment {
     public void onDetach() {
         super.onDetach();
         mListener = null;
+        recorder.release();
+    }
+
+    @Override
+    public void onClick(View v) {
+        int id = v.getId();
+        //Record or Stop button pressed
+        if (id == startButton.getId()){
+            //Start recording
+            if (!recording){
+                filePath = recorder.prepare("exerciseID" + "_" + "patientID");
+                recorder.record();
+                recording = true;
+                startButton.setText(R.string.stop);
+            //Stop recording
+            } else {
+                recorder.stopRecording();
+                recording = false;
+                startButton.setText(R.string.start);
+                startButton.setVisibility(View.INVISIBLE);
+                doneButton.setVisibility(View.VISIBLE);
+                redoButton.setVisibility(View.VISIBLE);
+            }
+        //Exercise done
+        } else if (id == doneButton.getId()){
+            mListener.onExerciseFinished(filePath);
+        //Redo exercise
+        } else if (id == redoButton.getId()){
+            doneButton.setVisibility(View.INVISIBLE);
+            redoButton.setVisibility(View.INVISIBLE);
+            startButton.setVisibility(View.VISIBLE);
+            Thread deleteFile = new Thread() {
+                @Override
+                public void run() {
+                    File file = new File(filePath);
+                    int attempts =  0;
+                    while (!file.exists() && attempts < 10){
+                        try {
+                            sleep(100);
+                            attempts++;
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                    if (attempts < 10){
+                        file.delete();
+                    } else {
+                        Log.w("AUDIO_FILE", "No file could be deleted");
+                    }
+                }
+            };
+            deleteFile.start();
+        }
     }
 
     /**
@@ -78,6 +152,26 @@ public class ex_sustained_vowel extends Fragment {
      */
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
-        void onFragmentInteraction(Uri uri);
+        void onExerciseFinished(String filePath);
+    }
+
+    private static class VolumeHandler extends Handler{
+        ProgressBar volumeBar;
+
+        public VolumeHandler(ProgressBar bar){
+            volumeBar = bar;
+        }
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+            Bundle bundle = msg.getData();
+            final int currentVolume = (int) bundle.getDouble("volume");
+            post(new Runnable() {
+                @Override
+                public void run() {
+                    volumeBar.setProgress(currentVolume);
+                }
+            });
+        }
     }
 }
