@@ -1,4 +1,4 @@
-package com.sma2.sma2.SignalRecording;
+package com.sma2.sma2;
 
 import java.io.Serializable;
 import java.util.Date;

@@ -78,5 +78,6 @@
     <string name="userid_empty">Please, fill userid field</string>
     <string name="log_in">Log in successful</string>
     <string name="log_error">Username and/or User id not found</string>
+    <string name="brith_date_error">Please, fill brith date</string>
 
 </resources>
