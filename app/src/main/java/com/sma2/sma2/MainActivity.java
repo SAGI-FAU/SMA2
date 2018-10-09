@@ -27,18 +27,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         DaoMaster.DevOpenHelper helper = new DaoMaster.DevOpenHelper(this, "apkinsondb");
         Database db = helper.getWritableDb();
         DaoSession daoSession = new DaoMaster(db).newSession();
-        PatientDADao dao = daoSession.getPatientDADao();
-        PatientDA da = new PatientDA();
-        da.setUsername("User6");
-        try{
-
-        Log.i("Debug", ""+ dao.insert(da));
-        }catch (Exception e){
-                    e.printStackTrace();
-        }
-
-
-
 
     }
 
