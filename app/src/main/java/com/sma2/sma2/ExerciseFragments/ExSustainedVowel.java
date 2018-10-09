@@ -19,14 +19,6 @@ import com.sma2.sma2.SignalRecording.SpeechRecorder;
 import java.io.File;
 
 
-/**
- * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
- * {@link ExSustainedVowel.OnFragmentInteractionListener} interface
- * to handle interaction events.
- * Use the {@link ExSustainedVowel#newInstance} factory method to
- * create an instance of this fragment.
- */
 public class ExSustainedVowel extends Fragment implements View.OnClickListener{
 
     private OnFragmentInteractionListener mListener;
@@ -42,13 +34,6 @@ public class ExSustainedVowel extends Fragment implements View.OnClickListener{
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @return A new instance of fragment ExSustainedVowel.
-     */
-    // TODO: Rename and change types and number of parameters
     public static ExSustainedVowel newInstance() {
         ExSustainedVowel fragment = new ExSustainedVowel();
         return fragment;
@@ -149,17 +134,7 @@ public class ExSustainedVowel extends Fragment implements View.OnClickListener{
             deleteFile.start();
         }
     }
-
-    /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
-     * to the activity and potentially other fragments contained in that
-     * activity.
-     * <p>
-     * See the Android Training lesson <a href=
-     * "http://developer.android.com/training/basics/fragments/communicating.html"
-     * >Communicating with Other Fragments</a> for more information.
-     */
+    
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
         void onExerciseFinished(String filePath);
