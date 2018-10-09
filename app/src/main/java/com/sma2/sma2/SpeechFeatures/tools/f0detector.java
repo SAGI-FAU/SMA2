@@ -2,7 +2,7 @@ package com.sma2.sma2.SpeechFeatures.tools;
 
 
 import com.sma2.sma2.SpeechFeatures.sigproc;
-import com.sma2.sma2.SpeechFeatures.tools.FFT;
+import com.sma2.sma2.SpeechFeatures.tools.array_manipulation;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -19,6 +19,7 @@ public class f0detector {
     private float winstep;
     private int fs;
     private sigproc SG = new sigproc();
+    private array_manipulation ArrM = new array_manipulation();
     private FFT fft;
     private int zpad;
     private float[] winRx;
@@ -217,7 +218,7 @@ public class f0detector {
     private int findmin(float[] rx)
     {
         //sigproc SG = new sigproc();
-        float[] d = SG.diff(rx);
+        float[] d = ArrM.diff(rx);
         int ind = 0;
         for (int i=0;i<d.length;i++)
         {
@@ -238,9 +239,9 @@ public class f0detector {
     public float[] fixf0(float[] cont) {
         //List maxf0 = SG.find(cont, 500, 2);//Find pitch values greater than 500Hz
         //List minf0 = SG.find(cont, 75, 0);//Find pitch values less than 75Hz
-        float[] d = SG.diff(cont);
-        float[] d_abs=SG.absArr(d);//Absolute value of differences
-        List df0 = SG.find(d_abs, 80, 2);//Find pitch variations greater than 80Hz
+        float[] d = ArrM.diff(cont);
+        float[] d_abs = ArrM.absArr(d);//Absolute value of differences
+        List df0 = ArrM.find(d_abs, 80, 2);//Find pitch variations greater than 80Hz
         if (df0.size()>0) {
             //Set to zero pitch values with high variations (80Hz)
 
@@ -312,7 +313,7 @@ public class f0detector {
                     int diff = Math.abs(posfin - posIni);
                     int minseg = 5;//Minimum number of windows considered for intepolation
                     if (diff <= minseg) {//If f0=0 in a non-unvoiced nor silence segment, then interpolate.
-                        float[] f0intp = SG.interpolate(cont[posIni], cont[posfin], diff);
+                        float[] f0intp = ArrM.interpolate(cont[posIni], cont[posfin], diff);
                         for (int j = 0; j <= diff; j++) {
                             cont[posIni + j] = f0intp[j];
                         }
@@ -336,7 +337,7 @@ public class f0detector {
         int step = Math.round(winstep*fs);
         List<float[]> VoicedSeg = new ArrayList<float[]>();
         //sigproc SG = new sigproc();
-        List pitchON = SG.find(f0,0f,5);//Find different than 0
+        List pitchON = ArrM.find(f0,0f,5);//Find different than 0
         //List to array
         float[] f0ON = new float[pitchON.size()];
         for(int i=0;i<pitchON.size();i++)
@@ -347,8 +348,8 @@ public class f0detector {
         //Initial position of segment
         int iniV = (int) pitchON.get(0)*step+step;
         //Detect segments
-        float[] df0 = SG.diff(f0ON);
-        List sizeV = SG.find(df0,1,2);
+        float[] df0 = ArrM.diff(f0ON);
+        List sizeV = ArrM.find(df0,1,2);
         for(int i=0;i<sizeV.size();i++)
         {
             //int indx = sizV[i];
@@ -380,7 +381,7 @@ public class f0detector {
         int step = Math.round(winstep*fs);
         List<float[]> UnvoicedSeg = new ArrayList<float[]>();
         //sigproc SG = new sigproc();
-        List pitchOFF = SG.find(f0,0f,4);//Find equals to 0
+        List pitchOFF = ArrM.find(f0,0f,4);//Find equals to 0
         //List to array
         float[] f0OFF = new float[pitchOFF.size()];
         for(int i=0;i<pitchOFF.size();i++)
@@ -391,8 +392,8 @@ public class f0detector {
         //Initial position of segment
         int iniV = (int) pitchOFF.get(0)*step+step;
         //Detect segments
-        float[] df0 = SG.diff(f0OFF);
-        List sizeV = SG.find(df0,1,2);
+        float[] df0 = ArrM.diff(f0OFF);
+        List sizeV = ArrM.find(df0,1,2);
         //List to array
         int[] sizV = new int[sizeV.size()];
         for(int i=0;i<sizeV.size();i++)

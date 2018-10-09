@@ -21,9 +21,9 @@ public class MFCC
     private int melBands;
     private int numFreqs;
     private double sampleRate;
-    public Matrix melWeights = null;
-    public Matrix dctMat = null;
-    public double[] lifterWeights;
+    private Matrix melWeights = null;
+    private Matrix dctMat = null;
+    private double[] lifterWeights;
 
     public MFCC(int fftSize, int numCoeffs, int melBands, double sampleRate)
     {
@@ -100,8 +100,7 @@ public class MFCC
         //Periodogram
         float[] powSig = powerspec(signalframe);
         //Compute Mel Filter Banks
-        float[] cepst = cepstrum(powSig);
-        return cepst;
+        return cepstrum(powSig);
     }
 
     private float[] preemphasis(float[] signal)
@@ -132,7 +131,7 @@ public class MFCC
         return sig_fft;
     }
 
-    public float[] cepstrum(float[] powspec)
+    private float[] cepstrum(float[] powspec)
     {
         Matrix powerSpec = new Matrix(numFreqs, 1);
         for (int i = 0; i < numFreqs; i ++)
@@ -159,12 +158,12 @@ public class MFCC
     }
 
 
-    public double fmel2hz(double mel)
+    private double fmel2hz(double mel)
     {
         return 700.0*(Math.pow(10.0, mel/2595.0) - 1.0);
     }
 
-    public double fhz2mel(double freq)
+    private double fhz2mel(double freq)
     {
         return 2595.0*Math.log10(1.0 + freq/700.0);
     }
