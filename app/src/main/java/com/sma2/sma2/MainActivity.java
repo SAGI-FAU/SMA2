@@ -62,7 +62,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     public void open_exercises(){
-        Intent intent_exercises =new Intent(this, Start_exercises_Activity.class);
+        Intent intent_exercises =new Intent(this, ExercisesActivity.class);
         startActivity(intent_exercises);
     }
 
