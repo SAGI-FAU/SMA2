@@ -1,5 +1,6 @@
 package com.sma2.sma2;
 
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
@@ -16,12 +17,12 @@ public class ExercisesActivity extends AppCompatActivity implements ExerciseIntr
         super.onCreate(savedInstanceState);
 
         sessionManager = new ExerciseSessionManager();
+        sessionManager.createExerciseSession(); // TODO: Only for testing
         nextExercise = null;
 
         setContentView(R.layout.activity_exercise);
 
-        ExerciseStart startScreen = new ExerciseStart();
-        showFragment(startScreen);
+        showStartScreen();
     }
 
     private void showFragment(Fragment fragment) {
@@ -30,13 +31,21 @@ public class ExercisesActivity extends AppCompatActivity implements ExerciseIntr
         transaction.commit();
     }
 
+    private void showStartScreen() {
+        try {
+            nextExercise = sessionManager.getNextExercise();
+        } catch (RuntimeException e) {
+            finish();
+        }
+        ExerciseStart startScreen = new ExerciseStart();
+        showFragment(startScreen);
+    }
+
     public void open_exercise() {
-        nextExercise = sessionManager.getNextExercise();
         ExerciseIntro intro = ExerciseIntro.newInstance(
                 nextExercise.getExercise().getName(),
                 nextExercise.getExercise().getInstructionVideoPath(),
                 nextExercise.getExercise().getInstructionTextPath());
-
         showFragment(intro);
     }
 
@@ -59,6 +68,7 @@ public class ExercisesActivity extends AppCompatActivity implements ExerciseIntr
 
     @Override
     public void onExerciseFinished(String filePath) {
-        //do something with file here
+        nextExercise.complete(Uri.parse(filePath));
+        showStartScreen();
     }
 }

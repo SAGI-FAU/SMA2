@@ -7,10 +7,10 @@ import java.util.Date;
 public class ScheduledExercise {
     private Exercise exercise;
     private int sessionId;
-    private Date completionDate;
+    private long completionDate;
     private Uri resultPath;
 
-    public ScheduledExercise(Exercise exercise, int sessionId, Date completionDate, Uri resultPath) {
+    public ScheduledExercise(Exercise exercise, int sessionId, long completionDate, Uri resultPath) {
         this.exercise = exercise;
         this.sessionId = sessionId;
         this.completionDate = completionDate;
@@ -20,8 +20,14 @@ public class ScheduledExercise {
     public ScheduledExercise(Exercise exercise, int sessionId) {
         this.exercise = exercise;
         this.sessionId = sessionId;
-        this.completionDate = null;
+        this.completionDate = -1;
         this.resultPath = null;
+    }
+
+    public void complete(Uri resultPath) {
+        this.completionDate = new Date().getTime();
+        this.resultPath = resultPath;
+        // TODO: Handle Database writing
     }
 
     public Exercise getExercise() {
@@ -32,15 +38,11 @@ public class ScheduledExercise {
         return sessionId;
     }
 
-    public Date getCompletionDate() {
+    public long getCompletionDate() {
         return completionDate;
     }
 
     public Uri getResultPath() {
         return resultPath;
-    }
-
-    public void complete(Uri resultPath) {
-        // get the current date, modify completion data, modify result path and persist to the database
     }
 }
