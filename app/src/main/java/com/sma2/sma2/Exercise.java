@@ -1,16 +1,16 @@
 package com.sma2.sma2;
 
-import android.app.Fragment;
 import android.net.Uri;
+import android.support.v4.app.Fragment;
 
 
 public class Exercise {
     private String name;
     private Uri instructionVideoPath;
     private Uri instructionTextPath;
-    private Fragment fragmentClass;
+    private Class<? extends Fragment> fragmentClass;
 
-    public Exercise(String name, Uri instructionVideoPath, Uri instructionTextPath, Fragment fragmentClass){
+    public Exercise(String name, Uri instructionVideoPath, Uri instructionTextPath, Class<? extends Fragment> fragmentClass){
         super();
         this.name = name;
         this.instructionVideoPath = instructionVideoPath;
@@ -21,9 +21,9 @@ public class Exercise {
     public Exercise(String name, Uri instructionVideoPath, Uri instructionTextPath, String fragmentClassString){
         super();
 
-        Fragment fragmentClass;
+        Class<? extends Fragment> fragmentClass;
         try {
-            fragmentClass = (Fragment) Class.forName(fragmentClassString).newInstance();
+            fragmentClass = Class.forName(fragmentClassString).asSubclass(Fragment.class);
         } catch (Exception e) {
             throw new RuntimeException("The specified Fragment class for this exercise is invalid.");
         }
@@ -42,7 +42,7 @@ public class Exercise {
         return instructionVideoPath;
     }
 
-    public Fragment getFragmentClass() {
+    public Class<? extends Fragment> getFragmentClass() {
         return fragmentClass;
     }
 
