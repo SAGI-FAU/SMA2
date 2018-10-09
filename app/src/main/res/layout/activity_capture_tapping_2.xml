@@ -10,14 +10,13 @@
     tools:context="com.sma2.sma2.MainActivity">
 
 
-
-
     <ImageView
         android:id="@+id/imageView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:srcCompat="@drawable/grass"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:scaleType="fitXY"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/grass" />
 
     <TextView
         android:id="@+id/accgraph_chrono4"

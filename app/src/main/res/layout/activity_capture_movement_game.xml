@@ -15,6 +15,7 @@
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         app:srcCompat="@drawable/wood"
+        android:scaleType="fitXY"
         android:layout_marginTop="0sp"
         app:layout_constraintTop_toTopOf="parent" />
 
