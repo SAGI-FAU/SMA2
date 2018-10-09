@@ -7,27 +7,26 @@ import org.greenrobot.greendao.annotation.Id;
 import org.greenrobot.greendao.annotation.NotNull;
 import org.greenrobot.greendao.annotation.Generated;
 
-
-@Entity()
+@Entity
 public class ExerciseDA {
-    @Id
-    private  Long id;
+    @Id private  Long id;
 
     @NotNull
     private String exerciseName;
     private String examplePath;
     private String instructionsPath;
     private String exerciseType;
-    @Generated(hash = 1795980125)
+
+    @Generated(hash = 532267431)
     public ExerciseDA(Long id, @NotNull String exerciseName, String examplePath,
-                      String instructionsPath, String exerciseType) {
+            String instructionsPath, String exerciseType) {
         this.id = id;
         this.exerciseName = exerciseName;
         this.examplePath = examplePath;
         this.instructionsPath = instructionsPath;
         this.exerciseType = exerciseType;
     }
-    @Generated(hash = 1537691247)
+    @Generated(hash = 846666550)
     public ExerciseDA() {
     }
     public Long getId() {
@@ -62,3 +61,4 @@ public class ExerciseDA {
     }
 
 }
+
