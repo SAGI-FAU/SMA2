@@ -10,13 +10,9 @@ import org.greenrobot.greendao.annotation.Generated;
 
 @Entity
 public class PatientDA {
-    @Id
-    private long userId;
-//    @Property
-//    private UUID globalId;
-
+    @Id(autoincrement = true)
+    private Long userId;
     @Property
-    @NotNull
     private String username;
     @Property
     private Date birthday;
@@ -36,8 +32,9 @@ public class PatientDA {
     private float weight;
     @Property
     private int height;
-    @Generated(hash = 1860963864)
-    public PatientDA(long userId, @NotNull String username, Date birthday, String gender,
+
+    @Generated(hash = 1539782669)
+    public PatientDA(Long userId, String username, Date birthday, String gender,
             int hand, boolean smoker, int educational_level, Date year_diag,
             String other_disorder, float weight, int height) {
         this.userId = userId;
@@ -55,12 +52,7 @@ public class PatientDA {
     @Generated(hash = 1204534041)
     public PatientDA() {
     }
-    public long getUserId() {
-        return this.userId;
-    }
-    public void setUserId(long userId) {
-        this.userId = userId;
-    }
+    
     public String getUsername() {
         return this.username;
     }
@@ -120,6 +112,15 @@ public class PatientDA {
     }
     public void setHeight(int height) {
         this.height = height;
+    }
+    public Long getUserId() {
+        return this.userId;
+    }
+    public void setUserId(long userId) {
+        this.userId = userId;
+    }
+    public void setUserId(Long userId) {
+        this.userId = userId;
     }
 
 }
