@@ -1,49 +1,56 @@
 package com.sma2.sma2;
 
-import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 
 import com.sma2.sma2.ExerciseFragments.ExSustainedVowel;
 
 public class ExercisesActivity extends AppCompatActivity implements ExerciseIntro.OnStartClickedListener, ExerciseStart.OnSessionStartListener, ExSustainedVowel.OnFragmentInteractionListener {
-    // TODO: Implement the connection to the Exersice Manager
-
-    Intent intent = getIntent();
+    ExerciseSessionManager sessionManager;
+    ScheduledExercise nextExercise;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        sessionManager = new ExerciseSessionManager();
+        nextExercise = null;
+
         setContentView(R.layout.activity_exercise);
 
-        //ExerciseStart startScreen = new ExerciseStart();
-        ExSustainedVowel startScreen = new ExSustainedVowel();
-        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        ExerciseStart startScreen = new ExerciseStart();
+        showFragment(startScreen);
+    }
 
-        transaction.replace(R.id.exerciseContainer, startScreen);
+    private void showFragment(Fragment fragment) {
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        transaction.replace(R.id.exerciseContainer, fragment);
         transaction.commit();
     }
 
     public void open_exercise() {
-        // TODO: Remove example and start the real exercise
+        nextExercise = sessionManager.getNextExercise();
         ExerciseIntro intro = ExerciseIntro.newInstance(
-                "Test",
-                Uri.parse("test/path"),
-                Uri.parse("test/path2"),
-                3);
-        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+                nextExercise.getExercise().getName(),
+                nextExercise.getExercise().getInstructionVideoPath(),
+                nextExercise.getExercise().getInstructionTextPath(),
+                nextExercise.getSessionId());
 
-        transaction.replace(R.id.exerciseContainer, intro);
-        transaction.commit();
+        showFragment(intro);
     }
 
 
     @Override
     public void onExerciseStartClicked(int scheduledExerciseId) {
-        // TODO: Open the correct excercise Fragment
+        if (nextExercise != null) {
+            try {
+                showFragment(nextExercise.getExercise().getFragmentClass().newInstance());
+            } catch (Exception e) {
+                throw new RuntimeException("Invalid Exercise Fragment provided");
+            }
+        }
     }
 
     @Override
