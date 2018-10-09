@@ -19,6 +19,14 @@ public class CSVFileWriter {
     private BufferedWriter mBufferedWriter = null;
 
     private File openFile(String path, String fileName) {
+
+        // check if directory exists and if not create it
+        File directory = new File(path);
+        if (! directory.exists()) {
+            Log.d(TAG, "Directory did not exists, creating: " + path);
+            directory.mkdir();
+        }
+
         File file = new File(path + fileName);
         if (!file.exists()) {
             try {

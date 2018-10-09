@@ -17,18 +17,14 @@ public class MovementRecorder implements SensorEventListener {
     private Sensor mMagnetometer;
     private Sensor mOrientation;
     private int mSamplingFrequencyMicroSeconds = SensorManager.SENSOR_DELAY_NORMAL;
-    private CSVFileWriter mCSVFileWriter = null;
+    private CSVFileWriter mCSVFileWriter;
     private final int SYNC_ACCURACY_NS = 100000;
     private CombinedSensorDataFrame combinedSensorDataFrame = null;
     private static boolean mStopRecorder = false;
+    private static boolean mEnableLogging = false;
 
     public MovementRecorder(Context context) {
         mSensorManager = (SensorManager) context.getSystemService(context.SENSOR_SERVICE);
-        /*List<Sensor> sensorList = mSensorManager.getSensorList(Sensor.TYPE_ALL);
-        for (Sensor sensor : sensorList) {
-            Log.d(TAG, sensor.getName());
-        }
-        Log.d(TAG, "SensorList = " + sensorList);*/
         mAccelerometer = mSensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
         mGyroscope = mSensorManager.getDefaultSensor(Sensor.TYPE_GYROSCOPE);
         mMagnetometer = mSensorManager.getDefaultSensor(Sensor.TYPE_MAGNETIC_FIELD);
@@ -41,7 +37,7 @@ public class MovementRecorder implements SensorEventListener {
         mSamplingFrequencyMicroSeconds = samplingFrequencyMicroSeconds;
     }
 
-    public void start() {
+    public void registerListeners() {
         mStopRecorder = false;
         if (mAccelerometer != null) {
             mSensorManager.registerListener(this, mAccelerometer, mSamplingFrequencyMicroSeconds);
@@ -57,27 +53,16 @@ public class MovementRecorder implements SensorEventListener {
         }
     }
 
+    public void startLogging() {
+        mEnableLogging = true;
+        mStopRecorder = false;
+    }
 
-    public void stop() {
-        Log.d(TAG, "unregister Listeners");
-
-        /*if (mAccelerometer != null) {
-            Log.d(TAG, "unregister ACC");
-            mSensorManager.unregisterListener(this, mAccelerometer);
-        }
-        if (mGyroscope != null) {
-            mSensorManager.unregisterListener(this, mGyroscope);
-        }
-        if (mMagnetometer != null) {
-            mSensorManager.unregisterListener(this, mMagnetometer);
-        }
-        if (mOrientation != null) {
-            mSensorManager.unregisterListener(this, mOrientation);
-        }*/
+    public void finalize() {
         mSensorManager.unregisterListener(this);
+        mEnableLogging = false;
         mStopRecorder = true;
         mCSVFileWriter.close();
-        //mSensorManager = null;
     }
 
 
@@ -164,7 +149,6 @@ public class MovementRecorder implements SensorEventListener {
                 case Sensor.TYPE_ROTATION_VECTOR:
                     mRotationData = dataFrame.mSensorData;
                     break;
-
             }
         }
 
@@ -236,6 +220,7 @@ public class MovementRecorder implements SensorEventListener {
         InternalSensorDataFrame df = null;
         if(mStopRecorder) {
             mSensorManager.unregisterListener(this);
+            mStopRecorder = false;
         }
 
         switch (event.sensor.getType()) {
@@ -260,7 +245,9 @@ public class MovementRecorder implements SensorEventListener {
         } else {
             if (combinedSensorDataFrame != null) {
                 Log.d(TAG, combinedSensorDataFrame.toString());
-                mCSVFileWriter.writeDataFrame(combinedSensorDataFrame);
+                if (mEnableLogging) {
+                    mCSVFileWriter.writeDataFrame(combinedSensorDataFrame);
+                }
             }
             combinedSensorDataFrame = new CombinedSensorDataFrame(df.getTimeStamp());
             combinedSensorDataFrame.addSensorData(df);
