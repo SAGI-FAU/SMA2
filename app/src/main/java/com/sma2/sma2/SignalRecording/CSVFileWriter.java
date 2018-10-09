@@ -19,10 +19,11 @@ public class CSVFileWriter {
     private BufferedWriter mBufferedWriter = null;
     private String mHeaderString = "";
 
+    private int numHeaderLines = 2;
+
     private final String PATH = Environment.getExternalStorageDirectory() + "/Apkinson/";
 
     private File openFile(String path, String fileName) {
-
         // check if directory exists and if not create it
         File directory = new File(path);
         if (! directory.exists()) {
@@ -36,7 +37,6 @@ public class CSVFileWriter {
             try {
                 Log.d(TAG,"Try to create new File at: " + path + fileName);
                 file.createNewFile();
-
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -62,13 +62,15 @@ public class CSVFileWriter {
         }
     }
     public void addHeaderString(String str) {
-        mHeaderString += str;
+        mHeaderString += str + NEW_LINE;
+        numHeaderLines += 1;
     }
 
     public void writeHeader() {
         try {
+            String firstHeaderLine = "Headerlines = " + numHeaderLines + NEW_LINE;
             mHeaderString += "Timestamp [ns]" + DELIMITER + "aX [m/s^2]" + DELIMITER + "aY [m/s^2]" + DELIMITER + "aZ [m/s^2]" + DELIMITER + "gX [rad/s]" + DELIMITER + "gY [rad/s]" + DELIMITER + "gZ [rad/s]" + DELIMITER + "mX [uT]" + DELIMITER + "mY [uT]" + DELIMITER + "mZ [uT]" + DELIMITER + "r0 [a.u.]" + DELIMITER + "r1 [a.u.]" + DELIMITER + "r2 [a.u.]" + DELIMITER + "r3 [a.u.]" + NEW_LINE;
-            mBufferedWriter.write(mHeaderString);
+            mBufferedWriter.write(firstHeaderLine + mHeaderString);
         } catch (Exception e) {
             Log.e(TAG,"ERROR writing file");
             e.printStackTrace();

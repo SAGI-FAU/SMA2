@@ -32,7 +32,7 @@ public class MovementRecorder implements SensorEventListener {
         mOrientation = mSensorManager.getDefaultSensor(Sensor.TYPE_ROTATION_VECTOR);
 
         mCSVFileWriter = new CSVFileWriter();
-        mCSVFileWriter.addHeaderString("Sampling Distance [us] = " + samplingfrequency_us + "\r\n");
+        mCSVFileWriter.addHeaderString("Sampling Distance [us] = " + samplingfrequency_us);
         if (mAccelerometer != null) {
             mCSVFileWriter.addHeaderString(new SensorInformation(mAccelerometer).toString());
         }
@@ -104,7 +104,7 @@ public class MovementRecorder implements SensorEventListener {
             msg += ", vendor = " + this.vendor;
             msg += ", maxRange = " + Float.toString(this.maxRange);
             msg += ", resolution = " + Float.toString(this.resolution);
-            return msg + "\r\n";
+            return msg;
         }
 
     }
