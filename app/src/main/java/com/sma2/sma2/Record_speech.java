@@ -10,6 +10,8 @@ import com.sma2.sma2.SignalRecording.SpeechRecorder;
 import android.os.Handler;
 import android.widget.ProgressBar;
 
+import us.feras.mdv.MarkdownView;
+
 public class Record_speech extends AppCompatActivity implements View.OnClickListener {
     private Intent intent_prev;
     private String Exercise;
@@ -64,15 +66,15 @@ public class Record_speech extends AppCompatActivity implements View.OnClickList
         Exercise = intent_prev.getStringExtra("EXERCISE");
         Intent intent_ex1;
         if (Exercise.equals("a")){
-            intent_ex1 =new Intent(this, Ex_speech2.class);
+            intent_ex1 =new Intent(this, Ex_speech1.class);
             startActivity(intent_ex1);
         }
         else if (Exercise.equals("ddk")){
-            intent_ex1 =new Intent(this, Ex_speech3.class);
+            intent_ex1 =new Intent(this, Ex_speech2.class);
             startActivity(intent_ex1);
         }
         else{
-            intent_ex1 =new Intent(this, Ex_walking.class);
+            intent_ex1 =new Intent(this, Ex_speech3.class);
             startActivity(intent_ex1);
         }
     }
