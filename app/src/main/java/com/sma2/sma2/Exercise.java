@@ -1,6 +1,5 @@
 package com.sma2.sma2;
 
-import android.app.Activity;
 import android.app.Fragment;
 import android.net.Uri;
 
@@ -8,16 +7,18 @@ import android.net.Uri;
 public class Exercise {
     private String name;
     private Uri instructionVideoPath;
+    private Uri instructionTextPath;
     private Fragment fragmentClass;
 
-    public Exercise(String name, Uri instructionVideoPath, Fragment fragmentClass){
+    public Exercise(String name, Uri instructionVideoPath, Uri instructionTextPath, Fragment fragmentClass){
         super();
         this.name = name;
         this.instructionVideoPath = instructionVideoPath;
+        this.instructionTextPath = instructionTextPath;
         this.fragmentClass = fragmentClass;
     }
 
-    public Exercise(String name, Uri instructionVideoPath, String fragmentClassString){
+    public Exercise(String name, Uri instructionVideoPath, Uri instructionTextPath, String fragmentClassString){
         super();
 
         Fragment fragmentClass;
@@ -29,6 +30,7 @@ public class Exercise {
 
         this.name = name;
         this.instructionVideoPath = instructionVideoPath;
+        this.instructionTextPath = instructionTextPath;
         this.fragmentClass = fragmentClass;
     }
 
@@ -42,5 +44,9 @@ public class Exercise {
 
     public Fragment getFragmentClass() {
         return fragmentClass;
+    }
+
+    public Uri getInstructionTextPath() {
+        return instructionTextPath;
     }
 }
