@@ -32,11 +32,13 @@ public class PatientDA {
     private float weight;
     @Property
     private int height;
+    @Property
+    private int sessionCount;
 
-    @Generated(hash = 1539782669)
+    @Generated(hash = 859711428)
     public PatientDA(Long userId, String username, Date birthday, String gender,
             int hand, boolean smoker, int educational_level, Date year_diag,
-            String other_disorder, float weight, int height) {
+            String other_disorder, float weight, int height, int sessionCount) {
         this.userId = userId;
         this.username = username;
         this.birthday = birthday;
@@ -48,6 +50,7 @@ public class PatientDA {
         this.other_disorder = other_disorder;
         this.weight = weight;
         this.height = height;
+        this.sessionCount = sessionCount;
     }
     @Generated(hash = 1204534041)
     public PatientDA() {
@@ -121,6 +124,12 @@ public class PatientDA {
     }
     public void setUserId(Long userId) {
         this.userId = userId;
+    }
+    public int getSessionCount() {
+        return this.sessionCount;
+    }
+    public void setSessionCount(int sessionCount) {
+        this.sessionCount = sessionCount;
     }
 
 }

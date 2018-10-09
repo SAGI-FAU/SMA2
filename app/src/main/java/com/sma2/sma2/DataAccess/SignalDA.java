@@ -20,7 +20,7 @@ public class SignalDA {
     @NotNull
     private String signalPath;
     private Date recordingTime;
-    private Integer sessionCount;
+    private int sessionNumber;
 
 
     @ToOne(joinProperty = "patientDAId")
@@ -37,15 +37,15 @@ public class SignalDA {
     @Generated(hash = 457749002)
     private transient SignalDADao myDao;
 
-    @Generated(hash = 835431146)
-    public SignalDA(Long id, long patientDAId, long exerciseDAID,
-            @NotNull String signalPath, Date recordingTime, Integer sessionCount) {
+    @Generated(hash = 1073206762)
+    public SignalDA(Long id, long patientDAId, long exerciseDAID, @NotNull String signalPath, Date recordingTime,
+            int sessionNumber) {
         this.id = id;
         this.patientDAId = patientDAId;
         this.exerciseDAID = exerciseDAID;
         this.signalPath = signalPath;
         this.recordingTime = recordingTime;
-        this.sessionCount = sessionCount;
+        this.sessionNumber = sessionNumber;
     }
 
     @Generated(hash = 896497034)
@@ -92,12 +92,12 @@ public class SignalDA {
         this.recordingTime = recordingTime;
     }
 
-    public Integer getSessionCount() {
-        return this.sessionCount;
+    public Integer getSessionNumber() {
+        return this.sessionNumber;
     }
 
-    public void setSessionCount(Integer sessionCount) {
-        this.sessionCount = sessionCount;
+    public void setSessionNumber(Integer sessionNumber) {
+        this.sessionNumber = sessionNumber;
     }
 
     @Generated(hash = 391381774)
@@ -207,6 +207,10 @@ public class SignalDA {
             throw new DaoException("Entity is detached from DAO context");
         }
         myDao.update(this);
+    }
+
+    public void setSessionNumber(int sessionNumber) {
+        this.sessionNumber = sessionNumber;
     }
 
     /** called by internal mechanisms, do not call yourself. */
