@@ -40,7 +40,7 @@ public class Ex_speech1 extends AppCompatActivity implements View.OnClickListene
     public void open_exercise(){
 
         Intent intent_ex1 =new Intent(this, Record_speech.class);
-        intent_ex1.putExtra("EXERCISE","@string/a_ex");
+        intent_ex1.putExtra("EXERCISE","a");
         startActivity(intent_ex1);
     }
 
