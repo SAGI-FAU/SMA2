@@ -3,9 +3,7 @@ package com.sma2.sma2;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,25 +13,21 @@ import android.widget.VideoView;
 
 public class ExerciseIntro extends Fragment {
 
+    OnStartClickedListener mStartClickedCallback;
     private String mExerciseName;
     private Uri mVideoPath;
     private Uri mInstructionPath;
+    private int mScheduledExerciseId;
 
-    OnStartClickedListener mStartClickedCallback;
-
-
-    public static ExerciseIntro newInstance(String exerciseName, Uri videoPath, Uri instructionPath) {
+    public static ExerciseIntro newInstance(String exerciseName, Uri videoPath, Uri instructionPath, int scheduledExerciseId) {
         ExerciseIntro fragment = new ExerciseIntro();
         Bundle args = new Bundle();
         args.putString("NAME", exerciseName);
         args.putString("VIDEO_PATH", videoPath.toString());
         args.putString("INSTRUCTION_PATH", instructionPath.toString());
+        args.putInt("SCHEDULED_EXERCISE_ID", scheduledExerciseId);
         fragment.setArguments(args);
         return fragment;
-    }
-
-    public interface OnStartClickedListener {
-        void onExerciseStartClicked();
     }
 
     @Override
@@ -43,6 +37,7 @@ public class ExerciseIntro extends Fragment {
             mExerciseName = getArguments().getString("NAME");
             mVideoPath = Uri.parse(getArguments().getString("VIDEO_PATH"));
             mInstructionPath = Uri.parse(getArguments().getString("INSTRUCTION_PATH"));
+            mScheduledExerciseId = getArguments().getInt("SCHEDULED_EXERCISE_ID");
         }
     }
 
@@ -51,17 +46,15 @@ public class ExerciseIntro extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_exercise_intro, container, false);
 
+        // TODO: Handle the button click for the test instructions
+
         // Set Title based on Intend Information
         TextView exerciseTitle = view.findViewById(R.id.exerciseTitle);
         exerciseTitle.setText(mExerciseName);
 
         // Set Video based on Intend Information
-        if (mInstructionPath.toString() != null) {
-            VideoView instructionVideo = view.findViewById(R.id.instructionVideo);
-            instructionVideo.setVideoURI(mVideoPath);
-        } else {
-            // Throw runtime error
-        }
+        VideoView instructionVideo = view.findViewById(R.id.instructionVideo);
+        instructionVideo.setVideoURI(mVideoPath);
 
         // Set On Click handler for Start Button
         Button startButton = view.findViewById(R.id.startButton);
@@ -69,9 +62,10 @@ public class ExerciseIntro extends Fragment {
             @Override
             public void onClick(View view) {
                 if (mStartClickedCallback != null) {
-                    mStartClickedCallback.onExerciseStartClicked();
+                    mStartClickedCallback.onExerciseStartClicked(mScheduledExerciseId);
                 }
             }
+
         });
 
         return view;
@@ -92,5 +86,9 @@ public class ExerciseIntro extends Fragment {
     public void onDetach() {
         super.onDetach();
         mStartClickedCallback = null;
+    }
+
+    public interface OnStartClickedListener {
+        void onExerciseStartClicked(int scheduledExerciseId);
     }
 }
