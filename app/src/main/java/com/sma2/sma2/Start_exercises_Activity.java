@@ -4,7 +4,8 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.RadioButton;
+
+import com.sma2.sma2.ExerciseFragments.Ex_speech1;
 
 public class Start_exercises_Activity extends AppCompatActivity implements View.OnClickListener {
 
