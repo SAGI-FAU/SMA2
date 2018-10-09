@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">SMA2</string>
     <string name="name">Benutzername</string>
     <string name="ID">ID-Nummer</string>
     <string name="Login">LOGIN</string>

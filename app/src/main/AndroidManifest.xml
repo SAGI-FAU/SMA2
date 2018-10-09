@@ -2,19 +2,83 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.sma2.sma2">
 
+    <uses-permission android:name="android.permission.VIBRATE" />
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity">
+
+
+        <activity android:name=".Activities.SplashScreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+
+        <activity
+            android:name=".MainActivity">
+        </activity>
+
+        <activity
+            android:name=".SettingsActivity">
+        </activity>
+
+        <activity
+            android:name=".Start_exercises_Activity">
+        </activity>
+
+        <activity
+            android:name=".Ex_speech1">
+        </activity>
+
+        <activity
+            android:name=".Ex_speech2">
+        </activity>
+        <activity
+            android:name=".Ex_speech3">
+        </activity>
+
+        <activity
+            android:name=".Ex_walking">
+        </activity>
+        <activity
+            android:name=".Ex_mov_hands">
+        </activity>
+        <activity
+            android:name=".Ex_tapping">
+        </activity>
+        <activity
+            android:name=".Tapping1">
+        </activity>
+
+        <activity
+            android:name=".Tapping2">
+        </activity>
+        <activity
+            android:name=".Sliding">
+        </activity>
+        <activity
+            android:name=".ThanksActivity">
+        </activity>
+        <activity
+            android:name=".Record_speech">
+        </activity>
+        <activity
+            android:name=".Record_speech_image">
+        </activity>
+        <activity
+            android:name=".Record_movement">
+        </activity>
+        <activity
+            android:name=".Record_mov_ball_balance">
+        </activity>
+
+
     </application>
 
 </manifest>

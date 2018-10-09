@@ -83,7 +83,7 @@
             android:layout_marginEnd="32dp"
             android:checked="true"
             android:text="@string/male"
-            android:textSize="30sp"
+            android:textSize="40sp"
             android:buttonTint="@color/colorPrimary"/>
 
 
@@ -93,7 +93,7 @@
             android:layout_height="wrap_content"
             android:checked="false"
             android:text="@string/female"
-            android:textSize="30sp"
+            android:textSize="40sp"
             android:buttonTint="@color/colorPrimary"/>
     </RadioGroup>
 
@@ -132,7 +132,7 @@
 
             android:checked="true"
             android:text="@string/right"
-            android:textSize="30sp"
+            android:textSize="40sp"
             android:buttonTint="@color/colorPrimary"/>
 
 
@@ -142,7 +142,7 @@
             android:layout_height="wrap_content"
             android:checked="false"
             android:text="@string/left"
-            android:textSize="30sp"
+            android:textSize="40sp"
             android:buttonTint="@color/colorPrimary"/>
     </RadioGroup>
 
@@ -184,7 +184,7 @@
 
             android:checked="true"
             android:text="@string/yes"
-            android:textSize="30sp"
+            android:textSize="40sp"
             android:buttonTint="@color/colorPrimary"/>
 
 
@@ -194,7 +194,7 @@
             android:layout_height="wrap_content"
             android:checked="false"
             android:text="@string/no"
-            android:textSize="30sp"
+            android:textSize="40sp"
             android:buttonTint="@color/colorPrimary"/>
     </RadioGroup>
 
@@ -207,12 +207,21 @@
         android:text="@string/next"
         android:layout_marginTop="20dp"
         android:textSize="50sp"
-        app:layout_constraintTop_toBottomOf="@+id/smoker_radio"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintRight_toRightOf="parent" />
 
 
 
-
+    <Button
+        android:id="@+id/button_back1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimaryDark"
+        android:text="@string/back"
+        android:layout_marginTop="90sp"
+        android:textSize="50sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent" />
 
 
 
