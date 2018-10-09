@@ -21,7 +21,7 @@ public class MovementRecorder implements SensorEventListener {
 
     private CombinedSensorDataFrame combinedSensorDataFrame = null;
     private static boolean mEnableLogging = false;
-    private final int SYNC_ACCURACY_NS = 100000; // corresponds to maximum difference of 100us in timestamps
+    private final int SYNC_ACCURACY_NS = 200000; // corresponds to maximum difference of 200us in timestamps
 
     public MovementRecorder(Context context, int samplingfrequency_us) {
         mSamplingFrequencyMicroSeconds = samplingfrequency_us;
