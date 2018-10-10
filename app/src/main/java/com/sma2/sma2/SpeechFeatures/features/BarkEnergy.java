@@ -1,6 +1,6 @@
 package com.sma2.sma2.SpeechFeatures.features;
 
-import com.sma2.sma2.SpeechFeatures.sigproc;
+import com.sma2.sma2.SpeechFeatures.tools.sigproc;
 
 import static java.util.Arrays.copyOfRange;
 

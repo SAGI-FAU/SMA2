@@ -34,6 +34,9 @@
             android:name=".Start_exercises_Activity">
         </activity>
 
+        <activity android:name=".Start_results_Activity">
+        </activity>
+
         <activity
             android:name=".Ex_speech1">
         </activity>

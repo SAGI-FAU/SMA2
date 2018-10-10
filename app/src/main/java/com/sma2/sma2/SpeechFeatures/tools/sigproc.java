@@ -1,5 +1,9 @@
-package com.sma2.sma2.SpeechFeatures;
+package com.sma2.sma2.SpeechFeatures.tools;
 
+import java.io.BufferedInputStream;
+import java.io.FileInputStream;
+import java.nio.ByteBuffer;
+import java.nio.ByteOrder;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -119,7 +123,6 @@ public class sigproc {
         }
         return sig_spec;
     }
-
 
     /***
      * Frame speech signal

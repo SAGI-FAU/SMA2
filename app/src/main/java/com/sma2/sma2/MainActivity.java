@@ -19,11 +19,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         //setContentView(R.layout.activity_main_menu);
         setContentView(R.layout.activity_main_menu);
         setListeners();
-
         ask_permissions();
-
-
-
     }
 
     private void setListeners() {
@@ -56,8 +52,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 open_exercises();
                 break;
             case R.id.btnResults:
+                open_results();
             case R.id.txtResults:
-                //TODO: Implement transition to new activity
+                open_results();
                 break;
         }
     }
@@ -70,6 +67,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void open_exercises(){
         Intent intent_exercises =new Intent(this, Start_exercises_Activity.class);
         startActivity(intent_exercises);
+    }
+
+    public void open_results(){
+        Intent intent_results = new Intent(this, Start_results_Activity.class);
+        startActivity(intent_results);
     }
 
     public void ask_permissions(){

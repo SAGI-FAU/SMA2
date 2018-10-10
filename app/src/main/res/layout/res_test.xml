@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <TextView
+            android:id="@+id/featname"
+            android:layout_weight="2"
+            android:layout_width="wrap_content"
+            android:textSize="40dp"
+            android:layout_height="wrap_content"
+            android:text="Jitter"
+            android:textColor="#000"/>
+        <TextView
+            android:id="@+id/feat_val"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="3"
+            android:textSize="40dp"
+            android:textAlignment="textEnd"/>
+    </LinearLayout>
+</android.support.constraint.ConstraintLayout>
