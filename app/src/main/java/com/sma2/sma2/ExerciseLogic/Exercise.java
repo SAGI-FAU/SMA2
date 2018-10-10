@@ -1,4 +1,4 @@
-package com.sma2.sma2;
+package com.sma2.sma2.ExerciseLogic;
 
 import android.net.Uri;
 import android.support.v4.app.Fragment;
