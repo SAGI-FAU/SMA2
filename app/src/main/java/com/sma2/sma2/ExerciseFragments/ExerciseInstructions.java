@@ -1,4 +1,4 @@
-package com.sma2.sma2;
+package com.sma2.sma2.ExerciseFragments;
 
 import android.content.Context;
 import android.net.Uri;
@@ -11,15 +11,17 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.VideoView;
 
-public class ExerciseIntro extends Fragment {
+import com.sma2.sma2.R;
+
+public class ExerciseInstructions extends Fragment {
 
     OnStartClickedListener mStartClickedCallback;
     private String mExerciseName;
     private Uri mVideoPath;
     private Uri mInstructionPath;
 
-    public static ExerciseIntro newInstance(String exerciseName, Uri videoPath, Uri instructionPath) {
-        ExerciseIntro fragment = new ExerciseIntro();
+    public static ExerciseInstructions newInstance(String exerciseName, Uri videoPath, Uri instructionPath) {
+        ExerciseInstructions fragment = new ExerciseInstructions();
         Bundle args = new Bundle();
         args.putString("NAME", exerciseName);
         args.putString("VIDEO_PATH", videoPath.toString());
@@ -41,7 +43,7 @@ public class ExerciseIntro extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_exercise_intro, container, false);
+        View view = inflater.inflate(R.layout.fragment_exercise_instructions, container, false);
 
         // TODO: Handle the button click for the test instructions
 
@@ -71,8 +73,8 @@ public class ExerciseIntro extends Fragment {
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        if (context instanceof ExerciseIntro.OnStartClickedListener) {
-            mStartClickedCallback = (ExerciseIntro.OnStartClickedListener) context;
+        if (context instanceof ExerciseInstructions.OnStartClickedListener) {
+            mStartClickedCallback = (ExerciseInstructions.OnStartClickedListener) context;
         } else {
             throw new RuntimeException(context.toString()
                     + " must implement OnStartClickedListener");
