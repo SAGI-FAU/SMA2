@@ -7,6 +7,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import com.sma2.sma2.R;
 
+import us.feras.mdv.MarkdownView;
+
 public class Ex_speech1 extends AppCompatActivity implements View.OnClickListener {
 
 
@@ -30,6 +32,10 @@ public class Ex_speech1 extends AppCompatActivity implements View.OnClickListene
         switch (view.getId()){
             case R.id.button_instructions1:
                 //TODO: Implement method to play the audio or visual instructions
+
+                //Display text instructions
+                MarkdownView markdownView = findViewById(R.id.markdownView);
+                markdownView.loadMarkdown(getResources().getString(R.string.a_ex));
                 break;
             case R.id.button_record1:
                 open_exercise();
@@ -41,7 +47,7 @@ public class Ex_speech1 extends AppCompatActivity implements View.OnClickListene
     public void open_exercise(){
 
         Intent intent_ex1 =new Intent(this, Record_speech.class);
-        intent_ex1.putExtra("EXERCISE","@string/a_ex");
+        intent_ex1.putExtra("EXERCISE","a");
         startActivity(intent_ex1);
     }
 

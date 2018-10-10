@@ -61,12 +61,12 @@ public class Ex_speech3 extends AppCompatActivity implements View.OnClickListene
 
         switch (x) {
             case 1:
-                intent_ex1 =new Intent(this, Record_speech.class);
+                intent_ex1 =new Intent(this, Record_speech_image.class);
                 intent_ex1.putExtra("EXERCISE","monologue");
                 startActivity(intent_ex1);
                 break;
             case 2:
-                intent_ex1 =new Intent(this, Record_speech.class);
+                intent_ex1 =new Intent(this, Record_speech_image.class);
                 intent_ex1.putExtra("EXERCISE","readtext");
                 startActivity(intent_ex1);
                 break;
