@@ -17,7 +17,6 @@ import android.widget.TextView;
 
 
 import com.sma2.sma2.SignalRecording.TappingRecorder;
-import com.sma2.sma2.Tapping1;
 
 import com.sma2.sma2.R;
 import com.sma2.sma2.ThanksActivity;
@@ -153,21 +152,6 @@ public class Tapping2 extends AppCompatActivity implements View.OnClickListener 
         startActivity(intent_ex1);
     }
 
-   /* public void change_button_position(ImageButton imageButton){
-        ConstraintLayout.LayoutParams params_bug= (ConstraintLayout.LayoutParams)  imageButton.getLayoutParams();
-
-
-        int y= (int)(Math.random()*((800)));
-        int x= (int)(Math.random()*((600)));
-
-
-
-        params_bug.topMargin=y;
-        params_bug.leftMargin=x;
-        params_bug.setMarginStart(x);
-        imageButton.setLayoutParams(params_bug);
-
-    }*/
 
     public void change_button_position(ImageButton imageButton, ImageButton imageButton2){
         ConstraintLayout.LayoutParams params_bug= (ConstraintLayout.LayoutParams)  imageButton.getLayoutParams();
@@ -198,15 +182,7 @@ public class Tapping2 extends AppCompatActivity implements View.OnClickListener 
             Log.e("x2","Here there is an increment");
 
         }
-        /*else if(Math.abs(y2-y)<120) {
 
-                y = y + 240;
-
-            if(y>600){
-                y=y-480;
-            }
-
-        }*/
         Log.e("x2","After");
         Log.e("x2",Integer.toString(x));
 
@@ -225,4 +201,3 @@ public class Tapping2 extends AppCompatActivity implements View.OnClickListener 
 
 }
 
-// TODO: Separate the buttons

@@ -68,12 +68,12 @@ public class Ex_tapping extends AppCompatActivity implements View.OnClickListene
                 startActivity(intent_ex1);
                 break;
             case 2:
-                intent_ex1 =new Intent(this, Tapping1.class);
+                intent_ex1 =new Intent(this, Tapping2.class);
                 intent_ex1.putExtra("EXERCISE","tapping2");
                 startActivity(intent_ex1);
                 break;
             case 3:
-                intent_ex1 =new Intent(this, Tapping1.class);
+                intent_ex1 =new Intent(this, Sliding.class);
                 intent_ex1.putExtra("EXERCISE","sliding");
                 startActivity(intent_ex1);
                 break;

@@ -85,7 +85,7 @@ dependencies {
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
 }
 
-android {
+/*android {
     compileSdkVersion 26
     buildToolsVersion '28.0.2'
-}
+}*/
