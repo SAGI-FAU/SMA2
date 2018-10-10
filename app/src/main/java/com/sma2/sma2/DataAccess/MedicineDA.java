@@ -8,12 +8,17 @@ import org.greenrobot.greendao.annotation.Generated;
 import org.greenrobot.greendao.DaoException;
 import org.greenrobot.greendao.annotation.NotNull;
 
+import java.util.Date;
+
 @Entity
 public class MedicineDA {
     @Id
     private Long id;
 
     private long patientDAId;
+
+    @NotNull
+    private Date insertDate;
 
     @Property
     private String medicineName;
@@ -33,11 +38,12 @@ public class MedicineDA {
     @Generated(hash = 1858501363)
     private transient MedicineDADao myDao;
 
-    @Generated(hash = 1426276973)
-    public MedicineDA(Long id, long patientDAId, String medicineName, int dose,
-            int intakeTime) {
+    @Generated(hash = 1635983714)
+    public MedicineDA(Long id, long patientDAId, @NotNull Date insertDate, String medicineName,
+            int dose, int intakeTime) {
         this.id = id;
         this.patientDAId = patientDAId;
+        this.insertDate = insertDate;
         this.medicineName = medicineName;
         this.dose = dose;
         this.intakeTime = intakeTime;
@@ -158,6 +164,14 @@ public class MedicineDA {
             throw new DaoException("Entity is detached from DAO context");
         }
         myDao.update(this);
+    }
+
+    public Date getInsertDate() {
+        return this.insertDate;
+    }
+
+    public void setInsertDate(Date insertDate) {
+        this.insertDate = insertDate;
     }
 
     /** called by internal mechanisms, do not call yourself. */
