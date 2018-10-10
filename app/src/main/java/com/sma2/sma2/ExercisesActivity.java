@@ -9,11 +9,11 @@ import android.support.v7.app.AppCompatActivity;
 
 import com.sma2.sma2.ExerciseFragments.ExSustainedVowel;
 import com.sma2.sma2.ExerciseFragments.ExerciseInstructions;
-import com.sma2.sma2.ExerciseFragments.ExerciseStart;
+import com.sma2.sma2.ExerciseFragments.SessionOverview;
 import com.sma2.sma2.ExerciseLogic.ExerciseSessionManager;
 import com.sma2.sma2.ExerciseLogic.ScheduledExercise;
 
-public class ExercisesActivity extends AppCompatActivity implements ExerciseInstructions.OnStartClickedListener, ExerciseStart.OnSessionStartListener, ExSustainedVowel.OnFragmentInteractionListener {
+public class ExercisesActivity extends AppCompatActivity implements ExerciseInstructions.OnStartClickedListener, SessionOverview.OnSessionStartListener, ExSustainedVowel.OnFragmentInteractionListener {
     ExerciseSessionManager sessionManager;
     ScheduledExercise nextExercise;
 
@@ -46,7 +46,7 @@ public class ExercisesActivity extends AppCompatActivity implements ExerciseInst
     private void showStartScreen() {
         try {
             nextExercise = sessionManager.getNextExercise();
-            ExerciseStart startScreen = new ExerciseStart();
+            SessionOverview startScreen = new SessionOverview();
             showFragment(startScreen);
         } catch (IndexOutOfBoundsException e) {
             // TODO: Show a end screen
