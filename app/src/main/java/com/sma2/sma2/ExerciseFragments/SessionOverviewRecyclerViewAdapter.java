@@ -29,6 +29,7 @@ public class SessionOverviewRecyclerViewAdapter extends RecyclerView.Adapter<Ses
     public void onBindViewHolder(final ViewHolder holder, int position) {
         holder.mItem = mScheduledExercises.get(position);
         holder.mNameView.setText(mScheduledExercises.get(position).getExercise().getName());
+        holder.mStatusView.setText(mScheduledExercises.get(position).getCompleted() ? "Done" : "");
     }
 
     @Override
@@ -40,6 +41,7 @@ public class SessionOverviewRecyclerViewAdapter extends RecyclerView.Adapter<Ses
         public final View mView;
         public final TextView mIdView;
         public final TextView mNameView;
+        public final TextView mStatusView;
         public ScheduledExercise mItem;
 
         public ViewHolder(View view) {
@@ -47,6 +49,7 @@ public class SessionOverviewRecyclerViewAdapter extends RecyclerView.Adapter<Ses
             mView = view;
             mIdView = view.findViewById(R.id.item_number);
             mNameView = view.findViewById(R.id.exerciseName);
+            mStatusView = view.findViewById(R.id.exerciseStatus);
         }
 
         @Override

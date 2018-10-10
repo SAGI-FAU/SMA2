@@ -67,6 +67,13 @@ public class ScheduledExercise implements Parcelable {
         return resultPath;
     }
 
+    public boolean getCompleted() {
+        if (completionDate == -1) {
+            return false;
+        }
+        return true;
+    }
+
     @Override
     public int describeContents() {
         return 0;
