@@ -27,7 +27,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         findViewById(R.id.txtSettings).setOnClickListener(this);
         findViewById(R.id.txtExercises).setOnClickListener(this);
         findViewById(R.id.txtResults).setOnClickListener(this);
-
     }
 
     @Override
@@ -39,17 +38,19 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 //TODO: Implement transition to new activity
                 break;
             case R.id.btnSettings:
-
                 open_settings();
+                break;
             case R.id.txtSettings:
                 open_settings();
                 break;
             case R.id.btnExercises:
                 open_exercises();
+                break;
             case R.id.txtExercises:
                 open_exercises();
                 break;
             case R.id.btnResults:
+                break;
             case R.id.txtResults:
                 //TODO: Implement transition to new activity
                 break;
