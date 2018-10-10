@@ -15,6 +15,7 @@ public class CSVFileWriter {
     private String TAG = "CSVFileWriter";
     private final String DELIMITER = ";";
     private final String NEW_LINE = "\r\n";
+    private final String FILE_ENDING =  ".csv";
 
     private BufferedWriter mBufferedWriter = null;
 
@@ -46,10 +47,9 @@ public class CSVFileWriter {
 
     public CSVFileWriter() {
         String path = PATH;
-        Log.d(TAG,"Path: " + path);
         String currTime = new SimpleDateFormat("yyyy-MM-dd_HH-mm", Locale.getDefault()).format(new Date());
 
-        File file = openFile(path, currTime + ".csv");
+        File file = openFile(path, currTime + FILE_ENDING);
 
         try {
             mBufferedWriter = new BufferedWriter(new FileWriter(file));
@@ -88,7 +88,7 @@ public class CSVFileWriter {
             mBufferedWriter.close();
             mBufferedWriter = null;
         } catch (Exception e) {
-            Log.e(TAG, "Error on completing writer!");
+            Log.e(TAG, "ERROR on completing writer!");
             e.printStackTrace();
         }
     }
