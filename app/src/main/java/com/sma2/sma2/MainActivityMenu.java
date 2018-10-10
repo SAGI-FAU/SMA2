@@ -50,7 +50,7 @@ public class MainActivityMenu extends AppCompatActivity implements View.OnClickL
     }
 
     public void open_exercises(){
-        Intent intent_exercises =new Intent(MainActivityMenu.this, Start_exercises_Activity.class);
-        startActivity(intent_exercises);
+        //Intent intent_exercises =new Intent(MainActivityMenu.this, Start_exercises_Activity.class);
+        //startActivity(intent_exercises);
     }
 }
