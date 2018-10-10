@@ -1,9 +1,6 @@
 package com.sma2.sma2.SpeechFeatures.tools;
 
 
-import com.sma2.sma2.SpeechFeatures.sigproc;
-import com.sma2.sma2.SpeechFeatures.tools.array_manipulation;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;

@@ -9,11 +9,19 @@ import static java.lang.Math.abs;
 public class phon_feats {
     private array_manipulation ArrM = new array_manipulation();
 
+    public void phon_feats(){}
+
     public float jitter(float[] f0) {
         //Ensure nonzero values in f0 contour
         List lf0 = ArrM.find(f0,0f,2);
         //Convert list to float array
-        f0 = ArrM.listtoarray(lf0);
+        //List to array
+        float[] newF0 = new float[lf0.size()];
+        for(int i=0;i<lf0.size();i++)
+        {
+            newF0[i] = f0[(int)lf0.get(i)];
+        }
+        f0 = newF0;
 
         //Length of the f0 contour
         int N = f0.length;
@@ -23,21 +31,9 @@ public class phon_feats {
         float Mp = temp[temp.length - 1];//Maximum pitch
         //Array with variations between elements of array
         float jitt = 0f;
-        for (int i = 0; i < N; i=i+3)
+        for (int i = 0; i < N; i=i+3)//Jitter is computed every 3 f0 periods
         {
-            int M = i+3;//Jitter is computed every 3 f0 periods.
-            int im = i;//Initial f0 point.
-            if (M>N) //This condition is used to avoid index bound errors
-            {
-                M = N;
-                im = M-3;
-            }
-            float tempd = 0;
-            for (int j = im; j < M; j++)
-            {
-                tempd+= abs(f0[j] - Mp);
-            }
-            jitt += tempd;
+            jitt+= abs(f0[i] - Mp);
         }
         jitt = (100*jitt)/(N*Mp);
         return jitt;

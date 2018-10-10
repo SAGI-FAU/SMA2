@@ -36,8 +36,7 @@ public class array_manipulation {
         float [] means = new float[vals.size()];
         for(int i=0;i<vals.size();i++)
         {
-            float temp = (float) vals.get(i);
-            means[i] =  temp;
+            means[i] = (float) vals.get(i);
         }
         return means;
     }

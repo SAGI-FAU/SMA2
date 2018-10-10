@@ -37,6 +37,9 @@
             android:exported="true">
         </activity>
 
+        <activity android:name=".Start_results_Activity">
+        </activity>
+
         <activity
             android:name=".ExerciseFragments.Ex_speech1">
         </activity>

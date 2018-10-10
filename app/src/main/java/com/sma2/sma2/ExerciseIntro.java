@@ -14,6 +14,8 @@ import android.widget.VideoView;
 public class ExerciseIntro extends Fragment {
 
     OnStartClickedListener mStartClickedCallback;
+    OnInstrClickedListener mInstrClickedCallback;
+
     private String mExerciseName;
     private Uri mVideoPath;
     private Uri mInstructionPath;
@@ -46,7 +48,17 @@ public class ExerciseIntro extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_exercise_intro, container, false);
 
-        // TODO: Handle the button click for the test instructions
+
+        // Set On Click handler for Instructions Button
+        Button instrButton = view.findViewById(R.id.textInstructions);
+        instrButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (mInstrClickedCallback != null) {
+                    mInstrClickedCallback.onTextInstrClicked();
+                }
+            }
+        });
 
         // Set Title based on Intend Information
         TextView exerciseTitle = view.findViewById(R.id.exerciseTitle);
@@ -86,6 +98,10 @@ public class ExerciseIntro extends Fragment {
     public void onDetach() {
         super.onDetach();
         mStartClickedCallback = null;
+    }
+
+    public interface  OnInstrClickedListener{
+        void onTextInstrClicked();
     }
 
     public interface OnStartClickedListener {

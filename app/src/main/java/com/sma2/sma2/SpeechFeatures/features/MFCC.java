@@ -1,7 +1,7 @@
 package com.sma2.sma2.SpeechFeatures.features;
 
 import com.sma2.sma2.SpeechFeatures.tools.Matrix;
-import com.sma2.sma2.SpeechFeatures.sigproc;
+import com.sma2.sma2.SpeechFeatures.tools.sigproc;
 
 import static java.lang.Math.PI;
 import static java.lang.Math.abs;
