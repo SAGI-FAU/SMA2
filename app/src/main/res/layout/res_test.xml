@@ -9,14 +9,14 @@
         <TextView
             android:id="@+id/featname"
             android:layout_weight="2"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:textSize="40dp"
             android:layout_height="wrap_content"
             android:text="Jitter"
             android:textColor="#000"/>
         <TextView
             android:id="@+id/feat_val"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="3"
             android:textSize="40dp"
