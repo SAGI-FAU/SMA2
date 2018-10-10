@@ -1,7 +1,6 @@
 package com.sma2.sma2;
 
 import android.net.Uri;
-import android.util.Log;
 
 import com.sma2.sma2.ExerciseFragments.ExSustainedVowel;
 
