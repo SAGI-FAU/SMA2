@@ -1,4 +1,4 @@
-package com.sma2.sma2;
+package com.sma2.sma2.ExerciseFragments;
 
 
 import android.content.Intent;
@@ -10,6 +10,9 @@ import android.util.Log;
 import android.view.View;
 import android.widget.SeekBar;
 import android.widget.TextView;
+
+import com.sma2.sma2.R;
+import com.sma2.sma2.ThanksActivity;
 
 
 public class Sliding extends AppCompatActivity implements View.OnClickListener {

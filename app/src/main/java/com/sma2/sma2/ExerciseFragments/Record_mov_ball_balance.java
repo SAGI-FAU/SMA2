@@ -1,4 +1,4 @@
-package com.sma2.sma2;
+package com.sma2.sma2.ExerciseFragments;
 
 
 import android.content.Intent;
@@ -7,6 +7,9 @@ import android.os.CountDownTimer;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.TextView;
+
+import com.sma2.sma2.ExerciseFragments.Ex_tapping;
+import com.sma2.sma2.R;
 
 
 public class Record_mov_ball_balance extends AppCompatActivity implements View.OnClickListener {
