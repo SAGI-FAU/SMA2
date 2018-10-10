@@ -17,25 +17,25 @@ public class ExerciseSessionManager {
     public void createExerciseSession() {
         // create Dummy List
         _createDummyExerciseList();
+        _testList.add(new ScheduledExercise(_dummyExerciseList.get(0), 1));
+//        _testList.add(new ScheduledExercise(_dummyExerciseList.get(1), 1));
+//        _testList.add(new ScheduledExercise(_dummyExerciseList.get(2), 1));
         // Create a new list of exercise and store them in the database with a new (incrementing) session id
         // store the current session id in the as a shared property
     }
 
     public List<ScheduledExercise> getExerciseSession() {
         // create Dummy List
-        _testList.add(new ScheduledExercise(_dummyExerciseList.get(0), 1));
-        _testList.add(new ScheduledExercise(_dummyExerciseList.get(1), 1));
-        _testList.add(new ScheduledExercise(_dummyExerciseList.get(2), 1));
         return _testList;
     }
 
-    public ScheduledExercise getNextExercise() throws RuntimeException {
+    public ScheduledExercise getNextExercise() throws IndexOutOfBoundsException {
         for (ScheduledExercise ex : getExerciseSession()) {
             if (ex.getCompletionDate() == -1) {
                 return ex;
             }
         }
-        throw new RuntimeException("No exercises left");
+        throw new IndexOutOfBoundsException("No exercises left");
     }
 
     public void _createDummyExerciseList(){

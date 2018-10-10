@@ -1,10 +1,12 @@
 package com.sma2.sma2;
 
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 
 import com.sma2.sma2.ExerciseFragments.ExSustainedVowel;
 
@@ -25,6 +27,13 @@ public class ExercisesActivity extends AppCompatActivity implements ExerciseIntr
         showStartScreen();
     }
 
+    @Override
+    public void finish() {
+        this.sessionManager = null;
+        this.nextExercise = null;
+        super.finish();
+    }
+
     private void showFragment(Fragment fragment) {
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         transaction.replace(R.id.exerciseContainer, fragment);
@@ -34,11 +43,13 @@ public class ExercisesActivity extends AppCompatActivity implements ExerciseIntr
     private void showStartScreen() {
         try {
             nextExercise = sessionManager.getNextExercise();
-        } catch (RuntimeException e) {
-            finish();
+            ExerciseStart startScreen = new ExerciseStart();
+            showFragment(startScreen);
+        } catch (IndexOutOfBoundsException e) {
+            // TODO: Show a end screen
+            Intent mIntent = new Intent(this, MainActivity.class);
+            startActivity(mIntent);
         }
-        ExerciseStart startScreen = new ExerciseStart();
-        showFragment(startScreen);
     }
 
     public void open_exercise() {
