@@ -47,14 +47,7 @@ public class ExercisesActivity extends AppCompatActivity implements ExerciseInst
     }
 
     private void showSessionOverview() {
-        try {
-            nextExercise = sessionManager.getNextExercise();
-            showFragment(sessionOverview);
-        } catch (IndexOutOfBoundsException e) {
-            // TODO: Show a end screen
-            Intent mIntent = new Intent(this, MainActivity.class);
-            startActivity(mIntent);
-        }
+        showFragment(sessionOverview);
     }
 
     public void open_exercise() {
@@ -76,7 +69,13 @@ public class ExercisesActivity extends AppCompatActivity implements ExerciseInst
 
     @Override
     public void onSessionStartClicked() {
-        open_exercise();
+        if (ExerciseSessionManager.getSessionCompleted(sessionManager.getScheduledExerciseList())) {
+            Intent mIntent = new Intent(this, MainActivity.class);
+            startActivity(mIntent);
+        } else {
+            nextExercise = sessionManager.getNextExercise();
+            open_exercise();
+        }
     }
 
     @Override
