@@ -4,8 +4,11 @@ package com.sma2.sma2;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.support.constraint.ConstraintLayout;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
+import android.widget.SeekBar;
 import android.widget.TextView;
 
 
@@ -15,6 +18,7 @@ public class Sliding extends AppCompatActivity implements View.OnClickListener {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
 
         setContentView(R.layout.activity_capture_sliding);
         setListeners();
@@ -36,7 +40,38 @@ public class Sliding extends AppCompatActivity implements View.OnClickListener {
             }
         }.start();
 
+
+        SeekBar seekBar = (SeekBar) findViewById(R.id.seekBar2);
+
+        seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
+                ConstraintLayout.LayoutParams params_bug= (ConstraintLayout.LayoutParams)  seekBar.getLayoutParams();
+                int x2=seekBar.getProgress(); //The bar position
+
+                int y2=params_bug.topMargin;
+                Log.e("seek",Integer.toString(x2));
+
+
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+
+            }
+        });
+
+
+
+
     }
+
+
 
 
     @Override
