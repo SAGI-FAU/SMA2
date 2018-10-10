@@ -23,13 +23,13 @@ public class ExerciseSessionManager {
         // store the current session id in the as a shared property
     }
 
-    public List<ScheduledExercise> getExerciseSession() {
+    public List<ScheduledExercise> getScheduledExerciseList() {
         // create Dummy List
         return _testList;
     }
 
     public ScheduledExercise getNextExercise() throws IndexOutOfBoundsException {
-        for (ScheduledExercise ex : getExerciseSession()) {
+        for (ScheduledExercise ex : getScheduledExerciseList()) {
             if (ex.getCompletionDate() == -1) {
                 return ex;
             }
