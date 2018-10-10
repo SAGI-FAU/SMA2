@@ -17,9 +17,6 @@ public class CSVFileWriter {
     private final String NEW_LINE = "\r\n";
 
     private BufferedWriter mBufferedWriter = null;
-    private String mHeaderString = "";
-
-    private int numHeaderLines = 2;
 
     private final String PATH = Environment.getExternalStorageDirectory() + "/Apkinson/";
 
@@ -61,25 +58,24 @@ public class CSVFileWriter {
             e.printStackTrace();
         }
     }
-    public void addHeaderString(String str) {
-        mHeaderString += str + NEW_LINE;
-        numHeaderLines += 1;
-    }
 
-    public void writeHeader() {
+    public void writeLine(String str) {
         try {
-            String firstHeaderLine = "Headerlines = " + numHeaderLines + NEW_LINE;
-            mHeaderString += "Timestamp [ns]" + DELIMITER + "aX [m/s^2]" + DELIMITER + "aY [m/s^2]" + DELIMITER + "aZ [m/s^2]" + DELIMITER + "gX [rad/s]" + DELIMITER + "gY [rad/s]" + DELIMITER + "gZ [rad/s]" + DELIMITER + "mX [uT]" + DELIMITER + "mY [uT]" + DELIMITER + "mZ [uT]" + DELIMITER + "r0 [a.u.]" + DELIMITER + "r1 [a.u.]" + DELIMITER + "r2 [a.u.]" + DELIMITER + "r3 [a.u.]" + NEW_LINE;
-            mBufferedWriter.write(firstHeaderLine + mHeaderString);
+            mBufferedWriter.write(str);
         } catch (Exception e) {
             Log.e(TAG,"ERROR writing file");
             e.printStackTrace();
         }
     }
 
-    public void writeDataFrame(MovementRecorder.CombinedSensorDataFrame df) {
+    public void writeData(String[] str) {
+        String line = "";
+        for(int i = 0; i < str.length - 1; i++) {
+            line += str[i] + DELIMITER;
+        }
+        line += str[str.length-1] + NEW_LINE;
         try {
-            mBufferedWriter.write(df.toCSVString());
+            mBufferedWriter.write(line);
         } catch (Exception e) {
             Log.e(TAG,"ERROR writing file");
             e.printStackTrace();

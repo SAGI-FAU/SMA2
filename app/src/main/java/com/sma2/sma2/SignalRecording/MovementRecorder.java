@@ -5,7 +5,6 @@ import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
-import android.util.Log;
 
 import java.util.Arrays;
 
@@ -16,15 +15,23 @@ public class MovementRecorder implements SensorEventListener {
     private Sensor mGyroscope;
     private Sensor mMagnetometer;
     private Sensor mOrientation;
-    private int mSamplingFrequencyMicroSeconds = SensorManager.SENSOR_DELAY_NORMAL;
+    private int mSamplingFrequency_us = SensorManager.SENSOR_DELAY_NORMAL;
     private CSVFileWriter mCSVFileWriter;
 
     private CombinedSensorDataFrame combinedSensorDataFrame = null;
     private static boolean mEnableLogging = false;
     private final int SYNC_ACCURACY_NS = 200000; // corresponds to maximum difference of 200us in timestamps
 
-    public MovementRecorder(Context context, int samplingfrequency_us) {
-        mSamplingFrequencyMicroSeconds = samplingfrequency_us;
+    private String[] SENSOR_INFO_HEADER =  {"Name","Vendor","MaxRange","Resolution","Sampling Distance [us]"};
+
+    private String[] SENSOR_DATA_HEADER =  {"Timestamp [ns]",
+            "aX [m/s^2]","aY [m/s^2]","aZ [m/s^2]",
+            "gX [rad/s]","gY [rad/s]","gZ [rad/s]",
+            "mX [uT]","mY [uT]","mZ [uT]",
+            "r0 [a.u.]","r1 [a.u.]","r2 [a.u.]","r3 [a.u.]"};
+
+    public MovementRecorder(Context context, int samplingFrequency_us) {
+        mSamplingFrequency_us = samplingFrequency_us;
         mSensorManager = (SensorManager) context.getSystemService(context.SENSOR_SERVICE);
         mAccelerometer = mSensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
         mGyroscope = mSensorManager.getDefaultSensor(Sensor.TYPE_GYROSCOPE);
@@ -32,39 +39,41 @@ public class MovementRecorder implements SensorEventListener {
         mOrientation = mSensorManager.getDefaultSensor(Sensor.TYPE_ROTATION_VECTOR);
 
         mCSVFileWriter = new CSVFileWriter();
-        mCSVFileWriter.addHeaderString("Sampling Distance [us] = " + samplingfrequency_us);
+
+        // generate header information
+        mCSVFileWriter.writeData(SENSOR_INFO_HEADER);
         if (mAccelerometer != null) {
-            mCSVFileWriter.addHeaderString(new SensorInformation(mAccelerometer).toString());
+            mCSVFileWriter.writeData(new SensorInformation(mAccelerometer,mSamplingFrequency_us).toStringArray());
         }
         if (mGyroscope != null) {
-            mCSVFileWriter.addHeaderString(new SensorInformation(mGyroscope).toString());
+            mCSVFileWriter.writeData(new SensorInformation(mGyroscope,mSamplingFrequency_us).toStringArray());
         }
         if (mMagnetometer != null) {
-            mCSVFileWriter.addHeaderString(new SensorInformation(mMagnetometer).toString());
+            mCSVFileWriter.writeData(new SensorInformation(mMagnetometer,mSamplingFrequency_us).toStringArray());
         }
         if (mOrientation != null) {
-            mCSVFileWriter.addHeaderString(new SensorInformation(mOrientation).toString());
+            mCSVFileWriter.writeData(new SensorInformation(mOrientation,mSamplingFrequency_us).toStringArray());
         }
-        mCSVFileWriter.writeHeader();
+        mCSVFileWriter.writeData(SENSOR_DATA_HEADER);
 
     }
 
     public void setSamplingFrequency(int samplingFrequencyMicroSeconds) {
-        mSamplingFrequencyMicroSeconds = samplingFrequencyMicroSeconds;
+        mSamplingFrequency_us = samplingFrequencyMicroSeconds;
     }
 
     public void registerListeners() {
         if (mAccelerometer != null) {
-            mSensorManager.registerListener(this, mAccelerometer, mSamplingFrequencyMicroSeconds);
+            mSensorManager.registerListener(this, mAccelerometer, mSamplingFrequency_us);
         }
         if (mGyroscope != null) {
-            mSensorManager.registerListener(this, mGyroscope, mSamplingFrequencyMicroSeconds);
+            mSensorManager.registerListener(this, mGyroscope, mSamplingFrequency_us);
         }
         if (mMagnetometer != null) {
-            mSensorManager.registerListener(this, mMagnetometer, mSamplingFrequencyMicroSeconds);
+            mSensorManager.registerListener(this, mMagnetometer, mSamplingFrequency_us);
         }
         if (mOrientation != null) {
-            mSensorManager.registerListener(this, mOrientation, mSamplingFrequencyMicroSeconds);
+            mSensorManager.registerListener(this, mOrientation, mSamplingFrequency_us);
         }
     }
 
@@ -77,7 +86,6 @@ public class MovementRecorder implements SensorEventListener {
         mEnableLogging = false;
         mCSVFileWriter.close();
         mSensorManager = null;
-        Log.d(TAG, "stop()");
     }
 
 
@@ -90,12 +98,14 @@ public class MovementRecorder implements SensorEventListener {
         public String vendor = "";
         public float maxRange = 0.0f;
         public float resolution = 0.0f;
+        public int samplingFrequency_us = 0;
 
-        public SensorInformation(Sensor sensor) {
+        public SensorInformation(Sensor sensor, int samplingFrequency_us) {
             this.name = sensor.getName();
             this.maxRange = sensor.getMaximumRange();
             this.vendor = sensor.getVendor();
             this.resolution = sensor.getResolution();
+            this.samplingFrequency_us = samplingFrequency_us;
         }
 
         @Override
@@ -107,6 +117,10 @@ public class MovementRecorder implements SensorEventListener {
             return msg;
         }
 
+        public String[] toStringArray() {
+            String[] str = {this.name, this.vendor, Float.toString(this.maxRange), Float.toString(this.resolution), Integer.toString(this.samplingFrequency_us)};
+            return str;
+        }
     }
 
     public static class InternalSensorDataFrame implements Comparable<InternalSensorDataFrame> {
@@ -167,8 +181,6 @@ public class MovementRecorder implements SensorEventListener {
         private double[] mMagData = null;
         private double[] mRotationData = null;
         private long mTimeStamp;
-        private final String DELIMITER = ";";
-        private final String NEW_LINE = "\r\n";
 
         public CombinedSensorDataFrame(long timestamp) {
             mTimeStamp = timestamp;
@@ -229,29 +241,31 @@ public class MovementRecorder implements SensorEventListener {
             return msg;
         }
 
-        public String toCSVString() {
-            String msg = Long.toString(mTimeStamp);
+        public String[] toStringArray() {
+            String[] str = {"NaN","NaN","NaN","NaN","NaN","NaN","NaN","NaN","NaN","NaN","NaN","NaN","NaN","NaN"};
+            str[0] = Long.toString(mTimeStamp);
             if (mAccData != null) {
-                msg += DELIMITER + Double.toString(mAccData[0]) + DELIMITER + Double.toString(mAccData[1]) + DELIMITER + Double.toString(mAccData[2]);
-            } else {
-                msg += DELIMITER + "NaN" + DELIMITER + "NaN" + DELIMITER + "NaN";
+                str[1] = Double.toString(mAccData[0]);
+                str[2] = Double.toString(mAccData[1]);
+                str[3] = Double.toString(mAccData[2]);
             }
             if (mGyroData != null) {
-                msg += DELIMITER + Double.toString(mGyroData[0]) + DELIMITER + Double.toString(mGyroData[1]) + DELIMITER + Double.toString(mGyroData[2]);
-            } else {
-                msg += DELIMITER + "NaN" + DELIMITER + "NaN" + DELIMITER + "NaN";
+                str[4] = Double.toString(mGyroData[0]);
+                str[5] = Double.toString(mGyroData[1]);
+                str[6] = Double.toString(mGyroData[2]);
             }
             if (mMagData != null) {
-                msg += DELIMITER + Double.toString(mMagData[0]) + DELIMITER + Double.toString(mMagData[1]) + DELIMITER + Double.toString(mMagData[2]);
-            } else {
-                msg += DELIMITER + "NaN" + DELIMITER + "NaN" + DELIMITER + "NaN";
+                str[7] = Double.toString(mMagData[0]);
+                str[8] = Double.toString(mMagData[1]);
+                str[9] = Double.toString(mMagData[2]);
             }
             if (mRotationData != null) {
-                msg += DELIMITER + Double.toString(mRotationData[0]) + DELIMITER + Double.toString(mRotationData[1]) + DELIMITER + Double.toString(mRotationData[2]) + DELIMITER + Double.toString(mRotationData[3]);
-            } else {
-                msg += DELIMITER + "NaN" + DELIMITER + "NaN" + DELIMITER + "NaN" + DELIMITER + "NaN";
+                str[10] = Double.toString(mRotationData[0]);
+                str[11] = Double.toString(mRotationData[1]);
+                str[12] = Double.toString(mRotationData[2]);
+                str[13] = Double.toString(mRotationData[2]);
             }
-            return msg + NEW_LINE;
+            return str;
         }
     }
 
@@ -280,7 +294,7 @@ public class MovementRecorder implements SensorEventListener {
             if (combinedSensorDataFrame != null) {
                 //Log.d(TAG, combinedSensorDataFrame.toString());
                 if (mEnableLogging) {
-                    mCSVFileWriter.writeDataFrame(combinedSensorDataFrame);
+                    mCSVFileWriter.writeData(combinedSensorDataFrame.toStringArray());
                 }
             }
             combinedSensorDataFrame = new CombinedSensorDataFrame(df.getTimeStamp());
