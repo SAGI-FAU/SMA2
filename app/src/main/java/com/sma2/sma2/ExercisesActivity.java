@@ -56,10 +56,7 @@ public class ExercisesActivity extends AppCompatActivity implements ExerciseInst
     }
 
     public void open_exercise() {
-        ExerciseInstructions intro = ExerciseInstructions.newInstance(
-                nextExercise.getExercise().getName(),
-                nextExercise.getExercise().getInstructionVideoPath(),
-                nextExercise.getExercise().getInstructionTextPath());
+        ExerciseInstructions intro = ExerciseInstructions.newInstance(nextExercise.getExercise());
         showFragment(intro);
     }
 

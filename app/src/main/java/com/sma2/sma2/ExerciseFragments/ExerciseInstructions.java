@@ -11,21 +11,20 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.VideoView;
 
+import com.sma2.sma2.ExerciseLogic.Exercise;
+import com.sma2.sma2.ExerciseLogic.ScheduledExercise;
 import com.sma2.sma2.R;
 
 public class ExerciseInstructions extends Fragment {
 
     OnStartClickedListener mStartClickedCallback;
-    private String mExerciseName;
-    private Uri mVideoPath;
-    private Uri mInstructionPath;
+    private Exercise mExercise;
 
-    public static ExerciseInstructions newInstance(String exerciseName, Uri videoPath, Uri instructionPath) {
+
+    public static ExerciseInstructions newInstance(Exercise exercise) {
         ExerciseInstructions fragment = new ExerciseInstructions();
         Bundle args = new Bundle();
-        args.putString("NAME", exerciseName);
-        args.putString("VIDEO_PATH", videoPath.toString());
-        args.putString("INSTRUCTION_PATH", instructionPath.toString());
+        args.putParcelable("EXERCISE", exercise);
         fragment.setArguments(args);
         return fragment;
     }
@@ -34,9 +33,7 @@ public class ExerciseInstructions extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            mExerciseName = getArguments().getString("NAME");
-            mVideoPath = Uri.parse(getArguments().getString("VIDEO_PATH"));
-            mInstructionPath = Uri.parse(getArguments().getString("INSTRUCTION_PATH"));
+            mExercise = getArguments().getParcelable("EXERCISE");
         }
     }
 
@@ -49,11 +46,11 @@ public class ExerciseInstructions extends Fragment {
 
         // Set Title based on Intend Information
         TextView exerciseTitle = view.findViewById(R.id.exerciseTitle);
-        exerciseTitle.setText(mExerciseName);
+        exerciseTitle.setText(mExercise.getName());
 
         // Set Video based on Intend Information
         VideoView instructionVideo = view.findViewById(R.id.instructionVideo);
-        instructionVideo.setVideoURI(mVideoPath);
+        instructionVideo.setVideoURI(mExercise.getInstructionVideoPath());
 
         // Set On Click handler for Start Button
         Button startButton = view.findViewById(R.id.startButton);
