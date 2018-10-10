@@ -10,6 +10,11 @@ import org.greenrobot.greendao.annotation.Generated;
 
 @Entity
 public class PatientDA {
+//    public Patient getPatient(){
+//        new Patient(username, birthday, gender, hand,
+//                smoker, year_diag, other_disorder, weight,height);
+//    } todo create method as soon as object is available
+
     @Id(autoincrement = true)
     private Long userId;
     @Property
