@@ -62,7 +62,7 @@ public class TappingRecorder {
     public String prepare(String exercise) {
         String date = getCurrentDateAsString();
         FILE_CSV = new File(MOVEMENT_FOLDER.getAbsolutePath() + File.separator + date + "_" + exercise + ".csv");
-        FILE_CSV_error = new File(MOVEMENT_FOLDER.getAbsolutePath() + File.separator + date + "_" + "Error" + ".csv");
+        FILE_CSV_error = new File(MOVEMENT_FOLDER.getAbsolutePath() + File.separator + date + "_" + "Error"+exercise + ".csv");
 
         try {
 

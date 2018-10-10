@@ -8,7 +8,8 @@
     android:layout_marginLeft="0dp"
     android:layout_marginRight="0dp"
     tools:context="com.sma2.sma2.MainActivity"
-    android:id="@+id/backgroundTapping1">
+    android:id="@+id/backgroundTapping1"
+    >
 
 
 

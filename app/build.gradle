@@ -11,7 +11,7 @@ if (project.hasProperty("sma2.signing") &&
         }
         defaultConfig {
             applicationId "com.sma2.sma2"
-            minSdkVersion 15
+            minSdkVersion 17
             targetSdkVersion 26
             versionCode 1
             versionName "1.0"
@@ -57,7 +57,7 @@ if (project.hasProperty("sma2.signing") &&
         }
         defaultConfig {
             applicationId "com.sma2.sma2"
-            minSdkVersion 15
+            minSdkVersion 17
             targetSdkVersion 26
             versionCode 1
             versionName "1.0"
@@ -82,4 +82,9 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
+}
+
+android {
+    compileSdkVersion 26
+    buildToolsVersion '28.0.2'
 }

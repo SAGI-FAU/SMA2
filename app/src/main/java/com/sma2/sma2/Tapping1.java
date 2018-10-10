@@ -22,7 +22,6 @@ import com.sma2.sma2.SignalRecording.TappingRecorder;
 
 public class Tapping1 extends AppCompatActivity implements View.OnClickListener {
 
-    private String data="";
     TappingRecorder tappingrecorder;
 
 
