@@ -26,8 +26,7 @@
     <string name="other1">Any other speech or</string>
     <string name="other2">Movement disorder</string>
     <string name="___">------ ------ ------</string>
-    <string name="start">Start your exercises Today</string>
-    <string name="start2">START</string>
+    <string name="start">Start</string>
     <string name="record">Record</string>
     <string name="sustained_a">Sustained vowel /ah/</string>
     <string name="ddk">Rapid repetition of syllables (/pa-ta-ka/)</string>
@@ -35,7 +34,6 @@
     <string name="volume">Volume</string>
     <string name="recording">Recording Speech.</string>
     <string name="done">Done!</string>
-
     <string name="btnProfileText">Profile</string>
     <string name="btnSettingsText">Settings</string>
     <string name="btnExercisesText">Exercises</string>
@@ -50,6 +48,8 @@
     <string name="update">UPDATE MEDICINE</string>
     <string name="weight">Weight (kg)</string>
     <string name="height">Height (cm)</string>
+    <string name="again">Again</string>
+    <string name="stop">Stop</string>
 
     <!--Instructions for the speech and movement exercises-->
     <!--Speech exercises-->

@@ -1,4 +1,4 @@
-package com.sma2.sma2;
+package com.sma2.sma2.ExerciseFragments;
 
 
 import android.content.Intent;
@@ -8,21 +8,24 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.TextView;
 
+import com.sma2.sma2.ExerciseFragments.Ex_tapping;
+import com.sma2.sma2.R;
 
-public class Sliding extends AppCompatActivity implements View.OnClickListener {
+
+public class Record_mov_ball_balance extends AppCompatActivity implements View.OnClickListener {
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        setContentView(R.layout.activity_capture_sliding);
+        setContentView(R.layout.activity_capture_movement_game);
         setListeners();
     }
 
     private void setListeners() {
 
-        final TextView mTextField = findViewById(R.id.accgraph_chrono5);
+        final TextView mTextField = findViewById(R.id.accgraph_chrono2);
         new CountDownTimer(10000, 1000) {
 
             public void onTick(long millisUntilFinished) {
@@ -46,7 +49,7 @@ public class Sliding extends AppCompatActivity implements View.OnClickListener {
 
     public void open_exercise(){
         Intent intent_ex1;
-        intent_ex1 =new Intent(this, ThanksActivity.class);
+        intent_ex1 =new Intent(this, Ex_tapping.class);
         startActivity(intent_ex1);
     }
 

@@ -5,6 +5,8 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -31,53 +33,54 @@
         </activity>
 
         <activity
-            android:name=".Start_exercises_Activity">
+            android:name=".ExercisesActivity"
+            android:exported="true">
         </activity>
 
         <activity
-            android:name=".Ex_speech1">
+            android:name=".ExerciseFragments.Ex_speech1">
         </activity>
 
         <activity
-            android:name=".Ex_speech2">
+            android:name=".ExerciseFragments.Ex_speech2">
         </activity>
         <activity
-            android:name=".Ex_speech3">
-        </activity>
-
-        <activity
-            android:name=".Ex_walking">
-        </activity>
-        <activity
-            android:name=".Ex_mov_hands">
-        </activity>
-        <activity
-            android:name=".Ex_tapping">
-        </activity>
-        <activity
-            android:name=".Tapping1">
+            android:name=".ExerciseFragments.Ex_speech3">
         </activity>
 
         <activity
-            android:name=".Tapping2">
+            android:name=".ExerciseFragments.Ex_walking">
         </activity>
         <activity
-            android:name=".Sliding">
+            android:name=".ExerciseFragments.Ex_mov_hands">
+        </activity>
+        <activity
+            android:name=".ExerciseFragments.Ex_tapping">
+        </activity>
+        <activity
+            android:name=".ExerciseFragments.Tapping1">
+        </activity>
+
+        <activity
+            android:name=".ExerciseFragments.Tapping2">
+        </activity>
+        <activity
+            android:name=".ExerciseFragments.Sliding">
         </activity>
         <activity
             android:name=".ThanksActivity">
         </activity>
         <activity
-            android:name=".Record_speech">
+            android:name=".ExerciseFragments.Record_speech">
         </activity>
         <activity
-            android:name=".Record_speech_image">
+            android:name=".ExerciseFragments.Record_speech_image">
         </activity>
         <activity
-            android:name=".Record_movement">
+            android:name=".ExerciseFragments.Record_movement">
         </activity>
         <activity
-            android:name=".Record_mov_ball_balance">
+            android:name=".ExerciseFragments.Record_mov_ball_balance">
         </activity>
 
 

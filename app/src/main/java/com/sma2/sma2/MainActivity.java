@@ -45,17 +45,19 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 //TODO: Implement transition to new activity
                 break;
             case R.id.btnSettings:
-
                 open_settings();
+                break;
             case R.id.txtSettings:
                 open_settings();
                 break;
             case R.id.btnExercises:
                 open_exercises();
+                break;
             case R.id.txtExercises:
                 open_exercises();
                 break;
             case R.id.btnResults:
+                break;
             case R.id.txtResults:
                 //TODO: Implement transition to new activity
                 break;
@@ -68,7 +70,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     public void open_exercises(){
-        Intent intent_exercises =new Intent(this, Start_exercises_Activity.class);
+        Intent intent_exercises =new Intent(this, ExercisesActivity.class);
         startActivity(intent_exercises);
     }
 
