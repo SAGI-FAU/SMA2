@@ -54,6 +54,7 @@ public class CSVFileWriter extends Thread {
                     write((String[]) msg.obj);
                 } catch (Exception e) {
                     e.printStackTrace();
+                    //TODO: handle exception
                 }
             }
         };
@@ -90,15 +91,6 @@ public class CSVFileWriter extends Thread {
         return file;
     }
 
-    public void writeLine(String str) throws IOException {
-        try {
-            mBufferedWriter.write(str);
-        } catch (Exception e) {
-            Log.e(TAG, "ERROR writing file");
-            throw e;
-        }
-    }
-
     public void writeData(String[] str) {
         Message msg = new Message();
         msg.obj = str;
@@ -130,6 +122,4 @@ public class CSVFileWriter extends Thread {
             throw e;
         }
     }
-
-
 }
