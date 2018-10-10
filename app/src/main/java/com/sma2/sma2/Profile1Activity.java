@@ -84,10 +84,10 @@ public class Profile1Activity extends AppCompatActivity implements View.OnClickL
 
                     switch (smoker_string) {
                         case "Yes":
-                            userData.setSmoker(0);
+                            userData.setSmoker(true);
                             break;
                         case "No":
-                            userData.setSmoker(1);
+                            userData.setSmoker(false);
                             break;
                     }
 
@@ -105,6 +105,7 @@ public class Profile1Activity extends AppCompatActivity implements View.OnClickL
                 datePickerDialog = new DatePickerDialog(this, AlertDialog.THEME_HOLO_LIGHT, new DatePickerDialog.OnDateSetListener() {
                     @Override
                     public void onDateSet(DatePicker datePicker, int mYear, int mMonth, int mDay) {
+                        mMonth+=1;
                         et_date.setText(mDay+"/"+mMonth+"/"+mYear);
                     }
                 },year,month,day);

@@ -9,7 +9,7 @@ public class UserData implements Serializable {
     private Date birthday;
     private String gender;
     private int hand;
-    private int smoker;
+    private boolean smoker;
     private int Educational_level;
     private int year_diag;
     private String other_disorder;
@@ -61,11 +61,11 @@ public class UserData implements Serializable {
         this.hand = hand;
     }
 
-    public int getSmoker() {
+    public boolean getSmoker() {
         return smoker;
     }
 
-    public void setSmoker(int smoker) {
+    public void setSmoker(boolean smoker) {
         this.smoker = smoker;
     }
 

@@ -88,5 +88,8 @@
     <string name="dose_empty">Please, fill dose (mg) field</string>
     <string name="add_medice_error">Medice was already added</string>
     <string name="medicine_added">Added successful</string>
+    <string name="time_diagnosis_error">Please, fill diagnosis time field</string>
+    <string name="weight_error">Please, fill weight field</string>
+    <string name="height_eror">Please, fill height field</string>
 
 </resources>

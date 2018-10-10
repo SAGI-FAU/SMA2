@@ -79,6 +79,9 @@
         <activity
             android:name=".Profile2Activity">
         </activity>
+        <activity
+            android:name=".Profile3Activity">
+        </activity>
 
     </application>
 
