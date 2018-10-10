@@ -4,10 +4,19 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
+
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
+
+
+import com.sma2.sma2.DataAccess.DaoMaster;
+import com.sma2.sma2.DataAccess.DaoSession;
+
+
+import org.greenrobot.greendao.database.Database;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -33,6 +42,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         tv_userid = findViewById(R.id.userid);
         bt_create = findViewById(R.id.button_create);
         setListeners();
+
+        DaoMaster.DevOpenHelper helper = new DaoMaster.DevOpenHelper(this, "apkinsondb");
+        Database db = helper.getWritableDb();
+        DaoSession daoSession = new DaoMaster(db).newSession();
     }
 
     private void setListeners() {
@@ -75,7 +88,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     public void open_exercises(){
-        Intent intent_exercises =new Intent(this, Start_exercises_Activity.class);
+        Intent intent_exercises =new Intent(this, ExercisesActivity.class);
         startActivity(intent_exercises);
     }
 
