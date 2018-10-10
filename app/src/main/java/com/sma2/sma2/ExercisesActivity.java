@@ -13,7 +13,7 @@ import com.sma2.sma2.ExerciseFragments.SessionOverview;
 import com.sma2.sma2.ExerciseLogic.ExerciseSessionManager;
 import com.sma2.sma2.ExerciseLogic.ScheduledExercise;
 
-public class ExercisesActivity extends AppCompatActivity implements ExerciseInstructions.OnStartClickedListener, SessionOverview.OnSessionStartListener, ExSustainedVowel.OnFragmentInteractionListener {
+public class ExercisesActivity extends AppCompatActivity implements ExerciseInstructions.OnStartClickedListener, SessionOverview.OnSessionControlListener, ExSustainedVowel.OnFragmentInteractionListener {
     ExerciseSessionManager sessionManager;
     SessionOverview sessionOverview;
     ScheduledExercise nextExercise;
@@ -68,14 +68,15 @@ public class ExercisesActivity extends AppCompatActivity implements ExerciseInst
     }
 
     @Override
-    public void onSessionStartClicked() {
-        if (ExerciseSessionManager.getSessionCompleted(sessionManager.getScheduledExerciseList())) {
-            Intent mIntent = new Intent(this, MainActivity.class);
-            startActivity(mIntent);
-        } else {
-            nextExercise = sessionManager.getNextExercise();
-            open_exercise();
-        }
+    public void onNextExerciseClicked() {
+        nextExercise = sessionManager.getNextExercise();
+        open_exercise();
+    }
+
+    @Override
+    public void onSessionFinishedClicked() {
+        Intent mIntent = new Intent(this, MainActivity.class);
+        startActivity(mIntent);
     }
 
     @Override

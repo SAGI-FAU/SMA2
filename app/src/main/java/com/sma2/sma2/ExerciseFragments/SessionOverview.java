@@ -21,7 +21,7 @@ import java.util.List;
 public class SessionOverview extends Fragment {
     ArrayList<ScheduledExercise> mScheduledExercises;
 
-    private OnSessionStartListener mSessionStartClickedCallback;
+    private OnSessionControlListener mListener;
 
     public static SessionOverview newInstance(List<ScheduledExercise> scheduledExerciseList) {
         SessionOverview fragment = new SessionOverview();
@@ -66,8 +66,12 @@ public class SessionOverview extends Fragment {
         startButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (mSessionStartClickedCallback != null) {
-                    mSessionStartClickedCallback.onSessionStartClicked();
+                if (mListener != null) {
+                    if (ExerciseSessionManager.getSessionCompleted(mScheduledExercises)) {
+                        mListener.onSessionFinishedClicked();
+                    } else {
+                        mListener.onNextExerciseClicked();
+                    }
                 }
             }
         });
@@ -79,8 +83,8 @@ public class SessionOverview extends Fragment {
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        if (context instanceof OnSessionStartListener) {
-            mSessionStartClickedCallback = (OnSessionStartListener) context;
+        if (context instanceof OnSessionControlListener) {
+            mListener = (OnSessionControlListener) context;
         } else {
             throw new RuntimeException(context.toString()
                     + " must implement OnFragmentInteractionListener");
@@ -90,10 +94,11 @@ public class SessionOverview extends Fragment {
     @Override
     public void onDetach() {
         super.onDetach();
-        mSessionStartClickedCallback = null;
+        mListener = null;
     }
 
-    public interface OnSessionStartListener {
-        void onSessionStartClicked();
+    public interface OnSessionControlListener {
+        void onNextExerciseClicked();
+        void onSessionFinishedClicked();
     }
 }
