@@ -1,11 +1,8 @@
 package com.sma2.sma2.ExerciseFragments;
 
-import android.app.Activity;
-import android.content.Context;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -20,26 +17,27 @@ import com.sma2.sma2.SignalRecording.SpeechRecorder;
 import java.io.File;
 
 
-public class ExSustainedVowel extends ExerciseFragment implements View.OnClickListener, ButtonFragment.OnButtonInteractionListener{
+public class ExAudioRec extends ExerciseFragment implements View.OnClickListener, ButtonFragment.OnButtonInteractionListener{
     private Button startButton;
     private Button doneButton;
     private Button redoButton;
     private ProgressBar volumeBar;
     private SpeechRecorder recorder;
 
-    public ExSustainedVowel() {
+    public ExAudioRec() {
         // Required empty public constructor
     }
 
-    public static ExSustainedVowel newInstance() {
-        ExSustainedVowel fragment = new ExSustainedVowel();
+    public static ExAudioRec newInstance() {
+        ExAudioRec fragment = new ExAudioRec();
         return fragment;
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_ex_sustained_vowel, container, false);
+        View view = inflater.inflate(R.layout.fragment_ex_audio_rec, container, false);
+        exercise = getArguments().getString("exercise");
         doneButton = view.findViewById(R.id.btnDoneExSV);
         doneButton.setOnClickListener(this);
         redoButton = view.findViewById(R.id.btnRedoExSV);

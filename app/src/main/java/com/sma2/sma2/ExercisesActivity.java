@@ -7,9 +7,9 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 
-import com.sma2.sma2.ExerciseFragments.ExSustainedVowel;
+import com.sma2.sma2.ExerciseFragments.ExAudioRec;
 
-public class ExercisesActivity extends AppCompatActivity implements ExerciseIntro.OnStartClickedListener, ExerciseStart.OnSessionStartListener, ExSustainedVowel.OnFragmentInteractionListener {
+public class ExercisesActivity extends AppCompatActivity implements ExerciseIntro.OnStartClickedListener, ExerciseStart.OnSessionStartListener, ExAudioRec.OnFragmentInteractionListener {
     ExerciseSessionManager sessionManager;
     ScheduledExercise nextExercise;
 

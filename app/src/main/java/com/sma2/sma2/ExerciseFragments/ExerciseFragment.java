@@ -9,6 +9,7 @@ public abstract class ExerciseFragment extends Fragment {
     protected ExerciseFragment.OnFragmentInteractionListener mListener;
     protected boolean recording = false;
     protected String filePath;
+    protected String exercise;
 
     public ExerciseFragment() {
         // Required empty public constructor
