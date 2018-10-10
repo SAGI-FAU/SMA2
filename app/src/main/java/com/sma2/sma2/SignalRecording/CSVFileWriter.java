@@ -58,6 +58,7 @@ public class CSVFileWriter extends Thread {
                 }
             }
         };
+
         if (Looper.myLooper() == null) {
             Looper.loop();
         }
