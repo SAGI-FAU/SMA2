@@ -91,4 +91,9 @@
     <string name="height_eror">Please, fill height field</string>
     <string name="again">Again</string>
     <string name="stop">Stop</string>
+    <string name="session_start">Start First Exercise</string>
+    <string name="session_continue">Start Next Exercise</string>
+    <string name="session_finish">Back To Main Menu</string>
+
+
 </resources>
