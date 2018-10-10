@@ -1,4 +1,4 @@
-package com.sma2.sma2;
+package com.sma2.sma2.ExerciseFragments;
 
 
 import android.content.Context;
@@ -12,7 +12,9 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.TextView;
-import com.sma2.sma2.Tapping1;
+
+import com.sma2.sma2.R;
+import com.sma2.sma2.ThanksActivity;
 
 
 public class Tapping2 extends AppCompatActivity implements View.OnClickListener {

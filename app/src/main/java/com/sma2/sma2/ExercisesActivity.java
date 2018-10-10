@@ -6,7 +6,9 @@ import android.os.Bundle;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 
-public class ExercisesActivity extends AppCompatActivity implements ExerciseIntro.OnStartClickedListener, ExerciseStart.OnSessionStartListener {
+import com.sma2.sma2.ExerciseFragments.ExSustainedVowel;
+
+public class ExercisesActivity extends AppCompatActivity implements ExerciseIntro.OnStartClickedListener, ExerciseStart.OnSessionStartListener, ExSustainedVowel.OnFragmentInteractionListener {
     // TODO: Implement the connection to the Exersice Manager
 
     Intent intent = getIntent();
@@ -17,7 +19,8 @@ public class ExercisesActivity extends AppCompatActivity implements ExerciseIntr
 
         setContentView(R.layout.activity_exercise);
 
-        ExerciseStart startScreen = new ExerciseStart();
+        //ExerciseStart startScreen = new ExerciseStart();
+        ExSustainedVowel startScreen = new ExSustainedVowel();
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
 
         transaction.replace(R.id.exerciseContainer, startScreen);
@@ -46,5 +49,10 @@ public class ExercisesActivity extends AppCompatActivity implements ExerciseIntr
     @Override
     public void onSessionStartClicked() {
         open_exercise();
+    }
+
+    @Override
+    public void onExerciseFinished(String filePath) {
+        //do something with file here
     }
 }
