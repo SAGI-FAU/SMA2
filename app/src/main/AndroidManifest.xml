@@ -14,7 +14,9 @@
         android:theme="@style/AppTheme">
 
 
-        <activity android:name=".Activities.SplashScreen">
+        <activity android:name=".Activities.SplashScreen"
+            android:screenOrientation="portrait"
+            >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -24,62 +26,96 @@
 
 
         <activity
-            android:name=".MainActivity">
+            android:name=".MainActivity"
+            android:screenOrientation="portrait"
+            >
         </activity>
 
         <activity
-            android:name=".SettingsActivity">
+            android:name=".SettingsActivity"
+            android:screenOrientation="portrait"
+            >
         </activity>
 
         <activity
             android:name=".ExercisesActivity"
-            android:exported="true">
+            android:exported="true"
+            android:screenOrientation="portrait"
+            >
         </activity>
 
         <activity
-            android:name=".ExerciseFragments.Ex_speech1">
+            android:name=".ExerciseFragments.Ex_speech1"
+            android:screenOrientation="portrait"
+            >
         </activity>
 
         <activity
-            android:name=".ExerciseFragments.Ex_speech2">
+            android:name=".ExerciseFragments.Ex_speech2"
+            android:screenOrientation="portrait"
+            >
         </activity>
         <activity
-            android:name=".ExerciseFragments.Ex_speech3">
-        </activity>
-
-        <activity
-            android:name=".ExerciseFragments.Ex_walking">
-        </activity>
-        <activity
-            android:name=".ExerciseFragments.Ex_mov_hands">
-        </activity>
-        <activity
-            android:name=".ExerciseFragments.Ex_tapping">
-        </activity>
-        <activity
-            android:name=".ExerciseFragments.Tapping1">
+            android:name=".ExerciseFragments.Ex_speech3"
+            android:screenOrientation="portrait"
+            >
         </activity>
 
         <activity
-            android:name=".ExerciseFragments.Tapping2">
+            android:name=".ExerciseFragments.Ex_walking"
+            android:screenOrientation="portrait"
+            >
         </activity>
         <activity
-            android:name=".ExerciseFragments.Sliding">
+            android:name=".ExerciseFragments.Ex_mov_hands"
+            android:screenOrientation="portrait"
+            >
         </activity>
         <activity
-            android:name=".ThanksActivity">
+            android:name=".ExerciseFragments.Ex_tapping"
+            android:screenOrientation="portrait"
+            >
         </activity>
         <activity
-            android:name=".ExerciseFragments.Record_speech">
+            android:name=".ExerciseFragments.Tapping1"
+            android:screenOrientation="portrait"
+            >
+        </activity>
+
+        <activity
+            android:name=".ExerciseFragments.Tapping2"
+            android:screenOrientation="portrait"
+            >
         </activity>
         <activity
-            android:name=".ExerciseFragments.Record_speech_image">
+            android:name=".ExerciseFragments.Sliding"
+            android:screenOrientation="portrait"
+            >
         </activity>
         <activity
-            android:name=".ExerciseFragments.Record_movement">
+            android:name=".ThanksActivity"
+            android:screenOrientation="portrait"
+            >
         </activity>
         <activity
-            android:name=".ExerciseFragments.Record_mov_ball_balance">
+            android:name=".ExerciseFragments.Record_speech"
+            android:screenOrientation="portrait"
+            >
+        </activity>
+        <activity
+            android:name=".ExerciseFragments.Record_speech_image"
+            android:screenOrientation="portrait"
+            >
+        </activity>
+        <activity
+            android:name=".ExerciseFragments.Record_movement"
+            android:screenOrientation="portrait"
+            >
+        </activity>
+        <activity
+            android:name=".ExerciseFragments.Record_mov_ball_balance"
+            android:screenOrientation="portrait"
+            >
         </activity>
 
 
