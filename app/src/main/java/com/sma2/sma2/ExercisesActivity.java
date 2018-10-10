@@ -26,7 +26,7 @@ public class ExercisesActivity extends AppCompatActivity implements ExerciseInst
         sessionManager.createExerciseSession(); // TODO: Only for testing
         nextExercise = null;
 
-        sessionOverview = SessionOverview.newInstance(sessionManager.getSceduledExerciseList());
+        sessionOverview = SessionOverview.newInstance(sessionManager.getScheduledExerciseList());
 
         setContentView(R.layout.activity_exercise);
 
