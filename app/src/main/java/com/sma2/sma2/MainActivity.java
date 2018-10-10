@@ -3,9 +3,15 @@ package com.sma2.sma2;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
-import android.widget.ImageButton;
-import android.widget.TextView;
+
+import com.sma2.sma2.DataAccess.DaoMaster;
+import com.sma2.sma2.DataAccess.DaoSession;
+import com.sma2.sma2.DataAccess.PatientDA;
+import com.sma2.sma2.DataAccess.PatientDADao;
+
+import org.greenrobot.greendao.database.Database;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -18,6 +24,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         setContentView(R.layout.activity_main_menu);
         setListeners();
 
+        DaoMaster.DevOpenHelper helper = new DaoMaster.DevOpenHelper(this, "apkinsondb");
+        Database db = helper.getWritableDb();
+        DaoSession daoSession = new DaoMaster(db).newSession();
+
     }
 
     private void setListeners() {
@@ -29,7 +39,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         findViewById(R.id.txtSettings).setOnClickListener(this);
         findViewById(R.id.txtExercises).setOnClickListener(this);
         findViewById(R.id.txtResults).setOnClickListener(this);
-
     }
 
     @Override
@@ -41,17 +50,19 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 //TODO: Implement transition to new activity
                 break;
             case R.id.btnSettings:
-
                 open_settings();
+                break;
             case R.id.txtSettings:
                 open_settings();
                 break;
             case R.id.btnExercises:
                 open_exercises();
+                break;
             case R.id.txtExercises:
                 open_exercises();
                 break;
             case R.id.btnResults:
+                break;
             case R.id.txtResults:
                 //TODO: Implement transition to new activity
                 break;
@@ -64,7 +75,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     public void open_exercises(){
-        Intent intent_exercises =new Intent(this, Start_exercises_Activity.class);
+        Intent intent_exercises =new Intent(this, ExercisesActivity.class);
         startActivity(intent_exercises);
     }
 
