@@ -1,6 +1,10 @@
 package com.sma2.sma2.SignalRecording;
 
+import android.annotation.SuppressLint;
 import android.os.Environment;
+import android.os.Handler;
+import android.os.Looper;
+import android.os.Message;
 import android.util.Log;
 
 import java.io.BufferedWriter;
@@ -11,21 +15,62 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 
-public class CSVFileWriter {
-    private String TAG = "CSVFileWriter";
+public class CSVFileWriter extends Thread {
+    private static Handler mHandler;
     private final String DELIMITER = ";";
     private final String NEW_LINE = "\r\n";
-    private final String FILE_ENDING =  ".csv";
-
+    private final String FILE_ENDING = ".csv";
+    private final String PATH = Environment.getExternalStorageDirectory() + "/Apkinson/";
+    private static final String TAG = CSVFileWriter.class.getSimpleName();
+    private String filename;
     private BufferedWriter mBufferedWriter = null;
 
-    private final String PATH = Environment.getExternalStorageDirectory() + "/Apkinson/";
+    public CSVFileWriter(String exerciseName) throws IOException {
+        String currTime = new SimpleDateFormat("yyyy-MM-dd_HH-mm", Locale.getDefault()).format(new Date());
+        this.filename = exerciseName + currTime + FILE_ENDING;
 
-    private File openFile(String path, String fileName) {
+        File file = openFile(PATH, this.filename);
+
+        try {
+            mBufferedWriter = new BufferedWriter(new FileWriter(file));
+        } catch (Exception e) {
+            Log.e(TAG, "ERROR opening file");
+            throw e;
+        }
+        run();
+    }
+
+    @SuppressLint("HandlerLeak")
+    @Override
+    public void run() {
+
+        if (Looper.myLooper() == null) {
+            Looper.prepare();
+        }
+
+        mHandler = new Handler() {
+            public void handleMessage(Message msg) {
+                try {
+                    write((String[]) msg.obj);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        };
+        if (Looper.myLooper() == null) {
+            Looper.loop();
+        }
+    }
+
+    public String getFileName() {
+        return this.filename;
+    }
+
+    private File openFile(String path, String fileName) throws IOException {
         // check if directory exists and if not create it
         File directory = new File(path);
-        if (! directory.exists()) {
-            Log.d(TAG, "Directory did not exists, creating: " + path);
+        if (!directory.exists()) {
+            Log.i(TAG, "Directory did not exists, creating: " + path);
             directory.mkdir();
         }
 
@@ -33,56 +78,48 @@ public class CSVFileWriter {
         File file = new File(path + fileName);
         if (!file.exists()) {
             try {
-                Log.d(TAG,"Try to create new File at: " + path + fileName);
+                Log.i(TAG, "Try to create new File at: " + path + fileName);
                 file.createNewFile();
             } catch (IOException e) {
-                e.printStackTrace();
+                throw e;
             }
-            Log.d(TAG,"File Successfully created at: " + path + fileName);
+            Log.i(TAG, "File Successfully created at: " + path + fileName);
         } else {
-            Log.d(TAG, "File: " + path + fileName + " already exists!");
+            Log.i(TAG, "File: " + path + fileName + " already exists!");
         }
         return file;
     }
 
-    public CSVFileWriter() {
-        String path = PATH;
-        String currTime = new SimpleDateFormat("yyyy-MM-dd_HH-mm", Locale.getDefault()).format(new Date());
-
-        File file = openFile(path, currTime + FILE_ENDING);
-
-        try {
-            mBufferedWriter = new BufferedWriter(new FileWriter(file));
-        } catch (Exception e) {
-            Log.e(TAG,"ERROR opening file");
-            e.printStackTrace();
-        }
-    }
-
-    public void writeLine(String str) {
+    public void writeLine(String str) throws IOException {
         try {
             mBufferedWriter.write(str);
         } catch (Exception e) {
-            Log.e(TAG,"ERROR writing file");
-            e.printStackTrace();
+            Log.e(TAG, "ERROR writing file");
+            throw e;
         }
     }
 
     public void writeData(String[] str) {
+        Message msg = new Message();
+        msg.obj = str;
+        mHandler.sendMessage(msg);
+    }
+
+    private void write(String[] str) throws IOException {
         String line = "";
-        for(int i = 0; i < str.length - 1; i++) {
+        for (int i = 0; i < str.length - 1; i++) {
             line += str[i] + DELIMITER;
         }
-        line += str[str.length-1] + NEW_LINE;
+        line += str[str.length - 1] + NEW_LINE;
         try {
             mBufferedWriter.write(line);
         } catch (Exception e) {
-            Log.e(TAG,"ERROR writing file");
-            e.printStackTrace();
+            Log.e(TAG, "ERROR writing file");
+            throw e;
         }
     }
 
-    public void close() {
+    public void close() throws IOException {
         try {
             mBufferedWriter.flush();
             mBufferedWriter.close();
@@ -90,6 +127,7 @@ public class CSVFileWriter {
         } catch (Exception e) {
             Log.e(TAG, "ERROR on completing writer!");
             e.printStackTrace();
+            throw e;
         }
     }
 
