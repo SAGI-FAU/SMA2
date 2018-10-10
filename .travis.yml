@@ -1,0 +1,36 @@
+os:
+  - linux
+#  - osx # not really important, but nice to know
+language: android
+jdk: oraclejdk8
+
+env:
+  global:
+    - ANDROID_API_LEVEL=26
+android:
+  components:
+    - tools
+    - platform-tools
+    - tools
+    # Build tools uses in the project
+    - build-tools
+    # Android version to compile the project
+    - android-$ANDROID-API-LEVEL
+    - extra-google-google_play_services
+    - extra-google-m2repository
+    - extra-android-m2repository
+    - addon-google_apis-google-$ANDROID_API_LEVEL
+licenses:
+    - 'android-sdk-preview-license-.+'
+    - 'android-sdk-license-.+'
+    - 'google-gdk-license-.+'
+before_install:
+  - yes | sdkmanager "platforms;android-$ANDROID_API_LEVEL"
+script:
+  ./gradlew build check
+
+#before_script:
+
+#after_failure:
+#
+#after_success:
