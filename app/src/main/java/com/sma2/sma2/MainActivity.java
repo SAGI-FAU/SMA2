@@ -2,74 +2,94 @@ package com.sma2.sma2;
 
 import android.Manifest;
 import android.content.Intent;
+
 import android.content.pm.PackageManager;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
+
+import android.content.SharedPreferences;
+
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 
+import android.widget.Button;
+import android.widget.TextView;
+import android.widget.Toast;
+
+
 import com.sma2.sma2.DataAccess.DaoMaster;
 import com.sma2.sma2.DataAccess.DaoSession;
-import com.sma2.sma2.DataAccess.PatientDA;
-import com.sma2.sma2.DataAccess.PatientDADao;
+
 
 import org.greenrobot.greendao.database.Database;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
+
     private int MY_PERMISSIONS_REQUEST_RECORD_AUDIO, MY_PERMISSIONS_REQUEST_WRITE_STORAGE;
+
+    TextView tv_username;
+    TextView tv_userid;
+    Button bt_create;
+    String username;
+    String userid;
+    UserData userData;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //setContentView(R.layout.activity_main_menu);
-        setContentView(R.layout.activity_main_menu);
+        SharedPreferences prefs = getSharedPreferences("LoginPref",this.MODE_PRIVATE);
+        int login = prefs.getInt("UserCreated",0);
+        if(login == 1){
+            Intent intent = new Intent(MainActivity.this,MainActivityMenu.class);
+            startActivity(intent);
+            finish();
+        }
+        setContentView(R.layout.activity_main);
+        tv_username = findViewById(R.id.username);
+        tv_userid = findViewById(R.id.userid);
+        bt_create = findViewById(R.id.button_create);
         setListeners();
         ask_permissions();
         DaoMaster.DevOpenHelper helper = new DaoMaster.DevOpenHelper(this, "apkinsondb");
         Database db = helper.getWritableDb();
         DaoSession daoSession = new DaoMaster(db).newSession();
-
     }
 
     private void setListeners() {
-        findViewById(R.id.btnProfile).setOnClickListener(this);
-        findViewById(R.id.btnSettings).setOnClickListener(this);
-        findViewById(R.id.btnExercises).setOnClickListener(this);
-        findViewById(R.id.btnResults).setOnClickListener(this);
-        findViewById(R.id.txtProfile).setOnClickListener(this);
-        findViewById(R.id.txtSettings).setOnClickListener(this);
-        findViewById(R.id.txtExercises).setOnClickListener(this);
-        findViewById(R.id.txtResults).setOnClickListener(this);
+        tv_username.setOnClickListener(this);
+        tv_userid.setOnClickListener(this);
+        bt_create.setOnClickListener(this);
     }
 
     @Override
     public void onClick(View view) {
 
         switch (view.getId()){
-            case R.id.btnProfile:
-            case R.id.txtProfile:
-                //TODO: Implement transition to new activity
+            case R.id.button_create:
+                username = tv_username.getText().toString();
+                userid = tv_userid.getText().toString();
+                if(validate_data()){
+                    open_profile1();
+                }
                 break;
-            case R.id.btnSettings:
-                open_settings();
-                break;
-            case R.id.txtSettings:
-                open_settings();
-                break;
-            case R.id.btnExercises:
-                open_exercises();
-                break;
-            case R.id.txtExercises:
-                open_exercises();
-                break;
-            case R.id.btnResults:
-                break;
-            case R.id.txtResults:
-                //TODO: Implement transition to new activity
-                break;
+
+        }
+    }
+
+    private boolean validate_data() {
+        if(username.isEmpty()) {
+            Toast.makeText(this, R.string.user_empty, Toast.LENGTH_SHORT).show();
+            return false;
+        } else if (userid.isEmpty()){
+            Toast.makeText(this,R.string.userid_empty,Toast.LENGTH_SHORT).show();
+            return false;
+        }else{
+            userData = new UserData(username,userid);
+            return true;
         }
     }
 
@@ -82,6 +102,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         Intent intent_exercises =new Intent(this, ExercisesActivity.class);
         startActivity(intent_exercises);
     }
+
 
 
     public void ask_permissions(){
@@ -106,6 +127,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         MY_PERMISSIONS_REQUEST_WRITE_STORAGE);
             }
         }
+    }
+
+
+    public void open_profile1(){
+        Intent intent_profile1 = new Intent(this,Profile1Activity.class);
+        intent_profile1.putExtra("UserData", userData);
+        startActivity(intent_profile1);
     }
 
 }
