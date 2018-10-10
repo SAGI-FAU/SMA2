@@ -37,6 +37,24 @@ public class ExerciseSessionManager {
         throw new IndexOutOfBoundsException("No exercises left");
     }
 
+    public static boolean getSessionStarted(List<ScheduledExercise> scheduledExerciseList) {
+        for (ScheduledExercise ex : scheduledExerciseList) {
+            if (ex.getCompleted()) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public static boolean getSessionCompleted(List<ScheduledExercise> scheduledExerciseList) {
+        for (ScheduledExercise ex : scheduledExerciseList) {
+            if (!(ex.getCompleted())) {
+                return false;
+            }
+        }
+        return true;
+    }
+
     public void _createDummyExerciseList(){
         _dummyExerciseList.add(new Exercise("Test1", Uri.parse("video/path"), Uri.parse("Instruction/Path"), ExSustainedVowel.class));
         _dummyExerciseList.add(new Exercise("Test2", Uri.parse("video/path"), Uri.parse("Instruction/Path"), ExSustainedVowel.class));

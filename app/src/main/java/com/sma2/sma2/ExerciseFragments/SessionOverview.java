@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
+import com.sma2.sma2.ExerciseLogic.ExerciseSessionManager;
 import com.sma2.sma2.ExerciseLogic.ScheduledExercise;
 import com.sma2.sma2.R;
 
@@ -51,8 +52,17 @@ public class SessionOverview extends Fragment {
         recyclerView.setLayoutManager(new LinearLayoutManager(context));
         recyclerView.setAdapter(new SessionOverviewRecyclerViewAdapter(mScheduledExercises));
 
-        // Set On Click handler for Start Button
+        // Change Text of Start Button based on Context
         Button startButton = view.findViewById(R.id.sessionStart);
+        if (ExerciseSessionManager.getSessionStarted(mScheduledExercises)) {
+            startButton.setText("Start Next Exercise");
+        } else if (ExerciseSessionManager.getSessionCompleted(mScheduledExercises)) {
+            startButton.setText("Back To Main Menu");
+        } else {
+            startButton.setText("Start First Exercise");
+        }
+
+        // Set On Click handler for Start Button
         startButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
