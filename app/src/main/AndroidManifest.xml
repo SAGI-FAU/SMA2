@@ -21,10 +21,6 @@
         </activity>
 
         <activity
-            android:name=".SignalRecording.MovementRecorder">
-        </activity>
-
-        <activity
             android:name=".MainActivity">
         </activity>
 
