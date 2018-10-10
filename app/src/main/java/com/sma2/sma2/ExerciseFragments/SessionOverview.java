@@ -55,11 +55,11 @@ public class SessionOverview extends Fragment {
         // Change Text of Start Button based on Context
         Button startButton = view.findViewById(R.id.sessionStart);
         if (ExerciseSessionManager.getSessionCompleted(mScheduledExercises)) {
-            startButton.setText("Back To Main Menu");
+            startButton.setText(R.string.session_finish);
         } else if (ExerciseSessionManager.getSessionStarted(mScheduledExercises)) {
-            startButton.setText("Start Next Exercise");
+            startButton.setText(R.string.session_continue);
         } else {
-            startButton.setText("Start First Exercise");
+            startButton.setText(R.string.session_start);
         }
 
         // Set On Click handler for Start Button
