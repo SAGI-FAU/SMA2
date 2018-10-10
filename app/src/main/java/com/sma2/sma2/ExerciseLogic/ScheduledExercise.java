@@ -1,12 +1,12 @@
 package com.sma2.sma2.ExerciseLogic;
 
 import android.net.Uri;
-
-import com.sma2.sma2.ExerciseLogic.Exercise;
+import android.os.Parcel;
+import android.os.Parcelable;
 
 import java.util.Date;
 
-public class ScheduledExercise {
+public class ScheduledExercise implements Parcelable {
     private Exercise exercise;
     private int sessionId;
     private long completionDate;
@@ -25,6 +25,25 @@ public class ScheduledExercise {
         this.completionDate = -1;
         this.resultPath = null;
     }
+
+
+    public ScheduledExercise(Parcel serializedExercise) {
+        this.exercise = serializedExercise.readParcelable(Exercise.class.getClassLoader());
+        this.sessionId = serializedExercise.readInt();
+        this.completionDate = serializedExercise.readLong();
+        this.resultPath = Uri.parse(serializedExercise.readString());
+
+    }
+
+    public static final Parcelable.Creator CREATOR = new Parcelable.Creator() {
+        public ScheduledExercise createFromParcel(Parcel serializedExercise) {
+            return new ScheduledExercise(serializedExercise);
+        }
+
+        public ScheduledExercise[] newArray(int size) {
+            return new ScheduledExercise[size];
+        }
+    };
 
     public void complete(Uri resultPath) {
         this.completionDate = new Date().getTime();
@@ -46,5 +65,19 @@ public class ScheduledExercise {
 
     public Uri getResultPath() {
         return resultPath;
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel parcel, int i) {
+        parcel.writeParcelable(this.exercise, i);
+        parcel.writeInt(this.sessionId);
+        parcel.writeLong(this.completionDate);
+        parcel.writeString(this.resultPath.toString());
+
     }
 }
