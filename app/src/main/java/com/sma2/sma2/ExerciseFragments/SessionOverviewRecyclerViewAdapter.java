@@ -12,7 +12,7 @@ import com.sma2.sma2.R;
 import java.util.ArrayList;
 
 public class SessionOverviewRecyclerViewAdapter extends RecyclerView.Adapter<SessionOverviewRecyclerViewAdapter.ViewHolder> {
-    ArrayList<ScheduledExercise> mScheduledExercises;
+    private ArrayList<ScheduledExercise> mScheduledExercises;
 
     public SessionOverviewRecyclerViewAdapter(ArrayList<ScheduledExercise> scheduledExercises) {
         mScheduledExercises = scheduledExercises;
