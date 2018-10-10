@@ -15,6 +15,7 @@ import com.sma2.sma2.ExerciseLogic.ScheduledExercise;
 
 public class ExercisesActivity extends AppCompatActivity implements ExerciseInstructions.OnStartClickedListener, SessionOverview.OnSessionStartListener, ExSustainedVowel.OnFragmentInteractionListener {
     ExerciseSessionManager sessionManager;
+    SessionOverview sessionOverview;
     ScheduledExercise nextExercise;
 
     @Override
@@ -25,9 +26,11 @@ public class ExercisesActivity extends AppCompatActivity implements ExerciseInst
         sessionManager.createExerciseSession(); // TODO: Only for testing
         nextExercise = null;
 
+        sessionOverview = SessionOverview.newInstance(sessionManager.getExerciseSession());
+
         setContentView(R.layout.activity_exercise);
 
-        showStartScreen();
+        showSessionOverview();
     }
 
     @Override
@@ -43,11 +46,10 @@ public class ExercisesActivity extends AppCompatActivity implements ExerciseInst
         transaction.commit();
     }
 
-    private void showStartScreen() {
+    private void showSessionOverview() {
         try {
             nextExercise = sessionManager.getNextExercise();
-            SessionOverview startScreen = new SessionOverview();
-            showFragment(startScreen);
+            showFragment(sessionOverview);
         } catch (IndexOutOfBoundsException e) {
             // TODO: Show a end screen
             Intent mIntent = new Intent(this, MainActivity.class);
@@ -80,6 +82,6 @@ public class ExercisesActivity extends AppCompatActivity implements ExerciseInst
     @Override
     public void onExerciseFinished(String filePath) {
         nextExercise.complete(Uri.parse(filePath));
-        showStartScreen();
+        showSessionOverview();
     }
 }
