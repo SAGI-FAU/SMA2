@@ -10,30 +10,23 @@
     tools:context="com.sma2.sma2.MainActivity">
 
 
-    <TextView
-        android:id="@+id/textView8"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="150dp"
-        android:gravity="center"
-        android:lines="2"
-        android:text="@string/start"
-        android:textSize="30sp"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
     <Button
         android:id="@+id/sessionStart"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
         android:background="@color/colorPrimaryDark"
         android:text="@string/start"
         android:textSize="60sp"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView8" />
+        tools:layout_editor_absoluteY="414dp" />
+
+    <ListView
+        android:layout_width="336dp"
+        android:layout_height="398dp"
+        tools:layout_editor_absoluteX="8dp"
+        tools:layout_editor_absoluteY="8dp" />
 
 
 </android.support.constraint.ConstraintLayout>
