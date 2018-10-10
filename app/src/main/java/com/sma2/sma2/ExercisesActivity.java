@@ -8,8 +8,12 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 
 import com.sma2.sma2.ExerciseFragments.ExSustainedVowel;
+import com.sma2.sma2.ExerciseFragments.ExerciseInstructions;
+import com.sma2.sma2.ExerciseFragments.ExerciseStart;
+import com.sma2.sma2.ExerciseLogic.ExerciseSessionManager;
+import com.sma2.sma2.ExerciseLogic.ScheduledExercise;
 
-public class ExercisesActivity extends AppCompatActivity implements ExerciseIntro.OnStartClickedListener, ExerciseStart.OnSessionStartListener, ExSustainedVowel.OnFragmentInteractionListener {
+public class ExercisesActivity extends AppCompatActivity implements ExerciseInstructions.OnStartClickedListener, ExerciseStart.OnSessionStartListener, ExSustainedVowel.OnFragmentInteractionListener {
     ExerciseSessionManager sessionManager;
     ScheduledExercise nextExercise;
 
@@ -52,7 +56,7 @@ public class ExercisesActivity extends AppCompatActivity implements ExerciseIntr
     }
 
     public void open_exercise() {
-        ExerciseIntro intro = ExerciseIntro.newInstance(
+        ExerciseInstructions intro = ExerciseInstructions.newInstance(
                 nextExercise.getExercise().getName(),
                 nextExercise.getExercise().getInstructionVideoPath(),
                 nextExercise.getExercise().getInstructionTextPath());
