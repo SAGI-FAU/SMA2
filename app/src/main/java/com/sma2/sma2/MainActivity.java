@@ -1,6 +1,7 @@
 package com.sma2.sma2;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -20,25 +21,21 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //setContentView(R.layout.activity_main);
+        SharedPreferences prefs = getSharedPreferences("LoginPref",this.MODE_PRIVATE);
+        int login = prefs.getInt("UserCreated",0);
+        if(login == 1){
+            Intent intent = new Intent(MainActivity.this,MainActivityMenu.class);
+            startActivity(intent);
+            finish();
+        }
         setContentView(R.layout.activity_main);
         tv_username = findViewById(R.id.username);
         tv_userid = findViewById(R.id.userid);
         bt_create = findViewById(R.id.button_create);
-         setListeners();
-
+        setListeners();
     }
 
     private void setListeners() {
-        /*findViewById(R.id.btnProfile).setOnClickListener(this);
-        findViewById(R.id.btnSettings).setOnClickListener(this);
-        findViewById(R.id.btnExercises).setOnClickListener(this);
-        findViewById(R.id.btnResults).setOnClickListener(this);
-        findViewById(R.id.txtProfile).setOnClickListener(this);
-        findViewById(R.id.txtSettings).setOnClickListener(this);
-        findViewById(R.id.txtExercises).setOnClickListener(this);
-        findViewById(R.id.txtResults).setOnClickListener(this);
-*/
         tv_username.setOnClickListener(this);
         tv_userid.setOnClickListener(this);
         bt_create.setOnClickListener(this);

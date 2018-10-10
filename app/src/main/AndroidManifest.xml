@@ -82,6 +82,9 @@
         <activity
             android:name=".Profile3Activity">
         </activity>
+        <activity
+            android:name=".MainActivityMenu">
+        </activity>
 
     </application>
 

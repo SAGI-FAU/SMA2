@@ -1,5 +1,7 @@
 package com.sma2.sma2;
 
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
@@ -32,6 +34,13 @@ public class Profile3Activity extends AppCompatActivity implements View.OnClickL
                 if(valid_data()){
                     //TODO: save the userData object to the database.
                     userData.setOther_disorder(((TextView)findViewById(R.id.other_disorder)).getText().toString());
+                    SharedPreferences prefs = getSharedPreferences("LoginPref",this.MODE_PRIVATE);
+                    SharedPreferences.Editor editor = prefs.edit();
+                    editor.putInt("UserCreated",1);
+                    editor.commit();
+                    Intent intent = new Intent(Profile3Activity.this,MainActivityMenu.class);
+                    startActivity(intent);
+                    finish();
                 }
         }
     }
