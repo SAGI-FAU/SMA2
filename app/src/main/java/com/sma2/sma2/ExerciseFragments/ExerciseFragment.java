@@ -6,7 +6,7 @@ import android.support.v4.app.Fragment;
 
 
 public abstract class ExerciseFragment extends Fragment {
-    protected ExerciseFragment.OnFragmentInteractionListener mListener;
+    protected OnExerciseCompletedListener mListener;
     protected boolean recording = false;
     protected String filePath;
     protected String exercise;
@@ -23,11 +23,11 @@ public abstract class ExerciseFragment extends Fragment {
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        if (context instanceof ExerciseFragment.OnFragmentInteractionListener) {
-            mListener = (ExerciseFragment.OnFragmentInteractionListener) context;
+        if (context instanceof OnExerciseCompletedListener) {
+            mListener = (OnExerciseCompletedListener) context;
         } else {
             throw new RuntimeException(context.toString()
-                    + " must implement OnFragmentInteractionListener");
+                    + " must implement OnExerciseCompletedListener");
         }
     }
 
@@ -37,7 +37,7 @@ public abstract class ExerciseFragment extends Fragment {
         mListener = null;
     }
 
-    public interface OnFragmentInteractionListener {
+    public interface OnExerciseCompletedListener {
         void onExerciseFinished(String filePath);
     }
 }
