@@ -5,12 +5,22 @@ import android.os.Parcel;
 import android.os.Parcelable;
 import android.support.v4.app.Fragment;
 
+import com.sma2.sma2.DataAccess.ExerciseDA;
+
 
 public class Exercise implements Parcelable {
     private String name;
     private Uri instructionVideoPath;
     private Uri instructionTextPath;
     private Class<? extends Fragment> fragmentClass;
+
+    public Exercise(ExerciseDA exerciseDA) {
+        super();
+        this.name = exerciseDA.getExerciseName();
+        this.instructionTextPath.parse(exerciseDA.getInstructionTextPath());
+        this.instructionVideoPath.parse(exerciseDA.getInstructionVideoPath());
+        this.fragmentClass = getFragmentFromString(exerciseDA.getFragmentClassName());
+    }
 
     public Exercise(String name, Uri instructionVideoPath, Uri instructionTextPath, Class<? extends Fragment> fragmentClass){
         super();
