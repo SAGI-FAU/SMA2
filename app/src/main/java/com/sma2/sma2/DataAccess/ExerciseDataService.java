@@ -42,7 +42,7 @@ public class ExerciseDataService {
         Database db = helper.getReadableDb();
         DaoSession session = new DaoMaster(db).newSession();
         ExerciseDADao dao = session.getExerciseDADao();
-        ExerciseDA exerciseDA = dao.queryBuilder().list().get(id);
+        ExerciseDA exerciseDA = dao.queryBuilder().where(ExerciseDADao.Properties.Id.eq(id)).list().get(0);
         db.close();
         return new Exercise(exerciseDA);
     }
