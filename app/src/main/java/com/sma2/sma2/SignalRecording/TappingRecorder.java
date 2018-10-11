@@ -30,6 +30,7 @@ import java.util.Date;
 public class TappingRecorder {
     private static Context CONTEXT;
     private static Handler HANDLER;
+    private CSVFileWriter mCSVFileWriter;
     private static DataOutputStream DATA_OUTPUT_STREAM;
     private static File MOVEMENT_FOLDER;
     private static File FILE_CSV;
@@ -38,17 +39,15 @@ public class TappingRecorder {
     private static String exercise;
     private OutputStreamWriter fout;
     private BufferedWriter bw;
-    private BufferedWriter ew;
-
     private static TappingRecorder recorder_instance=null;
+
+
 
 
     private TappingRecorder(Context context) {
         CONTEXT=context;
-        MOVEMENT_FOLDER = new File(Environment.getExternalStorageDirectory() + File.separator + "APP_NAME" + File.separator + "MOVEMENT");
-        if (!MOVEMENT_FOLDER.exists()) {
-            MOVEMENT_FOLDER.mkdirs();
-        }
+
+
     }
 
     public static TappingRecorder getInstance(Context context) {
@@ -59,51 +58,35 @@ public class TappingRecorder {
     }
 
 
-    public String prepare(String exercise) {
-        String date = getCurrentDateAsString();
-        FILE_CSV = new File(MOVEMENT_FOLDER.getAbsolutePath() + File.separator + date + "_" + exercise + ".csv");
-        FILE_CSV_error = new File(MOVEMENT_FOLDER.getAbsolutePath() + File.separator + date + "_" + "Error"+exercise + ".csv");
+    public void TapHeaderWriter(String TaskName, int Flag) throws IOException{
+        mCSVFileWriter = new CSVFileWriter(TaskName);
 
-        try {
+        if (Flag==0) {
+            String[] TAPPING_INFO_HEADER =  {"Task Name","TouchScreen Label" +
+                    "Label Bug 1","TimeTap","Distance"};
 
-            FILE_CSV.createNewFile();
-            FILE_CSV_error.createNewFile();
+            String[] TAPPING_DESCRIPTION_HEADER =
+                    {"One finger tapping", "0,1", "Times between taps", "Euclidean distance"};
+            String[] TAPPING_DATA_HEADER =  {"Bug Label","TimesTap [ms]",
+                    "Distance Bug1"};
+            mCSVFileWriter.writeData(TAPPING_INFO_HEADER);
 
-        } catch (IOException e) {
-            Log.e("TappingRecorder", e.toString());
-            return "ERROR: Could not create file: " + FILE_CSV.getAbsolutePath();
+            mCSVFileWriter.writeData(TAPPING_DESCRIPTION_HEADER);
+            mCSVFileWriter.writeData(TAPPING_DATA_HEADER);
 
-        }
+        }else{
+            String[] TAPPING_INFO_HEADER =  {"Task Name","TouchScreen Label",
+                    "Label Bug 1","Label Bug 2","TimeTap","Distance"};
 
+            String[] TAPPING_DESCRIPTION_HEADER =
+                    {"Two finger tapping", "0,1,2", "Times between taps", "Euclidean distance of each button"};
+            String[] TAPPING_DATA_HEADER =  {"Bug Label","TimesTap [ms]",
+                    "Distance Bug 1", "Distance Bug 2"};
+            mCSVFileWriter.writeData(TAPPING_INFO_HEADER);
 
-        try {
+            mCSVFileWriter.writeData(TAPPING_DESCRIPTION_HEADER);
+            mCSVFileWriter.writeData(TAPPING_DATA_HEADER);
 
-            FileWriter fw = new FileWriter(FILE_CSV);
-            bw = new BufferedWriter(fw);
-            FileWriter f_ew = new FileWriter(FILE_CSV_error);
-            ew = new BufferedWriter(f_ew);
-
-            //return bw;
-
-        } catch (IOException e) {
-
-            e.printStackTrace();
-        }
-
-        return FILE_CSV.getAbsolutePath();
-
-    }
-
-    public void TapWriter(String data_sensors){
-
-        try {
-
-            bw.write(data_sensors);
-            //return bw;
-
-        } catch (IOException e) {
-
-            e.printStackTrace();
         }
 
 
@@ -111,45 +94,17 @@ public class TappingRecorder {
     }
 
 
-    public void ErrorWriter(String data_sensors){
 
-        try {
+    public void TapWriter(String[] data_sensors){
 
-            ew.write(data_sensors);
-            //return bw;
-
-        } catch (IOException e) {
-
-            e.printStackTrace();
-        }
-
-
+        mCSVFileWriter.writeData(data_sensors);
 
     }
 
 
-    public void CloseTappingDocument(){
-        try {
-
-            bw.close();
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+    public void CloseTappingDocument() throws IOException{
+        mCSVFileWriter.close();
     }
-    public void CloseErrorDocument(){
-        try {
-
-            ew.close();
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-
-
-
 
 
 
@@ -159,6 +114,7 @@ public class TappingRecorder {
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy-HH-mm");
         return dateFormat.format(date);
     }
+
+
 }
 
-// TODO: Fix this part to save each tapping vector
