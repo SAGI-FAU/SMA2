@@ -17,6 +17,8 @@ public class MedicineDA {
 
     private long patientDAId;
 
+    private boolean deleted;
+
     @NotNull
     private Date insertDate;
 
@@ -38,11 +40,12 @@ public class MedicineDA {
     @Generated(hash = 1858501363)
     private transient MedicineDADao myDao;
 
-    @Generated(hash = 1635983714)
-    public MedicineDA(Long id, long patientDAId, @NotNull Date insertDate, String medicineName,
-            int dose, int intakeTime) {
+    @Generated(hash = 1591221393)
+    public MedicineDA(Long id, long patientDAId, boolean deleted, @NotNull Date insertDate,
+            String medicineName, int dose, int intakeTime) {
         this.id = id;
         this.patientDAId = patientDAId;
+        this.deleted = deleted;
         this.insertDate = insertDate;
         this.medicineName = medicineName;
         this.dose = dose;
@@ -172,6 +175,14 @@ public class MedicineDA {
 
     public void setInsertDate(Date insertDate) {
         this.insertDate = insertDate;
+    }
+
+    public boolean getDeleted() {
+        return this.deleted;
+    }
+
+    public void setDeleted(boolean deleted) {
+        this.deleted = deleted;
     }
 
     /** called by internal mechanisms, do not call yourself. */
