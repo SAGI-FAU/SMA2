@@ -15,6 +15,8 @@ import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
 
+import com.sma2.sma2.R;
+
 import java.io.BufferedOutputStream;
 import java.io.DataOutputStream;
 import java.io.File;
@@ -43,7 +45,7 @@ public class SpeechRecorder {
     private SpeechRecorder(Context context, Handler handler){
         CONTEXT = context;
         HANDLER = handler;
-        AUDIO_FOLDER = new File(Environment.getExternalStorageDirectory() + File.separator + "APP_NAME" + File.separator + "AUDIO");
+        AUDIO_FOLDER = new File(Environment.getExternalStorageDirectory() + File.separator + CONTEXT.getString(R.string.app_name) + File.separator + "AUDIO");
         if(!AUDIO_FOLDER.exists()){
             AUDIO_FOLDER.mkdirs();
         }

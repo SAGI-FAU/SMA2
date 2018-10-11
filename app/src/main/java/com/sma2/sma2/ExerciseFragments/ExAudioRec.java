@@ -69,7 +69,7 @@ public class ExAudioRec extends ExerciseFragment implements ButtonFragment.OnBut
     @Override
     public void onButtonInteraction(boolean start) {
         if(start){
-            filePath = recorder.prepare("exerciseID" + "_" + "patientID");
+            filePath = recorder.prepare(mExercise.getName());
             recorder.record();
             recording = true;
         } else {
