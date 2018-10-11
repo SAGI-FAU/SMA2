@@ -21,22 +21,32 @@ import com.sma2.sma2.SignalRecording.TappingRecorder;
 import com.sma2.sma2.R;
 import com.sma2.sma2.ThanksActivity;
 
+import java.io.File;
+import java.io.FileNotFoundException;
 
 
 public class Tapping2 extends AppCompatActivity implements View.OnClickListener {
     TappingRecorder tappingrecorder;
     private float time2;
     private String timeStr;
+    private String [] data= new String[4];
+    public String TappingFileName;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        tappingrecorder=TappingRecorder.getInstance(this);
-        tappingrecorder.prepare("Tapping2");
-        tappingrecorder.TapWriter("Tap Time (ms)"  + "\t" + "Button" +"\n\r");
-        tappingrecorder.ErrorWriter("Distance to bug1"  + "\t"+"Distance to bug2" +"\n\r");
+        tappingrecorder = TappingRecorder.getInstance(this);
+
+        try {
+            tappingrecorder.TapHeaderWriter("Two finger tapping", 1);
+        } catch (Exception e) {
+            Log.e("Tapping2HeaderWriter", e.toString());
+            //return "ERROR: Could not add the header";
+        }
+        TappingFileName=tappingrecorder.TappingFileName();
+
 
         setContentView(R.layout.activity_capture_tapping_2);
         setListeners();
@@ -63,8 +73,13 @@ public class Tapping2 extends AppCompatActivity implements View.OnClickListener 
 
             public void onFinish() {
                 mTextField.setText(getApplicationContext().getString(R.string.done));
-                tappingrecorder.CloseTappingDocument();
-                tappingrecorder.CloseErrorDocument();
+                try{
+                    tappingrecorder.CloseTappingDocument();
+                }catch (Exception e) {
+                    Log.e("Tapping2CloseWriter", e.toString());
+                    //return "ERROR: Could not add the header";
+                }
+
 
                 open_exercise();
             }
@@ -106,7 +121,16 @@ public class Tapping2 extends AppCompatActivity implements View.OnClickListener 
                 double distanceTouchButton1= Math.sqrt(Math.pow((xTap1-xScreen),2)+Math.pow((yTap1-yScreen),2)) ;
                 double distanceTouchButton2= Math.sqrt(Math.pow((xTap2-xScreen),2)+Math.pow((yTap2-yScreen),2)) ;
 
-                tappingrecorder.ErrorWriter(Double.toString(distanceTouchButton1)  + "\t"+Double.toString(distanceTouchButton2)+ "\n\r");
+                data[0]="0";
+                data[1]=timeStr;
+                data[2]=Double.toString(distanceTouchButton1);
+                data[3]=Double.toString(distanceTouchButton2);
+
+
+
+
+                tappingrecorder.TapWriter(data);
+
 
 
                 return true;
@@ -127,19 +151,30 @@ public class Tapping2 extends AppCompatActivity implements View.OnClickListener 
 
             vib.vibrate(100);
             change_button_position(tap1,tap2);
-                tappingrecorder.TapWriter(timeStr  + '\t'+ "0"  + "\n\r"); // Writing the time between taps
+                data[0]="1";
+                data[1]=timeStr;
+                data[2]="0";
+                data[3]="0";
 
-                tappingrecorder.ErrorWriter("0" + "\t"+ "0"+"\n\r"); // Writing 0 if there is not error
+
+
+
+                tappingrecorder.TapWriter(data);
 
                 break;
             case R.id.tapButton_2_2:
 
             vib.vibrate(100);
             change_button_position(tap2,tap1);
+                data[0]="2";
+                data[1]=timeStr;
+                data[2]="0";
+                data[3]="0";
 
-                tappingrecorder.TapWriter(timeStr  + '\t'+ "1"  + "\n\r"); // Writing the time between taps
 
-                tappingrecorder.ErrorWriter("0" + "\t"+ "0"+"\n\r"); // Writing 0 if there is not error
+
+
+                tappingrecorder.TapWriter(data);
 
                 break;
         }
@@ -158,8 +193,6 @@ public class Tapping2 extends AppCompatActivity implements View.OnClickListener 
         ConstraintLayout.LayoutParams params_bug2= (ConstraintLayout.LayoutParams)  imageButton2.getLayoutParams();
 
 
-        //int y= (int)(Math.random()*((800)));
-        //int x= (int)(Math.random()*((600)));
         int y= (int)(Math.random()*((800)));
         int x= (int)(Math.random()*((600)));
 

@@ -14,6 +14,10 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 
+import com.sma2.sma2.ExerciseFragments.Sliding;
+import com.sma2.sma2.ExerciseFragments.Tapping1;
+import com.sma2.sma2.ExerciseFragments.Tapping2;
+
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
