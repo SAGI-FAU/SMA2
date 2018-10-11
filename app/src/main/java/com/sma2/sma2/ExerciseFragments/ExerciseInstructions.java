@@ -4,6 +4,7 @@ import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,6 +15,7 @@ import android.widget.VideoView;
 import com.sma2.sma2.ExerciseLogic.Exercise;
 import com.sma2.sma2.ExerciseLogic.ScheduledExercise;
 import com.sma2.sma2.R;
+import com.sma2.sma2.TextInstructions;
 
 public class ExerciseInstructions extends Fragment {
 
@@ -42,7 +44,17 @@ public class ExerciseInstructions extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_exercise_instructions, container, false);
 
-        // TODO: Handle the button click for the test instructions
+        // Set On Click handler for Text instructions
+        Button instrButton = view.findViewById(R.id.textInstructions);
+        instrButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                TextInstructions dialogFragment = TextInstructions.newInstance();
+                FragmentTransaction ft = getFragmentManager().beginTransaction();
+                ft.replace(R.id.exerciseContainer,dialogFragment);
+                ft.commit();
+            }
+        });
 
         // Set Title based on Intend Information
         TextView exerciseTitle = view.findViewById(R.id.exerciseTitle);

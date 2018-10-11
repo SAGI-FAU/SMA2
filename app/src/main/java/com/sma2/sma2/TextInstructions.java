@@ -16,6 +16,17 @@ public class TextInstructions extends Fragment {
 
     public TextInstructions(){}
 
+    public static TextInstructions newInstance()
+    {
+        TextInstructions fragment = new TextInstructions();
+
+/*        Bundle args = new Bundle();
+        args.putString("InstructionPath", instrPath);
+        fragment.setArguments(args);*/
+
+        return fragment;
+    }
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -27,7 +38,7 @@ public class TextInstructions extends Fragment {
         View view = inflater.inflate(R.layout.fragment_text_instructions, container, false);
 
         MarkdownView txtinstr = view.findViewById(R.id.textInstrView);
-        txtinstr.loadMarkdown(getResources().getString(R.string.a_ex));
+        txtinstr.loadMarkdown("Sample instruction");
         return view;
     }
 
