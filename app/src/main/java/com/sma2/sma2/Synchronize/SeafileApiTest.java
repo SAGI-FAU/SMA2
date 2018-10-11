@@ -21,7 +21,11 @@ public class SeafileApiTest {
 
         doUpload.uploadFile(file);
 
+
+
+        //UploadService testService = new UploadService(username,password,null);
         /*
+
         OkHttpClient client = new OkHttpClient();
         SeafileApi api = new SeafileApi(SERVICE_URL,FILE_SERVER_ROOT);
 
@@ -32,8 +36,8 @@ public class SeafileApiTest {
         String token = api.obtainAuthToken(client, username, password);
         System.out.println("token = " + token);
 
-        List<Library> libraries=api.listLibraries(client,token);
-        for (Library library:libraries){
+        List<jsonObject.Library> libraries=api.listLibraries(client,token);
+        for (jsonObject.Library library:libraries){
             System.out.println(library.getId());
             System.out.println(library.getName());
         }
@@ -47,8 +51,16 @@ public class SeafileApiTest {
         String test = uploadLink.replace("seafile.example.com", "localhost");
         System.out.println(test);
 
-        String uploadLink_tmp = "http://localhost/seafhttp/upload-api/62c85efc-da5c-4698-84b8-dcfaf04c3fe6";
+        File file1=new File("/home/martin/Desktop/default.png");
+        if(file1.isFile()){
+            List<jsonObject.UploadFileRes> uploadFileResList=api.uploadFile(client,token,test,"/","",file1);
+            for (jsonObject.UploadFileRes res:uploadFileResList){
+                System.out.println(res.getId());
+            }
+        }
 */
+       // String uploadLink_tmp = "http://localhost/seafhttp/upload-api/62c85efc-da5c-4698-84b8-dcfaf04c3fe6";
+
 /*
         File file1=new File("/home/martin/Desktop/default.png");
         if(file1.isFile()){

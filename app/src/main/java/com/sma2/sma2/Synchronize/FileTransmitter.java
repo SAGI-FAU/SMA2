@@ -3,7 +3,6 @@ package com.sma2.sma2.Synchronize;
 import java.io.File;
 import java.util.List;
 
-import jsonObject.Library;
 import okhttp3.OkHttpClient;
 
 public class FileTransmitter {
@@ -12,8 +11,8 @@ public class FileTransmitter {
     public static final String FILE_SERVER_ROOT="http://localhost";
     public static final String LIBRARY="My Library"; // Find a name for the storage
 
-    private OkHttpClient client = new OkHttpClient();
-    private SeafileApi api = new SeafileApi(SERVICE_URL,FILE_SERVER_ROOT);
+    private static OkHttpClient client = new OkHttpClient();
+    private static SeafileApi api = new SeafileApi(SERVICE_URL,FILE_SERVER_ROOT);
 
     private String username;
     private String password;
@@ -22,7 +21,7 @@ public class FileTransmitter {
     public FileTransmitter(String username, String password) {
         this.username = username;
         this.password = password;
-        token = api.obtainAuthToken(client, this.username, this.password);
+        this.token = api.obtainAuthToken(client, this.username, this.password);
     }
 
 
@@ -32,15 +31,18 @@ public class FileTransmitter {
         String repo_id = null;
         String uploadLink = null;
 
-        List<Library> libraries = api.listLibraries(client,token);
+        List<jsonObject.Library> libraries = api.listLibraries(client,this.token);
+        //Log.e("Libraries",libraries.toString());
 
         // Check the list of libraries, and save the repository id if it exists.
-        for(Library library:libraries) {
+        for(jsonObject.Library library:libraries) {
             if(library.getName().equals(LIBRARY)) {
                 repo_id = library.getId();
                 break;
             }
         }
+
+       // Log.e("repo_id",repo_id);
 
         // Get the upload link and prepare if necessary
         if (repo_id != null) {
@@ -51,10 +53,7 @@ public class FileTransmitter {
         } else {
             throw new NullPointerException("The target repository was not found!");
         }
-
         // Upload file
         List<jsonObject.UploadFileRes> uploadFileResList=api.uploadFile(client,token,uploadLink,"/","",file);
-
     }
-
 }
