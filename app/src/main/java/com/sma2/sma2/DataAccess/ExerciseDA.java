@@ -23,20 +23,24 @@ public class ExerciseDA {
     private String exerciseType;
     @Property
     private String description;
+    @Property
+    private String instructions;
 
     @Keep
     public ExerciseDA(Exercise exercise) {
         this.exerciseName = exercise.getName();
         this.instructionTextPath = exercise.getInstructionTextPath().toString();
         this.instructionVideoPath = exercise.getInstructionVideoPath().toString();
-        this.exerciseType = "HELPFUL_EXERCISE_TYPE"; // TODO: Placeholder value. Implement on the Exercise class and getExerciseType();
-        this.description = "Helpful exercise description"; // TODO: Placeholder value. Implement on the Exercise class and getDescription();
+        this.fragmentClassName = Exercise.getStringFromFragment(exercise.getFragmentClass());
+        this.exerciseType = exercise.getExerciseType();
+        this.description = exercise.getShortDescription();
+        this.instructions = exercise.getShortInstructions();
 
     }
 
-    @Generated(hash = 1769152531)
+    @Generated(hash = 335302140)
     public ExerciseDA(Long id, @NotNull String exerciseName, String instructionTextPath, String instructionVideoPath, String fragmentClassName,
-            String exerciseType, String description) {
+            String exerciseType, String description, String instructions) {
         this.id = id;
         this.exerciseName = exerciseName;
         this.instructionTextPath = instructionTextPath;
@@ -44,6 +48,7 @@ public class ExerciseDA {
         this.fragmentClassName = fragmentClassName;
         this.exerciseType = exerciseType;
         this.description = description;
+        this.instructions = instructions;
     }
 
     @Generated(hash = 846666550)
@@ -104,6 +109,14 @@ public class ExerciseDA {
 
     public void setFragmentClassName(String fragmentClassName) {
         this.fragmentClassName = fragmentClassName;
+    }
+
+    public String getInstructions() {
+        return this.instructions;
+    }
+
+    public void setInstructions(String instructions) {
+        this.instructions = instructions;
     }
 
 }

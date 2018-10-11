@@ -16,10 +16,13 @@ public class Exercise implements Parcelable {
     private Uri instructionVideoPath;
     private Uri instructionTextPath;
     private Class<? extends Fragment> fragmentClass;
-    
+
     public Exercise(ExerciseDA exerciseDA) {
         super();
         this.name = exerciseDA.getExerciseName();
+        this.exerciseType = exerciseDA.getExerciseType();
+        this.shortDescription = exerciseDA.getDescription();
+        this.shortInstructions = exerciseDA.getInstructions();
         this.instructionTextPath.parse(exerciseDA.getInstructionTextPath());
         this.instructionVideoPath.parse(exerciseDA.getInstructionVideoPath());
         this.fragmentClass = getFragmentFromString(exerciseDA.getFragmentClassName());
@@ -78,7 +81,7 @@ public class Exercise implements Parcelable {
         return fragmentClass;
     }
 
-    static private String getStringFromFragment(Class<? extends Fragment> fragmentClass) {
+    static public String getStringFromFragment(Class<? extends Fragment> fragmentClass) {
         return fragmentClass.getName();
     }
 
