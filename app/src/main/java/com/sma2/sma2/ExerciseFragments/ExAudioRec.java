@@ -21,24 +21,12 @@ public class ExAudioRec extends ExerciseFragment implements ButtonFragment.OnBut
     private ProgressBar volumeBar;
     private SpeechRecorder recorder;
 
-    public ExAudioRec() {
-        // Required empty public constructor
-    }
-
-    public static ExAudioRec newInstance() {
-        ExAudioRec fragment = new ExAudioRec();
-        return fragment;
-    }
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_ex_audio_rec, container, false);
-        //exercise = getArguments().getString("exercise");
-        exercise = "SustainedVowel";
         volumeBar = view.findViewById(R.id.volumeExSV);
         recorder = SpeechRecorder.getInstance(getActivity().getApplicationContext(), new VolumeHandler(volumeBar));
-
         ButtonFragment buttonFragment = new ButtonFragment();
         buttonFragment.setmListener(this);
         FragmentTransaction transaction = getChildFragmentManager().beginTransaction();
