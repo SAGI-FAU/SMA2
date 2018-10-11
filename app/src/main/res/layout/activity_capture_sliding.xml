@@ -39,7 +39,9 @@
         android:maxHeight="70sp"
         android:maxWidth="15sp"
         android:max="200"
-        android:progress="30"
+        android:progress="20"
+
+
         android:layout_marginTop="30sp"
         app:layout_constraintTop_toBottomOf="@+id/accgraph_chrono5"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -55,8 +57,8 @@
         app:srcCompat="@drawable/limit_sliding"
         android:layout_marginTop="10sp"
         tools:layout_editor_absoluteX="200sp"
+        android:layout_marginStart="170sp"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/accgraph_chrono5"
         />
 

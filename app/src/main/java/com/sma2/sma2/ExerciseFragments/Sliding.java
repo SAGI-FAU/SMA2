@@ -8,6 +8,7 @@ import android.support.constraint.ConstraintLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
@@ -49,11 +50,17 @@ public class Sliding extends AppCompatActivity implements View.OnClickListener {
         seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
-                ConstraintLayout.LayoutParams params_bug= (ConstraintLayout.LayoutParams)  seekBar.getLayoutParams();
-                int x2=seekBar.getProgress(); //The bar position
+                ImageView imageView_limit=(ImageView) findViewById(R.id.imageView_limit);
+                ConstraintLayout.LayoutParams params_bug= (ConstraintLayout.LayoutParams)  imageView_limit.getLayoutParams();
+                int xSeek=seekBar.getProgress(); //The SeekBar percentage
+                //int xSeek=seekBar.get; //The SeekBar position
+                int xBar=params_bug.getMarginStart(); // The indicator bar position
+                ReachingTheBar(xSeek, xBar);
+                Log.e("seek",Integer.toString(xSeek));
+                Log.e("seek",Integer.toString(xBar));
 
-                int y2=params_bug.topMargin;
-                Log.e("seek",Integer.toString(x2));
+
+
 
 
             }
@@ -86,6 +93,18 @@ public class Sliding extends AppCompatActivity implements View.OnClickListener {
         Intent intent_ex1;
         intent_ex1 =new Intent(this, ThanksActivity.class);
         startActivity(intent_ex1);
+    }
+
+    public void ReachingTheBar(int xSeek, int xBar){
+        if(xSeek==xBar){
+            Log.e("seek","holi");
+
+            ImageView imageView_limit=(ImageView) findViewById(R.id.imageView_limit);
+            ConstraintLayout.LayoutParams params_bug= (ConstraintLayout.LayoutParams)  imageView_limit.getLayoutParams();
+            int xRandomBar= (int)(Math.random()*((22))+12);
+            params_bug.setMarginStart(xRandomBar); // The indicator bar position
+
+        }
     }
 
 

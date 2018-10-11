@@ -23,6 +23,8 @@ import com.sma2.sma2.SignalRecording.TappingRecorder;
 import com.sma2.sma2.R;
 import com.sma2.sma2.ThanksActivity;
 
+import java.util.ArrayList;
+
 
 public class Tapping1 extends AppCompatActivity implements View.OnClickListener {
 
@@ -31,6 +33,7 @@ public class Tapping1 extends AppCompatActivity implements View.OnClickListener 
 
     private float time2;
     private String timeStr;
+    private String [] data= new String[3];
 
 
 
@@ -38,17 +41,15 @@ public class Tapping1 extends AppCompatActivity implements View.OnClickListener 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         tappingrecorder=TappingRecorder.getInstance(this);
-        tappingrecorder.prepare("Tapping1");
-        tappingrecorder.TapWriter("Tap Time (ms)"  + "\n\r");
-        tappingrecorder.ErrorWriter("Distance to bug"  + "\n\r");
 
-
-
-
-
+        try {
+            tappingrecorder.TapHeaderWriter("Tapping1", 0);
+        }catch (Exception e) {
+            Log.e("Tapping1HeaderWriter", e.toString());
+            //return "ERROR: Could not add the header";
+        }
 
         setContentView(R.layout.activity_capture_tapping_1);
-
 
         setListeners();
     }
@@ -71,18 +72,20 @@ public class Tapping1 extends AppCompatActivity implements View.OnClickListener 
                 mTextField.setText(Long.toString(millisUntilFinished / 1000));
                 time2 = SystemClock.currentThreadTimeMillis()-timef; // The difference between times
                 timeStr = String.valueOf(time2);
-                //Log.e("values",timeStr);
-
-
-
 
 
             }
 
             public void onFinish() {
                 mTextField.setText(getApplicationContext().getString(R.string.done));
-                tappingrecorder.CloseTappingDocument();
-                tappingrecorder.CloseErrorDocument();
+
+                try {
+                    tappingrecorder.CloseTappingDocument();
+                }catch (Exception e) {
+                    Log.e("Tapping1CloseWriter", e.toString());
+                    //return "ERROR: Could not add the header";
+                }
+
 
                 open_exercise();
             }
@@ -93,12 +96,6 @@ public class Tapping1 extends AppCompatActivity implements View.OnClickListener 
 
     @Override
     public void onClick(View view) {
-
-
-
-        //if (view.getId()==R.id.backgroundTapping1){
-
-
 
             final ConstraintLayout background = (ConstraintLayout) findViewById(R.id.backgroundTapping1);
             background.setOnTouchListener(new View.OnTouchListener() {
@@ -119,14 +116,19 @@ public class Tapping1 extends AppCompatActivity implements View.OnClickListener 
                     // and the button to measure the error
                     double distanceTouchButton= Math.sqrt(Math.pow((xTap1-xScreen),2)+Math.pow((yTap1-yScreen),2)) ;
 
-                   tappingrecorder.ErrorWriter(Double.toString(distanceTouchButton)  + "\n\r");
+
+                    data[0]="0";
+                    data[1]=Double.toString(distanceTouchButton);
+                    data[2]=timeStr;
+
+
+                    tappingrecorder.TapWriter(data);
 
 
                     return true;
                 }
             });
 
-        //}
 
 
         if (view.getId()==R.id.tapButton_1){
@@ -135,8 +137,14 @@ public class Tapping1 extends AppCompatActivity implements View.OnClickListener 
             Vibrator vib = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
             // Vibrate for 500 milliseconds
             vib.vibrate(100);
-            tappingrecorder.TapWriter(timeStr  + "\n\r"); // Writing the time between taps
-            tappingrecorder.ErrorWriter("0" + "\n\r"); // Writing 0 if there is not error
+
+            data[0]="1";
+            data[1]="0";
+            data[2]=timeStr;
+
+
+            tappingrecorder.TapWriter(data);
+
 
             change_button_position(tap1);
 
@@ -150,16 +158,6 @@ public class Tapping1 extends AppCompatActivity implements View.OnClickListener 
         intent_ex1 =new Intent(this, ThanksActivity.class);
         startActivity(intent_ex1);
     }
-
-
-
-
-
-
-
-
-
-
 
     public void change_button_position(ImageButton imageButton){
         ConstraintLayout.LayoutParams params_bug= (ConstraintLayout.LayoutParams)  imageButton.getLayoutParams();
