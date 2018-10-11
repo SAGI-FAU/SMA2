@@ -10,10 +10,13 @@ import com.sma2.sma2.DataAccess.ExerciseDA;
 
 public class Exercise implements Parcelable {
     private String name;
+    private String exerciseType;
+    private String shortDescription;
+    private String shortInstructions;
     private Uri instructionVideoPath;
     private Uri instructionTextPath;
     private Class<? extends Fragment> fragmentClass;
-
+    
     public Exercise(ExerciseDA exerciseDA) {
         super();
         this.name = exerciseDA.getExerciseName();
@@ -22,16 +25,38 @@ public class Exercise implements Parcelable {
         this.fragmentClass = getFragmentFromString(exerciseDA.getFragmentClassName());
     }
 
-    public Exercise(String name, Uri instructionVideoPath, Uri instructionTextPath, Class<? extends Fragment> fragmentClass){
+    public Exercise(String name,
+                    String exerciseType,
+                    String shortDescription,
+                    String shortInstructions,
+                    Uri instructionVideoPath,
+                    Uri instructionTextPath,
+                    Class<? extends Fragment> fragmentClass){
         super();
         this.name = name;
+        this.exerciseType = exerciseType;
+        this.shortDescription = shortDescription;
+        this.shortInstructions = shortInstructions;
         this.instructionVideoPath = instructionVideoPath;
         this.instructionTextPath = instructionTextPath;
         this.fragmentClass = fragmentClass;
     }
 
-    public Exercise(String name, Uri instructionVideoPath, Uri instructionTextPath, String fragmentClassString){
-        this(name, instructionVideoPath, instructionTextPath, getFragmentFromString(fragmentClassString));
+    public Exercise(String name,
+                    String exerciseType,
+                    String shortDescription,
+                    String shortInstructions,
+                    Uri instructionVideoPath,
+                    Uri instructionTextPath,
+                    String fragmentClassString){
+        this(
+                name,
+                exerciseType,
+                shortDescription,
+                shortInstructions,
+                instructionVideoPath,
+                instructionTextPath,
+                getFragmentFromString(fragmentClassString));
     }
 
     public Exercise(Parcel serializedExercise) {
@@ -83,6 +108,18 @@ public class Exercise implements Parcelable {
         return instructionTextPath;
     }
 
+    public String getExerciseType() {
+        return exerciseType;
+    }
+
+    public String getShortDescription() {
+        return shortDescription;
+    }
+
+    public String getShortInstructions() {
+        return shortInstructions;
+    }
+
     @Override
     public int describeContents() {
         return 0;
@@ -91,6 +128,9 @@ public class Exercise implements Parcelable {
     @Override
     public void writeToParcel(Parcel parcel, int i) {
         parcel.writeString(this.name);
+        parcel.writeString(this.exerciseType);
+        parcel.writeString(this.shortDescription);
+        parcel.writeString(this.shortInstructions);
         parcel.writeString(this.instructionTextPath.toString());
         parcel.writeString(this.instructionVideoPath.toString());
         parcel.writeString(getStringFromFragment(this.fragmentClass));
