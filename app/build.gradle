@@ -87,4 +87,12 @@ dependencies {
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
     implementation 'org.greenrobot:greendao:3.2.2' // add library
     implementation 'us.feras.mdv:markdownview:1.1.0'
+
+    testImplementation 'junit:junit:4.12'
+
+    testImplementation 'com.android.support.test:runner:1.0.2'
+    testImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
+    testImplementation 'org.mockito:mockito-core:1.10.19'
+    testImplementation 'org.robolectric:robolectric:3.4.2'
+
 }
