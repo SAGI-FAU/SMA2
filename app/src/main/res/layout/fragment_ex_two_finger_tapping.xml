@@ -2,13 +2,13 @@
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/backgroundExTapOne"
+    android:id="@+id/backgroundExTapTwo"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ExerciseFragments.ExOneFingerTapping">
+    tools:context=".ExerciseFragments.ExTwoFingerTapping">
 
     <ImageView
-        android:id="@+id/exOneTapBackground"
+        android:id="@+id/exTwoTapBackground"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:scaleType="centerCrop"
@@ -19,7 +19,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageButton
-        android:id="@+id/bugTapOne"
+        android:id="@+id/bugTapTwoLeft"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginStart="8dp"
@@ -33,8 +33,23 @@
         app:layout_constraintWidth_percent="0.3"
         app:srcCompat="@drawable/bug" />
 
+    <ImageButton
+        android:id="@+id/bugTapTwoRight"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:adjustViewBounds="true"
+        android:background="@null"
+        android:scaleType="fitCenter"
+        app:layout_constraintDimensionRatio="1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintWidth_percent="0.3"
+        app:srcCompat="@drawable/bug" />
+
     <TextView
-        android:id="@+id/chronoTapOne"
+        android:id="@+id/chronoTapTwo"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:gravity="center"

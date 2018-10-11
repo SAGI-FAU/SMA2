@@ -17,34 +17,16 @@ import com.sma2.sma2.SignalRecording.SpeechRecorder;
 import java.io.File;
 
 
-public class ExAudioRec extends ExerciseFragment implements View.OnClickListener, ButtonFragment.OnButtonInteractionListener{
-    private Button startButton;
-    private Button doneButton;
-    private Button redoButton;
+public class ExAudioRec extends ExerciseFragment implements ButtonFragment.OnButtonInteractionListener{
     private ProgressBar volumeBar;
     private SpeechRecorder recorder;
-
-    public ExAudioRec() {
-        // Required empty public constructor
-    }
-
-    public static ExAudioRec newInstance() {
-        ExAudioRec fragment = new ExAudioRec();
-        return fragment;
-    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_ex_audio_rec, container, false);
-        exercise = getArguments().getString("exercise");
-        doneButton = view.findViewById(R.id.btnDoneExSV);
-        doneButton.setOnClickListener(this);
-        redoButton = view.findViewById(R.id.btnRedoExSV);
-        redoButton.setOnClickListener(this);
         volumeBar = view.findViewById(R.id.volumeExSV);
         recorder = SpeechRecorder.getInstance(getActivity().getApplicationContext(), new VolumeHandler(volumeBar));
-
         ButtonFragment buttonFragment = new ButtonFragment();
         buttonFragment.setmListener(this);
         FragmentTransaction transaction = getChildFragmentManager().beginTransaction();
@@ -60,40 +42,7 @@ public class ExAudioRec extends ExerciseFragment implements View.OnClickListener
         recorder.release();
     }
 
-    @Override
-    public void onClick(View v) {
-        int id = v.getId();
-        //Record or Stop button pressed
-        if (id == startButton.getId()){
-            //Start recording
-            if (!recording){
-                filePath = recorder.prepare("exerciseID" + "_" + "patientID");
-                recorder.record();
-                recording = true;
-                startButton.setText(R.string.stop);
-            //Stop recording
-            } else {
-                recorder.stopRecording();
-                recording = false;
-                startButton.setText(R.string.start);
-                startButton.setVisibility(View.INVISIBLE);
-                doneButton.setVisibility(View.VISIBLE);
-                redoButton.setVisibility(View.VISIBLE);
-                getActivity().runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        volumeBar.setProgress(0);
-                    }
-                });
-            }
-        //Exercise done
-        } else if (id == doneButton.getId()){
-            mListener.onExerciseFinished(filePath);
-        //Redo exercise
-        } else if (id == redoButton.getId()){
-            doneButton.setVisibility(View.INVISIBLE);
-            redoButton.setVisibility(View.INVISIBLE);
-            startButton.setVisibility(View.VISIBLE);
+/*
             Thread deleteFile = new Thread() {
                 @Override
                 public void run() {
@@ -115,8 +64,7 @@ public class ExAudioRec extends ExerciseFragment implements View.OnClickListener
                 }
             };
             deleteFile.start();
-        }
-    }
+*/
 
     @Override
     public void onButtonInteraction(boolean start) {
@@ -136,6 +84,7 @@ public class ExAudioRec extends ExerciseFragment implements View.OnClickListener
                     volumeBar.setProgress(0);
                 }
             });
+            mListener.onExerciseFinished(filePath);
         }
     }
 

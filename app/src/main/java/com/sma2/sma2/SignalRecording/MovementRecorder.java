@@ -52,6 +52,10 @@ public class MovementRecorder implements SensorEventListener {
 
     }
 
+    public String getFileName() {
+        return mCSVFileWriter.getFileName();
+    }
+
     private String[] getSensorInfoStringArray(Sensor sensor) {
         String[] sensorNotAvailable = {"NaN", "NaN", "NaN", "NaN"};
         if (sensor != null) {

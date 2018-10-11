@@ -3,31 +3,50 @@ package com.sma2.sma2.ExerciseFragments;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
+
+import com.sma2.sma2.ExerciseLogic.Exercise;
 
 
 public abstract class ExerciseFragment extends Fragment {
-    protected ExerciseFragment.OnFragmentInteractionListener mListener;
+    protected OnExerciseCompletedListener mListener;
     protected boolean recording = false;
     protected String filePath;
-    protected String exercise;
+    protected Exercise mExercise;
 
     public ExerciseFragment() {
         // Required empty public constructor
     }
 
+    public ExerciseFragment newInstance(Exercise exercise) {
+        ExerciseFragment fragment;
+        try {
+            fragment = this.getClass().asSubclass(ExerciseFragment.class).newInstance();
+        } catch (Exception e) {
+            throw new RuntimeException("Exercise not correctly implemented");
+        }
+        Bundle args = new Bundle();
+        args.putParcelable("EXERCISE", exercise);
+        fragment.setArguments(args);
+        return fragment;
+    }
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        if (getArguments() != null) {
+            mExercise = getArguments().getParcelable("EXERCISE");
+        }
     }
 
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        if (context instanceof ExerciseFragment.OnFragmentInteractionListener) {
-            mListener = (ExerciseFragment.OnFragmentInteractionListener) context;
+        if (context instanceof OnExerciseCompletedListener) {
+            mListener = (OnExerciseCompletedListener) context;
         } else {
             throw new RuntimeException(context.toString()
-                    + " must implement OnFragmentInteractionListener");
+                    + " must implement OnExerciseCompletedListener");
         }
     }
 
@@ -37,7 +56,7 @@ public abstract class ExerciseFragment extends Fragment {
         mListener = null;
     }
 
-    public interface OnFragmentInteractionListener {
+    public interface OnExerciseCompletedListener {
         void onExerciseFinished(String filePath);
     }
 }

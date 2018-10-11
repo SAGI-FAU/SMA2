@@ -6,8 +6,6 @@
     android:layout_height="match_parent"
     tools:context=".ExerciseFragments.ExAudioRec">
 
-    <!-- TODO: Update blank fragment layout -->
-
     <ProgressBar
         android:id="@+id/volumeExSV"
         style="?android:attr/progressBarStyleHorizontal"

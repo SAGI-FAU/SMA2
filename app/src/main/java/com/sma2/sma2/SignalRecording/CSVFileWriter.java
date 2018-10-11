@@ -123,7 +123,4 @@ public class CSVFileWriter extends Thread {
             throw e;
         }
     }
-
 }
-
-
