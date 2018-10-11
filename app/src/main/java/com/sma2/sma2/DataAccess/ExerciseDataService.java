@@ -6,6 +6,9 @@ import com.sma2.sma2.ExerciseLogic.Exercise;
 
 import org.greenrobot.greendao.database.Database;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class ExerciseDataService {
     private Context invocationcontext;
     public ExerciseDataService(Context context){
@@ -45,5 +48,19 @@ public class ExerciseDataService {
         ExerciseDA exerciseDA = dao.queryBuilder().where(ExerciseDADao.Properties.Id.eq(id)).list().get(0);
         db.close();
         return new Exercise(exerciseDA);
+    }
+
+    public ArrayList<Exercise> getAllExercises(){
+        DaoMaster.DevOpenHelper helper = new DaoMaster.DevOpenHelper(invocationcontext, "apkinsondb");
+        Database db = helper.getReadableDb();
+        DaoSession session = new DaoMaster(db).newSession();
+        ExerciseDADao dao = session.getExerciseDADao();
+        List<ExerciseDA> exercisesDA = dao.queryBuilder().list();
+        ArrayList<Exercise> exercises = new ArrayList<Exercise>();
+        for (int i=0; i<exercisesDA.size(); i++) {
+            exercises.add(new Exercise(exercisesDA.get(i)));
+        }
+        db.close();
+        return exercises;
     }
 }
