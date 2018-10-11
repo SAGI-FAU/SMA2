@@ -1,7 +1,6 @@
 package com.sma2.sma2.ExerciseFragments;
 
 import android.content.Context;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -12,7 +11,6 @@ import android.widget.TextView;
 import android.widget.VideoView;
 
 import com.sma2.sma2.ExerciseLogic.Exercise;
-import com.sma2.sma2.ExerciseLogic.ScheduledExercise;
 import com.sma2.sma2.R;
 
 public class ExerciseInstructions extends Fragment {
