@@ -33,7 +33,6 @@ public class Tapping1 extends AppCompatActivity implements View.OnClickListener 
 
     private float time2;
     private String timeStr;
-    private String [] data= new String[3];
     public String TappingFileName;
 
 
@@ -42,7 +41,6 @@ public class Tapping1 extends AppCompatActivity implements View.OnClickListener 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         tappingrecorder=TappingRecorder.getInstance(this);
-
         try {
             tappingrecorder.TapHeaderWriter("Tapping1", 0);
         }catch (Exception e) {
@@ -99,11 +97,11 @@ public class Tapping1 extends AppCompatActivity implements View.OnClickListener 
 
     @Override
     public void onClick(View view) {
-
             final ConstraintLayout background = (ConstraintLayout) findViewById(R.id.backgroundTapping1);
             background.setOnTouchListener(new View.OnTouchListener() {
                 public boolean onTouch(View v, MotionEvent ev) {
                     ImageButton tap1 = findViewById(R.id.tapButton_1);
+                    String [] data= new String[3];
                     ConstraintLayout.LayoutParams params_bugDif= (ConstraintLayout.LayoutParams) tap1.getLayoutParams();
                     //Capturing the button position
 
@@ -137,7 +135,7 @@ public class Tapping1 extends AppCompatActivity implements View.OnClickListener 
 
         if (view.getId()==R.id.tapButton_1){
             ImageButton tap1 = findViewById(R.id.tapButton_1);
-
+            String [] data= new String[3];
             Vibrator vib = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
             // Vibrate for 500 milliseconds
             vib.vibrate(100);

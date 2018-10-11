@@ -5,9 +5,9 @@ import android.content.Context;
 import android.graphics.Point;
 import android.os.Bundle;
 import android.os.CountDownTimer;
-import android.os.SystemClock;
 import android.os.Vibrator;
 import android.support.constraint.ConstraintLayout;
+import android.util.Log;
 import android.view.Display;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -22,12 +22,11 @@ import com.sma2.sma2.SignalRecording.TappingRecorder;
 
 public class ExOneFingerTapping extends ExerciseFragment implements View.OnClickListener {
     private TappingRecorder tappingrecorder;
-    private float time2;
-    private String timeStr;
     private TextView chronoText;
     private ConstraintLayout background;
     private ImageButton tapButton;
     int screenHeight, screenWidth;
+    long startTime;
 
     public ExOneFingerTapping() {
         // Required empty public constructor
@@ -48,38 +47,80 @@ public class ExOneFingerTapping extends ExerciseFragment implements View.OnClick
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_ex_one_finger_tapping, container, false);
         tappingrecorder = TappingRecorder.getInstance(getContext());
-        filePath = tappingrecorder.prepare("Tapping1");
-        tappingrecorder.TapWriter("Tap Time (ms)"  + "\n\r");
-        tappingrecorder.ErrorWriter("Distance to bug"  + "\n\r");
+        try {
+            tappingrecorder.TapHeaderWriter(mExercise.getName(), 0);
+        }catch (Exception e) {
+            Log.e("Tapping1HeaderWriter", e.toString());
+        }
+
+        filePath = tappingrecorder.TappingFileName();
         chronoText = view.findViewById(R.id.chronoTapOne);
-        background = view.findViewById(R.id.exOneTapBackground);
+        background = view.findViewById(R.id.backgroundExTapOne);
         view.findViewById(R.id.bugTapOne).setOnClickListener(this);
         tapButton = view.findViewById(R.id.bugTapOne);
         tapButton.setOnClickListener(this);
         getDisplayDimensions();
+        setListener();
         setTimer();
+
         return view;
     }
 
+    private void setListener() {
+        background.setOnTouchListener(new View.OnTouchListener() {
+            public boolean onTouch(View v, MotionEvent ev) {
+                if (ev.getAction() == MotionEvent.ACTION_DOWN) {
+                    ConstraintLayout.LayoutParams params_bugDif = (ConstraintLayout.LayoutParams) tapButton.getLayoutParams();
+                    //Capturing the button position
+                    String[] data = new String[3];
+                    float yTap1 = (float) params_bugDif.topMargin;
+                    float xTap1 = (float) params_bugDif.leftMargin;
+
+                    //Screen position
+                    float yScreen = ev.getY();
+                    float xScreen = ev.getX();
+
+
+                    //The euclidean distance between the touch screen position
+                    // and the button to measure the error
+                    double distanceTouchButton = Math.sqrt(Math.pow((xTap1 - xScreen), 2) + Math.pow((yTap1 - yScreen), 2));
+
+                    data[0] = "0";
+                    data[1] = String.valueOf(System.currentTimeMillis() - startTime);
+                    data[2] = Double.toString(distanceTouchButton);
+
+                    tappingrecorder.TapWriter(data);
+                    return true;
+                }
+                return true;
+            }
+        });
+    }
+
     private void setTimer() {
-        new CountDownTimer(10000, 1000) {
+        new CountDownTimer(10000, 100) {
 
             // Here, it is computed the difference between the last time in which
             // you push the button and the time you are pushing the button
-            float timef = SystemClock.currentThreadTimeMillis(); //Last time
+            //float timef = SystemClock.currentThreadTimeMillis(); //Last time
 
             public void onTick(long millisUntilFinished) {
-                chronoText.setText(Long.toString(millisUntilFinished / 1000));
-                time2 = SystemClock.currentThreadTimeMillis()-timef; // The difference between times
-                timeStr = String.valueOf(time2);
+                double newTime = (double) Math.round(millisUntilFinished / 100) / 10;
+                chronoText.setText(String.valueOf(newTime));
+                //time2 = SystemClock.currentThreadTimeMillis()-timef; // The difference between times
+                //timeStr = String.valueOf(time2);
             }
             public void onFinish() {
                 chronoText.setText(getActivity().getApplicationContext().getString(R.string.done));
-                tappingrecorder.CloseTappingDocument();
-                tappingrecorder.CloseErrorDocument();
+                try {
+                    tappingrecorder.CloseTappingDocument();
+                }catch (Exception e) {
+                    Log.e("Tapping1CloseWriter", e.toString());
+                }
                 mListener.onExerciseFinished(filePath);
             }
         }.start();
+        startTime = System.currentTimeMillis();
     }
 
     private void getDisplayDimensions() {
@@ -93,44 +134,19 @@ public class ExOneFingerTapping extends ExerciseFragment implements View.OnClick
     @Override
     public void onDetach() {
         super.onDetach();
-
     }
 
     @SuppressLint("ClickableViewAccessibility")
     @Override
     public void onClick(View view) {
-        background.setOnTouchListener(new View.OnTouchListener() {
-            public boolean onTouch(View v, MotionEvent ev) {
-                ConstraintLayout.LayoutParams params_bugDif= (ConstraintLayout.LayoutParams) tapButton.getLayoutParams();
-                //Capturing the button position
-
-                float yTap1=(float) params_bugDif.topMargin;
-                float xTap1=(float) params_bugDif.leftMargin;
-
-                //Screen position
-                float yScreen= ev.getY();
-                float xScreen= ev.getX();
-
-
-                //The euclidean distance between the touch screen position
-                // and the button to measure the error
-                double distanceTouchButton= Math.sqrt(Math.pow((xTap1-xScreen),2)+Math.pow((yTap1-yScreen),2)) ;
-
-                tappingrecorder.ErrorWriter(Double.toString(distanceTouchButton)  + "\n\r");
-                return true;
-            }
-        });
-
-        if (view.getId()==R.id.bugTapOne){
-            Vibrator vib = (Vibrator) getActivity().getApplicationContext().getSystemService(Context.VIBRATOR_SERVICE);
-            // Vibrate for 500 milliseconds
-            vib.vibrate(100);
-            tappingrecorder.TapWriter(timeStr  + "\n\r"); // Writing the time between taps
-            tappingrecorder.ErrorWriter("0" + "\n\r"); // Writing 0 if there is not error
-
-            change_button_position();
-
-        }
+        String [] data= new String[3];
+        Vibrator vib = (Vibrator) getActivity().getSystemService(Context.VIBRATOR_SERVICE);
+        vib.vibrate(200);
+        data[0]="1";
+        data[1]=String.valueOf(System.currentTimeMillis() - startTime);
+        data[2]="0";
+        tappingrecorder.TapWriter(data);
+        change_button_position();
     }
 
     public void change_button_position(){
