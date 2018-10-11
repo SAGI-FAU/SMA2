@@ -49,7 +49,7 @@ public class ExerciseInstructions extends Fragment {
         instrButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                TextInstructions dialogFragment = TextInstructions.newInstance();
+                TextInstructions dialogFragment = TextInstructions.newInstance("Path should be here");
                 FragmentTransaction ft = getFragmentManager().beginTransaction();
                 ft.replace(R.id.exerciseContainer,dialogFragment);
                 ft.commit();

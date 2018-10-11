@@ -16,13 +16,13 @@ public class TextInstructions extends Fragment {
 
     public TextInstructions(){}
 
-    public static TextInstructions newInstance()
+    public static TextInstructions newInstance(String InstrPath)
     {
         TextInstructions fragment = new TextInstructions();
 
-/*        Bundle args = new Bundle();
-        args.putString("InstructionPath", instrPath);
-        fragment.setArguments(args);*/
+        Bundle args = new Bundle();
+        args.putString("InstructionPath", InstrPath);
+        fragment.setArguments(args);
 
         return fragment;
     }
@@ -38,7 +38,7 @@ public class TextInstructions extends Fragment {
         View view = inflater.inflate(R.layout.fragment_text_instructions, container, false);
 
         MarkdownView txtinstr = view.findViewById(R.id.textInstrView);
-        txtinstr.loadMarkdown("Sample instruction");
+        txtinstr.loadMarkdown(getArguments().getString("InstructionPath"));
         return view;
     }
 
