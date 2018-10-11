@@ -6,14 +6,16 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
-
-import com.sma2.sma2.ExerciseFragments.ExSustainedVowel;
+import com.sma2.sma2.ExerciseFragments.ExAudioRec;
 import com.sma2.sma2.ExerciseFragments.ExerciseInstructions;
 import com.sma2.sma2.ExerciseFragments.SessionOverview;
 import com.sma2.sma2.ExerciseLogic.ExerciseSessionManager;
 import com.sma2.sma2.ExerciseLogic.ScheduledExercise;
 
-public class ExercisesActivity extends AppCompatActivity implements ExerciseInstructions.OnStartClickedListener, SessionOverview.OnSessionControlListener, ExSustainedVowel.OnFragmentInteractionListener {
+
+public class ExercisesActivity extends AppCompatActivity implements ExerciseInstructions.OnStartClickedListener,
+        SessionOverview.OnSessionControlListener, ExAudioRec.OnFragmentInteractionListener {
+
     ExerciseSessionManager sessionManager;
     SessionOverview sessionOverview;
     ScheduledExercise nextExercise;

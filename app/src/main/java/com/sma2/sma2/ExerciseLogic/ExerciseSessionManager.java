@@ -2,7 +2,7 @@ package com.sma2.sma2.ExerciseLogic;
 
 import android.net.Uri;
 
-import com.sma2.sma2.ExerciseFragments.ExSustainedVowel;
+import com.sma2.sma2.ExerciseFragments.ExAudioRec;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -62,20 +62,20 @@ public class ExerciseSessionManager {
                 "test Instructions",
                 Uri.parse("video/path"),
                 Uri.parse("Instruction/Path"),
-                ExSustainedVowel.class));
+                ExAudioRec.class));
         _dummyExerciseList.add(new Exercise("Test1",
                 "Speech",
                 "test Description",
                 "test Instructions",
                 Uri.parse("video/path"),
                 Uri.parse("Instruction/Path"),
-                ExSustainedVowel.class));
+                ExAudioRec.class));
         _dummyExerciseList.add(new Exercise("Test1",
                 "Speech",
                 "test Description",
                 "test Instructions",
                 Uri.parse("video/path"),
                 Uri.parse("Instruction/Path"),
-                ExSustainedVowel.class));
+                ExAudioRec.class));
     }
 }

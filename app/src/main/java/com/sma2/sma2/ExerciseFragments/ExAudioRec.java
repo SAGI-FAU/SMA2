@@ -1,11 +1,9 @@
 package com.sma2.sma2.ExerciseFragments;
 
-import android.app.Activity;
-import android.content.Context;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,61 +17,46 @@ import com.sma2.sma2.SignalRecording.SpeechRecorder;
 import java.io.File;
 
 
-public class ExSustainedVowel extends Fragment implements View.OnClickListener{
-
-    private OnFragmentInteractionListener mListener;
+public class ExAudioRec extends ExerciseFragment implements View.OnClickListener, ButtonFragment.OnButtonInteractionListener{
     private Button startButton;
     private Button doneButton;
     private Button redoButton;
     private ProgressBar volumeBar;
     private SpeechRecorder recorder;
-    private boolean recording = false;
-    private String filePath;
 
-    public ExSustainedVowel() {
+    public ExAudioRec() {
         // Required empty public constructor
     }
 
-    public static ExSustainedVowel newInstance() {
-        ExSustainedVowel fragment = new ExSustainedVowel();
+    public static ExAudioRec newInstance() {
+        ExAudioRec fragment = new ExAudioRec();
         return fragment;
-    }
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_ex_sustained_vowel, container, false);
-        startButton = view.findViewById(R.id.btnStartExSV);
-        startButton.setOnClickListener(this);
+        View view = inflater.inflate(R.layout.fragment_ex_audio_rec, container, false);
+        exercise = getArguments().getString("exercise");
         doneButton = view.findViewById(R.id.btnDoneExSV);
         doneButton.setOnClickListener(this);
         redoButton = view.findViewById(R.id.btnRedoExSV);
         redoButton.setOnClickListener(this);
         volumeBar = view.findViewById(R.id.volumeExSV);
         recorder = SpeechRecorder.getInstance(getActivity().getApplicationContext(), new VolumeHandler(volumeBar));
-        return view;
-    }
 
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        if (context instanceof OnFragmentInteractionListener) {
-            mListener = (OnFragmentInteractionListener) context;
-        } else {
-            throw new RuntimeException(context.toString()
-                    + " must implement OnFragmentInteractionListener");
-        }
+        ButtonFragment buttonFragment = new ButtonFragment();
+        buttonFragment.setmListener(this);
+        FragmentTransaction transaction = getChildFragmentManager().beginTransaction();
+
+        transaction.replace(R.id.frameExSV, buttonFragment);
+        transaction.commit();
+        return view;
     }
 
     @Override
     public void onDetach() {
         super.onDetach();
-        mListener = null;
         recorder.release();
     }
 
@@ -134,10 +117,26 @@ public class ExSustainedVowel extends Fragment implements View.OnClickListener{
             deleteFile.start();
         }
     }
-    
-    public interface OnFragmentInteractionListener {
-        // TODO: Update argument type and name
-        void onExerciseFinished(String filePath);
+
+    @Override
+    public void onButtonInteraction(boolean start) {
+        if(start){
+            filePath = recorder.prepare("exerciseID" + "_" + "patientID");
+            recorder.record();
+            recording = true;
+        } else {
+            if (!recording){
+                return;
+            }
+            recorder.stopRecording();
+            recording = false;
+            getActivity().runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    volumeBar.setProgress(0);
+                }
+            });
+        }
     }
 
     private static class VolumeHandler extends Handler{
