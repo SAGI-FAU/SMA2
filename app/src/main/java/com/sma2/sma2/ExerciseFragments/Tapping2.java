@@ -43,7 +43,6 @@ public class Tapping2 extends AppCompatActivity implements View.OnClickListener 
             tappingrecorder.TapHeaderWriter("Two finger tapping", 1);
         } catch (Exception e) {
             Log.e("Tapping2HeaderWriter", e.toString());
-            //return "ERROR: Could not add the header";
         }
         TappingFileName=tappingrecorder.TappingFileName();
 
@@ -77,7 +76,6 @@ public class Tapping2 extends AppCompatActivity implements View.OnClickListener 
                     tappingrecorder.CloseTappingDocument();
                 }catch (Exception e) {
                     Log.e("Tapping2CloseWriter", e.toString());
-                    //return "ERROR: Could not add the header";
                 }
 
 
@@ -126,9 +124,6 @@ public class Tapping2 extends AppCompatActivity implements View.OnClickListener 
                 data[2]=Double.toString(distanceTouchButton1);
                 data[3]=Double.toString(distanceTouchButton2);
 
-
-
-
                 tappingrecorder.TapWriter(data);
 
 
@@ -156,9 +151,6 @@ public class Tapping2 extends AppCompatActivity implements View.OnClickListener 
                 data[2]="0";
                 data[3]="0";
 
-
-
-
                 tappingrecorder.TapWriter(data);
 
                 break;
@@ -170,9 +162,6 @@ public class Tapping2 extends AppCompatActivity implements View.OnClickListener 
                 data[1]=timeStr;
                 data[2]="0";
                 data[3]="0";
-
-
-
 
                 tappingrecorder.TapWriter(data);
 

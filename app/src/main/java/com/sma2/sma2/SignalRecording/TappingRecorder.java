@@ -62,7 +62,7 @@ public class TappingRecorder {
         mCSVFileWriter = new CSVFileWriter(TaskName);
 
         if (Flag==0) {
-            String[] TAPPING_INFO_HEADER =  {"Task Name","TouchScreen Label" +
+            String[] TAPPING_INFO_HEADER =  {"Task Name","TouchScreen Label",
                     "Label Bug 1","TimeTap","Distance"};
 
             String[] TAPPING_DESCRIPTION_HEADER =
