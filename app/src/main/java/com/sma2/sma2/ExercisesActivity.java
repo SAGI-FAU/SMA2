@@ -14,7 +14,7 @@ import com.sma2.sma2.ExerciseLogic.ScheduledExercise;
 
 
 public class ExercisesActivity extends AppCompatActivity implements ExerciseInstructions.OnStartClickedListener,
-        SessionOverview.OnSessionControlListener, ExAudioRec.OnFragmentInteractionListener {
+        SessionOverview.OnSessionControlListener, ExAudioRec.OnExerciseCompletedListener {
 
     ExerciseSessionManager sessionManager;
     SessionOverview sessionOverview;
