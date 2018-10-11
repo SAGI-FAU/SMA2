@@ -80,7 +80,7 @@ public class Tapping1 extends AppCompatActivity implements View.OnClickListener 
             }
 
             public void onFinish() {
-                mTextField.setText(getApplicationContext().getString(R.string.done));
+                mTextField.setText(getApplicationContext().getString(R.string.done)); //
 
                 try {
                     tappingrecorder.CloseTappingDocument();
