@@ -42,6 +42,7 @@
         android:progress="20"
 
 
+
         android:layout_marginTop="30sp"
         app:layout_constraintTop_toBottomOf="@+id/accgraph_chrono5"
         app:layout_constraintLeft_toLeftOf="parent"
