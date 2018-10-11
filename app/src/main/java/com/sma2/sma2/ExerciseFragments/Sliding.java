@@ -1,9 +1,11 @@
 package com.sma2.sma2.ExerciseFragments;
 
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.os.Vibrator;
 import android.support.constraint.ConstraintLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -51,13 +53,22 @@ public class Sliding extends AppCompatActivity implements View.OnClickListener {
             @Override
             public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
                 ImageView imageView_limit=(ImageView) findViewById(R.id.imageView_limit);
+                ConstraintLayout.LayoutParams params_bug_seek= (ConstraintLayout.LayoutParams)  seekBar.getLayoutParams();
+
                 ConstraintLayout.LayoutParams params_bug= (ConstraintLayout.LayoutParams)  imageView_limit.getLayoutParams();
-                int xSeek=seekBar.getProgress(); //The SeekBar percentage
-                //int xSeek=seekBar.get; //The SeekBar position
-                int xBar=params_bug.getMarginStart(); // The indicator bar position
+
+                int xSeekProgress=seekBar.getProgress(); //The SeekBar percentage
+                int xLimit1=params_bug_seek.getMarginStart(); //Limit in the Left
+                int xLimit2=params_bug_seek.getMarginEnd()-xLimit1; //Limit in the Right
+
+                //int xSeek=((xLimit2*xSeekProgress)/100)+xLimit1;
+                float xSeek = seekBar.getMeasuredWidth() * seekBar.getProgress() /
+                        seekBar.getMax() - seekBar.getThumbOffset();
+
+                float xBar=params_bug.getMarginStart(); // The indicator bar position
                 ReachingTheBar(xSeek, xBar);
-                Log.e("seek",Integer.toString(xSeek));
-                Log.e("seek",Integer.toString(xBar));
+
+
 
 
 
@@ -95,14 +106,16 @@ public class Sliding extends AppCompatActivity implements View.OnClickListener {
         startActivity(intent_ex1);
     }
 
-    public void ReachingTheBar(int xSeek, int xBar){
-        if(xSeek==xBar){
-            Log.e("seek","holi");
-
+    public void ReachingTheBar(Float xSeek, Float xBar){
+        if(Math.abs(xSeek-xBar)<20){
+            Vibrator vib = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
+            vib.vibrate(100);
             ImageView imageView_limit=(ImageView) findViewById(R.id.imageView_limit);
             ConstraintLayout.LayoutParams params_bug= (ConstraintLayout.LayoutParams)  imageView_limit.getLayoutParams();
-            int xRandomBar= (int)(Math.random()*((22))+12);
+            int xRandomBar= (int)(Math.random()*((500))+100);
             params_bug.setMarginStart(xRandomBar); // The indicator bar position
+            params_bug.leftMargin=xRandomBar;
+            imageView_limit.setLayoutParams(params_bug);
 
         }
     }

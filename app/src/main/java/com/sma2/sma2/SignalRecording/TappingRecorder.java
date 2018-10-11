@@ -93,6 +93,10 @@ public class TappingRecorder {
 
     }
 
+    public String TappingFileName(){
+        return mCSVFileWriter.getFileName() ;
+    }
+
 
 
     public void TapWriter(String[] data_sensors){

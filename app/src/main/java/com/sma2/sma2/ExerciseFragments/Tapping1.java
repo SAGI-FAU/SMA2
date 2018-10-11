@@ -34,6 +34,7 @@ public class Tapping1 extends AppCompatActivity implements View.OnClickListener 
     private float time2;
     private String timeStr;
     private String [] data= new String[3];
+    public String TappingFileName;
 
 
 
@@ -48,6 +49,8 @@ public class Tapping1 extends AppCompatActivity implements View.OnClickListener 
             Log.e("Tapping1HeaderWriter", e.toString());
             //return "ERROR: Could not add the header";
         }
+
+        TappingFileName=tappingrecorder.TappingFileName();
 
         setContentView(R.layout.activity_capture_tapping_1);
 
@@ -118,8 +121,9 @@ public class Tapping1 extends AppCompatActivity implements View.OnClickListener 
 
 
                     data[0]="0";
-                    data[1]=Double.toString(distanceTouchButton);
-                    data[2]=timeStr;
+                    data[1]=timeStr;
+                    data[2]=Double.toString(distanceTouchButton);
+
 
 
                     tappingrecorder.TapWriter(data);
@@ -139,8 +143,8 @@ public class Tapping1 extends AppCompatActivity implements View.OnClickListener 
             vib.vibrate(100);
 
             data[0]="1";
-            data[1]="0";
-            data[2]=timeStr;
+            data[1]=timeStr;
+            data[2]="0";
 
 
             tappingrecorder.TapWriter(data);

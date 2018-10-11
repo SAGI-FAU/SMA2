@@ -21,6 +21,7 @@ import com.sma2.sma2.SignalRecording.TappingRecorder;
 import com.sma2.sma2.R;
 import com.sma2.sma2.ThanksActivity;
 
+import java.io.File;
 import java.io.FileNotFoundException;
 
 
@@ -29,6 +30,7 @@ public class Tapping2 extends AppCompatActivity implements View.OnClickListener 
     private float time2;
     private String timeStr;
     private String [] data= new String[4];
+    public String TappingFileName;
 
 
     @Override
@@ -43,6 +45,7 @@ public class Tapping2 extends AppCompatActivity implements View.OnClickListener 
             Log.e("Tapping2HeaderWriter", e.toString());
             //return "ERROR: Could not add the header";
         }
+        TappingFileName=tappingrecorder.TappingFileName();
 
 
         setContentView(R.layout.activity_capture_tapping_2);
