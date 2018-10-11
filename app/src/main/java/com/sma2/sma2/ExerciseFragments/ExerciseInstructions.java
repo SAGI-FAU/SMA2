@@ -1,4 +1,4 @@
-package com.sma2.sma2;
+package com.sma2.sma2.ExerciseFragments;
 
 import android.content.Context;
 import android.net.Uri;
@@ -11,21 +11,20 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.VideoView;
 
-public class ExerciseIntro extends Fragment {
+import com.sma2.sma2.ExerciseLogic.Exercise;
+import com.sma2.sma2.ExerciseLogic.ScheduledExercise;
+import com.sma2.sma2.R;
+
+public class ExerciseInstructions extends Fragment {
 
     OnStartClickedListener mStartClickedCallback;
-    private String mExerciseName;
-    private Uri mVideoPath;
-    private Uri mInstructionPath;
-    private int mScheduledExerciseId;
+    private Exercise mExercise;
 
-    public static ExerciseIntro newInstance(String exerciseName, Uri videoPath, Uri instructionPath, int scheduledExerciseId) {
-        ExerciseIntro fragment = new ExerciseIntro();
+
+    public static ExerciseInstructions newInstance(Exercise exercise) {
+        ExerciseInstructions fragment = new ExerciseInstructions();
         Bundle args = new Bundle();
-        args.putString("NAME", exerciseName);
-        args.putString("VIDEO_PATH", videoPath.toString());
-        args.putString("INSTRUCTION_PATH", instructionPath.toString());
-        args.putInt("SCHEDULED_EXERCISE_ID", scheduledExerciseId);
+        args.putParcelable("EXERCISE", exercise);
         fragment.setArguments(args);
         return fragment;
     }
@@ -34,27 +33,24 @@ public class ExerciseIntro extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            mExerciseName = getArguments().getString("NAME");
-            mVideoPath = Uri.parse(getArguments().getString("VIDEO_PATH"));
-            mInstructionPath = Uri.parse(getArguments().getString("INSTRUCTION_PATH"));
-            mScheduledExerciseId = getArguments().getInt("SCHEDULED_EXERCISE_ID");
+            mExercise = getArguments().getParcelable("EXERCISE");
         }
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_exercise_intro, container, false);
+        View view = inflater.inflate(R.layout.fragment_exercise_instructions, container, false);
 
         // TODO: Handle the button click for the test instructions
 
         // Set Title based on Intend Information
         TextView exerciseTitle = view.findViewById(R.id.exerciseTitle);
-        exerciseTitle.setText(mExerciseName);
+        exerciseTitle.setText(mExercise.getName());
 
         // Set Video based on Intend Information
         VideoView instructionVideo = view.findViewById(R.id.instructionVideo);
-        instructionVideo.setVideoURI(mVideoPath);
+        instructionVideo.setVideoURI(mExercise.getInstructionVideoPath());
 
         // Set On Click handler for Start Button
         Button startButton = view.findViewById(R.id.startButton);
@@ -62,7 +58,7 @@ public class ExerciseIntro extends Fragment {
             @Override
             public void onClick(View view) {
                 if (mStartClickedCallback != null) {
-                    mStartClickedCallback.onExerciseStartClicked(mScheduledExerciseId);
+                    mStartClickedCallback.onExerciseStartClicked();
                 }
             }
 
@@ -74,8 +70,8 @@ public class ExerciseIntro extends Fragment {
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        if (context instanceof ExerciseIntro.OnStartClickedListener) {
-            mStartClickedCallback = (ExerciseIntro.OnStartClickedListener) context;
+        if (context instanceof ExerciseInstructions.OnStartClickedListener) {
+            mStartClickedCallback = (ExerciseInstructions.OnStartClickedListener) context;
         } else {
             throw new RuntimeException(context.toString()
                     + " must implement OnStartClickedListener");
@@ -89,6 +85,6 @@ public class ExerciseIntro extends Fragment {
     }
 
     public interface OnStartClickedListener {
-        void onExerciseStartClicked(int scheduledExerciseId);
+        void onExerciseStartClicked();
     }
 }
