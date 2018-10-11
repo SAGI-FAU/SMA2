@@ -6,6 +6,10 @@
     android:layout_height="match_parent"
     tools:context=".TextInstructions">
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
 
     <us.feras.mdv.MarkdownView
         android:id="@+id/textInstrView"
@@ -17,5 +21,7 @@
         app:layout_constrainedHeight="false"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"/>
+
+    </LinearLayout>
 
 </FrameLayout>

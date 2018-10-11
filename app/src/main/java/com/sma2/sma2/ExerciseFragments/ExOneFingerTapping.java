@@ -47,17 +47,17 @@ public class ExOneFingerTapping extends ExerciseFragment implements View.OnClick
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_ex_one_finger_tapping, container, false);
-        tappingrecorder = TappingRecorder.getInstance(getContext());
-        filePath = tappingrecorder.prepare("Tapping1");
-        tappingrecorder.TapWriter("Tap Time (ms)"  + "\n\r");
-        tappingrecorder.ErrorWriter("Distance to bug"  + "\n\r");
-        chronoText = view.findViewById(R.id.chronoTapOne);
-        background = view.findViewById(R.id.exOneTapBackground);
-        view.findViewById(R.id.bugTapOne).setOnClickListener(this);
-        tapButton = view.findViewById(R.id.bugTapOne);
-        tapButton.setOnClickListener(this);
-        getDisplayDimensions();
-        setTimer();
+//        tappingrecorder = TappingRecorder.getInstance(getContext());
+//        filePath = tappingrecorder.prepare("Tapping1");
+//        tappingrecorder.TapWriter("Tap Time (ms)"  + "\n\r");
+//        tappingrecorder.ErrorWriter("Distance to bug"  + "\n\r");
+//        chronoText = view.findViewById(R.id.chronoTapOne);
+//        background = view.findViewById(R.id.exOneTapBackground);
+//        view.findViewById(R.id.bugTapOne).setOnClickListener(this);
+//        tapButton = view.findViewById(R.id.bugTapOne);
+//        tapButton.setOnClickListener(this);
+//        getDisplayDimensions();
+//        setTimer();
         return view;
     }
 
@@ -75,8 +75,8 @@ public class ExOneFingerTapping extends ExerciseFragment implements View.OnClick
             }
             public void onFinish() {
                 chronoText.setText(getActivity().getApplicationContext().getString(R.string.done));
-                tappingrecorder.CloseTappingDocument();
-                tappingrecorder.CloseErrorDocument();
+//                tappingrecorder.CloseTappingDocument();
+//                tappingrecorder.CloseErrorDocument();
                 mListener.onExerciseFinished(filePath);
             }
         }.start();
@@ -116,7 +116,7 @@ public class ExOneFingerTapping extends ExerciseFragment implements View.OnClick
                 // and the button to measure the error
                 double distanceTouchButton= Math.sqrt(Math.pow((xTap1-xScreen),2)+Math.pow((yTap1-yScreen),2)) ;
 
-                tappingrecorder.ErrorWriter(Double.toString(distanceTouchButton)  + "\n\r");
+//                tappingrecorder.ErrorWriter(Double.toString(distanceTouchButton)  + "\n\r");
                 return true;
             }
         });
@@ -125,8 +125,8 @@ public class ExOneFingerTapping extends ExerciseFragment implements View.OnClick
             Vibrator vib = (Vibrator) getActivity().getApplicationContext().getSystemService(Context.VIBRATOR_SERVICE);
             // Vibrate for 500 milliseconds
             vib.vibrate(100);
-            tappingrecorder.TapWriter(timeStr  + "\n\r"); // Writing the time between taps
-            tappingrecorder.ErrorWriter("0" + "\n\r"); // Writing 0 if there is not error
+//            tappingrecorder.TapWriter(timeStr  + "\n\r"); // Writing the time between taps
+//            tappingrecorder.ErrorWriter("0" + "\n\r"); // Writing 0 if there is not error
 
             change_button_position();
 

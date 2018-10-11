@@ -51,6 +51,7 @@ public class ExerciseInstructions extends Fragment {
             public void onClick(View view) {
                 TextInstructions dialogFragment = TextInstructions.newInstance(mExercise.getShortInstructions());
                 FragmentTransaction ft = getFragmentManager().beginTransaction();
+                ft.addToBackStack(null);
                 ft.replace(R.id.exerciseContainer,dialogFragment);
                 ft.commit();
             }
