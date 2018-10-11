@@ -7,6 +7,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import com.sma2.sma2.ExerciseFragments.ExAudioRec;
+import com.sma2.sma2.ExerciseFragments.ExerciseFragment;
 import com.sma2.sma2.ExerciseFragments.ExerciseInstructions;
 import com.sma2.sma2.ExerciseFragments.SessionOverview;
 import com.sma2.sma2.ExerciseLogic.ExerciseSessionManager;
@@ -62,7 +63,9 @@ public class ExercisesActivity extends AppCompatActivity implements ExerciseInst
     public void onExerciseStartClicked() {
         if (nextExercise != null) {
             try {
-                showFragment(nextExercise.getExercise().getFragmentClass().newInstance());
+                Class<? extends ExerciseFragment> fragmentClass = nextExercise.getExercise().getFragmentClass();
+                ExerciseFragment fragment = fragmentClass.newInstance();
+                showFragment(fragment.newInstance(nextExercise.getExercise()));
             } catch (Exception e) {
                 throw new RuntimeException("Invalid Exercise Fragment provided");
             }

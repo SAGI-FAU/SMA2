@@ -5,6 +5,8 @@ import android.os.Parcel;
 import android.os.Parcelable;
 import android.support.v4.app.Fragment;
 
+import com.sma2.sma2.ExerciseFragments.ExerciseFragment;
+
 
 public class Exercise implements Parcelable {
     private String name;
@@ -13,7 +15,7 @@ public class Exercise implements Parcelable {
     private String shortInstructions;
     private Uri instructionVideoPath;
     private Uri instructionTextPath;
-    private Class<? extends Fragment> fragmentClass;
+    private Class<? extends ExerciseFragment> fragmentClass;
 
     public Exercise(String name,
                     String exerciseType,
@@ -21,7 +23,7 @@ public class Exercise implements Parcelable {
                     String shortInstructions,
                     Uri instructionVideoPath,
                     Uri instructionTextPath,
-                    Class<? extends Fragment> fragmentClass){
+                    Class<? extends ExerciseFragment> fragmentClass){
         super();
         this.name = name;
         this.exerciseType = exerciseType;
@@ -58,10 +60,10 @@ public class Exercise implements Parcelable {
 
     }
 
-    static private Class<? extends Fragment> getFragmentFromString(String fragmentClassString) {
-        Class<? extends Fragment> fragmentClass;
+    static private Class<? extends ExerciseFragment> getFragmentFromString(String fragmentClassString) {
+        Class<? extends ExerciseFragment> fragmentClass;
         try {
-            fragmentClass = Class.forName(fragmentClassString).asSubclass(Fragment.class);
+            fragmentClass = Class.forName(fragmentClassString).asSubclass(ExerciseFragment.class);
         } catch (Exception e) {
             throw new RuntimeException("The specified Fragment class for this exercise is invalid.");
         }
@@ -90,7 +92,7 @@ public class Exercise implements Parcelable {
         return instructionVideoPath;
     }
 
-    public Class<? extends Fragment> getFragmentClass() {
+    public Class<? extends ExerciseFragment> getFragmentClass() {
         return fragmentClass;
     }
 
