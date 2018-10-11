@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">SMA2</string>
+    <string name="app_name" translatable="false">Apkinson</string>
     <string name="name">User name</string>
     <string name="ID">ID number</string>
     <string name="Login">LOGIN</string>
@@ -26,8 +26,7 @@
     <string name="other1">Any other speech or</string>
     <string name="other2">Movement disorder</string>
     <string name="___">------ ------ ------</string>
-    <string name="start">Start your exercises Today</string>
-    <string name="start2">START</string>
+    <string name="start">Start</string>
     <string name="record">Record</string>
     <string name="sustained_a">Sustained vowel /ah/</string>
     <string name="a_ex">a</string>
@@ -59,7 +58,6 @@
     <string name="tapping_2">two finger tapping</string>
     <string name="sliding">sliding</string>
     <string name="done">Done!</string>
-
     <string name="btnProfileText">Profile</string>
     <string name="btnSettingsText">Settings</string>
     <string name="btnExercisesText">Exercises</string>
@@ -74,5 +72,28 @@
     <string name="update">UPDATE MEDICINE</string>
     <string name="weight">Weight (kg)</string>
     <string name="height">Height (cm)</string>
+    <string name="user_empty">Please, fill username field</string>
+    <string name="userid_empty">Please, fill userid field</string>
+    <string name="log_in">Log in successful</string>
+    <string name="log_error">Username and/or User id not found</string>
+    <string name="brith_date_error">Please, fill brith date</string>
+    <string name="none_item">None</string>
+    <string name="elem_item">Elementary school</string>
+    <string name="high_item">High school</string>
+    <string name="under_item">Undergraduate</string>
+    <string name="post">Postgraduate</string>
+    <string name="medicine_empty">Please, fill medicine name field</string>
+    <string name="dose_empty">Please, fill dose (mg) field</string>
+    <string name="add_medice_error">Medice was already added</string>
+    <string name="medicine_added">Added successful</string>
+    <string name="time_diagnosis_error">Please, fill diagnosis time field</string>
+    <string name="weight_error">Please, fill weight field</string>
+    <string name="height_eror">Please, fill height field</string>
+    <string name="again">Again</string>
+    <string name="stop">Stop</string>
+    <string name="session_start">Start First Exercise</string>
+    <string name="session_continue">Start Next Exercise</string>
+    <string name="session_finish">Back To Main Menu</string>
+
 
 </resources>
