@@ -32,10 +32,6 @@ public class Ex_speech1 extends AppCompatActivity implements View.OnClickListene
         switch (view.getId()){
             case R.id.button_instructions1:
                 //TODO: Implement method to play the audio or visual instructions
-
-                //Display text instructions
-                //MarkdownView markdownView = findViewById(R.id.markdownView);
-                //markdownView.loadMarkdown(getResources().getString(R.string.a_ex));
                 break;
             case R.id.button_record1:
                 open_exercise();

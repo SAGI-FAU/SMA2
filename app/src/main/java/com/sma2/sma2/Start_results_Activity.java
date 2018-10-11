@@ -1,38 +1,46 @@
 package com.sma2.sma2;
 
 import android.os.Bundle;
-import android.os.Environment;
 import android.support.v7.app.AppCompatActivity;
-import android.widget.TextView;
 
 import com.sma2.sma2.SpeechFeatures.features.phon_feats;
 import com.sma2.sma2.SpeechFeatures.tools.WAVfileReader;
 import com.sma2.sma2.SpeechFeatures.tools.f0detector;
 import com.sma2.sma2.SpeechFeatures.tools.sigproc;
 
-import java.io.File;
-
 public class Start_results_Activity extends AppCompatActivity{
-    private String WAVpath = null;
-    private WAVfileReader WAVR = new WAVfileReader();
-    private sigproc SG = new sigproc();
-    private f0detector f0meth = new f0detector();
-    private phon_feats PF = new phon_feats();
+    private WAVfileReader WAVR = new WAVfileReader();//WAV reader
+    private sigproc SG = new sigproc();//Preprocessing
+    private f0detector f0meth = new f0detector();//Pitch contour
+    private phon_feats PF = new phon_feats();//Phonation features
 
+    private String WAVpath = null;//WAV files
+    private int Fs = 0;
+    private String ACCpath = null;//Accelerometer files
+    private String TAPpath = null;//Tapping files
+
+    public Start_results_Activity(String WAVpath, String ACCpath, String TAPpath){
+        WAVpath = WAVpath;
+
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.res_test);
+        setContentView(R.layout.activity_results);
 
-        jitter_cal();
+        //TODO: Create the layout to display the features (activity_results)
+        //TODO: Compute speech/movement features and display them in the screen.
+        //TODO: Store features in the database.
+
     }
 
-    public void jitter_cal()
+    /***
+     * Read wav file and get the speech signals and the sampling frequency
+     * @return Array with the normalized speech signal.
+     * */
+    private float[] get_speech_signal()
     {
-        //WAV file path
-        WAVpath = Environment.getExternalStorageDirectory() + File.separator + "AppSpeechData"+ File.separator +"WAV"+ File.separator +"patvowel.wav";
-
         //Get number of samples (infosig[0]) and sampling frequency (infosig[1])
         int infosig[] = WAVR.getdatainfo(WAVpath), Fs = infosig[1];
 
@@ -42,16 +50,7 @@ public class Start_results_Activity extends AppCompatActivity{
         //Normalize signal
         signal = SG.normsig(signal);
 
-        //Extract f0 contour
-        float[] f0 = f0meth.sig_f0(signal,Fs,0.04f,0.02f);
-
-        //jitter
-        float jitt = PF.jitter(f0);
-
-        //Display data info
-        TextView textView = findViewById(R.id.featname);
-        //File name
-        textView.setText(String.valueOf(jitt));
+        return signal;
     }
 
 }

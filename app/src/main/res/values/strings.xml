@@ -53,7 +53,7 @@
 
     <!--Instructions for the speech and movement exercises-->
     <!--Speech exercises-->
-    <string name="a_ex">Please say the vowel **/aaaah/** during 3 seconds</string>
+    <string name="a_ex">Please say the vowel **aaaah** during 3 seconds</string>
     <string name="ddk_ex">Please **REPEAT** the word **PATAKA** several times until the screen turns off.</string>
     <string name="image_ex">Please **DESCRIBE** the **IMAGE** shown in the screen</string>
     <string name="text_ex">Please **READ** the following text</string>
@@ -85,6 +85,7 @@
     <string name="recording2">Recording Movement.</string>
     <string name="tapping_ex">Tapping exercise</string>
     <string name="tapping_ex1">one finger taping, two fingers tapping, sliding, etc.</string>
+
 
 
 </resources>
