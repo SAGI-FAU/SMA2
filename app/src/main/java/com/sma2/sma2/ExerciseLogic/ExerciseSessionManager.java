@@ -62,20 +62,20 @@ public class ExerciseSessionManager {
                 "test Instructions",
                 Uri.parse("video/path"),
                 Uri.parse("Instruction/Path"),
-                ExSustainedVowel.class));
+                ExAudioRec.class));
         _dummyExerciseList.add(new Exercise("Test1",
                 "Speech",
                 "test Description",
                 "test Instructions",
                 Uri.parse("video/path"),
                 Uri.parse("Instruction/Path"),
-                ExSustainedVowel.class));
+                ExAudioRec.class));
         _dummyExerciseList.add(new Exercise("Test1",
                 "Speech",
                 "test Description",
                 "test Instructions",
                 Uri.parse("video/path"),
                 Uri.parse("Instruction/Path"),
-                ExSustainedVowel.class));
+                ExAudioRec.class));
     }
 }
