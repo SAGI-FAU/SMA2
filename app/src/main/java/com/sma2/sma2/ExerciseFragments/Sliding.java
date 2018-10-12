@@ -57,7 +57,7 @@ public class Sliding extends AppCompatActivity implements View.OnClickListener {
         final TextView mTextField = findViewById(R.id.accgraph_chrono5);
 
         if (seekBarFlag==0) {
-            mTextField.setText("START");
+            mTextField.setText(R.string.start);
 
 
         }
@@ -92,12 +92,14 @@ public class Sliding extends AppCompatActivity implements View.OnClickListener {
                 new CountDownTimer(10000, 1000) {
                     // Here, it is computed the difference between the last time in which
                     // you push the button and the time you are pushing the button
-                    float timef = SystemClock.currentThreadTimeMillis(); //Last time
+                    float timef = System.currentTimeMillis(); //Last time
 
                     public void onTick(long millisUntilFinished) {
-                        mTextField.setText(Long.toString(millisUntilFinished / 1000));
-                        time2 = SystemClock.currentThreadTimeMillis()-timef; // The difference between times
+                        double newTime = (double) Math.round(millisUntilFinished / 100) / 10;
+                        mTextField.setText(String.valueOf(newTime));
+                        time2 = System.currentTimeMillis()-timef; // The difference between times
                         timeStr = String.valueOf(time2);
+
                     }
 
                     public void onFinish() {
