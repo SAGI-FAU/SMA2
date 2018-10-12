@@ -7,7 +7,7 @@
     tools:context=".ExerciseFragments.ExAudioRec">
 
     <TextView
-        android:id="@+id/txtWalking"
+        android:id="@+id/countdownTimerTextView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -41,7 +41,7 @@
         app:layout_constraintHeight_percent="0.5"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtWalking" />
+        app:layout_constraintTop_toBottomOf="@+id/countdownTimerTextView" />
 
     <FrameLayout
         android:id="@+id/frameExSV"

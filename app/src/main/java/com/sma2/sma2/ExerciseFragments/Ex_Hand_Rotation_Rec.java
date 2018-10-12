@@ -17,6 +17,7 @@ public class Ex_Hand_Rotation_Rec extends ExerciseFragment implements ButtonFrag
     private MovementRecorder recorder;
     private static long START_COUNTDOWN = 3;
     private static long EXERCISE_TIME = 30;
+    private String countdown_finished_txt;
     private long countdownStart;
     private CountDownTimer timer;
     private TextView countdownTextView;
@@ -30,8 +31,8 @@ public class Ex_Hand_Rotation_Rec extends ExerciseFragment implements ButtonFrag
 
         transaction.replace(R.id.frameExSV, buttonFragment);
         transaction.commit();
-
-        countdownTextView = view.findViewById(R.id.txtWalking);
+        countdown_finished_txt = getResources().getString(R.string.start2);
+        countdownTextView = view.findViewById(R.id.countdownTimerTextView);
         countdownTextView.setText(String.valueOf(START_COUNTDOWN));
         try {
             recorder = new MovementRecorder(this.getContext(), 10000, mExercise.getName());
@@ -73,7 +74,7 @@ public class Ex_Hand_Rotation_Rec extends ExerciseFragment implements ButtonFrag
             }
             public void onFinish() {
                 this.cancel();
-                countdownTextView.setText("START!");
+                countdownTextView.setText(countdown_finished_txt);
                 MediaPlayer mp = MediaPlayer.create(getContext(), R.raw.bell);
                 mp.start();
 
