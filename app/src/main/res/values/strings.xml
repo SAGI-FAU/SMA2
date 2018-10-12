@@ -95,5 +95,8 @@
     <string name="session_continue">Start Next Exercise</string>
     <string name="session_finish">Back To Main Menu</string>
 
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
 
 </resources>
