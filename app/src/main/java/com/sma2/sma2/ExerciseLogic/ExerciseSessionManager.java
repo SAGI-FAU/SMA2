@@ -2,8 +2,8 @@ package com.sma2.sma2.ExerciseLogic;
 
 import android.net.Uri;
 
+import com.sma2.sma2.ExerciseFragments.ExFreeWalking;
 import com.sma2.sma2.ExerciseFragments.ExAudioRec;
-import com.sma2.sma2.ExerciseFragments.ExOneFingerTapping;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -63,7 +63,7 @@ public class ExerciseSessionManager {
                 "test Instructions",
                 Uri.parse("video/path"),
                 Uri.parse("Instruction/Path"),
-                ExAudioRec.class));
+                ExFreeWalking.class));
         _dummyExerciseList.add(new Exercise("Test1",
                 "Speech",
                 "test Description",
