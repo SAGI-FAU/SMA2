@@ -26,7 +26,7 @@
     <string name="other1">Any other speech or</string>
     <string name="other2">Movement disorder</string>
     <string name="___" translatable="false">------ ------ ------</string>
-    <string name="start">Start your exercises Today</string>
+    <string name="start">Start</string>
     <string name="start2">START</string>
     <string name="record">Record</string>
     <string name="sustained_a">Sustained vowel /ah/</string>
@@ -97,5 +97,6 @@
     <string name="session_continue">Start Next Exercise</string>
     <string name="session_finish">Back To Main Menu</string>
     <string name="exercise_start">Start Exercise</string>
+    <string name="Session">Today\'s session</string>
 
 </resources>

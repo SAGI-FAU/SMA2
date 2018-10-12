@@ -19,4 +19,10 @@
     <string name="back">Back</string>
     <string name="education">Education Level</string>
     <string name="tod">Time of Diagnosis (years)</string>
+    <string name="med">Medical intake</string>
+    <string name="med_name">Medicine name</string>
+    <string name="med_dose">Dose (mg)</string>
+    <string name="med_time">Intake time</string>
+    <string name="other1">Any other speech or</string>
+    <string name="other2">Movement disorder</string>
 </resources>
