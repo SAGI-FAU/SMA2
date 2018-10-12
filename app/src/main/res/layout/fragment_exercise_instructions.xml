@@ -9,7 +9,7 @@
 
     <TextView
         android:id="@+id/exerciseTitle"
-        android:layout_width="368dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
@@ -23,10 +23,11 @@
 
     <us.feras.mdv.MarkdownView
         android:id="@+id/exerciseDescription"
-        android:layout_width="368dp"
+        android:layout_width="match_parent"
         android:layout_height="80dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
         android:text="Description"
         android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
         app:layout_constraintEnd_toEndOf="parent"
@@ -36,7 +37,7 @@
 
     <us.feras.mdv.MarkdownView
         android:id="@+id/shortInstructions"
-        android:layout_width="368dp"
+        android:layout_width="match_parent"
         android:layout_height="200dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
@@ -49,8 +50,8 @@
 
     <Button
         android:id="@+id/textInstructions"
-        android:layout_width="364dp"
-        android:layout_height="54dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
@@ -63,8 +64,8 @@
 
     <Button
         android:id="@+id/videoInstructionsbtn"
-        android:layout_width="364dp"
-        android:layout_height="54dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
@@ -77,7 +78,7 @@
 
     <Button
         android:id="@+id/startButton"
-        android:layout_width="368dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"

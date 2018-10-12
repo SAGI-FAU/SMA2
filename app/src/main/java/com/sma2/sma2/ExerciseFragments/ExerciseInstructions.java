@@ -16,6 +16,8 @@ import com.sma2.sma2.ExerciseLogic.Exercise;
 import com.sma2.sma2.ExerciseLogic.ScheduledExercise;
 import com.sma2.sma2.R;
 
+import us.feras.mdv.MarkdownView;
+
 public class ExerciseInstructions extends Fragment {
 
     OnStartClickedListener mStartClickedCallback;
@@ -75,12 +77,12 @@ public class ExerciseInstructions extends Fragment {
         exerciseTitle.setText(mExercise.getName());
 
         // Set Short description based Exercise Information
-        TextView exerciseDescription = view.findViewById(R.id.exerciseDescription);
-        exerciseDescription.setText(mExercise.getShortDescription());
+        MarkdownView shortdesc = view.findViewById(R.id.exerciseDescription);
+        shortdesc.loadMarkdown(mExercise.getShortDescription());
 
         // Set Short instructions based Exercise Information
-        TextView exerciseShortInstructions = view.findViewById(R.id.shortInstructions);
-        exerciseShortInstructions.setText(mExercise.getShortInstructions());
+        MarkdownView shortinstr = view.findViewById(R.id.shortInstructions);
+        shortinstr.loadMarkdown(mExercise.getShortDescription());
 
         // Set On Click handler for Start Button
         Button startButton = view.findViewById(R.id.startButton);
