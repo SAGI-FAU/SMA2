@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">SMA2</string>
     <string name="name">User name</string>
     <string name="ID">ID number</string>
     <string name="Login">LOGIN</string>
@@ -20,4 +19,16 @@
     <string name="back">Back</string>
     <string name="education">Education Level</string>
     <string name="tod">Time of Diagnosis (years)</string>
+    <string name="med">Medical intake</string>
+    <string name="med_name">Medicine name</string>
+    <string name="med_dose">Dose (mg)</string>
+    <string name="med_time">Intake time</string>
+    <string name="other1">Any other speech or</string>
+    <string name="other2">Movement disorder</string>
+    <string name="user_empty">Please, fill username field</string>
+    <string name="userid_empty">Please, fill userid field</string>
+    <string name="log_in">Log in successful</string>
+    <string name="log_error">Username and/or User id not found</string>
+    <string name="brith_date_error">Please, fill birth date</string>
+    <string name="none_item">None</string>
 </resources>
