@@ -57,6 +57,19 @@ public class ExerciseInstructions extends Fragment {
             }
         });
 
+        // Set On Click handler for Video instructions
+        Button videoInstrButton = view.findViewById(R.id.videoInstructionsbtn);
+        videoInstrButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                VideoInstruction videoFragment = VideoInstruction.newInstance(mExercise.getInstructionVideoPath());
+                FragmentTransaction ft = getFragmentManager().beginTransaction();
+                ft.addToBackStack(null);
+                ft.replace(R.id.exerciseContainer,videoFragment);
+                ft.commit();
+            }
+        });
+
         // Set Title based Exercise Information
         TextView exerciseTitle = view.findViewById(R.id.exerciseTitle);
         exerciseTitle.setText(mExercise.getName());
@@ -68,10 +81,6 @@ public class ExerciseInstructions extends Fragment {
         // Set Short instructions based Exercise Information
         TextView exerciseShortInstructions = view.findViewById(R.id.shortInstructions);
         exerciseShortInstructions.setText(mExercise.getShortInstructions());
-
-        // Set Video based on based Exercise Information
-        VideoView instructionVideo = view.findViewById(R.id.instructionVideo);
-        instructionVideo.setVideoURI(mExercise.getInstructionVideoPath());
 
         // Set On Click handler for Start Button
         Button startButton = view.findViewById(R.id.startButton);
