@@ -87,7 +87,7 @@ public class SessionOverview extends Fragment {
             mListener = (OnSessionControlListener) context;
         } else {
             throw new RuntimeException(context.toString()
-                    + " must implement OnFragmentInteractionListener");
+                    + " must implement OnExerciseActionListener");
         }
     }
 

@@ -7,6 +7,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import com.sma2.sma2.ExerciseFragments.ExAudioRec;
+import com.sma2.sma2.ExerciseFragments.ExerciseFinished;
 import com.sma2.sma2.ExerciseFragments.ExerciseFragment;
 import com.sma2.sma2.ExerciseFragments.ExerciseInstructions;
 import com.sma2.sma2.ExerciseFragments.SessionOverview;
@@ -15,7 +16,7 @@ import com.sma2.sma2.ExerciseLogic.ScheduledExercise;
 
 
 public class ExercisesActivity extends AppCompatActivity implements ExerciseInstructions.OnStartClickedListener,
-        SessionOverview.OnSessionControlListener, ExAudioRec.OnExerciseCompletedListener {
+        SessionOverview.OnSessionControlListener, ExerciseFragment.OnExerciseCompletedListener, ExerciseFinished.OnExerciseActionListener {
 
     ExerciseSessionManager sessionManager;
     SessionOverview sessionOverview;
@@ -80,13 +81,24 @@ public class ExercisesActivity extends AppCompatActivity implements ExerciseInst
 
     @Override
     public void onSessionFinishedClicked() {
-        Intent mIntent = new Intent(this, MainActivity.class);
+        Intent mIntent = new Intent(this, MainActivityMenu.class);
         startActivity(mIntent);
     }
 
     @Override
     public void onExerciseFinished(String filePath) {
         nextExercise.complete(Uri.parse(filePath));
+        showFragment(ExerciseFinished.newInstance(nextExercise));
+    }
+
+    @Override
+    public void onRedoButtonClicked() {
+        open_exercise();
+    }
+
+    @Override
+    public void onDoneButtonClicked() {
+        nextExercise.save();
         showSessionOverview();
     }
 }

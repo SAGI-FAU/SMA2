@@ -25,14 +25,16 @@
     <string name="med_time">Intake time</string>
     <string name="other1">Any other speech or</string>
     <string name="other2">Movement disorder</string>
-    <string name="___">------ ------ ------</string>
+    <string name="___" translatable="false">------ ------ ------</string>
     <string name="start">Start</string>
+    <string name="start2">START</string>
     <string name="record">Record</string>
     <string name="sustained_a">Sustained vowel /ah/</string>
     <string name="a_ex">a</string>
     <string name="ddk">Rapid repetition of syllables (/pa-ta-ka/)</string>
     <string name="ddk_ex">ddk</string>
     <string name="instructions">Instructions</string>
+    <string name="instructions_long">Detailed Instructions</string>
     <string name="text3">Speech exercise 3</string>
     <string name="readtext">Please listen and repeat the following paragraph</string>
     <string name="monologue">Please say what you normally do in a normal day</string>
@@ -76,7 +78,7 @@
     <string name="userid_empty">Please, fill userid field</string>
     <string name="log_in">Log in successful</string>
     <string name="log_error">Username and/or User id not found</string>
-    <string name="brith_date_error">Please, fill brith date</string>
+    <string name="brith_date_error">Please, fill birth date</string>
     <string name="none_item">None</string>
     <string name="elem_item">Elementary school</string>
     <string name="high_item">High school</string>
@@ -84,7 +86,7 @@
     <string name="post">Postgraduate</string>
     <string name="medicine_empty">Please, fill medicine name field</string>
     <string name="dose_empty">Please, fill dose (mg) field</string>
-    <string name="add_medice_error">Medice was already added</string>
+    <string name="add_medice_error">Medicine was already added</string>
     <string name="medicine_added">Added successful</string>
     <string name="time_diagnosis_error">Please, fill diagnosis time field</string>
     <string name="weight_error">Please, fill weight field</string>
@@ -94,4 +96,7 @@
     <string name="session_start">Start First Exercise</string>
     <string name="session_continue">Start Next Exercise</string>
     <string name="session_finish">Back To Main Menu</string>
+    <string name="exercise_start">Start Exercise</string>
+    <string name="Session">Today\'s exercise</string>
+
 </resources>
