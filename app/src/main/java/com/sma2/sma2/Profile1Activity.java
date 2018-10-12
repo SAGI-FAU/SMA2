@@ -15,6 +15,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.sma2.sma2.DataAccess.PatientDA;
+import com.sma2.sma2.DataAccess.PatientDataService;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -45,7 +46,7 @@ public class Profile1Activity extends AppCompatActivity implements View.OnClickL
         tv_userid = findViewById(R.id.userid_create);
         et_date = findViewById(R.id.age_create);
         tv_username.setText(patientData.getUsername());
-//        tv_userid.setText(patientData.getGovId());
+        tv_userid.setText(patientData.getGovtId());
         findViewById(R.id.button_continue).setOnClickListener(this);
         findViewById(R.id.button_back1).setOnClickListener(this);
         et_date.setOnClickListener(this);
@@ -94,6 +95,8 @@ public class Profile1Activity extends AppCompatActivity implements View.OnClickL
 
                     Intent intent = new Intent(Profile1Activity.this,Profile2Activity.class);
                     intent.putExtra("PatientData", patientData);
+                    PatientDataService pds = new PatientDataService(getApplicationContext());
+                    pds.savePatient(patientData);
                     startActivity(intent);
                 }else{
                     Toast.makeText(this,R.string.brith_date_error,Toast.LENGTH_SHORT).show();
