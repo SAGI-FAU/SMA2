@@ -2,6 +2,7 @@ package com.sma2.sma2.ExerciseLogic;
 
 import android.net.Uri;
 
+import com.sma2.sma2.ExerciseFragments.ExFreeWalking;
 import com.sma2.sma2.ExerciseFragments.ExAudioRec;
 import com.sma2.sma2.ExerciseFragments.ExOneFingerTapping;
 
@@ -20,6 +21,7 @@ public class ExerciseSessionManager {
         _testList.add(new ScheduledExercise(_dummyExerciseList.get(0), 1));
         _testList.add(new ScheduledExercise(_dummyExerciseList.get(1), 1));
         _testList.add(new ScheduledExercise(_dummyExerciseList.get(2), 1));
+        _testList.add(new ScheduledExercise(_dummyExerciseList.get(3), 1));
         // Create a new list of exercise and store them in the database with a new (incrementing) session id
         // store the current session id in the as a shared property
     }
@@ -63,8 +65,8 @@ public class ExerciseSessionManager {
                 "test Instructions",
                 Uri.parse("video/path"),
                 Uri.parse("Instruction/Path"),
-                ExAudioRec.class));
-        _dummyExerciseList.add(new Exercise(1, "Test1",
+                ExFreeWalking.class));
+        _dummyExerciseList.add(new Exercise(1,"Test1",
                 "Speech",
                 "test Description",
                 "test Instructions",
@@ -78,5 +80,14 @@ public class ExerciseSessionManager {
                 Uri.parse("video/path"),
                 Uri.parse("Instruction/Path"),
                 ExAudioRec.class));
+        _dummyExerciseList.add(new Exercise(1, "Test1",
+                "Tapping",
+                "test Description",
+                "test Instructions",
+                Uri.parse("video/path"),
+                Uri.parse("Instruction/Path"),
+                ExOneFingerTapping.class));
+
+
     }
 }
