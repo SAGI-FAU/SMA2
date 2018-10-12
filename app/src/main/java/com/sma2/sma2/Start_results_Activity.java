@@ -8,6 +8,7 @@ import android.util.Log;
 import android.widget.TextView;
 
 import com.sma2.sma2.SpeechFeatures.features.phon_feats;
+import com.sma2.sma2.SpeechFeatures.tools.Energy;
 import com.sma2.sma2.SpeechFeatures.tools.WAVfileReader;
 import com.sma2.sma2.SpeechFeatures.tools.f0detector;
 import com.sma2.sma2.SpeechFeatures.tools.sigproc;
@@ -25,19 +26,15 @@ public class Start_results_Activity extends AppCompatActivity{
     private phon_feats PF = new phon_feats();
     private float signal[];
     private int Fs;
+    float[] f0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.res_test);
 
-        jitter_cal();
-    }
-
-    public void jitter_cal()
-    {
         //WAV file path
-        WAVpath = Environment.getExternalStorageDirectory() + File.separator + "Music"+ File.separator +"aud.wav";
+        WAVpath = Environment.getExternalStorageDirectory() + File.separator + "Music" + File.separator + "aud.wav";
 
         //Get number of samples (infosig[0]) and sampling frequency (infosig[1])
         int infosig[] = WAVR.getdatainfo(WAVpath);
@@ -47,24 +44,22 @@ public class Start_results_Activity extends AppCompatActivity{
 
         //Normalize signal
         signal = SG.normsig(signal);
-        //Extract f0 contour
-        float[] f0 = f0meth.sig_f0(signal,Fs,0.04f,0.02f);
 
-        float fluency = calculateFluency(f0);
-        //jitter
-        //float jitt = PF.jitter(f0);
-        Log.d("Prueba","Cualquier");
-        //Display data info
-        TextView textView = findViewById(R.id.featname);
-        //File name
-        //textView.setText(String.valueOf(jitt));
+        //Extract f0 contour
+        f0 = f0meth.sig_f0(signal, Fs, 0.04f, 0.02f);
+
+        //jitter_cal();
+        //float fluency = fluency_cal();
+        Energy energy = new Energy();
+        float[] energy_contour = energy.energyContour(signal,Fs);
+        
     }
 
-    private float calculateFluency(float[] f0) {
+    private float fluency_cal() {
         ArrayList<Integer> index_array_onset = new ArrayList<Integer>();
         ArrayList<Integer> index_array_offset = new ArrayList<Integer>();
-        int start;
-        int end;
+//        int start;
+//        int end;
         for(int i = 1;i < f0.length;i++){
             int round_1 = (int) Math.round(f0[i-1]);
             int round = (int) Math.round(f0[i]);
@@ -103,4 +98,12 @@ public class Start_results_Activity extends AppCompatActivity{
         return mean;
     }
 
+    public void jitter_cal() {
+        //jitter
+        float jitt = PF.jitter(f0);
+        //Display data info
+        TextView textView = findViewById(R.id.featname);
+        //File name
+        textView.setText(String.valueOf(jitt));
+    }
 }

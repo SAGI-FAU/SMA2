@@ -87,6 +87,20 @@ public class array_manipulation {
     }
 
     /**
+     *Power each element from array
+     * @param x - Array
+     * @return Powered array
+     */
+    public float[] powerArray(float[] x){
+        float[] y = new float[x.length];
+        for(int i = 0; i<x.length; i++)
+        {
+            y[i] = x[i]*x[i];
+        }
+        return y;
+    }
+
+    /**
      * Return elements depending on condition
      * @param x - Array
      * @param val - Condition
