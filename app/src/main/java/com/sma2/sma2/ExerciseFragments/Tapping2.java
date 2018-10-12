@@ -3,6 +3,7 @@ package com.sma2.sma2.ExerciseFragments;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.Resources;
 import android.graphics.Point;
 import android.os.Bundle;
 import android.os.CountDownTimer;
@@ -191,19 +192,43 @@ public class Tapping2 extends AppCompatActivity implements View.OnClickListener 
         startActivity(intent_ex1);
     }
 
+    public static int getScreenWidth() {
+        return Resources.getSystem().getDisplayMetrics().widthPixels;
+    }
 
+    public static int getScreenHeight() {
+        return Resources.getSystem().getDisplayMetrics().heightPixels;
+    }
 
     public void change_button_position(ImageButton imageButton, int bugFlag){
         ConstraintLayout.LayoutParams params_bug= (ConstraintLayout.LayoutParams)  imageButton.getLayoutParams();
 
-        int y= (int)(Math.random()*((800)));
+        int bugHeight = imageButton.getHeight();
+        int bugWidth = imageButton.getWidth();
+        screenHeight=getScreenHeight();
+        screenWidth=getScreenWidth();
+        int y = (int)(Math.random()*((screenHeight - bugHeight)));
+        Log.e("LadyBug","ScreenWidth");
+
+        Log.e("LadyBug",Integer.toString(screenWidth));
+
+        Log.e("LadyBug","ScreenHeight");
+
+        Log.e("LadyBug",Integer.toString(screenHeight));
+
         int x;
 
         if (bugFlag==0){
+            x = (int)(Math.random()*((screenWidth - bugWidth)/2));
+            Log.e("LadyBug","0");
+            Log.e("LadyBug",Integer.toString(x));
 
-            x = (int)(Math.random()*((600/2)));
         }else{
-            x = (int)(Math.random()*((600/2))+(600/2));
+            x = (int)(Math.random()*(((screenWidth - bugWidth)/2)+(screenWidth - bugWidth)/2));
+            Log.e("LadyBug","1");
+            Log.e("LadyBug",Integer.toString(x));
+
+
         }
 
 
