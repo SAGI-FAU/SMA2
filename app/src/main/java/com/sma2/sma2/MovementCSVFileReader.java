@@ -15,7 +15,7 @@ public class MovementCSVFileReader {
     private String path = "";
     private final String SEPARATOR = ";";
     private String tmpLine = "";
-    private final String PATH = Environment.getExternalStorageDirectory() + "/Apkinson/";
+    private final String PATH = Environment.getExternalStorageDirectory() + "/Apkinson/MOVEMENT/";
     private int NUM_HEADER_LINES_MOVEMENT_DATA = 6;
 
     BufferedReader mBufferedReader;

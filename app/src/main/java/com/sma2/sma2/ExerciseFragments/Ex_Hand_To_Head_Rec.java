@@ -1,8 +1,10 @@
 package com.sma2.sma2.ExerciseFragments;
 
+import android.content.Context;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.os.Vibrator;
 import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,6 +23,7 @@ public class Ex_Hand_To_Head_Rec extends ExerciseFragment implements ButtonFragm
     private long countdownStart;
     private CountDownTimer timer;
     private TextView countdownTextView;
+    private boolean countdownIsRunning = false;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -55,17 +58,23 @@ public class Ex_Hand_To_Head_Rec extends ExerciseFragment implements ButtonFragm
             recorder.startLogging();
             startTimer();
         } else {
-            try {
-                recorder.stop();
-            } catch (Exception e) {
-                e.printStackTrace();
+            if(countdownIsRunning) {
+                countdownIsRunning = false;
+                timer.cancel();
+                countdownTextView.setText(String.valueOf(START_COUNTDOWN));
+            } else {
+                try {
+                    recorder.stop();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                mListener.onExerciseFinished(recorder.getFileName());
             }
-
-            mListener.onExerciseFinished(recorder.getFileName());
         }
     }
 
     private void startTimer() {
+        countdownIsRunning = true;
         countdownStart = System.currentTimeMillis();
         timer = new CountDownTimer(START_COUNTDOWN * 1000, 1000) {
             public void onTick(long millisUntilFinished) {
@@ -73,10 +82,13 @@ public class Ex_Hand_To_Head_Rec extends ExerciseFragment implements ButtonFragm
                 countdownTextView.setText(String.valueOf(newTime));
             }
             public void onFinish() {
+                countdownIsRunning = false;
                 this.cancel();
                 countdownTextView.setText(countdown_finished_txt);
                 MediaPlayer mp = MediaPlayer.create(getContext(), R.raw.bell);
                 mp.start();
+                Vibrator vib = (Vibrator) getContext().getSystemService(Context.VIBRATOR_SERVICE);
+                vib.vibrate(1000);
 
             }
         }.start();
