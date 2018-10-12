@@ -4,21 +4,69 @@ import android.net.Uri;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
 
 import com.sma2.sma2.ExerciseFragments.ExerciseFragment;
 
+import org.greenrobot.greendao.annotation.Convert;
+import org.greenrobot.greendao.annotation.Entity;
+import org.greenrobot.greendao.annotation.Id;
+import org.greenrobot.greendao.annotation.Keep;
+import org.greenrobot.greendao.annotation.NotNull;
+import org.greenrobot.greendao.annotation.Property;
+import org.greenrobot.greendao.converter.PropertyConverter;
+import org.greenrobot.greendao.annotation.Generated;
 
+@Entity
 public class Exercise implements Parcelable {
-    private int id;
+    @Id(autoincrement = true)
+    private Long id;
+
+    @NotNull
     private String name;
+    @NotNull
     private String exerciseType;
+    @Property
     private String shortDescription;
+    @Property
     private String shortInstructions;
+    @Convert(converter = UriConverter.class, columnType = String.class)
     private Uri instructionVideoPath;
+    @Convert(converter = UriConverter.class, columnType = String.class)
     private Uri instructionTextPath;
+    @Convert(converter = FragmentConverter.class, columnType = String.class)
     private Class<? extends ExerciseFragment> fragmentClass;
 
-    public Exercise(int id,
+    public static class UriConverter implements PropertyConverter<Uri, String> {
+        @Override
+        public Uri convertToEntityProperty(String databaseValue) {
+            if (databaseValue == null) {
+                return null;
+            }
+            return Uri.parse(databaseValue);
+        }
+        @Override
+        public String convertToDatabaseValue(Uri entityProperty) {
+            return entityProperty == null ? null : entityProperty.toString();
+        }
+    }
+
+    public static class FragmentConverter implements PropertyConverter<Class<? extends ExerciseFragment>, String> {
+        @Override
+        public Class<? extends ExerciseFragment> convertToEntityProperty(String databaseValue) {
+            if (databaseValue == null) {
+                return null;
+            }
+            return Exercise.getFragmentFromString(databaseValue);
+        }
+        @Override
+        public String convertToDatabaseValue(Class<? extends ExerciseFragment> entityProperty) {
+            return entityProperty == null ? null : Exercise.getStringFromFragment(entityProperty);
+        }
+    }
+
+    @Keep
+    public Exercise(long id,
                     String name,
                     String exerciseType,
                     String shortDescription,
@@ -37,7 +85,8 @@ public class Exercise implements Parcelable {
         this.fragmentClass = fragmentClass;
     }
 
-    public Exercise(int id,
+    @Keep
+    public Exercise(long id,
                     String name,
                     String exerciseType,
                     String shortDescription,
@@ -56,9 +105,10 @@ public class Exercise implements Parcelable {
                 getFragmentFromString(fragmentClassString));
     }
 
+    @Keep
     public Exercise(Parcel serializedExercise) {
         super();
-        this.id = serializedExercise.readInt();
+        this.id = serializedExercise.readLong();
         this.name = serializedExercise.readString();
         this.exerciseType = serializedExercise.readString();
         this.shortDescription = serializedExercise.readString();
@@ -67,6 +117,22 @@ public class Exercise implements Parcelable {
         this.instructionTextPath = Uri.parse(serializedExercise.readString());
         this.fragmentClass = getFragmentFromString(serializedExercise.readString());
 
+    }
+    @Generated(hash = 2073761405)
+    public Exercise(Long id, @NotNull String name, @NotNull String exerciseType, String shortDescription,
+            String shortInstructions, Uri instructionVideoPath, Uri instructionTextPath,
+            Class<? extends ExerciseFragment> fragmentClass) {
+        this.id = id;
+        this.name = name;
+        this.exerciseType = exerciseType;
+        this.shortDescription = shortDescription;
+        this.shortInstructions = shortInstructions;
+        this.instructionVideoPath = instructionVideoPath;
+        this.instructionTextPath = instructionTextPath;
+        this.fragmentClass = fragmentClass;
+    }
+    @Generated(hash = 1537691247)
+    public Exercise() {
     }
 
     static private Class<? extends ExerciseFragment> getFragmentFromString(String fragmentClassString) {
@@ -79,7 +145,7 @@ public class Exercise implements Parcelable {
         return fragmentClass;
     }
 
-    static private String getStringFromFragment(Class<? extends Fragment> fragmentClass) {
+    static private String getStringFromFragment(Class<? extends ExerciseFragment> fragmentClass) {
         return fragmentClass.getName();
     }
 
@@ -93,7 +159,7 @@ public class Exercise implements Parcelable {
         }
     };
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 
@@ -132,7 +198,7 @@ public class Exercise implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel parcel, int i) {
-        parcel.writeInt(this.id);
+        parcel.writeLong(this.id);
         parcel.writeString(this.name);
         parcel.writeString(this.exerciseType);
         parcel.writeString(this.shortDescription);
@@ -140,5 +206,30 @@ public class Exercise implements Parcelable {
         parcel.writeString(this.instructionTextPath.toString());
         parcel.writeString(this.instructionVideoPath.toString());
         parcel.writeString(getStringFromFragment(this.fragmentClass));
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+    public void setName(String name) {
+        this.name = name;
+    }
+    public void setExerciseType(String exerciseType) {
+        this.exerciseType = exerciseType;
+    }
+    public void setShortDescription(String shortDescription) {
+        this.shortDescription = shortDescription;
+    }
+    public void setShortInstructions(String shortInstructions) {
+        this.shortInstructions = shortInstructions;
+    }
+    public void setInstructionVideoPath(Uri instructionVideoPath) {
+        this.instructionVideoPath = instructionVideoPath;
+    }
+    public void setInstructionTextPath(Uri instructionTextPath) {
+        this.instructionTextPath = instructionTextPath;
+    }
+    public void setFragmentClass(Class<? extends ExerciseFragment> fragmentClass) {
+        this.fragmentClass = fragmentClass;
     }
 }
