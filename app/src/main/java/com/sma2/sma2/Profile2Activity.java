@@ -12,13 +12,15 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.sma2.sma2.DataAccess.PatientDA;
+
 import java.util.ArrayList;
 
 public class Profile2Activity extends AppCompatActivity implements View.OnClickListener {
 
     Spinner spinner;
     Spinner intaketime_spinner;
-    UserData userData;
+    PatientDA patientData;
     ArrayList<MedicineData> medicineDataArrayList;
     String medicine_name;
     int dose, hour_intake;
@@ -26,7 +28,7 @@ public class Profile2Activity extends AppCompatActivity implements View.OnClickL
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile2);
-        userData = (UserData) getIntent().getSerializableExtra("UserData");
+        patientData = (PatientDA) getIntent().getSerializableExtra("PatientData");
         medicineDataArrayList = new ArrayList<MedicineData>(5);
         initialized();
     }
@@ -45,7 +47,7 @@ public class Profile2Activity extends AppCompatActivity implements View.OnClickL
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                userData.setEducational_level(i);
+                patientData.setEducational_level(i);
             }
 
             @Override
@@ -89,12 +91,12 @@ public class Profile2Activity extends AppCompatActivity implements View.OnClickL
             case R.id.button_continue2:
                 String time_diagnosis = ((TextView)findViewById(R.id.time_diagnosis)).getText().toString();
                 if(!time_diagnosis.isEmpty()){
-                    userData.setYear_diag(Integer.valueOf(time_diagnosis));
-                    userData.setYear_diag(Integer.valueOf(time_diagnosis));
+                    patientData.setYear_diag(Integer.valueOf(time_diagnosis));
+                    patientData.setYear_diag(Integer.valueOf(time_diagnosis));
                     Intent intent = new Intent(Profile2Activity.this,Profile3Activity.class);
-                    intent.putExtra("UserData",userData);
+                    intent.putExtra("PatientData", patientData);
                     startActivity(intent);
-                    userData.setYear_diag(Integer.valueOf(time_diagnosis));
+                    patientData.setYear_diag(Integer.valueOf(time_diagnosis));
                 }else{
                     Toast.makeText(this,R.string.time_diagnosis_error,Toast.LENGTH_SHORT).show();
                 }
