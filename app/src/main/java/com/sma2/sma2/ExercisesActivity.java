@@ -81,7 +81,7 @@ public class ExercisesActivity extends AppCompatActivity implements ExerciseInst
 
     @Override
     public void onSessionFinishedClicked() {
-        Intent mIntent = new Intent(this, MainActivity.class);
+        Intent mIntent = new Intent(this, MainActivityMenu.class);
         startActivity(mIntent);
     }
 
