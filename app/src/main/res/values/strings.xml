@@ -25,14 +25,16 @@
     <string name="med_time">Intake time</string>
     <string name="other1">Any other speech or</string>
     <string name="other2">Movement disorder</string>
-    <string name="___">------ ------ ------</string>
-    <string name="start">Start</string>
+    <string name="___" translatable="false">------ ------ ------</string>
+    <string name="start">Start your exercises Today</string>
+    <string name="start2">START</string>
     <string name="record">Record</string>
     <string name="sustained_a">Sustained vowel /ah/</string>
     <string name="a_ex">a</string>
     <string name="ddk">Rapid repetition of syllables (/pa-ta-ka/)</string>
     <string name="ddk_ex">ddk</string>
     <string name="instructions">Instructions</string>
+    <string name="instructions_long">Detailed Instructions</string>
     <string name="text3">Speech exercise 3</string>
     <string name="readtext">Please listen and repeat the following paragraph</string>
     <string name="monologue">Please say what you normally do in a normal day</string>
@@ -94,6 +96,5 @@
     <string name="session_start">Start First Exercise</string>
     <string name="session_continue">Start Next Exercise</string>
     <string name="session_finish">Back To Main Menu</string>
-
-
+    <string name="exercise_start">Start Exercise</string>
 </resources>

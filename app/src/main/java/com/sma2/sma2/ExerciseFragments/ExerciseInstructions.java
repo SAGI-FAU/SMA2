@@ -4,6 +4,7 @@ import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -42,13 +43,33 @@ public class ExerciseInstructions extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_exercise_instructions, container, false);
 
-        // TODO: Handle the button click for the test instructions
 
-        // Set Title based on Intend Information
+        // Set On Click handler for Text instructions
+        Button instrButton = view.findViewById(R.id.textInstructions);
+        instrButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                LongInstruction dialogFragment = LongInstruction.newInstance(mExercise.getShortInstructions());
+                FragmentTransaction ft = getFragmentManager().beginTransaction();
+                ft.addToBackStack(null);
+                ft.replace(R.id.exerciseContainer,dialogFragment);
+                ft.commit();
+            }
+        });
+
+        // Set Title based Exercise Information
         TextView exerciseTitle = view.findViewById(R.id.exerciseTitle);
         exerciseTitle.setText(mExercise.getName());
 
-        // Set Video based on Intend Information
+        // Set Short description based Exercise Information
+        TextView exerciseDescription = view.findViewById(R.id.exerciseDescription);
+        exerciseDescription.setText(mExercise.getShortDescription());
+
+        // Set Short instructions based Exercise Information
+        TextView exerciseShortInstructions = view.findViewById(R.id.shortInstructions);
+        exerciseShortInstructions.setText(mExercise.getShortInstructions());
+
+        // Set Video based on based Exercise Information
         VideoView instructionVideo = view.findViewById(R.id.instructionVideo);
         instructionVideo.setVideoURI(mExercise.getInstructionVideoPath());
 
