@@ -23,11 +23,12 @@ import com.sma2.sma2.ThanksActivity;
 
 public class Sliding extends AppCompatActivity implements View.OnClickListener {
     SlidingRecorder slidingrecorder;
-    private float time2;
+    private long time2;
     private String timeStr;
     private String [] data= new String[2];
     public String SlidingFileName;
-    private int seekBarFlag=0;
+    private int seekBarFlag=1;
+    long timef;
 
 
 
@@ -44,7 +45,9 @@ public class Sliding extends AppCompatActivity implements View.OnClickListener {
             Log.e("SlidingHeaderWriter", e.toString());
         }
         SlidingFileName=slidingrecorder.SlidingFileName();
+        final TextView mTextField = findViewById(R.id.accgraph_chrono5);
 
+        //mTextField.setText(String.valueOf(getResources().getString(R.string.start2)));
 
         setContentView(R.layout.activity_capture_sliding);
         setListeners();
@@ -56,11 +59,6 @@ public class Sliding extends AppCompatActivity implements View.OnClickListener {
 
         final TextView mTextField = findViewById(R.id.accgraph_chrono5);
 
-        if (seekBarFlag==0) {
-            mTextField.setText(R.string.start);
-
-
-        }
 
         SeekBar seekBar = (SeekBar) findViewById(R.id.seekBar2);
 
@@ -69,7 +67,6 @@ public class Sliding extends AppCompatActivity implements View.OnClickListener {
             @Override
             public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
 
-                seekBarFlag=1;
                 ImageView imageView_limit=(ImageView) findViewById(R.id.imageView_limit);
                 ConstraintLayout.LayoutParams params_bug_seek= (ConstraintLayout.LayoutParams)  seekBar.getLayoutParams();
 
@@ -89,30 +86,39 @@ public class Sliding extends AppCompatActivity implements View.OnClickListener {
 
             @Override
             public void onStartTrackingTouch(SeekBar seekBar) {
-                new CountDownTimer(10000, 1000) {
-                    // Here, it is computed the difference between the last time in which
-                    // you push the button and the time you are pushing the button
-                    float timef = System.currentTimeMillis(); //Last time
 
-                    public void onTick(long millisUntilFinished) {
-                        double newTime = (double) Math.round(millisUntilFinished / 100) / 10;
-                        mTextField.setText(String.valueOf(newTime));
-                        time2 = System.currentTimeMillis()-timef; // The difference between times
-                        timeStr = String.valueOf(time2);
+                if (seekBarFlag==1) {
 
-                    }
+                    new CountDownTimer(10000, 1000) {
+                        // Here, it is computed the difference between the last time in which
+                        // you push the button and the time you are pushing the button
 
-                    public void onFinish() {
-                        mTextField.setText(getApplicationContext().getString(R.string.done));
-                        try{
-                            slidingrecorder.CloseSlidingDocument();
-                        }catch (Exception e) {
-                            Log.e("SlidingCloseWriter", e.toString());
+                        public void onTick(long millisUntilFinished) {
+                            double newTime = (double) Math.round(millisUntilFinished / 100) / 10;
+                            mTextField.setText(Long.toString(millisUntilFinished / 1000));
+
+                            time2 = System.currentTimeMillis()-timef; // The difference between times
+                            timeStr = String.valueOf(time2);
+
                         }
 
-                        open_exercise();
-                    }
-                }.start();
+                        public void onFinish() {
+                            mTextField.setText(getApplicationContext().getString(R.string.done));
+                            try{
+                                slidingrecorder.CloseSlidingDocument();
+                            }catch (Exception e) {
+                                Log.e("SlidingCloseWriter", e.toString());
+                            }
+
+                            open_exercise();
+                        }
+                    }.start();
+                    timef = System.currentTimeMillis(); //Last time
+
+                }
+                seekBarFlag=0; //To deactivate the timer
+
+
 
             }
 
@@ -121,6 +127,10 @@ public class Sliding extends AppCompatActivity implements View.OnClickListener {
 
             }
         });
+
+
+
+
 
     }
 
@@ -139,9 +149,16 @@ public class Sliding extends AppCompatActivity implements View.OnClickListener {
     }
 
     public void ReachingTheBar(Float xSeek, Float xBar){
-        if(Math.abs(xSeek-xBar)<20){
+
+        SeekBar seekBar = (SeekBar) findViewById(R.id.seekBar2);
+
+        if(Math.abs(xSeek-xBar)<30){
             data[0]=Float.toString(xBar);
-            data[1]=timeStr;
+            data[1]=String.valueOf(System.currentTimeMillis()-timef); //Last time
+            timef = System.currentTimeMillis(); //Last time
+            Log.e("timef",String.valueOf(timef));
+
+
 
 
             slidingrecorder.SlidingWriter(data);
@@ -149,7 +166,10 @@ public class Sliding extends AppCompatActivity implements View.OnClickListener {
             vib.vibrate(100);
             ImageView imageView_limit=(ImageView) findViewById(R.id.imageView_limit);
             ConstraintLayout.LayoutParams params_bug= (ConstraintLayout.LayoutParams)  imageView_limit.getLayoutParams();
-            int xRandomBar= (int)(Math.random()*((500))+100);
+            ConstraintLayout.LayoutParams params_seekBar= (ConstraintLayout.LayoutParams)  seekBar.getLayoutParams();
+
+            int xRandomBar= (int)(Math.random()*(seekBar.getWidth()-seekBar.getMax()))+
+                    seekBar.getMinimumWidth();
             params_bug.setMarginStart(xRandomBar); // The indicator bar position
             params_bug.leftMargin=xRandomBar;
             imageView_limit.setLayoutParams(params_bug);
