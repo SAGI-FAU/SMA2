@@ -8,16 +8,15 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.TextView;
 
-import com.sma2.sma2.ExerciseFragments.Ex_tapping;
 import com.sma2.sma2.R;
 
 
 public class Record_mov_ball_balance extends AppCompatActivity implements View.OnClickListener {
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
 
         setContentView(R.layout.activity_capture_movement_game);
         setListeners();
@@ -38,6 +37,7 @@ public class Record_mov_ball_balance extends AppCompatActivity implements View.O
                 open_exercise();
             }
         }.start();
+
 
     }
 
