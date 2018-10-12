@@ -5,9 +5,11 @@
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
     -->
-    <color name="colorPrimary">#FFA500</color>
+    <color name="colorPrimary">#ffa500</color>
     <color name="colorPrimaryDark">#ff8c00</color>
-    <color name="colorAccent">#20B2AA</color>
+    <color name="colorAccent">#20b2aa</color>
     <color name="colorSeek">#ff1a1a</color>
+    <color name="textColor">#585858</color>
+    <color name="backgroundColor">#b8b8b8</color>
     <color name="white">#ffffff</color>
 </resources>
