@@ -56,7 +56,7 @@ public class Ex_Hand_Rotation_Rec extends ExerciseFragment implements ButtonFrag
     public void onButtonInteraction(boolean start) {
         if (start) {
             recorder.startLogging();
-            startTimer();
+            startInitialCountdownTimer();
         } else {
             if(countdownIsRunning) {
                 countdownIsRunning = false;
@@ -73,7 +73,7 @@ public class Ex_Hand_Rotation_Rec extends ExerciseFragment implements ButtonFrag
         }
     }
 
-    private void startTimer() {
+    private void startInitialCountdownTimer() {
         countdownIsRunning = true;
         countdownStart = System.currentTimeMillis();
         timer = new CountDownTimer(START_COUNTDOWN * 1000, 1000) {
@@ -93,18 +93,5 @@ public class Ex_Hand_Rotation_Rec extends ExerciseFragment implements ButtonFrag
             }
         }.start();
 
-    }
-
-    private CountDownTimer getWalkingTimer() {
-        return new CountDownTimer(EXERCISE_TIME * 1000, 1000) {
-            public void onTick(long millisUntilFinished) {
-                long newTime = Math.round(millisUntilFinished / 1000);
-                countdownTextView.setText(String.valueOf(EXERCISE_TIME - newTime));
-            }
-            public void onFinish() {
-                countdownTextView.setText(getString(R.string.done));
-                mListener.onExerciseFinished(filePath);
-            }
-        };
     }
 }
