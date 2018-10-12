@@ -84,7 +84,6 @@ public class Start_results_Activity extends AppCompatActivity{
                 index_array_offset.add(i);
             }
         }
-        //TODO: This procedure must be reviewed
         if(index_array_offset.get(0) < index_array_onset.get(0)){
             index_array_onset.add(0,0);
         }
