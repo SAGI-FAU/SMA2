@@ -6,6 +6,7 @@ import android.os.Parcelable;
 import android.support.v4.app.Fragment;
 
 import com.sma2.sma2.ExerciseFragments.ExerciseFragment;
+import com.sma2.sma2.DataAccess.ExerciseDA;
 
 
 public class Exercise implements Parcelable {
@@ -16,6 +17,17 @@ public class Exercise implements Parcelable {
     private Uri instructionVideoPath;
     private Uri instructionTextPath;
     private Class<? extends ExerciseFragment> fragmentClass;
+
+    public Exercise(ExerciseDA exerciseDA) {
+        super();
+        this.name = exerciseDA.getExerciseName();
+        this.exerciseType = exerciseDA.getExerciseType();
+        this.shortDescription = exerciseDA.getShortDescription();
+        this.shortInstructions = exerciseDA.getShortInstructions();
+        this.instructionTextPath.parse(exerciseDA.getInstructionTextPath());
+        this.instructionVideoPath.parse(exerciseDA.getInstructionVideoPath());
+        this.fragmentClass = getFragmentFromString(exerciseDA.getFragmentClassName());
+    }
 
     public Exercise(String name,
                     String exerciseType,
@@ -70,7 +82,7 @@ public class Exercise implements Parcelable {
         return fragmentClass;
     }
 
-    static private String getStringFromFragment(Class<? extends Fragment> fragmentClass) {
+    static public String getStringFromFragment(Class<? extends Fragment> fragmentClass) {
         return fragmentClass.getName();
     }
 
