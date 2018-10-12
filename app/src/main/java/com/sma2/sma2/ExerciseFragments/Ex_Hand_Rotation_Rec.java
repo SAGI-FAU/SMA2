@@ -10,13 +10,13 @@ import com.sma2.sma2.R;
 import com.sma2.sma2.SignalRecording.MovementRecorder;
 
 
-public class ExMovementRec extends ExerciseFragment implements ButtonFragment.OnButtonInteractionListener {
+public class Ex_Hand_Rotation_Rec extends ExerciseFragment implements ButtonFragment.OnButtonInteractionListener {
     private MovementRecorder recorder;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_ex_move_rec, container, false);
+        View view = inflater.inflate(R.layout.fragment_ex_hand_rotation_rec, container, false);
         ButtonFragment buttonFragment = new ButtonFragment();
         buttonFragment.setmListener(this);
         FragmentTransaction transaction = getChildFragmentManager().beginTransaction();
