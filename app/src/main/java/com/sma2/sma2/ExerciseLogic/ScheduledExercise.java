@@ -48,7 +48,10 @@ public class ScheduledExercise implements Parcelable {
     public void complete(Uri resultPath) {
         this.completionDate = new Date().getTime();
         this.resultPath = resultPath;
-        // TODO: Handle Database writing
+    }
+
+    public void save() {
+        //Save the exercise to the db
     }
 
     public Exercise getExercise() {
