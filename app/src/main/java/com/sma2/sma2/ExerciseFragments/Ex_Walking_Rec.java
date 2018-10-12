@@ -19,11 +19,17 @@ public class Ex_Walking_Rec extends ExerciseFragment implements ButtonFragment.O
     private MovementRecorder recorder;
     private static long START_COUNTDOWN = 10;
     private static long EXERCISE_TIME = 30;
+    private final int SAMPLING_FREQUENCY = 10000;
     private String countdown_finished_txt;
     private long countdownStart;
     private CountDownTimer timer;
     private TextView countdownTextView;
     private boolean countdownIsRunning = false;
+
+    public Ex_Walking_Rec() {
+
+    }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -38,7 +44,7 @@ public class Ex_Walking_Rec extends ExerciseFragment implements ButtonFragment.O
         countdownTextView = view.findViewById(R.id.countdownTimerTextView);
         countdownTextView.setText(String.valueOf(START_COUNTDOWN));
         try {
-            recorder = new MovementRecorder(this.getContext(), 10000, mExercise.getName());
+            recorder = new MovementRecorder(this.getContext(), SAMPLING_FREQUENCY, mExercise.getName());
             recorder.registerListeners();
         } catch (Exception e) {
             e.printStackTrace();
