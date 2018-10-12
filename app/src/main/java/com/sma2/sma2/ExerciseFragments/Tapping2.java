@@ -3,6 +3,7 @@ package com.sma2.sma2.ExerciseFragments;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Point;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.os.SystemClock;
@@ -10,6 +11,7 @@ import android.os.Vibrator;
 import android.support.constraint.ConstraintLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.Display;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ImageButton;
@@ -31,6 +33,7 @@ public class Tapping2 extends AppCompatActivity implements View.OnClickListener 
     private String timeStr;
     private String [] data= new String[4];
     public String TappingFileName;
+    int screenHeight, screenWidth;
 
 
     @Override
@@ -86,6 +89,7 @@ public class Tapping2 extends AppCompatActivity implements View.OnClickListener 
         }.start();
 
     }
+
 
 
     @Override
@@ -150,7 +154,7 @@ public class Tapping2 extends AppCompatActivity implements View.OnClickListener 
             case R.id.tapButton_2_1:
 
             vib.vibrate(100);
-            change_button_position(tap1,tap2);
+            change_button_position(tap1,0);
                 data[0]="1";
                 data[1]=timeStr;
                 data[2]="0";
@@ -165,7 +169,7 @@ public class Tapping2 extends AppCompatActivity implements View.OnClickListener 
             case R.id.tapButton_2_2:
 
             vib.vibrate(100);
-            change_button_position(tap2,tap1);
+            change_button_position(tap2,1);
                 data[0]="2";
                 data[1]=timeStr;
                 data[2]="0";
@@ -188,36 +192,20 @@ public class Tapping2 extends AppCompatActivity implements View.OnClickListener 
     }
 
 
-    public void change_button_position(ImageButton imageButton, ImageButton imageButton2){
-        ConstraintLayout.LayoutParams params_bug= (ConstraintLayout.LayoutParams)  imageButton.getLayoutParams();
-        ConstraintLayout.LayoutParams params_bug2= (ConstraintLayout.LayoutParams)  imageButton2.getLayoutParams();
 
+    public void change_button_position(ImageButton imageButton, int bugFlag){
+        ConstraintLayout.LayoutParams params_bug= (ConstraintLayout.LayoutParams)  imageButton.getLayoutParams();
 
         int y= (int)(Math.random()*((800)));
-        int x= (int)(Math.random()*((600)));
+        int x;
 
-        int x2=params_bug2.getMarginStart();
+        if (bugFlag==0){
 
-        int y2=params_bug2.topMargin;
-        Log.e("x2",Integer.toString(x));
-        Log.e("y2",Integer.toString(y));
-        Log.e("x2",Integer.toString(x2));
-        Log.e("y2",Integer.toString(y2));
-
-
-
-        if(Math.abs(x2-x)<120) {
-            x = x + 240;
-
-            if(x>800){
-                x=x-480;
-            }
-            Log.e("x2","Here there is an increment");
-
+            x = (int)(Math.random()*((600/2)));
+        }else{
+            x = (int)(Math.random()*((600/2))+(600/2));
         }
 
-        Log.e("x2","After");
-        Log.e("x2",Integer.toString(x));
 
 
         params_bug.topMargin=y;
