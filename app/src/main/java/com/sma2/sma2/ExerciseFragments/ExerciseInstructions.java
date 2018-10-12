@@ -44,11 +44,15 @@ public class ExerciseInstructions extends Fragment {
 
         // TODO: Handle the button click for the test instructions
 
-        // Set Title based on Intend Information
+        // Set Title based Exercise Information
         TextView exerciseTitle = view.findViewById(R.id.exerciseTitle);
         exerciseTitle.setText(mExercise.getName());
 
-        // Set Video based on Intend Information
+        // Set Short description based Exercise Information
+        TextView exerciseDescription = view.findViewById(R.id.exerciseDescription);
+        exerciseDescription.setText(mExercise.getShortDescription());
+
+        // Set Video based on based Exercise Information
         VideoView instructionVideo = view.findViewById(R.id.instructionVideo);
         instructionVideo.setVideoURI(mExercise.getInstructionVideoPath());
 
