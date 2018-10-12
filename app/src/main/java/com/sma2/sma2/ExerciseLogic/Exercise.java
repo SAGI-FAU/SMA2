@@ -9,6 +9,7 @@ import com.sma2.sma2.ExerciseFragments.ExerciseFragment;
 
 
 public class Exercise implements Parcelable {
+    private int id;
     private String name;
     private String exerciseType;
     private String shortDescription;
@@ -17,7 +18,8 @@ public class Exercise implements Parcelable {
     private Uri instructionTextPath;
     private Class<? extends ExerciseFragment> fragmentClass;
 
-    public Exercise(String name,
+    public Exercise(int id,
+                    String name,
                     String exerciseType,
                     String shortDescription,
                     String shortInstructions,
@@ -25,6 +27,7 @@ public class Exercise implements Parcelable {
                     Uri instructionTextPath,
                     Class<? extends ExerciseFragment> fragmentClass){
         super();
+        this.id = id;
         this.name = name;
         this.exerciseType = exerciseType;
         this.shortDescription = shortDescription;
@@ -34,7 +37,8 @@ public class Exercise implements Parcelable {
         this.fragmentClass = fragmentClass;
     }
 
-    public Exercise(String name,
+    public Exercise(int id,
+                    String name,
                     String exerciseType,
                     String shortDescription,
                     String shortInstructions,
@@ -42,6 +46,7 @@ public class Exercise implements Parcelable {
                     Uri instructionTextPath,
                     String fragmentClassString){
         this(
+                id,
                 name,
                 exerciseType,
                 shortDescription,
@@ -53,7 +58,11 @@ public class Exercise implements Parcelable {
 
     public Exercise(Parcel serializedExercise) {
         super();
+        this.id = serializedExercise.readInt();
         this.name = serializedExercise.readString();
+        this.exerciseType = serializedExercise.readString();
+        this.shortDescription = serializedExercise.readString();
+        this.shortInstructions = serializedExercise.readString();
         this.instructionVideoPath = Uri.parse(serializedExercise.readString());
         this.instructionTextPath = Uri.parse(serializedExercise.readString());
         this.fragmentClass = getFragmentFromString(serializedExercise.readString());
@@ -83,6 +92,10 @@ public class Exercise implements Parcelable {
             return new Exercise[size];
         }
     };
+
+    public int getId() {
+        return id;
+    }
 
     public String getName() {
         return name;
@@ -119,6 +132,7 @@ public class Exercise implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel parcel, int i) {
+        parcel.writeInt(this.id);
         parcel.writeString(this.name);
         parcel.writeString(this.exerciseType);
         parcel.writeString(this.shortDescription);

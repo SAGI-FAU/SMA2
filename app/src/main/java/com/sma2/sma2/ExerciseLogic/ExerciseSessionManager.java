@@ -57,21 +57,21 @@ public class ExerciseSessionManager {
     }
 
     public void _createDummyExerciseList(){
-        _dummyExerciseList.add(new Exercise("Test1",
+        _dummyExerciseList.add(new Exercise(1, "Test1",
                 "Speech",
                 "test Description",
                 "test Instructions",
                 Uri.parse("video/path"),
                 Uri.parse("Instruction/Path"),
                 ExAudioRec.class));
-        _dummyExerciseList.add(new Exercise("Test1",
+        _dummyExerciseList.add(new Exercise(1, "Test1",
                 "Speech",
                 "test Description",
                 "test Instructions",
                 Uri.parse("video/path"),
                 Uri.parse("Instruction/Path"),
                 ExAudioRec.class));
-        _dummyExerciseList.add(new Exercise("Test1",
+        _dummyExerciseList.add(new Exercise(1, "Test1",
                 "Speech",
                 "test Description",
                 "test Instructions",
