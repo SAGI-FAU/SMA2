@@ -49,7 +49,12 @@ public class Ex_Hand_Rotation_Rec extends ExerciseFragment implements ButtonFrag
     @Override
     public void onDetach() {
         super.onDetach();
-        //recorder.stop();
+        try {
+            recorder.stop();
+            recorder = null;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
