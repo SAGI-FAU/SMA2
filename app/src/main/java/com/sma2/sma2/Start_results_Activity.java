@@ -1,6 +1,5 @@
 package com.sma2.sma2;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.os.Environment;
 import android.support.v7.app.AppCompatActivity;
@@ -8,15 +7,13 @@ import android.util.Log;
 import android.widget.TextView;
 
 import com.sma2.sma2.SpeechFeatures.features.phon_feats;
-import com.sma2.sma2.SpeechFeatures.tools.Energy;
+import com.sma2.sma2.SpeechFeatures.features.Energy;
 import com.sma2.sma2.SpeechFeatures.tools.WAVfileReader;
 import com.sma2.sma2.SpeechFeatures.tools.f0detector;
 import com.sma2.sma2.SpeechFeatures.tools.sigproc;
 
 import java.io.File;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 
 public class Start_results_Activity extends AppCompatActivity{
     private String WAVpath = null;
@@ -52,7 +49,8 @@ public class Start_results_Activity extends AppCompatActivity{
         //float fluency = fluency_cal();
         Energy energy = new Energy();
         float[] energy_contour = energy.energyContour(signal,Fs);
-        
+        float per_energy = energy.perturbationEnergy(energy_contour);
+        Log.d("Prueba","Value "+per_energy);
     }
 
     private float fluency_cal() {
