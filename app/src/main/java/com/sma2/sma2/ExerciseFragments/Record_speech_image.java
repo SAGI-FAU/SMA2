@@ -1,33 +1,35 @@
-package com.sma2.sma2;
+package com.sma2.sma2.ExerciseFragments;
+
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
-import android.widget.RadioButton;
 
-public class Start_exercises_Activity extends AppCompatActivity implements View.OnClickListener {
+import com.sma2.sma2.ExerciseFragments.Ex_walking;
+import com.sma2.sma2.R;
 
 
-    Intent intent = getIntent();
+public class Record_speech_image extends AppCompatActivity implements View.OnClickListener {
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        setContentView(R.layout.activity_start);
+        setContentView(R.layout.activity_capture_speech_image);
         setListeners();
     }
 
     private void setListeners() {
-        findViewById(R.id.button_start).setOnClickListener(this);
+        findViewById(R.id.button_continue_image).setOnClickListener(this);
     }
 
 
     @Override
     public void onClick(View view) {
         switch (view.getId()){
-            case R.id.button_start:
+            case R.id.button_continue_image:
                 open_exercise();
                 break;
         }
@@ -35,8 +37,9 @@ public class Start_exercises_Activity extends AppCompatActivity implements View.
     }
 
     public void open_exercise(){
-        Intent intent_ex1 =new Intent(this, Ex_speech1.class);
+        Intent intent_ex1 =new Intent(this, Ex_walking.class);
         startActivity(intent_ex1);
+
     }
 
 

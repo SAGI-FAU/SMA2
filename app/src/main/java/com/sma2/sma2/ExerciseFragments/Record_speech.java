@@ -1,10 +1,15 @@
-package com.sma2.sma2;
+package com.sma2.sma2.ExerciseFragments;
 
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+
+import com.sma2.sma2.ExerciseFragments.Ex_speech2;
+import com.sma2.sma2.ExerciseFragments.Ex_speech3;
+import com.sma2.sma2.ExerciseFragments.Ex_walking;
+import com.sma2.sma2.R;
 
 
 public class Record_speech extends AppCompatActivity implements View.OnClickListener {
@@ -15,6 +20,7 @@ public class Record_speech extends AppCompatActivity implements View.OnClickList
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_capture_speech_all_tasks);
+
         setListeners();
     }
 

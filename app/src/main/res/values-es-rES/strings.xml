@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="name">Nombre de usuario</string>
+
+    <string name="name">Nombre</string>
     <string name="ID">Identificación</string>
     <string name="Login">Ingresar</string>
     <string name="or">Ó</string>
