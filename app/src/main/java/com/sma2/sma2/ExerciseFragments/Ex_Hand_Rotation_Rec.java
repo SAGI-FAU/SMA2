@@ -1,10 +1,13 @@
 package com.sma2.sma2.ExerciseFragments;
 
+import android.media.MediaPlayer;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.sma2.sma2.R;
 import com.sma2.sma2.SignalRecording.MovementRecorder;
@@ -12,7 +15,11 @@ import com.sma2.sma2.SignalRecording.MovementRecorder;
 
 public class Ex_Hand_Rotation_Rec extends ExerciseFragment implements ButtonFragment.OnButtonInteractionListener {
     private MovementRecorder recorder;
-
+    private static long START_COUNTDOWN = 3;
+    private static long EXERCISE_TIME = 30;
+    private long countdownStart;
+    private CountDownTimer timer;
+    private TextView countdownTextView;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -23,6 +30,9 @@ public class Ex_Hand_Rotation_Rec extends ExerciseFragment implements ButtonFrag
 
         transaction.replace(R.id.frameExSV, buttonFragment);
         transaction.commit();
+
+        countdownTextView = view.findViewById(R.id.txtWalking);
+        countdownTextView.setText(String.valueOf(START_COUNTDOWN));
         try {
             recorder = new MovementRecorder(this.getContext(), 10000, mExercise.getName());
             recorder.registerListeners();
@@ -35,13 +45,14 @@ public class Ex_Hand_Rotation_Rec extends ExerciseFragment implements ButtonFrag
     @Override
     public void onDetach() {
         super.onDetach();
-        //recorder.release();
+        //recorder.stop();
     }
 
     @Override
     public void onButtonInteraction(boolean start) {
         if (start) {
             recorder.startLogging();
+            startTimer();
         } else {
             try {
                 recorder.stop();
@@ -52,4 +63,36 @@ public class Ex_Hand_Rotation_Rec extends ExerciseFragment implements ButtonFrag
             mListener.onExerciseFinished(recorder.getFileName());
         }
     }
+
+    private void startTimer() {
+        countdownStart = System.currentTimeMillis();
+        timer = new CountDownTimer(START_COUNTDOWN * 1000, 1000) {
+            public void onTick(long millisUntilFinished) {
+                int newTime = (int) Math.round(millisUntilFinished / 1000);
+                countdownTextView.setText(String.valueOf(newTime));
+            }
+            public void onFinish() {
+                this.cancel();
+                countdownTextView.setText("START!");
+                MediaPlayer mp = MediaPlayer.create(getContext(), R.raw.bell);
+                mp.start();
+
+            }
+        }.start();
+
+    }
+
+    private CountDownTimer getWalkingTimer() {
+        return new CountDownTimer(EXERCISE_TIME * 1000, 1000) {
+            public void onTick(long millisUntilFinished) {
+                long newTime = Math.round(millisUntilFinished / 1000);
+                countdownTextView.setText(String.valueOf(EXERCISE_TIME - newTime));
+            }
+            public void onFinish() {
+                countdownTextView.setText(getString(R.string.done));
+                mListener.onExerciseFinished(filePath);
+            }
+        };
+    }
+
 }
