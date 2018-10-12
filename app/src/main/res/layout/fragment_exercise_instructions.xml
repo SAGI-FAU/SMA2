@@ -15,16 +15,16 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:text="TextView"
-        android:textAlignment="viewStart"
+        android:gravity="center"
         android:textAppearance="@style/TextAppearance.AppCompat.Headline"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
+    <us.feras.mdv.MarkdownView
         android:id="@+id/exerciseDescription"
         android:layout_width="368dp"
-        android:layout_height="wrap_content"
+        android:layout_height="80dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:text="Description"
@@ -33,10 +33,11 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/exerciseTitle" />
 
-    <TextView
+
+    <us.feras.mdv.MarkdownView
         android:id="@+id/shortInstructions"
         android:layout_width="368dp"
-        android:layout_height="0dp"
+        android:layout_height="200dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
@@ -53,6 +54,7 @@
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
+        android:textSize="30dp"
         android:background="@color/colorPrimary"
         android:text="@string/instructions_long"
         app:layout_constraintEnd_toEndOf="parent"
@@ -66,6 +68,7 @@
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
+        android:textSize="30dp"
         android:background="@color/colorPrimary"
         android:text="@string/instructions_video"
         app:layout_constraintEnd_toEndOf="parent"
@@ -79,6 +82,7 @@
         android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
+        android:textSize="30dp"
         android:background="@color/colorPrimary"
         android:text="@string/exercise_start"
         app:layout_constraintBottom_toBottomOf="parent"
