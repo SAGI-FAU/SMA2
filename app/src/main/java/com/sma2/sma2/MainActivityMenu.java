@@ -10,6 +10,8 @@ import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
+import com.sma2.sma2.FeatureExtraction.Tapping.SeeResultsActivity;
+
 public class MainActivityMenu extends AppCompatActivity implements View.OnClickListener {
 
     private int MY_PERMISSIONS_REQUEST_RECORD_AUDIO, MY_PERMISSIONS_REQUEST_WRITE_STORAGE;
@@ -48,6 +50,12 @@ public class MainActivityMenu extends AppCompatActivity implements View.OnClickL
             case R.id.txtExercises:
                 open_exercises();
                 break;
+            case R.id.btnResults:
+                open_results();
+                break;
+            case R.id.txtResults:
+                open_results();
+                break;
         }
     }
 
@@ -60,7 +68,10 @@ public class MainActivityMenu extends AppCompatActivity implements View.OnClickL
         Intent intent_exercises =new Intent(MainActivityMenu.this, ExercisesActivity.class);
         startActivity(intent_exercises);
     }
-
+    public void open_results(){
+        Intent intent_results =new Intent(MainActivityMenu.this, SeeResultsActivity.class);
+        startActivity(intent_results);
+    }
 
 
     public void ask_permissions(){

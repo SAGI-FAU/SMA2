@@ -98,4 +98,15 @@
     <string name="session_finish">Back To Main Menu</string>
     <string name="exercise_start">Start Exercise</string>
     <string name="Session">Today\'s exercise</string>
+    <string name="Tapping_two">Tapping Two Finger</string>
+    <string name="Tapping_one">Tapping One Finger</string>
+    <string name="Number_Taps">Number of Taps  </string>
+    <string name="Time_Tapping_His">Time Tapping Hits  </string>
+    <string name="One_Finger_Tapping">One Finger Tapping</string>
+    <string name="Finger_left">Finger Left</string>
+    <string name="Finger_right">Finger Right</string>
+    <string name="Hits_porcentage">Hits Porcentage</string>
+    <string name="Tapping_Time">Tapping Time </string>
+
+
 </resources>
