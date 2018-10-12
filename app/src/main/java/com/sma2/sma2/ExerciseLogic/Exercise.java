@@ -21,7 +21,6 @@ import org.greenrobot.greendao.annotation.Generated;
 public class Exercise implements Parcelable {
     @Id(autoincrement = true)
     private Long id;
-
     @NotNull
     private String name;
     @NotNull
@@ -159,7 +158,7 @@ public class Exercise implements Parcelable {
         }
     };
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
