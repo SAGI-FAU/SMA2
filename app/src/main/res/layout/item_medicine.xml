@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/idmedicine"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="medicine"
+            android:textSize="25dp"
+            android:layout_weight="0.2" />
+
+        <TextView
+            android:id="@+id/iddose"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="doses"
+            android:layout_weight="0.5"
+            android:textSize="25dp" />
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:background="@color/colorPrimaryDark"
+        app:layout_constraintLeft_toLeftOf="@+id/textView_name" />
+
+
+</LinearLayout>

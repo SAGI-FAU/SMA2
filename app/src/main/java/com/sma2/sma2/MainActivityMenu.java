@@ -48,6 +48,11 @@ public class MainActivityMenu extends AppCompatActivity implements View.OnClickL
             case R.id.txtExercises:
                 open_exercises();
                 break;
+            case R.id.btnProfile:
+                open_profile();
+            case R.id.txtProfile:
+                open_profile();
+                break;
         }
     }
 
@@ -59,6 +64,11 @@ public class MainActivityMenu extends AppCompatActivity implements View.OnClickL
     public void open_exercises(){
         Intent intent_exercises =new Intent(MainActivityMenu.this, ExercisesActivity.class);
         startActivity(intent_exercises);
+    }
+
+    public void open_profile(){
+        Intent intent_profile =new Intent(MainActivityMenu.this, ProfileActivity.class);
+        startActivity(intent_profile);
     }
 
 
