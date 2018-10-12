@@ -10,8 +10,8 @@ import java.util.List;
 
 public class ExerciseSessionManager {
 
-    private List<Exercise> _dummyExerciseList = new ArrayList<Exercise>(); // TODO: REMOVE
-    private List<ScheduledExercise> _testList = new ArrayList<ScheduledExercise>(); // TODO: REMOVE
+    private List<Exercise> _dummyExerciseList = new ArrayList<>(); // TODO: REMOVE
+    private List<ScheduledExercise> _testList = new ArrayList<>(); // TODO: REMOVE
 
 
     public void createExerciseSession() {
