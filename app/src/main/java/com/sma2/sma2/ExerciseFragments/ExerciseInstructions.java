@@ -52,6 +52,10 @@ public class ExerciseInstructions extends Fragment {
         TextView exerciseDescription = view.findViewById(R.id.exerciseDescription);
         exerciseDescription.setText(mExercise.getShortDescription());
 
+        // Set Short instructions based Exercise Information
+        TextView exerciseShortInstructions = view.findViewById(R.id.shortInstructions);
+        exerciseShortInstructions.setText(mExercise.getShortInstructions());
+
         // Set Video based on based Exercise Information
         VideoView instructionVideo = view.findViewById(R.id.instructionVideo);
         instructionVideo.setVideoURI(mExercise.getInstructionVideoPath());
