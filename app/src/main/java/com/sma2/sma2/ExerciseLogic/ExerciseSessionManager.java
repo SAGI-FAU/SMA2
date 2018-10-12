@@ -4,6 +4,7 @@ import android.net.Uri;
 
 import com.sma2.sma2.ExerciseFragments.ExFreeWalking;
 import com.sma2.sma2.ExerciseFragments.ExAudioRec;
+import com.sma2.sma2.ExerciseFragments.ExOneFingerTapping;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -65,7 +66,7 @@ public class ExerciseSessionManager {
                 Uri.parse("video/path"),
                 Uri.parse("Instruction/Path"),
                 ExFreeWalking.class));
-        _dummyExerciseList.add(new Exercise("Test1",
+        _dummyExerciseList.add(new Exercise(1,"Test1",
                 "Speech",
                 "test Description",
                 "test Instructions",
