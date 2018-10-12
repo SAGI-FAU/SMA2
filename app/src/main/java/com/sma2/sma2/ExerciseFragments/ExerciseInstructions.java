@@ -82,7 +82,7 @@ public class ExerciseInstructions extends Fragment {
 
         // Set Short instructions based Exercise Information
         MarkdownView shortinstr = view.findViewById(R.id.shortInstructions);
-        shortinstr.loadMarkdown(mExercise.getShortDescription());
+        shortinstr.loadMarkdown(mExercise.getShortInstructions());
 
         // Set On Click handler for Start Button
         Button startButton = view.findViewById(R.id.startButton);
