@@ -5,55 +5,51 @@ import android.content.Context;
 import org.greenrobot.greendao.database.Database;
 import org.greenrobot.greendao.query.QueryBuilder;
 import com.sma2.sma2.DataAccess.MedicineDADao.Properties;
+import com.sma2.sma2.R;
 
 import java.util.List;
 
 public class MedicineDataService {
 
     private Context invocationcontext;
+    private String dbname;
     public MedicineDataService(Context context){
         this.invocationcontext = context;
+        this.dbname = context.getResources().getString(R.string.databasename);
     }
-
-    private class Medicine{} //todo remove for the real thing
 
     //updarte or inserts a entity
-    public void saveMedicine(Medicine medicine){
-//      MedicineDA tmp = new MedicineDA(medicine); todo change the real thing
-        DaoMaster.DevOpenHelper helper = new DaoMaster.DevOpenHelper(invocationcontext, "apkinsondb");
+    public void saveMedicine(MedicineDA medicine){
+        DaoMaster.DevOpenHelper helper = new DaoMaster.DevOpenHelper(invocationcontext, dbname);
         Database db = helper.getWritableDb();
         DaoSession session = new DaoMaster(db).newSession();
-        session.getMedicineDADao().save(new MedicineDA());//todo change the real thing
+        session.getMedicineDADao().save(medicine);
         db.close();
     }
 
-    public void update(Medicine medicine){
-//      MedicineDA tmp = new MedicineDA(medicine); todo change the real thing
-        DaoMaster.DevOpenHelper helper = new DaoMaster.DevOpenHelper(invocationcontext, "apkinsondb");
+    public void update(MedicineDA medicine){
+        DaoMaster.DevOpenHelper helper = new DaoMaster.DevOpenHelper(invocationcontext, dbname);
         Database db = helper.getWritableDb();
         DaoSession session = new DaoMaster(db).newSession();
-        session.getMedicineDADao().update(new MedicineDA());//todo change the real thing
+        session.getMedicineDADao().update(medicine);
         db.close();
     }
 
-    public void delete(Medicine medicine){
-        //do not delete, just use a dirty flag(deleted)
-        //MedicineDA tmp = new MedicineDA(medicine); //todo change the real thing
-        MedicineDA tmp = new MedicineDA();//todo
-        DaoMaster.DevOpenHelper helper = new DaoMaster.DevOpenHelper(invocationcontext, "apkinsondb");
+    public void delete(MedicineDA medicine){
+        DaoMaster.DevOpenHelper helper = new DaoMaster.DevOpenHelper(invocationcontext, dbname);
         Database db = helper.getWritableDb();
         DaoSession session = new DaoMaster(db).newSession();
-        tmp.setDeleted(true);
-        session.getMedicineDADao().update(new MedicineDA());//todo change the real thing
+        medicine.setDeleted(true);
+        session.getMedicineDADao().update(medicine);
         db.close();
     }
 
 
     public MedicineDA getMedicineById(Long id){
-        DaoMaster.DevOpenHelper helper = new DaoMaster.DevOpenHelper(invocationcontext, "apkinsondb");
+        DaoMaster.DevOpenHelper helper = new DaoMaster.DevOpenHelper(invocationcontext, dbname);
         Database db = helper.getReadableDb();
         DaoSession session = new DaoMaster(db).newSession();
-        MedicineDADao dao = session.getMedicineDADao();//todo change the real thing
+        MedicineDADao dao = session.getMedicineDADao();
         List<MedicineDA> medication = dao.queryBuilder()
                 .where(Properties.Id.eq(id))
                 .list();
@@ -63,7 +59,7 @@ public class MedicineDataService {
     }
 
     public List<MedicineDA> getAllCurrentMedictation(){
-        DaoMaster.DevOpenHelper helper = new DaoMaster.DevOpenHelper(invocationcontext, "apkinsondb");
+        DaoMaster.DevOpenHelper helper = new DaoMaster.DevOpenHelper(invocationcontext, dbname);
         Database db = helper.getReadableDb();
         DaoSession session = new DaoMaster(db).newSession();
         MedicineDADao dao = session.getMedicineDADao();
@@ -76,7 +72,7 @@ public class MedicineDataService {
 
     }
     public List<MedicineDA> getAllMedictation(){
-        DaoMaster.DevOpenHelper helper = new DaoMaster.DevOpenHelper(invocationcontext, "apkinsondb");
+        DaoMaster.DevOpenHelper helper = new DaoMaster.DevOpenHelper(invocationcontext, dbname);
         Database db = helper.getReadableDb();
         DaoSession session = new DaoMaster(db).newSession();
         MedicineDADao dao = session.getMedicineDADao();
@@ -87,10 +83,5 @@ public class MedicineDataService {
         return currentMedication;
 
     }
-
-    public String getAppString(){
-        return "Apkinson";
-    }
-
 
 }

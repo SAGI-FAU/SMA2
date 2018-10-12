@@ -12,7 +12,10 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.sma2.sma2.DataAccess.MedicineDA;
+import com.sma2.sma2.DataAccess.MedicineDataService;
 import com.sma2.sma2.DataAccess.PatientDA;
+import com.sma2.sma2.DataAccess.PatientDataService;
 
 import java.util.ArrayList;
 
@@ -21,7 +24,7 @@ public class Profile2Activity extends AppCompatActivity implements View.OnClickL
     Spinner spinner;
     Spinner intaketime_spinner;
     PatientDA patientData;
-    ArrayList<MedicineData> medicineDataArrayList;
+    ArrayList<MedicineDA> medicineDataArrayList;
     String medicine_name;
     int dose, hour_intake;
     @Override
@@ -29,7 +32,9 @@ public class Profile2Activity extends AppCompatActivity implements View.OnClickL
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile2);
         patientData = (PatientDA) getIntent().getSerializableExtra("PatientData");
-        medicineDataArrayList = new ArrayList<MedicineData>(5);
+        MedicineDataService ds = new MedicineDataService(getApplicationContext());
+        ds.getAllCurrentMedictation();
+        medicineDataArrayList = new ArrayList<MedicineDA>(ds.getAllCurrentMedictation());
         initialized();
     }
 
@@ -79,7 +84,7 @@ public class Profile2Activity extends AppCompatActivity implements View.OnClickL
         switch (view.getId()){
             case R.id.button_save_med:
                 if(valid_medical_data(temp_dose)){
-                    if(!AddMedice()){
+                    if(!AddMedicine()){
                         Toast.makeText(this,R.string.add_medice_error,Toast.LENGTH_SHORT).show();
                     }
                     Log.d("debug","Cualquier: Debug");
@@ -103,11 +108,18 @@ public class Profile2Activity extends AppCompatActivity implements View.OnClickL
         }
     }
 
-    private boolean AddMedice() {
-        if(medicineDataArrayList.contains(new MedicineData(medicine_name,dose,hour_intake))){
+    private boolean AddMedicine() {
+        PatientDataService pds = new PatientDataService(getApplicationContext());
+        MedicineDataService mds = new MedicineDataService(getApplicationContext());
+
+        long patientid = pds.getPatient().getUserId();
+        MedicineDA da = new MedicineDA(medicine_name, dose, hour_intake, patientid);
+        if(medicineDataArrayList.contains(da)){
+            Toast.makeText(this,R.string.add_medice_error,Toast.LENGTH_SHORT).show();
             return false;
         }else{
-            medicineDataArrayList.add(new MedicineData(medicine_name,dose,hour_intake));
+            medicineDataArrayList.add(da);
+            mds.saveMedicine(da);
             Toast.makeText(this,R.string.medicine_added,Toast.LENGTH_SHORT).show();
             return true;
         }

@@ -9,6 +9,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.sma2.sma2.DataAccess.PatientDA;
+import com.sma2.sma2.DataAccess.PatientDataService;
 
 public class Profile3Activity extends AppCompatActivity implements View.OnClickListener {
 
@@ -32,12 +33,13 @@ public class Profile3Activity extends AppCompatActivity implements View.OnClickL
                 break;
             case R.id.button_menu_settings:
                 if(valid_data()){
-                    //TODO: save the patientData object to the database.
                     patientData.setOther_disorder(((TextView)findViewById(R.id.other_disorder)).getText().toString());
                     SharedPreferences prefs = getSharedPreferences("LoginPref",this.MODE_PRIVATE);
                     SharedPreferences.Editor editor = prefs.edit();
                     editor.putInt("UserCreated",1);
                     editor.commit();
+                    PatientDataService pds = new PatientDataService(getApplicationContext());
+                    pds.savePatient(patientData);
                     Intent intent = new Intent(Profile3Activity.this,MainActivityMenu.class);
                     intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                     startActivity(intent);

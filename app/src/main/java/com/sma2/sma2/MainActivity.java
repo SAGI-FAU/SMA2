@@ -21,6 +21,7 @@ import android.widget.Toast;
 import com.sma2.sma2.DataAccess.DaoMaster;
 import com.sma2.sma2.DataAccess.DaoSession;
 import com.sma2.sma2.DataAccess.PatientDA;
+import com.sma2.sma2.DataAccess.PatientDataService;
 
 
 import org.greenrobot.greendao.database.Database;
@@ -73,6 +74,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 userid = tv_userid.getText().toString();
                 if(validate_data()){
                     open_profile1();
+                    PatientDataService pds = new PatientDataService(getApplicationContext());
+                    pds.savePatient(new PatientDA(username, userid));
                 }
                 break;
 
