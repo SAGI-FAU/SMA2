@@ -12,6 +12,7 @@ import android.widget.TextView;
 import com.sma2.sma2.ApplicationState;
 import com.sma2.sma2.MainActivity;
 import com.sma2.sma2.R;
+import com.sma2.sma2.Start_results_Activity;
 
 public class SplashScreen extends AppCompatActivity {
 
@@ -21,7 +22,7 @@ public class SplashScreen extends AppCompatActivity {
         setContentView(R.layout.activity_splash_screen);
         //Skip splash screen if in dev-mode
         if (ApplicationState.appUnderDevelopment()) {
-            Intent intent = new Intent(SplashScreen.this, MainActivity.class);
+            Intent intent = new Intent(SplashScreen.this, Start_results_Activity.class);
             startActivity(intent);
         } else {
             ImageView empty_square = findViewById(R.id.empty_square);
