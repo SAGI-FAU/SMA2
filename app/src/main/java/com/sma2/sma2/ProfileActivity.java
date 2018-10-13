@@ -35,6 +35,7 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
 
     private void setListeners() {
         findViewById(R.id.button_update_medicine).setOnClickListener(this);
+        findViewById(R.id.button_back).setOnClickListener(this);
     }
 
     @Override
@@ -43,11 +44,26 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
             case R.id.button_update_medicine:
                 open_update();
                 break;
+            case R.id.button_back:
+                open_main();
+                break;
         }
+    }
+
+    @Override
+    public void onBackPressed() {
+        open_main();
+        finish();
+        super.onBackPressed();
     }
 
     private void open_update() {
         Intent intent_update =new Intent(this, UpdateMedicine.class);
         startActivity(intent_update);
+    }
+
+    public void open_main(){
+        Intent intent_main =new Intent(this, MainActivityMenu.class);
+        startActivity(intent_main);
     }
 }

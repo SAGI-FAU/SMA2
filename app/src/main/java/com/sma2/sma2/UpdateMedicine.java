@@ -35,6 +35,7 @@ public class UpdateMedicine extends AppCompatActivity implements View.OnClickLis
 
     private void setListeners() {
         findViewById(R.id.button_add_medicine).setOnClickListener(this);
+        findViewById(R.id.button_back1).setOnClickListener(this);
     }
 
     @Override
@@ -42,6 +43,9 @@ public class UpdateMedicine extends AppCompatActivity implements View.OnClickLis
         switch (view.getId()) {
             case R.id.button_add_medicine:
                 add_medicine();
+                break;
+            case R.id.button_back1:
+                finish();
                 break;
         }
     }

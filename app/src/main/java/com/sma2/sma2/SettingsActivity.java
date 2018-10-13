@@ -33,13 +33,12 @@ public class SettingsActivity extends AppCompatActivity implements View.OnClickL
     public void onClick(View view) {
         switch (view.getId()){
             case R.id.button_update_medicine:
-                //TODO: Implement transition update medicine activity
+                open_update();
                 break;
             case R.id.button_menu_settings:
                 open_main();
                 break;
         }
-
 
         if(rbEnglish.isChecked()){
             //TODO: Change the app language to English
@@ -49,7 +48,6 @@ public class SettingsActivity extends AppCompatActivity implements View.OnClickL
         else{
             //TODO: Change the app language to Spanish
         }
-
     }
 
     public void open_main(){
@@ -57,5 +55,8 @@ public class SettingsActivity extends AppCompatActivity implements View.OnClickL
         startActivity(intent_main);
     }
 
-
+    private void open_update() {
+        Intent intent_update =new Intent(this, UpdateMedicine.class);
+        startActivity(intent_update);
+    }
 }

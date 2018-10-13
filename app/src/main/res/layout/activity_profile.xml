@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_marginLeft="16dp"
@@ -23,7 +24,7 @@
         android:id="@+id/layout1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
+        android:layout_marginTop="10dp"
         android:backgroundTint="@color/colorPrimary"
         android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
@@ -64,7 +65,7 @@
         android:id="@+id/layout2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
+        android:layout_marginTop="10dp"
         android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -84,6 +85,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Patient ID"
+            android:lines="1"
             android:textSize="30sp"
             app:layout_constraintLeft_toLeftOf="@+id/textView_id"
             app:layout_constraintRight_toRightOf="parent" />
@@ -103,7 +105,7 @@
         android:id="@+id/layout3"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
+        android:layout_marginTop="10dp"
         android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -123,6 +125,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Patient Age"
+            android:lines="1"
             android:textSize="30sp"
             app:layout_constraintLeft_toLeftOf="@+id/textView_age"
             app:layout_constraintRight_toRightOf="parent" />
@@ -142,7 +145,7 @@
         android:id="@+id/layout4"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
+        android:layout_marginTop="10dp"
         android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -161,6 +164,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="0"
+            android:lines="1"
             android:textSize="30sp" />
     </LinearLayout>
 
@@ -179,7 +183,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/Int_medicine"
-        android:layout_marginTop="12dp"
+        android:layout_marginTop="10dp"
         android:textColor="@color/colorPrimaryDark"
         android:textSize="30sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -211,12 +215,26 @@
 
     <Button
         android:id="@+id/button_update_medicine"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:layout_marginBottom="8dp"
+        android:background="@color/colorPrimaryDark"
+        android:gravity="center"
+        android:text="@string/update"
+        android:textSize="30sp"
+        app:layout_constraintBottom_toTopOf="@+id/button_back"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/button_back"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
         android:background="@color/colorPrimaryDark"
         android:gravity="center"
-        android:text="@string/update"
+        android:text="@string/back"
         android:textSize="30sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
