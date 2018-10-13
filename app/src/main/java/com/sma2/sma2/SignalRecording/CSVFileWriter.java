@@ -7,6 +7,9 @@ import android.os.Looper;
 import android.os.Message;
 import android.util.Log;
 
+import com.sma2.sma2.DataAccess.SignalDA;
+import com.sma2.sma2.DataAccess.SignalDataService;
+
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
@@ -24,12 +27,15 @@ public class CSVFileWriter extends Thread {
     private static final String TAG = CSVFileWriter.class.getSimpleName();
     private String filename;
     private BufferedWriter mBufferedWriter = null;
+    private SignalDA signalDA;
 
     public CSVFileWriter(String exerciseName) throws IOException {
         String currTime = new SimpleDateFormat("yyyy-MM-dd_HH-mm", Locale.getDefault()).format(new Date());
         this.filename = exerciseName + currTime + FILE_ENDING;
 
         File file = openFile(PATH, this.filename);
+
+        signalDA = new SignalDA(exerciseName, PATH+this.filename);
 
         try {
             mBufferedWriter = new BufferedWriter(new FileWriter(file));
@@ -67,6 +73,7 @@ public class CSVFileWriter extends Thread {
     public String getFileName() {
         return this.filename;
     }
+    public SignalDA getSignalDA() { return this.signalDA; }
 
     private File openFile(String path, String fileName) throws IOException {
         // check if directory exists and if not create it

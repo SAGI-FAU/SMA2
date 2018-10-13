@@ -9,6 +9,8 @@ import android.os.Environment;
 import android.os.Handler;
 import android.util.Log;
 
+import com.sma2.sma2.DataAccess.SignalDataService;
+
 import java.io.BufferedOutputStream;
 import java.io.BufferedWriter;
 import java.io.DataOutputStream;
@@ -31,12 +33,14 @@ public class TappingRecorder {
     private static Context CONTEXT;
     private static Handler HANDLER;
     private CSVFileWriter mCSVFileWriter;
+    private SignalDataService signalDataService;
 
     private static TappingRecorder recorder_instance=null;
 
 
     private TappingRecorder(Context context) {
         CONTEXT=context;
+        signalDataService = new SignalDataService(context);
 
     }
 
@@ -90,10 +94,9 @@ public class TappingRecorder {
     public void TapWriter(String[] data_sensors){ mCSVFileWriter.writeData(data_sensors); }
 
 
-    public void CloseTappingDocument() throws IOException{mCSVFileWriter.close();}
-
-
-
-
+    public void CloseTappingDocument() throws IOException{
+        mCSVFileWriter.close();
+        signalDataService.saveSignal(mCSVFileWriter.getSignalDA());
+    }
 }
 

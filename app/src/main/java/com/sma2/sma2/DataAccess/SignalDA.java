@@ -16,22 +16,16 @@ public class SignalDA {
     private Long id;
 
     private long patientDAId;
-    private long exerciseDAID;
 
     @NotNull
     private String signalPath;
+    private String exerciseName;
     private Date recordingTime;
     private int sessionNumber;
 
 
     @ToOne(joinProperty = "patientDAId")
     private PatientDA patient;
-
-    @ToOne(joinProperty = "exerciseDAID")
-    private  ExerciseDA exerciseDA;
-
-    @Keep
-    private SignalDA()
 
     /** Used to resolve relations */
     @Generated(hash = 2040040024)
@@ -41,13 +35,27 @@ public class SignalDA {
     @Generated(hash = 457749002)
     private transient SignalDADao myDao;
 
-    @Generated(hash = 1073206762)
-    public SignalDA(Long id, long patientDAId, long exerciseDAID, @NotNull String signalPath, Date recordingTime,
-            int sessionNumber) {
+    @Generated(hash = 391381774)
+    private transient Long patient__resolvedKey;
+
+    @Keep
+    public SignalDA(String exerciseName, String signalPath){
+        this.id=null;
+        this.patientDAId=1;
+        this.signalPath = signalPath;
+        this.exerciseName=exerciseName;
+        this.recordingTime = new Date();
+        this.sessionNumber = 0; // TODO: Get the session number
+
+    }
+
+    @Generated(hash = 1895564419)
+    public SignalDA(Long id, long patientDAId, @NotNull String signalPath,
+            String exerciseName, Date recordingTime, int sessionNumber) {
         this.id = id;
         this.patientDAId = patientDAId;
-        this.exerciseDAID = exerciseDAID;
         this.signalPath = signalPath;
+        this.exerciseName = exerciseName;
         this.recordingTime = recordingTime;
         this.sessionNumber = sessionNumber;
     }
@@ -72,20 +80,20 @@ public class SignalDA {
         this.patientDAId = patientDAId;
     }
 
-    public long getExerciseDAID() {
-        return this.exerciseDAID;
-    }
-
-    public void setExerciseDAID(long exerciseDAID) {
-        this.exerciseDAID = exerciseDAID;
-    }
-
     public String getSignalPath() {
         return this.signalPath;
     }
 
     public void setSignalPath(String signalPath) {
         this.signalPath = signalPath;
+    }
+
+    public String getExerciseName() {
+        return this.exerciseName;
+    }
+
+    public void setExerciseName(String exerciseName) {
+        this.exerciseName = exerciseName;
     }
 
     public Date getRecordingTime() {
@@ -96,16 +104,13 @@ public class SignalDA {
         this.recordingTime = recordingTime;
     }
 
-    public Integer getSessionNumber() {
+    public int getSessionNumber() {
         return this.sessionNumber;
     }
 
-    public void setSessionNumber(Integer sessionNumber) {
+    public void setSessionNumber(int sessionNumber) {
         this.sessionNumber = sessionNumber;
     }
-
-    @Generated(hash = 391381774)
-    private transient Long patient__resolvedKey;
 
     /** To-one relationship, resolved on first access. */
     @Generated(hash = 266209956)
@@ -137,43 +142,6 @@ public class SignalDA {
             this.patient = patient;
             patientDAId = patient.getUserId();
             patient__resolvedKey = patientDAId;
-        }
-    }
-
-    @Generated(hash = 196987570)
-    private transient Long exerciseDA__resolvedKey;
-
-    /** To-one relationship, resolved on first access. */
-    @Generated(hash = 2056666445)
-    public ExerciseDA getExerciseDA() {
-        long __key = this.exerciseDAID;
-        if (exerciseDA__resolvedKey == null
-                || !exerciseDA__resolvedKey.equals(__key)) {
-            final DaoSession daoSession = this.daoSession;
-            if (daoSession == null) {
-                throw new DaoException("Entity is detached from DAO context");
-            }
-            ExerciseDADao targetDao = daoSession.getExerciseDADao();
-            ExerciseDA exerciseDANew = targetDao.load(__key);
-            synchronized (this) {
-                exerciseDA = exerciseDANew;
-                exerciseDA__resolvedKey = __key;
-            }
-        }
-        return exerciseDA;
-    }
-
-    /** called by internal mechanisms, do not call yourself. */
-    @Generated(hash = 701245847)
-    public void setExerciseDA(@NotNull ExerciseDA exerciseDA) {
-        if (exerciseDA == null) {
-            throw new DaoException(
-                    "To-one property 'exerciseDAID' has not-null constraint; cannot set to-one to null");
-        }
-        synchronized (this) {
-            this.exerciseDA = exerciseDA;
-            exerciseDAID = exerciseDA.getId();
-            exerciseDA__resolvedKey = exerciseDAID;
         }
     }
 
@@ -213,17 +181,10 @@ public class SignalDA {
         myDao.update(this);
     }
 
-    public void setSessionNumber(int sessionNumber) {
-        this.sessionNumber = sessionNumber;
-    }
-
     /** called by internal mechanisms, do not call yourself. */
     @Generated(hash = 1305790658)
     public void __setDaoSession(DaoSession daoSession) {
         this.daoSession = daoSession;
         myDao = daoSession != null ? daoSession.getSignalDADao() : null;
     }
-
-
-
 }
