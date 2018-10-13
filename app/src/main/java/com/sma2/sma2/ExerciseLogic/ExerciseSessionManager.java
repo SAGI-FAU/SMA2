@@ -1,7 +1,10 @@
 package com.sma2.sma2.ExerciseLogic;
 
+import android.content.Context;
 import android.net.Uri;
 
+import com.sma2.sma2.DataAccess.ExerciseDataService;
+import com.sma2.sma2.DataAccess.ScheduledExerciseDataService;
 import com.sma2.sma2.ExerciseFragments.ExAudioRec;
 import com.sma2.sma2.ExerciseFragments.ExOneFingerTapping;
 import com.sma2.sma2.ExerciseFragments.ExReadText;
@@ -17,24 +20,24 @@ public class ExerciseSessionManager {
     private List<ScheduledExercise> _testList = new ArrayList<ScheduledExercise>(); // TODO: REMOVE
 
 
-    public void createExerciseSession() {
+    public void createExerciseSession(Context context) {
         // create Dummy List
-        _createDummyExerciseList();
+        _createDummyExerciseList(context);
         for (Exercise exercise : _dummyExerciseList){
             _testList.add(new ScheduledExercise(exercise, 1));
         }
-        /*
-        _testList.add(new ScheduledExercise(_dummyExerciseList.get(0), 1));
-        _testList.add(new ScheduledExercise(_dummyExerciseList.get(1), 1));
-        _testList.add(new ScheduledExercise(_dummyExerciseList.get(2), 1));
-        _testList.add(new ScheduledExercise(_dummyExerciseList.get(3), 1));
-        */
+        ScheduledExerciseDataService scheduledExerciseDataService = new ScheduledExerciseDataService(context);
+        if (scheduledExerciseDataService.getAllScheduledExercises().size()>=0){
+            for (int i=0; i<_testList.size(); i++){
+                scheduledExerciseDataService.saveScheduledExercise(_testList.get(i));
+            }
+        }
         // Create a new list of exercise and store them in the database with a new (incrementing) session id
         // store the current session id in the as a shared property
     }
 
     public List<ScheduledExercise> getScheduledExerciseList() {
-        // create Dummy List
+        //_createDummyExerciseList();
         return _testList;
     }
 
@@ -65,7 +68,7 @@ public class ExerciseSessionManager {
         return true;
     }
 
-    public void _createDummyExerciseList(){
+    public void _createDummyExerciseList(Context context){
         _dummyExerciseList.add(new Exercise(1, "Pataka",
                 "Speech",
                 "Pataka",
@@ -108,5 +111,12 @@ public class ExerciseSessionManager {
                 Uri.parse("video/path"),
                 Uri.parse("Instruction/Path"),
                 Ex_Hand_To_Head_Rec.class));
+
+        ExerciseDataService exerciseDataService = new ExerciseDataService(context);
+        if (exerciseDataService.getAllExercises().size()==0) {
+            for (int i = 0; i < _dummyExerciseList.size(); i++) {
+                exerciseDataService.saveExercise(_dummyExerciseList.get(i));
+            }
+        }
     }
 }
