@@ -34,13 +34,9 @@ public class ThanksActivity extends AppCompatActivity implements View.OnClickLis
         }
     }
 
-
     public void open_results(){
         Intent intent_results=new Intent(this, MainActivity.class);
         startActivity(intent_results);
         //TODO: transitions to the dashboard screen
-
     }
-
-
 }

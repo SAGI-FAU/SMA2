@@ -4,20 +4,19 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-
+    android:id="@+id/backgroundTapping2"
     android:layout_marginLeft="0dp"
     android:layout_marginRight="0dp"
     tools:context="com.sma2.sma2.MainActivity">
-
-
 
 
     <ImageView
         android:id="@+id/imageView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:srcCompat="@drawable/grass"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:scaleType="fitXY"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/grass" />
 
     <TextView
         android:id="@+id/accgraph_chrono4"
@@ -43,7 +42,7 @@
         app:layout_constraintLeft_toLeftOf="parent"
         android:layout_marginTop="100sp"
         android:layout_marginLeft="150sp"
-        android:layout_marginStart="150sp"/>
+        android:layout_marginStart="150sp" />
 
 
     <ImageButton
