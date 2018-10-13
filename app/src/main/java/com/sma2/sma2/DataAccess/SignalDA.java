@@ -2,6 +2,7 @@ package com.sma2.sma2.DataAccess;
 
 import org.greenrobot.greendao.annotation.Entity;
 import org.greenrobot.greendao.annotation.Id;
+import org.greenrobot.greendao.annotation.Keep;
 import org.greenrobot.greendao.annotation.NotNull;
 import org.greenrobot.greendao.annotation.ToOne;
 
@@ -28,6 +29,9 @@ public class SignalDA {
 
     @ToOne(joinProperty = "exerciseDAID")
     private  ExerciseDA exerciseDA;
+
+    @Keep
+    private SignalDA()
 
     /** Used to resolve relations */
     @Generated(hash = 2040040024)
