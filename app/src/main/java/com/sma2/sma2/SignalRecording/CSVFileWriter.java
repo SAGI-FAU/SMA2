@@ -60,7 +60,7 @@ public class CSVFileWriter {
         File directory = new File(path);
         if (!directory.exists()) {
             Log.i(TAG, "Directory did not exists, creating: " + path);
-            directory.mkdir();
+            directory.mkdirs();
         }
 
         // Try to create File
