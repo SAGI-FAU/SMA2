@@ -1,14 +1,8 @@
-package com.sma2.sma2.SpeechFeatures.tools;
+package com.sma2.sma2.FeatureExtraction.Tapping.tools;
 
-import java.io.BufferedInputStream;
-import java.io.FileInputStream;
-import java.nio.ByteBuffer;
-import java.nio.ByteOrder;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-
-import com.sma2.sma2.SpeechFeatures.tools.FFT;
 
 import static java.util.Arrays.copyOfRange;
 

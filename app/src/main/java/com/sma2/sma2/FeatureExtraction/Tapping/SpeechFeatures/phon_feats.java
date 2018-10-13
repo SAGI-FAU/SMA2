@@ -1,9 +1,7 @@
-package com.sma2.sma2.SpeechFeatures.features;
+package com.sma2.sma2.FeatureExtraction.Tapping.SpeechFeatures;
 
-import android.util.Log;
-
-import com.sma2.sma2.SpeechFeatures.tools.TransitionDectector;
-import com.sma2.sma2.SpeechFeatures.tools.array_manipulation;
+import com.sma2.sma2.FeatureExtraction.Tapping.tools.TransitionDectector;
+import com.sma2.sma2.FeatureExtraction.Tapping.tools.array_manipulation;
 
 import java.util.ArrayList;
 import java.util.Arrays;

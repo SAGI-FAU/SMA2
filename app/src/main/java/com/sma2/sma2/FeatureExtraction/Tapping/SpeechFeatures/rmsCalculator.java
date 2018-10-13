@@ -1,4 +1,4 @@
-package com.sma2.sma2.SpeechFeatures.features;
+package com.sma2.sma2.FeatureExtraction.Tapping.SpeechFeatures;
 
 import android.content.Context;
 

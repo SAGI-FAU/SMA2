@@ -1,4 +1,4 @@
-package com.sma2.sma2.SpeechFeatures.tools;
+package com.sma2.sma2.FeatureExtraction.Tapping.tools;
 
 /*
  *  Copyright (c) 2007 - 2008 by Damien Di Fede <ddf@compartmental.net>

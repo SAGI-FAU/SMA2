@@ -1,11 +1,7 @@
-package com.sma2.sma2.SpeechFeatures.features;
+package com.sma2.sma2.FeatureExtraction.Tapping.SpeechFeatures;
 
-import android.os.Build;
-import android.support.annotation.RequiresApi;
-import android.util.Log;
-
-import com.sma2.sma2.SpeechFeatures.tools.array_manipulation;
-import com.sma2.sma2.SpeechFeatures.tools.sigproc;
+import com.sma2.sma2.FeatureExtraction.Tapping.tools.array_manipulation;
+import com.sma2.sma2.FeatureExtraction.Tapping.tools.sigproc;
 
 import java.util.Arrays;
 import java.util.List;

@@ -1,6 +1,6 @@
-package com.sma2.sma2.SpeechFeatures.features;
+package com.sma2.sma2.FeatureExtraction.Tapping.SpeechFeatures;
 
-import com.sma2.sma2.SpeechFeatures.tools.sigproc;
+import com.sma2.sma2.FeatureExtraction.Tapping.tools.sigproc;
 
 import static java.util.Arrays.copyOfRange;
 

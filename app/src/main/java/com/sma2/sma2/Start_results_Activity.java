@@ -3,16 +3,15 @@ package com.sma2.sma2;
 import android.os.Bundle;
 import android.os.Environment;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.widget.TextView;
 
-import com.sma2.sma2.SpeechFeatures.features.phon_feats;
-import com.sma2.sma2.SpeechFeatures.features.Energy;
-import com.sma2.sma2.SpeechFeatures.tools.TransitionDectector;
-import com.sma2.sma2.SpeechFeatures.tools.WAVfileReader;
-import com.sma2.sma2.SpeechFeatures.tools.array_manipulation;
-import com.sma2.sma2.SpeechFeatures.tools.f0detector;
-import com.sma2.sma2.SpeechFeatures.tools.sigproc;
+import com.sma2.sma2.FeatureExtraction.Tapping.SpeechFeatures.phon_feats;
+import com.sma2.sma2.FeatureExtraction.Tapping.SpeechFeatures.Energy;
+import com.sma2.sma2.FeatureExtraction.Tapping.tools.TransitionDectector;
+import com.sma2.sma2.FeatureExtraction.Tapping.tools.WAVfileReader;
+import com.sma2.sma2.FeatureExtraction.Tapping.tools.array_manipulation;
+import com.sma2.sma2.FeatureExtraction.Tapping.tools.f0detector;
+import com.sma2.sma2.FeatureExtraction.Tapping.tools.sigproc;
 
 import java.io.File;
 import java.util.ArrayList;

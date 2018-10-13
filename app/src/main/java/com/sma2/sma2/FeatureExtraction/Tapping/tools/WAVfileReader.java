@@ -1,4 +1,4 @@
-package com.sma2.sma2.SpeechFeatures.tools;
+package com.sma2.sma2.FeatureExtraction.Tapping.tools;
 
 import java.io.BufferedInputStream;
 import java.io.File;

@@ -1,4 +1,4 @@
-package com.sma2.sma2.SpeechFeatures.tools;
+package com.sma2.sma2.FeatureExtraction.Tapping.tools;
 
 
 /*
@@ -29,8 +29,6 @@ package com.sma2.sma2.SpeechFeatures.tools;
 //package ddf.minim.analysis;
 
 //import ddf.minim.Minim;
-
-import com.sma2.sma2.SpeechFeatures.tools.FourierTransform;
 
 /**
  * FFT stands for Fast Fourier Transform. It is an efficient way to calculate the Complex
