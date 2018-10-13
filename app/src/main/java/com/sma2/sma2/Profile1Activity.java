@@ -7,13 +7,15 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
-import android.view.accessibility.AccessibilityManager;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.sma2.sma2.DataAccess.PatientDA;
+import com.sma2.sma2.DataAccess.PatientDataService;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -26,7 +28,7 @@ public class Profile1Activity extends AppCompatActivity implements View.OnClickL
     TextView tv_userid;
     EditText et_date;
     RadioGroup rg_gender, rg_hand, rg_smoker;
-    UserData userData;
+    PatientDA patientData;
     Calendar C = Calendar.getInstance();
     int year, month, day;
     DatePickerDialog datePickerDialog;
@@ -35,7 +37,7 @@ public class Profile1Activity extends AppCompatActivity implements View.OnClickL
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile1);
-        userData = (UserData) getIntent().getSerializableExtra("UserData");
+        patientData = (PatientDA) getIntent().getSerializableExtra("PatientData");
         initialized();
     }
 
@@ -43,14 +45,21 @@ public class Profile1Activity extends AppCompatActivity implements View.OnClickL
         tv_username = findViewById(R.id.username_create);
         tv_userid = findViewById(R.id.userid_create);
         et_date = findViewById(R.id.age_create);
-        tv_username.setText(userData.getUsername());
-        tv_userid.setText(userData.getUserId());
+        tv_username.setText(patientData.getUsername());
+        tv_userid.setText(patientData.getGovtId());
         findViewById(R.id.button_continue).setOnClickListener(this);
         findViewById(R.id.button_back1).setOnClickListener(this);
         et_date.setOnClickListener(this);
         year = C.get(Calendar.YEAR);
         month = C.get(Calendar.MONTH);
         day = C.get(Calendar.DAY_OF_MONTH);
+        datePickerDialog = new DatePickerDialog(this, AlertDialog.THEME_HOLO_LIGHT, new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker datePicker, int mYear, int mMonth, int mDay) {
+                mMonth+=1;
+                et_date.setText(mDay+"/"+mMonth+"/"+mYear);
+            }
+        },year,month,day);
     }
 
     @Override
@@ -71,28 +80,28 @@ public class Profile1Activity extends AppCompatActivity implements View.OnClickL
                     } catch (ParseException e) {
                         e.printStackTrace();
                     }
-                    userData.setBirthday(date);
-                    userData.setGender(gender);
+                    patientData.setBirthday(date);
+                    patientData.setGender(gender);
                     switch (hand_string) {
                         case "Right":
-                            userData.setHand(0);
+                            patientData.setHand(0);
                             break;
                         case "Left":
-                            userData.setHand(1);
+                            patientData.setHand(1);
                             break;
                     }
 
                     switch (smoker_string) {
                         case "Yes":
-                            userData.setSmoker(true);
+                            patientData.setSmoker(true);
                             break;
                         case "No":
-                            userData.setSmoker(false);
+                            patientData.setSmoker(false);
                             break;
                     }
 
                     Intent intent = new Intent(Profile1Activity.this,Profile2Activity.class);
-                    intent.putExtra("UserData", userData);
+                    intent.putExtra("PatientData", patientData);
                     startActivity(intent);
                 }else{
                     Toast.makeText(this,R.string.brith_date_error,Toast.LENGTH_SHORT).show();
@@ -102,13 +111,6 @@ public class Profile1Activity extends AppCompatActivity implements View.OnClickL
                 onBackPressed();
                 break;
             case R.id.age_create:
-                datePickerDialog = new DatePickerDialog(this, AlertDialog.THEME_HOLO_LIGHT, new DatePickerDialog.OnDateSetListener() {
-                    @Override
-                    public void onDateSet(DatePicker datePicker, int mYear, int mMonth, int mDay) {
-                        mMonth+=1;
-                        et_date.setText(mDay+"/"+mMonth+"/"+mYear);
-                    }
-                },year,month,day);
             datePickerDialog.show();
         }
     }

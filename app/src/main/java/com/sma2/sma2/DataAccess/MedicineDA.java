@@ -12,20 +12,20 @@ import java.util.Date;
 
 @Entity
 public class MedicineDA {
-    @Id
+    @Id(autoincrement = true)
     private Long id;
 
     private long patientDAId;
 
-    @NotNull
-    private Date insertDate;
+    @Property
+    private boolean deleted;
 
     @Property
     private String medicineName;
     @Property
     private int dose;
     @Property
-    int intakeTime;
+    private int intakeTime;
 
     @ToOne(joinProperty = "patientDAId")
     private PatientDA patientDA;
@@ -38,15 +38,22 @@ public class MedicineDA {
     @Generated(hash = 1858501363)
     private transient MedicineDADao myDao;
 
-    @Generated(hash = 1635983714)
-    public MedicineDA(Long id, long patientDAId, @NotNull Date insertDate, String medicineName,
-            int dose, int intakeTime) {
+    @Generated(hash = 873106531)
+    public MedicineDA(Long id, long patientDAId, boolean deleted, String medicineName, int dose,
+            int intakeTime) {
         this.id = id;
         this.patientDAId = patientDAId;
-        this.insertDate = insertDate;
+        this.deleted = deleted;
         this.medicineName = medicineName;
         this.dose = dose;
         this.intakeTime = intakeTime;
+    }
+    public MedicineDA(String medicineName, int dose, int intakeTime, long patientDAId){
+        this.medicineName = medicineName;
+        this.dose = dose;
+        this.intakeTime = intakeTime;
+        this.patientDAId = patientDAId;
+        this.id = null;
     }
 
     @Generated(hash = 1697102487)
@@ -100,8 +107,7 @@ public class MedicineDA {
     @Generated(hash = 1943062614)
     public PatientDA getPatientDA() {
         long __key = this.patientDAId;
-        if (patientDA__resolvedKey == null
-                || !patientDA__resolvedKey.equals(__key)) {
+        if (patientDA__resolvedKey == null || !patientDA__resolvedKey.equals(__key)) {
             final DaoSession daoSession = this.daoSession;
             if (daoSession == null) {
                 throw new DaoException("Entity is detached from DAO context");
@@ -166,12 +172,16 @@ public class MedicineDA {
         myDao.update(this);
     }
 
-    public Date getInsertDate() {
-        return this.insertDate;
+    public boolean getDeleted() {
+        return this.deleted;
     }
 
-    public void setInsertDate(Date insertDate) {
-        this.insertDate = insertDate;
+    public void setDeleted(boolean deleted) {
+        this.deleted = deleted;
+    }
+
+    public void setPatientDAId(Long patientDAId) {
+        this.patientDAId = patientDAId;
     }
 
     /** called by internal mechanisms, do not call yourself. */

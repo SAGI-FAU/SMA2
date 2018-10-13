@@ -1,9 +1,11 @@
 package com.sma2.sma2;
 
+import com.sma2.sma2.DataAccess.PatientDA;
+
 import java.io.Serializable;
 import java.util.Date;
 
-public class UserData implements Serializable {
+public class PatientData implements Serializable {
     private String username;
     private String userId;
     private Date birthday;
@@ -16,9 +18,13 @@ public class UserData implements Serializable {
     private float weight;
     private int height;
 
-    public UserData(String username, String userId) {
+    public PatientData(String username, String userId) {
         this.username = username;
         this.userId = userId;
+    }
+
+    public PatientData(PatientDA da){
+
     }
 
     public String getUsername() {
