@@ -44,14 +44,23 @@ public class Tapping_feature_Activity extends AppCompatActivity {
         float Hist_Porcentage= Count_one;
         String Distance_error=df.format(dimention);
         String Tapping_time_total=df.format(average_funtion(Delay_one));
-        tNumber_Taps.setText( String.valueOf(Count_Touch_one.size()));
-        tTapping_time_hits.setText( String.valueOf(df.format(delay_hits_two))+ " ms");
+
+        if(path_tapping==null){
+            tNumber_Taps.setText(R.string.Empty);
+            tTapping_time_hits.setText(R.string.Empty);
+            
+        }
+        else{
+            tNumber_Taps.setText( String.valueOf(Count_Touch_one.size()));
+            tTapping_time_hits.setText( String.valueOf(df.format(delay_hits_two))+ " ms");
+        }
+
         if( Hist_Porcentage>= 70){
             iEmojin.setImageResource(R.drawable.happy_emojin);
 
             Animation animation=AnimationUtils.loadAnimation(this,R.anim.zoomin);
             iEmojin.startAnimation(animation);
-            tMessage.setText("Good Job");
+            tMessage.setText(R.string.Positive_message);
             Animation animation2=AnimationUtils.loadAnimation(this,R.anim.bounce);
             tMessage.startAnimation(animation2);
         }
@@ -60,7 +69,7 @@ public class Tapping_feature_Activity extends AppCompatActivity {
 
             Animation animation=AnimationUtils.loadAnimation(this,R.anim.zoomin);
             iEmojin.startAnimation(animation);
-            tMessage.setText("Good Job \nBut, You can get better\n");
+            tMessage.setText(R.string.Medium_message);
             Animation animation2=AnimationUtils.loadAnimation(this,R.anim.bounce);
             tMessage.startAnimation(animation2);
         }
@@ -69,7 +78,7 @@ public class Tapping_feature_Activity extends AppCompatActivity {
 
             Animation animation=AnimationUtils.loadAnimation(this,R.anim.zoomin);
             iEmojin.startAnimation(animation);
-            tMessage.setText("Let's improve \nContinue working");
+            tMessage.setText(R.string.Negative_message);
             Animation animation2=AnimationUtils.loadAnimation(this,R.anim.bounce);
             tMessage.startAnimation(animation2);
 
