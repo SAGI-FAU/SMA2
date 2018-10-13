@@ -23,6 +23,7 @@ public class ExerciseInstructions extends Fragment {
     OnStartClickedListener mStartClickedCallback;
     private Exercise mExercise;
 
+    public ExerciseInstructions() {}
 
     public static ExerciseInstructions newInstance(Exercise exercise) {
         ExerciseInstructions fragment = new ExerciseInstructions();
