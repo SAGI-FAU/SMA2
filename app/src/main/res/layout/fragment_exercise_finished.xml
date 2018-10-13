@@ -40,10 +40,14 @@
         android:id="@+id/motivationMessage"
         android:layout_width="368dp"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="20dp"
         android:text="@string/motivate"
         android:textAlignment="center"
         android:textAppearance="@style/TextAppearance.AppCompat.Headline"
         android:textSize="30sp"
-        tools:layout_editor_absoluteX="8dp"
-        tools:layout_editor_absoluteY="62dp" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 </android.support.constraint.ConstraintLayout>
