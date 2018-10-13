@@ -27,7 +27,7 @@ public class ExercisesActivity extends AppCompatActivity implements ExerciseInst
         super.onCreate(savedInstanceState);
 
         sessionManager = new ExerciseSessionManager();
-        sessionManager.createExerciseSession(); // TODO: Only for testing
+        sessionManager.createExerciseSession(this); // TODO: Only for testing
         nextExercise = null;
 
         sessionOverview = SessionOverview.newInstance(sessionManager.getScheduledExerciseList());

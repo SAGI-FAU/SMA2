@@ -28,7 +28,7 @@ import org.greenrobot.greendao.database.Database;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
-
+    private int MY_PERMISSIONS_REQUEST_RECORD_AUDIO, MY_PERMISSIONS_REQUEST_WRITE_STORAGE;
 
     TextView tv_username;
     TextView tv_userid;
@@ -53,7 +53,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         tv_userid = findViewById(R.id.userid);
         bt_create = findViewById(R.id.button_create);
         setListeners();
-
+        ask_permissions();
         DaoMaster.DevOpenHelper helper = new DaoMaster.DevOpenHelper(this, getString(R.string.databasename));
         Database db = helper.getWritableDb();
         DaoSession daoSession = new DaoMaster(db).newSession();
@@ -108,6 +108,29 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
 
 
+    public void ask_permissions(){
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.RECORD_AUDIO)!= PackageManager.PERMISSION_GRANTED) {
+            if (ActivityCompat.shouldShowRequestPermissionRationale(this,
+                    Manifest.permission.RECORD_AUDIO)) {
+            } else {
+                // No explanation needed, we can request the permission.
+                ActivityCompat.requestPermissions(this,
+                        new String[]{Manifest.permission.RECORD_AUDIO},
+                        MY_PERMISSIONS_REQUEST_RECORD_AUDIO);
+            }
+        }
+        if (ContextCompat.checkSelfPermission(this,
+                Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                != PackageManager.PERMISSION_GRANTED) {
+            if (ActivityCompat.shouldShowRequestPermissionRationale(this,
+                    Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
+            } else {
+                ActivityCompat.requestPermissions(this,
+                        new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
+                        MY_PERMISSIONS_REQUEST_WRITE_STORAGE);
+            }
+        }
+    }
 
 
     public void open_profile1(){

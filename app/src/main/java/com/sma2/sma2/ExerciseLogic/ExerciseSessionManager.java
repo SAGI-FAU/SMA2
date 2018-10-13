@@ -1,7 +1,10 @@
 package com.sma2.sma2.ExerciseLogic;
 
+import android.content.Context;
 import android.net.Uri;
 
+import com.sma2.sma2.DataAccess.ExerciseDataService;
+import com.sma2.sma2.DataAccess.ScheduledExerciseDataService;
 import com.sma2.sma2.ExerciseFragments.ExAudioRec;
 import com.sma2.sma2.ExerciseFragments.ExOneFingerTapping;
 import com.sma2.sma2.ExerciseFragments.ExReadText;
@@ -17,24 +20,25 @@ public class ExerciseSessionManager {
     private List<ScheduledExercise> _testList = new ArrayList<ScheduledExercise>(); // TODO: REMOVE
 
 
-    public void createExerciseSession() {
+    public void createExerciseSession(Context context) {
         // create Dummy List
-        _createDummyExerciseList();
+        _createDummyExerciseList(context);
         for (Exercise exercise : _dummyExerciseList){
             _testList.add(new ScheduledExercise(exercise, 1));
         }
-        /*
-        _testList.add(new ScheduledExercise(_dummyExerciseList.get(0), 1));
-        _testList.add(new ScheduledExercise(_dummyExerciseList.get(1), 1));
-        _testList.add(new ScheduledExercise(_dummyExerciseList.get(2), 1));
-        _testList.add(new ScheduledExercise(_dummyExerciseList.get(3), 1));
-        */
+        ScheduledExerciseDataService scheduledExerciseDataService = new ScheduledExerciseDataService(context);
+        if (scheduledExerciseDataService.getAllScheduledExercises().size()==0){
+            for (int i=0; i<_testList.size(); i++){
+                scheduledExerciseDataService.saveScheduledExercise(_testList.get(i));
+            }
+        }
+        _testList=scheduledExerciseDataService.getAllScheduledExercises();
         // Create a new list of exercise and store them in the database with a new (incrementing) session id
         // store the current session id in the as a shared property
     }
 
     public List<ScheduledExercise> getScheduledExerciseList() {
-        // create Dummy List
+        //_createDummyExerciseList();
         return _testList;
     }
 
@@ -65,48 +69,57 @@ public class ExerciseSessionManager {
         return true;
     }
 
-    public void _createDummyExerciseList(){
-        _dummyExerciseList.add(new Exercise(1, "Pataka",
+    public void _createDummyExerciseList(Context context){
+        _dummyExerciseList.add(new Exercise(null, "Pataka",
                 "Speech",
                 "Pataka",
                 "Please say Pataka as many times as possible",
                 Uri.parse("video/path"),
                 Uri.parse("Instruction/Path"),
                 ExAudioRec.class));
-        _dummyExerciseList.add(new Exercise(1, "Sustained Vowel",
+        _dummyExerciseList.add(new Exercise(null, "Sustained Vowel",
                 "Speech",
                 "Sustained Vowel",
                 "Please hold the sound Ah as long as possible",
                 Uri.parse("video/path"),
                 Uri.parse("Instruction/Path"),
                 ExAudioRec.class));
-        _dummyExerciseList.add(new Exercise(1, "Reading Text",
+        _dummyExerciseList.add(new Exercise(null, "Reading Text",
                 "Speech",
                 "Reading Text",
                 "Please read the following text",
                 Uri.parse("video/path"),
                 Uri.parse("Instruction/Path"),
                 ExReadText.class));
-        _dummyExerciseList.add(new Exercise(1, "Tapping Bug",
+        _dummyExerciseList.add(new Exercise(null, "Tapping Bug",
                 "Tapping",
                 "Tapping Bug",
                 "Tap the bug as fast as you can",
                 Uri.parse("video/path"),
                 Uri.parse("Instruction/Path"),
                 ExOneFingerTapping.class));
-        _dummyExerciseList.add(new Exercise(1, "Hand Rotation",
+        _dummyExerciseList.add(new Exercise(null, "Hand Rotation",
                 "Tapping",
                 "Hand Rotation",
                 "Stretch out your arm and twist it",
                 Uri.parse("video/path"),
                 Uri.parse("Instruction/Path"),
                 Ex_Hand_Rotation_Rec.class));
-        _dummyExerciseList.add(new Exercise(1, "Hand to Head",
+        _dummyExerciseList.add(new Exercise(null, "Hand to Head",
                 "Tapping",
                 "Hand to Head",
                 "Stretch out your arm, palm facing up, and then move your hand to the head",
                 Uri.parse("video/path"),
                 Uri.parse("Instruction/Path"),
                 Ex_Hand_To_Head_Rec.class));
+
+        ExerciseDataService exerciseDataService = new ExerciseDataService(context);
+        if (exerciseDataService.getAllExercises().size()==0) {
+            for (int i = 0; i < _dummyExerciseList.size(); i++) {
+                exerciseDataService.insertExercise(_dummyExerciseList.get(i));
+            }
+            // exerciseDataService.closeDB();
+        }
+        _dummyExerciseList=exerciseDataService.getAllExercises();
     }
 }
