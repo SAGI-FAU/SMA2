@@ -61,42 +61,42 @@ public class ExerciseSessionManager {
     }
 
     public void _createDummyExerciseList(){
-        _dummyExerciseList.add(new Exercise(1, "Test1",
+        _dummyExerciseList.add(new Exercise(1, "Pataka",
                 "Speech",
                 "Pataka",
                 "Please say Pataka as many times as possible",
                 Uri.parse("video/path"),
                 Uri.parse("Instruction/Path"),
                 ExAudioRec.class));
-        _dummyExerciseList.add(new Exercise(1, "Test1",
+        _dummyExerciseList.add(new Exercise(1, "Sustained Vowel",
                 "Speech",
                 "Sustained Vowel",
                 "Please hold the sound Ah as long as possible",
                 Uri.parse("video/path"),
                 Uri.parse("Instruction/Path"),
                 ExAudioRec.class));
-        _dummyExerciseList.add(new Exercise(1, "Hand-to-Head",
+        _dummyExerciseList.add(new Exercise(1, "Reading Text",
                 "Speech",
                 "Reading Text",
                 "Please read the following text",
                 Uri.parse("video/path"),
                 Uri.parse("Instruction/Path"),
                 ExReadText.class));
-        _dummyExerciseList.add(new Exercise(1, "Test1",
+        _dummyExerciseList.add(new Exercise(1, "Tapping Bug",
                 "Tapping",
                 "Tapping Bug",
                 "Tap the bug as fast as you can",
                 Uri.parse("video/path"),
                 Uri.parse("Instruction/Path"),
                 ExOneFingerTapping.class));
-        _dummyExerciseList.add(new Exercise(1, "Test1",
+        _dummyExerciseList.add(new Exercise(1, "Hand Rotation",
                 "Tapping",
                 "Hand Rotation",
                 "Stretch out your arm and twist it",
                 Uri.parse("video/path"),
                 Uri.parse("Instruction/Path"),
                 Ex_Hand_Rotation_Rec.class));
-        _dummyExerciseList.add(new Exercise(1, "Test1",
+        _dummyExerciseList.add(new Exercise(1, "Hand to Head",
                 "Tapping",
                 "Hand to Head",
                 "Stretch out your arm, palm facing up, and then move your hand to the head",
