@@ -60,20 +60,19 @@ public class Tapping_feature_Two_Activity extends AppCompatActivity {
         image_control(Hits_Porcentage_left,iEmojiLeft);
         image_control(Hits_Porcentage_right,iEmojiRight);
 
+        if(path_tapping==null){
+            tTapping_time_hits.setText(R.string.Empty);
+            tTapping_time_hits2.setText(R.string.Empty);
+            tTapping_time.setText(R.string.Empty);
+            tNumber_Taps.setText(R.string.Empty);
 
-
-
-
-        tTapping_time_hits.setText(String.valueOf(df.format(delay_hits_one))+" ms");
-        tTapping_time_hits2.setText(String.valueOf(df.format(delay_hits_two))+" ms");
-        tTapping_time.setText(String.valueOf(df.format(average_funtion(Delay)))+" ms");
-        tNumber_Taps.setText(String.valueOf(df.format(Count_Touch.size())));
-
-
-
-        //float Count_two=Count_ladybug_two(Count_Touch_two);
-
-
+        }
+        else{
+            tTapping_time_hits.setText(String.valueOf(df.format(delay_hits_one))+" ms");
+            tTapping_time_hits2.setText(String.valueOf(df.format(delay_hits_two))+" ms");
+            tTapping_time.setText(String.valueOf(df.format(average_funtion(Delay)))+" ms");
+            tNumber_Taps.setText(String.valueOf(df.format(Count_Touch.size())));
+        }
 
     }
     public static double average_funtion(ArrayList<Double> v) {
