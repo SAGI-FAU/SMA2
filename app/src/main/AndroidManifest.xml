@@ -79,11 +79,15 @@
         <activity
             android:name=".ExerciseFragments.Record_mov_ball_balance"
             android:screenOrientation="portrait" />
-        <activity android:name=".Profile1Activity" />
-        <activity android:name=".Profile2Activity" />
-        <activity android:name=".Profile3Activity" />
+        <activity android:name=".Profile1Activity"
+            android:screenOrientation="portrait" />
+        <activity android:name=".Profile2Activity"
+            android:screenOrientation="portrait" />
+        <activity android:name=".Profile3Activity"
+            android:screenOrientation="portrait" />
         <activity android:name=".MainActivityMenu" />
-        <activity android:name=".ProfileActivity" />
+        <activity android:name=".ProfileActivity"
+            android:screenOrientation="portrait" />
         <activity android:name=".UpdateMedicine" />
         <activity android:name=".Modif_medicine" />
         <activity android:name=".ResultsActivity" />

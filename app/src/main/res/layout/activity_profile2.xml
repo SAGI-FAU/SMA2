@@ -11,28 +11,33 @@
     tools:context="com.sma2.sma2.MainActivity">
 
 
-    <TextView
-        android:id="@+id/textView4"
-        android:layout_width="wrap_content"
-        android:layout_height="26dp"
-        android:layout_marginTop="20dp"
-        android:text="@string/education"
-        android:textSize="20sp"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-
-    <Spinner
-        android:id="@+id/spinnerEducation"
-        android:layout_width="100sp"
+    <LinearLayout
+        android:id="@+id/layout1"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="25dp"
-        android:hint="@string/education"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        android:textSize="25sp"
-        />
+        android:layout_marginTop="8dp"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
+        <TextView
+            android:id="@+id/textView4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="@string/education"
+            android:textSize="20sp" />
+
+        <Spinner
+            android:id="@+id/spinnerEducation"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:hint="@string/education"
+            android:textSize="25sp" />
+
+
+    </LinearLayout>
 
     <EditText
         android:id="@+id/time_diagnosis"
@@ -45,7 +50,7 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/spinnerEducation" />
+        app:layout_constraintTop_toBottomOf="@+id/layout1" />
 
 
     <TextView
@@ -85,31 +90,36 @@
         android:backgroundTint="@color/colorPrimary"
         />
 
-
-
-
-    <TextView
-        android:id="@+id/textView6"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:id="@+id/layout2"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/med_time"
-        android:layout_marginTop="15dp"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/med_dose"
-        android:textSize="20sp"
-        />
+        android:layout_marginTop="20dp"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/med_dose">
+
+        <TextView
+            android:id="@+id/textView6"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/med_time"
+            android:textSize="20sp" />
+
+        <Spinner
+            android:id="@+id/spinnerIntake"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="@string/med_time"
+            android:textSize="25sp" />
+    </LinearLayout>
 
 
-    <Spinner
-        android:id="@+id/spinnerIntake"
-        android:layout_width="170sp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="25dp"
-        android:hint="@string/med_time"
-        app:layout_constraintTop_toBottomOf="@+id/med_dose"
-        app:layout_constraintRight_toRightOf="parent"
-        android:textSize="25sp"
-        />
+
+
+
+
 
 
     <Button
@@ -123,7 +133,7 @@
         android:gravity="center"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/spinnerIntake"/>
+        app:layout_constraintTop_toBottomOf="@+id/layout2"/>
 
 
 
