@@ -23,6 +23,8 @@ public class SessionOverview extends Fragment {
 
     private OnSessionControlListener mListener;
 
+    public SessionOverview() {}
+
     public static SessionOverview newInstance(List<ScheduledExercise> scheduledExerciseList) {
         SessionOverview fragment = new SessionOverview();
         Bundle args = new Bundle();
