@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import com.sma2.sma2.ApplicationState;
 import com.sma2.sma2.MainActivity;
+import com.sma2.sma2.MainActivityMenu;
 import com.sma2.sma2.R;
 import com.sma2.sma2.Start_results_Activity;
 

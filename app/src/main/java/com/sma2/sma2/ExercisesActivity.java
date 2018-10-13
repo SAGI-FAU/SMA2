@@ -6,11 +6,20 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
+import com.sma2.sma2.ExerciseFragments.ExAudioRec;
+import com.sma2.sma2.ExerciseFragments.ExerciseFinished;
+import com.sma2.sma2.ExerciseFragments.ExerciseFragment;
+import com.sma2.sma2.ExerciseFragments.ExerciseInstructions;
+import com.sma2.sma2.ExerciseFragments.SessionOverview;
+import com.sma2.sma2.ExerciseLogic.ExerciseSessionManager;
+import com.sma2.sma2.ExerciseLogic.ScheduledExercise;
 
-import com.sma2.sma2.ExerciseFragments.ExSustainedVowel;
 
-public class ExercisesActivity extends AppCompatActivity implements ExerciseIntro.OnStartClickedListener, ExerciseStart.OnSessionStartListener, ExSustainedVowel.OnFragmentInteractionListener {
+public class ExercisesActivity extends AppCompatActivity implements ExerciseInstructions.OnStartClickedListener,
+        SessionOverview.OnSessionControlListener, ExerciseFragment.OnExerciseCompletedListener, ExerciseFinished.OnExerciseActionListener {
+
     ExerciseSessionManager sessionManager;
+    SessionOverview sessionOverview;
     ScheduledExercise nextExercise;
 
     @Override
@@ -21,9 +30,11 @@ public class ExercisesActivity extends AppCompatActivity implements ExerciseIntr
         sessionManager.createExerciseSession(); // TODO: Only for testing
         nextExercise = null;
 
+        sessionOverview = SessionOverview.newInstance(sessionManager.getScheduledExerciseList());
+
         setContentView(R.layout.activity_exercise);
 
-        showStartScreen();
+        showSessionOverview();
     }
 
     @Override
@@ -39,23 +50,12 @@ public class ExercisesActivity extends AppCompatActivity implements ExerciseIntr
         transaction.commit();
     }
 
-    private void showStartScreen() {
-        try {
-            nextExercise = sessionManager.getNextExercise();
-            ExerciseStart startScreen = new ExerciseStart();
-            showFragment(startScreen);
-        } catch (IndexOutOfBoundsException e) {
-            // TODO: Show a end screen
-            Intent mIntent = new Intent(this, MainActivity.class);
-            startActivity(mIntent);
-        }
+    private void showSessionOverview() {
+        showFragment(sessionOverview);
     }
 
     public void open_exercise() {
-        ExerciseIntro intro = ExerciseIntro.newInstance(
-                nextExercise.getExercise().getName(),
-                nextExercise.getExercise().getInstructionVideoPath(),
-                nextExercise.getExercise().getInstructionTextPath());
+        ExerciseInstructions intro = ExerciseInstructions.newInstance(nextExercise.getExercise());
         showFragment(intro);
     }
 
@@ -64,7 +64,9 @@ public class ExercisesActivity extends AppCompatActivity implements ExerciseIntr
     public void onExerciseStartClicked() {
         if (nextExercise != null) {
             try {
-                showFragment(nextExercise.getExercise().getFragmentClass().newInstance());
+                Class<? extends ExerciseFragment> fragmentClass = nextExercise.getExercise().getFragmentClass();
+                ExerciseFragment fragment = fragmentClass.newInstance();
+                showFragment(fragment.newInstance(nextExercise.getExercise()));
             } catch (Exception e) {
                 throw new RuntimeException("Invalid Exercise Fragment provided");
             }
@@ -72,13 +74,31 @@ public class ExercisesActivity extends AppCompatActivity implements ExerciseIntr
     }
 
     @Override
-    public void onSessionStartClicked() {
+    public void onNextExerciseClicked() {
+        nextExercise = sessionManager.getNextExercise();
         open_exercise();
+    }
+
+    @Override
+    public void onSessionFinishedClicked() {
+        Intent mIntent = new Intent(this, MainActivityMenu.class);
+        startActivity(mIntent);
     }
 
     @Override
     public void onExerciseFinished(String filePath) {
         nextExercise.complete(Uri.parse(filePath));
-        showStartScreen();
+        showFragment(ExerciseFinished.newInstance(nextExercise));
+    }
+
+    @Override
+    public void onRedoButtonClicked() {
+        open_exercise();
+    }
+
+    @Override
+    public void onDoneButtonClicked() {
+        nextExercise.save();
+        showSessionOverview();
     }
 }

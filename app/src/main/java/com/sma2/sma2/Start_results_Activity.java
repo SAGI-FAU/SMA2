@@ -10,12 +10,14 @@ import com.sma2.sma2.SpeechFeatures.features.phon_feats;
 import com.sma2.sma2.SpeechFeatures.features.Energy;
 import com.sma2.sma2.SpeechFeatures.tools.TransitionDectector;
 import com.sma2.sma2.SpeechFeatures.tools.WAVfileReader;
+import com.sma2.sma2.SpeechFeatures.tools.array_manipulation;
 import com.sma2.sma2.SpeechFeatures.tools.f0detector;
 import com.sma2.sma2.SpeechFeatures.tools.sigproc;
 
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 public class Start_results_Activity extends AppCompatActivity{
     private String WAVpath = null;
@@ -25,7 +27,8 @@ public class Start_results_Activity extends AppCompatActivity{
     private phon_feats PF = new phon_feats();
     private float signal[];
     private int Fs;
-    float[] f0;
+    private float[] f0;
+    array_manipulation array_manipulation = new array_manipulation();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,9 +76,12 @@ public class Start_results_Activity extends AppCompatActivity{
             voice_signal = temp2;
         }
 
+        List voice_element = array_manipulation.find(f0,0,2);
+
         Energy energy = new Energy();
         float[] energy_contour = energy.energyContour(voice_signal,Fs);
         float per_energy = energy.perturbationEnergy(energy_contour);
+        jitter_cal();
     }
 
     public void jitter_cal() {

@@ -1,0 +1,243 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginLeft="16dp"
+    android:layout_marginRight="16dp">
+
+    <TextView
+        android:id="@+id/textView_profile"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:gravity="center"
+        android:text="@string/btnProfileText"
+        android:textSize="30sp"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <LinearLayout
+        android:id="@+id/layout1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:backgroundTint="@color/colorPrimary"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView_profile">
+
+        <TextView
+            android:id="@+id/textView_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/user_name"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="30sp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="@+id/textView_name1" />
+
+        <TextView
+            android:id="@+id/textView_use_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:lines="1"
+            android:text="Patient Name"
+            android:textSize="30sp"
+            app:layout_constraintLeft_toLeftOf="@+id/textView_name"
+            app:layout_constraintRight_toRightOf="parent" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/textview1"
+        android:layout_width="match_parent"
+        android:layout_height="3dp"
+        android:background="@color/colorPrimaryDark"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintLeft_toLeftOf="@+id/layout1"
+        app:layout_constraintTop_toBottomOf="@+id/layout1" />
+
+    <LinearLayout
+        android:id="@+id/layout2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textview1">
+
+        <TextView
+            android:id="@+id/textView_id"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/user_id"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="30sp"
+            app:layout_constraintLeft_toLeftOf="parent" />
+
+        <TextView
+            android:id="@+id/textView_user_id"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Patient ID"
+            android:lines="1"
+            android:textSize="30sp"
+            app:layout_constraintLeft_toLeftOf="@+id/textView_id"
+            app:layout_constraintRight_toRightOf="parent" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/textview2"
+        android:layout_width="match_parent"
+        android:layout_height="3dp"
+        android:background="@color/colorPrimaryDark"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintLeft_toLeftOf="@+id/layout2"
+        app:layout_constraintTop_toBottomOf="@+id/layout2" />
+
+
+    <LinearLayout
+        android:id="@+id/layout3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textview2">
+
+        <TextView
+            android:id="@+id/textView_age"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/user_age"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="30sp"
+            app:layout_constraintLeft_toLeftOf="parent" />
+
+        <TextView
+            android:id="@+id/textView_user_age"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Patient Age"
+            android:lines="1"
+            android:textSize="30sp"
+            app:layout_constraintLeft_toLeftOf="@+id/textView_age"
+            app:layout_constraintRight_toRightOf="parent" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="match_parent"
+        android:layout_height="3dp"
+        android:background="@color/colorPrimaryDark"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintLeft_toLeftOf="@+id/layout3"
+        app:layout_constraintTop_toBottomOf="@+id/layout3" />
+
+
+    <LinearLayout
+        android:id="@+id/layout4"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView3">
+
+        <TextView
+            android:id="@+id/textView_section"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/S_record"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="30sp" />
+
+        <TextView
+            android:id="@+id/textView_user_section"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="0"
+            android:lines="1"
+            android:textSize="30sp" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="match_parent"
+        android:layout_height="3dp"
+        android:background="@color/colorPrimaryDark"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintLeft_toLeftOf="@+id/layout4"
+        app:layout_constraintTop_toBottomOf="@+id/layout4" />
+
+
+    <TextView
+        android:id="@+id/textView_Int_medicine"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/Int_medicine"
+        android:layout_marginTop="10dp"
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="30sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView4" />
+
+
+    <LinearLayout
+        android:id="@+id/layout5"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintBottom_toTopOf="@+id/button_update_medicine"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView_Int_medicine">
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recyclerMedicine"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:layout_marginTop="8dp">
+
+        </android.support.v7.widget.RecyclerView>
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/button_update_medicine"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:layout_marginBottom="8dp"
+        android:background="@color/colorPrimaryDark"
+        android:gravity="center"
+        android:text="@string/update"
+        android:textSize="30sp"
+        app:layout_constraintBottom_toTopOf="@+id/button_back"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/button_back"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:background="@color/colorPrimaryDark"
+        android:gravity="center"
+        android:text="@string/back"
+        android:textSize="30sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+</android.support.constraint.ConstraintLayout>

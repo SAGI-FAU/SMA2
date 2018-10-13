@@ -11,7 +11,6 @@ import android.content.SharedPreferences;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 
 import android.widget.Button;
@@ -21,6 +20,8 @@ import android.widget.Toast;
 
 import com.sma2.sma2.DataAccess.DaoMaster;
 import com.sma2.sma2.DataAccess.DaoSession;
+import com.sma2.sma2.DataAccess.PatientDA;
+import com.sma2.sma2.DataAccess.PatientDataService;
 
 
 import org.greenrobot.greendao.database.Database;
@@ -28,14 +29,13 @@ import org.greenrobot.greendao.database.Database;
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
 
-    private int MY_PERMISSIONS_REQUEST_RECORD_AUDIO, MY_PERMISSIONS_REQUEST_WRITE_STORAGE;
 
     TextView tv_username;
     TextView tv_userid;
     Button bt_create;
     String username;
     String userid;
-    UserData userData;
+    PatientDA patientData;
 
 
     @Override
@@ -53,8 +53,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         tv_userid = findViewById(R.id.userid);
         bt_create = findViewById(R.id.button_create);
         setListeners();
-        ask_permissions();
-        DaoMaster.DevOpenHelper helper = new DaoMaster.DevOpenHelper(this, "apkinsondb");
+
+        DaoMaster.DevOpenHelper helper = new DaoMaster.DevOpenHelper(this, getString(R.string.databasename));
         Database db = helper.getWritableDb();
         DaoSession daoSession = new DaoMaster(db).newSession();
     }
@@ -73,6 +73,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 username = tv_username.getText().toString();
                 userid = tv_userid.getText().toString();
                 if(validate_data()){
+                    PatientDataService pds = new PatientDataService(getApplicationContext());
+                    pds.savePatient(patientData);
+                    patientData = pds.getPatient();
                     open_profile1();
                 }
                 break;
@@ -88,7 +91,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             Toast.makeText(this,R.string.userid_empty,Toast.LENGTH_SHORT).show();
             return false;
         }else{
-            userData = new UserData(username,userid);
+            patientData = new PatientDA(username, userid);
             return true;
         }
     }
@@ -105,34 +108,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
 
 
-    public void ask_permissions(){
-        if (ContextCompat.checkSelfPermission(this, Manifest.permission.RECORD_AUDIO)!= PackageManager.PERMISSION_GRANTED) {
-            if (ActivityCompat.shouldShowRequestPermissionRationale(this,
-                    Manifest.permission.RECORD_AUDIO)) {
-            } else {
-                // No explanation needed, we can request the permission.
-                ActivityCompat.requestPermissions(this,
-                        new String[]{Manifest.permission.RECORD_AUDIO},
-                        MY_PERMISSIONS_REQUEST_RECORD_AUDIO);
-            }
-        }
-        if (ContextCompat.checkSelfPermission(this,
-                Manifest.permission.WRITE_EXTERNAL_STORAGE)
-                != PackageManager.PERMISSION_GRANTED) {
-            if (ActivityCompat.shouldShowRequestPermissionRationale(this,
-                    Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
-            } else {
-                ActivityCompat.requestPermissions(this,
-                        new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
-                        MY_PERMISSIONS_REQUEST_WRITE_STORAGE);
-            }
-        }
-    }
 
 
     public void open_profile1(){
         Intent intent_profile1 = new Intent(this,Profile1Activity.class);
-        intent_profile1.putExtra("UserData", userData);
+        intent_profile1.putExtra("PatientData", patientData);
         startActivity(intent_profile1);
     }
 
