@@ -13,6 +13,7 @@ import com.sma2.sma2.ApplicationState;
 import com.sma2.sma2.MainActivity;
 import com.sma2.sma2.MainActivityMenu;
 import com.sma2.sma2.R;
+import com.sma2.sma2.ResultsActivity;
 
 public class SplashScreen extends AppCompatActivity {
 
@@ -22,7 +23,7 @@ public class SplashScreen extends AppCompatActivity {
         setContentView(R.layout.activity_splash_screen);
         //Skip splash screen if in dev-mode
         if (ApplicationState.appUnderDevelopment()) {
-            Intent intent = new Intent(SplashScreen.this, MainActivityMenu.class);
+            Intent intent = new Intent(SplashScreen.this, ResultsActivity.class);
             startActivity(intent);
         } else {
             ImageView empty_square = findViewById(R.id.empty_square);
