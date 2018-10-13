@@ -9,6 +9,7 @@ import android.os.Environment;
 import android.os.Handler;
 import android.util.Log;
 
+import com.sma2.sma2.DataAccess.SignalDA;
 import com.sma2.sma2.DataAccess.SignalDataService;
 
 import java.io.BufferedOutputStream;
@@ -34,6 +35,7 @@ public class TappingRecorder {
     private static Handler HANDLER;
     private CSVFileWriter mCSVFileWriter;
     private SignalDataService signalDataService;
+    private SignalDA signalDA;
 
     private static TappingRecorder recorder_instance=null;
 
@@ -54,6 +56,7 @@ public class TappingRecorder {
 
     public void TapHeaderWriter(String TaskName, int Flag) throws IOException{
         mCSVFileWriter = new CSVFileWriter(TaskName);
+        signalDA = new SignalDA(TaskName, mCSVFileWriter.getFileName());
 
         if (Flag==0) {
             String[] TAPPING_INFO_HEADER =  {"Task Name","TouchScreen Label",
@@ -80,9 +83,7 @@ public class TappingRecorder {
 
             mCSVFileWriter.writeData(TAPPING_DESCRIPTION_HEADER);
             mCSVFileWriter.writeData(TAPPING_DATA_HEADER);
-
         }
-
     }
 
     public String TappingFileName(){
@@ -96,7 +97,7 @@ public class TappingRecorder {
 
     public void CloseTappingDocument() throws IOException{
         mCSVFileWriter.close();
-        signalDataService.saveSignal(mCSVFileWriter.getSignalDA());
+        signalDataService.saveSignal(this.signalDA);
     }
 }
 

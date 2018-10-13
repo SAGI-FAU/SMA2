@@ -27,7 +27,7 @@ public class CSVFileWriter extends Thread {
     private static final String TAG = CSVFileWriter.class.getSimpleName();
     private String filename;
     private BufferedWriter mBufferedWriter = null;
-    private SignalDA signalDA;
+
 
     public CSVFileWriter(String exerciseName) throws IOException {
         String currTime = new SimpleDateFormat("yyyy-MM-dd_HH-mm", Locale.getDefault()).format(new Date());
@@ -35,7 +35,7 @@ public class CSVFileWriter extends Thread {
 
         File file = openFile(PATH, this.filename);
 
-        signalDA = new SignalDA(exerciseName, PATH+this.filename);
+
 
         try {
             mBufferedWriter = new BufferedWriter(new FileWriter(file));
@@ -73,7 +73,6 @@ public class CSVFileWriter extends Thread {
     public String getFileName() {
         return this.filename;
     }
-    public SignalDA getSignalDA() { return this.signalDA; }
 
     private File openFile(String path, String fileName) throws IOException {
         // check if directory exists and if not create it

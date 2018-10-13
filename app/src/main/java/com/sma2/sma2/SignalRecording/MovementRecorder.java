@@ -6,6 +6,7 @@ import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 
+import com.sma2.sma2.DataAccess.SignalDA;
 import com.sma2.sma2.DataAccess.SignalDataService;
 
 import java.io.IOException;
@@ -21,6 +22,7 @@ public class MovementRecorder implements SensorEventListener {
     private int mSamplingFrequency_us = SensorManager.SENSOR_DELAY_NORMAL;
     private CSVFileWriter mCSVFileWriter;
     private SignalDataService signalDataService;
+    private SignalDA signalDA;
 
     private CombinedSensorDataFrame combinedSensorDataFrame = null;
     private static boolean mEnableLogging = false;
@@ -43,8 +45,9 @@ public class MovementRecorder implements SensorEventListener {
         mOrientation = mSensorManager.getDefaultSensor(Sensor.TYPE_ROTATION_VECTOR);
 
         mCSVFileWriter = new CSVFileWriter(exercisName);
-
         signalDataService = new SignalDataService(context);
+        signalDA = new SignalDA(exercisName, mCSVFileWriter.getFileName());
+
 
         // generate header information
         mCSVFileWriter.writeData(SENSOR_INFO_HEADER);
@@ -97,7 +100,7 @@ public class MovementRecorder implements SensorEventListener {
         mSensorManager.unregisterListener(this);
         mEnableLogging = false;
         mCSVFileWriter.close();
-        signalDataService.saveSignal(mCSVFileWriter.getSignalDA());
+        signalDataService.saveSignal(signalDA);
         mSensorManager = null;
     }
 

@@ -3,6 +3,7 @@ package com.sma2.sma2.SignalRecording;
 import android.content.Context;
 import android.os.Handler;
 
+import com.sma2.sma2.DataAccess.SignalDA;
 import com.sma2.sma2.DataAccess.SignalDataService;
 import com.sma2.sma2.ExerciseFragments.Sliding;
 
@@ -22,6 +23,7 @@ public class SlidingRecorder {
     private static Handler HANDLER;
     private CSVFileWriter mCSVFileWriter;
     private SignalDataService signalDataService;
+    private SignalDA signalDA;
 
     private static SlidingRecorder recorder_instance = null;
 
@@ -41,6 +43,7 @@ public class SlidingRecorder {
 
     public void SlidingHeaderWriter(String TaskName) throws IOException {
         mCSVFileWriter = new CSVFileWriter(TaskName);
+        signalDA = new SignalDA(TaskName, mCSVFileWriter.getFileName());
 
 
             String[] SLIDING_INFO_HEADER = {"Task Name", "Position", "ReachTime"};
@@ -67,7 +70,7 @@ public class SlidingRecorder {
 
     public void CloseSlidingDocument() throws IOException{
         mCSVFileWriter.close();
-        signalDataService.saveSignal(mCSVFileWriter.getSignalDA());
+        signalDataService.saveSignal(signalDA);
     }
 
 
