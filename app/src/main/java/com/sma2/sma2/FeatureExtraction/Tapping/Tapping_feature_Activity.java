@@ -48,6 +48,7 @@ public class Tapping_feature_Activity extends AppCompatActivity {
         if(path_tapping==null){
             tNumber_Taps.setText(R.string.Empty);
             tTapping_time_hits.setText(R.string.Empty);
+            
         }
         else{
             tNumber_Taps.setText( String.valueOf(Count_Touch_one.size()));
