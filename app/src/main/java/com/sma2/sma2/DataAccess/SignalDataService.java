@@ -11,11 +11,11 @@ public class SignalDataService {
     }
 
     public void saveSignal(){
-        SignalDA tmp = new SignalDA(signal); todo change the real thing
+//        SignalDA tmp = new SignalDA(signal); todo change the real thing
         DaoMaster.DevOpenHelper helper = new DaoMaster.DevOpenHelper(invocationcontext, "apkinsondb");
         Database db = helper.getWritableDb();
         DaoSession session = new DaoMaster(db).newSession();
-        session.getSignalDADao().save(tmp);//todo change the real thing
+//        session.getSignalDADao().save(tmp);//todo change the real thing
         db.close();
     }
 
@@ -34,13 +34,13 @@ public class SignalDataService {
         session.getSignalDADao().delete(signal);
         db.close();
     }
-    public SignalDataService.Signal getSignal(){
-        DaoMaster.DevOpenHelper helper = new DaoMaster.DevOpenHelper(invocationcontext, "apkinsondb");
-        Database db = helper.getReadableDb();
-        DaoSession session = new DaoMaster(db).newSession();
-        SignalDADao dao = session.getSignalDADao();
-        SignalDA signal = dao.queryBuilder().list().get(0);
-        db.close();
-        return new SignalDataService.Signal();//todo
-    }
+//    public SignalDataService.Signal getSignal(){
+//        DaoMaster.DevOpenHelper helper = new DaoMaster.DevOpenHelper(invocationcontext, "apkinsondb");
+//        Database db = helper.getReadableDb();
+//        DaoSession session = new DaoMaster(db).newSession();
+//        SignalDADao dao = session.getSignalDADao();
+//        SignalDA signal = dao.queryBuilder().list().get(0);
+//        db.close();
+//        return new SignalDataService.Signal();//todo
+//    }
 }
