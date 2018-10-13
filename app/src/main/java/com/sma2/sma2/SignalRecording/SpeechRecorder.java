@@ -15,6 +15,9 @@ import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
 
+import com.sma2.sma2.DataAccess.PatientDataService;
+import com.sma2.sma2.DataAccess.SignalDA;
+import com.sma2.sma2.DataAccess.SignalDataService;
 import com.sma2.sma2.R;
 
 import java.io.BufferedOutputStream;
@@ -40,10 +43,14 @@ public class SpeechRecorder {
     private static File FILE_PCM;
     private static File FILE_WAV;
 
+    private SignalDataService signalDataService;
+    private SignalDA signalDA;
+
     private int minBufferSize;
 
     private SpeechRecorder(Context context, Handler handler){
         CONTEXT = context;
+        signalDataService = new SignalDataService(context);
         HANDLER = handler;
         AUDIO_FOLDER = new File(Environment.getExternalStorageDirectory() + File.separator + CONTEXT.getString(R.string.app_name) + File.separator + "AUDIO");
         if(!AUDIO_FOLDER.exists()){
@@ -75,6 +82,7 @@ public class SpeechRecorder {
         String date = getCurrentDateAsString();
         FILE_PCM  = new File(AUDIO_FOLDER.getAbsolutePath() + File.separator + date + "_" + exercise + ".pcm");
         FILE_WAV  = new File(AUDIO_FOLDER.getAbsolutePath() + File.separator + date + "_" + exercise + ".wav");
+        signalDA = new SignalDA(exercise,AUDIO_FOLDER.getAbsolutePath() + File.separator + date + "_" + exercise + ".wav");
         try {
             FILE_PCM.createNewFile();
         } catch (IOException e) {
@@ -149,6 +157,9 @@ public class SpeechRecorder {
             return "Cannot stop recording. Not recording at the moment.";
         }
         AUDIO_RECORD.stop();
+        PatientDataService pd = new PatientDataService(CONTEXT);
+        signalDA.setPatientDAId(pd.getPatient().getUserId());
+        signalDataService.saveSignal(signalDA);
         return "Stopped recording";
     }
 
