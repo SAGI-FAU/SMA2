@@ -109,10 +109,10 @@ public class Profile2Activity extends AppCompatActivity implements View.OnClickL
     }
 
     private boolean AddMedicine() {
-        PatientDataService pds = new PatientDataService(getApplicationContext());
+//        PatientDataService pds = new PatientDataService(getApplicationContext());
         MedicineDataService mds = new MedicineDataService(getApplicationContext());
 
-        long patientid = pds.getPatient().getUserId();
+        long patientid = patientData.getUserId();
         MedicineDA da = new MedicineDA(medicine_name, dose, hour_intake, patientid);
         if(medicineDataArrayList.contains(da)){
             Toast.makeText(this,R.string.add_medice_error,Toast.LENGTH_SHORT).show();

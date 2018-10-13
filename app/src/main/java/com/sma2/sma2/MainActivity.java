@@ -54,7 +54,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         bt_create = findViewById(R.id.button_create);
         setListeners();
 
-        DaoMaster.DevOpenHelper helper = new DaoMaster.DevOpenHelper(this, "apkinsondb");
+        DaoMaster.DevOpenHelper helper = new DaoMaster.DevOpenHelper(this, getString(R.string.databasename));
         Database db = helper.getWritableDb();
         DaoSession daoSession = new DaoMaster(db).newSession();
     }
@@ -73,9 +73,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 username = tv_username.getText().toString();
                 userid = tv_userid.getText().toString();
                 if(validate_data()){
-                    open_profile1();
                     PatientDataService pds = new PatientDataService(getApplicationContext());
-                    pds.savePatient(new PatientDA(username, userid));
+                    pds.savePatient(patientData);
+                    patientData = pds.getPatient();
+                    open_profile1();
                 }
                 break;
 
