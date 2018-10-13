@@ -18,6 +18,7 @@ public class MovementRecorder implements SensorEventListener {
     private Sensor mOrientation;
     private int mSamplingFrequency_us = SensorManager.SENSOR_DELAY_NORMAL;
     private CSVFileWriter mCSVFileWriter;
+    private boolean recorderRunning = false;
 
     private CombinedSensorDataFrame combinedSensorDataFrame = null;
     private static boolean mEnableLogging = false;
@@ -49,7 +50,7 @@ public class MovementRecorder implements SensorEventListener {
         mCSVFileWriter.writeData(getSensorInfoStringArray(mOrientation));
 
         mCSVFileWriter.writeData(SENSOR_DATA_HEADER);
-
+        recorderRunning = false;
     }
 
     public String getFileName() {
@@ -82,6 +83,7 @@ public class MovementRecorder implements SensorEventListener {
         if (mOrientation != null) {
             mSensorManager.registerListener(this, mOrientation, mSamplingFrequency_us);
         }
+        recorderRunning = true;
     }
 
     public void startLogging() {
@@ -89,10 +91,13 @@ public class MovementRecorder implements SensorEventListener {
     }
 
     public void stop() throws IOException {
-        mSensorManager.unregisterListener(this);
-        mEnableLogging = false;
-        mCSVFileWriter.close();
-        mSensorManager = null;
+        if(recorderRunning) {
+            recorderRunning = false;
+            mSensorManager.unregisterListener(this);
+            mSensorManager = null;
+            mEnableLogging = false;
+            mCSVFileWriter.close();
+        }
     }
 
     public void onAccuracyChanged(Sensor sensor, int accuracy) {
