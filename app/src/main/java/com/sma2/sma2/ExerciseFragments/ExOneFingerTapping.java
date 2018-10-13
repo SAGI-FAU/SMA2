@@ -28,20 +28,6 @@ public class ExOneFingerTapping extends ExerciseFragment implements View.OnClick
     int screenHeight, screenWidth;
     long startTime;
 
-    public ExOneFingerTapping() {
-        // Required empty public constructor
-    }
-
-    public static ExOneFingerTapping newInstance(String param1, String param2) {
-        ExOneFingerTapping fragment = new ExOneFingerTapping();
-        return fragment;
-    }
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-    }
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
