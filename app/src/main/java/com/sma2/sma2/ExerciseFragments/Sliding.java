@@ -45,10 +45,7 @@ public class Sliding extends AppCompatActivity implements View.OnClickListener {
             Log.e("SlidingHeaderWriter", e.toString());
         }
         SlidingFileName=slidingrecorder.SlidingFileName();
-        final TextView mTextField = findViewById(R.id.accgraph_chrono5);
-
-        //mTextField.setText(String.valueOf(getResources().getString(R.string.start2)));
-
+        
         setContentView(R.layout.activity_capture_sliding);
         setListeners();
     }
