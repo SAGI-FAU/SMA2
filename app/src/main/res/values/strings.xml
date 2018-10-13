@@ -109,5 +109,6 @@
     <string name="delete">DELETE</string>
     <string name="cancel">CANCEL</string>
     <string name="save">SAVE</string>
+    <string name="motivate">Good Job!</string>
 
 </resources>
