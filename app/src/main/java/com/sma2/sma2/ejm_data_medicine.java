@@ -7,6 +7,7 @@ public class ejm_data_medicine {
     private int time;
 
     public ejm_data_medicine(String medicine, int doses, int time) {
+        //TODO : It is necessary to test but then it can be eliminated.
         this.medicine = medicine;
         this.doses = doses;
         this.time = time;

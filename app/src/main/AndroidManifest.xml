@@ -129,7 +129,8 @@
             android:name=".MainActivityMenu">
         </activity>
         <activity
-            android:name=".ProfileActivity">
+            android:name=".ProfileActivity"
+            android:screenOrientation="portrait">
         </activity>
         <activity
             android:name=".UpdateMedicine">
