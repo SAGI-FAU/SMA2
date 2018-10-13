@@ -23,7 +23,7 @@ public class SplashScreen extends AppCompatActivity {
         setContentView(R.layout.activity_splash_screen);
         //Skip splash screen if in dev-mode
         if (ApplicationState.appUnderDevelopment()) {
-            Intent intent = new Intent(SplashScreen.this, ResultsActivity.class);
+            Intent intent = new Intent(SplashScreen.this, MainActivityMenu.class);
             startActivity(intent);
         } else {
             ImageView empty_square = findViewById(R.id.empty_square);
