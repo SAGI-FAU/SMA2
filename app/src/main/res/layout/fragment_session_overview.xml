@@ -55,7 +55,7 @@
         android:layout_marginBottom="20dp"
         android:background="@color/colorPrimaryDark"
         android:text="@string/session_start"
-        android:textSize="30sp"
+        android:textSize="@dimen/button_text_size"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintDimensionRatio="2"
         app:layout_constraintEnd_toEndOf="parent"

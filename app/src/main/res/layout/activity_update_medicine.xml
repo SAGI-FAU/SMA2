@@ -42,7 +42,7 @@
         android:background="@color/colorPrimaryDark"
         android:gravity="center"
         android:text="@string/add_medicine"
-        android:textSize="30sp"
+        android:textSize="@dimen/button_text_size"
         app:layout_constraintBottom_toTopOf="@+id/button_back1"
         app:layout_constraintLeft_toLeftOf="@+id/recycler_update" />
 
@@ -54,7 +54,7 @@
         android:background="@color/colorPrimaryDark"
         android:gravity="center"
         android:text="@string/back"
-        android:textSize="30sp"
+        android:textSize="@dimen/button_text_size"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />

@@ -93,7 +93,7 @@
         android:layout_height="wrap_content"
         android:background="@color/colorPrimaryDark"
         android:text="@string/update"
-        android:textSize="30sp"
+        android:textSize="@dimen/button_text_size"
         app:layout_constraintTop_toBottomOf="@+id/language_radio"
         android:layout_marginTop="50sp"
         app:layout_constraintLeft_toLeftOf="parent" />
