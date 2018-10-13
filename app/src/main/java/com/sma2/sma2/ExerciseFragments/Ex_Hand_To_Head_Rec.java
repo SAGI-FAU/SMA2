@@ -31,6 +31,17 @@ public class Ex_Hand_To_Head_Rec extends ExerciseFragment implements ButtonFragm
     }
 
     @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        try {
+            recorder = new MovementRecorder(this.getContext(), SAMPLING_FREQUENCY, mExercise.getName());
+            recorder.registerListeners();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_ex_hand_to_head_rec, container, false);
@@ -43,12 +54,6 @@ public class Ex_Hand_To_Head_Rec extends ExerciseFragment implements ButtonFragm
         countdown_finished_txt = getResources().getString(R.string.start2);
         countdownTextView = view.findViewById(R.id.countdownTimerTextView);
         countdownTextView.setText(String.valueOf(START_COUNTDOWN));
-        try {
-            recorder = new MovementRecorder(this.getContext(), SAMPLING_FREQUENCY, mExercise.getName());
-            recorder.registerListeners();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
         return view;
     }
 
