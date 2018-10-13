@@ -25,8 +25,10 @@ public class ExOneFingerTapping extends ExerciseFragment implements View.OnClick
     private TextView chronoText;
     private ConstraintLayout background;
     private ImageButton tapButton;
-    int screenHeight, screenWidth;
-    long startTime;
+    private int screenHeight, screenWidth;
+    private long lastTime;
+    private CountDownTimer timer;
+    private static final long TOTAL_TIME =  10000;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -41,14 +43,15 @@ public class ExOneFingerTapping extends ExerciseFragment implements View.OnClick
 
         filePath = tappingrecorder.TappingFileName();
         chronoText = view.findViewById(R.id.chronoTapOne);
+        chronoText.setText(String.valueOf((float) TOTAL_TIME / 1000));
         background = view.findViewById(R.id.backgroundExTapOne);
         view.findViewById(R.id.bugTapOne).setOnClickListener(this);
         tapButton = view.findViewById(R.id.bugTapOne);
         tapButton.setOnClickListener(this);
         getDisplayDimensions();
         setListener();
-        setTimer();
-
+        timer = setTimer();
+        change_button_position();
         return view;
     }
 
@@ -72,9 +75,9 @@ public class ExOneFingerTapping extends ExerciseFragment implements View.OnClick
                     double distanceTouchButton = Math.sqrt(Math.pow((xTap1 - xScreen), 2) + Math.pow((yTap1 - yScreen), 2));
 
                     data[0] = "0";
-                    data[1] = String.valueOf(System.currentTimeMillis() - startTime);
+                    data[1] = String.valueOf(System.currentTimeMillis() - lastTime);
                     data[2] = Double.toString(distanceTouchButton);
-                    startTime = System.currentTimeMillis(); //To update the initial time
+                    lastTime = System.currentTimeMillis(); //To update the initial time
 
 
                     tappingrecorder.TapWriter(data);
@@ -85,8 +88,8 @@ public class ExOneFingerTapping extends ExerciseFragment implements View.OnClick
         });
     }
 
-    private void setTimer() {
-        new CountDownTimer(10000, 100) {
+    private CountDownTimer setTimer() {
+        return new CountDownTimer(TOTAL_TIME, 100) {
 
             // Here, it is computed the difference between the last time in which
             // you push the button and the time you are pushing the button
@@ -105,8 +108,7 @@ public class ExOneFingerTapping extends ExerciseFragment implements View.OnClick
                 }
                 mListener.onExerciseFinished(filePath);
             }
-        }.start();
-        startTime = System.currentTimeMillis();
+        };
     }
 
     private void getDisplayDimensions() {
@@ -121,20 +123,30 @@ public class ExOneFingerTapping extends ExerciseFragment implements View.OnClick
     @Override
     public void onDetach() {
         super.onDetach();
+        timer.cancel();
     }
 
     @SuppressLint("ClickableViewAccessibility")
     @Override
     public void onClick(View view) {
-        String [] data= new String[3];
-        Vibrator vib = (Vibrator) getActivity().getSystemService(Context.VIBRATOR_SERVICE);
-        vib.vibrate(200);
-        data[0]="1";
-        data[1]=String.valueOf(System.currentTimeMillis() - startTime);
-        data[2]="0";
-        startTime = System.currentTimeMillis();
-        tappingrecorder.TapWriter(data);
-        change_button_position();
+        if (!recording){
+            recording = true;
+            lastTime = System.currentTimeMillis();
+            timer.start();
+            Vibrator vib = (Vibrator) getActivity().getSystemService(Context.VIBRATOR_SERVICE);
+            vib.vibrate(200);
+            change_button_position();
+        } else {
+            String[] data = new String[3];
+            Vibrator vib = (Vibrator) getActivity().getSystemService(Context.VIBRATOR_SERVICE);
+            vib.vibrate(200);
+            data[0] = "1";
+            data[1] = String.valueOf(System.currentTimeMillis() - lastTime);
+            data[2] = "0";
+            lastTime = System.currentTimeMillis();
+            tappingrecorder.TapWriter(data);
+            change_button_position();
+        }
     }
 
     public void change_button_position(){
