@@ -53,6 +53,7 @@ public class Ex_Walking_Rec extends ExerciseFragment implements ButtonFragment.O
         transaction.commit();
         countdown_finished_txt = getResources().getString(R.string.start2);
         countdownTextView = view.findViewById(R.id.countdownTimerTextView);
+        countdownTextView.setText(String.valueOf(START_COUNTDOWN));
         return view;
     }
 
