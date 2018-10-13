@@ -66,6 +66,7 @@ public class MainActivityMenu extends AppCompatActivity implements View.OnClickL
             case R.id.txtResults:
                 open_results();
                 break;
+                
 
         }
     }
