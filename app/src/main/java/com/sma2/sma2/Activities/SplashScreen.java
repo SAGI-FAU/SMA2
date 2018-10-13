@@ -24,6 +24,7 @@ public class SplashScreen extends AppCompatActivity {
         if (ApplicationState.appUnderDevelopment()) {
             Intent intent = new Intent(SplashScreen.this, MainActivityMenu.class);
             startActivity(intent);
+            finish();
         } else {
             ImageView empty_square = findViewById(R.id.empty_square);
             ImageView tulip_elevated = findViewById(R.id.tulip_elevated);
@@ -65,6 +66,7 @@ public class SplashScreen extends AppCompatActivity {
                 public void run() {
                     Intent intent = new Intent(SplashScreen.this, MainActivity.class);
                     startActivity(intent);
+                    finish();
                 }
             }, 6000);
         }
