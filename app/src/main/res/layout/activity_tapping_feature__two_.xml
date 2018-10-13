@@ -12,7 +12,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/Tapping_two"
+            android:text="@string/tapping_2"
             android:gravity="center"
             android:textSize="25dp"
             />
@@ -98,7 +98,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/Finger_left"
+                android:text="@string/Finger_right"
                 android:gravity="center"
                 android:textSize="25dp"
                 />
