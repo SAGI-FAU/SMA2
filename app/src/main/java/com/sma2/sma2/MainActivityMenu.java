@@ -60,6 +60,14 @@ public class MainActivityMenu extends AppCompatActivity implements View.OnClickL
             case R.id.txtExercises:
                 open_exercises();
                 break;
+            case R.id.btnResults:
+                open_results();
+                break;
+            case R.id.txtResults:
+                open_results();
+                break;
+                
+
         }
     }
 
@@ -81,6 +89,11 @@ public class MainActivityMenu extends AppCompatActivity implements View.OnClickL
         Intent intent_profile =new Intent(MainActivityMenu.this, ProfileActivity.class);
         startActivity(intent_profile);
     }
+    public void open_results(){
+        Intent intent_results =new Intent(MainActivityMenu.this, ResultsActivity.class);
+        startActivity(intent_results);
+    }
+
 
     public static boolean hasPermissions(Context context, String... permissions) {
         if (context != null && permissions != null) {
