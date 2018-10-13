@@ -20,6 +20,7 @@ import com.sma2.sma2.SignalRecording.SpeechRecorder;
 
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.Locale;
 
 
 public class ExReadText extends ExerciseFragment implements ButtonFragment.OnButtonInteractionListener {
@@ -61,7 +62,11 @@ public class ExReadText extends ExerciseFragment implements ButtonFragment.OnBut
         TextExercise exercise = null;
         while ((line = parser.parseLine(reader.readNext()[0])) != null){
             //For now just take first entry and return
-            exercise = new TextExercise(line[0], languages[0], 1);
+            String lang=Locale.getDefault().getDisplayLanguage();
+            if (lang.equals("español"))
+                exercise = new TextExercise(line[1], languages[1], 1);
+            else
+                exercise = new TextExercise(line[0], languages[0], 1);
             break;
         }
         return exercise;
