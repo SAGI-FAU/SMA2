@@ -88,6 +88,8 @@ public class ExOneFingerTapping extends ExerciseFragment implements View.OnClick
                     data[0] = "0";
                     data[1] = String.valueOf(System.currentTimeMillis() - startTime);
                     data[2] = Double.toString(distanceTouchButton);
+                    startTime = System.currentTimeMillis(); //To update the initial time
+
 
                     tappingrecorder.TapWriter(data);
                     return true;
@@ -125,6 +127,7 @@ public class ExOneFingerTapping extends ExerciseFragment implements View.OnClick
 
     private void getDisplayDimensions() {
         Display display = getActivity().getWindowManager().getDefaultDisplay();
+
         Point size = new Point();
         display.getSize(size);
         screenWidth = size.x;
@@ -145,6 +148,7 @@ public class ExOneFingerTapping extends ExerciseFragment implements View.OnClick
         data[0]="1";
         data[1]=String.valueOf(System.currentTimeMillis() - startTime);
         data[2]="0";
+        startTime = System.currentTimeMillis();
         tappingrecorder.TapWriter(data);
         change_button_position();
     }
