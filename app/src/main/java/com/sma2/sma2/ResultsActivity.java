@@ -29,6 +29,8 @@ public class ResultsActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_results);
+        bTapping_one=findViewById(R.id.bTapping_one);
+        bTapping_two=findViewById(R.id.bTapping_two);
     }
 
     public void onButtonClicked_Tapping_one(View view) {
