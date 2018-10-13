@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v4.app.FragmentTransaction;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -65,8 +66,9 @@ public class ExReadText extends ExerciseFragment implements ButtonFragment.OnBut
         List<TextExercise> exercises = new ArrayList<>();
         int locale = getCurrentLocale(languages);
         while ((line = reader.readNext()) != null){
-            line = parser.parseLine(line[0]);
+            line = parser.parseLine(TextUtils.join("",line));
             exercises.add(new TextExercise(line[locale], languages[locale], 1));
+
         }
         Random rand = new Random();
         return exercises.get(rand.nextInt(exercises.size()));
