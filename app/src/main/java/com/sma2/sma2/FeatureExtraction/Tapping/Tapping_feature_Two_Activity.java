@@ -19,7 +19,8 @@ import java.util.ArrayList;
 public class Tapping_feature_Two_Activity extends AppCompatActivity {
     TextView  tNumber_Taps, tTapping_time, tTapping_time_hits, tTapping_time_hits2;
     ImageView iEmojiLeft,iEmojiRight;
-    String path_tapping = "/storage/emulated/0/AppSpeechData/ACC/Tapping_example2.csv";
+    String path_tapping = null; //To Do
+            //"/storage/emulated/0/AppSpeechData/ACC/Tapping_example2.csv";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

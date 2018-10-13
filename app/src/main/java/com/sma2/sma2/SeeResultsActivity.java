@@ -1,4 +1,4 @@
-package com.sma2.sma2.FeatureExtraction.Tapping;
+package com.sma2.sma2;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
@@ -6,8 +6,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
-import com.sma2.sma2.MainActivityMenu;
-import com.sma2.sma2.R;
+import com.sma2.sma2.FeatureExtraction.Tapping.Tapping_feature_Activity;
+import com.sma2.sma2.FeatureExtraction.Tapping.Tapping_feature_Two_Activity;
 
 public class SeeResultsActivity extends AppCompatActivity {
     Button bTapping_one, bTapping_two;
@@ -15,7 +15,7 @@ public class SeeResultsActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_see_results);
+        setContentView(R.layout.activity_results);
         bTapping_one=findViewById(R.id.bTapping_one);
         bTapping_two=findViewById(R.id.bTapping_two);
 
