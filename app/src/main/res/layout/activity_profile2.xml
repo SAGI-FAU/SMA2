@@ -24,7 +24,7 @@
 
     <Spinner
         android:id="@+id/spinnerEducation"
-        android:layout_width="170sp"
+        android:layout_width="100sp"
         android:layout_height="wrap_content"
         android:layout_marginTop="25dp"
         android:hint="@string/education"
@@ -136,7 +136,7 @@
         android:background="@color/colorPrimaryDark"
         android:text="@string/next"
         android:layout_marginTop="90sp"
-        android:textSize="50sp"
+        android:textSize="30sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintRight_toRightOf="parent" />
 
@@ -147,7 +147,7 @@
         android:background="@color/colorPrimaryDark"
         android:text="@string/back"
         android:layout_marginTop="90sp"
-        android:textSize="50sp"
+        android:textSize="30sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent" />
 
