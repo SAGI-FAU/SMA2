@@ -8,6 +8,9 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <style name="button" parent="@android:style/Widget.TextView">
+        <item name="android:textSize">@dimen/button_text_size</item>
+    </style>
 
     <style name="MySeekBar" parent="Widget.AppCompat.SeekBar">
         <item name="android:progressBackgroundTint">#f4511e</item>
