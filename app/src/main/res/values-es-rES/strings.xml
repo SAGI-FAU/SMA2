@@ -89,7 +89,7 @@
     <string name="dose_empty">"Por favor, introduzca la dosis "</string>
     <string name="add_medice_error">La medicina fue agregada</string>
     <string name="medicine_added">Agregada de forma exitosa</string>
-    <string name="time_diagnosis_error">Por favor, introduzca  el tiempo de diagnostico</string>
+    <string name="time_diagnosis_error">Por favor, introduzca  el tiempo de diagnóstico</string>
     <string name="weight_error">Por favor, introduzca su peso</string>
     <string name="height_eror">Por favor, introduzca su estatura</string>
     <string name="again">Repetir</string>
