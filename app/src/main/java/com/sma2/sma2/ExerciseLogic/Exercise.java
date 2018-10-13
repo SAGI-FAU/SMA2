@@ -1,0 +1,144 @@
+package com.sma2.sma2.ExerciseLogic;
+
+import android.net.Uri;
+import android.os.Parcel;
+import android.os.Parcelable;
+import android.support.v4.app.Fragment;
+
+import com.sma2.sma2.ExerciseFragments.ExerciseFragment;
+
+
+public class Exercise implements Parcelable {
+    private int id;
+    private String name;
+    private String exerciseType;
+    private String shortDescription;
+    private String shortInstructions;
+    private Uri instructionVideoPath;
+    private Uri instructionTextPath;
+    private Class<? extends ExerciseFragment> fragmentClass;
+
+    public Exercise(int id,
+                    String name,
+                    String exerciseType,
+                    String shortDescription,
+                    String shortInstructions,
+                    Uri instructionVideoPath,
+                    Uri instructionTextPath,
+                    Class<? extends ExerciseFragment> fragmentClass){
+        super();
+        this.id = id;
+        this.name = name;
+        this.exerciseType = exerciseType;
+        this.shortDescription = shortDescription;
+        this.shortInstructions = shortInstructions;
+        this.instructionVideoPath = instructionVideoPath;
+        this.instructionTextPath = instructionTextPath;
+        this.fragmentClass = fragmentClass;
+    }
+
+    public Exercise(int id,
+                    String name,
+                    String exerciseType,
+                    String shortDescription,
+                    String shortInstructions,
+                    Uri instructionVideoPath,
+                    Uri instructionTextPath,
+                    String fragmentClassString){
+        this(
+                id,
+                name,
+                exerciseType,
+                shortDescription,
+                shortInstructions,
+                instructionVideoPath,
+                instructionTextPath,
+                getFragmentFromString(fragmentClassString));
+    }
+
+    public Exercise(Parcel serializedExercise) {
+        super();
+        this.id = serializedExercise.readInt();
+        this.name = serializedExercise.readString();
+        this.exerciseType = serializedExercise.readString();
+        this.shortDescription = serializedExercise.readString();
+        this.shortInstructions = serializedExercise.readString();
+        this.instructionVideoPath = Uri.parse(serializedExercise.readString());
+        this.instructionTextPath = Uri.parse(serializedExercise.readString());
+        this.fragmentClass = getFragmentFromString(serializedExercise.readString());
+
+    }
+
+    static private Class<? extends ExerciseFragment> getFragmentFromString(String fragmentClassString) {
+        Class<? extends ExerciseFragment> fragmentClass;
+        try {
+            fragmentClass = Class.forName(fragmentClassString).asSubclass(ExerciseFragment.class);
+        } catch (Exception e) {
+            throw new RuntimeException("The specified Fragment class for this exercise is invalid.");
+        }
+        return fragmentClass;
+    }
+
+    static private String getStringFromFragment(Class<? extends Fragment> fragmentClass) {
+        return fragmentClass.getName();
+    }
+
+    public static final Parcelable.Creator CREATOR = new Parcelable.Creator() {
+        public Exercise createFromParcel(Parcel serializedExercise) {
+            return new Exercise(serializedExercise);
+        }
+
+        public Exercise[] newArray(int size) {
+            return new Exercise[size];
+        }
+    };
+
+    public int getId() {
+        return id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public Uri getInstructionVideoPath() {
+        return instructionVideoPath;
+    }
+
+    public Class<? extends ExerciseFragment> getFragmentClass() {
+        return fragmentClass;
+    }
+
+    public Uri getInstructionTextPath() {
+        return instructionTextPath;
+    }
+
+    public String getExerciseType() {
+        return exerciseType;
+    }
+
+    public String getShortDescription() {
+        return shortDescription;
+    }
+
+    public String getShortInstructions() {
+        return shortInstructions;
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel parcel, int i) {
+        parcel.writeInt(this.id);
+        parcel.writeString(this.name);
+        parcel.writeString(this.exerciseType);
+        parcel.writeString(this.shortDescription);
+        parcel.writeString(this.shortInstructions);
+        parcel.writeString(this.instructionTextPath.toString());
+        parcel.writeString(this.instructionVideoPath.toString());
+        parcel.writeString(getStringFromFragment(this.fragmentClass));
+    }
+}
