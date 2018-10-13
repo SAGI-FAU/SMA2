@@ -103,11 +103,11 @@
     <string name="missing_permissions_title">Missing Permissions!</string>
     <string name="missing_permissions_text">You must grant permissions to record audio and write to storage to use the exercises!</string>
     <string name="OK">OK</string>
-    <string name="user_name">Name :</string>
-    <string name="user_id">ID :</string>
-    <string name="user_age">Age :</string>
-    <string name="S_record">Recorded session :</string>
-    <string name="Int_medicine">Intake medicine :</string>
+    <string name="user_name">Name: </string>
+    <string name="user_id">ID: </string>
+    <string name="user_age">Age: </string>
+    <string name="S_record">Recorded session: </string>
+    <string name="Int_medicine">Intake medicine: </string>
     <string name="upd_medicine">Update medicine</string>
     <string name="add_medicine">ADD MEDICINE</string>
     <string name="delete">DELETE</string>
@@ -121,7 +121,7 @@
     <string name="One_Finger_Tapping">One Finger Tapping</string>
     <string name="Finger_left">Finger Left</string>
     <string name="Finger_right">Finger Right</string>
-    <string name="Hits_porcentage">Hits Porcentage</string>
+    <string name="Hits_porcentage">Hits Percentage</string>
     <string name="Tapping_Time">Tapping Time </string>
 
 
