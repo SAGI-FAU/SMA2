@@ -52,6 +52,7 @@ public class ScheduledExercise implements Parcelable {
     @Keep
     public ScheduledExercise(Exercise exercise, int sessionId, long completionDate, Uri resultPath) {
         this.exercise = exercise;
+        this.exerciseId = exercise.getId();
         this.sessionId = sessionId;
         this.completionDate = completionDate;
         this.resultPath = resultPath;
@@ -59,7 +60,9 @@ public class ScheduledExercise implements Parcelable {
 
     @Keep
     public ScheduledExercise(Exercise exercise, int sessionId) {
+        this.id=null;
         this.exercise = exercise;
+        this.exerciseId=exercise.getId();
         this.sessionId = sessionId;
         this.completionDate = -1;
         this.resultPath = Uri.parse("");
