@@ -19,36 +19,44 @@ import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 public class Tapping_feature_Activity extends AppCompatActivity {
-    TextView  tNumber_Taps,tTapping_time_hits,tMessage;
+    TextView  tNumber_Taps,tTapping_time_hits,tMessage,tTapping_Time;
     ImageView iEmojin;
     String path_tapping = null; // To Do
-            //"/storage/emulated/0/AppSpeechData/ACC/Tapping_example.csv";
+    //"/storage/emulated/0/AppSpeechData/ACC/Tapping_example.csv";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tapping_feature_);
-
         tNumber_Taps = findViewById(R.id.tNumber_Taps);
         tTapping_time_hits=findViewById(R.id.tTapping_time_hits);
         iEmojin=findViewById(R.id.iEmojin);
         tMessage=findViewById(R.id.tmessage);
+        tTapping_Time=findViewById(R.id.tTapping_time);
+
         DecimalFormat df = new DecimalFormat("#.00");
 
         ArrayList<Double> Count_Touch_one=read_csv(path_tapping,0);// The index tells me which column I should access
         ArrayList<Double> Delay_one=read_csv(path_tapping,2);
         ArrayList<Double> Distance_one=read_csv(path_tapping,1);
-        double delay_hits_two= delay_hits_Tapping_one(Count_Touch_one,Delay_one);
+        double delay_hits_one= delay_hits_Tapping_one(Count_Touch_one,Delay_one);
         float Count_one=Count_ladybug_one(Count_Touch_one);
-
         float dimention=pixeltomm((float)average_funtion(Distance_one));
         float Hist_Porcentage= Count_one;
         String Distance_error=df.format(dimention);
         String Tapping_time_total=df.format(average_funtion(Delay_one));
-        tNumber_Taps.setText( String.valueOf(Count_Touch_one.size()));
-        tTapping_time_hits.setText( String.valueOf(df.format(delay_hits_two))+ " ms");
+
+        if(path_tapping == null){
+            tTapping_time_hits.setText("Empty");
+            tNumber_Taps.setText("Empty");
+        }
+        else{
+            tNumber_Taps.setText( String.valueOf(Count_Touch_one.size()));
+            tTapping_time_hits.setText( String.valueOf(df.format(delay_hits_one))+ " ms");
+            tTapping_Time.setText(Tapping_time_total+" ms");
+
+        }
         if( Hist_Porcentage>= 70){
             iEmojin.setImageResource(R.drawable.happy_emojin);
-
             Animation animation=AnimationUtils.loadAnimation(this,R.anim.zoomin);
             iEmojin.startAnimation(animation);
             tMessage.setText("Good Job");
@@ -57,7 +65,6 @@ public class Tapping_feature_Activity extends AppCompatActivity {
         }
         else if (Hist_Porcentage >=30){
             iEmojin.setImageResource(R.drawable.medium_emojin);
-
             Animation animation=AnimationUtils.loadAnimation(this,R.anim.zoomin);
             iEmojin.startAnimation(animation);
             tMessage.setText("Good Job \nBut, You can get better\n");

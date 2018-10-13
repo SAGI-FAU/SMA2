@@ -9,7 +9,7 @@ import android.widget.Button;
 import com.sma2.sma2.FeatureExtraction.Tapping.Tapping_feature_Activity;
 import com.sma2.sma2.FeatureExtraction.Tapping.Tapping_feature_Two_Activity;
 
-public class SeeResultsActivity extends AppCompatActivity {
+public class ResultsActivity extends AppCompatActivity {
     Button bTapping_one, bTapping_two;
 
     @Override
@@ -22,13 +22,13 @@ public class SeeResultsActivity extends AppCompatActivity {
     }
 
     public void onButtonClicked_Tapping_one(View view) {
-        Intent i =new Intent(SeeResultsActivity.this, Tapping_feature_Activity.class);
+        Intent i =new Intent(ResultsActivity.this, Tapping_feature_Activity.class);
         startActivity(i);
     }
 
 
     public void onButtonClicked_Tapping_two(View view) {
-        Intent i =new Intent(SeeResultsActivity.this, Tapping_feature_Two_Activity.class);
+        Intent i =new Intent(ResultsActivity.this, Tapping_feature_Two_Activity.class);
         startActivity(i);
     }
 }

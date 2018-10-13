@@ -80,7 +80,7 @@
         <activity android:name=".MainActivityMenu"></activity>
         <activity android:name=".FeatureExtraction.Tapping.Tapping_feature_Activity"></activity>
         <activity android:name=".FeatureExtraction.Tapping.Tapping_feature_Two_Activity"></activity>
-        <activity android:name=".SeeResultsActivity"></activity>
+        <activity android:name=".ResultsActivity"></activity>
 
     </application>
 
