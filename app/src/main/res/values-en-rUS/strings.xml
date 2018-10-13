@@ -98,4 +98,18 @@
     <string name="record">Record</string>
     <string name="start2">START</string>
     <string name="start">Start</string>
+    <string name="missing_permissions_title">Missing Permissions!</string>
+    <string name="missing_permissions_text">You must grant permissions to record audio and write to storage to use the exercises!</string>
+    <string name="OK">OK</string>
+    <string name="user_name">Name:</string>
+    <string name="user_id">ID:</string>
+    <string name="user_age">"Age: "</string>
+    <string name="S_record">"Recorded session: "</string>
+    <string name="Int_medicine">Intake medicine:</string>
+    <string name="upd_medicine">Update medicine</string>
+    <string name="add_medicine">ADD MEDICINE</string>
+    <string name="delete">DELETE</string>
+    <string name="cancel">CANCEL</string>
+    <string name="save">SAVE</string>
+    <string name="motivate">Good Job!</string>
 </resources>
