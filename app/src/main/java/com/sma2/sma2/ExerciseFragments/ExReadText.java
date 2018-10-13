@@ -1,4 +1,4 @@
-package com.sma2.sma2;
+package com.sma2.sma2.ExerciseFragments;
 
 import android.os.Bundle;
 import android.os.Handler;
@@ -15,8 +15,7 @@ import com.opencsv.CSVParser;
 import com.opencsv.CSVParserBuilder;
 import com.opencsv.CSVReader;
 import com.opencsv.CSVReaderBuilder;
-import com.sma2.sma2.ExerciseFragments.ButtonFragment;
-import com.sma2.sma2.ExerciseFragments.ExerciseFragment;
+import com.sma2.sma2.R;
 import com.sma2.sma2.SignalRecording.SpeechRecorder;
 
 import java.io.IOException;
