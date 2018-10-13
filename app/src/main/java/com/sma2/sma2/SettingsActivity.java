@@ -53,7 +53,7 @@ public class SettingsActivity extends AppCompatActivity implements View.OnClickL
     }
 
     public void open_main(){
-        Intent intent_main =new Intent(this, MainActivity.class);
+        Intent intent_main =new Intent(this, MainActivityMenu.class);
         startActivity(intent_main);
     }
 
