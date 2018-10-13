@@ -16,10 +16,10 @@ public class SeafileApiTest {
 
     public static void main(String[] args) {
 
-        FileTransmitter doUpload = new FileTransmitter(username,password);
+        //FileTransmitter doUpload = new FileTransmitter(username,password);
         File file = new File("/home/martin/Desktop/default.png");
 
-        doUpload.uploadFile(file);
+        //doUpload.uploadFile(file);
 
 
 

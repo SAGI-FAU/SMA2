@@ -73,7 +73,7 @@ public class UploadService{
 
         Log.e("Online check",netInfo.getTypeName());
         //should check null because in airplane mode it will be null
-        return (netInfo != null && netInfo.isConnected()); // MAKE SURE THAT ONLY WIFI IS POSSIBLE
+        return (netInfo != null && netInfo.isConnected() && netInfo.getTypeName().equalsIgnoreCase("WIFI")); // MAKE SURE THAT ONLY WIFI IS POSSIBLE
     }
 
     /*
