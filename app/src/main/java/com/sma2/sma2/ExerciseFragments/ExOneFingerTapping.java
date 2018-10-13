@@ -150,7 +150,7 @@ public class ExOneFingerTapping extends ExerciseFragment implements View.OnClick
     }
 
     public void change_button_position(){
-        ConstraintLayout.LayoutParams params_bug= (ConstraintLayout.LayoutParams)  tapButton.getLayoutParams();
+        ConstraintLayout.LayoutParams params_bug = (ConstraintLayout.LayoutParams)  tapButton.getLayoutParams();
         int bugHeight = tapButton.getHeight();
         int bugWidth = tapButton.getWidth();
         int x = (int)(Math.random()*((screenWidth - bugWidth)));
