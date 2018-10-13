@@ -29,9 +29,13 @@ public class SessionOverviewRecyclerViewAdapter extends RecyclerView.Adapter<Ses
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
         holder.mItem = mScheduledExercises.get(position);
-        holder.mIdView.setText(String.valueOf(position));
+        holder.mIdView.setText(String.valueOf(position + 1));
         holder.mNameView.setText(mScheduledExercises.get(position).getExercise().getName());
-        holder.mStatusView.setChecked(mScheduledExercises.get(position).getCompleted());
+        if (mScheduledExercises.get(position).getCompleted()){
+            holder.mStatusView.setVisibility(View.VISIBLE);
+        } else {
+            holder.mStatusView.setVisibility(View.INVISIBLE);
+        }
     }
 
     @Override
