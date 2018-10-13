@@ -37,8 +37,13 @@ public class ExerciseSessionManager {
         // store the current session id in the as a shared property
     }
 
+    public List<ScheduledExercise> updateExerciseListFromDB(Context context) {
+        ScheduledExerciseDataService scheduledExerciseDataService = new ScheduledExerciseDataService(context);
+        _testList=scheduledExerciseDataService.getAllScheduledExercises();
+        return _testList;
+    }
+
     public List<ScheduledExercise> getScheduledExerciseList() {
-        //_createDummyExerciseList();
         return _testList;
     }
 

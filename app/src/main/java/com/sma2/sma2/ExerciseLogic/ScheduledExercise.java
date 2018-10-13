@@ -1,5 +1,6 @@
 package com.sma2.sma2.ExerciseLogic;
 
+import android.content.Context;
 import android.net.Uri;
 import android.os.Parcel;
 import android.os.Parcelable;
@@ -17,6 +18,7 @@ import java.util.Date;
 import org.greenrobot.greendao.annotation.Generated;
 import org.greenrobot.greendao.DaoException;
 import com.sma2.sma2.DataAccess.DaoSession;
+import com.sma2.sma2.DataAccess.ScheduledExerciseDataService;
 
 @Entity
 public class ScheduledExercise implements Parcelable {
@@ -117,8 +119,9 @@ public class ScheduledExercise implements Parcelable {
         this.resultPath = resultPath;
     }
 
-    public void save() {
-        //Save the exercise to the db
+    public void save(Context context) {
+        ScheduledExerciseDataService scheduledExerciseDataService = new ScheduledExerciseDataService(context);
+        scheduledExerciseDataService.saveScheduledExercise(this);
     }
     
 
