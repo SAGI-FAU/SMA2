@@ -136,7 +136,7 @@
         android:background="@color/colorPrimaryDark"
         android:text="@string/next"
         android:layout_marginTop="90sp"
-        android:textSize="30sp"
+        android:textSize="@dimen/button_text_size"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintRight_toRightOf="parent" />
 
@@ -147,7 +147,7 @@
         android:background="@color/colorPrimaryDark"
         android:text="@string/back"
         android:layout_marginTop="90sp"
-        android:textSize="30sp"
+        android:textSize="@dimen/button_text_size"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent" />
 

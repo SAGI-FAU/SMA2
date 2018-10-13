@@ -22,8 +22,8 @@
         <Button
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:textSize="@dimen/button_text_size"
             android:text="@string/tapping_1"
-            android:textSize="20dp"
             android:layout_marginTop="30dp"
             android:background="@color/colorPrimaryDark"
             android:id="@+id/bTapping_one"
