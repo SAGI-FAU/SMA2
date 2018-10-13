@@ -153,8 +153,14 @@ public class ExOneFingerTapping extends ExerciseFragment implements View.OnClick
         ConstraintLayout.LayoutParams params_bug = (ConstraintLayout.LayoutParams)  tapButton.getLayoutParams();
         int bugHeight = tapButton.getHeight();
         int bugWidth = tapButton.getWidth();
-        int x = (int)(Math.random()*((screenWidth - bugWidth)));
-        int y = (int)(Math.random()*((screenHeight - bugHeight)));
+        int x, y;
+        if(bugHeight == 0 && bugWidth == 0){
+            x = (int)(Math.random()*((screenWidth * 0.8)));
+            y = (int)(Math.random()*((screenHeight * 0.8)));
+        } else {
+            x = (int) (Math.random() * ((screenWidth - bugWidth)));
+            y = (int) (Math.random() * ((screenHeight - bugHeight)));
+        }
         params_bug.topMargin=y;
         params_bug.leftMargin=x;
         params_bug.setMarginStart(x);
