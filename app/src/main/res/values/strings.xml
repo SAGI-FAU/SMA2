@@ -99,5 +99,15 @@
     <string name="session_finish">Back To Main Menu</string>
     <string name="exercise_start">Start Exercise</string>
     <string name="Session">Today\'s exercise</string>
+    <string name="user_name">Name :</string>
+    <string name="user_id">ID :</string>
+    <string name="user_age">Age :</string>
+    <string name="S_record">Recorded session :</string>
+    <string name="Int_medicine">Intake medicine :</string>
+    <string name="upd_medicine">Update medicine</string>
+    <string name="add_medicine">ADD MEDICINE</string>
+    <string name="delete">DELETE</string>
+    <string name="cancel">CANCEL</string>
+    <string name="save">SAVE</string>
 
 </resources>
