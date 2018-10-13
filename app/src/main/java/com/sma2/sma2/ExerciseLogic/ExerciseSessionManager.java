@@ -20,10 +20,15 @@ public class ExerciseSessionManager {
     public void createExerciseSession() {
         // create Dummy List
         _createDummyExerciseList();
+        for (Exercise exercise : _dummyExerciseList){
+            _testList.add(new ScheduledExercise(exercise, 1));
+        }
+        /*
         _testList.add(new ScheduledExercise(_dummyExerciseList.get(0), 1));
         _testList.add(new ScheduledExercise(_dummyExerciseList.get(1), 1));
         _testList.add(new ScheduledExercise(_dummyExerciseList.get(2), 1));
         _testList.add(new ScheduledExercise(_dummyExerciseList.get(3), 1));
+        */
         // Create a new list of exercise and store them in the database with a new (incrementing) session id
         // store the current session id in the as a shared property
     }
