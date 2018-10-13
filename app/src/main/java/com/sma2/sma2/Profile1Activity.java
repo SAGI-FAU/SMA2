@@ -53,6 +53,13 @@ public class Profile1Activity extends AppCompatActivity implements View.OnClickL
         year = C.get(Calendar.YEAR);
         month = C.get(Calendar.MONTH);
         day = C.get(Calendar.DAY_OF_MONTH);
+        datePickerDialog = new DatePickerDialog(this, AlertDialog.THEME_HOLO_LIGHT, new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker datePicker, int mYear, int mMonth, int mDay) {
+                mMonth+=1;
+                et_date.setText(mDay+"/"+mMonth+"/"+mYear);
+            }
+        },year,month,day);
     }
 
     @Override
@@ -95,8 +102,6 @@ public class Profile1Activity extends AppCompatActivity implements View.OnClickL
 
                     Intent intent = new Intent(Profile1Activity.this,Profile2Activity.class);
                     intent.putExtra("PatientData", patientData);
-                    PatientDataService pds = new PatientDataService(getApplicationContext());
-                    pds.savePatient(patientData);
                     startActivity(intent);
                 }else{
                     Toast.makeText(this,R.string.brith_date_error,Toast.LENGTH_SHORT).show();
@@ -106,13 +111,6 @@ public class Profile1Activity extends AppCompatActivity implements View.OnClickL
                 onBackPressed();
                 break;
             case R.id.age_create:
-                datePickerDialog = new DatePickerDialog(this, AlertDialog.THEME_HOLO_LIGHT, new DatePickerDialog.OnDateSetListener() {
-                    @Override
-                    public void onDateSet(DatePicker datePicker, int mYear, int mMonth, int mDay) {
-                        mMonth+=1;
-                        et_date.setText(mDay+"/"+mMonth+"/"+mYear);
-                    }
-                },year,month,day);
             datePickerDialog.show();
         }
     }
