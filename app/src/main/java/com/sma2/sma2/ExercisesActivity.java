@@ -27,7 +27,7 @@ public class ExercisesActivity extends AppCompatActivity implements ExerciseInst
         super.onCreate(savedInstanceState);
 
         sessionManager = new ExerciseSessionManager();
-        sessionManager.createExerciseSession(this); // TODO: Only for testing
+        sessionManager.updateExerciseListFromDB(this);
         nextExercise = null;
 
         sessionOverview = SessionOverview.newInstance(sessionManager.getScheduledExerciseList());
@@ -98,7 +98,7 @@ public class ExercisesActivity extends AppCompatActivity implements ExerciseInst
 
     @Override
     public void onDoneButtonClicked() {
-        nextExercise.save();
+        nextExercise.save(this);
         showSessionOverview();
     }
 }

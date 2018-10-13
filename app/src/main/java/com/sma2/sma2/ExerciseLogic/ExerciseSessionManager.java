@@ -24,22 +24,23 @@ public class ExerciseSessionManager {
     public void createExerciseSession(Context context) {
         // create Dummy List
         _createDummyExerciseList(context);
-        for (Exercise exercise : _dummyExerciseList){
-            _testList.add(new ScheduledExercise(exercise, 1));
-        }
         ScheduledExerciseDataService scheduledExerciseDataService = new ScheduledExerciseDataService(context);
-        if (scheduledExerciseDataService.getAllScheduledExercises().size()==0){
-            for (int i=0; i<_testList.size(); i++){
-                scheduledExerciseDataService.saveScheduledExercise(_testList.get(i));
-            }
+        for (Exercise exercise : _dummyExerciseList){
+            ScheduledExercise ex = new ScheduledExercise(exercise, 1);
+            _testList.add(ex);
+            scheduledExerciseDataService.saveScheduledExercise(ex);
         }
         _testList=scheduledExerciseDataService.getAllScheduledExercises();
         // Create a new list of exercise and store them in the database with a new (incrementing) session id
         // store the current session id in the as a shared property
     }
 
+    public void updateExerciseListFromDB(Context context) {
+        ScheduledExerciseDataService scheduledExerciseDataService = new ScheduledExerciseDataService(context);
+        _testList=scheduledExerciseDataService.getAllScheduledExercises();
+    }
+
     public List<ScheduledExercise> getScheduledExerciseList() {
-        //_createDummyExerciseList();
         return _testList;
     }
 
