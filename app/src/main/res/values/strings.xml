@@ -99,6 +99,9 @@
     <string name="session_finish">Back To Main Menu</string>
     <string name="exercise_start">Start Exercise</string>
     <string name="Session">Today\'s exercise</string>
+    <string name="missing_permissions_title">Missing Permissions!</string>
+    <string name="missing_permissions_text">You must grant permissions to record audio and write to storage to use the exercises!</string>
+    <string name="OK">OK</string>
     <string name="user_name">Name :</string>
     <string name="user_id">ID :</string>
     <string name="user_age">Age :</string>
