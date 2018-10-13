@@ -4,6 +4,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CheckBox;
 import android.widget.TextView;
 
 import com.sma2.sma2.ExerciseLogic.ScheduledExercise;
@@ -28,8 +29,9 @@ public class SessionOverviewRecyclerViewAdapter extends RecyclerView.Adapter<Ses
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
         holder.mItem = mScheduledExercises.get(position);
+        holder.mIdView.setText(String.valueOf(position));
         holder.mNameView.setText(mScheduledExercises.get(position).getExercise().getName());
-        holder.mStatusView.setText(mScheduledExercises.get(position).getCompleted() ? "Done" : "");
+        holder.mStatusView.setChecked(mScheduledExercises.get(position).getCompleted());
     }
 
     @Override
@@ -41,13 +43,13 @@ public class SessionOverviewRecyclerViewAdapter extends RecyclerView.Adapter<Ses
         public final View mView;
         public final TextView mIdView;
         public final TextView mNameView;
-        public final TextView mStatusView;
+        public final CheckBox mStatusView;
         public ScheduledExercise mItem;
 
         public ViewHolder(View view) {
             super(view);
             mView = view;
-            mIdView = view.findViewById(R.id.item_number);
+            mIdView = view.findViewById(R.id.itemNumber);
             mNameView = view.findViewById(R.id.exerciseName);
             mStatusView = view.findViewById(R.id.exerciseStatus);
         }
