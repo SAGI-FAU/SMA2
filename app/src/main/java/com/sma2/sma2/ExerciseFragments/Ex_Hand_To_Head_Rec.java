@@ -17,7 +17,7 @@ import com.sma2.sma2.SignalRecording.MovementRecorder;
 
 public class Ex_Hand_To_Head_Rec extends ExerciseFragment implements ButtonFragment.OnButtonInteractionListener {
     private MovementRecorder recorder;
-    private static long START_COUNTDOWN = 5;
+    private static long START_COUNTDOWN = 3;
     private static long EXERCISE_TIME = 30;
     private final int SAMPLING_FREQUENCY = 10000;
     private String countdown_finished_txt;
