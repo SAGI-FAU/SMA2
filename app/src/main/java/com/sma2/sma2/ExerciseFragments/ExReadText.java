@@ -70,6 +70,7 @@ public class ExReadText extends ExerciseFragment implements ButtonFragment.OnBut
     @Override
     public void onDetach() {
         super.onDetach();
+        recorder.release();
         mListener = null;
     }
 
