@@ -20,7 +20,7 @@ public class CSVFileWriter extends Thread {
     private final String DELIMITER = ";";
     private final String NEW_LINE = "\r\n";
     private final String FILE_ENDING = ".csv";
-    private final String PATH = Environment.getExternalStorageDirectory() + "/Apkinson/";
+    private final String PATH = Environment.getExternalStorageDirectory() + "/Apkinson/MOVEMENT/";
     private static final String TAG = CSVFileWriter.class.getSimpleName();
     private String filename;
     private BufferedWriter mBufferedWriter = null;
