@@ -13,6 +13,7 @@ import com.sma2.sma2.ApplicationState;
 import com.sma2.sma2.MainActivity;
 import com.sma2.sma2.MainActivityMenu;
 import com.sma2.sma2.R;
+import com.sma2.sma2.ResultsActivity;
 
 public class SplashScreen extends AppCompatActivity {
 
