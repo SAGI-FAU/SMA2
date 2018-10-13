@@ -90,13 +90,11 @@ public class ExOneFingerTapping extends ExerciseFragment implements View.OnClick
 
             // Here, it is computed the difference between the last time in which
             // you push the button and the time you are pushing the button
-            //float timef = SystemClock.currentThreadTimeMillis(); //Last time
 
             public void onTick(long millisUntilFinished) {
                 double newTime = (double) Math.round(millisUntilFinished / 100) / 10;
                 chronoText.setText(String.valueOf(newTime));
-                //time2 = SystemClock.currentThreadTimeMillis()-timef; // The difference between times
-                //timeStr = String.valueOf(time2);
+
             }
             public void onFinish() {
                 chronoText.setText(getActivity().getApplicationContext().getString(R.string.done));

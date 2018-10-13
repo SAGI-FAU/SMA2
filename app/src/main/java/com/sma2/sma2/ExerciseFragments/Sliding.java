@@ -19,18 +19,16 @@ import com.sma2.sma2.R;
 import com.sma2.sma2.SignalRecording.SlidingRecorder;
 import com.sma2.sma2.SignalRecording.TappingRecorder;
 import com.sma2.sma2.ThanksActivity;
-
+/**
+ * Created by paulaperez on 8/10/18.
+ */
 
 public class Sliding extends AppCompatActivity implements View.OnClickListener {
     SlidingRecorder slidingrecorder;
-    private long time2;
-    private String timeStr;
     private String [] data= new String[2];
     public String SlidingFileName;
     private int seekBarFlag=1;
     long timef;
-
-
 
 
     @Override
@@ -94,8 +92,7 @@ public class Sliding extends AppCompatActivity implements View.OnClickListener {
                             double newTime = (double) Math.round(millisUntilFinished / 100) / 10;
                             mTextField.setText(Long.toString(millisUntilFinished / 1000));
 
-                            time2 = System.currentTimeMillis()-timef; // The difference between times
-                            timeStr = String.valueOf(time2);
+
 
                         }
 
@@ -110,7 +107,7 @@ public class Sliding extends AppCompatActivity implements View.OnClickListener {
                             open_exercise();
                         }
                     }.start();
-                    timef = System.currentTimeMillis(); //Last time
+                    timef = System.currentTimeMillis(); //Last Tap time
 
                 }
                 seekBarFlag=0; //To deactivate the timer
@@ -125,13 +122,7 @@ public class Sliding extends AppCompatActivity implements View.OnClickListener {
             }
         });
 
-
-
-
-
     }
-
-
 
 
     @Override
@@ -151,14 +142,11 @@ public class Sliding extends AppCompatActivity implements View.OnClickListener {
 
         if(Math.abs(xSeek-xBar)<30){
             data[0]=Float.toString(xBar);
-            data[1]=String.valueOf(System.currentTimeMillis()-timef); //Last time
-            timef = System.currentTimeMillis(); //Last time
-            Log.e("timef",String.valueOf(timef));
+            data[1]=String.valueOf(System.currentTimeMillis()-timef); // The difference between times
+            timef = System.currentTimeMillis(); //Last Tap time
 
 
-
-
-            slidingrecorder.SlidingWriter(data);
+            slidingrecorder.SlidingWriter(data); //Writing the data
             Vibrator vib = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
             vib.vibrate(100);
             ImageView imageView_limit=(ImageView) findViewById(R.id.imageView_limit);

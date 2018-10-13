@@ -31,22 +31,12 @@ public class TappingRecorder {
     private static Context CONTEXT;
     private static Handler HANDLER;
     private CSVFileWriter mCSVFileWriter;
-    private static DataOutputStream DATA_OUTPUT_STREAM;
-    private static File MOVEMENT_FOLDER;
-    private static File FILE_CSV;
-    private static File FILE_CSV_error;
 
-    private static String exercise;
-    private OutputStreamWriter fout;
-    private BufferedWriter bw;
     private static TappingRecorder recorder_instance=null;
-
-
 
 
     private TappingRecorder(Context context) {
         CONTEXT=context;
-
 
     }
 
@@ -89,8 +79,6 @@ public class TappingRecorder {
 
         }
 
-
-
     }
 
     public String TappingFileName(){
@@ -99,25 +87,12 @@ public class TappingRecorder {
 
 
 
-    public void TapWriter(String[] data_sensors){
-
-        mCSVFileWriter.writeData(data_sensors);
-
-    }
+    public void TapWriter(String[] data_sensors){ mCSVFileWriter.writeData(data_sensors); }
 
 
-    public void CloseTappingDocument() throws IOException{
-        mCSVFileWriter.close();
-    }
+    public void CloseTappingDocument() throws IOException{mCSVFileWriter.close();}
 
 
-
-
-    private String getCurrentDateAsString() {
-        Date date = Calendar.getInstance().getTime();
-        SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy-HH-mm");
-        return dateFormat.format(date);
-    }
 
 
 }
