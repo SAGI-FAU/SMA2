@@ -41,7 +41,13 @@ public class MainActivityMenu extends AppCompatActivity implements View.OnClickL
 
     @Override
     public void onClick(View view) {
-        switch (view.getId()) {
+        switch (view.getId()){
+            case R.id.btnProfile:
+                open_profile();
+                break;
+            case R.id.txtProfile:
+                open_profile();
+                break;
             case R.id.btnSettings:
                 open_settings();
                 break;
@@ -71,6 +77,10 @@ public class MainActivityMenu extends AppCompatActivity implements View.OnClickL
         startActivity(intent_exercises);
     }
 
+    public void open_profile(){
+        Intent intent_profile =new Intent(MainActivityMenu.this, ProfileActivity.class);
+        startActivity(intent_profile);
+    }
 
     public static boolean hasPermissions(Context context, String... permissions) {
         if (context != null && permissions != null) {
