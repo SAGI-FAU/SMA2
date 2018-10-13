@@ -5,18 +5,18 @@ import org.greenrobot.greendao.annotation.Id;
 import org.greenrobot.greendao.annotation.NotNull;
 import org.greenrobot.greendao.annotation.Property;
 
+import java.io.Serializable;
 import java.util.Date;
 import org.greenrobot.greendao.annotation.Generated;
 
 @Entity
-public class PatientDA {
-//    public Patient getPatient(){
-//        new Patient(username, birthday, gender, hand,
-//                smoker, year_diag, other_disorder, weight,height);
-//    } todo create method as soon as object is available
+public class PatientDA implements Serializable {
+    private static final long serialVersionUID = -7060210544600464481L;
 
     @Id(autoincrement = true)
     private Long userId;
+    @Property
+    private String govtId;
     @Property
     private String username;
     @Property
@@ -30,7 +30,7 @@ public class PatientDA {
     @Property
     int educational_level;
     @Property
-    private Date year_diag;
+    private int year_diag;
     @Property
     private String other_disorder;
     @Property
@@ -40,11 +40,13 @@ public class PatientDA {
     @Property
     private int sessionCount;
 
-    @Generated(hash = 859711428)
-    public PatientDA(Long userId, String username, Date birthday, String gender,
-            int hand, boolean smoker, int educational_level, Date year_diag,
-            String other_disorder, float weight, int height, int sessionCount) {
+    @Generated(hash = 736211304)
+    public PatientDA(Long userId, String govtId, String username, Date birthday,
+            String gender, int hand, boolean smoker, int educational_level,
+            int year_diag, String other_disorder, float weight, int height,
+            int sessionCount) {
         this.userId = userId;
+        this.govtId = govtId;
         this.username = username;
         this.birthday = birthday;
         this.gender = gender;
@@ -60,7 +62,12 @@ public class PatientDA {
     @Generated(hash = 1204534041)
     public PatientDA() {
     }
-    
+
+    public PatientDA(String username, String govtId) {
+        this.username = username;
+        this.govtId = govtId;
+    }
+
     public String getUsername() {
         return this.username;
     }
@@ -97,10 +104,10 @@ public class PatientDA {
     public void setEducational_level(int educational_level) {
         this.educational_level = educational_level;
     }
-    public Date getYear_diag() {
+    public int getYear_diag() {
         return this.year_diag;
     }
-    public void setYear_diag(Date year_diag) {
+    public void setYear_diag(int year_diag) {
         this.year_diag = year_diag;
     }
     public String getOther_disorder() {
@@ -135,6 +142,12 @@ public class PatientDA {
     }
     public void setSessionCount(int sessionCount) {
         this.sessionCount = sessionCount;
+    }
+    public String getGovtId() {
+        return this.govtId;
+    }
+    public void setGovtId(String govtId) {
+        this.govtId = govtId;
     }
 
 }
