@@ -17,7 +17,7 @@ import com.sma2.sma2.SignalRecording.MovementRecorder;
 
 public class Ex_Walking_Rec extends ExerciseFragment implements ButtonFragment.OnButtonInteractionListener {
     private MovementRecorder recorder;
-    private static long START_COUNTDOWN = 10;
+    private static long START_COUNTDOWN = 5;
     private static long EXERCISE_TIME = 30;
     private final int SAMPLING_FREQUENCY = 10000;
     private String countdown_finished_txt;
@@ -28,6 +28,17 @@ public class Ex_Walking_Rec extends ExerciseFragment implements ButtonFragment.O
 
     public Ex_Walking_Rec() {
 
+    }
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        try {
+            recorder = new MovementRecorder(this.getContext(), SAMPLING_FREQUENCY, mExercise.getName());
+            recorder.registerListeners();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
@@ -42,13 +53,6 @@ public class Ex_Walking_Rec extends ExerciseFragment implements ButtonFragment.O
         transaction.commit();
         countdown_finished_txt = getResources().getString(R.string.start2);
         countdownTextView = view.findViewById(R.id.countdownTimerTextView);
-        countdownTextView.setText(String.valueOf(START_COUNTDOWN));
-        try {
-            recorder = new MovementRecorder(this.getContext(), SAMPLING_FREQUENCY, mExercise.getName());
-            recorder.registerListeners();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
         return view;
     }
 
