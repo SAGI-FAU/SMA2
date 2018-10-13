@@ -10,20 +10,17 @@ import java.io.DataOutputStream;
 import java.io.File;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
+/**
+ * Created by paulaperez on 8/11/18.
+ */
+
 
 public class SlidingRecorder {
 
     private static Context CONTEXT;
     private static Handler HANDLER;
     private CSVFileWriter mCSVFileWriter;
-    private static DataOutputStream DATA_OUTPUT_STREAM;
-    private static File MOVEMENT_FOLDER;
-    private static File FILE_CSV;
-    private static File FILE_CSV_error;
 
-    private static String exercise;
-    private OutputStreamWriter fout;
-    private BufferedWriter bw;
     private static SlidingRecorder recorder_instance = null;
 
     private SlidingRecorder(Context context) {
@@ -53,9 +50,6 @@ public class SlidingRecorder {
             mCSVFileWriter.writeData(SLIDING_DESCRIPTION_HEADER);
             mCSVFileWriter.writeData(SLIDING_DATA_HEADER);
 
-
-
-
     }
 
 
@@ -65,16 +59,10 @@ public class SlidingRecorder {
 
 
 
-    public void SlidingWriter(String[] data_sensors){
-
-        mCSVFileWriter.writeData(data_sensors);
-
-    }
+    public void SlidingWriter(String[] data_sensors){mCSVFileWriter.writeData(data_sensors);}
 
 
-    public void CloseSlidingDocument() throws IOException{
-        mCSVFileWriter.close();
-    }
+    public void CloseSlidingDocument() throws IOException{mCSVFileWriter.close();}
 
 
 }
