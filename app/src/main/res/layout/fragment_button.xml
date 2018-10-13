@@ -16,6 +16,7 @@
         android:layout_marginTop="8dp"
         android:background="@color/colorPrimary"
         android:text="@string/start"
+        android:textSize="@dimen/button_text_size"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintDimensionRatio="4"
         app:layout_constraintEnd_toEndOf="parent"

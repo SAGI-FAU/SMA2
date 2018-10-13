@@ -82,7 +82,7 @@
         android:background="@color/colorPrimaryDark"
         android:gravity="center"
         android:text="@string/delete"
-        android:textSize="30sp"
+        android:textSize="@dimen/button_text_size"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/layout1" />
 
@@ -93,7 +93,7 @@
         android:background="@color/colorPrimaryDark"
         android:gravity="center"
         android:text="@string/cancel"
-        android:textSize="30sp"
+        android:textSize="@dimen/button_text_size"
         app:layout_constraintBottom_toBottomOf="parent" />
 
     <Button
@@ -105,7 +105,7 @@
         android:background="@color/colorPrimaryDark"
         android:gravity="center"
         android:text="@string/save"
-        android:textSize="30sp"
+        android:textSize="@dimen/button_text_size"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
