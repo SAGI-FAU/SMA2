@@ -21,7 +21,8 @@ import java.util.ArrayList;
 public class Tapping_feature_Activity extends AppCompatActivity {
     TextView  tNumber_Taps,tTapping_time_hits,tMessage;
     ImageView iEmojin;
-    String path_tapping = "/storage/emulated/0/AppSpeechData/ACC/Tapping_example.csv";
+    String path_tapping = null; // To Do
+            //"/storage/emulated/0/AppSpeechData/ACC/Tapping_example.csv";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
