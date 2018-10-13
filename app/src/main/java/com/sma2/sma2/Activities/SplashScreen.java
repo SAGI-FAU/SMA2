@@ -10,16 +10,25 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.sma2.sma2.ApplicationState;
+import com.sma2.sma2.DataAccess.DaoMaster;
+import com.sma2.sma2.DataAccess.DaoSession;
 import com.sma2.sma2.MainActivity;
 import com.sma2.sma2.MainActivityMenu;
 import com.sma2.sma2.R;
 import com.sma2.sma2.ResultsActivity;
+
+import org.greenrobot.greendao.database.Database;
 
 public class SplashScreen extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        DaoMaster.DevOpenHelper helper = new DaoMaster.DevOpenHelper(this, "apkinsondb");
+        Database db = helper.getWritableDb();
+        DaoSession daoSession = new DaoMaster(db).newSession();
+
         setContentView(R.layout.activity_splash_screen);
         //Skip splash screen if in dev-mode
         if (ApplicationState.appUnderDevelopment()) {
