@@ -9,6 +9,7 @@ import android.os.Environment;
 import android.os.Handler;
 import android.util.Log;
 
+import com.sma2.sma2.DataAccess.PatientDataService;
 import com.sma2.sma2.DataAccess.SignalDA;
 import com.sma2.sma2.DataAccess.SignalDataService;
 
@@ -97,7 +98,9 @@ public class TappingRecorder {
 
     public void CloseTappingDocument() throws IOException{
         mCSVFileWriter.close();
-        signalDataService.saveSignal(this.signalDA);
+        PatientDataService pd = new PatientDataService(CONTEXT);
+        signalDA.setPatientDAId(pd.getPatient().getUserId());
+        signalDataService.saveSignal(signalDA);
     }
 }
 

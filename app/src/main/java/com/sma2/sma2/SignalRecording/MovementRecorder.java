@@ -6,6 +6,7 @@ import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 
+import com.sma2.sma2.DataAccess.PatientDataService;
 import com.sma2.sma2.DataAccess.SignalDA;
 import com.sma2.sma2.DataAccess.SignalDataService;
 
@@ -13,6 +14,7 @@ import java.io.IOException;
 import java.util.Arrays;
 
 public class MovementRecorder implements SensorEventListener {
+    private static Context CONTEXT;
     private final String TAG = "MovementRecorder";
     private SensorManager mSensorManager;
     private Sensor mAccelerometer;
@@ -37,6 +39,7 @@ public class MovementRecorder implements SensorEventListener {
             "r0 [a.u.]", "r1 [a.u.]", "r2 [a.u.]", "r3 [a.u.]"};
 
     public MovementRecorder(Context context, int samplingFrequency_us, String exercisName) throws IOException {
+        CONTEXT = context;
         mSamplingFrequency_us = samplingFrequency_us;
         mSensorManager = (SensorManager) context.getSystemService(context.SENSOR_SERVICE);
         mAccelerometer = mSensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
@@ -100,6 +103,8 @@ public class MovementRecorder implements SensorEventListener {
         mSensorManager.unregisterListener(this);
         mEnableLogging = false;
         mCSVFileWriter.close();
+        PatientDataService pd = new PatientDataService(CONTEXT);
+        signalDA.setPatientDAId(pd.getPatient().getUserId());
         signalDataService.saveSignal(signalDA);
         mSensorManager = null;
     }
