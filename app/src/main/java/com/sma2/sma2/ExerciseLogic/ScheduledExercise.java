@@ -23,7 +23,7 @@ public class ScheduledExercise implements Parcelable {
         this.exercise = exercise;
         this.sessionId = sessionId;
         this.completionDate = -1;
-        this.resultPath = null;
+        this.resultPath = Uri.parse("");
     }
 
 
