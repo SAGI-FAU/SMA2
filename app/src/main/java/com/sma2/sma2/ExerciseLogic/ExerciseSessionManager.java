@@ -66,14 +66,14 @@ public class ExerciseSessionManager {
                 "test Instructions",
                 Uri.parse("video/path"),
                 Uri.parse("Instruction/Path"),
-                ExOneFingerTapping.class));
+                ExReadText.class));
         _dummyExerciseList.add(new Exercise(1, "Test1",
                 "Speech",
                 "test Description",
                 "test Instructions",
                 Uri.parse("video/path"),
                 Uri.parse("Instruction/Path"),
-                ExAudioRec.class));
+                ExReadText.class));
         _dummyExerciseList.add(new Exercise(1, "Hand-to-Head",
                 "Speech",
                 "test Description",

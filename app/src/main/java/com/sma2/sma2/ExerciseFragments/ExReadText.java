@@ -20,7 +20,10 @@ import com.sma2.sma2.SignalRecording.SpeechRecorder;
 
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Locale;
+import java.util.Random;
 
 
 public class ExReadText extends ExerciseFragment implements ButtonFragment.OnButtonInteractionListener {
@@ -59,17 +62,25 @@ public class ExReadText extends ExerciseFragment implements ButtonFragment.OnBut
         CSVParser parser = new CSVParserBuilder().withSeparator(';').build();
         String[] languages = parser.parseLine(reader.readNext()[0]);
         String[] line;
-        TextExercise exercise = null;
-        while ((line = parser.parseLine(reader.readNext()[0])) != null){
-            //For now just take first entry and return
-            String lang=Locale.getDefault().getDisplayLanguage();
-            if (lang.equals("español"))
-                exercise = new TextExercise(line[1], languages[1], 1);
-            else
-                exercise = new TextExercise(line[0], languages[0], 1);
-            break;
+        List<TextExercise> exercises = new ArrayList<>();
+        int locale = getCurrentLocale(languages);
+        while ((line = reader.readNext()) != null){
+            line = parser.parseLine(line[0]);
+            exercises.add(new TextExercise(line[locale], languages[locale], 1));
         }
-        return exercise;
+        Random rand = new Random();
+        return exercises.get(rand.nextInt(exercises.size()));
+    }
+
+    private int getCurrentLocale(String[] languages) {
+        Locale locale = Locale.getDefault();
+        for (int i = 0; i < languages.length; i++){
+            if (languages[i].contains(locale.getLanguage())){
+                return i;
+            }
+        }
+        //If not found, return default
+        return 0;
     }
 
     @Override
