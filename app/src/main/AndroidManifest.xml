@@ -2,12 +2,15 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.sma2.sma2">
 
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.VIBRATE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.RECORD_AUDIO" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -15,75 +18,77 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
-        <activity android:name=".Activities.SplashScreen">
+        <activity
+            android:name=".Activities.SplashScreen"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-
         <activity
-            android:name=".MainActivity">
-        </activity>
-
+            android:name=".MainActivity"
+            android:screenOrientation="portrait" />
         <activity
-            android:name=".SettingsActivity">
-        </activity>
-
+            android:name=".SettingsActivity"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".ExercisesActivity"
-            android:exported="true">
-        </activity>
-
+            android:exported="true"
+            android:screenOrientation="portrait" />
         <activity
-            android:name=".ExerciseFragments.Ex_speech1">
-        </activity>
-
+            android:name=".ExerciseFragments.Ex_speech1"
+            android:screenOrientation="portrait" />
         <activity
-            android:name=".ExerciseFragments.Ex_speech2">
-        </activity>
+            android:name=".ExerciseFragments.Ex_speech2"
+            android:screenOrientation="portrait" />
         <activity
-            android:name=".ExerciseFragments.Ex_speech3">
-        </activity>
-
+            android:name=".ExerciseFragments.Ex_speech3"
+            android:screenOrientation="portrait" />
         <activity
-            android:name=".ExerciseFragments.Ex_walking">
-        </activity>
+            android:name=".ExerciseFragments.Ex_walking"
+            android:screenOrientation="portrait" />
         <activity
-            android:name=".ExerciseFragments.Ex_mov_hands">
-        </activity>
+            android:name=".ExerciseFragments.Ex_mov_hands"
+            android:screenOrientation="portrait" />
         <activity
-            android:name=".ExerciseFragments.Ex_tapping">
-        </activity>
+            android:name=".ExerciseFragments.Ex_tapping"
+            android:screenOrientation="portrait" />
         <activity
-            android:name=".ExerciseFragments.Tapping1">
-        </activity>
-
+            android:name=".ExerciseFragments.Tapping1"
+            android:screenOrientation="portrait" />
         <activity
-            android:name=".ExerciseFragments.Tapping2">
-        </activity>
+            android:name=".ExerciseFragments.Tapping2"
+            android:screenOrientation="portrait" />
         <activity
-            android:name=".ExerciseFragments.Sliding">
-        </activity>
+            android:name=".ExerciseFragments.Sliding"
+            android:screenOrientation="portrait" />
         <activity
-            android:name=".ThanksActivity">
-        </activity>
+            android:name=".ThanksActivity"
+            android:screenOrientation="portrait" />
         <activity
-            android:name=".ExerciseFragments.Record_speech">
-        </activity>
+            android:name=".ExerciseFragments.Record_speech"
+            android:screenOrientation="portrait" />
         <activity
-            android:name=".ExerciseFragments.Record_speech_image">
-        </activity>
+            android:name=".ExerciseFragments.Record_speech_image"
+            android:screenOrientation="portrait" />
         <activity
-            android:name=".ExerciseFragments.Record_movement">
-        </activity>
+            android:name=".ExerciseFragments.Record_movement"
+            android:screenOrientation="portrait" />
         <activity
-            android:name=".ExerciseFragments.Record_mov_ball_balance">
-        </activity>
-
-
+            android:name=".ExerciseFragments.Record_mov_ball_balance"
+            android:screenOrientation="portrait" />
+        <activity android:name=".Profile1Activity" />
+        <activity android:name=".Profile2Activity" />
+        <activity android:name=".Profile3Activity" />
+        <activity android:name=".MainActivityMenu" />
+        <activity android:name=".ProfileActivity" />
+        <activity android:name=".UpdateMedicine" />
+        <activity android:name=".Modif_medicine" />
+        <activity android:name=".ResultsActivity" />
+        <activity android:name=".FeatureExtraction.Tapping.Tapping_feature_Activity" />
+        <activity android:name=".FeatureExtraction.Tapping.Tapping_feature_Two_Activity"></activity>
     </application>
 
 </manifest>

@@ -1,0 +1,63 @@
+package com.sma2.sma2.ExerciseFragments;
+
+import android.content.Context;
+import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.util.Log;
+
+import com.sma2.sma2.ExerciseLogic.Exercise;
+
+
+public abstract class ExerciseFragment extends Fragment {
+    protected OnExerciseCompletedListener mListener;
+    protected boolean recording = false;
+    protected String filePath;
+    protected Exercise mExercise;
+
+    public ExerciseFragment() {
+        // Required empty public constructor
+    }
+
+    public ExerciseFragment newInstance(Exercise exercise) {
+        ExerciseFragment fragment;
+        try {
+            fragment = this.getClass().asSubclass(ExerciseFragment.class).newInstance();
+        } catch (Exception e) {
+            throw new RuntimeException("Exercise not correctly implemented");
+        }
+        Bundle args = new Bundle();
+        args.putParcelable("EXERCISE", exercise);
+        fragment.setArguments(args);
+        return fragment;
+    }
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        if (getArguments() != null) {
+            mExercise = getArguments().getParcelable("EXERCISE");
+        }
+    }
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        if (context instanceof OnExerciseCompletedListener) {
+            mListener = (OnExerciseCompletedListener) context;
+        } else {
+            throw new RuntimeException(context.toString()
+                    + " must implement OnExerciseCompletedListener");
+        }
+    }
+
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        mListener = null;
+    }
+
+    public interface OnExerciseCompletedListener {
+        void onExerciseFinished(String filePath);
+    }
+}
+
