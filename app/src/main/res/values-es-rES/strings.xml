@@ -77,7 +77,7 @@
     <string name="userid_empty">Por favor, introduzca  su documento</string>
     <string name="log_in">Acceso concedido</string>
     <string name="log_error">Usuario no encontrado</string>
-    <string name="brith_date_error">Por favor, llene su fecha de nacimiento</string>
+    <string name="brith_date_error">Por favor, introduzca su fecha de nacimiento</string>
     <string name="none_item">Vacio</string>
     <string name="instructions_video">Video de demostración</string>
     <string name="instructions_long">Instrucciones Detalladas</string>
@@ -112,5 +112,16 @@
     <string name="delete">BORRAR</string>
     <string name="cancel">CANCELAR</string>
     <string name="save">GUARDAR</string>
+    <string name="motivate">¡Buen Trabajo!</string>
+    <string name="Number_Taps">Número de Taps</string>
+    <string name="Time_Tapping_His">Tiempo</string>
+    <string name="Finger_left">Dedo Izquierdo</string>
+    <string name="Finger_right">Dedo Derecho</string>
+    <string name="Hits_porcentage">Porcentaje de aciertos</string>
+    <string name="Tapping_Time">Tiempo de tapping</string>
+    <string name="Positive_message">¡Buen Trabajo!</string>
+    <string name="Medium_message">¡Buen Trabajo! \nPero, puede hacerlo mejor!</string>
+    <string name="Negative_message">¡Vamos a mejorar! \nSigue trabajando</string>
+    <string name="Empty">Vacio</string>
 
 </resources>

@@ -111,5 +111,15 @@
     <string name="delete">DELETE</string>
     <string name="cancel">CANCEL</string>
     <string name="save">SAVE</string>
-    <string name="motivate">Good Job!</string>
+    <string name="motivate">Good Job!!</string>
+    <string name="Number_Taps">Number of Taps  </string>
+    <string name="Time_Tapping_His">Hits Time  </string>
+    <string name="Finger_left">Finger Left</string>
+    <string name="Finger_right">Finger Right</string>
+    <string name="Hits_porcentage">Hits Percentage</string>
+    <string name="Tapping_Time">Tapping Time </string>
+    <string name="Positive_message">Good Job!! </string>
+    <string name="Medium_message">Good Job!!  \nBut, You can do it better</string>
+    <string name="Negative_message">Let\'s improve \nKeep working</string>
+    <string name="Empty">Empty</string>
 </resources>
