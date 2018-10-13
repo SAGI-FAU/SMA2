@@ -35,6 +35,7 @@
     <string name="ddk_ex">ddk</string>
     <string name="instructions">Instructions</string>
     <string name="instructions_long">Detailed Instructions</string>
+    <string name="instructions_video">Video Demonstration</string>
     <string name="text3">Speech exercise 3</string>
     <string name="readtext">Please listen and repeat the following paragraph</string>
     <string name="monologue">Please say what you normally do in a normal day</string>
