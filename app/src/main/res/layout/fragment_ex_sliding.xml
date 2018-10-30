@@ -2,20 +2,14 @@
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/backgroundExTapOne"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-
-    android:layout_marginLeft="16dp"
-    android:layout_marginRight="16dp"
-    tools:context="com.sma2.sma2.MainActivity">
-
-
-
-
+    tools:context=".ExerciseFragments.ExSliding">
 
 
     <TextView
-        android:id="@+id/accgraph_chrono5"
+        android:id="@+id/chronoSliding"
         android:textSize="50sp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -26,12 +20,9 @@
         app:layout_constraintTop_toTopOf="parent"
         />
 
-
-
-
     <SeekBar
         android:splitTrack="false"
-        android:id="@+id/seekBar2"
+        android:id="@+id/bar_sliding"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:minHeight="70sp"
@@ -40,11 +31,8 @@
         android:maxWidth="15sp"
         android:max="200"
         android:progress="20"
-
-
-
         android:layout_marginTop="30sp"
-        app:layout_constraintTop_toBottomOf="@+id/accgraph_chrono5"
+        app:layout_constraintTop_toBottomOf="@+id/chronoSliding"
         app:layout_constraintLeft_toLeftOf="parent"
         android:thumb="@drawable/thumb_seek"
         android:progressDrawable="@drawable/seekbar_sliding"/>
@@ -53,14 +41,14 @@
 
     <ImageView
         android:id="@+id/imageView_limit"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         app:srcCompat="@drawable/limit_sliding"
         android:layout_marginTop="10sp"
         tools:layout_editor_absoluteX="200sp"
         android:layout_marginStart="170sp"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/accgraph_chrono5"
+        app:layout_constraintTop_toBottomOf="@+id/chronoSliding"
         />
 
 
