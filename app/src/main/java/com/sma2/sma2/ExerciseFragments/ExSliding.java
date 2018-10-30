@@ -24,6 +24,7 @@ public class ExSliding extends ExerciseFragment implements SeekBar.OnSeekBarChan
     private SlidingRecorder slidingrecorder;
     private TextView chronoText;
     private ImageView imageView_limit;
+    private TextView textView_limit;
     private SeekBar bar_sliding;
     private int screenHeight, screenWidth;
     private long lastTime;
@@ -51,6 +52,7 @@ public class ExSliding extends ExerciseFragment implements SeekBar.OnSeekBarChan
         bar_sliding = view.findViewById(R.id.bar_sliding);
         bar_sliding.setOnSeekBarChangeListener(this);
         imageView_limit=view.findViewById(R.id.imageView_limit);
+        textView_limit=view.findViewById(R.id.textView_limit);
         getDisplayDimensions();
         timer = setTimer();
         return view;
@@ -100,8 +102,11 @@ public class ExSliding extends ExerciseFragment implements SeekBar.OnSeekBarChan
     @Override
     public void onStartTrackingTouch(SeekBar seekBar) {
 
-        timer=setTimer();
-
+        if (seekBarFlag==1) {
+            lastTime = System.currentTimeMillis();
+            timer.start();
+        }
+        seekBarFlag=0; //To deactivate the timer
     }
 
     @Override
@@ -133,6 +138,7 @@ public class ExSliding extends ExerciseFragment implements SeekBar.OnSeekBarChan
 
     public void ReachingTheBar(Float xSeek, Float xBar){
 
+        int textView_limitWidth = textView_limit.getWidth();
 
         if(Math.abs(xSeek-xBar)<threshold){
             String[] data = new String[2];
@@ -144,12 +150,31 @@ public class ExSliding extends ExerciseFragment implements SeekBar.OnSeekBarChan
             slidingrecorder.SlidingWriter(data); //Writing the data
             Vibrator vib = (Vibrator) getActivity().getSystemService(Context.VIBRATOR_SERVICE);
             vib.vibrate(200);
-            ConstraintLayout.LayoutParams params_seekBar= (ConstraintLayout.LayoutParams)  bar_sliding.getLayoutParams();
+
+            ConstraintLayout.LayoutParams params_line= (ConstraintLayout.LayoutParams)  imageView_limit.getLayoutParams();
+            ConstraintLayout.LayoutParams params_text= (ConstraintLayout.LayoutParams)  textView_limit.getLayoutParams();
 
             int xRandomBar= (int)(Math.random()*(bar_sliding.getWidth()-bar_sliding.getMax()))+bar_sliding.getMinimumWidth();
-            params_seekBar.setMarginStart(xRandomBar); // The indicator bar position
-            params_seekBar.leftMargin=xRandomBar;
-            imageView_limit.setLayoutParams(params_seekBar);
+
+
+            int xTextbar=xRandomBar-textView_limitWidth/2;
+
+            if (xTextbar+textView_limitWidth/2>=screenWidth){
+                xTextbar=xRandomBar-textView_limitWidth-8;
+            }
+            else if (xTextbar<=0){
+                xTextbar=8;
+            }
+
+            params_line.setMarginStart(xRandomBar); // The indicator bar position
+            params_line.leftMargin=xRandomBar;
+            params_line.setMarginStart(xRandomBar);
+            imageView_limit.setLayoutParams(params_line);
+
+            params_text.setMarginStart(xRandomBar);
+            params_text.leftMargin=xTextbar;
+            params_text.setMarginStart(xTextbar);
+            textView_limit.setLayoutParams(params_text);
 
         }
     }

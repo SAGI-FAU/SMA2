@@ -59,11 +59,10 @@
         android:text="@string/target"
         android:layout_marginTop="0dp"
         app:layout_constraintTop_toBottomOf="@+id/imageView_limit"
-        tools:layout_editor_absoluteX="170sp"
+        android:layout_marginStart="130sp"
         android:textSize="30sp"
         android:gravity="center"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
         android:textColor="@color/colorSeek"
 
          />
