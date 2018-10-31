@@ -10,6 +10,8 @@
     <uses-permission android:name="android.permission.RECORD_AUDIO" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <!-- permission required to automatically restart a repeating alarm if the user reboots the device -->
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
 
     <application
         android:allowBackup="true"
@@ -93,6 +95,15 @@
         <activity android:name=".ResultsActivity" />
         <activity android:name=".FeatureExtraction.Tapping.Tapping_feature_Activity" />
         <activity android:name=".FeatureExtraction.Tapping.Tapping_feature_Two_Activity"></activity>
+
+        <!-- Register the Alarm Receiver -->
+        <receiver android:name=".AlarmReceiver"
+
+            android:enabled="false">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+            </intent-filter>
+        </receiver>
     </application>
 
 </manifest>
