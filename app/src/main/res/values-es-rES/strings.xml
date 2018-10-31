@@ -123,5 +123,7 @@
     <string name="Medium_message">¡Buen Trabajo! \nPero, puede hacerlo mejor!</string>
     <string name="Negative_message">¡Vamos a mejorar! \nSigue trabajando</string>
     <string name="Empty">Vacio</string>
+    <string name="Title_notif">Haz tu Terapia</string>
+    <string name="Content_notif">Recuerda hacer hoy tus Ejercicios</string>
 
 </resources>

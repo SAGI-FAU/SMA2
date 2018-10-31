@@ -25,7 +25,19 @@ public class MainActivityMenu extends AppCompatActivity implements View.OnClickL
         setContentView(R.layout.activity_main_menu);
         noPermissionsAlertDialog= createAlertDialog();
         ask_permissions();
+
+        // create alarm notifications to make exercises
+        //TODO: read the medical intake time from DB and correlate it with the alarm for notification of the exercises. Now it is fixed at 9:00 am
+        Notifications notifications=new Notifications(this);
+        int hour=9;
+        int minutes=0;
+        notifications.setReminder(this,AlarmReceiver.class, hour, minutes);
+
+
         setListeners();
+
+
+
     }
 
     private void setListeners() {
