@@ -5,7 +5,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.CountDownTimer;
-import android.os.SystemClock;
 import android.os.Vibrator;
 import android.support.constraint.ConstraintLayout;
 import android.support.v7.app.AppCompatActivity;
@@ -17,7 +16,6 @@ import android.widget.TextView;
 
 import com.sma2.sma2.R;
 import com.sma2.sma2.SignalRecording.SlidingRecorder;
-import com.sma2.sma2.SignalRecording.TappingRecorder;
 import com.sma2.sma2.ThanksActivity;
 /**
  * Created by paulaperez on 8/10/18.
@@ -44,7 +42,7 @@ public class Sliding extends AppCompatActivity implements View.OnClickListener {
         }
         SlidingFileName=slidingrecorder.SlidingFileName();
         
-        setContentView(R.layout.activity_capture_sliding);
+        setContentView(R.layout.fragment_ex_sliding);
         setListeners();
     }
 
@@ -52,10 +50,10 @@ public class Sliding extends AppCompatActivity implements View.OnClickListener {
 
 
 
-        final TextView mTextField = findViewById(R.id.accgraph_chrono5);
+        final TextView mTextField = findViewById(R.id.chronoSliding);
 
 
-        SeekBar seekBar = (SeekBar) findViewById(R.id.seekBar2);
+        SeekBar seekBar = (SeekBar) findViewById(R.id.bar_sliding);
 
 
         seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
@@ -138,7 +136,7 @@ public class Sliding extends AppCompatActivity implements View.OnClickListener {
 
     public void ReachingTheBar(Float xSeek, Float xBar){
 
-        SeekBar seekBar = (SeekBar) findViewById(R.id.seekBar2);
+        SeekBar seekBar = (SeekBar) findViewById(R.id.bar_sliding);
 
         if(Math.abs(xSeek-xBar)<30){
             data[0]=Float.toString(xBar);
