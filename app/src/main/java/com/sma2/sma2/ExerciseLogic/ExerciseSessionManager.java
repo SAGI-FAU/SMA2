@@ -106,7 +106,14 @@ public class ExerciseSessionManager {
                 Uri.parse("video/path"),
                 Uri.parse("Instruction/Path"),
                 ExAudioRec.class));
-        _dummyExerciseList.add(new Exercise(null, "Reading Text",
+        _dummyExerciseList.add(new Exercise(null, "Sentence 0",
+                "Speech",
+                "Reading Text",
+                "Please read the following text",
+                Uri.parse("video/path"),
+                Uri.parse("Instruction/Path"),
+                ExReadText.class));
+        _dummyExerciseList.add(new Exercise(null, "Sentence 1",
                 "Speech",
                 "Reading Text",
                 "Please read the following text",
