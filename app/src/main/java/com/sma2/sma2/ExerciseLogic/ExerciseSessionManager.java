@@ -9,6 +9,7 @@ import com.sma2.sma2.ExerciseFragments.ExAudioRec;
 import com.sma2.sma2.ExerciseFragments.ExOneFingerTapping;
 import com.sma2.sma2.ExerciseFragments.ExReadText;
 import com.sma2.sma2.ExerciseFragments.ExSliding;
+import com.sma2.sma2.ExerciseFragments.ExTwoFingerTapping;
 import com.sma2.sma2.ExerciseFragments.Ex_Hand_Rotation_Rec;
 import com.sma2.sma2.ExerciseFragments.Ex_Hand_To_Head_Rec;
 import com.sma2.sma2.ExerciseFragments.Ex_Walking_Rec;
@@ -74,6 +75,14 @@ public class ExerciseSessionManager {
 
     public void _createDummyExerciseList(Context context){
 
+
+        _dummyExerciseList.add(new Exercise(null, "Tapping 2 fingers",
+                "Tapping",
+                "2-fingers Tapping",
+                "Tap the bug as fast as you can by alternating between left and right bugs",
+                Uri.parse("video/path"),
+                Uri.parse("Instruction/Path"),
+                ExTwoFingerTapping.class));
 
         _dummyExerciseList.add(new Exercise(null, "Sliding",
                 "Tapping",
