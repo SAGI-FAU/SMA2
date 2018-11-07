@@ -3,15 +3,13 @@ package com.sma2.sma2.SignalRecording;
 import android.content.Context;
 import android.os.Handler;
 
-import com.sma2.sma2.ExerciseFragments.Sliding;
 
 import java.io.BufferedWriter;
 import java.io.DataOutputStream;
 import java.io.File;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
-/**
- * Created by paulaperez on 8/11/18.
+/** * Created by paulaperez on 8/11/18.
  */
 
 
