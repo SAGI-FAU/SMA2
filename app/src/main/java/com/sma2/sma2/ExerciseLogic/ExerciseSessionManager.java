@@ -6,6 +6,7 @@ import android.net.Uri;
 import com.sma2.sma2.DataAccess.ExerciseDataService;
 import com.sma2.sma2.DataAccess.ScheduledExerciseDataService;
 import com.sma2.sma2.ExerciseFragments.ExAudioRec;
+import com.sma2.sma2.ExerciseFragments.ExImageDescription;
 import com.sma2.sma2.ExerciseFragments.ExOneFingerTapping;
 import com.sma2.sma2.ExerciseFragments.ExReadText;
 import com.sma2.sma2.ExerciseFragments.ExSliding;
@@ -25,8 +26,16 @@ public class ExerciseSessionManager {
 
     public void createExerciseSession(Context context) {
         // create Dummy List
-        _createDummyExerciseList(context);
         ScheduledExerciseDataService scheduledExerciseDataService = new ScheduledExerciseDataService(context);
+        _testList=scheduledExerciseDataService.getAllScheduledExercises();
+        if (_testList.size()>0) {
+            for (int i = 0; i < _testList.size(); i++) {
+                scheduledExerciseDataService.deleteScheduledExercise(_testList.get(i));
+            }
+        }
+
+        _createDummyExerciseList(context);
+        _testList=scheduledExerciseDataService.getAllScheduledExercises();
         for (Exercise exercise : _dummyExerciseList){
             ScheduledExercise ex = new ScheduledExercise(exercise, 1);
             _testList.add(ex);
@@ -75,10 +84,17 @@ public class ExerciseSessionManager {
 
     public void _createDummyExerciseList(Context context){
 
+        _dummyExerciseList.add(new Exercise(null, "Cookie theft",
+                "Speech",
+                "Image description of the Cookie theft picture",
+                "Please describe what you see in the following image",
+                Uri.parse("video/path"),
+                Uri.parse("Instruction/Path"),
+                ExImageDescription.class));
 
         _dummyExerciseList.add(new Exercise(null, "Tapping 2 fingers",
                 "Tapping",
-                "2-fingers Tapping",
+                "2-finger Tapping",
                 "Tap the bug as fast as you can by alternating between left and right bugs",
                 Uri.parse("video/path"),
                 Uri.parse("Instruction/Path"),
@@ -151,6 +167,14 @@ public class ExerciseSessionManager {
 
 
         ExerciseDataService exerciseDataService = new ExerciseDataService(context);
+
+        ArrayList<Exercise> exerciseDb=exerciseDataService.getAllExercises();
+
+
+        for (int i = 0; i < exerciseDb.size(); i++) {
+            exerciseDataService.deleteExercise(exerciseDb.get(i));
+        }
+
         if (exerciseDataService.getAllExercises().size()==0) {
             for (int i = 0; i < _dummyExerciseList.size(); i++) {
                 exerciseDataService.insertExercise(_dummyExerciseList.get(i));
