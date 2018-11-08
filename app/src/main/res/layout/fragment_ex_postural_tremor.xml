@@ -4,8 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ExerciseFragments.ExFreeWalking">
-
+    tools:context=".ExerciseFragments.Ex_postural_Rec">
 
     <TextView
         android:id="@+id/countdownTimerTextView"
@@ -36,7 +35,7 @@
         android:layout_height="285dp"
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
-        android:src="@drawable/walking_icon"
+        android:src="@drawable/smartphone_extended"
         app:layout_constraintBottom_toTopOf="@+id/frameExSV"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHeight_percent="0.5"
@@ -45,11 +44,13 @@
         app:layout_constraintTop_toBottomOf="@+id/countdownTimerTextView" />
 
     <FrameLayout
-        android:id="@+id/frameExWalking"
+        android:id="@+id/frameExSV"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
         android:layout_marginStart="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

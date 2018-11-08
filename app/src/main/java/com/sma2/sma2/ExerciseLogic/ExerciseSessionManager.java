@@ -11,9 +11,11 @@ import com.sma2.sma2.ExerciseFragments.ExOneFingerTapping;
 import com.sma2.sma2.ExerciseFragments.ExReadText;
 import com.sma2.sma2.ExerciseFragments.ExSliding;
 import com.sma2.sma2.ExerciseFragments.ExTwoFingerTapping;
+import com.sma2.sma2.ExerciseFragments.Ex_Circling_Rec;
 import com.sma2.sma2.ExerciseFragments.Ex_Hand_Rotation_Rec;
 import com.sma2.sma2.ExerciseFragments.Ex_Hand_To_Head_Rec;
 import com.sma2.sma2.ExerciseFragments.Ex_Walking_Rec;
+import com.sma2.sma2.ExerciseFragments.Ex_postural_Rec;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -84,6 +86,23 @@ public class ExerciseSessionManager {
 
     public void _createDummyExerciseList(Context context){
 
+
+        _dummyExerciseList.add(new Exercise(null, "Circling",
+                "Movement",
+                "Make circles with your arm extended",
+                "Please make circles with your arm extended",
+                Uri.parse("video/path"),
+                Uri.parse("Instruction/Path"),
+                Ex_Circling_Rec.class));
+
+        _dummyExerciseList.add(new Exercise(null, "Postural tremor",
+                "Movement",
+                "Hold the phone with the extended arm",
+                "Please hold the phone with your extended arm as long as possible",
+                Uri.parse("video/path"),
+                Uri.parse("Instruction/Path"),
+                Ex_postural_Rec.class));
+
         _dummyExerciseList.add(new Exercise(null, "Cookie theft",
                 "Speech",
                 "Image description of the Cookie theft picture",
@@ -130,6 +149,62 @@ public class ExerciseSessionManager {
                 Uri.parse("Instruction/Path"),
                 ExReadText.class));
         _dummyExerciseList.add(new Exercise(null, "Sentence 1",
+                "Speech",
+                "Reading Text",
+                "Please read the following text",
+                Uri.parse("video/path"),
+                Uri.parse("Instruction/Path"),
+                ExReadText.class));
+        _dummyExerciseList.add(new Exercise(null, "Sentence 2",
+                "Speech",
+                "Reading Text",
+                "Please read the following text",
+                Uri.parse("video/path"),
+                Uri.parse("Instruction/Path"),
+                ExReadText.class));
+        _dummyExerciseList.add(new Exercise(null, "Sentence 3",
+                "Speech",
+                "Reading Text",
+                "Please read the following text",
+                Uri.parse("video/path"),
+                Uri.parse("Instruction/Path"),
+                ExReadText.class));
+        _dummyExerciseList.add(new Exercise(null, "Sentence 4",
+                "Speech",
+                "Reading Text",
+                "Please read the following text",
+                Uri.parse("video/path"),
+                Uri.parse("Instruction/Path"),
+                ExReadText.class));
+        _dummyExerciseList.add(new Exercise(null, "Sentence 5",
+                "Speech",
+                "Reading Text",
+                "Please read the following text",
+                Uri.parse("video/path"),
+                Uri.parse("Instruction/Path"),
+                ExReadText.class));
+        _dummyExerciseList.add(new Exercise(null, "Sentence 6",
+                "Speech",
+                "Reading Text",
+                "Please read the following text",
+                Uri.parse("video/path"),
+                Uri.parse("Instruction/Path"),
+                ExReadText.class));
+        _dummyExerciseList.add(new Exercise(null, "Sentence 7",
+                "Speech",
+                "Reading Text",
+                "Please read the following text",
+                Uri.parse("video/path"),
+                Uri.parse("Instruction/Path"),
+                ExReadText.class));
+        _dummyExerciseList.add(new Exercise(null, "Sentence 8",
+                "Speech",
+                "Reading Text",
+                "Please read the following text",
+                Uri.parse("video/path"),
+                Uri.parse("Instruction/Path"),
+                ExReadText.class));
+        _dummyExerciseList.add(new Exercise(null, "Sentence 9",
                 "Speech",
                 "Reading Text",
                 "Please read the following text",
