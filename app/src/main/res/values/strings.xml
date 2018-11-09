@@ -107,7 +107,7 @@
     <string name="user_id">ID: </string>
     <string name="user_age">Age: </string>
     <string name="S_record">Recorded sessions: </string>
-    <string name="Int_medicine">Intake medicine: </string>
+    <string name="Int_medicine">Medicine intake: </string>
     <string name="upd_medicine">Update medicine</string>
     <string name="add_medicine">ADD MEDICINE</string>
     <string name="delete">DELETE</string>
