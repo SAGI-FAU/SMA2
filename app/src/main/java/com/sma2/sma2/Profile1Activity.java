@@ -58,7 +58,7 @@ public class Profile1Activity extends AppCompatActivity implements View.OnClickL
             @Override
             public void onDateSet(DatePicker datePicker, int mYear, int mMonth, int mDay) {
                 mMonth+=1;
-                et_date.setText(DateFormat.getDateInstance().format(C));
+                et_date.setText(mDay+"/"+mMonth+"/"+mYear);
             }
         },year,month,day);
     }

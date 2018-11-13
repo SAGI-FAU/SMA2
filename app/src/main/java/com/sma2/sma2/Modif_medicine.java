@@ -10,6 +10,11 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.sma2.sma2.DataAccess.MedicineDA;
+import com.sma2.sma2.DataAccess.MedicineDataService;
+import com.sma2.sma2.DataAccess.PatientDA;
+import com.sma2.sma2.DataAccess.PatientDataService;
+
 public class Modif_medicine extends AppCompatActivity implements View.OnClickListener{
 
     TextView eMedicine,eDoses;
@@ -27,6 +32,7 @@ public class Modif_medicine extends AppCompatActivity implements View.OnClickLis
         eDoses=findViewById(R.id.med_dose);
         delete=findViewById(R.id.button_delete);
         intaketime_spinner = findViewById(R.id.spinnerIntake);
+
         Bundle Data_medicine=this.getIntent().getExtras();
         if (Data_medicine!=null){
             eMedicine.setText(String.valueOf(Data_medicine.get("Medicine")).toString());
@@ -67,7 +73,16 @@ public class Modif_medicine extends AppCompatActivity implements View.OnClickLis
             case R.id.button_cancel:
                 finish();
             case R.id.button_save:
-                // TODO: Save medicine
+                MedicineDataService mds = new MedicineDataService(getApplicationContext());
+                PatientDataService PatientData= new PatientDataService(this);
+                Long NumPatients=PatientData.countPatients();
+
+                if (NumPatients>0){
+                    PatientDA patient=PatientData.getPatient();
+                    MedicineDA Medicine=new MedicineDA(medicine_name, Integer.valueOf(temp_dose), hour_intake, patient.getUserId());
+                    mds.saveMedicine(Medicine);
+                }
+
                 finish();
                 break;
             case R.id.button_delete:
