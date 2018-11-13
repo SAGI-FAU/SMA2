@@ -26,7 +26,7 @@
         android:layout_height="wrap_content"
         android:gravity="center"
         android:text="@string/Session"
-        android:textSize="40sp"
+        android:textSize="@dimen/textview_text_size"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/spaceHolder" />
@@ -35,15 +35,16 @@
         android:id="@+id/scheduledExerciseList"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginBottom="20dp"
-        android:layout_marginTop="20dp"
-        android:textSize="30sp"
+        app:layout_constraintWidth_percent="0.85"
+        app:layout_constraintDimensionRatio="1.2"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:textSize="@dimen/textview_text_size"
         app:layout_constraintBottom_toTopOf="@+id/sessionStart"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHeight_percent="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView_ex"
-        app:layout_constraintWidth_percent="0.75">
+        app:layout_constraintTop_toBottomOf="@+id/textView_ex">
 
     </android.support.v7.widget.RecyclerView>
 
@@ -52,13 +53,17 @@
         android:id="@+id/sessionStart"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginBottom="20dp"
+        app:layout_constraintDimensionRatio="4"
+        app:layout_constraintWidth_percent="0.7"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
         android:background="@color/colorPrimaryDark"
         android:text="@string/session_start"
         android:textSize="@dimen/button_text_size"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintDimensionRatio="2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintWidth_percent="0.6" />
+        app:layout_constraintTop_toBottomOf="@+id/scheduledExerciseList" />
 </android.support.constraint.ConstraintLayout>
