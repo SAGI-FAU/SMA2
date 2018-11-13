@@ -104,7 +104,7 @@
     <string name="OK">OK</string>
     <string name="user_name">"Nombre: "</string>
     <string name="user_id">"CC: "</string>
-    <string name="user_age">"Edad: "</string>
+    <string name="user_age">"Fecha de Nacimiento: "</string>
     <string name="S_record">"Sesiones grabadas: "</string>
     <string name="Int_medicine">"Medicinas: "</string>
     <string name="upd_medicine">Actualizar medicina</string>

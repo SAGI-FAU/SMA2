@@ -17,6 +17,7 @@ import android.widget.Toast;
 import com.sma2.sma2.DataAccess.PatientDA;
 import com.sma2.sma2.DataAccess.PatientDataService;
 
+import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -57,7 +58,7 @@ public class Profile1Activity extends AppCompatActivity implements View.OnClickL
             @Override
             public void onDateSet(DatePicker datePicker, int mYear, int mMonth, int mDay) {
                 mMonth+=1;
-                et_date.setText(mDay+"/"+mMonth+"/"+mYear);
+                et_date.setText(DateFormat.getDateInstance().format(C));
             }
         },year,month,day);
     }

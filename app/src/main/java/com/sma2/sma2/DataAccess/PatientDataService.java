@@ -2,6 +2,8 @@ package com.sma2.sma2.DataAccess;
 
 import android.content.Context;
 
+import com.sma2.sma2.ExerciseLogic.DaoMaster;
+import com.sma2.sma2.ExerciseLogic.DaoSession;
 import com.sma2.sma2.R;
 
 import org.greenrobot.greendao.database.Database;
@@ -46,8 +48,19 @@ public class PatientDataService
         DaoSession session = new DaoMaster(db).newSession();
         PatientDADao dao = session.getPatientDADao();
         PatientDA patient = dao.queryBuilder().list().get(0);
+
         db.close();
         return patient;
+    }
+
+    public Long countPatients(){
+        DaoMaster.DevOpenHelper helper = new DaoMaster.DevOpenHelper(invocationcontext, dbname);
+        Database db = helper.getReadableDb();
+        DaoSession session = new DaoMaster(db).newSession();
+        PatientDADao dao = session.getPatientDADao();
+        Long N_pat = dao.queryBuilder().count();
+        db.close();
+        return N_pat;
     }
 
 

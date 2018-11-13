@@ -64,7 +64,7 @@ public class Notifications {
         PendingIntent pendingIntent = PendingIntent.getActivity(CONTEXT, DAILY_REMINDER_REQUEST_CODE, intent, 0);
 
         NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(CONTEXT, "ch10")
-                .setSmallIcon(R.mipmap.ic_launcher)
+                .setSmallIcon(R.drawable.tulip_elevated_binary)
                 .setContentTitle(title)
                 .setContentText(text)
                 .setSound(alarmSound)
