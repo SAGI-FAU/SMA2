@@ -2,6 +2,8 @@ package com.sma2.sma2.DataAccess;
 
 import android.content.Context;
 
+import com.sma2.sma2.DataAccess.DaoMaster;
+import com.sma2.sma2.DataAccess.DaoSession;
 import com.sma2.sma2.ExerciseLogic.ScheduledExercise;
 
 import com.sma2.sma2.ExerciseLogic.ScheduledExerciseDao;
@@ -68,6 +70,21 @@ public class ScheduledExerciseDataService {
         DaoSession session = new DaoMaster(db).newSession();
         ScheduledExerciseDao dao = session.getScheduledExerciseDao();
         List<ScheduledExercise> scheduledExercises = dao.queryBuilder().list();
+
+        // db.close();
+        return new ArrayList<ScheduledExercise>(scheduledExercises);
+    }
+
+    public ArrayList<ScheduledExercise> getAllScheduledExercisesbySession(int SessionId){
+        if (db == null) {
+            DaoMaster.DevOpenHelper helper = new DaoMaster.DevOpenHelper(invocationcontext, "apkinsondb");
+            db = helper.getWritableDb();
+        }
+        DaoSession session = new DaoMaster(db).newSession();
+        ScheduledExerciseDao dao = session.getScheduledExerciseDao();
+        List<ScheduledExercise> scheduledExercises = dao.queryBuilder()
+                .where(ScheduledExerciseDao.Properties.SessionId.eq(SessionId))
+                .list();
 
         // db.close();
         return new ArrayList<ScheduledExercise>(scheduledExercises);

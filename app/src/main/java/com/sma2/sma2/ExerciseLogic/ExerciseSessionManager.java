@@ -30,18 +30,21 @@ public class ExerciseSessionManager {
 
 
     public void createExerciseSession(Context context) {
+        Calendar c = Calendar.getInstance();
+        int day= c.get(Calendar.DAY_OF_WEEK);
+
         // create Dummy List
         ScheduledExerciseDataService scheduledExerciseDataService = new ScheduledExerciseDataService(context);
         ExerciseDataService exerciseDataService = new ExerciseDataService(context);
-        _testList=scheduledExerciseDataService.getAllScheduledExercises();
+        _testList=scheduledExerciseDataService.getAllScheduledExercisesbySession(day);
         if (_testList.size()>0) {
             for (int i = 0; i < _testList.size(); i++) {
                 scheduledExerciseDataService.deleteScheduledExercise(_testList.get(i));
             }
         }
         _createDummyExerciseList(context);
-        Calendar c = Calendar.getInstance();
-        int day= c.get(Calendar.DAY_OF_WEEK);
+
+
         int[] exercisesIDs=new int[] {};
         switch (day){
             case 1:
@@ -75,7 +78,7 @@ public class ExerciseSessionManager {
             _testList.add(ex);
             scheduledExerciseDataService.saveScheduledExercise(ex);
         }
-        _testList=scheduledExerciseDataService.getAllScheduledExercises();
+        _testList=scheduledExerciseDataService.getAllScheduledExercisesbySession(day);
         // Create a new list of exercise and store them in the database with a new (incrementing) session id
         // store the current session id in the as a shared property
     }
