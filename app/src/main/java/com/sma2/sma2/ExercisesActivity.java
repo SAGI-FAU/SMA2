@@ -6,6 +6,9 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
+
+import com.sma2.sma2.DataAccess.PatientDA;
+import com.sma2.sma2.DataAccess.PatientDataService;
 import com.sma2.sma2.ExerciseFragments.ExAudioRec;
 import com.sma2.sma2.ExerciseFragments.ExReadText;
 import com.sma2.sma2.ExerciseFragments.ExerciseFinished;
@@ -83,6 +86,15 @@ public class ExercisesActivity extends AppCompatActivity implements ExerciseInst
 
     @Override
     public void onSessionFinishedClicked() {
+
+        PatientDataService PatientData= new PatientDataService(this);
+        Long NumPatients=PatientData.countPatients();
+        if (NumPatients>0){
+            PatientDA Patient=PatientData.getPatient();
+            int sessions=Patient.getSessionCount();
+            Patient.setSessionCount(sessions+1);
+            PatientData.updatePatient(Patient);
+        }
         Intent mIntent = new Intent(this, MainActivityMenu.class);
         startActivity(mIntent);
     }

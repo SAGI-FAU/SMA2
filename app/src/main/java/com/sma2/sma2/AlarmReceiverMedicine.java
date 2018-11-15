@@ -48,7 +48,7 @@ public class AlarmReceiverMedicine extends BroadcastReceiver {
         for (int i=0;i<ListMed.size();i++){
             MedicineDA CurrentMed=ListMed.get(i);
             MedicineName=CurrentMed.getMedicineName();
-            content_notification=content_notification+MedicineName+", ";
+            content_notification=content_notification+ " "+MedicineName+", ";
         }
 
 
