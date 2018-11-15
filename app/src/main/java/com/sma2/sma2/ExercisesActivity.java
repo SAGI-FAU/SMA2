@@ -95,7 +95,7 @@ public class ExercisesActivity extends AppCompatActivity implements ExerciseInst
             Patient.setSessionCount(sessions+1);
             PatientData.updatePatient(Patient);
         }
-        Intent mIntent = new Intent(this, MainActivityMenu.class);
+        Intent mIntent = new Intent(this, ThanksActivity.class);
         startActivity(mIntent);
     }
 
