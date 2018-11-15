@@ -7,6 +7,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import com.sma2.sma2.ExerciseFragments.ExAudioRec;
+import com.sma2.sma2.ExerciseFragments.ExReadText;
 import com.sma2.sma2.ExerciseFragments.ExerciseFinished;
 import com.sma2.sma2.ExerciseFragments.ExerciseFragment;
 import com.sma2.sma2.ExerciseFragments.ExerciseInstructions;
@@ -45,6 +46,7 @@ public class ExercisesActivity extends AppCompatActivity implements ExerciseInst
     }
 
     private void showFragment(Fragment fragment) {
+
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         transaction.replace(R.id.exerciseContainer, fragment);
         transaction.commit();

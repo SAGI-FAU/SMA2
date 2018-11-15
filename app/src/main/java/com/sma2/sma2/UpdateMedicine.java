@@ -42,7 +42,7 @@ public class UpdateMedicine extends AppCompatActivity implements View.OnClickLis
         for (int i = 0; i < Medicine.size(); i++) {
             CurrentMed=Medicine.get(i);
 
-            list_medic.add(new ejm_data_medicine(CurrentMed.getMedicineName(),CurrentMed.getDose(),CurrentMed.getIntakeTime()));
+            list_medic.add(new ejm_data_medicine(CurrentMed.getId(), CurrentMed.getMedicineName(),CurrentMed.getDose(),CurrentMed.getIntakeTime()));
         }
     }
 

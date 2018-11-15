@@ -22,6 +22,7 @@ public class Modif_medicine extends AppCompatActivity implements View.OnClickLis
     Spinner intaketime_spinner;
     int hour_intake;
     int band=0;
+    Long id;
     Button delete;
 
     @Override
@@ -35,8 +36,9 @@ public class Modif_medicine extends AppCompatActivity implements View.OnClickLis
 
         Bundle Data_medicine=this.getIntent().getExtras();
         if (Data_medicine!=null){
-            eMedicine.setText(String.valueOf(Data_medicine.get("Medicine")).toString());
-            eDoses.setText(String.valueOf(Data_medicine.get("Doses")).toString());
+            eMedicine.setText(String.valueOf(Data_medicine.get("Medicine")));
+            eDoses.setText(String.valueOf(Data_medicine.get("Doses")));
+            id=(Long) Data_medicine.get("id");
             band=1;
         }
 
@@ -44,7 +46,7 @@ public class Modif_medicine extends AppCompatActivity implements View.OnClickLis
             delete.setVisibility(View.GONE);
         }
         String[] hours = new String[]{"00:00","01:00","02:00","03:00","04:00","05:00","06:00","07:00","08:00","09:00","10:00","11:00","12:00","13:00","14:00","15:00","16:00","17:00","18:00","19:00","20:00","21:00","22:00","23:00"};
-        ArrayAdapter<String> intake_adapter =  new ArrayAdapter<String> (this,android.R.layout.simple_spinner_item,hours);
+        ArrayAdapter<String> intake_adapter =  new ArrayAdapter<> (this,android.R.layout.simple_spinner_item,hours);
         intake_adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         intaketime_spinner.setAdapter(intake_adapter);
         intaketime_spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -69,13 +71,13 @@ public class Modif_medicine extends AppCompatActivity implements View.OnClickLis
     public void onClick(View view) {
         medicine_name = ((TextView) findViewById(R.id.med_name)).getText().toString();
         temp_dose = ((TextView) findViewById(R.id.med_dose)).getText().toString();
+        MedicineDataService mds = new MedicineDataService(getApplicationContext());
+        PatientDataService PatientData= new PatientDataService(this);
+        Long NumPatients=PatientData.countPatients();
         switch (view.getId()){
             case R.id.button_cancel:
                 finish();
             case R.id.button_save:
-                MedicineDataService mds = new MedicineDataService(getApplicationContext());
-                PatientDataService PatientData= new PatientDataService(this);
-                Long NumPatients=PatientData.countPatients();
 
                 if (NumPatients>0){
                     PatientDA patient=PatientData.getPatient();
@@ -86,7 +88,10 @@ public class Modif_medicine extends AppCompatActivity implements View.OnClickLis
                 finish();
                 break;
             case R.id.button_delete:
-                // TODO: Delete medicine
+
+                MedicineDA Med=mds.getMedicineById(id);
+                mds.delete(Med);
+
                 finish();
         }
     }

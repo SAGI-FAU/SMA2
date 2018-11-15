@@ -24,7 +24,7 @@ public class AlarmReceiver extends BroadcastReceiver {
                 // Set the alarm here.
                 Log.d(TAG, "onReceive: BOOT_COMPLETED");
                 notifications.setReminder(context, AlarmReceiver.class,
-                        10, 0);
+                        9, 0);
                 return;
 
             }

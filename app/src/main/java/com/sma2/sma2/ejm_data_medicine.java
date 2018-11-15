@@ -5,9 +5,12 @@ public class ejm_data_medicine {
     private String medicine;
     private int doses;
     private int time;
+    private Long id;
 
-    public ejm_data_medicine(String medicine, int doses, int time) {
+    public ejm_data_medicine(Long id, String medicine, int doses, int time) {
         //TODO : It is necessary to test but then it can be eliminated.
+
+        this.id=id;
         this.medicine = medicine;
         this.doses = doses;
         this.time = time;
@@ -16,6 +19,8 @@ public class ejm_data_medicine {
     public String getMedicine() {
         return medicine;
     }
+
+    public Long getId(){return id;}
 
     public void setMedicine(String medicine) {
         this.medicine = medicine;

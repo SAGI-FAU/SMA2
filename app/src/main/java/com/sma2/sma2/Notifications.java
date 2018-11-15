@@ -54,11 +54,11 @@ public class Notifications {
         Uri alarmSound = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
 
         // Create an explicit intent for an Activity in your app
-        Intent intent = new Intent(CONTEXT, MainActivityMenu.class);
+        Intent intent = new Intent(CONTEXT, MainActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
 
         TaskStackBuilder stackBuilder = TaskStackBuilder.create(CONTEXT);
-        stackBuilder.addParentStack(MainActivityMenu.class);
+        stackBuilder.addParentStack(MainActivity.class);
         stackBuilder.addNextIntent(intent);
 
         PendingIntent pendingIntent = PendingIntent.getActivity(CONTEXT, DAILY_REMINDER_REQUEST_CODE, intent, 0);

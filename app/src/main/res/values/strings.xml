@@ -126,7 +126,8 @@
     <string name="Empty">Empty</string>
     <string name="Title_notif">Make your therapy</string>
     <string name="Content_notif">Please remind your exercises today</string>
-
+    <string name="title_notif_med">Take your medicine</string>
+    <string name="content_notif_med">Remember to take your medicine: </string>
 
 
 
