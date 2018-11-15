@@ -14,7 +14,6 @@ import com.sma2.sma2.DataAccess.PatientDA;
 import com.sma2.sma2.DataAccess.PatientDataService;
 
 import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -51,7 +50,7 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
             SessionsText.setText(String.valueOf(patient.getSessionCount()));
         }
         else{
-            UsernameText.setText("Name");
+            UsernameText.setText(this.getText(R.string.name));
             Date Birthday=Calendar.getInstance().getTime();
             BirthdayText.setText(DateFormat.getDateInstance().format(Birthday));
             SessionsText.setText(String.valueOf(0));

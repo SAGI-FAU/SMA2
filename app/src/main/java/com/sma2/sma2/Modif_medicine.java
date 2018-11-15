@@ -8,7 +8,6 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.sma2.sma2.DataAccess.MedicineDA;
 import com.sma2.sma2.DataAccess.MedicineDataService;

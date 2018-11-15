@@ -94,7 +94,7 @@ public class Ex_Hand_Rotation_Rec extends ExerciseFragment implements ButtonFrag
         countdownStart = System.currentTimeMillis();
         timer = new CountDownTimer(START_COUNTDOWN * 1000, 1000) {
             public void onTick(long millisUntilFinished) {
-                int newTime = (int) Math.round(millisUntilFinished / 1000);
+                int newTime =  Math.round(millisUntilFinished / 1000);
                 countdownTextView.setText(String.valueOf(newTime));
             }
             public void onFinish() {

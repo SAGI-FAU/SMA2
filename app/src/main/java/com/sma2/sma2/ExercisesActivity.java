@@ -9,8 +9,6 @@ import android.support.v7.app.AppCompatActivity;
 
 import com.sma2.sma2.DataAccess.PatientDA;
 import com.sma2.sma2.DataAccess.PatientDataService;
-import com.sma2.sma2.ExerciseFragments.ExAudioRec;
-import com.sma2.sma2.ExerciseFragments.ExReadText;
 import com.sma2.sma2.ExerciseFragments.ExerciseFinished;
 import com.sma2.sma2.ExerciseFragments.ExerciseFragment;
 import com.sma2.sma2.ExerciseFragments.ExerciseInstructions;

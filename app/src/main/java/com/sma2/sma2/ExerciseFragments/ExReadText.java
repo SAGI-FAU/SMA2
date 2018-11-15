@@ -72,8 +72,7 @@ public class ExReadText extends ExerciseFragment implements ButtonFragment.OnBut
             exercises.add(new TextExercise(line[locale], languages[locale], 1));
 
         }
-        Random rand = new Random();
-        //return exercises.get(rand.nextInt(exercises.size()));
+
         return exercises.get(Sentence);
     }
 

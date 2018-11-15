@@ -32,7 +32,6 @@ public class MainActivityMenu extends AppCompatActivity implements View.OnClickL
         ask_permissions();
 
         // create alarm notifications to make exercises
-        //TODO: read the medical intake time from DB and correlate it with the alarm for notification of the exercises. Now it is fixed at 9:00 am
         Notifications notifications=new Notifications(this);
         int hour=9;
         int minutes=0;

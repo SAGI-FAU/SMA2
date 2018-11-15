@@ -12,7 +12,7 @@ import java.util.ArrayList;
 
 public class Adapter_update_medic extends RecyclerView.Adapter<Adapter_update_medic.ViewHolderDatos> {
 
-    ArrayList<ejm_data_medicine> list_medic;
+    private ArrayList<ejm_data_medicine> list_medic;
     private Activity activity;
 
     public Adapter_update_medic(ArrayList<ejm_data_medicine> list_medic, Activity activity){
