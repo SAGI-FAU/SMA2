@@ -85,7 +85,9 @@ public class ExerciseSessionManager {
 
     public void updateExerciseListFromDB(Context context) {
         ScheduledExerciseDataService scheduledExerciseDataService = new ScheduledExerciseDataService(context);
-        _testList=scheduledExerciseDataService.getAllScheduledExercises();
+        Calendar c = Calendar.getInstance();
+        int day= c.get(Calendar.DAY_OF_WEEK);
+        _testList=scheduledExerciseDataService.getAllScheduledExercisesbySession(day);
     }
 
     public List<ScheduledExercise> getScheduledExerciseList() {

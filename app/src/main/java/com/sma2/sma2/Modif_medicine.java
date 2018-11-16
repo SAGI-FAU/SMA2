@@ -76,8 +76,8 @@ public class Modif_medicine extends AppCompatActivity implements View.OnClickLis
         switch (view.getId()){
             case R.id.button_cancel:
                 finish();
+                break;
             case R.id.button_save:
-
                 if (NumPatients>0){
                     PatientDA patient=PatientData.getPatient();
                     MedicineDA Medicine=new MedicineDA(medicine_name, Integer.valueOf(temp_dose), hour_intake, patient.getUserId());

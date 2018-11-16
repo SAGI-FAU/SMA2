@@ -113,12 +113,12 @@
     <string name="cancel">CANCELAR</string>
     <string name="save">GUARDAR</string>
     <string name="motivate">¡Buen Trabajo!</string>
-    <string name="Number_Taps">Número de Taps</string>
+    <string name="Number_Taps">Número de Toques</string>
     <string name="Time_Tapping_His">Tiempo</string>
     <string name="Finger_left">Dedo Izquierdo</string>
     <string name="Finger_right">Dedo Derecho</string>
     <string name="Hits_porcentage">Porcentaje de aciertos</string>
-    <string name="Tapping_Time">Tiempo de tapping</string>
+    <string name="Tapping_Time">Tiempo de toque</string>
     <string name="Positive_message">¡Buen Trabajo!</string>
     <string name="Medium_message">¡Buen Trabajo! \nPero, puede hacerlo mejor!</string>
     <string name="Negative_message">¡Vamos a mejorar! \nSigue trabajando</string>
@@ -127,4 +127,6 @@
     <string name="Content_notif">Recuerda hacer hoy tus Ejercicios</string>
     <string name="title_notif_med">Toma tu medicina</string>
     <string name="content_notif_med">Recuerda tomar tu medicina: </string>
+    <string name="Perc_Tapping_Hits">% Toques: </string>
+
 </resources>
