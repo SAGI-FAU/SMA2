@@ -17,7 +17,7 @@ import com.sma2.sma2.SignalRecording.MovementRecorder;
 
 public class Ex_Hand_Rotation_Rec extends ExerciseFragment implements ButtonFragment.OnButtonInteractionListener {
     private MovementRecorder recorder;
-    private static long START_COUNTDOWN = 5;
+    private static long START_COUNTDOWN = 3;
     private static long EXERCISE_TIME = 30;
     private final int SAMPLING_FREQUENCY = 10000;
     private String countdown_finished_txt;
@@ -28,6 +28,17 @@ public class Ex_Hand_Rotation_Rec extends ExerciseFragment implements ButtonFrag
 
     public Ex_Hand_Rotation_Rec() {
 
+    }
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        try {
+            recorder = new MovementRecorder(this.getContext(), SAMPLING_FREQUENCY, mExercise.getName());
+            recorder.registerListeners();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
@@ -43,12 +54,6 @@ public class Ex_Hand_Rotation_Rec extends ExerciseFragment implements ButtonFrag
         countdown_finished_txt = getResources().getString(R.string.start2);
         countdownTextView = view.findViewById(R.id.countdownTimerTextView);
         countdownTextView.setText(String.valueOf(START_COUNTDOWN));
-        try {
-            recorder = new MovementRecorder(this.getContext(), SAMPLING_FREQUENCY, mExercise.getName());
-            recorder.registerListeners();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
         return view;
     }
 
@@ -89,7 +94,7 @@ public class Ex_Hand_Rotation_Rec extends ExerciseFragment implements ButtonFrag
         countdownStart = System.currentTimeMillis();
         timer = new CountDownTimer(START_COUNTDOWN * 1000, 1000) {
             public void onTick(long millisUntilFinished) {
-                int newTime = (int) Math.round(millisUntilFinished / 1000);
+                int newTime =  Math.round(millisUntilFinished / 1000);
                 countdownTextView.setText(String.valueOf(newTime));
             }
             public void onFinish() {

@@ -27,6 +27,13 @@ public abstract class ExerciseFragment extends Fragment {
         }
         Bundle args = new Bundle();
         args.putParcelable("EXERCISE", exercise);
+
+        if (fragment  instanceof ExReadText){
+            String name=exercise.getName();
+            String NumSent=name.substring(name.length()-1);
+            args.putInt("sentence", Integer.valueOf(NumSent));
+
+        }
         fragment.setArguments(args);
         return fragment;
     }

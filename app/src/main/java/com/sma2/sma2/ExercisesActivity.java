@@ -6,7 +6,9 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
-import com.sma2.sma2.ExerciseFragments.ExAudioRec;
+
+import com.sma2.sma2.DataAccess.PatientDA;
+import com.sma2.sma2.DataAccess.PatientDataService;
 import com.sma2.sma2.ExerciseFragments.ExerciseFinished;
 import com.sma2.sma2.ExerciseFragments.ExerciseFragment;
 import com.sma2.sma2.ExerciseFragments.ExerciseInstructions;
@@ -27,7 +29,7 @@ public class ExercisesActivity extends AppCompatActivity implements ExerciseInst
         super.onCreate(savedInstanceState);
 
         sessionManager = new ExerciseSessionManager();
-        sessionManager.createExerciseSession(); // TODO: Only for testing
+        sessionManager.updateExerciseListFromDB(this);
         nextExercise = null;
 
         sessionOverview = SessionOverview.newInstance(sessionManager.getScheduledExerciseList());
@@ -45,6 +47,7 @@ public class ExercisesActivity extends AppCompatActivity implements ExerciseInst
     }
 
     private void showFragment(Fragment fragment) {
+
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         transaction.replace(R.id.exerciseContainer, fragment);
         transaction.commit();
@@ -81,7 +84,16 @@ public class ExercisesActivity extends AppCompatActivity implements ExerciseInst
 
     @Override
     public void onSessionFinishedClicked() {
-        Intent mIntent = new Intent(this, MainActivityMenu.class);
+
+        PatientDataService PatientData= new PatientDataService(this);
+        Long NumPatients=PatientData.countPatients();
+        if (NumPatients>0){
+            PatientDA Patient=PatientData.getPatient();
+            int sessions=Patient.getSessionCount();
+            Patient.setSessionCount(sessions+1);
+            PatientData.updatePatient(Patient);
+        }
+        Intent mIntent = new Intent(this, ThanksActivity.class);
         startActivity(mIntent);
     }
 
@@ -98,7 +110,7 @@ public class ExercisesActivity extends AppCompatActivity implements ExerciseInst
 
     @Override
     public void onDoneButtonClicked() {
-        nextExercise.save();
+        nextExercise.save(this);
         showSessionOverview();
     }
 }

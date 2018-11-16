@@ -4,8 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/frameLayout"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".BaseActivities.ExerciseIntro">
+    android:layout_height="match_parent">
 
     <TextView
         android:id="@+id/exerciseTitle"
@@ -24,7 +23,8 @@
     <us.feras.mdv.MarkdownView
         android:id="@+id/exerciseDescription"
         android:layout_width="match_parent"
-        android:layout_height="80dp"
+        android:layout_height="0dp"
+        app:layout_constraintDimensionRatio="6"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
@@ -38,7 +38,8 @@
     <us.feras.mdv.MarkdownView
         android:id="@+id/shortInstructions"
         android:layout_width="match_parent"
-        android:layout_height="200dp"
+        android:layout_height="0dp"
+        app:layout_constraintDimensionRatio="2"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
@@ -50,13 +51,15 @@
 
     <Button
         android:id="@+id/textInstructions"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintDimensionRatio="4"
+        app:layout_constraintWidth_percent="0.7"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:textSize="30dp"
-        android:background="@color/colorPrimary"
+        android:textSize="@dimen/button_text_size"
+        android:background="@color/colorPrimaryDark"
         android:text="@string/instructions_long"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -64,13 +67,15 @@
 
     <Button
         android:id="@+id/videoInstructionsbtn"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintDimensionRatio="4"
+        app:layout_constraintWidth_percent="0.7"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:textSize="30dp"
-        android:background="@color/colorPrimary"
+        android:textSize="@dimen/button_text_size"
+        android:background="@color/colorPrimaryDark"
         android:text="@string/instructions_video"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -78,16 +83,19 @@
 
     <Button
         android:id="@+id/startButton"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintDimensionRatio="4"
+        app:layout_constraintWidth_percent="0.7"
         android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
-        android:textSize="30dp"
-        android:background="@color/colorPrimary"
+        android:textSize="@dimen/button_text_size"
+        android:background="@color/colorPrimaryDark"
         android:text="@string/exercise_start"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/videoInstructionsbtn" />
 
 </android.support.constraint.ConstraintLayout>

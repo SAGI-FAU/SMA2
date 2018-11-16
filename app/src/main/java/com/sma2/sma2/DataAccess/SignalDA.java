@@ -1,5 +1,7 @@
 package com.sma2.sma2.DataAccess;
 
+import com.sma2.sma2.ExerciseLogic.Exercise;
+
 import org.greenrobot.greendao.annotation.Entity;
 import org.greenrobot.greendao.annotation.Id;
 import org.greenrobot.greendao.annotation.Keep;
@@ -9,13 +11,14 @@ import org.greenrobot.greendao.annotation.ToOne;
 import java.util.Date;
 import org.greenrobot.greendao.annotation.Generated;
 import org.greenrobot.greendao.DaoException;
+import com.sma2.sma2.ExerciseLogic.ExerciseDao;
 
 @Entity
 public class SignalDA {
     @Id
     private Long id;
-
     private long patientDAId;
+    private long exerciseID;
 
     @NotNull
     private String signalPath;
@@ -26,6 +29,10 @@ public class SignalDA {
 
     @ToOne(joinProperty = "patientDAId")
     private PatientDA patient;
+
+
+    @ToOne(joinProperty = "exerciseID")
+    private Exercise exercise;
 
     /** Used to resolve relations */
     @Generated(hash = 2040040024)
@@ -79,6 +86,16 @@ public class SignalDA {
     public void setPatientDAId(long patientDAId) {
         this.patientDAId = patientDAId;
     }
+
+
+    public long getExerciseID() {
+        return this.exerciseID;
+    }
+
+    public void setExerciseID(long exerciseID) {
+        this.exerciseID = exerciseID;
+    }
+
 
     public String getSignalPath() {
         return this.signalPath;
@@ -145,6 +162,43 @@ public class SignalDA {
         }
     }
 
+
+    @Generated(hash = 1987934211)
+    private transient Long exercise__resolvedKey;
+
+    /** To-one relationship, resolved on first access. */
+    @Generated(hash = 1642099129)
+    public Exercise getExercise() {
+        long __key = this.exerciseID;
+        if (exercise__resolvedKey == null || !exercise__resolvedKey.equals(__key)) {
+            final DaoSession daoSession = this.daoSession;
+            if (daoSession == null) {
+                throw new DaoException("Entity is detached from DAO context");
+            }
+            ExerciseDao targetDao = daoSession.getExerciseDao();
+            Exercise exerciseNew = targetDao.load(__key);
+            synchronized (this) {
+                exercise = exerciseNew;
+                exercise__resolvedKey = __key;
+            }
+        }
+        return exercise;
+    }
+
+    /** called by internal mechanisms, do not call yourself. */
+    @Generated(hash = 1823297237)
+    public void setExercise(@NotNull Exercise exercise) {
+        if (exercise == null) {
+            throw new DaoException(
+                    "To-one property 'exerciseID' has not-null constraint; cannot set to-one to null");
+        }
+        synchronized (this) {
+            this.exercise = exercise;
+            exerciseID = exercise.getId();
+            exercise__resolvedKey = exerciseID;
+        }
+    }
+
     /**
      * Convenient call for {@link org.greenrobot.greendao.AbstractDao#delete(Object)}.
      * Entity must attached to an entity context.
@@ -187,4 +241,5 @@ public class SignalDA {
         this.daoSession = daoSession;
         myDao = daoSession != null ? daoSession.getSignalDADao() : null;
     }
+
 }

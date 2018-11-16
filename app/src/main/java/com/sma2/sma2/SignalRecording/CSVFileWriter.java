@@ -1,9 +1,8 @@
 package com.sma2.sma2.SignalRecording;
 
-import android.annotation.SuppressLint;
 import android.os.Environment;
 import android.os.Handler;
-import android.os.Looper;
+import android.os.HandlerThread;
 import android.os.Message;
 import android.util.Log;
 
@@ -18,8 +17,8 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 
-public class CSVFileWriter extends Thread {
-    private static Handler mHandler;
+public class CSVFileWriter {
+    public Handler mHandler;
     private final String DELIMITER = ";";
     private final String NEW_LINE = "\r\n";
     private final String FILE_ENDING = ".csv";
@@ -43,18 +42,10 @@ public class CSVFileWriter extends Thread {
             Log.e(TAG, "ERROR opening file");
             throw e;
         }
-        run();
-    }
 
-    @SuppressLint("HandlerLeak")
-    @Override
-    public void run() {
-
-        if (Looper.myLooper() == null) {
-            Looper.prepare();
-        }
-
-        mHandler = new Handler() {
+        HandlerThread ht = new HandlerThread("CSVFileWriterThread");
+        ht.start();
+        mHandler = new Handler(ht.getLooper()) {
             public void handleMessage(Message msg) {
                 try {
                     write((String[]) msg.obj);
@@ -64,10 +55,6 @@ public class CSVFileWriter extends Thread {
                 }
             }
         };
-
-        if (Looper.myLooper() == null) {
-            Looper.loop();
-        }
     }
 
     public String getFileName() {
@@ -79,7 +66,7 @@ public class CSVFileWriter extends Thread {
         File directory = new File(path);
         if (!directory.exists()) {
             Log.i(TAG, "Directory did not exists, creating: " + path);
-            directory.mkdir();
+            directory.mkdirs();
         }
 
         // Try to create File

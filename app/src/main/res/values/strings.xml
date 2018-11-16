@@ -48,19 +48,19 @@
     <string name="volume">Volume</string>
     <string name="recording">Recording Speech.</string>
     <string name="walking">Walking exercise</string>
-    <string name="walking1">2x0, 4x10, free walk, etc.</string>
+    <string name="walking1">2x10, 4x10, free walk, etc.</string>
     <string name="hand_ex">Hand tremor exercise</string>
-    <string name="hand_ex1">rest tremor, kinetic tremor, pronation / supination, etc.</string>
+    <string name="hand_ex1">Rest tremor, kinetic tremor, pronation / supination, etc.</string>
     <string name="rest_tremor">Rest tremor</string>
     <string name="kinetic_tremor">Kinetic tremor</string>
     <string name="pronation_supination">Pronation / Supination</string>
     <string name="ball_balance">Ball balance Game</string>
     <string name="recording2">Recording Movement.</string>
     <string name="tapping_ex">Tapping exercise</string>
-    <string name="tapping_ex1">one finger taping, two fingers tapping, sliding, etc.</string>
+    <string name="tapping_ex1">One finger taping, two fingers tapping, sliding, etc.</string>
     <string name="tapping_1">one finger tapping</string>
     <string name="tapping_2">two finger tapping</string>
-    <string name="sliding">sliding</string>
+    <string name="sliding">Sliding</string>
     <string name="done">Done!</string>
     <string name="btnProfileText">Profile</string>
     <string name="btnSettingsText">Settings</string>
@@ -87,7 +87,7 @@
     <string name="under_item">Undergraduate</string>
     <string name="post">Postgraduate</string>
     <string name="medicine_empty">Please, fill medicine name field</string>
-    <string name="dose_empty">Please, fill dose (mg) field</string>
+    <string name="dose_empty">Please, fill dose field</string>
     <string name="add_medice_error">Medicine was already added</string>
     <string name="medicine_added">Added successful</string>
     <string name="time_diagnosis_error">Please, fill diagnosis time field</string>
@@ -103,16 +103,32 @@
     <string name="missing_permissions_title">Missing Permissions!</string>
     <string name="missing_permissions_text">You must grant permissions to record audio and write to storage to use the exercises!</string>
     <string name="OK">OK</string>
-    <string name="user_name">Name :</string>
-    <string name="user_id">ID :</string>
-    <string name="user_age">Age :</string>
-    <string name="S_record">Recorded session :</string>
-    <string name="Int_medicine">Intake medicine :</string>
+    <string name="user_name">Name: </string>
+    <string name="user_id">ID: </string>
+    <string name="user_age">Birthday: </string>
+    <string name="S_record">Recorded sessions: </string>
+    <string name="Int_medicine">Medicine intake: </string>
     <string name="upd_medicine">Update medicine</string>
     <string name="add_medicine">ADD MEDICINE</string>
     <string name="delete">DELETE</string>
     <string name="cancel">CANCEL</string>
     <string name="save">SAVE</string>
-    <string name="motivate">Good Job!</string>
+    <string name="motivate">Good Job!!</string>
+    <string name="Number_Taps">Number of Taps  </string>
+    <string name="Time_Tapping_His">Hits Time  </string>
+    <string name="Finger_left">Finger Left</string>
+    <string name="Finger_right">Finger Right</string>
+    <string name="Hits_porcentage">Hits Percentage</string>
+    <string name="Tapping_Time">Tapping Time </string>
+    <string name="Positive_message">Good Job!! </string>
+    <string name="Medium_message">Good Job!!  \nBut, You can do it better</string>
+    <string name="Negative_message">Let\'s improve! \nKeep working</string>
+    <string name="Empty">Empty</string>
+    <string name="Title_notif">Make your therapy</string>
+    <string name="Content_notif">Please remind your exercises today</string>
+    <string name="title_notif_med">Take your medicine</string>
+    <string name="content_notif_med">Remember to take your medicine: </string>
+
+
 
 </resources>

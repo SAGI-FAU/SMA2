@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+
+    android:layout_marginLeft="16dp"
+    android:layout_marginRight="16dp"
+    tools:context="com.sma2.sma2.MainActivity">
+
+
+        <TextView
+            android:id="@+id/textViewResults"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            app:layout_constraintTop_toTopOf="parent"
+            android:text="@string/btnResultsText"
+            android:textSize="25sp"
+            android:layout_marginTop="20dp"/>
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/button_text_size"
+            android:text="@string/tapping_1"
+            android:layout_marginTop="20sp"
+            app:layout_constraintTop_toBottomOf="@+id/textViewResults"
+            android:background="@color/colorPrimaryDark"
+            android:id="@+id/bTapping_one"
+            />
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/tapping_2"
+            android:textSize="@dimen/button_text_size"
+            android:layout_marginTop="20sp"
+            android:background="@color/colorPrimaryDark"
+            android:id="@+id/bTapping_two"
+            app:layout_constraintTop_toBottomOf="@+id/bTapping_one"
+            />
+
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/back"
+            android:textSize="@dimen/button_text_size"
+            android:background="@color/colorPrimaryDark"
+            android:id="@+id/button_back3"
+            app:layout_constraintBottom_toBottomOf="parent"
+            />
+
+
+
+
+</android.support.constraint.ConstraintLayout>
