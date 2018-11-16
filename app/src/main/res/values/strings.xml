@@ -105,7 +105,7 @@
     <string name="OK">OK</string>
     <string name="user_name">Name: </string>
     <string name="user_id">ID: </string>
-    <string name="user_age">Birthday: </string>
+    <string name="user_age">Birthdate: </string>
     <string name="S_record">Recorded sessions: </string>
     <string name="Int_medicine">Medicine intake: </string>
     <string name="upd_medicine">Update medicine</string>

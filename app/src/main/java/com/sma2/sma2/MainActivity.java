@@ -44,7 +44,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         SharedPreferences prefs = getSharedPreferences("LoginPref",this.MODE_PRIVATE);
         int login = prefs.getInt("UserCreated",0);
         if(login == 1){
-            Intent intent = new Intent(MainActivity.this,MainActivityMenu.class);
+            Intent intent = new Intent(MainActivity.this,MainActivity.class);
             startActivity(intent);
             finish();
         }
