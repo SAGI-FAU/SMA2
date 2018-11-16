@@ -7,7 +7,11 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
+import com.sma2.sma2.DataAccess.MedicineDA;
+import com.sma2.sma2.DataAccess.MedicineDataService;
+
 import java.util.ArrayList;
+import java.util.List;
 
 public class UpdateMedicine extends AppCompatActivity implements View.OnClickListener {
 
@@ -29,8 +33,17 @@ public class UpdateMedicine extends AppCompatActivity implements View.OnClickLis
 
     private void ad_medicine() {
         //TODO: this is a test for RecyclerView
-        list_medic.add(new ejm_data_medicine("Medicine 1",100,15));
-        list_medic.add(new ejm_data_medicine("Medicine 2",250,18));
+
+        MedicineDataService MedicineData=new MedicineDataService(this);
+
+        List<MedicineDA> Medicine=MedicineData.getAllCurrentMedictation();
+
+        MedicineDA CurrentMed;
+        for (int i = 0; i < Medicine.size(); i++) {
+            CurrentMed=Medicine.get(i);
+
+            list_medic.add(new ejm_data_medicine(CurrentMed.getId(), CurrentMed.getMedicineName(),CurrentMed.getDose(),CurrentMed.getIntakeTime()));
+        }
     }
 
     private void setListeners() {

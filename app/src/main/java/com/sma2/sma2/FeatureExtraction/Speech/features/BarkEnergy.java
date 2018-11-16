@@ -46,8 +46,7 @@ public class BarkEnergy {
                 }
             }//END FOR j
         }//END FOR i
-        float BBE[] = copyOfRange(sig_bark,1,sig_bark.length);
-        return BBE;
+        return copyOfRange(sig_bark,1,sig_bark.length);
         //return sig_bark;
     }
 

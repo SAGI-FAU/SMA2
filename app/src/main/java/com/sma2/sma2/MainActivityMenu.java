@@ -10,6 +10,11 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
+import com.sma2.sma2.DataAccess.MedicineDA;
+import com.sma2.sma2.DataAccess.MedicineDataService;
+
+import java.util.List;
+
 public class MainActivityMenu extends AppCompatActivity implements View.OnClickListener {
     int PERMISSION_ALL = 1;
     String[] PERMISSIONS = {
@@ -27,12 +32,20 @@ public class MainActivityMenu extends AppCompatActivity implements View.OnClickL
         ask_permissions();
 
         // create alarm notifications to make exercises
-        //TODO: read the medical intake time from DB and correlate it with the alarm for notification of the exercises. Now it is fixed at 9:00 am
         Notifications notifications=new Notifications(this);
         int hour=9;
         int minutes=0;
         notifications.setReminder(this,AlarmReceiver.class, hour, minutes);
 
+
+        // create alarm notifications to take the medicine
+        MedicineDataService MedicineData=new MedicineDataService(this);
+        List<MedicineDA> Medicine=MedicineData.getAllCurrentMedictation();
+        MedicineDA CurrentMed;
+        for (int i = 0; i < Medicine.size(); i++) {
+            CurrentMed=Medicine.get(i);
+            notifications.setReminder(this,AlarmReceiverMedicine.class, CurrentMed.getIntakeTime(), 0);
+            }
 
         setListeners();
 
