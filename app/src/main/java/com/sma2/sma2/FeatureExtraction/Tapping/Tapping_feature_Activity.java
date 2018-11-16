@@ -1,5 +1,6 @@
 package com.sma2.sma2.FeatureExtraction.Tapping;
 
+import android.graphics.Color;
 import android.os.Environment;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
@@ -11,6 +12,11 @@ import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.jjoe64.graphview.GraphView;
+import com.jjoe64.graphview.GridLabelRenderer;
+import com.jjoe64.graphview.ValueDependentColor;
+import com.jjoe64.graphview.series.BarGraphSeries;
+import com.jjoe64.graphview.series.DataPoint;
 import com.sma2.sma2.DataAccess.SignalDA;
 import com.sma2.sma2.DataAccess.SignalDataService;
 import com.sma2.sma2.R;
@@ -25,7 +31,8 @@ import java.util.List;
 public class Tapping_feature_Activity extends AppCompatActivity {
     TextView  tNumber_Taps,tTapping_time_hits,tMessage, tTapping_perc_hits;
     ImageView iEmojin;
-    String path_tapping = null; // ToDo
+    String path_tapping = null;
+    List<String> path_tapping_all= new ArrayList<String>();
     private final String PATH = Environment.getExternalStorageDirectory() + "/Apkinson/MOVEMENT/";
 
     //"/storage/emulated/0/AppSpeechData/ACC/Tapping_example.csv";
@@ -39,6 +46,18 @@ public class Tapping_feature_Activity extends AppCompatActivity {
 
         if (signals.size()>0){
             path_tapping=PATH+signals.get(signals.size()-1).getSignalPath();
+
+            if (signals.size()>4){
+                for (int i=3;i>=0;i--){
+                    path_tapping_all.add(PATH+signals.get(i).getSignalPath());
+                }
+            }
+            else{
+                for (int i=signals.size()-1;i>=0;i--){
+                    path_tapping_all.add(PATH+signals.get(i).getSignalPath());
+                }
+            }
+
         }
 
         setContentView(R.layout.activity_tapping_feature_);
@@ -60,6 +79,7 @@ public class Tapping_feature_Activity extends AppCompatActivity {
         float Hist_Porcentage= Count_one;
         String Distance_error=df.format(dimention);
         String Tapping_time_total=df.format(average_funtion(Delay_one));
+
 
         if(path_tapping==null){
             tNumber_Taps.setText(R.string.Empty);
@@ -102,6 +122,52 @@ public class Tapping_feature_Activity extends AppCompatActivity {
             tMessage.startAnimation(animation2);
 
         }
+
+
+        int j;
+        BarGraphSeries<DataPoint> series= new BarGraphSeries<>();
+        if (path_tapping_all.size()>0) {
+            j = path_tapping_all.size() - 1;
+            for (int i = 0; i < path_tapping_all.size(); i++) {
+                Count_Touch_one = read_csv(path_tapping_all.get(j), 0);// The index tells me which column I should access
+                series.appendData(new DataPoint(i + 1, Count_ladybug_one(Count_Touch_one)), true, 5);
+                j = j - 1;
+            }
+
+        }
+        else{
+            series.appendData(new DataPoint(1, 0), true, 5);
+            }
+
+
+        GraphView graph =findViewById(R.id.bar_perc);
+        graph.addSeries(series);
+
+// styling
+
+        series.setColor(Color.rgb(255, 140, 0));
+
+        series.setSpacing(5);
+        graph.getViewport().setMinY(0.0);
+        graph.getViewport().setMaxY(101.0);
+        graph.getViewport().setMinX(0);
+        graph.getViewport().setMaxX(5);
+        graph.getViewport().setYAxisBoundsManual(true);
+        graph.getViewport().setXAxisBoundsManual(true);
+        series.setTitle(getResources().getString(R.string.Perc_Tapping_Hits));
+        GridLabelRenderer gridLabel = graph.getGridLabelRenderer();
+        gridLabel.setHorizontalAxisTitle(getResources().getString(R.string.session));
+        gridLabel.setVerticalAxisTitle(getResources().getString(R.string.Perc_Tapping_Hits));
+
+
+// draw values on top
+        //series.setDrawValuesOnTop(true);
+        //series.setValuesOnTopColor(Color.RED);
+//series.setValuesOnTopSize(50);
+
+
+
+
 
 
     }

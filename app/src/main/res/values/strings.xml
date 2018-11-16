@@ -128,7 +128,7 @@
     <string name="Content_notif">Please remind your exercises today</string>
     <string name="title_notif_med">Take your medicine</string>
     <string name="content_notif_med">Remember to take your medicine: </string>
-
+    <string name="session">Session </string>
     <string name="Perc_Tapping_Hits">Taps %: </string>
 
 
