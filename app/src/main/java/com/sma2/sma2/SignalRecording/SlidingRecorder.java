@@ -6,7 +6,6 @@ import android.os.Handler;
 import com.sma2.sma2.DataAccess.PatientDataService;
 import com.sma2.sma2.DataAccess.SignalDA;
 import com.sma2.sma2.DataAccess.SignalDataService;
-import com.sma2.sma2.ExerciseFragments.Sliding;
 
 
 import java.io.BufferedWriter;
