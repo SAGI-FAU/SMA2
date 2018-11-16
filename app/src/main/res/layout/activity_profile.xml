@@ -102,8 +102,8 @@
         android:text=""
         android:gravity="right"
         android:textSize="@dimen/textview_text_size"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView_section" />
+        app:layout_constraintLeft_toRightOf="@id/textView_section"
+        app:layout_constraintTop_toBottomOf="@+id/textView_user_birthday" />
 
     <TextView
         android:id="@+id/textView_Int_medicine"
@@ -155,7 +155,7 @@
         android:id="@+id/button_back"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        app:layout_constraintDimensionRatio="4.5"
+        app:layout_constraintDimensionRatio="4"
         app:layout_constraintWidth_percent="0.7"
         android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
