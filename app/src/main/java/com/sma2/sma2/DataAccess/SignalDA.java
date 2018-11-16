@@ -4,6 +4,7 @@ import com.sma2.sma2.ExerciseLogic.Exercise;
 
 import org.greenrobot.greendao.annotation.Entity;
 import org.greenrobot.greendao.annotation.Id;
+import org.greenrobot.greendao.annotation.Keep;
 import org.greenrobot.greendao.annotation.NotNull;
 import org.greenrobot.greendao.annotation.ToOne;
 
@@ -16,18 +17,19 @@ import com.sma2.sma2.ExerciseLogic.ExerciseDao;
 public class SignalDA {
     @Id
     private Long id;
-
     private long patientDAId;
     private long exerciseID;
 
     @NotNull
     private String signalPath;
+    private String exerciseName;
     private Date recordingTime;
     private int sessionNumber;
 
 
     @ToOne(joinProperty = "patientDAId")
     private PatientDA patient;
+
 
     @ToOne(joinProperty = "exerciseID")
     private Exercise exercise;
@@ -40,13 +42,27 @@ public class SignalDA {
     @Generated(hash = 457749002)
     private transient SignalDADao myDao;
 
-    @Generated(hash = 2071263424)
-    public SignalDA(Long id, long patientDAId, long exerciseID,
-            @NotNull String signalPath, Date recordingTime, int sessionNumber) {
+    @Generated(hash = 391381774)
+    private transient Long patient__resolvedKey;
+
+    @Keep
+    public SignalDA(String exerciseName, String signalPath){
+        this.id=null;
+        this.patientDAId=1;
+        this.signalPath = signalPath;
+        this.exerciseName=exerciseName;
+        this.recordingTime = new Date();
+        this.sessionNumber = 0; // TODO: Get the session number
+
+    }
+
+    @Generated(hash = 1895564419)
+    public SignalDA(Long id, long patientDAId, @NotNull String signalPath,
+            String exerciseName, Date recordingTime, int sessionNumber) {
         this.id = id;
         this.patientDAId = patientDAId;
-        this.exerciseID = exerciseID;
         this.signalPath = signalPath;
+        this.exerciseName = exerciseName;
         this.recordingTime = recordingTime;
         this.sessionNumber = sessionNumber;
     }
@@ -71,6 +87,7 @@ public class SignalDA {
         this.patientDAId = patientDAId;
     }
 
+
     public long getExerciseID() {
         return this.exerciseID;
     }
@@ -79,12 +96,21 @@ public class SignalDA {
         this.exerciseID = exerciseID;
     }
 
+
     public String getSignalPath() {
         return this.signalPath;
     }
 
     public void setSignalPath(String signalPath) {
         this.signalPath = signalPath;
+    }
+
+    public String getExerciseName() {
+        return this.exerciseName;
+    }
+
+    public void setExerciseName(String exerciseName) {
+        this.exerciseName = exerciseName;
     }
 
     public Date getRecordingTime() {
@@ -102,9 +128,6 @@ public class SignalDA {
     public void setSessionNumber(int sessionNumber) {
         this.sessionNumber = sessionNumber;
     }
-
-    @Generated(hash = 391381774)
-    private transient Long patient__resolvedKey;
 
     /** To-one relationship, resolved on first access. */
     @Generated(hash = 266209956)
@@ -138,6 +161,7 @@ public class SignalDA {
             patient__resolvedKey = patientDAId;
         }
     }
+
 
     @Generated(hash = 1987934211)
     private transient Long exercise__resolvedKey;
@@ -217,6 +241,5 @@ public class SignalDA {
         this.daoSession = daoSession;
         myDao = daoSession != null ? daoSession.getSignalDADao() : null;
     }
-    
 
 }
