@@ -1,5 +1,7 @@
 package com.sma2.sma2.FeatureExtraction.Tapping;
 
+import android.graphics.Color;
+import android.os.Environment;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -10,6 +12,13 @@ import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.jjoe64.graphview.GraphView;
+import com.jjoe64.graphview.GridLabelRenderer;
+import com.jjoe64.graphview.ValueDependentColor;
+import com.jjoe64.graphview.series.BarGraphSeries;
+import com.jjoe64.graphview.series.DataPoint;
+import com.sma2.sma2.DataAccess.SignalDA;
+import com.sma2.sma2.DataAccess.SignalDataService;
 import com.sma2.sma2.R;
 
 import java.io.BufferedReader;
@@ -17,26 +26,52 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
+import java.util.List;
 
 public class Tapping_feature_Activity extends AppCompatActivity {
-    TextView  tNumber_Taps,tTapping_time_hits,tMessage;
+    TextView  tNumber_Taps,tTapping_time_hits,tMessage, tTapping_perc_hits;
     ImageView iEmojin;
-    String path_tapping = null; // ToDo
+    String path_tapping = null;
+    List<String> path_tapping_all= new ArrayList<String>();
+    private final String PATH = Environment.getExternalStorageDirectory() + "/Apkinson/MOVEMENT/";
+
     //"/storage/emulated/0/AppSpeechData/ACC/Tapping_example.csv";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        SignalDataService signalDataService =new SignalDataService(this);
+
+        List<SignalDA> signals=signalDataService.getSignalsbyname("Tapping one finger");
+
+        if (signals.size()>0){
+            path_tapping=PATH+signals.get(signals.size()-1).getSignalPath();
+
+            if (signals.size()>4){
+                for (int i=3;i>=0;i--){
+                    path_tapping_all.add(PATH+signals.get(i).getSignalPath());
+                }
+            }
+            else{
+                for (int i=signals.size()-1;i>=0;i--){
+                    path_tapping_all.add(PATH+signals.get(i).getSignalPath());
+                }
+            }
+
+        }
+
         setContentView(R.layout.activity_tapping_feature_);
 
         tNumber_Taps = findViewById(R.id.tNumber_Taps);
         tTapping_time_hits=findViewById(R.id.tTapping_time_hits);
+        tTapping_perc_hits= findViewById(R.id.tTapping_perc_hits);
         iEmojin=findViewById(R.id.iEmojin);
         tMessage=findViewById(R.id.tmessage);
         DecimalFormat df = new DecimalFormat("#.00");
 
         ArrayList<Double> Count_Touch_one=read_csv(path_tapping,0);// The index tells me which column I should access
-        ArrayList<Double> Delay_one=read_csv(path_tapping,2);
-        ArrayList<Double> Distance_one=read_csv(path_tapping,1);
+        ArrayList<Double> Delay_one=read_csv(path_tapping,1);
+        ArrayList<Double> Distance_one=read_csv(path_tapping,2);
         double delay_hits_two= delay_hits_Tapping_one(Count_Touch_one,Delay_one);
         float Count_one=Count_ladybug_one(Count_Touch_one);
 
@@ -45,14 +80,18 @@ public class Tapping_feature_Activity extends AppCompatActivity {
         String Distance_error=df.format(dimention);
         String Tapping_time_total=df.format(average_funtion(Delay_one));
 
+
         if(path_tapping==null){
             tNumber_Taps.setText(R.string.Empty);
             tTapping_time_hits.setText(R.string.Empty);
+            tTapping_perc_hits.setText(R.string.Empty);
             
         }
         else{
             tNumber_Taps.setText( String.valueOf(Count_Touch_one.size()));
             tTapping_time_hits.setText( String.valueOf(df.format(delay_hits_two))+ " ms");
+            tTapping_perc_hits.setText( String.valueOf(df.format(Hist_Porcentage))+ "%");
+
         }
 
         if( Hist_Porcentage>= 70){
@@ -83,6 +122,52 @@ public class Tapping_feature_Activity extends AppCompatActivity {
             tMessage.startAnimation(animation2);
 
         }
+
+
+        int j;
+        BarGraphSeries<DataPoint> series= new BarGraphSeries<>();
+        if (path_tapping_all.size()>0) {
+            j = path_tapping_all.size() - 1;
+            for (int i = 0; i < path_tapping_all.size(); i++) {
+                Count_Touch_one = read_csv(path_tapping_all.get(j), 0);// The index tells me which column I should access
+                series.appendData(new DataPoint(i + 1, Count_ladybug_one(Count_Touch_one)), true, 5);
+                j = j - 1;
+            }
+
+        }
+        else{
+            series.appendData(new DataPoint(1, 0), true, 5);
+            }
+
+
+        GraphView graph =findViewById(R.id.bar_perc);
+        graph.addSeries(series);
+
+// styling
+
+        series.setColor(Color.rgb(255, 140, 0));
+
+        series.setSpacing(5);
+        graph.getViewport().setMinY(0.0);
+        graph.getViewport().setMaxY(101.0);
+        graph.getViewport().setMinX(0);
+        graph.getViewport().setMaxX(5);
+        graph.getViewport().setYAxisBoundsManual(true);
+        graph.getViewport().setXAxisBoundsManual(true);
+        series.setTitle(getResources().getString(R.string.Perc_Tapping_Hits));
+        GridLabelRenderer gridLabel = graph.getGridLabelRenderer();
+        gridLabel.setHorizontalAxisTitle(getResources().getString(R.string.session));
+        gridLabel.setVerticalAxisTitle(getResources().getString(R.string.Perc_Tapping_Hits));
+
+
+// draw values on top
+        //series.setDrawValuesOnTop(true);
+        //series.setValuesOnTopColor(Color.RED);
+//series.setValuesOnTopSize(50);
+
+
+
+
 
 
     }

@@ -2,9 +2,13 @@ package com.sma2.sma2.DataAccess;
 
 import android.content.Context;
 
+import com.sma2.sma2.DataAccess.DaoMaster;
+import com.sma2.sma2.DataAccess.DaoSession;
 import com.sma2.sma2.R;
 
 import org.greenrobot.greendao.database.Database;
+
+import java.util.List;
 
 public class SignalDataService {
     private Database db;
@@ -58,4 +62,35 @@ public class SignalDataService {
         // db.close();
         return signal;
     }
+
+
+    public List<SignalDA> getAllSignals(){
+        if (db == null) {
+            DaoMaster.DevOpenHelper helper = new DaoMaster.DevOpenHelper(invocationcontext, dbname);
+            db = helper.getWritableDb();
+        }
+        DaoSession session = new DaoMaster(db).newSession();
+        SignalDADao dao = session.getSignalDADao();
+        List<SignalDA> signals = dao.queryBuilder()
+                .list();
+        // db.close();
+        return signals;
+
+    }
+
+    public List<SignalDA> getSignalsbyname(String name){
+        if (db == null) {
+            DaoMaster.DevOpenHelper helper = new DaoMaster.DevOpenHelper(invocationcontext, dbname);
+            db = helper.getWritableDb();
+        }
+        DaoSession session = new DaoMaster(db).newSession();
+        SignalDADao dao = session.getSignalDADao();
+        List<SignalDA> signals = dao.queryBuilder()
+                .where(SignalDADao.Properties.ExerciseName.eq(name))
+                .list();
+        // db.close();
+        return signals;
+
+    }
+
 }
