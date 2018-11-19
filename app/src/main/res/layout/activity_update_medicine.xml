@@ -25,7 +25,7 @@
         android:id="@+id/recycler_update"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        app:layout_constraintDimensionRatio="0.95"
+        app:layout_constraintDimensionRatio="1.2"
         android:layout_marginTop="8dp"
         app:layout_constraintBottom_toTopOf="@+id/button_add_medicine"
         app:layout_constraintEnd_toEndOf="parent"
@@ -40,8 +40,6 @@
         android:layout_height="0dp"
         app:layout_constraintDimensionRatio="4"
         app:layout_constraintWidth_percent="0.7"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginBottom="8dp"
         android:background="@color/colorPrimaryDark"
@@ -50,6 +48,7 @@
         android:textSize="@dimen/button_text_size"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/recycler_update"
         app:layout_constraintBottom_toTopOf="@id/button_back1"/>
 
     <Button
@@ -58,8 +57,6 @@
         android:layout_height="0dp"
         app:layout_constraintDimensionRatio="4"
         app:layout_constraintWidth_percent="0.7"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginBottom="8dp"
         android:layout_gravity="bottom"

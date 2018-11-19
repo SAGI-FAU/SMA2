@@ -15,7 +15,7 @@
         android:layout_marginStart="8dp"
         android:gravity="center"
         android:text="@string/btnProfileText"
-        android:textSize="@dimen/textview_text_size"
+        android:textSize="@dimen/menu_text_size"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
@@ -70,10 +70,10 @@
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
+        android:textSize="@dimen/textview_text_size"
         android:lines="1"
         android:text=""
         android:gravity="end"
-        android:textSize="@dimen/textview_text_size"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView_age" />
 
@@ -144,12 +144,13 @@
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
         android:background="@color/colorPrimaryDark"
         android:text="@string/update"
         android:textSize="@dimen/button_text_size"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/recyclerMedicine"/>
+        app:layout_constraintBottom_toTopOf="@+id/button_back"/>
 
     <Button
         android:id="@+id/button_back"
@@ -167,7 +168,6 @@
         android:textSize="@dimen/button_text_size"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button_update_medicine" />
+        app:layout_constraintStart_toStartOf="parent" />
 
 </android.support.constraint.ConstraintLayout>
