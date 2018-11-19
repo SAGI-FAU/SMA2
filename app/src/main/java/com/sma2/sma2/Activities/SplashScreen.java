@@ -37,7 +37,7 @@ public class SplashScreen extends AppCompatActivity {
             ExerciseSessionManager sessionManager = new ExerciseSessionManager();
             sessionManager.createExerciseSession(this);
 
-            Intent intent = new Intent(SplashScreen.this, MainActivityMenu.class);
+            Intent intent = new Intent(SplashScreen.this, MainActivity.class);
             startActivity(intent);
             finish();
         } else {

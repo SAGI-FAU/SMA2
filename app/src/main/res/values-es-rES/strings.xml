@@ -5,7 +5,8 @@
     <string name="ID">Identificación</string>
     <string name="Login">Ingresar</string>
     <string name="or">Ó</string>
-    <string name="sign_up">CREAR CUENTA</string>
+    <string name="register">Registro</string>
+    <string name="sign_up">Crear cuenta</string>
     <string name="age">Edad</string>
     <string name="gender">Género</string>
     <string name="male">Masculino</string>
@@ -20,6 +21,7 @@
     <string name="back">Atrás</string>
     <string name="education">Nivel de escolaridad</string>
     <string name="tod">Año de diagnóstico</string>
+    <string name="todinput">Año</string>
     <string name="med_dose">Dosis (mg)</string>
     <string name="med_time">Hora de ingesta</string>
     <string name="start">Iniciar</string>
