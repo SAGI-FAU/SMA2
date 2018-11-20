@@ -361,7 +361,7 @@ public class ExerciseSessionManager {
                 "Walk a free pth during 2 minutes",
                 Uri.parse("video/path"),
                 Uri.parse("Instruction/Path"),
-                ExFreeWalking.class));
+                Ex_Walking_Rec.class));
 
 
         _dummyExerciseList.add(new Exercise(33, "Tapping one finger",

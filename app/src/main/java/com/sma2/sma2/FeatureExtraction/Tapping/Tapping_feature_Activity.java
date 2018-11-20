@@ -1,5 +1,6 @@
 package com.sma2.sma2.FeatureExtraction.Tapping;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Environment;
 import android.os.Handler;
@@ -7,8 +8,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.util.TypedValue;
+import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -19,7 +22,9 @@ import com.jjoe64.graphview.series.BarGraphSeries;
 import com.jjoe64.graphview.series.DataPoint;
 import com.sma2.sma2.DataAccess.SignalDA;
 import com.sma2.sma2.DataAccess.SignalDataService;
+import com.sma2.sma2.MainActivityMenu;
 import com.sma2.sma2.R;
+import com.sma2.sma2.ResultsActivity;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -28,8 +33,9 @@ import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Tapping_feature_Activity extends AppCompatActivity {
+public class Tapping_feature_Activity extends AppCompatActivity  implements View.OnClickListener {
     TextView  tNumber_Taps,tTapping_time_hits,tMessage, tTapping_perc_hits;
+    Button bBack;
     ImageView iEmojin;
     String path_tapping = null;
     List<String> path_tapping_all= new ArrayList<String>();
@@ -39,6 +45,7 @@ public class Tapping_feature_Activity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
 
         SignalDataService signalDataService =new SignalDataService(this);
 
@@ -61,12 +68,13 @@ public class Tapping_feature_Activity extends AppCompatActivity {
         }
 
         setContentView(R.layout.activity_tapping_feature_);
-
+        bBack=findViewById(R.id.button_back4);
         tNumber_Taps = findViewById(R.id.tNumber_Taps);
         tTapping_time_hits=findViewById(R.id.tTapping_time_hits);
         tTapping_perc_hits= findViewById(R.id.tTapping_perc_hits);
         iEmojin=findViewById(R.id.iEmojin);
         tMessage=findViewById(R.id.tmessage);
+        bBack.setOnClickListener(this);
         DecimalFormat df = new DecimalFormat("#.00");
 
         ArrayList<Double> Count_Touch_one=read_csv(path_tapping,0);// The index tells me which column I should access
@@ -160,17 +168,10 @@ public class Tapping_feature_Activity extends AppCompatActivity {
         gridLabel.setVerticalAxisTitle(getResources().getString(R.string.Perc_Tapping_Hits));
 
 
-// draw values on top
-        //series.setDrawValuesOnTop(true);
-        //series.setValuesOnTopColor(Color.RED);
-//series.setValuesOnTopSize(50);
-
-
-
-
-
-
     }
+
+
+
     public static double average_funtion(ArrayList<Double> v) {
         double prom = 0.0;
         for (int i = 0; i < v.size(); i++)
@@ -241,4 +242,22 @@ public class Tapping_feature_Activity extends AppCompatActivity {
 
         return delay_count/size_vector_new;
     }
+
+
+    @Override
+    public void onClick(View view) {
+
+        switch (view.getId()){
+            case R.id.button_back4:
+                onButtonBack();
+                break;
+        }
+    }
+
+    private void onButtonBack(){
+        Intent i =new Intent(Tapping_feature_Activity.this, MainActivityMenu.class);
+        startActivity(i);
+
+    }
+
 }

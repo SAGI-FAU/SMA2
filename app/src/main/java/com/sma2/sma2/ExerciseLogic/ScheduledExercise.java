@@ -17,7 +17,6 @@ import org.greenrobot.greendao.converter.PropertyConverter;
 import java.util.Date;
 import org.greenrobot.greendao.annotation.Generated;
 import org.greenrobot.greendao.DaoException;
-import com.sma2.sma2.DataAccess.DaoSession;
 import com.sma2.sma2.DataAccess.ScheduledExerciseDataService;
 
 @Entity

@@ -30,7 +30,7 @@ public class AlarmReceiverMedicine extends BroadcastReceiver {
                 // Set the alarm here.
                 Log.d(TAG, "onReceive: BOOT_COMPLETED");
                 notifications.setReminder(context, AlarmReceiverMedicine.class,
-                        10, 0);
+                        9, 0);
                 return;
 
             }
