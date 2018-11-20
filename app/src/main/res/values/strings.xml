@@ -35,7 +35,7 @@
     <string name="sustained_a">Sustained vowel /ah/</string>
     <string name="a_ex">a</string>
     <string name="ddk">Rapid repetition of syllables (/pa-ta-ka/)</string>
-    <string name="ddk_ex">ddk</string>
+    <string name="ddk_ex" translatable="false">ddk</string>
     <string name="instructions">Instructions</string>
     <string name="instructions_long">Detailed Instructions</string>
     <string name="instructions_video">Video Demonstration</string>
@@ -134,6 +134,13 @@
     <string name="Perc_Tapping_Hits">% Taps: </string>
     <string name="completed">You have finished a total of </string>
     <string name="keep">Keep doing your best </string>
+    <string name="phonation">Phonation </string>
+    <string name="jitter" translatable="false">Jitter (%) </string>
+    <string name="articulation">Articulation </string>
+    <string name="ddk_reg">DDK regularity (ms)</string>
+    <string name="Speech">Speech</string>
+
+
 
 
 

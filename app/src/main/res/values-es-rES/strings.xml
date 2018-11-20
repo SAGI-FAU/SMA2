@@ -70,7 +70,6 @@
     <string name="hand_ex1">Temblor en reposo, temblor en movimiento, pronación / supinación, etc.</string>
     <string name="rest_tremor">Temblor en reposo</string>
     <string name="kinetic_tremor">Temblor en movimiento</string>
-    <string name="ddk_ex">ddk</string>
     <string name="med_name">Nombre del medicamento</string>
     <string name="med">Medicamentos</string>
     <string name="other1">"Sufre alguna otro transtorno "</string>
@@ -133,5 +132,11 @@
     <string name="session">Sesión </string>
     <string name="completed">Haz terminado un total de  </string>
     <string name="keep">Sigue así</string>
+    <string name="phonation">Fonación </string>
+    <string name="articulation">Articulación </string>
+    <string name="ddk_reg">Regularidad DDK (ms)</string>
+    <string name="Speech">Voz</string>
+
+
 
 </resources>

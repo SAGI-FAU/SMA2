@@ -7,12 +7,13 @@ import android.view.View;
 import android.widget.Button;
 
 
+import com.sma2.sma2.FeatureExtraction.Speech.Speech_features_Activity;
 import com.sma2.sma2.FeatureExtraction.Tapping.Tapping_feature_Activity;
 import com.sma2.sma2.FeatureExtraction.Tapping.Tapping_feature_Two_Activity;
 
 
 public class ResultsActivity extends AppCompatActivity implements View.OnClickListener {
-    Button bTapping_one, bTapping_two, bBack;
+    Button bTapping_one, bTapping_two, bBack, bSpeech;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,6 +22,7 @@ public class ResultsActivity extends AppCompatActivity implements View.OnClickLi
         bTapping_one=findViewById(R.id.bTapping_one);
         bTapping_two=findViewById(R.id.bTapping_two);
         bBack=findViewById(R.id.button_back3);
+        bSpeech=findViewById(R.id.bSpeech);
         setListeners();
     }
 
@@ -29,12 +31,16 @@ public class ResultsActivity extends AppCompatActivity implements View.OnClickLi
         bTapping_one.setOnClickListener(this);
         bTapping_two.setOnClickListener(this);
         bBack.setOnClickListener(this);
+        bSpeech.setOnClickListener(this);
     }
 
     @Override
     public void onClick(View view) {
 
         switch (view.getId()){
+            case R.id.bSpeech:
+                onButtonClicked_Speech();
+                break;
             case R.id.bTapping_one:
                 onButtonClicked_Tapping_one();
                 break;
@@ -47,11 +53,15 @@ public class ResultsActivity extends AppCompatActivity implements View.OnClickLi
         }
     }
 
+    private void onButtonClicked_Speech() {
+        Intent i =new Intent(ResultsActivity.this, Speech_features_Activity.class);
+        startActivity(i);
+    }
+
     private void onButtonClicked_Tapping_one() {
         Intent i =new Intent(ResultsActivity.this, Tapping_feature_Activity.class);
         startActivity(i);
     }
-
 
     private void onButtonClicked_Tapping_two() {
         Intent i =new Intent(ResultsActivity.this, Tapping_feature_Two_Activity.class);
