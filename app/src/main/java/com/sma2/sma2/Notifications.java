@@ -107,7 +107,7 @@ public class Notifications {
                 DAILY_REMINDER_REQUEST_CODE, intent1,
                 PendingIntent.FLAG_UPDATE_CURRENT);
 
-        AlarmManager am = (AlarmManager) context.getSystemService(MainActivityMenu.ALARM_SERVICE);
+        AlarmManager am = (AlarmManager) context.getSystemService(MainActivity.ALARM_SERVICE);
 
         am.setInexactRepeating(AlarmManager.RTC_WAKEUP, setcalendar.getTimeInMillis(),
 
@@ -132,7 +132,7 @@ public class Notifications {
         PendingIntent pendingIntent = PendingIntent.getBroadcast(context,
                 DAILY_REMINDER_REQUEST_CODE, intent1, PendingIntent.FLAG_UPDATE_CURRENT);
 
-        AlarmManager am = (AlarmManager) context.getSystemService(MainActivityMenu.ALARM_SERVICE);
+        AlarmManager am = (AlarmManager) context.getSystemService(MainActivity.ALARM_SERVICE);
 
         am.cancel(pendingIntent);
 

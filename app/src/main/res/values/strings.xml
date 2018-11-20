@@ -131,7 +131,11 @@
     <string name="title_notif_med">Take your medicine</string>
     <string name="content_notif_med">Remember to take your medicine: </string>
     <string name="session">Session </string>
-    <string name="Perc_Tapping_Hits">Taps %: </string>
+    <string name="Perc_Tapping_Hits">% Taps: </string>
+    <string name="completed">You have finished a total of </string>
+    <string name="keep">Keep doing your best </string>
+
+
 
 
 
