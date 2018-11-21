@@ -1,5 +1,7 @@
 package com.sma2.sma2;
 
+import android.app.AlertDialog;
+import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.os.Bundle;
@@ -8,6 +10,8 @@ import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.DatePicker;
+import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -17,6 +21,7 @@ import com.sma2.sma2.DataAccess.MedicineDataService;
 import com.sma2.sma2.DataAccess.PatientDA;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 
 public class Profile2Activity extends AppCompatActivity implements View.OnClickListener {
 
@@ -26,6 +31,7 @@ public class Profile2Activity extends AppCompatActivity implements View.OnClickL
     ArrayList<MedicineDA> medicineDataArrayList;
     String medicine_name;
     int dose, hour_intake;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,6 +53,7 @@ public class Profile2Activity extends AppCompatActivity implements View.OnClickL
         ArrayAdapter<String> adapter =  new ArrayAdapter<> (this,android.R.layout.simple_spinner_item,categories);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         intake_adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
         spinner.setAdapter(adapter);
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
