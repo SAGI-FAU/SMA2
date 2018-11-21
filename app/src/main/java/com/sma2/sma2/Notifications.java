@@ -16,6 +16,8 @@ import android.os.Build;
 import android.support.v4.app.NotificationCompat;
 import android.support.v4.app.NotificationManagerCompat;
 
+import com.sma2.sma2.Activities.SplashScreen;
+
 import java.util.Calendar;
 
 public class Notifications {
@@ -54,11 +56,11 @@ public class Notifications {
         Uri alarmSound = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
 
         // Create an explicit intent for an Activity in your app
-        Intent intent = new Intent(CONTEXT, MainActivity.class);
+        Intent intent = new Intent(CONTEXT, SplashScreen.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
 
         TaskStackBuilder stackBuilder = TaskStackBuilder.create(CONTEXT);
-        stackBuilder.addParentStack(MainActivity.class);
+        stackBuilder.addParentStack(SplashScreen.class);
         stackBuilder.addNextIntent(intent);
 
         PendingIntent pendingIntent = PendingIntent.getActivity(CONTEXT, DAILY_REMINDER_REQUEST_CODE, intent, 0);
@@ -107,7 +109,7 @@ public class Notifications {
                 DAILY_REMINDER_REQUEST_CODE, intent1,
                 PendingIntent.FLAG_UPDATE_CURRENT);
 
-        AlarmManager am = (AlarmManager) context.getSystemService(MainActivity.ALARM_SERVICE);
+        AlarmManager am = (AlarmManager) context.getSystemService(SplashScreen.ALARM_SERVICE);
 
         am.setInexactRepeating(AlarmManager.RTC_WAKEUP, setcalendar.getTimeInMillis(),
 
@@ -132,7 +134,7 @@ public class Notifications {
         PendingIntent pendingIntent = PendingIntent.getBroadcast(context,
                 DAILY_REMINDER_REQUEST_CODE, intent1, PendingIntent.FLAG_UPDATE_CURRENT);
 
-        AlarmManager am = (AlarmManager) context.getSystemService(MainActivity.ALARM_SERVICE);
+        AlarmManager am = (AlarmManager) context.getSystemService(SplashScreen.ALARM_SERVICE);
 
         am.cancel(pendingIntent);
 

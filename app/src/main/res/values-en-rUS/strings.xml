@@ -91,7 +91,6 @@
     <string name="instructions_video">Video Demonstration</string>
     <string name="instructions_long">Detailed Instructions</string>
     <string name="instructions">Instructions</string>
-    <string name="ddk_ex">ddk</string>
     <string name="ddk">Rapid repetition of syllables (/pa-ta-ka/)</string>
     <string name="a_ex">a</string>
     <string name="sustained_a">Sustained vowel /ah/</string>
@@ -122,4 +121,15 @@
     <string name="Medium_message">Good Job!!  \nBut, You can do it better</string>
     <string name="Negative_message">Let\'s improve \nKeep working</string>
     <string name="Empty">Empty</string>
+    <string name="register">Register</string>
+    <string name="todinput">Year</string>
+    <string name="Title_notif">Make your therapy</string>
+    <string name="Content_notif">Please remind your exercises today</string>
+    <string name="title_notif_med">Take your medicine</string>
+    <string name="content_notif_med">"Remember to take your medicine: "</string>
+    <string name="session">"Session "</string>
+    <string name="Perc_Tapping_Hits">"% Taps: "</string>
+    <string name="completed">"You have finished a total of "</string>
+    <string name="keep">"Keep doing your best "</string>
+    <string name="phonation">Phonation</string>
 </resources>

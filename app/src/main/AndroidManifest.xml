@@ -56,7 +56,10 @@
         <activity android:name=".Modif_medicine" />
         <activity android:name=".ResultsActivity" />
         <activity android:name=".FeatureExtraction.Tapping.Tapping_feature_Activity" />
+
         <activity android:name=".FeatureExtraction.Tapping.Tapping_feature_Two_Activity"></activity>
+        <activity android:name=".FeatureExtraction.Speech.Speech_features_Activity"
+            android:screenOrientation="portrait" />
 
         <!-- Register the Alarm Receiver -->
         <receiver android:name=".AlarmReceiver"
