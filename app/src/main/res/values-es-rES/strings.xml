@@ -72,8 +72,7 @@
     <string name="kinetic_tremor">Temblor en movimiento</string>
     <string name="med_name">Nombre del medicamento</string>
     <string name="med">Medicamentos</string>
-    <string name="other1">"Sufre alguna otro transtorno "</string>
-    <string name="other2">del habla o el movimiento</string>
+    <string name="other1">"¿Sufre de algún transtorno del habla o el movimiento?"</string>
     <string name="user_empty">Por favor, introduzca  su nombre</string>
     <string name="userid_empty">Por favor, introduzca  su documento</string>
     <string name="log_in">Acceso concedido</string>
