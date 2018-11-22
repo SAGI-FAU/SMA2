@@ -37,22 +37,13 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="@dimen/button_text_size"
-            android:text="@string/tapping_1"
+            android:text="@string/tapping_ex"
             android:layout_marginTop="20sp"
             app:layout_constraintTop_toBottomOf="@+id/bSpeech"
             android:background="@color/colorPrimaryDark"
             android:id="@+id/bTapping_one"
             />
-        <Button
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/tapping_2"
-            android:textSize="@dimen/button_text_size"
-            android:layout_marginTop="20sp"
-            android:background="@color/colorPrimaryDark"
-            android:id="@+id/bTapping_two"
-            app:layout_constraintTop_toBottomOf="@+id/bTapping_one"
-            />
+
 
 
         <Button
