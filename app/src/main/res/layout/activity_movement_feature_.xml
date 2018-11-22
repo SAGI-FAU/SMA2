@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingTop="0dp"
+    android:paddingLeft="0dp"
+    android:paddingRight="0dp"
+    android:layout_gravity="center"
+    >
+
+
+
+    <android.support.constraint.ConstraintLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        tools:context="com.sma2.sma2.MainActivity">
+
+
+    <TextView
+        android:id="@+id/textView_movement"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8sp"
+        android:layout_marginEnd="8sp"
+        android:layout_marginStart="8sp"
+        android:gravity="center"
+        android:text="@string/movement"
+        android:textSize="@dimen/textview_text_size"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <TextView
+        android:id="@+id/textView_movement2"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8sp"
+        android:layout_marginEnd="8sp"
+        android:layout_marginStart="8sp"
+        android:gravity="center"
+        android:text="@string/postural"
+        android:textSize="@dimen/textview_text_size"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView_movement"/>
+
+
+    <TextView
+        android:id="@+id/textView_leftHand"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15sp"
+        android:layout_marginEnd="8sp"
+        android:layout_marginStart="8sp"
+        android:gravity="center"
+        android:text="@string/Hand_left"
+        android:textSize="@dimen/textview_text_size"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView_movement2"
+        />
+
+
+    <TextView
+        android:id="@+id/textView_rightHand"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15sp"
+        android:layout_marginEnd="8sp"
+        android:layout_marginStart="8sp"
+        android:gravity="center"
+        android:text="@string/Hand_right"
+        android:textSize="@dimen/textview_text_size"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView_movement2"
+        />
+
+
+
+    <TextView
+        android:id="@+id/tTremor_left"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8sp"
+        android:layout_marginEnd="8sp"
+        android:layout_marginStart="8sp"
+        android:lines="1"
+        android:text=""
+        android:gravity="end"
+        android:textSize="@dimen/textview_text_size"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView_leftHand" />
+
+
+
+    <TextView
+        android:id="@+id/tTremor_right"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8sp"
+        android:layout_marginEnd="8sp"
+        android:layout_marginStart="8sp"
+        android:lines="1"
+        android:text=""
+        android:gravity="end"
+        android:textSize="@dimen/textview_text_size"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView_rightHand" />
+
+
+    <com.jjoe64.graphview.GraphView
+        android:id="@+id/bar_percTremorLeft"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintWidth_percent="0.9"
+        app:layout_constraintDimensionRatio="1.8"
+        app:seriesType="bar"
+        android:layout_marginTop="35sp"
+        app:seriesColor="@color/colorPrimaryDark"
+        android:title="@string/TremorAmplitudeLeft"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tTremor_left"/>
+
+
+
+    <com.jjoe64.graphview.GraphView
+        android:id="@+id/bar_percTremorRight"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintWidth_percent="0.9"
+        app:layout_constraintDimensionRatio="1.8"
+        app:seriesType="bar"
+        android:layout_marginTop="35sp"
+        app:seriesColor="@color/colorPrimaryDark"
+        android:title="@string/TremorAmplitudeRight"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/bar_percTremorLeft"/>
+
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/back"
+        android:layout_marginTop="35sp"
+        android:textSize="@dimen/button_text_size"
+        android:background="@color/colorPrimaryDark"
+        android:id="@+id/button_back5"
+        app:layout_constraintTop_toBottomOf="@+id/bar_percTremorRight"
+
+        />
+</android.support.constraint.ConstraintLayout>
+
+</ScrollView>

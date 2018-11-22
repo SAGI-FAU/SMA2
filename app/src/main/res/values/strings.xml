@@ -139,6 +139,12 @@
     <string name="articulation">Articulation </string>
     <string name="ddk_reg">DDK regularity (ms)</string>
     <string name="Speech">Speech</string>
+    <string name="movement">Movement</string>
+    <string name="postural">Postural Tremor</string>
+    <string name="Hand_left">Left Hand</string>
+    <string name="Hand_right">Right Hand</string>
+    <string name="TremorAmplitudeLeft">Tremor Amplitude Left Hand</string>
+    <string name="TremorAmplitudeRight">Tremor Amplitude Right Hand</string>
 
 
 
