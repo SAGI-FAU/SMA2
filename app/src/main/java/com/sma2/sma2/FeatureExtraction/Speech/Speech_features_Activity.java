@@ -126,16 +126,23 @@ public class Speech_features_Activity extends AppCompatActivity implements View.
     private void PhonationFeatures() {
         // get exercises from sustained vowel ah to compute phonation features
         SignalDataService signalDataService = new SignalDataService(this);
-        List<SignalDA> signals = signalDataService.getSignalsbyname("A");
-        if (signals.size() > 0) {
-            path_ah = signals.get(signals.size() - 1).getSignalPath();
-            if (signals.size() > 5) {
-                for (int i = 4; i >= 0; i--) {
-                    path_ah_all.add(signals.get(i).getSignalPath());
-                }
-            } else {
-                for (int i = signals.size() - 1; i >= 0; i--) {
-                    path_ah_all.add(signals.get(i).getSignalPath());
+
+
+        long N = signalDataService.countSignalsbyname("A");
+
+        if (N>0) {
+
+            List<SignalDA> signals = signalDataService.getSignalsbyname("A");
+            if (signals.size() > 0) {
+                path_ah = signals.get(signals.size() - 1).getSignalPath();
+                if (signals.size() > 5) {
+                    for (int i = 4; i >= 0; i--) {
+                        path_ah_all.add(signals.get(i).getSignalPath());
+                    }
+                } else {
+                    for (int i = signals.size() - 1; i >= 0; i--) {
+                        path_ah_all.add(signals.get(i).getSignalPath());
+                    }
                 }
             }
         }
@@ -221,21 +228,24 @@ public class Speech_features_Activity extends AppCompatActivity implements View.
 
     private void ArticulationFeatures(){
         SignalDataService signalDataService = new SignalDataService(this);
-        List<SignalDA> signals=signalDataService.getSignalsbyname("Pataka");
-        if (signals.size()>0){
-            path_pataka=signals.get(signals.size()-1).getSignalPath();
-            if (signals.size()>5){
-                for (int i=4;i>=0;i--){
-                    path_pataka_all.add(signals.get(i).getSignalPath());
-                }
-            }
-            else{
-                for (int i=signals.size()-1;i>=0;i--){
-                    path_pataka_all.add(signals.get(i).getSignalPath());
+
+        long N = signalDataService.countSignalsbyname("Pataka");
+
+        if (N>0) {
+            List<SignalDA> signals = signalDataService.getSignalsbyname("Pataka");
+            if (signals.size() > 0) {
+                path_pataka = signals.get(signals.size() - 1).getSignalPath();
+                if (signals.size() > 5) {
+                    for (int i = 4; i >= 0; i--) {
+                        path_pataka_all.add(signals.get(i).getSignalPath());
+                    }
+                } else {
+                    for (int i = signals.size() - 1; i >= 0; i--) {
+                        path_pataka_all.add(signals.get(i).getSignalPath());
+                    }
                 }
             }
         }
-
         if (path_pataka == null) {
             tddk_reg.setText(R.string.Empty);
         } else {

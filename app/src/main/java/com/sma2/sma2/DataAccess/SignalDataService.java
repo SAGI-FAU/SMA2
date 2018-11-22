@@ -93,4 +93,17 @@ public class SignalDataService {
 
     }
 
+    public long countSignalsbyname(String name){
+        if (db == null) {
+            DaoMaster.DevOpenHelper helper = new DaoMaster.DevOpenHelper(invocationcontext, dbname);
+            db = helper.getWritableDb();
+        }
+        DaoSession session = new DaoMaster(db).newSession();
+        SignalDADao dao = session.getSignalDADao();
+        // db.close();
+        return dao.queryBuilder()
+                .where(SignalDADao.Properties.ExerciseName.eq(name))
+                .count();
+    }
+
 }
