@@ -44,9 +44,9 @@ public class Movement_feature_Activity extends AppCompatActivity implements View
         DecimalFormat df = new DecimalFormat("#.0");
 
 
-        int ID=30;
+        String name="Postural tremor Right";
         double TremorRight=0;
-        List<SignalDA> SignalsRight=signalDataService.getSignalsbyID(ID);
+        List<SignalDA> SignalsRight=signalDataService.getSignalsbyname(name);
         if (SignalsRight.size()>0){
             path_movementRight=PATH+SignalsRight.get(SignalsRight.size()-1).getSignalPath();
 
@@ -77,9 +77,9 @@ public class Movement_feature_Activity extends AppCompatActivity implements View
 
 
 
-        ID=29;
+        name="Postural tremor Left";
         double TremorLeft=0;
-        List<SignalDA> SignalsLeft=signalDataService.getSignalsbyID(ID);
+        List<SignalDA> SignalsLeft=signalDataService.getSignalsbyname(name);
         if (SignalsLeft.size()>0){
             path_movementLeft=PATH+SignalsLeft.get(SignalsLeft.size()-1).getSignalPath();
 

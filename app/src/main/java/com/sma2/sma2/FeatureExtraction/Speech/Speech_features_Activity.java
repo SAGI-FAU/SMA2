@@ -138,12 +138,12 @@ public class Speech_features_Activity extends AppCompatActivity implements View.
         SignalDataService signalDataService = new SignalDataService(this);
         DecimalFormat df = new DecimalFormat("#.00");
 
-        int ID=18;
-        long N = signalDataService.countSignalsbyID(ID);
+        String name="A";
+        long N = signalDataService.countSignalsbyname(name);
 
         if (N>0) {
 
-            List<SignalDA> signals = signalDataService.getSignalsbyID(ID);
+            List<SignalDA> signals = signalDataService.getSignalsbyname(name);
             if (signals.size() > 0) {
                 path_ah = signals.get(signals.size() - 1).getSignalPath();
                 if (signals.size() > 5) {
@@ -237,13 +237,13 @@ public class Speech_features_Activity extends AppCompatActivity implements View.
 
 
     private void ArticulationFeatures(){
-        int ID=11;
+        String name="Pataka";
         SignalDataService signalDataService = new SignalDataService(this);
         DecimalFormat df = new DecimalFormat("#.00");
-        long N = signalDataService.countSignalsbyID(ID);
+        long N = signalDataService.countSignalsbyname(name);
 
         if (N>0) {
-            List<SignalDA> signals = signalDataService.getSignalsbyID(ID);
+            List<SignalDA> signals = signalDataService.getSignalsbyname(name);
             if (signals.size() > 0) {
                 path_pataka = signals.get(signals.size() - 1).getSignalPath();
                 if (signals.size() > 5) {
