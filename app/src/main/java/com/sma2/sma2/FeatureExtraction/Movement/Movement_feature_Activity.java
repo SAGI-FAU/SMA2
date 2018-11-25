@@ -146,6 +146,7 @@ public class Movement_feature_Activity extends AppCompatActivity implements View
         GridLabelRenderer gridLabel = graph.getGridLabelRenderer();
         gridLabel.setHorizontalAxisTitle(getResources().getString(R.string.session));
         gridLabel.setVerticalAxisTitle(getResources().getString(R.string.TremorAmplitudeLeft));
+        gridLabel.setNumHorizontalLabels(5);
 
 
 
@@ -179,9 +180,10 @@ public class Movement_feature_Activity extends AppCompatActivity implements View
         graph2.getViewport().setYAxisBoundsManual(true);
         graph2.getViewport().setXAxisBoundsManual(true);
         series2.setTitle(getResources().getString(R.string.TremorAmplitudeRight));
-        GridLabelRenderer gridLabel2 = graph.getGridLabelRenderer();
+        GridLabelRenderer gridLabel2 = graph2.getGridLabelRenderer();
         gridLabel2.setHorizontalAxisTitle(getResources().getString(R.string.session));
         gridLabel2.setVerticalAxisTitle(getResources().getString(R.string.TremorAmplitudeRight));
+        gridLabel2.setNumHorizontalLabels(5);
 
 
 
