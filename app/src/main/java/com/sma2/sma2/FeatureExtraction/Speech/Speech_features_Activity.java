@@ -110,16 +110,25 @@ public class Speech_features_Activity extends AppCompatActivity implements View.
         sigproc SigProc = new sigproc();
         Signal = SigProc.normsig(Signal);
         float[] F0= F0Detector.sig_f0(Signal, InfoSig[1]);
-        List<float[]> Voiced=F0Detector.voiced(F0, Signal);
-
-        List<Float> Duration=new ArrayList<>();
-        float[] segment;
-        for(int i=0;i<Voiced.size();i++){
-            segment=Voiced.get(i);
-            Duration.add(((float)segment.length*1000)/InfoSig[0]);
+        float sumF0=0;
+        for (int i=0;i<F0.length;i++){
+            sumF0+=F0[i];
         }
+        if (sumF0==0){
+            return 0;
+        }
+        else{
+            List<float[]> Voiced=F0Detector.voiced(F0, Signal);
 
-        return PhonFeatures.calculateSD(Duration);
+            List<Float> Duration=new ArrayList<>();
+            float[] segment;
+            for(int i=0;i<Voiced.size();i++){
+                segment=Voiced.get(i);
+                Duration.add(((float)segment.length*1000)/InfoSig[0]);
+            }
+
+            return PhonFeatures.calculateSD(Duration);
+        }
 
     }
 
@@ -129,11 +138,12 @@ public class Speech_features_Activity extends AppCompatActivity implements View.
         SignalDataService signalDataService = new SignalDataService(this);
         DecimalFormat df = new DecimalFormat("#.00");
 
-        long N = signalDataService.countSignalsbyname("A");
+        int ID=18;
+        long N = signalDataService.countSignalsbyID(ID);
 
         if (N>0) {
 
-            List<SignalDA> signals = signalDataService.getSignalsbyname("A");
+            List<SignalDA> signals = signalDataService.getSignalsbyID(ID);
             if (signals.size() > 0) {
                 path_ah = signals.get(signals.size() - 1).getSignalPath();
                 if (signals.size() > 5) {
@@ -227,12 +237,13 @@ public class Speech_features_Activity extends AppCompatActivity implements View.
 
 
     private void ArticulationFeatures(){
+        int ID=11;
         SignalDataService signalDataService = new SignalDataService(this);
         DecimalFormat df = new DecimalFormat("#.00");
-        long N = signalDataService.countSignalsbyname("Pataka");
+        long N = signalDataService.countSignalsbyID(ID);
 
         if (N>0) {
-            List<SignalDA> signals = signalDataService.getSignalsbyname("Pataka");
+            List<SignalDA> signals = signalDataService.getSignalsbyID(ID);
             if (signals.size() > 0) {
                 path_pataka = signals.get(signals.size() - 1).getSignalPath();
                 if (signals.size() > 5) {

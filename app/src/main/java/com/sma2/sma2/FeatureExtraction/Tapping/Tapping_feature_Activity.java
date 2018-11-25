@@ -292,7 +292,7 @@ public class Tapping_feature_Activity extends AppCompatActivity  implements View
         float Count=0;
 
         for (int i = 0; i < vector.size(); i ++){
-            if(vector.get(i)==1 ) {
+            if(vector.get(i)==1 || vector.get(i)==2 ) {
                 Count++;
             }
         }

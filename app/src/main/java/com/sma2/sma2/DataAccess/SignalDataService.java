@@ -78,7 +78,7 @@ public class SignalDataService {
 
     }
 
-    public List<SignalDA> getSignalsbyname(String name){
+    public List<SignalDA> getSignalsbyID(int ID){
         if (db == null) {
             DaoMaster.DevOpenHelper helper = new DaoMaster.DevOpenHelper(invocationcontext, dbname);
             db = helper.getWritableDb();
@@ -86,14 +86,14 @@ public class SignalDataService {
         DaoSession session = new DaoMaster(db).newSession();
         SignalDADao dao = session.getSignalDADao();
         List<SignalDA> signals = dao.queryBuilder()
-                .where(SignalDADao.Properties.ExerciseName.eq(name))
+                .where(SignalDADao.Properties.ExerciseID.eq(ID))
                 .list();
         // db.close();
         return signals;
 
     }
 
-    public long countSignalsbyname(String name){
+    public long countSignalsbyID(int ID){
         if (db == null) {
             DaoMaster.DevOpenHelper helper = new DaoMaster.DevOpenHelper(invocationcontext, dbname);
             db = helper.getWritableDb();
@@ -102,7 +102,7 @@ public class SignalDataService {
         SignalDADao dao = session.getSignalDADao();
         // db.close();
         return dao.queryBuilder()
-                .where(SignalDADao.Properties.ExerciseName.eq(name))
+                .where(SignalDADao.Properties.ExerciseID.eq(ID))
                 .count();
     }
 
