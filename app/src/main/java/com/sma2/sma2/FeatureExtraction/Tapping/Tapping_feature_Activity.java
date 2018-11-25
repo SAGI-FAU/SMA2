@@ -62,8 +62,8 @@ public class Tapping_feature_Activity extends AppCompatActivity  implements View
         SignalDataService signalDataService =new SignalDataService(this);
         DecimalFormat df = new DecimalFormat("#.0");
 
-
-        List<SignalDA> signals=signalDataService.getSignalsbyname("Tapping one finger");
+        int ID=33;
+        List<SignalDA> signals=signalDataService.getSignalsbyID(ID);
         if (signals.size()>0){
             path_tapping=PATH+signals.get(signals.size()-1).getSignalPath();
             if (signals.size()>4){
@@ -156,8 +156,8 @@ public class Tapping_feature_Activity extends AppCompatActivity  implements View
 
 
         // two finger tapping
-
-        List<SignalDA> signals2=signalDataService.getSignalsbyname("Tapping two fingers");
+        ID=34;
+        List<SignalDA> signals2=signalDataService.getSignalsbyID(ID);
         if (signals2.size()>0){
             path_tapping2=PATH+signals2.get(signals2.size()-1).getSignalPath();
             if (signals2.size()>4){
