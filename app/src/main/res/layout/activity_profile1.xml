@@ -28,7 +28,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:layout_marginBottom="8dp"
-        android:text="@string/user_age"
+        android:text="@string/birthdate"
         android:textColor="@color/colorPrimaryDark"
         android:textSize="@dimen/textview_text_size"
         app:layout_constraintLeft_toLeftOf="parent"

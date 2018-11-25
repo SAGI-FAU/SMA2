@@ -24,28 +24,14 @@
     <string name="todinput">Año</string>
     <string name="med_dose">Dosis (mg)</string>
     <string name="med_time">Hora de ingesta</string>
-    <string name="start">Iniciar</string>
     <string name="start2">INICIAR</string>
     <string name="record">Grabar</string>
-    <string name="sentences">Por favor escuche y repita las siguientes frases</string>
-    <string name="monologue">Por favor cuente qué hace en un día normal</string>
-    <string name="image">Por favor describa lo que ve en la siguiente imagen</string>
-    <string name="sustained_a">Vocal sostenida /a/</string>
     <string name="a_ex">a</string>
-    <string name="ddk">Repetición rápida de las sílabas /pa-ta-ka/</string>
     <string name="instructions">Instrucciones</string>
-    <string name="text3">Ejercicio de habla 3</string>
-    <string name="readtext">Por favor escuche y repita el siguiente párrafo</string>
-    <string name="two_x_ten">2 x 10 con pausa</string>
-    <string name="four_x_ten">4 x 10 con pausa</string>
-    <string name="two_min_walk">Por favor camine por su casa durante dos minutos</string>
-    <string name="recording2">Grabando movimiento</string>
     <string name="ball_balance">Juego de balón en equilibrio</string>
-    <string name="pronation_supination">Pronación / Supinación</string>
-    <string name="tapping_ex">Ejercicio de pulsar</string>
-    <string name="tapping_ex1">Pulsar con un dedo, con dos dedos, deslizar, etc.</string>
-    <string name="tapping_1">Pulsar con un dedo</string>
-    <string name="tapping_2">Pulsar con dos dedos</string>
+    <string name="tapping_ex">Toques</string>
+    <string name="tapping_1">Toque con un dedo</string>
+    <string name="tapping_2">Toques con dos dedos</string>
     <string name="sliding">Deslizamiento</string>
     <string name="done">Listo!</string>
     <string name="btnProfileText">Perfil</string>
@@ -63,13 +49,6 @@
     <string name="results">Ver los resultados</string>
     <string name="target">LLEGUE AQUÍ</string>
     <string name="volume">Volumen</string>
-    <string name="recording">Grabando voz</string>
-    <string name="walking">Ejercicio de caminata</string>
-    <string name="walking1">2x10, 4x10, caminata libre, etc.</string>
-    <string name="hand_ex">Ejercicio de temblor en la mano</string>
-    <string name="hand_ex1">Temblor en reposo, temblor en movimiento, pronación / supinación, etc.</string>
-    <string name="rest_tremor">Temblor en reposo</string>
-    <string name="kinetic_tremor">Temblor en movimiento</string>
     <string name="med_name">Nombre del medicamento</string>
     <string name="med">Medicamentos</string>
     <string name="other1">"¿Sufre de algún transtorno del habla o el movimiento?"</string>
@@ -89,7 +68,7 @@
     <string name="dose_empty">"Por favor, introduzca la dosis "</string>
     <string name="add_medice_error">La medicina fue agregada</string>
     <string name="medicine_added">Agregada de forma exitosa</string>
-    <string name="time_diagnosis_error">Por favor, introduzca  el tiempo de diagnóstico</string>
+    <string name="time_diagnosis_error">Por favor, introduzca el año de diagnóstico</string>
     <string name="weight_error">Por favor, introduzca su peso</string>
     <string name="height_eror">Por favor, introduzca su estatura</string>
     <string name="again">Repetir</string>
@@ -104,9 +83,7 @@
     <string name="OK">OK</string>
     <string name="user_name">"Nombre: "</string>
     <string name="user_id">"CC: "</string>
-    <string name="user_age">"Fecha de Nacimiento: "</string>
     <string name="S_record">"Sesiones grabadas: "</string>
-    <string name="Int_medicine">"Medicinas: "</string>
     <string name="upd_medicine">Actualizar medicina</string>
     <string name="add_medicine">AGREGAR MEDICINA</string>
     <string name="delete">BORRAR</string>
@@ -135,7 +112,12 @@
     <string name="articulation">Articulación </string>
     <string name="ddk_reg">Regularidad DDK (ms)</string>
     <string name="Speech">Voz</string>
-
+    <string name="Hand_left">Mano Izquierda</string>
+    <string name="movement">Movimiento</string>
+    <string name="Hand_right">Mano Derecha</string>
+    <string name="postural">Temblor Postural</string>
+    <string name="TremorAmplitudeLeft">Temblor mano izquerda</string>
+    <string name="TremorAmplitudeRight">Temblor mano derecha</string>
 
 
 </resources>

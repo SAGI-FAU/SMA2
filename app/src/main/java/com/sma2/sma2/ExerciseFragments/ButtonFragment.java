@@ -46,7 +46,7 @@ public class ButtonFragment extends Fragment {
                     startButton.setText(getString(R.string.stop));
                     running = true;
                 } else {
-                    startButton.setText(getString(R.string.start));
+                    startButton.setText(getString(R.string.start2));
                     running = false;
                 }
                 mListener.onButtonInteraction(running);

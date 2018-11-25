@@ -25,6 +25,7 @@ import com.sma2.sma2.FeatureExtraction.Speech.tools.sigproc;
 import com.sma2.sma2.MainActivityMenu;
 import com.sma2.sma2.R;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -109,16 +110,25 @@ public class Speech_features_Activity extends AppCompatActivity implements View.
         sigproc SigProc = new sigproc();
         Signal = SigProc.normsig(Signal);
         float[] F0= F0Detector.sig_f0(Signal, InfoSig[1]);
-        List<float[]> Voiced=F0Detector.voiced(F0, Signal);
-
-        List<Float> Duration=new ArrayList<>();
-        float[] segment;
-        for(int i=0;i<Voiced.size();i++){
-            segment=Voiced.get(i);
-            Duration.add(((float)segment.length*1000)/InfoSig[0]);
+        float sumF0=0;
+        for (int i=0;i<F0.length;i++){
+            sumF0+=F0[i];
         }
+        if (sumF0==0){
+            return 0;
+        }
+        else{
+            List<float[]> Voiced=F0Detector.voiced(F0, Signal);
 
-        return PhonFeatures.calculateSD(Duration);
+            List<Float> Duration=new ArrayList<>();
+            float[] segment;
+            for(int i=0;i<Voiced.size();i++){
+                segment=Voiced.get(i);
+                Duration.add(((float)segment.length*1000)/InfoSig[0]);
+            }
+
+            return PhonFeatures.calculateSD(Duration);
+        }
 
     }
 
@@ -126,16 +136,24 @@ public class Speech_features_Activity extends AppCompatActivity implements View.
     private void PhonationFeatures() {
         // get exercises from sustained vowel ah to compute phonation features
         SignalDataService signalDataService = new SignalDataService(this);
-        List<SignalDA> signals = signalDataService.getSignalsbyname("A");
-        if (signals.size() > 0) {
-            path_ah = signals.get(signals.size() - 1).getSignalPath();
-            if (signals.size() > 5) {
-                for (int i = 4; i >= 0; i--) {
-                    path_ah_all.add(signals.get(i).getSignalPath());
-                }
-            } else {
-                for (int i = signals.size() - 1; i >= 0; i--) {
-                    path_ah_all.add(signals.get(i).getSignalPath());
+        DecimalFormat df = new DecimalFormat("#.00");
+
+        String name="A";
+        long N = signalDataService.countSignalsbyname(name);
+
+        if (N>0) {
+
+            List<SignalDA> signals = signalDataService.getSignalsbyname(name);
+            if (signals.size() > 0) {
+                path_ah = signals.get(signals.size() - 1).getSignalPath();
+                if (signals.size() > 5) {
+                    for (int i = 4; i >= 0; i--) {
+                        path_ah_all.add(signals.get(i).getSignalPath());
+                    }
+                } else {
+                    for (int i = signals.size() - 1; i >= 0; i--) {
+                        path_ah_all.add(signals.get(i).getSignalPath());
+                    }
                 }
             }
         }
@@ -147,7 +165,7 @@ public class Speech_features_Activity extends AppCompatActivity implements View.
             tjitter.setText(R.string.Empty);
         } else {
             jitter = Jitter(path_ah);
-            String JitterStr = String.valueOf(jitter) + "%";
+            String JitterStr = String.valueOf(df.format(jitter)) + "%";
             tjitter.setText(JitterStr);
 
         }
@@ -205,7 +223,6 @@ public class Speech_features_Activity extends AppCompatActivity implements View.
 
         series.setSpacing(5);
         graph.getViewport().setMinY(0.0);
-        graph.getViewport().setMaxY(30.0);
         graph.getViewport().setMinX(0);
         graph.getViewport().setMaxX(6);
         graph.getViewport().setYAxisBoundsManual(true);
@@ -220,33 +237,37 @@ public class Speech_features_Activity extends AppCompatActivity implements View.
 
 
     private void ArticulationFeatures(){
+        String name="Pataka";
         SignalDataService signalDataService = new SignalDataService(this);
-        List<SignalDA> signals=signalDataService.getSignalsbyname("Pataka");
-        if (signals.size()>0){
-            path_pataka=signals.get(signals.size()-1).getSignalPath();
-            if (signals.size()>5){
-                for (int i=4;i>=0;i--){
-                    path_pataka_all.add(signals.get(i).getSignalPath());
-                }
-            }
-            else{
-                for (int i=signals.size()-1;i>=0;i--){
-                    path_pataka_all.add(signals.get(i).getSignalPath());
+        DecimalFormat df = new DecimalFormat("#.00");
+        long N = signalDataService.countSignalsbyname(name);
+
+        if (N>0) {
+            List<SignalDA> signals = signalDataService.getSignalsbyname(name);
+            if (signals.size() > 0) {
+                path_pataka = signals.get(signals.size() - 1).getSignalPath();
+                if (signals.size() > 5) {
+                    for (int i = 4; i >= 0; i--) {
+                        path_pataka_all.add(signals.get(i).getSignalPath());
+                    }
+                } else {
+                    for (int i = signals.size() - 1; i >= 0; i--) {
+                        path_pataka_all.add(signals.get(i).getSignalPath());
+                    }
                 }
             }
         }
-
         if (path_pataka == null) {
             tddk_reg.setText(R.string.Empty);
         } else {
             DDK_reg = DDKRegularity(path_pataka);
-            String DDK_regStr = String.valueOf(DDK_reg) + "ms";
+            String DDK_regStr = String.valueOf(df.format(DDK_reg)) + "ms";
             tddk_reg.setText(DDK_regStr);
         }
 
         // Emoji for articulation features
 
-        if (DDK_reg <= 300) {
+        if (DDK_reg <= 200) {
             iEmojinArticulation.setImageResource(R.drawable.happy_emojin);
 
             Animation animation = AnimationUtils.loadAnimation(this, R.anim.zoomin);
@@ -254,7 +275,7 @@ public class Speech_features_Activity extends AppCompatActivity implements View.
             tmessage_articulation.setText(R.string.Positive_message);
             Animation animation2 = AnimationUtils.loadAnimation(this, R.anim.bounce);
             tmessage_articulation.startAnimation(animation2);
-        } else if (DDK_reg <= 600) {
+        } else if (DDK_reg <= 400) {
             iEmojinArticulation.setImageResource(R.drawable.medium_emojin);
 
             Animation animation = AnimationUtils.loadAnimation(this, R.anim.zoomin);
@@ -298,7 +319,6 @@ public class Speech_features_Activity extends AppCompatActivity implements View.
 
         series.setSpacing(5);
         graph.getViewport().setMinY(0.0);
-        graph.getViewport().setMaxY(30.0);
         graph.getViewport().setMinX(0);
         graph.getViewport().setMaxX(6);
         graph.getViewport().setYAxisBoundsManual(true);
