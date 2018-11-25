@@ -22,12 +22,11 @@
     <string name="education">Education Level</string>
     <string name="tod">Year of diagnosis</string>
     <string name="todinput">Year</string>
-    <string name="med">Medical intake</string>
+    <string name="med">Medicine</string>
     <string name="med_name">Medicine name</string>
     <string name="med_dose">Dose (mg)</string>
     <string name="med_time">Intake time</string>
-    <string name="other1">Any other speech or</string>
-    <string name="other2">Movement disorder</string>
+    <string name="other1">Do you have any speech or movement disorder?</string>
     <string name="___" translatable="false">------ ------ ------</string>
     <string name="start2">START</string>
     <string name="record">Record</string>
@@ -87,6 +86,7 @@
     <string name="user_name">Name: </string>
     <string name="user_id">ID: </string>
     <string name="S_record">Recorded sessions: </string>
+    <string name="Int_medicine">Medicine: </string>
     <string name="upd_medicine">Update medicine</string>
     <string name="add_medicine">ADD MEDICINE</string>
     <string name="delete">REMOVE</string>
@@ -122,11 +122,5 @@
     <string name="Hand_right">Right Hand</string>
     <string name="TremorAmplitudeLeft">Tremor Amplitude Left Hand</string>
     <string name="TremorAmplitudeRight">Tremor Amplitude Right Hand</string>
-
-
-
-
-
-
 
 </resources>

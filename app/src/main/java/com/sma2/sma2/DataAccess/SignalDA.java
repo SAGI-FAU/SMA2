@@ -56,11 +56,12 @@ public class SignalDA {
 
     }
 
-    @Generated(hash = 1895564419)
-    public SignalDA(Long id, long patientDAId, @NotNull String signalPath,
+    @Generated(hash = 1545681166)
+    public SignalDA(Long id, long patientDAId, long exerciseID, @NotNull String signalPath,
             String exerciseName, Date recordingTime, int sessionNumber) {
         this.id = id;
         this.patientDAId = patientDAId;
+        this.exerciseID = exerciseID;
         this.signalPath = signalPath;
         this.exerciseName = exerciseName;
         this.recordingTime = recordingTime;

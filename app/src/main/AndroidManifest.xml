@@ -49,7 +49,6 @@
         <activity android:name=".Profile2Activity"
             android:screenOrientation="portrait" />
         <activity android:name=".Profile3Activity"
-            android:windowSoftInputMode="adjustResize"
             android:screenOrientation="portrait" />
         <activity android:name=".MainActivityMenu" />
         <activity android:name=".ProfileActivity"
