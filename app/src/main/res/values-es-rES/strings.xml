@@ -104,7 +104,7 @@
     <string name="Content_notif">Recuerda hacer hoy tus Ejercicios</string>
     <string name="title_notif_med">Toma tu medicina</string>
     <string name="content_notif_med">Recuerda tomar tu medicina: </string>
-    <string name="Perc_Tapping_Hits">% Toques: </string>
+    <string name="Perc_Tapping_Hits">% Toques </string>
     <string name="session">Sesión </string>
     <string name="completed">Haz terminado un total de  </string>
     <string name="keep">Sigue así</string>

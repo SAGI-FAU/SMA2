@@ -60,6 +60,7 @@
         android:id="@+id/textView_leftHand"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:textColor="@color/colorPrimaryDark"
         android:layout_marginTop="15sp"
         android:layout_marginEnd="8sp"
         android:layout_marginStart="8sp"
@@ -72,20 +73,6 @@
         />
 
 
-    <TextView
-        android:id="@+id/textView_rightHand"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="15sp"
-        android:layout_marginEnd="8sp"
-        android:layout_marginStart="8sp"
-        android:gravity="center"
-        android:text="@string/Hand_right"
-        android:textSize="@dimen/textview_text_size"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView_movement2"
-        />
 
 
 
@@ -93,23 +80,7 @@
         android:id="@+id/tTremor_left"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8sp"
-        android:layout_marginEnd="8sp"
-        android:layout_marginStart="8sp"
-        android:lines="1"
-        android:text=""
-        android:gravity="end"
-        android:textSize="@dimen/textview_text_size"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView_leftHand" />
-
-
-
-    <TextView
-        android:id="@+id/tTremor_right"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8sp"
+        android:layout_marginTop="15sp"
         android:layout_marginEnd="8sp"
         android:layout_marginStart="8sp"
         android:lines="1"
@@ -117,14 +88,18 @@
         android:gravity="end"
         android:textSize="@dimen/textview_text_size"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView_rightHand" />
+        app:layout_constraintTop_toBottomOf="@+id/textView_movement2" />
+
+
+
+
 
 
     <com.jjoe64.graphview.GraphView
         android:id="@+id/bar_percTremorLeft"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        app:layout_constraintWidth_percent="1"
+        app:layout_constraintWidth_percent="0.95"
         app:layout_constraintDimensionRatio="1.6"
         app:seriesType="bar"
         android:layout_marginTop="35sp"
@@ -136,19 +111,51 @@
 
 
 
+        <TextView
+            android:id="@+id/textView_rightHand"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15sp"
+            android:layout_marginEnd="8sp"
+            android:layout_marginStart="8sp"
+            android:gravity="center"
+            android:text="@string/Hand_right"
+            android:textSize="@dimen/textview_text_size"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintLeft_toLeftOf="parent"
+            android:textColor="@color/colorPrimaryDark"
+
+            app:layout_constraintTop_toBottomOf="@+id/bar_percTremorLeft"
+            />
+
+        <TextView
+            android:id="@+id/tTremor_right"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15sp"
+            android:layout_marginEnd="8sp"
+            android:layout_marginStart="8sp"
+            android:lines="1"
+            android:text=""
+            android:gravity="end"
+            android:textSize="@dimen/textview_text_size"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/bar_percTremorLeft" />
+
+
     <com.jjoe64.graphview.GraphView
         android:id="@+id/bar_percTremorRight"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        app:layout_constraintWidth_percent="1"
+        app:layout_constraintWidth_percent="0.95"
         app:layout_constraintDimensionRatio="1.6"
         app:seriesType="bar"
-        android:layout_marginTop="35sp"
+        android:layout_marginTop="20sp"
         app:seriesColor="@color/colorPrimaryDark"
         android:title="@string/TremorAmplitudeRight"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/bar_percTremorLeft"/>
+        app:layout_constraintTop_toBottomOf="@+id/textView_rightHand"/>
 
 
     <Button

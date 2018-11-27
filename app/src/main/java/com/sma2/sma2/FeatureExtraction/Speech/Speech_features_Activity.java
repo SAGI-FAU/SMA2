@@ -146,12 +146,12 @@ public class Speech_features_Activity extends AppCompatActivity implements View.
             List<SignalDA> signals = signalDataService.getSignalsbyname(name);
             if (signals.size() > 0) {
                 path_ah = signals.get(signals.size() - 1).getSignalPath();
-                if (signals.size() > 5) {
-                    for (int i = 4; i >= 0; i--) {
+                if (signals.size()>4){
+                    for (int i=signals.size()-4;i<signals.size();i++){
                         path_ah_all.add(signals.get(i).getSignalPath());
                     }
                 } else {
-                    for (int i = signals.size() - 1; i >= 0; i--) {
+                    for (int i=0;i<signals.size();i++){
                         path_ah_all.add(signals.get(i).getSignalPath());
                     }
                 }
@@ -198,15 +198,12 @@ public class Speech_features_Activity extends AppCompatActivity implements View.
             tmessage_phonation.startAnimation(animation2);
         }
 
-        int j;
         float JitterTemp;
         BarGraphSeries<DataPoint> series = new BarGraphSeries<>();
         if (path_ah_all.size() > 0) {
-            j = path_ah_all.size() - 1;
             for (int i = 0; i < path_ah_all.size(); i++) {
-                JitterTemp = Jitter(path_ah_all.get(j));
-                series.appendData(new DataPoint(i + 1, JitterTemp), true, 6);
-                j = j - 1;
+                JitterTemp = Jitter(path_ah_all.get(i));
+                series.appendData(new DataPoint(i + 1, JitterTemp), true, 5);
             }
 
         } else {
@@ -246,12 +243,12 @@ public class Speech_features_Activity extends AppCompatActivity implements View.
             List<SignalDA> signals = signalDataService.getSignalsbyname(name);
             if (signals.size() > 0) {
                 path_pataka = signals.get(signals.size() - 1).getSignalPath();
-                if (signals.size() > 5) {
-                    for (int i = 4; i >= 0; i--) {
+                if (signals.size() > 4) {
+                    for (int i=signals.size()-4;i<signals.size();i++){
                         path_pataka_all.add(signals.get(i).getSignalPath());
                     }
                 } else {
-                    for (int i = signals.size() - 1; i >= 0; i--) {
+                    for (int i=0;i<signals.size();i++){
                         path_pataka_all.add(signals.get(i).getSignalPath());
                     }
                 }
@@ -294,15 +291,12 @@ public class Speech_features_Activity extends AppCompatActivity implements View.
         }
 
 
-        int j;
         float DDK_regTemp;
         BarGraphSeries<DataPoint> series = new BarGraphSeries<>();
         if (path_pataka_all.size() > 0) {
-            j = path_pataka_all.size() - 1;
             for (int i = 0; i < path_pataka_all.size(); i++) {
-                DDK_regTemp = DDKRegularity(path_pataka_all.get(j));
-                series.appendData(new DataPoint(i + 1, DDK_regTemp), true, 6);
-                j = j - 1;
+                DDK_regTemp = DDKRegularity(path_pataka_all.get(i));
+                series.appendData(new DataPoint(i + 1, DDK_regTemp), true, 5);
             }
 
         } else {
