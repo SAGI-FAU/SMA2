@@ -213,18 +213,6 @@ public class ExerciseSessionManager {
                         Uri.parse("Instruction/Path"),
                         Ex_balance_Rec.class));
             }
-            else if (ExFrag.equals("balance"))
-            {
-                _ExerciseList.add(new Exercise(
-                        ExID,
-                        ExName,
-                        ExType,
-                        ExDescr,
-                        ExInstr,
-                        Uri.parse("video/path"),
-                        Uri.parse("Instruction/Path"),
-                        Ex_balance_Rec.class));
-            }
             else if (ExFrag.equals("circling"))
             {
                 _ExerciseList.add(new Exercise(
