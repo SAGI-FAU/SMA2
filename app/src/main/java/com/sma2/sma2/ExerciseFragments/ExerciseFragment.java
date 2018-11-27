@@ -31,7 +31,7 @@ public abstract class ExerciseFragment extends Fragment {
         if (fragment  instanceof ExReadText){
             String name=exercise.getName();
             String NumSent=name.substring(name.length()-1);
-            args.putInt("sentence", Integer.valueOf(NumSent));
+            args.putInt("sentence", Integer.valueOf(NumSent)-1);
 
         }
         fragment.setArguments(args);

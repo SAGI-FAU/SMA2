@@ -24,10 +24,11 @@
         android:id="@+id/exerciseDescription"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        app:layout_constraintDimensionRatio="6"
+        app:layout_constraintDimensionRatio="5"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
+        android:textSize="@dimen/button_text_size"
         android:text="Description"
         android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
         app:layout_constraintEnd_toEndOf="parent"
@@ -39,17 +40,17 @@
         android:id="@+id/shortInstructions"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        app:layout_constraintDimensionRatio="2"
+        app:layout_constraintDimensionRatio="1.4"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:text="short Instructions"
-        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        android:textAppearance="@dimen/button_text_size"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/exerciseDescription" />
 
-    <Button
+<!--    <Button
         android:id="@+id/textInstructions"
         android:layout_width="0dp"
         android:layout_height="0dp"
@@ -63,7 +64,7 @@
         android:text="@string/instructions_long"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/shortInstructions" />
+        app:layout_constraintTop_toBottomOf="@+id/shortInstructions" />-->
 
     <Button
         android:id="@+id/videoInstructionsbtn"
@@ -71,15 +72,14 @@
         android:layout_height="0dp"
         app:layout_constraintDimensionRatio="4"
         app:layout_constraintWidth_percent="0.7"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
         android:textSize="@dimen/button_text_size"
         android:background="@color/colorPrimaryDark"
         android:text="@string/instructions_video"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textInstructions" />
+        app:layout_constraintBottom_toTopOf="@+id/startButton" />
 
     <Button
         android:id="@+id/startButton"
@@ -87,15 +87,13 @@
         android:layout_height="0dp"
         app:layout_constraintDimensionRatio="4"
         app:layout_constraintWidth_percent="0.7"
+        android:layout_marginTop="8dp"
         android:layout_marginBottom="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
         android:textSize="@dimen/button_text_size"
         android:background="@color/colorPrimaryDark"
         android:text="@string/exercise_start"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/videoInstructionsbtn" />
+        app:layout_constraintStart_toStartOf="parent"/>
 
 </android.support.constraint.ConstraintLayout>

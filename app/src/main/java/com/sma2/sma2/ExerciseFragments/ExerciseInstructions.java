@@ -47,7 +47,7 @@ public class ExerciseInstructions extends Fragment {
         View view = inflater.inflate(R.layout.fragment_exercise_instructions, container, false);
 
 
-        // Set On Click handler for Text instructions
+/*        // Set On Click handler for Text instructions
         Button instrButton = view.findViewById(R.id.textInstructions);
         instrButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -58,7 +58,7 @@ public class ExerciseInstructions extends Fragment {
                 ft.replace(R.id.exerciseContainer,dialogFragment);
                 ft.commit();
             }
-        });
+        });*/
 
         // Set On Click handler for Video instructions
         Button videoInstrButton = view.findViewById(R.id.videoInstructionsbtn);
