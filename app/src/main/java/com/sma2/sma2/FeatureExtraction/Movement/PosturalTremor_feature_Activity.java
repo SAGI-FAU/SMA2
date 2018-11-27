@@ -21,8 +21,9 @@ import com.sma2.sma2.R;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
-public class Movement_feature_Activity extends AppCompatActivity implements View.OnClickListener {
+public class PosturalTremor_feature_Activity extends AppCompatActivity implements View.OnClickListener {
 
     Button bBack;
     private final String PATH = Environment.getExternalStorageDirectory() + "/Apkinson/MOVEMENT/";
@@ -33,7 +34,7 @@ public class Movement_feature_Activity extends AppCompatActivity implements View
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_movement_feature_);
+        setContentView(R.layout.activity_postural_tremor_feature_);
         bBack=findViewById(R.id.button_back5);
         bBack.setOnClickListener(this);
         tTremor_left=findViewById(R.id.tTremor_left);
@@ -44,19 +45,35 @@ public class Movement_feature_Activity extends AppCompatActivity implements View
         DecimalFormat df = new DecimalFormat("#.0");
 
 
-        String name="Postural tremor Right";
+
+
+        Locale locale = Locale.getDefault();
+        String Lang=locale.getLanguage();
+        String name;
+        switch(Lang){
+            case "es":
+                name="Temblor en reposos-derecha";
+                break;
+            case "de":
+                name="Haltetremor der rechten hand";
+                break;
+            default:
+                name="Postural tremor-Right";
+        }
+
+
         double TremorRight=0;
         List<SignalDA> SignalsRight=signalDataService.getSignalsbyname(name);
         if (SignalsRight.size()>0){
             path_movementRight=PATH+SignalsRight.get(SignalsRight.size()-1).getSignalPath();
 
             if (SignalsRight.size()>4){
-                for (int i=3;i>=0;i--){
+                for (int i=SignalsRight.size()-4;i<SignalsRight.size();i++){
                     path_movement_all_right.add(PATH+SignalsRight.get(i).getSignalPath());
                 }
             }
             else{
-                for (int i=SignalsRight.size()-1;i>=0;i--){
+                for (int i=0;i<SignalsRight.size();i++){
                     path_movement_all_right.add(PATH+SignalsRight.get(i).getSignalPath());
                 }
             }
@@ -77,19 +94,28 @@ public class Movement_feature_Activity extends AppCompatActivity implements View
 
 
 
-        name="Postural tremor Left";
+        switch(Lang){
+            case "es":
+                name="Temblor en reposos-izquierda";
+                break;
+            case "de":
+                name="Haltetremor der linken hand";
+                break;
+            default:
+                name="Postural tremor-Left";
+        }
         double TremorLeft=0;
         List<SignalDA> SignalsLeft=signalDataService.getSignalsbyname(name);
         if (SignalsLeft.size()>0){
             path_movementLeft=PATH+SignalsLeft.get(SignalsLeft.size()-1).getSignalPath();
 
             if (SignalsLeft.size()>4){
-                for (int i=3;i>=0;i--){
+                for (int i=SignalsLeft.size()-4;i<SignalsLeft.size();i++){
                     path_movement_all_left.add(PATH+SignalsLeft.get(i).getSignalPath());
                 }
             }
             else{
-                for (int i=SignalsLeft.size()-1;i>=0;i--){
+                for (int i=0;i<SignalsLeft.size();i++){
                     path_movement_all_left.add(PATH+SignalsLeft.get(i).getSignalPath());
                 }
             }
@@ -108,16 +134,8 @@ public class Movement_feature_Activity extends AppCompatActivity implements View
         }
 
 
-
-
-
-
-
-
-        int j;
         BarGraphSeries<DataPoint> series= new BarGraphSeries<>();
         if (path_movement_all_left.size()>0) {
-            j = path_movement_all_left.size() - 1;
             for (int i = 0; i < path_movement_all_left.size(); i++) {
 
                 CSVFileReader.Signal TremorSignalaX2 = FileReader.ReadMovementSignal(path_movement_all_left.get(i), "aX [m/s^2]");
@@ -126,7 +144,6 @@ public class Movement_feature_Activity extends AppCompatActivity implements View
                 TremorLeft = MovementProcessor.ComputeTremor(TremorSignalaX2.Signal, TremorSignalaY2.Signal, TremorSignalaZ2.Signal);
 
                 series.appendData(new DataPoint(i + 1, TremorLeft), true, 5);
-                j = j - 1;
             }
         }
         else{
@@ -154,7 +171,6 @@ public class Movement_feature_Activity extends AppCompatActivity implements View
 
         BarGraphSeries<DataPoint> series2= new BarGraphSeries<>();
         if (path_movement_all_right.size()>0) {
-            j = path_movement_all_right.size() - 1;
             for (int i = 0; i < path_movement_all_right.size(); i++) {
 
                 CSVFileReader.Signal TremorSignalaX2 = FileReader.ReadMovementSignal(path_movement_all_right.get(i), "aX [m/s^2]");
@@ -163,7 +179,6 @@ public class Movement_feature_Activity extends AppCompatActivity implements View
                 TremorRight = MovementProcessor.ComputeTremor(TremorSignalaX2.Signal, TremorSignalaY2.Signal, TremorSignalaZ2.Signal);
 
                 series2.appendData(new DataPoint(i + 1, TremorRight), true, 5);
-                j = j - 1;
             }
         }
         else{
@@ -205,7 +220,7 @@ public class Movement_feature_Activity extends AppCompatActivity implements View
     }
 
     private void onButtonBack(){
-        Intent i =new Intent(Movement_feature_Activity.this, MainActivityMenu.class);
+        Intent i =new Intent(PosturalTremor_feature_Activity.this, MainActivityMenu.class);
         startActivity(i);
 
     }

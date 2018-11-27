@@ -32,6 +32,7 @@ import java.io.IOException;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 public class Tapping_feature_Activity extends AppCompatActivity  implements View.OnClickListener {
     TextView  tNumber_Taps,tTapping_time_hits,tMessage, tTapping_perc_hits, tTapping_perc_hits_left, tTapping_perc_hits_right;
@@ -62,17 +63,30 @@ public class Tapping_feature_Activity extends AppCompatActivity  implements View
         SignalDataService signalDataService =new SignalDataService(this);
         DecimalFormat df = new DecimalFormat("#.0");
 
-        String name="Tapping one finger";
+        Locale locale = Locale.getDefault();
+        String Lang=locale.getLanguage();
+        String name;
+        switch(Lang){
+            case "es":
+                name="Golpeteo 1";
+                break;
+            case "de":
+                name="Fingertippen";
+                break;
+            default:
+                name="Finger tapping 1";
+        }
+
         List<SignalDA> signals=signalDataService.getSignalsbyname(name);
         if (signals.size()>0){
             path_tapping=PATH+signals.get(signals.size()-1).getSignalPath();
             if (signals.size()>4){
-                for (int i=3;i>=0;i--){
+                for (int i=signals.size()-4;i<signals.size();i++){
                     path_tapping_all.add(PATH+signals.get(i).getSignalPath());
                 }
             }
             else{
-                for (int i=signals.size()-1;i>=0;i--){
+                for (int i=0;i<signals.size();i++){
                     path_tapping_all.add(PATH+signals.get(i).getSignalPath());
                 }
             }
@@ -128,11 +142,9 @@ public class Tapping_feature_Activity extends AppCompatActivity  implements View
         int j;
         BarGraphSeries<DataPoint> series= new BarGraphSeries<>();
         if (path_tapping_all.size()>0) {
-            j = path_tapping_all.size() - 1;
             for (int i = 0; i < path_tapping_all.size(); i++) {
-                Count_Touch_one = read_csv(path_tapping_all.get(j), 0);// The index tells me which column I should access
+                Count_Touch_one = read_csv(path_tapping_all.get(i), 0);// The index tells me which column I should access
                 series.appendData(new DataPoint(i + 1, Count_ladybug_one(Count_Touch_one)), true, 5);
-                j = j - 1;
             }
         }
         else{
@@ -157,16 +169,27 @@ public class Tapping_feature_Activity extends AppCompatActivity  implements View
 
         // two finger tapping
         name="Tapping two fingers";
+
+        switch(Lang){
+            case "es":
+                name="Golpeteo 2";
+                break;
+            case "de":
+                name="Fingertippen2";
+                break;
+            default:
+                name="Finger tapping 2";
+        }
         List<SignalDA> signals2=signalDataService.getSignalsbyname(name);
         if (signals2.size()>0){
             path_tapping2=PATH+signals2.get(signals2.size()-1).getSignalPath();
             if (signals2.size()>4){
-                for (int i=3;i>=0;i--){
+                for (int i=signals2.size()-4;i<signals2.size();i++){
                     path_tapping_all2.add(PATH+signals2.get(i).getSignalPath());
                 }
             }
             else{
-                for (int i=signals2.size()-1;i>=0;i--){
+                for (int i=0;i<signals2.size();i++){
                     path_tapping_all2.add(PATH+signals2.get(i).getSignalPath());
                 }
             }
@@ -198,14 +221,12 @@ public class Tapping_feature_Activity extends AppCompatActivity  implements View
 
         BarGraphSeries<DataPoint> series2= new BarGraphSeries<>();
         if (path_tapping_all2.size()>0) {
-            j = path_tapping_all2.size() - 1;
             for (int i = 0; i < path_tapping_all2.size(); i++) {
-                Count_Touch2 = read_csv(path_tapping_all2.get(j), 0);
+                Count_Touch2 = read_csv(path_tapping_all2.get(i), 0);
                 Count_Touch_left=separator_vector(Count_Touch2,1);
                 Count_Touch_right=separator_vector(Count_Touch2,2);
 
                 series2.appendData(new DataPoint(i + 1, (Count_ladybug_one(Count_Touch_left)+Count_ladybug_one(Count_Touch_right))/2), true, 5);
-                j = j - 1;
             }
         }
         else{

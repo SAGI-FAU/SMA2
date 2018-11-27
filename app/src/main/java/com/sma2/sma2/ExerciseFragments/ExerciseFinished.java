@@ -6,7 +6,10 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
+import android.widget.TextView;
 
 import com.sma2.sma2.ExerciseLogic.ScheduledExercise;
 import com.sma2.sma2.R;
@@ -57,6 +60,12 @@ public class ExerciseFinished extends Fragment {
                 mListener.onDoneButtonClicked();
             }
         });
+
+
+        TextView tMessage=view.findViewById(R.id.motivationMessage);
+        Animation animation2=AnimationUtils.loadAnimation(view.getContext(),R.anim.bounce);
+        tMessage.startAnimation(animation2);
+
         return view;
     }
 

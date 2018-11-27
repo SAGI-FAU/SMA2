@@ -105,7 +105,7 @@
     <string name="title_notif_med">Take your medicine</string>
     <string name="content_notif_med">"Remember to take your medicine: "</string>
     <string name="session">"Session "</string>
-    <string name="Perc_Tapping_Hits">"% Taps: "</string>
+    <string name="Perc_Tapping_Hits">"% Taps "</string>
     <string name="completed">"You have finished a total of "</string>
     <string name="keep">"Keep doing your best "</string>
     <string name="phonation">Phonation</string>
@@ -118,4 +118,8 @@
     <string name="Speech">Speech</string>
     <string name="TremorAmplitudeLeft">Tremor Amplitude Left Hand</string>
     <string name="TremorAmplitudeRight">Tremor Amplitude Right Hand</string>
+    <string name="balance">Balancing</string>
+    <string name="TremorAmplitude">Tremor Amplitude</string>
+
+
 </resources>
