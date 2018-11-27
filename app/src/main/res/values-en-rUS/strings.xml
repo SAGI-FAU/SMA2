@@ -118,4 +118,8 @@
     <string name="Speech">Speech</string>
     <string name="TremorAmplitudeLeft">Tremor Amplitude Left Hand</string>
     <string name="TremorAmplitudeRight">Tremor Amplitude Right Hand</string>
+    <string name="balance">Balancing</string>
+    <string name="TremorAmplitude">Tremor Amplitude</string>
+
+
 </resources>

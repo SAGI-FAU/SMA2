@@ -118,6 +118,9 @@
     <string name="postural">Temblor Postural</string>
     <string name="TremorAmplitudeLeft">Temblor mano izquerda</string>
     <string name="TremorAmplitudeRight">Temblor mano derecha</string>
+    <string name="balance">Balanceo</string>
+    <string name="TremorAmplitude">Amplitud de Temblor</string>
+
 
 
 </resources>

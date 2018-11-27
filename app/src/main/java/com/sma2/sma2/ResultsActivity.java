@@ -5,16 +5,18 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 
 
-import com.sma2.sma2.FeatureExtraction.Movement.Movement_feature_Activity;
+import com.sma2.sma2.FeatureExtraction.Movement.BalanceTremorFeatureActivity;
+import com.sma2.sma2.FeatureExtraction.Movement.PosturalTremor_feature_Activity;
 import com.sma2.sma2.FeatureExtraction.Speech.Speech_features_Activity;
 import com.sma2.sma2.FeatureExtraction.Tapping.Tapping_feature_Activity;
 
 
 public class ResultsActivity extends AppCompatActivity implements View.OnClickListener {
-    Button bTapping_one, bMovement, bBack, bSpeech;
-
+    ImageButton bTapping_one, bPosturalTremor, bSpeech, bBalance;
+    Button bBack;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -22,7 +24,8 @@ public class ResultsActivity extends AppCompatActivity implements View.OnClickLi
         bTapping_one=findViewById(R.id.bTapping_one);
         bBack=findViewById(R.id.button_back3);
         bSpeech=findViewById(R.id.bSpeech);
-        bMovement=findViewById(R.id.bMovement);
+        bPosturalTremor=findViewById(R.id.bPosturalTremor);
+        bBalance=findViewById(R.id.bBalance);
         setListeners();
     }
 
@@ -31,7 +34,8 @@ public class ResultsActivity extends AppCompatActivity implements View.OnClickLi
         bTapping_one.setOnClickListener(this);
         bBack.setOnClickListener(this);
         bSpeech.setOnClickListener(this);
-        bMovement.setOnClickListener(this);
+        bPosturalTremor.setOnClickListener(this);
+        bBalance.setOnClickListener(this);
     }
 
     @Override
@@ -44,12 +48,17 @@ public class ResultsActivity extends AppCompatActivity implements View.OnClickLi
             case R.id.bTapping_one:
                 onButtonClicked_Tapping_one();
                 break;
-            case R.id.bMovement:
-                onButtonClicked_Movement();
+            case R.id.bPosturalTremor:
+                onButtonClicked_bPosturalTremor();
                 break;
+            case R.id.bBalance:
+                onButtonClicked_bBalance();
+                break;
+
             case R.id.button_back3:
                 onButtonBack();
                 break;
+
         }
     }
 
@@ -63,8 +72,14 @@ public class ResultsActivity extends AppCompatActivity implements View.OnClickLi
         startActivity(i);
     }
 
-    private void onButtonClicked_Movement() {
-        Intent i =new Intent(ResultsActivity.this, Movement_feature_Activity.class);
+    private void onButtonClicked_bPosturalTremor() {
+        Intent i =new Intent(ResultsActivity.this, PosturalTremor_feature_Activity.class);
+        startActivity(i);
+    }
+
+
+    private void onButtonClicked_bBalance() {
+        Intent i =new Intent(ResultsActivity.this, BalanceTremorFeatureActivity.class);
         startActivity(i);
     }
 

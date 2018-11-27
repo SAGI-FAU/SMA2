@@ -22,7 +22,7 @@ import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Movement_feature_Activity extends AppCompatActivity implements View.OnClickListener {
+public class PosturalTremor_feature_Activity extends AppCompatActivity implements View.OnClickListener {
 
     Button bBack;
     private final String PATH = Environment.getExternalStorageDirectory() + "/Apkinson/MOVEMENT/";
@@ -33,7 +33,7 @@ public class Movement_feature_Activity extends AppCompatActivity implements View
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_movement_feature_);
+        setContentView(R.layout.activity_postural_tremor_feature_);
         bBack=findViewById(R.id.button_back5);
         bBack.setOnClickListener(this);
         tTremor_left=findViewById(R.id.tTremor_left);
@@ -201,7 +201,7 @@ public class Movement_feature_Activity extends AppCompatActivity implements View
     }
 
     private void onButtonBack(){
-        Intent i =new Intent(Movement_feature_Activity.this, MainActivityMenu.class);
+        Intent i =new Intent(PosturalTremor_feature_Activity.this, MainActivityMenu.class);
         startActivity(i);
 
     }

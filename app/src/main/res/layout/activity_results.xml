@@ -1,17 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
+
+<ScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:paddingTop="0dp"
+    android:paddingLeft="0dp"
+    android:paddingRight="0dp"
+    android:layout_gravity="center"
+    >
 
-    android:layout_marginLeft="16dp"
-    android:layout_marginRight="16dp"
-    tools:context="com.sma2.sma2.MainActivity">
 
 
-        <TextView
+    <android.support.constraint.ConstraintLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        tools:context="com.sma2.sma2.MainActivity">
+
+
+
+    <TextView
             android:id="@+id/textViewResults"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -21,39 +35,140 @@
             android:textSize="25sp"
             android:layout_marginTop="20dp"/>
 
-        <Button
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textSize="@dimen/button_text_size"
-            android:text="@string/Speech"
-            android:layout_marginTop="20sp"
+
+
+        <ImageButton
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginTop="8sp"
+            android:adjustViewBounds="true"
+            android:background="@null"
+            android:hapticFeedbackEnabled="true"
+            android:scaleType="fitCenter"
+            android:src="@drawable/speech_results"
+            app:layout_constraintDimensionRatio="1"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textViewResults"
-            android:background="@color/colorPrimaryDark"
+            app:layout_constraintWidth_percent="0.45"
             android:id="@+id/bSpeech"
             />
 
-
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textSize="@dimen/button_text_size"
-        android:text="@string/movement"
-        android:layout_marginTop="20sp"
-        app:layout_constraintTop_toBottomOf="@+id/bSpeech"
-        android:background="@color/colorPrimaryDark"
-        android:id="@+id/bMovement"
-        />
-
-        <Button
-            android:layout_width="match_parent"
+        <TextView
+            android:id="@+id/txtSpeech"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="@dimen/button_text_size"
-            android:text="@string/tapping_ex"
-            android:layout_marginTop="20sp"
-            app:layout_constraintTop_toBottomOf="@+id/bMovement"
-            android:background="@color/colorPrimaryDark"
+            android:layout_marginEnd="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8sp"
+            android:text="@string/Speech"
+            android:textSize="@dimen/menu_text_size"
+            android:textStyle="bold|italic"
+            app:layout_constraintTop_toBottomOf="@+id/bSpeech"
+            app:layout_constraintEnd_toEndOf="@+id/bSpeech"
+            app:layout_constraintStart_toStartOf="@+id/bSpeech" />
+
+
+
+        <ImageButton
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginTop="8sp"
+            android:adjustViewBounds="true"
+            android:background="@null"
+            android:hapticFeedbackEnabled="true"
+            android:scaleType="fitCenter"
+            android:src="@drawable/bug"
+            app:layout_constraintDimensionRatio="1"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textViewResults"
+            app:layout_constraintWidth_percent="0.45"
             android:id="@+id/bTapping_one"
             />
+
+        <TextView
+            android:id="@+id/txtTapping"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8sp"
+            android:text="@string/tapping_ex"
+            android:textSize="@dimen/menu_text_size"
+            android:textStyle="bold|italic"
+            app:layout_constraintTop_toBottomOf="@+id/bTapping_one"
+            app:layout_constraintEnd_toEndOf="@+id/bTapping_one"
+            app:layout_constraintStart_toStartOf="@+id/bTapping_one" />
+
+
+
+        <ImageButton
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginTop="8sp"
+            android:adjustViewBounds="true"
+            android:background="@null"
+            android:scaleType="fitCenter"
+            android:src="@drawable/smartphone_extended"
+            app:layout_constraintDimensionRatio="1"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/txtSpeech"
+            app:layout_constraintWidth_percent="0.45"
+            android:id="@+id/bPosturalTremor"
+            />
+
+        <TextView
+            android:id="@+id/txtPosturalTremor"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8sp"
+            android:text="@string/postural"
+            android:textSize="20sp"
+            android:textStyle="bold|italic"
+            app:layout_constraintTop_toBottomOf="@+id/bPosturalTremor"
+            app:layout_constraintEnd_toEndOf="@+id/bPosturalTremor"
+            app:layout_constraintStart_toStartOf="@+id/bPosturalTremor" />
+
+
+        <ImageButton
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginTop="8sp"
+            android:adjustViewBounds="true"
+            android:background="@null"
+            android:scaleType="fitCenter"
+            android:src="@drawable/smartphone_balance"
+            app:layout_constraintDimensionRatio="1"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/txtTapping"
+            app:layout_constraintWidth_percent="0.45"
+            android:id="@+id/bBalance"
+            />
+
+        <TextView
+            android:id="@+id/txtBalance"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8sp"
+            android:text="@string/balance"
+            android:textSize="23sp"
+            android:textStyle="bold|italic"
+            app:layout_constraintTop_toBottomOf="@+id/bBalance"
+            app:layout_constraintEnd_toEndOf="@+id/bBalance"
+            app:layout_constraintStart_toStartOf="@+id/bBalance" />
+
+
 
 
 
@@ -72,10 +187,11 @@
             android:layout_marginTop="8dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/txtPosturalTremor"
             />
 
 
 
 
 </android.support.constraint.ConstraintLayout>
+</ScrollView>
