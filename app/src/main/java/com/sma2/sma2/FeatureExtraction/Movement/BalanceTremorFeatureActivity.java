@@ -21,6 +21,7 @@ import com.sma2.sma2.R;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 public class BalanceTremorFeatureActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -43,7 +44,19 @@ public class BalanceTremorFeatureActivity extends AppCompatActivity implements V
         DecimalFormat df = new DecimalFormat("#.0");
 
 
-        String name="Balance";
+        Locale locale = Locale.getDefault();
+        String Lang=locale.getLanguage();
+        String name;
+        switch(Lang){
+            case "es":
+                name="Postura";
+                break;
+            case "de":
+                name="Körperhaltung";
+                break;
+            default:
+                name="Posture";
+        }
         double Tremor=0;
         List<SignalDA> Signals=signalDataService.getSignalsbyname(name);
         if (Signals.size()>0){

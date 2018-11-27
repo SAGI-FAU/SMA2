@@ -21,6 +21,7 @@ import com.sma2.sma2.R;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 public class PosturalTremor_feature_Activity extends AppCompatActivity implements View.OnClickListener {
 
@@ -44,7 +45,23 @@ public class PosturalTremor_feature_Activity extends AppCompatActivity implement
         DecimalFormat df = new DecimalFormat("#.0");
 
 
-        String name="Postural tremor Right";
+
+
+        Locale locale = Locale.getDefault();
+        String Lang=locale.getLanguage();
+        String name;
+        switch(Lang){
+            case "es":
+                name="Temblor en reposos-derecha";
+                break;
+            case "de":
+                name="Haltetremor der rechten hand";
+                break;
+            default:
+                name="Postural tremor-Right";
+        }
+
+
         double TremorRight=0;
         List<SignalDA> SignalsRight=signalDataService.getSignalsbyname(name);
         if (SignalsRight.size()>0){
@@ -77,7 +94,16 @@ public class PosturalTremor_feature_Activity extends AppCompatActivity implement
 
 
 
-        name="Postural tremor Left";
+        switch(Lang){
+            case "es":
+                name="Temblor en reposos-izquierda";
+                break;
+            case "de":
+                name="Haltetremor der linken hand";
+                break;
+            default:
+                name="Postural tremor-Left";
+        }
         double TremorLeft=0;
         List<SignalDA> SignalsLeft=signalDataService.getSignalsbyname(name);
         if (SignalsLeft.size()>0){
@@ -108,13 +134,6 @@ public class PosturalTremor_feature_Activity extends AppCompatActivity implement
         }
 
 
-
-
-
-
-
-
-        int j;
         BarGraphSeries<DataPoint> series= new BarGraphSeries<>();
         if (path_movement_all_left.size()>0) {
             for (int i = 0; i < path_movement_all_left.size(); i++) {

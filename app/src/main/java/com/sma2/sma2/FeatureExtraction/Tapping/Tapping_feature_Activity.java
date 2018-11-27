@@ -32,6 +32,7 @@ import java.io.IOException;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 public class Tapping_feature_Activity extends AppCompatActivity  implements View.OnClickListener {
     TextView  tNumber_Taps,tTapping_time_hits,tMessage, tTapping_perc_hits, tTapping_perc_hits_left, tTapping_perc_hits_right;
@@ -62,7 +63,20 @@ public class Tapping_feature_Activity extends AppCompatActivity  implements View
         SignalDataService signalDataService =new SignalDataService(this);
         DecimalFormat df = new DecimalFormat("#.0");
 
-        String name="Tapping one finger";
+        Locale locale = Locale.getDefault();
+        String Lang=locale.getLanguage();
+        String name;
+        switch(Lang){
+            case "es":
+                name="Golpeteo 1";
+                break;
+            case "de":
+                name="Fingertippen";
+                break;
+            default:
+                name="Finger tapping 1";
+        }
+
         List<SignalDA> signals=signalDataService.getSignalsbyname(name);
         if (signals.size()>0){
             path_tapping=PATH+signals.get(signals.size()-1).getSignalPath();
@@ -155,6 +169,17 @@ public class Tapping_feature_Activity extends AppCompatActivity  implements View
 
         // two finger tapping
         name="Tapping two fingers";
+
+        switch(Lang){
+            case "es":
+                name="Golpeteo 2";
+                break;
+            case "de":
+                name="Fingertippen2";
+                break;
+            default:
+                name="Finger tapping 2";
+        }
         List<SignalDA> signals2=signalDataService.getSignalsbyname(name);
         if (signals2.size()>0){
             path_tapping2=PATH+signals2.get(signals2.size()-1).getSignalPath();

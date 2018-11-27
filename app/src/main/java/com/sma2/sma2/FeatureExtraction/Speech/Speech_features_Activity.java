@@ -28,6 +28,7 @@ import com.sma2.sma2.R;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 public class Speech_features_Activity extends AppCompatActivity implements View.OnClickListener {
     private TextView tjitter, tmessage_phonation, tddk_reg, tmessage_articulation;
@@ -138,7 +139,20 @@ public class Speech_features_Activity extends AppCompatActivity implements View.
         SignalDataService signalDataService = new SignalDataService(this);
         DecimalFormat df = new DecimalFormat("#.00");
 
-        String name="A";
+        Locale locale = Locale.getDefault();
+        String Lang=locale.getLanguage();
+        String name;
+        switch(Lang){
+            case "es":
+                name="Vocal A";
+                break;
+            case "de":
+                name="Vokal AH";
+                break;
+            default:
+                name="Vowel AH";
+        }
+
         long N = signalDataService.countSignalsbyname(name);
 
         if (N>0) {
@@ -234,7 +248,7 @@ public class Speech_features_Activity extends AppCompatActivity implements View.
 
 
     private void ArticulationFeatures(){
-        String name="Pataka";
+        String name="PATAKA";
         SignalDataService signalDataService = new SignalDataService(this);
         DecimalFormat df = new DecimalFormat("#.00");
         long N = signalDataService.countSignalsbyname(name);
