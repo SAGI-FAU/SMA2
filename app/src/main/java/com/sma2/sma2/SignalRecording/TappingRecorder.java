@@ -9,6 +9,7 @@ import android.os.Environment;
 import android.os.Handler;
 import android.util.Log;
 
+import com.sma2.sma2.DataAccess.ExerciseDataService;
 import com.sma2.sma2.DataAccess.PatientDataService;
 import com.sma2.sma2.DataAccess.SignalDA;
 import com.sma2.sma2.DataAccess.SignalDataService;
@@ -72,6 +73,7 @@ public class TappingRecorder {
 
             mCSVFileWriter.writeData(TAPPING_DESCRIPTION_HEADER);
             mCSVFileWriter.writeData(TAPPING_DATA_HEADER);
+
 
         }else{
             String[] TAPPING_INFO_HEADER =  {"Task Name","TouchScreen Label",

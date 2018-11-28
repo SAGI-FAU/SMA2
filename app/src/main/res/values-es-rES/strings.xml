@@ -83,7 +83,7 @@
     <string name="OK">OK</string>
     <string name="user_name">"Nombre: "</string>
     <string name="user_id">"CC: "</string>
-    <string name="S_record">"Sesiones grabadas: "</string>
+    <string name="S_record">"Sesiones grabadas "</string>
     <string name="upd_medicine">Actualizar medicina</string>
     <string name="add_medicine">AGREGAR MEDICINA</string>
     <string name="delete">BORRAR</string>
@@ -120,7 +120,7 @@
     <string name="TremorAmplitudeRight">Temblor mano derecha</string>
     <string name="balance">Balanceo</string>
     <string name="TremorAmplitude">Amplitud de Temblor</string>
-
+    <string name="Completed_Exercises">Ejercicios completados</string>
 
 
 </resources>

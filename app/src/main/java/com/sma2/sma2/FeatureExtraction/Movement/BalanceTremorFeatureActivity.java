@@ -15,6 +15,7 @@ import com.jjoe64.graphview.series.BarGraphSeries;
 import com.jjoe64.graphview.series.DataPoint;
 import com.sma2.sma2.DataAccess.SignalDA;
 import com.sma2.sma2.DataAccess.SignalDataService;
+import com.sma2.sma2.FeatureExtraction.GetExercises;
 import com.sma2.sma2.MainActivityMenu;
 import com.sma2.sma2.R;
 
@@ -44,19 +45,10 @@ public class BalanceTremorFeatureActivity extends AppCompatActivity implements V
         DecimalFormat df = new DecimalFormat("#.0");
 
 
-        Locale locale = Locale.getDefault();
-        String Lang=locale.getLanguage();
-        String name;
-        switch(Lang){
-            case "es":
-                name="Postura";
-                break;
-            case "de":
-                name="Körperhaltung";
-                break;
-            default:
-                name="Posture";
-        }
+
+        int IDEx=22;
+        GetExercises GetEx=new GetExercises(this);
+        String name=GetEx.getNameExercise(IDEx);
         double Tremor=0;
         List<SignalDA> Signals=signalDataService.getSignalsbyname(name);
         if (Signals.size()>0){
@@ -119,10 +111,6 @@ public class BalanceTremorFeatureActivity extends AppCompatActivity implements V
         gridLabel.setVerticalAxisTitle(getResources().getString(R.string.TremorAmplitude));
         gridLabel.setNumHorizontalLabels(5);
 
-
-
-
-
     }
 
 
@@ -141,6 +129,7 @@ public class BalanceTremorFeatureActivity extends AppCompatActivity implements V
         startActivity(i);
 
     }
+
 
 
 

@@ -5,6 +5,7 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Environment;
 import android.support.v7.app.AppCompatActivity;
+import android.text.TextUtils;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
@@ -16,15 +17,23 @@ import com.jjoe64.graphview.GraphView;
 import com.jjoe64.graphview.GridLabelRenderer;
 import com.jjoe64.graphview.series.BarGraphSeries;
 import com.jjoe64.graphview.series.DataPoint;
+import com.opencsv.CSVParser;
+import com.opencsv.CSVParserBuilder;
+import com.opencsv.CSVReader;
+import com.opencsv.CSVReaderBuilder;
 import com.sma2.sma2.DataAccess.SignalDA;
 import com.sma2.sma2.DataAccess.SignalDataService;
+import com.sma2.sma2.FeatureExtraction.GetExercises;
 import com.sma2.sma2.FeatureExtraction.Speech.features.PhonFeatures;
 import com.sma2.sma2.FeatureExtraction.Speech.tools.WAVfileReader;
 import com.sma2.sma2.FeatureExtraction.Speech.tools.f0detector;
 import com.sma2.sma2.FeatureExtraction.Speech.tools.sigproc;
+import com.sma2.sma2.MainActivity;
 import com.sma2.sma2.MainActivityMenu;
 import com.sma2.sma2.R;
 
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
@@ -138,20 +147,9 @@ public class Speech_features_Activity extends AppCompatActivity implements View.
         // get exercises from sustained vowel ah to compute phonation features
         SignalDataService signalDataService = new SignalDataService(this);
         DecimalFormat df = new DecimalFormat("#.00");
-
-        Locale locale = Locale.getDefault();
-        String Lang=locale.getLanguage();
-        String name;
-        switch(Lang){
-            case "es":
-                name="Vocal A";
-                break;
-            case "de":
-                name="Vokal AH";
-                break;
-            default:
-                name="Vowel AH";
-        }
+        int IDEx=18;
+        GetExercises GetEx=new GetExercises(this);
+        String name=GetEx.getNameExercise(IDEx);
 
         long N = signalDataService.countSignalsbyname(name);
 
@@ -248,7 +246,9 @@ public class Speech_features_Activity extends AppCompatActivity implements View.
 
 
     private void ArticulationFeatures(){
-        String name="PATAKA";
+        int IDEx=11;
+        GetExercises GetEx=new GetExercises(this);
+        String name=GetEx.getNameExercise(IDEx);
         SignalDataService signalDataService = new SignalDataService(this);
         DecimalFormat df = new DecimalFormat("#.00");
         long N = signalDataService.countSignalsbyname(name);
@@ -338,5 +338,7 @@ public class Speech_features_Activity extends AppCompatActivity implements View.
 
 
     }
+
+
 
 }

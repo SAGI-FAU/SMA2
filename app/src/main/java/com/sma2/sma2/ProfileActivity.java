@@ -12,6 +12,8 @@ import com.sma2.sma2.DataAccess.MedicineDA;
 import com.sma2.sma2.DataAccess.MedicineDataService;
 import com.sma2.sma2.DataAccess.PatientDA;
 import com.sma2.sma2.DataAccess.PatientDataService;
+import com.sma2.sma2.DataAccess.SignalDA;
+import com.sma2.sma2.DataAccess.SignalDataService;
 
 import java.text.DateFormat;
 import java.util.ArrayList;
@@ -31,6 +33,7 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
         TextView UsernameText = findViewById(R.id.textView_use_name);
         TextView BirthdayText = findViewById(R.id.textView_user_birthday);
         TextView SessionsText = findViewById(R.id.textView_user_sessions);
+        TextView ExercisesText= findViewById(R.id.textView_user_exercises);
 
         recycler=findViewById(R.id.recyclerMedicine);
         recycler.setLayoutManager(new LinearLayoutManager(this));
@@ -48,12 +51,19 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
             Date Birthday=patient.getBirthday();
             BirthdayText.setText(DateFormat.getDateInstance().format(Birthday));
             SessionsText.setText(String.valueOf(patient.getSessionCount()));
+
+            SignalDataService signalDataService =new SignalDataService(this);
+            List<SignalDA> signals= signalDataService.getAllSignals();
+            int NSignals=signals.size();
+            ExercisesText.setText(String.valueOf(NSignals));
+
         }
         else{
             UsernameText.setText(this.getText(R.string.name));
             Date Birthday=Calendar.getInstance().getTime();
             BirthdayText.setText(DateFormat.getDateInstance().format(Birthday));
             SessionsText.setText(String.valueOf(0));
+            ExercisesText.setText(String.valueOf(0));
         }
 
 
@@ -61,16 +71,11 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
     }
 
     private void ad_medicine() {
-        //TODO: this is a test for RecyclerView
-
         MedicineDataService MedicineData=new MedicineDataService(this);
-
         List<MedicineDA> Medicine=MedicineData.getAllCurrentMedictation();
-
         MedicineDA CurrentMed;
         for (int i = 0; i < Medicine.size(); i++) {
             CurrentMed=Medicine.get(i);
-
             list_medic.add(new ejm_data_medicine(CurrentMed.getId(), CurrentMed.getMedicineName(),CurrentMed.getDose(),CurrentMed.getIntakeTime()));
         }
     }

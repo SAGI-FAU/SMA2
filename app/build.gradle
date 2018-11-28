@@ -90,7 +90,7 @@ dependencies {
     implementation 'com.squareup.okhttp3:okhttp:3.11.0'
     implementation 'com.alibaba:fastjson:1.1.70.android'
     implementation 'us.feras.mdv:markdownview:1.1.0'
-
+    implementation 'com.android.support:cardview-v7:26.1.0'
     testImplementation 'junit:junit:4.12'
 
     testImplementation 'com.android.support.test:runner:1.0.2'

@@ -39,6 +39,7 @@ public class Adapter_update_medic extends RecyclerView.Adapter<Adapter_update_me
                 intent_mod_medicine.putExtra("Medicine",datos.getMedicine());
                 intent_mod_medicine.putExtra("Doses",datos.getDoses());
                 intent_mod_medicine.putExtra("Time",datos.getTime());
+                intent_mod_medicine.putExtra("update",true);
                 activity.startActivity(intent_mod_medicine);
             }
         });
