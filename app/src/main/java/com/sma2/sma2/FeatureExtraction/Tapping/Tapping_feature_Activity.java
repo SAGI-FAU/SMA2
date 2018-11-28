@@ -6,6 +6,7 @@ import android.os.Environment;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
 import android.util.TypedValue;
 import android.view.View;
@@ -20,8 +21,13 @@ import com.jjoe64.graphview.GridLabelRenderer;
 import com.jjoe64.graphview.ValueDependentColor;
 import com.jjoe64.graphview.series.BarGraphSeries;
 import com.jjoe64.graphview.series.DataPoint;
+import com.opencsv.CSVParser;
+import com.opencsv.CSVParserBuilder;
+import com.opencsv.CSVReader;
+import com.opencsv.CSVReaderBuilder;
 import com.sma2.sma2.DataAccess.SignalDA;
 import com.sma2.sma2.DataAccess.SignalDataService;
+import com.sma2.sma2.FeatureExtraction.GetExercises;
 import com.sma2.sma2.MainActivityMenu;
 import com.sma2.sma2.R;
 import com.sma2.sma2.ResultsActivity;
@@ -29,6 +35,7 @@ import com.sma2.sma2.ResultsActivity;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
@@ -63,19 +70,10 @@ public class Tapping_feature_Activity extends AppCompatActivity  implements View
         SignalDataService signalDataService =new SignalDataService(this);
         DecimalFormat df = new DecimalFormat("#.0");
 
-        Locale locale = Locale.getDefault();
-        String Lang=locale.getLanguage();
-        String name;
-        switch(Lang){
-            case "es":
-                name="Golpeteo 1";
-                break;
-            case "de":
-                name="Fingertippen";
-                break;
-            default:
-                name="Finger tapping 1";
-        }
+
+        int IDEx=33;
+        GetExercises GetEx=new GetExercises(this);
+        String name=GetEx.getNameExercise(IDEx);
 
         List<SignalDA> signals=signalDataService.getSignalsbyname(name);
         if (signals.size()>0){
@@ -167,19 +165,9 @@ public class Tapping_feature_Activity extends AppCompatActivity  implements View
         gridLabel.setVerticalAxisTitle(getResources().getString(R.string.Perc_Tapping_Hits));
 
 
-        // two finger tapping
-        name="Tapping two fingers";
-
-        switch(Lang){
-            case "es":
-                name="Golpeteo 2";
-                break;
-            case "de":
-                name="Fingertippen2";
-                break;
-            default:
-                name="Finger tapping 2";
-        }
+        IDEx=34;
+        GetEx=new GetExercises(this);
+        name=GetEx.getNameExercise(IDEx);
         List<SignalDA> signals2=signalDataService.getSignalsbyname(name);
         if (signals2.size()>0){
             path_tapping2=PATH+signals2.get(signals2.size()-1).getSignalPath();
@@ -375,5 +363,7 @@ public class Tapping_feature_Activity extends AppCompatActivity  implements View
         startActivity(i);
 
     }
+
+
 
 }

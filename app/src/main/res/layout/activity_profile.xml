@@ -6,15 +6,110 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+
+    <ImageView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="0dp"
+        android:background="@color/colorPrimary"
+        android:hapticFeedbackEnabled="true"
+        android:scaleType="fitCenter"
+        android:adjustViewBounds="true"
+        app:layout_constraintWidth_percent="1"
+        app:layout_constraintHeight_percent="0.2"
+        app:layout_constraintDimensionRatio="3.4"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        />
+
+    <android.support.v7.widget.CardView
+        android:id="@+id/card"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="8sp"
+        app:layout_constraintWidth_percent="0.8"
+        app:layout_constraintDimensionRatio="2.8"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView_use_name">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:weightSum="2">
+
+            <LinearLayout
+                android:gravity="center"
+                android:orientation="vertical"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="@string/S_record"
+                    android:textSize="@dimen/textview_text_size"
+                    />
+
+                <TextView
+                    android:id="@+id/textView_user_sessions"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=""
+                    android:gravity="center"
+                    android:textStyle="bold"
+                    android:textSize="@dimen/textview_text_size"
+                    android:paddingTop="10dp"
+                    android:textColor="@color/colorPrimary"/>
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:gravity="center"
+                android:orientation="vertical"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="match_parent">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="@string/Completed_Exercises"
+                    android:textSize="20sp"
+                    />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/textView_user_exercises"
+                    android:text=""
+                    android:textStyle="bold"
+                    android:textSize="20sp"
+                    android:gravity="center"
+                    android:paddingTop="10dp"
+                    android:textColor="@color/colorPrimary"/>
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+    </android.support.v7.widget.CardView>
+
     <TextView
         android:id="@+id/textView_use_name"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8sp"
+        android:layout_marginTop="10sp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:gravity="center"
         android:textSize="@dimen/menu_text_size"
+        android:textColor="@color/textColor"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
@@ -32,13 +127,13 @@
         android:textColor="@color/colorPrimaryDark"
         android:textSize="@dimen/textview_text_size"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView_use_name" />
+        app:layout_constraintTop_toBottomOf="@+id/card" />
 
     <TextView
         android:id="@+id/textView_user_birthday"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="6dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:textSize="@dimen/textview_text_size"
@@ -48,54 +143,30 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView_age" />
 
-    <TextView
-        android:id="@+id/textView_section"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintWidth_percent="0.5"
-        app:layout_constraintDimensionRatio="3"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:text="@string/S_record"
-        android:textColor="@color/colorPrimaryDark"
-        android:textSize="@dimen/textview_text_size"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView_user_birthday" />
 
-    <TextView
-        android:id="@+id/textView_user_sessions"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:layout_marginStart="8dp"
-        android:lines="1"
-        android:text=""
-        android:gravity="right"
-        android:textSize="@dimen/textview_text_size"
-        app:layout_constraintLeft_toRightOf="@id/textView_section"
-        app:layout_constraintTop_toBottomOf="@+id/textView_user_birthday" />
+
+
 
     <TextView
         android:id="@+id/textView_Int_medicine"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="6dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:text="@string/med"
         android:textColor="@color/colorPrimaryDark"
         android:textSize="@dimen/textview_text_size"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView_user_sessions" />
+        app:layout_constraintTop_toBottomOf="@+id/textView_user_birthday" />
 
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recyclerMedicine"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        app:layout_constraintWidth_percent="0.85"
-        app:layout_constraintDimensionRatio="1.7"
+        app:layout_constraintWidth_percent="0.9"
+        app:layout_constraintDimensionRatio="2.5"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"

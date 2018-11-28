@@ -1,5 +1,6 @@
 package com.sma2.sma2;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -23,7 +24,7 @@ public class Modif_medicine extends AppCompatActivity implements View.OnClickLis
     int band=0;
     Long id;
     Button delete;
-
+    boolean update=false;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,7 +35,9 @@ public class Modif_medicine extends AppCompatActivity implements View.OnClickLis
         intaketime_spinner = findViewById(R.id.spinnerIntake);
 
         Bundle Data_medicine=this.getIntent().getExtras();
+
         if (Data_medicine!=null){
+            update=(boolean)Data_medicine.get("update");
             eMedicine.setText(String.valueOf(Data_medicine.get("Medicine")));
             eDoses.setText(String.valueOf(Data_medicine.get("Doses")));
             id=(Long) Data_medicine.get("id");
@@ -73,25 +76,37 @@ public class Modif_medicine extends AppCompatActivity implements View.OnClickLis
         MedicineDataService mds = new MedicineDataService(getApplicationContext());
         PatientDataService PatientData= new PatientDataService(this);
         Long NumPatients=PatientData.countPatients();
+        Intent intent_update =new Intent(this, UpdateMedicine.class);
+
         switch (view.getId()){
             case R.id.button_cancel:
-                finish();
+                startActivity(intent_update);
                 break;
             case R.id.button_save:
                 if (NumPatients>0){
                     PatientDA patient=PatientData.getPatient();
+                    if (!update){
                     MedicineDA Medicine=new MedicineDA(medicine_name, Integer.valueOf(temp_dose), hour_intake, patient.getUserId());
                     mds.saveMedicine(Medicine);
+                    }
+                    else{
+                        MedicineDA Medicine=   mds.getMedicineById(id);
+                        Medicine.setMedicineName(medicine_name);
+                        Medicine.setDose(Integer.valueOf(temp_dose));
+                        Medicine.setIntakeTime(hour_intake);
+                        Medicine.setPatientDAId(patient.getUserId());
+                        mds.saveMedicine(Medicine);
+                    }
                 }
 
-                finish();
+                startActivity(intent_update);
                 break;
             case R.id.button_delete:
 
                 MedicineDA Med=mds.getMedicineById(id);
                 mds.delete(Med);
 
-                finish();
+                startActivity(intent_update);
         }
     }
 }

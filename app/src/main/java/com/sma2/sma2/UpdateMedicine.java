@@ -32,16 +32,11 @@ public class UpdateMedicine extends AppCompatActivity implements View.OnClickLis
     }
 
     private void ad_medicine() {
-        //TODO: this is a test for RecyclerView
-
         MedicineDataService MedicineData=new MedicineDataService(this);
-
         List<MedicineDA> Medicine=MedicineData.getAllCurrentMedictation();
-
         MedicineDA CurrentMed;
         for (int i = 0; i < Medicine.size(); i++) {
             CurrentMed=Medicine.get(i);
-
             list_medic.add(new ejm_data_medicine(CurrentMed.getId(), CurrentMed.getMedicineName(),CurrentMed.getDose(),CurrentMed.getIntakeTime()));
         }
     }
@@ -58,12 +53,14 @@ public class UpdateMedicine extends AppCompatActivity implements View.OnClickLis
                 add_medicine();
                 break;
             case R.id.button_back1:
-                finish();
+                Intent intent=new Intent(UpdateMedicine.this, ProfileActivity.class);
+                startActivity(intent);
                 break;
         }
     }
     private void add_medicine() {
         Intent intent_add_medicine =new Intent(UpdateMedicine.this, Modif_medicine.class);
+        intent_add_medicine.putExtra("update",false);
         startActivity(intent_add_medicine);
     }
 }

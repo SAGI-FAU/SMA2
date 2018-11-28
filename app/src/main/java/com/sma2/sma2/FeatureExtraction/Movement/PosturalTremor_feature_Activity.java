@@ -15,6 +15,7 @@ import com.jjoe64.graphview.series.BarGraphSeries;
 import com.jjoe64.graphview.series.DataPoint;
 import com.sma2.sma2.DataAccess.SignalDA;
 import com.sma2.sma2.DataAccess.SignalDataService;
+import com.sma2.sma2.FeatureExtraction.GetExercises;
 import com.sma2.sma2.MainActivityMenu;
 import com.sma2.sma2.R;
 
@@ -44,23 +45,9 @@ public class PosturalTremor_feature_Activity extends AppCompatActivity implement
         MovementProcessing MovementProcessor=new MovementProcessing();
         DecimalFormat df = new DecimalFormat("#.0");
 
-
-
-
-        Locale locale = Locale.getDefault();
-        String Lang=locale.getLanguage();
-        String name;
-        switch(Lang){
-            case "es":
-                name="Temblor en reposos-derecha";
-                break;
-            case "de":
-                name="Haltetremor der rechten hand";
-                break;
-            default:
-                name="Postural tremor-Right";
-        }
-
+        int IDEx=29;
+        GetExercises GetEx=new GetExercises(this);
+        String name=GetEx.getNameExercise(IDEx);
 
         double TremorRight=0;
         List<SignalDA> SignalsRight=signalDataService.getSignalsbyname(name);
@@ -93,17 +80,10 @@ public class PosturalTremor_feature_Activity extends AppCompatActivity implement
         }
 
 
+        IDEx=30;
+        GetEx=new GetExercises(this);
+        name=GetEx.getNameExercise(IDEx);
 
-        switch(Lang){
-            case "es":
-                name="Temblor en reposos-izquierda";
-                break;
-            case "de":
-                name="Haltetremor der linken hand";
-                break;
-            default:
-                name="Postural tremor-Left";
-        }
         double TremorLeft=0;
         List<SignalDA> SignalsLeft=signalDataService.getSignalsbyname(name);
         if (SignalsLeft.size()>0){
@@ -166,9 +146,6 @@ public class PosturalTremor_feature_Activity extends AppCompatActivity implement
         gridLabel.setNumHorizontalLabels(5);
 
 
-
-
-
         BarGraphSeries<DataPoint> series2= new BarGraphSeries<>();
         if (path_movement_all_right.size()>0) {
             for (int i = 0; i < path_movement_all_right.size(); i++) {
@@ -201,12 +178,7 @@ public class PosturalTremor_feature_Activity extends AppCompatActivity implement
         gridLabel2.setNumHorizontalLabels(5);
 
 
-
     }
-
-
-
-
 
 
     @Override

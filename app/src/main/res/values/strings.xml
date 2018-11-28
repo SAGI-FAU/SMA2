@@ -49,7 +49,7 @@
     <string name="target">TARGET</string>
     <string name="thanks">Thank you!!!</string>
     <string name="results">See the results</string>
-    <string name="birthdate">Date of birth</string>
+    <string name="birthdate">Birth date</string>
     <string name="language">Language</string>
     <string name="add">ADD</string>
     <string name="save_med">SAVE MEDICINE</string>
@@ -85,7 +85,7 @@
     <string name="OK">OK</string>
     <string name="user_name">Name: </string>
     <string name="user_id">ID: </string>
-    <string name="S_record">Recorded sessions: </string>
+    <string name="S_record">Recorded sessions </string>
     <string name="Int_medicine">Medicine: </string>
     <string name="upd_medicine">Update medicine</string>
     <string name="add_medicine">ADD MEDICINE</string>
@@ -124,6 +124,7 @@
     <string name="TremorAmplitudeRight">Tremor Amplitude Right Hand</string>
     <string name="balance">Balancing</string>
     <string name="TremorAmplitude">Tremor Amplitude</string>
+    <string name="Completed_Exercises">Completed Exercises</string>
 
 
 

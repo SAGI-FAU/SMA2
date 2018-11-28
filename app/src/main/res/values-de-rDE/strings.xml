@@ -114,4 +114,8 @@
     <string name="user_id">ID:</string>
     <string name="user_name">Name:</string>
     <string name="volume">6/5000 Volumen</string>
+    <string name="other1">Hast du eine Sprech- oder Bewegungsstörung?</string>
+    <string name="balance">Schwanken</string>
+    <string name="TremorAmplitude">Tremoramplitude</string>
+    <string name="Completed_Exercises">Abgeschlossene Übungen</string>
 </resources>
