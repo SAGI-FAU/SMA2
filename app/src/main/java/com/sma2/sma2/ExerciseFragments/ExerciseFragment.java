@@ -30,7 +30,8 @@ public abstract class ExerciseFragment extends Fragment {
 
         if (fragment  instanceof ExReadText){
             String name=exercise.getName();
-            String NumSent=name.substring(name.length()-1);
+            String[] separated = name.split(" ");
+            String NumSent=separated[1];
             args.putInt("sentence", Integer.valueOf(NumSent)-1);
 
         }
