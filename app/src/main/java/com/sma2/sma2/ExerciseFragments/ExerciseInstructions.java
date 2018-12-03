@@ -46,46 +46,18 @@ public class ExerciseInstructions extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_exercise_instructions, container, false);
 
-
-        // Set On Click handler for Text instructions
-        Button instrButton = view.findViewById(R.id.textInstructions);
-        instrButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                LongInstruction dialogFragment = LongInstruction.newInstance(mExercise.getShortInstructions());
-                FragmentTransaction ft = getFragmentManager().beginTransaction();
-                ft.addToBackStack(null);
-                ft.replace(R.id.exerciseContainer,dialogFragment);
-                ft.commit();
-            }
-        });
-
-        // Set On Click handler for Video instructions
-        Button videoInstrButton = view.findViewById(R.id.videoInstructionsbtn);
-        videoInstrButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                VideoInstruction videoFragment = VideoInstruction.newInstance(mExercise.getInstructionVideoPath());
-                FragmentTransaction ft = getFragmentManager().beginTransaction();
-                ft.addToBackStack(null);
-                ft.replace(R.id.exerciseContainer,videoFragment);
-                ft.commit();
-            }
-        });
-
-        // Set Title based Exercise Information
+        // Set Exercise Information
         TextView exerciseTitle = view.findViewById(R.id.exerciseTitle);
+        TextView exerciseInstruction = view.findViewById(R.id.exerciseInstruction);
+        TextView exerciseDescription = view.findViewById(R.id.exerciseDescription);
         exerciseTitle.setText(mExercise.getName());
+        exerciseDescription.setText(mExercise.getShortDescription());
+        exerciseInstruction.setText(mExercise.getShortInstructions());
 
-        // Set Short description based Exercise Information
-        MarkdownView shortdesc = view.findViewById(R.id.exerciseDescription);
-        shortdesc.loadMarkdown(mExercise.getShortDescription());
+        // Set Instruction Video
+        VideoView videoView = view.findViewById(R.id.videoView);
+        videoView.setVideoURI(mExercise.getInstructionVideoPath());
 
-        // Set Short instructions based Exercise Information
-        MarkdownView shortinstr = view.findViewById(R.id.shortInstructions);
-        shortinstr.loadMarkdown(mExercise.getShortInstructions());
-
-        
         // Set On Click handler for Start Button
         Button startButton = view.findViewById(R.id.startButton);
         startButton.setOnClickListener(new View.OnClickListener() {
