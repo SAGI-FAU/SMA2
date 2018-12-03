@@ -16,13 +16,36 @@ public class Profile3Activity extends AppCompatActivity implements View.OnClickL
     PatientDA patientData;
     float weight;
     int height;
+    TextView OtherDisordersView, WeightView, HeightView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile3);
+        OtherDisordersView=findViewById(R.id.other_disorder);
+        WeightView=findViewById(R.id.weight);
+
+        HeightView=findViewById(R.id.height);
         patientData = (PatientDA) getIntent().getSerializableExtra("PatientData");
         findViewById(R.id.button_menu_settings).setOnClickListener(this);
         findViewById(R.id.button_back2).setOnClickListener(this);
+
+
+        String Disorders=patientData.getOther_disorder();
+        if (Disorders!=null){
+            OtherDisordersView.setText(Disorders);
+        }
+
+        float Weight=patientData.getWeight();
+        if (Weight>=0){
+            WeightView.setText(String.valueOf(Weight));
+        }
+        int Height=patientData.getHeight();
+        if (Height>=0){
+            HeightView.setText(String.valueOf(Height));
+        }
+
+
     }
 
     @Override
@@ -33,7 +56,7 @@ public class Profile3Activity extends AppCompatActivity implements View.OnClickL
                 break;
             case R.id.button_menu_settings:
                 if(valid_data()){
-                    patientData.setOther_disorder(((TextView)findViewById(R.id.other_disorder)).getText().toString());
+                    patientData.setOther_disorder(OtherDisordersView.getText().toString());
                     SharedPreferences prefs = getSharedPreferences("LoginPref",this.MODE_PRIVATE);
                     SharedPreferences.Editor editor = prefs.edit();
                     editor.putInt("UserCreated",1);
@@ -48,7 +71,7 @@ public class Profile3Activity extends AppCompatActivity implements View.OnClickL
     }
 
     private boolean valid_data() {
-        String weight = ((TextView) findViewById(R.id.weight)).getText().toString();
+        String weight = WeightView.getText().toString();
         String height = ((TextView) findViewById(R.id.height)).getText().toString();
         if(weight.isEmpty()){
             Toast.makeText(this,R.string.weight_error,Toast.LENGTH_SHORT).show();
