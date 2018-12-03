@@ -1,7 +1,6 @@
 package com.sma2.sma2.ExerciseFragments;
 
 import android.content.Context;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -47,7 +46,7 @@ public class ButtonFragment extends Fragment {
                     startButton.setText(getString(R.string.stop));
                     running = true;
                 } else {
-                    startButton.setText(getString(R.string.start));
+                    startButton.setText(getString(R.string.start2));
                     running = false;
                 }
                 mListener.onButtonInteraction(running);

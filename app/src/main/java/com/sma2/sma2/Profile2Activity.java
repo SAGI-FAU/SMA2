@@ -1,5 +1,7 @@
 package com.sma2.sma2;
 
+import android.app.AlertDialog;
+import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.os.Bundle;
@@ -8,6 +10,8 @@ import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.DatePicker;
+import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -15,9 +19,9 @@ import android.widget.Toast;
 import com.sma2.sma2.DataAccess.MedicineDA;
 import com.sma2.sma2.DataAccess.MedicineDataService;
 import com.sma2.sma2.DataAccess.PatientDA;
-import com.sma2.sma2.DataAccess.PatientDataService;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 
 public class Profile2Activity extends AppCompatActivity implements View.OnClickListener {
 
@@ -27,6 +31,7 @@ public class Profile2Activity extends AppCompatActivity implements View.OnClickL
     ArrayList<MedicineDA> medicineDataArrayList;
     String medicine_name;
     int dose, hour_intake;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,7 +39,7 @@ public class Profile2Activity extends AppCompatActivity implements View.OnClickL
         patientData = (PatientDA) getIntent().getSerializableExtra("PatientData");
         MedicineDataService ds = new MedicineDataService(getApplicationContext());
         ds.getAllCurrentMedictation();
-        medicineDataArrayList = new ArrayList<MedicineDA>(ds.getAllCurrentMedictation());
+        medicineDataArrayList = new ArrayList<>(ds.getAllCurrentMedictation());
         initialized();
     }
 
@@ -44,10 +49,11 @@ public class Profile2Activity extends AppCompatActivity implements View.OnClickL
         Resources r = getResources();
         String[] categories = new String[]{r.getString(R.string.none_item),r.getString(R.string.elem_item),r.getString(R.string.high_item),r.getString(R.string.under_item),r.getString(R.string.post)};
         String[] hours = new String[]{"00:00","01:00","02:00","03:00","04:00","05:00","06:00","07:00","08:00","09:00","10:00","11:00","12:00","13:00","14:00","15:00","16:00","17:00","18:00","19:00","20:00","21:00","22:00","23:00"};
-        ArrayAdapter<String> intake_adapter =  new ArrayAdapter<String> (this,android.R.layout.simple_spinner_item,hours);
-        ArrayAdapter<String> adapter =  new ArrayAdapter<String> (this,android.R.layout.simple_spinner_item,categories);
+        ArrayAdapter<String> intake_adapter =  new ArrayAdapter<> (this,android.R.layout.simple_spinner_item,hours);
+        ArrayAdapter<String> adapter =  new ArrayAdapter<> (this,android.R.layout.simple_spinner_item,categories);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         intake_adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
         spinner.setAdapter(adapter);
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override

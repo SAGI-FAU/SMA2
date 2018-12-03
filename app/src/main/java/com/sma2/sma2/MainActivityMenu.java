@@ -10,6 +10,11 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
+import com.sma2.sma2.DataAccess.MedicineDA;
+import com.sma2.sma2.DataAccess.MedicineDataService;
+
+import java.util.List;
+
 public class MainActivityMenu extends AppCompatActivity implements View.OnClickListener {
     int PERMISSION_ALL = 1;
     String[] PERMISSIONS = {
@@ -25,7 +30,27 @@ public class MainActivityMenu extends AppCompatActivity implements View.OnClickL
         setContentView(R.layout.activity_main_menu);
         noPermissionsAlertDialog= createAlertDialog();
         ask_permissions();
+
+        // create alarm notifications to make exercises
+        Notifications notifications=new Notifications(this);
+        int hour=9;
+        int minutes=0;
+        notifications.setReminder(this,AlarmReceiver.class, hour, minutes);
+
+
+        // create alarm notifications to take the medicine
+        MedicineDataService MedicineData=new MedicineDataService(this);
+        List<MedicineDA> Medicine=MedicineData.getAllCurrentMedictation();
+        MedicineDA CurrentMed;
+        for (int i = 0; i < Medicine.size(); i++) {
+            CurrentMed=Medicine.get(i);
+            notifications.setReminder(this,AlarmReceiverMedicine.class, CurrentMed.getIntakeTime(), 0);
+            }
+
         setListeners();
+
+
+
     }
 
     private void setListeners() {

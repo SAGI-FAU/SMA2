@@ -6,8 +6,20 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.TextView;
 
+import com.sma2.sma2.DataAccess.MedicineDA;
+import com.sma2.sma2.DataAccess.MedicineDataService;
+import com.sma2.sma2.DataAccess.PatientDA;
+import com.sma2.sma2.DataAccess.PatientDataService;
+import com.sma2.sma2.DataAccess.SignalDA;
+import com.sma2.sma2.DataAccess.SignalDataService;
+
+import java.text.DateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.List;
 
 public class ProfileActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -18,19 +30,54 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
+        TextView UsernameText = findViewById(R.id.textView_use_name);
+        TextView BirthdayText = findViewById(R.id.textView_user_birthday);
+        TextView SessionsText = findViewById(R.id.textView_user_sessions);
+        TextView ExercisesText= findViewById(R.id.textView_user_exercises);
+
         recycler=findViewById(R.id.recyclerMedicine);
         recycler.setLayoutManager(new LinearLayoutManager(this));
         list_medic=new ArrayList<>();
         ad_medicine();
         Adapter_data_medicine adapter=new Adapter_data_medicine(list_medic);
         recycler.setAdapter(adapter);
+
+
+        PatientDataService PatientData= new PatientDataService(this);
+        Long NumPatients=PatientData.countPatients();
+        if (NumPatients>0){
+            PatientDA patient=PatientData.getPatient();
+            UsernameText.setText(patient.getUsername());
+            Date Birthday=patient.getBirthday();
+            BirthdayText.setText(DateFormat.getDateInstance().format(Birthday));
+            SessionsText.setText(String.valueOf(patient.getSessionCount()));
+
+            SignalDataService signalDataService =new SignalDataService(this);
+            List<SignalDA> signals= signalDataService.getAllSignals();
+            int NSignals=signals.size();
+            ExercisesText.setText(String.valueOf(NSignals));
+
+        }
+        else{
+            UsernameText.setText(this.getText(R.string.name));
+            Date Birthday=Calendar.getInstance().getTime();
+            BirthdayText.setText(DateFormat.getDateInstance().format(Birthday));
+            SessionsText.setText(String.valueOf(0));
+            ExercisesText.setText(String.valueOf(0));
+        }
+
+
         setListeners();
     }
 
     private void ad_medicine() {
-        //TODO: this is a test for RecyclerView
-        list_medic.add(new ejm_data_medicine("Medicine 1",100,15));
-        list_medic.add(new ejm_data_medicine("Medicine 2",250,18));
+        MedicineDataService MedicineData=new MedicineDataService(this);
+        List<MedicineDA> Medicine=MedicineData.getAllCurrentMedictation();
+        MedicineDA CurrentMed;
+        for (int i = 0; i < Medicine.size(); i++) {
+            CurrentMed=Medicine.get(i);
+            list_medic.add(new ejm_data_medicine(CurrentMed.getId(), CurrentMed.getMedicineName(),CurrentMed.getDose(),CurrentMed.getIntakeTime()));
+        }
     }
 
     private void setListeners() {

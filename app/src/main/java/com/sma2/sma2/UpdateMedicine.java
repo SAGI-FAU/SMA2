@@ -7,7 +7,11 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
+import com.sma2.sma2.DataAccess.MedicineDA;
+import com.sma2.sma2.DataAccess.MedicineDataService;
+
 import java.util.ArrayList;
+import java.util.List;
 
 public class UpdateMedicine extends AppCompatActivity implements View.OnClickListener {
 
@@ -28,9 +32,13 @@ public class UpdateMedicine extends AppCompatActivity implements View.OnClickLis
     }
 
     private void ad_medicine() {
-        //TODO: this is a test for RecyclerView
-        list_medic.add(new ejm_data_medicine("Medicine 1",100,15));
-        list_medic.add(new ejm_data_medicine("Medicine 2",250,18));
+        MedicineDataService MedicineData=new MedicineDataService(this);
+        List<MedicineDA> Medicine=MedicineData.getAllCurrentMedictation();
+        MedicineDA CurrentMed;
+        for (int i = 0; i < Medicine.size(); i++) {
+            CurrentMed=Medicine.get(i);
+            list_medic.add(new ejm_data_medicine(CurrentMed.getId(), CurrentMed.getMedicineName(),CurrentMed.getDose(),CurrentMed.getIntakeTime()));
+        }
     }
 
     private void setListeners() {
@@ -45,12 +53,14 @@ public class UpdateMedicine extends AppCompatActivity implements View.OnClickLis
                 add_medicine();
                 break;
             case R.id.button_back1:
-                finish();
+                Intent intent=new Intent(UpdateMedicine.this, ProfileActivity.class);
+                startActivity(intent);
                 break;
         }
     }
     private void add_medicine() {
         Intent intent_add_medicine =new Intent(UpdateMedicine.this, Modif_medicine.class);
+        intent_add_medicine.putExtra("update",false);
         startActivity(intent_add_medicine);
     }
 }

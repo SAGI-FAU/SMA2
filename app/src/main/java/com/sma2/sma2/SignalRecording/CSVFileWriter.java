@@ -6,6 +6,9 @@ import android.os.HandlerThread;
 import android.os.Message;
 import android.util.Log;
 
+import com.sma2.sma2.DataAccess.SignalDA;
+import com.sma2.sma2.DataAccess.SignalDataService;
+
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
@@ -24,11 +27,14 @@ public class CSVFileWriter {
     private String filename;
     private BufferedWriter mBufferedWriter = null;
 
+
     public CSVFileWriter(String exerciseName) throws IOException {
         String currTime = new SimpleDateFormat("yyyy-MM-dd_HH-mm", Locale.getDefault()).format(new Date());
         this.filename = exerciseName + currTime + FILE_ENDING;
 
         File file = openFile(PATH, this.filename);
+
+
 
         try {
             mBufferedWriter = new BufferedWriter(new FileWriter(file));

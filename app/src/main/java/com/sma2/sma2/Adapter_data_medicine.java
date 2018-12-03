@@ -10,7 +10,7 @@ import java.util.ArrayList;
 
 public class Adapter_data_medicine extends RecyclerView.Adapter<Adapter_data_medicine.ViewHolderDatos> {
 
-    ArrayList<ejm_data_medicine> list_medicine;
+    private ArrayList<ejm_data_medicine> list_medicine;
 
     public Adapter_data_medicine(ArrayList<ejm_data_medicine> list_medicine) {
         this.list_medicine = list_medicine;

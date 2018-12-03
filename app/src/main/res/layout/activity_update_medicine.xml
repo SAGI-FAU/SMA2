@@ -14,7 +14,7 @@
         android:layout_marginTop="8dp"
         android:gravity="center"
         android:text="@string/upd_medicine"
-        android:textSize="30sp"
+        android:textSize="@dimen/textview_text_size"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
@@ -25,31 +25,40 @@
         android:id="@+id/recycler_update"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_marginTop="32dp"
+        app:layout_constraintDimensionRatio="1.2"
+        android:layout_marginTop="8dp"
         app:layout_constraintBottom_toTopOf="@+id/button_add_medicine"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView_update_medicine">
-
     </android.support.v7.widget.RecyclerView>
 
 
     <Button
         android:id="@+id/button_add_medicine"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintDimensionRatio="4"
+        app:layout_constraintWidth_percent="0.7"
+        android:layout_marginTop="8dp"
         android:layout_marginBottom="8dp"
         android:background="@color/colorPrimaryDark"
         android:gravity="center"
         android:text="@string/add_medicine"
         android:textSize="@dimen/button_text_size"
-        app:layout_constraintBottom_toTopOf="@+id/button_back1"
-        app:layout_constraintLeft_toLeftOf="@+id/recycler_update" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/recycler_update"
+        app:layout_constraintBottom_toTopOf="@id/button_back1"/>
 
     <Button
         android:id="@+id/button_back1"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintDimensionRatio="4"
+        app:layout_constraintWidth_percent="0.7"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
         android:layout_gravity="bottom"
         android:background="@color/colorPrimaryDark"
         android:gravity="center"

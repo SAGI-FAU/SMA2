@@ -5,6 +5,8 @@ import android.content.Context;
 import org.greenrobot.greendao.database.Database;
 import org.greenrobot.greendao.query.QueryBuilder;
 import com.sma2.sma2.DataAccess.MedicineDADao.Properties;
+import com.sma2.sma2.DataAccess.DaoMaster;
+import com.sma2.sma2.DataAccess.DaoSession;
 import com.sma2.sma2.R;
 
 import java.util.List;
@@ -56,6 +58,20 @@ public class MedicineDataService {
 
         db.close();
         return medication.get(0);
+    }
+
+
+    public List<MedicineDA> getMedicineByTime(int time){
+        DaoMaster.DevOpenHelper helper = new DaoMaster.DevOpenHelper(invocationcontext, dbname);
+        Database db = helper.getReadableDb();
+        DaoSession session = new DaoMaster(db).newSession();
+        MedicineDADao dao = session.getMedicineDADao();
+        List<MedicineDA> medication = dao.queryBuilder()
+                .where(Properties.IntakeTime.eq(time))
+                .list();
+
+        db.close();
+        return medication;
     }
 
     public List<MedicineDA> getAllCurrentMedictation(){

@@ -55,6 +55,7 @@ public class ExOneFingerTapping extends ExerciseFragment implements View.OnClick
         return view;
     }
 
+    @SuppressLint("ClickableViewAccessibility")
     private void setListener() {
         background.setOnTouchListener(new View.OnTouchListener() {
             public boolean onTouch(View v, MotionEvent ev) {

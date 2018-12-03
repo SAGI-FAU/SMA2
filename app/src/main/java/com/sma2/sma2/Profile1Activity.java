@@ -15,7 +15,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.sma2.sma2.DataAccess.PatientDA;
-import com.sma2.sma2.DataAccess.PatientDataService;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -25,7 +24,7 @@ import java.util.Date;
 public class Profile1Activity extends AppCompatActivity implements View.OnClickListener {
 
     TextView tv_username;
-    TextView tv_userid;
+    //TextView tv_userid;
     EditText et_date;
     RadioGroup rg_gender, rg_hand, rg_smoker;
     PatientDA patientData;
@@ -43,10 +42,10 @@ public class Profile1Activity extends AppCompatActivity implements View.OnClickL
 
     private void initialized() {
         tv_username = findViewById(R.id.username_create);
-        tv_userid = findViewById(R.id.userid_create);
+        //tv_userid = findViewById(R.id.userid_create);
         et_date = findViewById(R.id.age_create);
         tv_username.setText(patientData.getUsername());
-        tv_userid.setText(patientData.getGovtId());
+        //tv_userid.setText(patientData.getGovtId());
         findViewById(R.id.button_continue).setOnClickListener(this);
         findViewById(R.id.button_back1).setOnClickListener(this);
         et_date.setOnClickListener(this);

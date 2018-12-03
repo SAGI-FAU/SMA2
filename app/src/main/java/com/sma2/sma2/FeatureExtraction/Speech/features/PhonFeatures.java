@@ -11,7 +11,7 @@ import java.util.List;
 
 import static java.lang.Math.abs;
 
-public class phon_feats {
+public class PhonFeatures {
     private array_manipulation ArrM = new array_manipulation();
 
     public void phon_feats(){}
@@ -60,6 +60,25 @@ public class phon_feats {
         }
         mean/=voiced_time.size();
         return mean;
+    }
+
+
+    public float calculateSD(List<Float> numArray)
+    {
+        float sum = 0, standardDeviation = 0;
+        int length = numArray.size();
+
+        for(float num : numArray) {
+            sum += num;
+        }
+
+        float mean = sum/length;
+
+        for(float num: numArray) {
+            standardDeviation += Math.pow(num - mean, 2);
+        }
+
+        return (float) Math.sqrt(standardDeviation/length);
     }
 
 }

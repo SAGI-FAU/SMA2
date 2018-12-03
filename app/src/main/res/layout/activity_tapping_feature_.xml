@@ -1,126 +1,318 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:paddingTop="0dp"
+    android:paddingLeft="0dp"
+    android:paddingRight="0dp"
+    android:layout_gravity="center"
+    >
 
-    android:layout_marginLeft="16dp"
-    android:layout_marginRight="16dp"
-    tools:context="com.sma2.sma2.MainActivity">
 
-    <LinearLayout
+
+    <android.support.constraint.ConstraintLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
-
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:text="@string/tapping_1"
-                android:textSize="25dp" />
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/Number_Taps"
-                    android:layout_marginTop="12dp"
-                    android:textSize="22dp"/>
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical">
-                    <TextView
-                        android:id="@+id/tNumber_Taps"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_marginTop="12dp"
-                        android:gravity="center"
-                        android:text="Empty"
-                        android:textSize="22dp" />
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:background="@color/colorPrimaryDark"
-                        android:gravity="center"
-                        android:textSize="3dp" />
-                </LinearLayout>
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/Time_Tapping_His"
-                    android:layout_marginTop="12dp"
-                    android:textSize="22dp"/>
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical">
-                    <TextView
-                        android:id="@+id/tTapping_time_hits"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="12dp"
-                        android:gravity="center"
-                        android:text="Empty"
-                        android:textSize="22dp" />
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:background="@color/colorPrimaryDark"
-                        android:gravity="center"
-                        android:textSize="3dp" />
-                </LinearLayout>
-
-            </LinearLayout>
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        tools:context="com.sma2.sma2.MainActivity">
 
 
 
-        </LinearLayout>
-
-            <ImageView
-                android:id="@+id/iEmojin"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:layout_marginTop="150dp"
-                android:layout_gravity="center"
-                />
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/tmessage"
-                android:layout_marginTop="50dp"
-                android:background="@color/colorPrimaryDark"
-                android:layout_gravity="center"
-                android:textSize="22dp"
-                android:text="message" />
-
-        </LinearLayout>
+    <TextView
+        android:id="@+id/textView_tapping1"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8sp"
+        android:layout_marginEnd="8sp"
+        android:layout_marginStart="8sp"
+        android:gravity="center"
+        android:text="@string/tapping_1"
+        android:textSize="@dimen/textview_text_size"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 
+    <TextView
+        android:id="@+id/textView_num_taps"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintWidth_percent="0.6"
+        app:layout_constraintDimensionRatio="5"
+        android:layout_marginTop="8sp"
+        android:layout_marginEnd="8sp"
+        android:layout_marginStart="8sp"
+        android:text="@string/Number_Taps"
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="@dimen/textview_text_size"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView_tapping1" />
+
+    <TextView
+        android:id="@+id/textView_time_taps"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintWidth_percent="0.6"
+        app:layout_constraintDimensionRatio="5"
+        android:layout_marginTop="8sp"
+        android:layout_marginEnd="8sp"
+        android:layout_marginStart="8sp"
+        android:text="@string/Time_Tapping_His"
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="@dimen/textview_text_size"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView_num_taps" />
 
 
 
+    <TextView
+        android:id="@+id/textView_perc_taps"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintWidth_percent="0.6"
+        app:layout_constraintDimensionRatio="5"
+        android:layout_marginTop="8sp"
+        android:layout_marginEnd="8sp"
+        android:layout_marginStart="8sp"
+        android:text="@string/Perc_Tapping_Hits"
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="@dimen/textview_text_size"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView_time_taps" />
+
+    <TextView
+        android:id="@+id/tNumber_Taps"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintWidth_percent="0.35"
+        app:layout_constraintDimensionRatio="3"
+        android:layout_marginTop="8sp"
+        android:layout_marginEnd="8sp"
+        android:layout_marginStart="8sp"
+        android:lines="1"
+        android:text=""
+        android:gravity="end"
+        android:textSize="@dimen/textview_text_size"
+        app:layout_constraintLeft_toRightOf="@+id/textView_num_taps"
+        app:layout_constraintTop_toBottomOf="@+id/textView_tapping1" />
+
+    <TextView
+        android:id="@+id/tTapping_time_hits"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintWidth_percent="0.35"
+        app:layout_constraintDimensionRatio="3"
+        android:layout_marginTop="8sp"
+        android:layout_marginEnd="8sp"
+        android:layout_marginStart="8sp"
+        android:lines="1"
+        android:text=""
+        android:gravity="end"
+        android:textSize="@dimen/textview_text_size"
+        app:layout_constraintLeft_toRightOf="@+id/textView_time_taps"
+        app:layout_constraintTop_toBottomOf="@+id/textView_num_taps" />
+
+    <TextView
+        android:id="@+id/tTapping_perc_hits"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintWidth_percent="0.35"
+        app:layout_constraintDimensionRatio="3"
+        android:layout_marginTop="8sp"
+        android:layout_marginEnd="8sp"
+        android:layout_marginStart="8sp"
+        android:lines="1"
+        android:text=""
+        android:gravity="end"
+        android:textSize="@dimen/textview_text_size"
+        app:layout_constraintLeft_toRightOf="@+id/textView_perc_taps"
+        app:layout_constraintTop_toBottomOf="@+id/tTapping_time_hits" />
+
+
+
+
+    <ImageView
+        android:id="@+id/iEmojin"
+        android:layout_width="35sp"
+        android:layout_height="35sp"
+        android:layout_marginTop="35sp"
+        android:layout_gravity="center"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tTapping_perc_hits"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/tmessage"
+        android:layout_marginTop="35sp"
+        android:background="@color/colorPrimaryDark"
+        android:layout_gravity="center"
+        android:textSize="22sp"
+        android:text=""
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/iEmojin"
+
+        />
+
+
+    <com.jjoe64.graphview.GraphView
+        android:id="@+id/bar_perc"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintWidth_percent="0.9"
+        app:layout_constraintDimensionRatio="1.8"
+        app:seriesType="bar"
+        app:seriesColor="@color/colorPrimaryDark"
+        android:title="@string/Perc_Tapping_Hits"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tmessage"/>
+
+
+    <TextView
+        android:id="@+id/textView_tapping2"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15sp"
+        android:layout_marginEnd="8sp"
+        android:layout_marginStart="8sp"
+        android:gravity="center"
+        android:text="@string/tapping_2"
+        android:textSize="@dimen/textview_text_size"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/bar_perc"
+        />
+
+
+    <TextView
+        android:id="@+id/textView_left"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15sp"
+        android:layout_marginEnd="8sp"
+        android:layout_marginStart="8sp"
+        android:gravity="center"
+        android:text="@string/Finger_left"
+        android:textSize="@dimen/textview_text_size"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView_tapping2"
+        />
+
+
+    <TextView
+        android:id="@+id/textView_right"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15sp"
+        android:layout_marginEnd="8sp"
+        android:layout_marginStart="8sp"
+        android:gravity="center"
+        android:text="@string/Finger_right"
+        android:textSize="@dimen/textview_text_size"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView_tapping2"
+        />
+
+    <TextView
+        android:id="@+id/tTapping_time_hits_left"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8sp"
+        android:layout_marginEnd="8sp"
+        android:layout_marginStart="8sp"
+        android:lines="1"
+        android:text=""
+        android:gravity="end"
+        android:textSize="@dimen/textview_text_size"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView_left" />
+
+
+
+    <TextView
+        android:id="@+id/tTapping_time_hits_right"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:layout_marginTop="8sp"
+        android:layout_marginEnd="8sp"
+        android:layout_marginStart="8sp"
+        android:lines="1"
+        android:text=""
+        android:gravity="end"
+        android:textSize="@dimen/textview_text_size"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView_right" />
+
+
+
+
+    <ImageView
+        android:id="@+id/iEmojin_left"
+        android:layout_width="25sp"
+        android:layout_height="25sp"
+        android:layout_marginTop="35sp"
+        android:layout_marginStart="35sp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tTapping_time_hits_left"
+        />
+
+    <ImageView
+        android:id="@+id/iEmojin_right"
+        android:layout_width="25sp"
+        android:layout_height="25sp"
+        android:layout_marginTop="35sp"
+        android:layout_marginEnd="35sp"
+
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tTapping_time_hits_right"
+        />
+
+
+
+    <com.jjoe64.graphview.GraphView
+        android:id="@+id/bar_perc2"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintWidth_percent="0.9"
+        app:layout_constraintDimensionRatio="1.8"
+        app:seriesType="bar"
+        android:layout_marginTop="35sp"
+        app:seriesColor="@color/colorPrimaryDark"
+        android:title="@string/Perc_Tapping_Hits"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/iEmojin_left"/>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/back"
+        android:layout_marginTop="35sp"
+        android:textSize="@dimen/button_text_size"
+        android:background="@color/colorPrimaryDark"
+        android:id="@+id/button_back4"
+        app:layout_constraintTop_toBottomOf="@+id/bar_perc2"
+        />
 
 
 
 
 </android.support.constraint.ConstraintLayout>
+
+</ScrollView>

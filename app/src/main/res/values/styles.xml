@@ -8,10 +8,6 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
-    <style name="button" parent="@android:style/Widget.TextView">
-        <item name="android:textSize">@dimen/button_text_size</item>
-    </style>
-
     <style name="RadioButton" parent="@android:style/Widget.CompoundButton.RadioButton">
         <item name="android:textSize">@dimen/RadioButton_size</item>
     </style>

@@ -12,7 +12,7 @@ import java.util.ArrayList;
 
 public class Adapter_update_medic extends RecyclerView.Adapter<Adapter_update_medic.ViewHolderDatos> {
 
-    ArrayList<ejm_data_medicine> list_medic;
+    private ArrayList<ejm_data_medicine> list_medic;
     private Activity activity;
 
     public Adapter_update_medic(ArrayList<ejm_data_medicine> list_medic, Activity activity){
@@ -35,13 +35,15 @@ public class Adapter_update_medic extends RecyclerView.Adapter<Adapter_update_me
             @Override
             public void onClick(View view) {
                 Intent intent_mod_medicine =new Intent(activity, Modif_medicine.class);
+                intent_mod_medicine.putExtra("id", datos.getId());
                 intent_mod_medicine.putExtra("Medicine",datos.getMedicine());
                 intent_mod_medicine.putExtra("Doses",datos.getDoses());
                 intent_mod_medicine.putExtra("Time",datos.getTime());
+                intent_mod_medicine.putExtra("update",true);
                 activity.startActivity(intent_mod_medicine);
             }
         });
-
+        //holder.id.setText(String.valueOf(list_medic.get(position).getId()));
         holder.dato.setText(list_medic.get(position).getMedicine());
         holder.doses.setText(String.valueOf(list_medic.get(position).getDoses()));
         holder.time.setText(String.valueOf(list_medic.get(position).getTime()));
@@ -57,6 +59,7 @@ public class Adapter_update_medic extends RecyclerView.Adapter<Adapter_update_me
 
         public ViewHolderDatos(View itemView) {
             super(itemView);
+            //id=itemView.findViewById(R.id.id1);
             dato=itemView.findViewById(R.id.idmedicine1);
             doses=itemView.findViewById(R.id.iddose1);
             time=itemView.findViewById(R.id.idtime1);

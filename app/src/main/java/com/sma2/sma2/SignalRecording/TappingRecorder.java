@@ -9,6 +9,11 @@ import android.os.Environment;
 import android.os.Handler;
 import android.util.Log;
 
+import com.sma2.sma2.DataAccess.ExerciseDataService;
+import com.sma2.sma2.DataAccess.PatientDataService;
+import com.sma2.sma2.DataAccess.SignalDA;
+import com.sma2.sma2.DataAccess.SignalDataService;
+
 import java.io.BufferedOutputStream;
 import java.io.BufferedWriter;
 import java.io.DataOutputStream;
@@ -31,12 +36,16 @@ public class TappingRecorder {
     private static Context CONTEXT;
     private static Handler HANDLER;
     private CSVFileWriter mCSVFileWriter;
+    private SignalDataService signalDataService;
+    private SignalDA signalDA;
+
 
     private static TappingRecorder recorder_instance=null;
 
 
     private TappingRecorder(Context context) {
         CONTEXT=context;
+        signalDataService = new SignalDataService(context);
 
     }
 
@@ -50,6 +59,7 @@ public class TappingRecorder {
 
     public void TapHeaderWriter(String TaskName, int Flag) throws IOException{
         mCSVFileWriter = new CSVFileWriter(TaskName);
+        signalDA = new SignalDA(TaskName, mCSVFileWriter.getFileName());
 
         if (Flag==0) {
             String[] TAPPING_INFO_HEADER =  {"Task Name","TouchScreen Label",
@@ -64,6 +74,7 @@ public class TappingRecorder {
             mCSVFileWriter.writeData(TAPPING_DESCRIPTION_HEADER);
             mCSVFileWriter.writeData(TAPPING_DATA_HEADER);
 
+
         }else{
             String[] TAPPING_INFO_HEADER =  {"Task Name","TouchScreen Label",
                     "Label Bug 1","Label Bug 2","TimeTap","Distance"};
@@ -76,9 +87,7 @@ public class TappingRecorder {
 
             mCSVFileWriter.writeData(TAPPING_DESCRIPTION_HEADER);
             mCSVFileWriter.writeData(TAPPING_DATA_HEADER);
-
         }
-
     }
 
     public String TappingFileName(){
@@ -90,10 +99,11 @@ public class TappingRecorder {
     public void TapWriter(String[] data_sensors){ mCSVFileWriter.writeData(data_sensors); }
 
 
-    public void CloseTappingDocument() throws IOException{mCSVFileWriter.close();}
-
-
-
-
+    public void CloseTappingDocument() throws IOException{
+        mCSVFileWriter.close();
+        PatientDataService pd = new PatientDataService(CONTEXT);
+        signalDA.setPatientDAId(pd.getPatient().getUserId());
+        signalDataService.saveSignal(signalDA);
+    }
 }
 

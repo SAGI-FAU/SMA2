@@ -31,6 +31,7 @@ public class ExReadText extends ExerciseFragment implements ButtonFragment.OnBut
     private SpeechRecorder recorder;
     private ProgressBar volumeBar;
     private TextExercise textExercise;
+    private int Sentence;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -40,6 +41,7 @@ public class ExReadText extends ExerciseFragment implements ButtonFragment.OnBut
         recorder = SpeechRecorder.getInstance(getActivity().getApplicationContext(), new VolumeHandler(volumeBar));
         TextView text = view.findViewById(R.id.txtItemRT);
         textExercise = null;
+        Sentence =getArguments().getInt("sentence");
         try {
             textExercise = loadText();
         } catch (IOException e){
@@ -70,8 +72,8 @@ public class ExReadText extends ExerciseFragment implements ButtonFragment.OnBut
             exercises.add(new TextExercise(line[locale], languages[locale], 1));
 
         }
-        Random rand = new Random();
-        return exercises.get(rand.nextInt(exercises.size()));
+
+        return exercises.get(Sentence);
     }
 
     private int getCurrentLocale(String[] languages) {

@@ -4,6 +4,12 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.TextView;
+
+import com.sma2.sma2.DataAccess.SignalDA;
+import com.sma2.sma2.DataAccess.SignalDataService;
+
+import java.util.List;
 
 public class ThanksActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -14,7 +20,18 @@ public class ThanksActivity extends AppCompatActivity implements View.OnClickLis
         super.onCreate(savedInstanceState);
         //setContentView(R.layout.activity_main_menu);
         setContentView(R.layout.activity_thanks);
+        TextView MessageTextView = findViewById(R.id.textView_total);
         setListeners();
+
+        SignalDataService signalDataService =new SignalDataService(this);
+        List<SignalDA> signals= signalDataService.getAllSignals();
+        int NSignals=signals.size();
+
+        String message=getString(R.string.completed)+" "+String.valueOf(NSignals)+" "+getString(R.string.btnExercisesText);
+        MessageTextView.setText(message);
+
+
+
 
     }
 
@@ -36,7 +53,7 @@ public class ThanksActivity extends AppCompatActivity implements View.OnClickLis
 
 
     public void open_results(){
-        Intent intent_results=new Intent(this, MainActivity.class);
+        Intent intent_results=new Intent(this, MainActivityMenu.class);
         startActivity(intent_results);
         //TODO: transitions to the dashboard screen
 
