@@ -27,7 +27,8 @@ public class Adapter_data_medicine extends RecyclerView.Adapter<Adapter_data_med
     @Override
     public void onBindViewHolder(ViewHolderDatos holder, int position) {
         holder.dato.setText(list_medicine.get(position).getMedicine());
-        holder.doses.setText(String.valueOf(list_medicine.get(position).getDoses()));
+        String time=String.valueOf(list_medicine.get(position).getTime())+":00";
+        holder.doses.setText(time);
         }
 
     @Override

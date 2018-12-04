@@ -74,7 +74,7 @@ public class SettingsActivity extends AppCompatActivity implements View.OnClickL
 
         Notifications notifications=new Notifications(this);
         notifications.cancelReminder(this,AlarmReceiver.class);
-        notifications.setReminder(this, AlarmReceiver.class, TimeNotification, 0);
+        notifications.setReminder(this, AlarmReceiver.class, TimeNotification-1, 0);
     }
 
 

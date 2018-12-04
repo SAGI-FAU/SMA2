@@ -36,7 +36,7 @@ public class MainActivityMenu extends AppCompatActivity implements View.OnClickL
         SharedPreferences sharedPref =this.getPreferences(Context.MODE_PRIVATE);
         int TimeNotification=sharedPref.getInt("Notification Time", 9);
         Notifications notifications=new Notifications(this);
-        notifications.setReminder(this,AlarmReceiver.class, TimeNotification, 0);
+        notifications.setReminder(this,AlarmReceiver.class, TimeNotification-1, 0);
 
 
         // create alarm notifications to take the medicine

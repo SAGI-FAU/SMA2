@@ -29,24 +29,26 @@ public class Adapter_update_medic extends RecyclerView.Adapter<Adapter_update_me
 
     @Override
     public void onBindViewHolder(ViewHolderDatos holder, final int position) {
-        final ejm_data_medicine datos = list_medic.get(position);
+        final ejm_data_medicine data = list_medic.get(position);
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent_mod_medicine =new Intent(activity, Modif_medicine.class);
-                intent_mod_medicine.putExtra("id", datos.getId());
-                intent_mod_medicine.putExtra("Medicine",datos.getMedicine());
-                intent_mod_medicine.putExtra("Doses",datos.getDoses());
-                intent_mod_medicine.putExtra("Time",datos.getTime());
+                intent_mod_medicine.putExtra("id", data.getId());
+                intent_mod_medicine.putExtra("Medicine",data.getMedicine());
+                intent_mod_medicine.putExtra("Doses",data.getDoses());
+                intent_mod_medicine.putExtra("Time",data.getTime());
                 intent_mod_medicine.putExtra("update",true);
                 activity.startActivity(intent_mod_medicine);
             }
         });
         //holder.id.setText(String.valueOf(list_medic.get(position).getId()));
         holder.dato.setText(list_medic.get(position).getMedicine());
-        holder.doses.setText(String.valueOf(list_medic.get(position).getDoses()));
-        holder.time.setText(String.valueOf(list_medic.get(position).getTime()));
+        String dose=String.valueOf(list_medic.get(position).getDoses());
+        String time=String.valueOf(list_medic.get(position).getTime())+":00";
+        holder.doses.setText(dose);
+        holder.time.setText(time);
     }
 
     @Override

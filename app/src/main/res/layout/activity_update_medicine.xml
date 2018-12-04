@@ -21,6 +21,49 @@
         app:layout_constraintTop_toTopOf="parent" />
 
 
+    <TextView
+        android:id="@+id/textView_Int_medicine"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="6dp"
+        app:layout_constraintDimensionRatio="6"
+        app:layout_constraintWidth_percent="0.5"
+        android:text="@string/med"
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="@dimen/textview_text_size"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView_update_medicine" />
+
+    <TextView
+        android:id="@+id/textView_Int_dose"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="6dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        app:layout_constraintDimensionRatio="1.5"
+        app:layout_constraintWidth_percent="0.25"
+        android:text="@string/med_dose"
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="@dimen/textview_text_size"
+        app:layout_constraintLeft_toRightOf="@+id/textView_Int_medicine"
+        app:layout_constraintTop_toBottomOf="@+id/textView_update_medicine" />
+
+
+    <TextView
+        android:id="@+id/textView_time"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="6dp"
+        app:layout_constraintDimensionRatio="1.5"
+        app:layout_constraintWidth_percent="0.25"
+        android:text="@string/med_time"
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="@dimen/textview_text_size"
+        app:layout_constraintLeft_toRightOf="@+id/textView_Int_dose"
+        app:layout_constraintTop_toBottomOf="@+id/textView_update_medicine" />
+
+
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recycler_update"
         android:layout_width="match_parent"
@@ -30,7 +73,7 @@
         app:layout_constraintBottom_toTopOf="@+id/button_add_medicine"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView_update_medicine">
+        app:layout_constraintTop_toBottomOf="@+id/textView_Int_medicine">
     </android.support.v7.widget.RecyclerView>
 
 
