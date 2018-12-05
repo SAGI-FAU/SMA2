@@ -71,10 +71,10 @@ public class ExerciseSessionManager {
                 exercisesIDs = new int[]{3, 4, 12, 23, 24, 34};
                 break;
             case 3:
-                exercisesIDs = new int[]{13, 6, 25, 5, 26, 33};
+                exercisesIDs = new int[]{7, 6, 25, 5, 26, 33};
                 break;
             case 4:
-                exercisesIDs = new int[]{7, 8, 14, 27, 28, 34};
+                exercisesIDs = new int[]{25, 8, 14, 27, 28, 34};
                 break;
             case 5:
                 exercisesIDs = new int[]{9, 10, 15, 29, 30, 35};
@@ -166,8 +166,10 @@ public class ExerciseSessionManager {
             ExInstr = instr[locale + 2];//Exercise instruction.
             String videoName = instr[instr.length - 1];
             if (videoName.length() != 0) {
-                ExVideo = languages[locale] + "_" + videoName;
-                ExVideo = "android.resource://" + context.getPackageName() + "/" + context.getResources().getIdentifier(ExVideo, "raw", context.getPackageName());
+                //ExVideo = languages[locale] + videoName;
+                ExVideo = "en" + videoName;
+                String test = ExVideo.split(".webm")[0];
+                ExVideo = "android.resource://" + context.getPackageName() + "/" + context.getResources().getIdentifier(ExVideo.split(".webm")[0], "raw", context.getPackageName());
             } else {
                 ExVideo = "None";
             }
@@ -182,7 +184,7 @@ public class ExerciseSessionManager {
                         ExType,
                         ExDescr,
                         ExInstr,
-                        Uri.parse("video/path"),
+                        Uri.parse(ExVideo),
                         Uri.parse("Instruction/Path"),
                         ExReadText.class));
             }
@@ -194,7 +196,7 @@ public class ExerciseSessionManager {
                         ExType,
                         ExDescr,
                         ExInstr,
-                        Uri.parse("video/path"),
+                        Uri.parse(ExVideo),
                         Uri.parse("Instruction/Path"),
                         ExAudioRec.class));
             }
@@ -206,7 +208,7 @@ public class ExerciseSessionManager {
                         ExType,
                         ExDescr,
                         ExInstr,
-                        Uri.parse("video/path"),
+                        Uri.parse(ExVideo),
                         Uri.parse("Instruction/Path"),
                         ExImageDescription.class));
             }
@@ -218,7 +220,7 @@ public class ExerciseSessionManager {
                         ExType,
                         ExDescr,
                         ExInstr,
-                        Uri.parse("video/path"),
+                        Uri.parse(ExVideo),
                         Uri.parse("Instruction/Path"),
                         Ex_balance_Rec.class));
             }
@@ -230,7 +232,7 @@ public class ExerciseSessionManager {
                         ExType,
                         ExDescr,
                         ExInstr,
-                        Uri.parse("video/path"),
+                        Uri.parse(ExVideo),
                         Uri.parse("Instruction/Path"),
                         Ex_Circling_Rec.class));
             }
@@ -242,7 +244,7 @@ public class ExerciseSessionManager {
                         ExType,
                         ExDescr,
                         ExInstr,
-                        Uri.parse("video/path"),
+                        Uri.parse(ExVideo),
                         Uri.parse("Instruction/Path"),
                         Ex_Hand_Rotation_Rec.class));
             }
@@ -254,7 +256,7 @@ public class ExerciseSessionManager {
                         ExType,
                         ExDescr,
                         ExInstr,
-                        Uri.parse("video/path"),
+                        Uri.parse(ExVideo),
                         Uri.parse("Instruction/Path"),
                         Ex_Hand_To_Head_Rec.class));
             }
@@ -266,7 +268,7 @@ public class ExerciseSessionManager {
                         ExType,
                         ExDescr,
                         ExInstr,
-                        Uri.parse("video/path"),
+                        Uri.parse(ExVideo),
                         Uri.parse("Instruction/Path"),
                         Ex_postural_Rec.class));
             }
@@ -278,7 +280,7 @@ public class ExerciseSessionManager {
                         ExType,
                         ExDescr,
                         ExInstr,
-                        Uri.parse("video/path"),
+                        Uri.parse(ExVideo),
                         Uri.parse("Instruction/Path"),
                         Ex_Walking_Rec.class));
             }
@@ -290,7 +292,7 @@ public class ExerciseSessionManager {
                         ExType,
                         ExDescr,
                         ExInstr,
-                        Uri.parse("video/path"),
+                        Uri.parse(ExVideo),
                         Uri.parse("Instruction/Path"),
                         ExOneFingerTapping.class));
             }
@@ -302,7 +304,7 @@ public class ExerciseSessionManager {
                         ExType,
                         ExDescr,
                         ExInstr,
-                        Uri.parse("video/path"),
+                        Uri.parse(ExVideo),
                         Uri.parse("Instruction/Path"),
                         ExTwoFingerTapping.class));
             }
@@ -314,7 +316,7 @@ public class ExerciseSessionManager {
                         ExType,
                         ExDescr,
                         ExInstr,
-                        Uri.parse("video/path"),
+                        Uri.parse(ExVideo),
                         Uri.parse("Instruction/Path"),
                         ExSliding.class));
             }
