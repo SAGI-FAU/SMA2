@@ -331,13 +331,17 @@ public class ExerciseSessionManager {
 
     private int getCurrentLocale(String[] languages) {
         Locale locale = Locale.getDefault();
+        int defaultOption = 0;
         for (int i = 0; i < languages.length; i++) {
+            if (languages[i].contains("en")) {
+                defaultOption = i;
+            }
             if (languages[i].contains(locale.getLanguage())) {
                 return i;
             }
         }
         //If not found, return default
-        return 0;
+        return defaultOption;
     }
 
     public void _createDummyExerciseList(Context context){
