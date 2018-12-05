@@ -1,14 +1,18 @@
 package com.sma2.sma2.ExerciseFragments;
 
 import android.content.Context;
+import android.content.res.Resources;
+import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.MediaController;
 import android.widget.TextView;
 import android.widget.VideoView;
 
@@ -55,8 +59,32 @@ public class ExerciseInstructions extends Fragment {
         exerciseInstruction.setText(mExercise.getShortInstructions());
 
         // Set Instruction Video
-        VideoView videoView = view.findViewById(R.id.videoView);
-        videoView.setVideoURI(mExercise.getInstructionVideoPath());
+        final VideoView videoView = view.findViewById(R.id.videoView);
+        Log.d("VIDEO_PATH", mExercise.getInstructionVideoPath().getPath());
+        if(!mExercise.getInstructionVideoPath().getPath().equals("None")) {
+            videoView.setVideoURI(mExercise.getInstructionVideoPath());
+            videoView.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
+                @Override
+                public void onPrepared(MediaPlayer mediaPlayer) {
+                    mediaPlayer.setOnVideoSizeChangedListener(new MediaPlayer.OnVideoSizeChangedListener() {
+                        @Override
+                        public void onVideoSizeChanged(MediaPlayer mediaPlayer, int i, int i1) {
+                            MediaController mediaController = new MediaController(getContext(), false){
+                                @Override
+                                public void hide() {
+
+                                }
+                            };
+                            videoView.setMediaController(mediaController);
+                            mediaController.setAnchorView(videoView);
+                            mediaController.show(0);
+                            mediaController.setAlpha(0.6f);
+                        }
+                    });
+                }
+            });
+            videoView.seekTo(1);
+        }
 
         // Set On Click handler for Start Button
         Button startButton = view.findViewById(R.id.startButton);
@@ -67,7 +95,6 @@ public class ExerciseInstructions extends Fragment {
                     mStartClickedCallback.onExerciseStartClicked();
                 }
             }
-
         });
 
         return view;
