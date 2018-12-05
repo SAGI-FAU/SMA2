@@ -24,6 +24,7 @@ import com.opencsv.CSVReaderBuilder;
 import com.sma2.sma2.DataAccess.SignalDA;
 import com.sma2.sma2.DataAccess.SignalDataService;
 import com.sma2.sma2.FeatureExtraction.GetExercises;
+import com.sma2.sma2.FeatureExtraction.GraphManager;
 import com.sma2.sma2.FeatureExtraction.Speech.features.PhonFeatures;
 import com.sma2.sma2.FeatureExtraction.Speech.tools.WAVfileReader;
 import com.sma2.sma2.FeatureExtraction.Speech.tools.f0detector;
@@ -211,35 +212,41 @@ public class Speech_features_Activity extends AppCompatActivity implements View.
         }
 
         float JitterTemp;
-        BarGraphSeries<DataPoint> series = new BarGraphSeries<>();
-        if (path_ah_all.size() > 0) {
-            for (int i = 0; i < path_ah_all.size(); i++) {
+
+
+
+
+
+
+        GraphManager graphManager=new GraphManager(this);
+
+
+        ArrayList<Integer> x=new ArrayList<>();
+        ArrayList<Float> y=new ArrayList<>();
+        for (int i=0;i<5;i++){
+
+            if (i<path_ah_all.size()){
                 JitterTemp = Jitter(path_ah_all.get(i));
-                series.appendData(new DataPoint(i + 1, JitterTemp), true, 5);
+                x.add(i+1);
+                y.add(JitterTemp);
+            }
+            else{
+                x.add(i+1);
+                y.add((float) 0);
             }
 
-        } else {
-            series.appendData(new DataPoint(1, 0), true, 5);
         }
 
+        String Title=getResources().getString(R.string.jitter);
+        String Ylabel=getResources().getString(R.string.jitter);
+        String Xlabel=getResources().getString(R.string.session);
+        GraphView graph =findViewById(R.id.bar_perc_phonation);
+        graphManager.BarGraph(graph, x, y, 0, 5, Title, Xlabel, Ylabel);
 
-        GraphView graph = findViewById(R.id.bar_perc_phonation);
-        graph.addSeries(series);
 
-        // styling
 
-        series.setColor(Color.rgb(255, 140, 0));
 
-        series.setSpacing(5);
-        graph.getViewport().setMinY(0.0);
-        graph.getViewport().setMinX(0);
-        graph.getViewport().setMaxX(6);
-        graph.getViewport().setYAxisBoundsManual(true);
-        graph.getViewport().setXAxisBoundsManual(true);
-        series.setTitle(getResources().getString(R.string.jitter));
-        GridLabelRenderer gridLabel = graph.getGridLabelRenderer();
-        gridLabel.setHorizontalAxisTitle(getResources().getString(R.string.session));
-        gridLabel.setVerticalAxisTitle(getResources().getString(R.string.jitter));
+
 
     }
 
@@ -306,35 +313,36 @@ public class Speech_features_Activity extends AppCompatActivity implements View.
 
 
         float DDK_regTemp;
-        BarGraphSeries<DataPoint> series = new BarGraphSeries<>();
-        if (path_pataka_all.size() > 0) {
-            for (int i = 0; i < path_pataka_all.size(); i++) {
+
+
+
+
+        GraphManager graphManager=new GraphManager(this);
+
+
+        ArrayList<Integer> x=new ArrayList<>();
+        ArrayList<Float> y=new ArrayList<>();
+        for (int i=0;i<5;i++){
+
+            if (i<path_pataka_all.size()){
                 DDK_regTemp = DDKRegularity(path_pataka_all.get(i));
-                series.appendData(new DataPoint(i + 1, DDK_regTemp), true, 5);
+                x.add(i+1);
+                y.add(DDK_regTemp);
+            }
+            else{
+                x.add(i+1);
+                y.add((float) 0);
             }
 
-        } else {
-            series.appendData(new DataPoint(1, 0), true, 5);
         }
 
+        String Title=getResources().getString(R.string.ddk_reg);
+        String Ylabel=getResources().getString(R.string.ddk_reg);
+        String Xlabel=getResources().getString(R.string.session);
+        GraphView graph =findViewById(R.id.bar_perc_articulation);
+        graphManager.BarGraph(graph, x, y, 0, 5, Title, Xlabel, Ylabel);
 
-        GraphView graph = findViewById(R.id.bar_perc_articulation);
-        graph.addSeries(series);
 
-        // styling
-
-        series.setColor(Color.rgb(255, 140, 0));
-
-        series.setSpacing(5);
-        graph.getViewport().setMinY(0.0);
-        graph.getViewport().setMinX(0);
-        graph.getViewport().setMaxX(6);
-        graph.getViewport().setYAxisBoundsManual(true);
-        graph.getViewport().setXAxisBoundsManual(true);
-        series.setTitle(getResources().getString(R.string.ddk_reg));
-        GridLabelRenderer gridLabel = graph.getGridLabelRenderer();
-        gridLabel.setHorizontalAxisTitle(getResources().getString(R.string.session));
-        gridLabel.setVerticalAxisTitle(getResources().getString(R.string.ddk_reg));
 
 
     }

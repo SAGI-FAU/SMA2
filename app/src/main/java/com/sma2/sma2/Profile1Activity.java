@@ -16,6 +16,7 @@ import android.widget.Toast;
 
 import com.sma2.sma2.DataAccess.PatientDA;
 
+import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -31,7 +32,7 @@ public class Profile1Activity extends AppCompatActivity implements View.OnClickL
     Calendar C = Calendar.getInstance();
     int year, month, day;
     DatePickerDialog datePickerDialog;
-
+    Date date = null;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,11 +45,18 @@ public class Profile1Activity extends AppCompatActivity implements View.OnClickL
         tv_username = findViewById(R.id.username_create);
         //tv_userid = findViewById(R.id.userid_create);
         et_date = findViewById(R.id.age_create);
+        et_date.setOnClickListener(this);
+
         tv_username.setText(patientData.getUsername());
         //tv_userid.setText(patientData.getGovtId());
         findViewById(R.id.button_continue).setOnClickListener(this);
         findViewById(R.id.button_back1).setOnClickListener(this);
-        et_date.setOnClickListener(this);
+
+        Date Birthdate=patientData.getBirthday();
+        if (Birthdate!=null){
+            et_date.setText(DateFormat.getDateInstance().format(Birthdate));
+        }
+
         year = C.get(Calendar.YEAR);
         month = C.get(Calendar.MONTH);
         day = C.get(Calendar.DAY_OF_MONTH);
@@ -56,9 +64,20 @@ public class Profile1Activity extends AppCompatActivity implements View.OnClickL
             @Override
             public void onDateSet(DatePicker datePicker, int mYear, int mMonth, int mDay) {
                 mMonth+=1;
-                et_date.setText(mDay+"/"+mMonth+"/"+mYear);
+
+
+                try {
+                    date = new SimpleDateFormat("dd/MM/yyyy").parse(String.valueOf(mDay)+"/"+String.valueOf(mMonth)+"/"+String.valueOf(mYear));
+                    et_date.setText(DateFormat.getDateInstance().format(date));
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+
+
             }
         },year,month,day);
+
+
     }
 
     @Override
@@ -73,12 +92,6 @@ public class Profile1Activity extends AppCompatActivity implements View.OnClickL
                     String gender = ((RadioButton) findViewById(rg_gender.getCheckedRadioButtonId())).getText().toString();
                     String hand_string = ((RadioButton) findViewById(rg_hand.getCheckedRadioButtonId())).getText().toString();
                     String smoker_string = ((RadioButton) findViewById(rg_smoker.getCheckedRadioButtonId())).getText().toString();
-                    Date date = null;
-                    try {
-                        date = new SimpleDateFormat("dd/MM/yyyy").parse(date_string);
-                    } catch (ParseException e) {
-                        e.printStackTrace();
-                    }
                     patientData.setBirthday(date);
                     patientData.setGender(gender);
                     switch (hand_string) {

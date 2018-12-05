@@ -28,6 +28,10 @@ public class CSVFileWriter {
     private BufferedWriter mBufferedWriter = null;
 
 
+
+
+
+
     public CSVFileWriter(String exerciseName) throws IOException {
         String currTime = new SimpleDateFormat("yyyy-MM-dd_HH-mm", Locale.getDefault()).format(new Date());
         this.filename = exerciseName + currTime + FILE_ENDING;
@@ -56,6 +60,39 @@ public class CSVFileWriter {
             }
         };
     }
+
+    public CSVFileWriter(String exerciseName, String path) throws IOException {
+        String currTime = new SimpleDateFormat("yyyy-MM-dd_HH-mm", Locale.getDefault()).format(new Date());
+        this.filename = exerciseName + currTime + FILE_ENDING;
+
+        File file = openFile(path, this.filename);
+
+
+
+        try {
+            mBufferedWriter = new BufferedWriter(new FileWriter(file));
+        } catch (Exception e) {
+            Log.e(TAG, "ERROR opening file");
+            throw e;
+        }
+
+        HandlerThread ht = new HandlerThread("CSVFileWriterThread");
+        ht.start();
+        mHandler = new Handler(ht.getLooper()) {
+            public void handleMessage(Message msg) {
+                try {
+                    write((String[]) msg.obj);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    //TODO: handle exception
+                }
+            }
+        };
+    }
+
+
+
+
 
     public String getFileName() {
         return this.filename;
@@ -91,7 +128,7 @@ public class CSVFileWriter {
         mHandler.sendMessage(msg);
     }
 
-    private void write(String[] str) throws IOException {
+    public void write(String[] str) throws IOException {
         String line = "";
         for (int i = 0; i < str.length - 1; i++) {
             line += str[i] + DELIMITER;

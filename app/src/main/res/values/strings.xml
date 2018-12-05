@@ -2,7 +2,7 @@
     <string name="app_name" translatable="false">Apkinson</string>
     <string name="databasename" translatable="false">apkinsondb</string>
     <string name="name">User name</string>
-    <string name="ID">ID number</string>
+    <string name="ID">Telephone number</string>
     <string name="Login">LOGIN</string>
     <string name="or">OR</string>
     <string name="register">Register</string>
@@ -36,7 +36,7 @@
     <string name="instructions_long">Detailed Instructions</string>
     <string name="instructions_video">Video Demonstration</string>
     <string name="volume">Volume</string>
-    <string name="ball_balance">Ball balance Game</string>
+    <string name="ball_balance" translatable="false">Ball balance Game</string>
     <string name="tapping_ex">Tapping</string>
     <string name="tapping_1">one finger tapping</string>
     <string name="tapping_2">two finger tapping</string>
@@ -57,9 +57,9 @@
     <string name="weight">Weight (kg)</string>
     <string name="height">Height (cm)</string>
     <string name="user_empty">Please, fill username field</string>
-    <string name="userid_empty">Please, fill userid field</string>
+    <string name="userid_empty">Please, fill telephone field</string>
     <string name="log_in">Log in successful</string>
-    <string name="log_error">Username and/or User id not found</string>
+    <string name="log_error">Username and/or User telephone not found</string>
     <string name="brith_date_error">Please, fill birth date</string>
     <string name="none_item">None</string>
     <string name="elem_item">Elementary school</string>
@@ -84,7 +84,7 @@
     <string name="missing_permissions_text">You must grant permissions to record audio and write to storage to use the exercises!</string>
     <string name="OK">OK</string>
     <string name="user_name">Name: </string>
-    <string name="user_id">ID: </string>
+    <string name="user_id">Telephone: </string>
     <string name="S_record">Recorded sessions </string>
     <string name="Int_medicine">Medicine: </string>
     <string name="upd_medicine">Update medicine</string>
@@ -125,6 +125,12 @@
     <string name="balance">Balancing</string>
     <string name="TremorAmplitude">Tremor Amplitude</string>
     <string name="Completed_Exercises">Completed Exercises</string>
+    <string name="update_profile">Update Profile</string>
+    <string name="Notification_time">Time for notifications</string>
+    <string name="export">Export Metadata</string>
+    <string name="export_sucess">Metadata export was successful</string>
+    <string name="export_failed">Metadata export failed</string>
+
 
 
 

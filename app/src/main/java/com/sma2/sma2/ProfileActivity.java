@@ -49,7 +49,9 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
             PatientDA patient=PatientData.getPatient();
             UsernameText.setText(patient.getUsername());
             Date Birthday=patient.getBirthday();
-            BirthdayText.setText(DateFormat.getDateInstance().format(Birthday));
+            if (Birthday!=null){
+                BirthdayText.setText(DateFormat.getDateInstance().format(Birthday));
+            }
             SessionsText.setText(String.valueOf(patient.getSessionCount()));
 
             SignalDataService signalDataService =new SignalDataService(this);
