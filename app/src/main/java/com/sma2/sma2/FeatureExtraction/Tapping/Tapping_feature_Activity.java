@@ -28,6 +28,7 @@ import com.opencsv.CSVReaderBuilder;
 import com.sma2.sma2.DataAccess.SignalDA;
 import com.sma2.sma2.DataAccess.SignalDataService;
 import com.sma2.sma2.FeatureExtraction.GetExercises;
+import com.sma2.sma2.FeatureExtraction.GraphManager;
 import com.sma2.sma2.MainActivityMenu;
 import com.sma2.sma2.R;
 import com.sma2.sma2.ResultsActivity;
@@ -69,6 +70,8 @@ public class Tapping_feature_Activity extends AppCompatActivity  implements View
         bBack.setOnClickListener(this);
         SignalDataService signalDataService =new SignalDataService(this);
         DecimalFormat df = new DecimalFormat("#.0");
+
+        GraphManager graphManager=new GraphManager(this);
 
 
         int IDEx=33;
@@ -137,32 +140,33 @@ public class Tapping_feature_Activity extends AppCompatActivity  implements View
             tMessage.startAnimation(animation2);
         }
 
-        int j;
-        BarGraphSeries<DataPoint> series= new BarGraphSeries<>();
-        if (path_tapping_all.size()>0) {
-            for (int i = 0; i < path_tapping_all.size(); i++) {
-                Count_Touch_one = read_csv(path_tapping_all.get(i), 0);// The index tells me which column I should access
-                series.appendData(new DataPoint(i + 1, Count_ladybug_one(Count_Touch_one)), true, 5);
-            }
-        }
-        else{
-            series.appendData(new DataPoint(1, 0), true, 5);
-            }
-        GraphView graph =findViewById(R.id.bar_perc);
-        graph.addSeries(series);
 
-        series.setColor(Color.rgb(255, 140, 0));
-        series.setSpacing(5);
-        graph.getViewport().setMinY(0.0);
-        graph.getViewport().setMaxY(101.0);
-        graph.getViewport().setMinX(0);
-        graph.getViewport().setMaxX(5);
-        graph.getViewport().setYAxisBoundsManual(true);
-        graph.getViewport().setXAxisBoundsManual(true);
-        series.setTitle(getResources().getString(R.string.Perc_Tapping_Hits));
-        GridLabelRenderer gridLabel = graph.getGridLabelRenderer();
-        gridLabel.setHorizontalAxisTitle(getResources().getString(R.string.session));
-        gridLabel.setVerticalAxisTitle(getResources().getString(R.string.Perc_Tapping_Hits));
+
+
+        ArrayList<Integer> x=new ArrayList<>();
+        ArrayList<Float> y=new ArrayList<>();
+        for (int i=0;i<5;i++){
+
+            if (i<path_tapping_all.size()){
+                Count_Touch_one = read_csv(path_tapping_all.get(i), 0);// The index tells me which column I should access
+                x.add(i+1);
+                y.add(Count_ladybug_one(Count_Touch_one));
+            }
+            else{
+                x.add(i+1);
+                y.add((float) 0);
+            }
+
+        }
+
+        String Title=getResources().getString(R.string.Perc_Tapping_Hits);
+        String Ylabel=getResources().getString(R.string.Perc_Tapping_Hits);
+        String Xlabel=getResources().getString(R.string.session);
+        GraphView graph =findViewById(R.id.bar_perc);
+        graphManager.BarGraph(graph, x, y, 101.0, 5, Title, Xlabel, Ylabel);
+
+
+
 
 
         IDEx=34;
@@ -207,34 +211,31 @@ public class Tapping_feature_Activity extends AppCompatActivity  implements View
 
 
 
-        BarGraphSeries<DataPoint> series2= new BarGraphSeries<>();
-        if (path_tapping_all2.size()>0) {
-            for (int i = 0; i < path_tapping_all2.size(); i++) {
+        ArrayList<Integer> x2=new ArrayList<>();
+        ArrayList<Float> y2=new ArrayList<>();
+
+
+        for (int i=0;i<5;i++){
+
+            if (i<path_tapping_all2.size()){
                 Count_Touch2 = read_csv(path_tapping_all2.get(i), 0);
                 Count_Touch_left=separator_vector(Count_Touch2,1);
                 Count_Touch_right=separator_vector(Count_Touch2,2);
 
-                series2.appendData(new DataPoint(i + 1, (Count_ladybug_one(Count_Touch_left)+Count_ladybug_one(Count_Touch_right))/2), true, 5);
+                x2.add(i+1);
+                y2.add((Count_ladybug_one(Count_Touch_left)+Count_ladybug_one(Count_Touch_right))/2);
             }
-        }
-        else{
-            series2.appendData(new DataPoint(1, 0), true, 5);
-        }
-        GraphView graph2 =findViewById(R.id.bar_perc2);
-        graph2.addSeries(series2);
+            else{
+                x2.add(i+1);
+                y2.add((float) 0);
+            }
 
-        series2.setColor(Color.rgb(255, 140, 0));
-        series2.setSpacing(5);
-        graph2.getViewport().setMinY(0.0);
-        graph2.getViewport().setMaxY(101.0);
-        graph2.getViewport().setMinX(0);
-        graph2.getViewport().setMaxX(5);
-        graph2.getViewport().setYAxisBoundsManual(true);
-        graph2.getViewport().setXAxisBoundsManual(true);
-        series2.setTitle(getResources().getString(R.string.Perc_Tapping_Hits));
-        GridLabelRenderer gridLabel2 = graph2.getGridLabelRenderer();
-        gridLabel2.setHorizontalAxisTitle(getResources().getString(R.string.session));
-        gridLabel2.setVerticalAxisTitle(getResources().getString(R.string.Perc_Tapping_Hits));
+        }
+
+        GraphView graph2 =findViewById(R.id.bar_perc2);
+        graphManager.BarGraph(graph2, x2, y2, 101.0, 5, Title, Xlabel, Ylabel);
+
+        
 
 
     }
