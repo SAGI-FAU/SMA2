@@ -72,7 +72,7 @@ public class ExerciseSessionManager {
                 exercisesIDs = new int[]{5, 6, 13, 25, 26, 33};
                 break;
             case 4:
-                exercisesIDs = new int[]{25, 8, 14, 27, 28, 34};
+                exercisesIDs = new int[]{7, 8, 14, 27, 28, 34};
                 break;
             case 5:
                 exercisesIDs = new int[]{9, 10, 15, 29, 30, 35};

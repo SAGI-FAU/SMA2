@@ -46,9 +46,19 @@ public class Adapter_update_medic extends RecyclerView.Adapter<Adapter_update_me
         //holder.id.setText(String.valueOf(list_medic.get(position).getId()));
         holder.dato.setText(list_medic.get(position).getMedicine());
         String dose=String.valueOf(list_medic.get(position).getDoses());
-        String time=String.valueOf(list_medic.get(position).getTime())+":00";
+
+
+        int time=list_medic.get(position).getTime();
+        String hour;
+        if (time>=10){
+            hour=String.valueOf(time)+":00";
+        }
+        else{
+            hour="0"+String.valueOf(time)+":00";
+        }
+
         holder.doses.setText(dose);
-        holder.time.setText(time);
+        holder.time.setText(hour);
     }
 
     @Override
