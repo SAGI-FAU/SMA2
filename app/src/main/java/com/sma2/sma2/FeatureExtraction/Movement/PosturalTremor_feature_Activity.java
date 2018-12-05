@@ -16,6 +16,7 @@ import com.jjoe64.graphview.series.DataPoint;
 import com.sma2.sma2.DataAccess.SignalDA;
 import com.sma2.sma2.DataAccess.SignalDataService;
 import com.sma2.sma2.FeatureExtraction.GetExercises;
+import com.sma2.sma2.FeatureExtraction.GraphManager;
 import com.sma2.sma2.MainActivityMenu;
 import com.sma2.sma2.R;
 
@@ -114,68 +115,60 @@ public class PosturalTremor_feature_Activity extends AppCompatActivity implement
         }
 
 
-        BarGraphSeries<DataPoint> series= new BarGraphSeries<>();
-        if (path_movement_all_left.size()>0) {
-            for (int i = 0; i < path_movement_all_left.size(); i++) {
 
+        GraphManager graphManager=new GraphManager(this);
+        ArrayList<Integer> xl=new ArrayList<>();
+        ArrayList<Float> yl=new ArrayList<>();
+        for (int i=0;i<5;i++){
+
+            if (i<path_movement_all_left.size()){
                 CSVFileReader.Signal TremorSignalaX2 = FileReader.ReadMovementSignal(path_movement_all_left.get(i), "aX [m/s^2]");
                 CSVFileReader.Signal TremorSignalaY2 = FileReader.ReadMovementSignal(path_movement_all_left.get(i), "aY [m/s^2]");
                 CSVFileReader.Signal TremorSignalaZ2 = FileReader.ReadMovementSignal(path_movement_all_left.get(i), "aZ [m/s^2]");
                 TremorLeft = MovementProcessor.ComputeTremor(TremorSignalaX2.Signal, TremorSignalaY2.Signal, TremorSignalaZ2.Signal);
-
-                series.appendData(new DataPoint(i + 1, TremorLeft), true, 5);
+                xl.add(i+1);
+                yl.add((float)TremorLeft);
             }
+            else{
+                xl.add(i+1);
+                yl.add((float) 0);
+            }
+
         }
-        else{
-            series.appendData(new DataPoint(1, 0), true, 5);
-        }
+        String Title=getResources().getString(R.string.TremorAmplitudeLeft);
+        String Ylabel=getResources().getString(R.string.TremorAmplitudeLeft);
+        String Xlabel=getResources().getString(R.string.session);
         GraphView graph =findViewById(R.id.bar_percTremorLeft);
-        graph.addSeries(series);
-
-        series.setColor(Color.rgb(255, 140, 0));
-        series.setSpacing(5);
-        graph.getViewport().setMinY(0.0);
-        graph.getViewport().setMinX(0);
-        graph.getViewport().setMaxX(5);
-        graph.getViewport().setYAxisBoundsManual(true);
-        graph.getViewport().setXAxisBoundsManual(true);
-        series.setTitle(getResources().getString(R.string.TremorAmplitudeLeft));
-        GridLabelRenderer gridLabel = graph.getGridLabelRenderer();
-        gridLabel.setHorizontalAxisTitle(getResources().getString(R.string.session));
-        gridLabel.setVerticalAxisTitle(getResources().getString(R.string.TremorAmplitudeLeft));
-        gridLabel.setNumHorizontalLabels(5);
+        graphManager.BarGraph(graph, xl, yl, 0, 5, Title, Xlabel, Ylabel);
 
 
-        BarGraphSeries<DataPoint> series2= new BarGraphSeries<>();
-        if (path_movement_all_right.size()>0) {
-            for (int i = 0; i < path_movement_all_right.size(); i++) {
 
+
+
+
+        ArrayList<Integer> xr=new ArrayList<>();
+        ArrayList<Float> yr=new ArrayList<>();
+        for (int i=0;i<5;i++){
+
+            if (i<path_movement_all_right.size()){
                 CSVFileReader.Signal TremorSignalaX2 = FileReader.ReadMovementSignal(path_movement_all_right.get(i), "aX [m/s^2]");
                 CSVFileReader.Signal TremorSignalaY2 = FileReader.ReadMovementSignal(path_movement_all_right.get(i), "aY [m/s^2]");
                 CSVFileReader.Signal TremorSignalaZ2 = FileReader.ReadMovementSignal(path_movement_all_right.get(i), "aZ [m/s^2]");
                 TremorRight = MovementProcessor.ComputeTremor(TremorSignalaX2.Signal, TremorSignalaY2.Signal, TremorSignalaZ2.Signal);
-
-                series2.appendData(new DataPoint(i + 1, TremorRight), true, 5);
+                xr.add(i+1);
+                yr.add((float)TremorRight);
             }
-        }
-        else{
-            series2.appendData(new DataPoint(1, 0), true, 5);
-        }
-        GraphView graph2 =findViewById(R.id.bar_percTremorRight);
-        graph2.addSeries(series2);
+            else{
+                xr.add(i+1);
+                yr.add((float) 0);
+            }
 
-        series2.setColor(Color.rgb(255, 140, 0));
-        series2.setSpacing(5);
-        graph2.getViewport().setMinY(0.0);
-        graph2.getViewport().setMinX(0);
-        graph2.getViewport().setMaxX(5);
-        graph2.getViewport().setYAxisBoundsManual(true);
-        graph2.getViewport().setXAxisBoundsManual(true);
-        series2.setTitle(getResources().getString(R.string.TremorAmplitudeRight));
-        GridLabelRenderer gridLabel2 = graph2.getGridLabelRenderer();
-        gridLabel2.setHorizontalAxisTitle(getResources().getString(R.string.session));
-        gridLabel2.setVerticalAxisTitle(getResources().getString(R.string.TremorAmplitudeRight));
-        gridLabel2.setNumHorizontalLabels(5);
+        }
+        Title=getResources().getString(R.string.TremorAmplitudeRight);
+        Ylabel=getResources().getString(R.string.TremorAmplitudeRight);
+        GraphView graph2 =findViewById(R.id.bar_percTremorRight);
+        graphManager.BarGraph(graph2, xr, yr, 0, 5, Title, Xlabel, Ylabel);
+
 
 
     }

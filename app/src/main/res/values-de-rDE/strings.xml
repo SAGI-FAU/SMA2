@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="name">Benutzername</string>
-    <string name="ID">ID-Nummer</string>
+    <string name="ID">Telefon-Nummer</string>
     <string name="Login">LOGIN</string>
     <string name="or">ODER</string>
     <string name="sign_up">ACCOUNT ANLEGEN</string>
@@ -25,9 +25,9 @@
     <string name="med_dose">Dosis (mg)</string>
     <string name="med_time">Aufnahmezeit</string>
     <string name="user_empty">Füllen Sie das Feld Benutzername aus, bitte</string>
-    <string name="userid_empty">Füllen Sie das Feld ID-numer  aus, bitte</string>
+    <string name="userid_empty">Füllen Sie das Feld Telefon-Nummer  aus, bitte</string>
     <string name="log_in">Anmeldung erfolgreich</string>
-    <string name="log_error">Benutzername und / oder Nummer ID nicht gefunden</string>
+    <string name="log_error">Benutzername und / oder Telefon-Nummer nicht gefunden</string>
     <string name="brith_date_error">Füllen Sie das Geburtsdatum aus, bitte</string>
     <string name="none_item">Keiner</string>
     <string name="Session">Die heutige Übung</string>
@@ -111,11 +111,18 @@
     <string name="TremorAmplitudeLeft">Tremoramplitude linke Hand</string>
     <string name="TremorAmplitudeRight">Tremor Amplitude rechte Hand</string>
     <string name="upd_medicine">Medizin aktualisieren</string>
-    <string name="user_id">ID:</string>
+    <string name="user_id">Telefon-Nummer:</string>
     <string name="user_name">Name:</string>
     <string name="volume">6/5000 Volumen</string>
     <string name="other1">Hast du eine Sprech- oder Bewegungsstörung?</string>
     <string name="balance">Schwanken</string>
     <string name="TremorAmplitude">Tremoramplitude</string>
     <string name="Completed_Exercises">Abgeschlossene Übungen</string>
+    <string name="Int_medicine">Medizin:</string>
+    <string name="update_profile">Profil aktualisieren</string>
+    <string name="Notification_time">Zeit für Benachrichtigungen</string>
+    <string name="export">Metadaten exportieren</string>
+    <string name="export_sucess">Metadatenexport war erfolgreich</string>
+    <string name="export_failed">Metadatenexport fehlgeschlagen</string>
+
 </resources>

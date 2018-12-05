@@ -2,7 +2,7 @@
 <resources>
 
     <string name="name">Nombre</string>
-    <string name="ID">Identificación</string>
+    <string name="ID">Teléfono</string>
     <string name="Login">Ingresar</string>
     <string name="or">Ó</string>
     <string name="register">Registro</string>
@@ -53,7 +53,7 @@
     <string name="med">Medicamentos</string>
     <string name="other1">"¿Sufre de algún transtorno del habla o el movimiento?"</string>
     <string name="user_empty">Por favor, introduzca  su nombre</string>
-    <string name="userid_empty">Por favor, introduzca  su documento</string>
+    <string name="userid_empty">Por favor, introduzca  su numero telefónico</string>
     <string name="log_in">Acceso concedido</string>
     <string name="log_error">Usuario no encontrado</string>
     <string name="brith_date_error">Por favor, introduzca su fecha de nacimiento</string>
@@ -82,7 +82,7 @@
     <string name="missing_permissions_text">Debes Garantizar permisos para hacer los ejercicios</string>
     <string name="OK">OK</string>
     <string name="user_name">"Nombre: "</string>
-    <string name="user_id">"CC: "</string>
+    <string name="user_id">"Teléfono: "</string>
     <string name="S_record">"Sesiones grabadas "</string>
     <string name="upd_medicine">Actualizar medicina</string>
     <string name="add_medicine">AGREGAR MEDICINA</string>
@@ -121,6 +121,12 @@
     <string name="balance">Balanceo</string>
     <string name="TremorAmplitude">Amplitud de Temblor</string>
     <string name="Completed_Exercises">Ejercicios completados</string>
+    <string name="Int_medicine">Medicinas:</string>
+    <string name="update_profile">Actualizar Perfil</string>
+    <string name="Notification_time">Hora del recordatorio</string>
+    <string name="export">Exportar Metadatos</string>
+    <string name="export_sucess">Metadatos fueron exportados de forma exitosa</string>
+    <string name="export_failed">Fallo al exortar los metadatos</string>
 
 
 </resources>

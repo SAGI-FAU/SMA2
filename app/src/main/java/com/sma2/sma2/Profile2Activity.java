@@ -24,7 +24,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 
 public class Profile2Activity extends AppCompatActivity implements View.OnClickListener {
-
+    TextView TimeDignosis;
     Spinner spinner;
     Spinner intaketime_spinner;
     PatientDA patientData;
@@ -36,6 +36,7 @@ public class Profile2Activity extends AppCompatActivity implements View.OnClickL
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile2);
+        TimeDignosis=findViewById(R.id.time_diagnosis);
         patientData = (PatientDA) getIntent().getSerializableExtra("PatientData");
         MedicineDataService ds = new MedicineDataService(getApplicationContext());
         ds.getAllCurrentMedictation();
@@ -46,6 +47,8 @@ public class Profile2Activity extends AppCompatActivity implements View.OnClickL
     private void initialized() {
         spinner = findViewById(R.id.spinnerEducation);
         intaketime_spinner = findViewById(R.id.spinnerIntake);
+
+
         Resources r = getResources();
         String[] categories = new String[]{r.getString(R.string.none_item),r.getString(R.string.elem_item),r.getString(R.string.high_item),r.getString(R.string.under_item),r.getString(R.string.post)};
         String[] hours = new String[]{"00:00","01:00","02:00","03:00","04:00","05:00","06:00","07:00","08:00","09:00","10:00","11:00","12:00","13:00","14:00","15:00","16:00","17:00","18:00","19:00","20:00","21:00","22:00","23:00"};
@@ -55,6 +58,12 @@ public class Profile2Activity extends AppCompatActivity implements View.OnClickL
         intake_adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
         spinner.setAdapter(adapter);
+
+        int EducationLevel=patientData.getEducational_level();
+        if (EducationLevel>=0){
+            spinner.setSelection(EducationLevel);
+        }
+
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
@@ -66,6 +75,13 @@ public class Profile2Activity extends AppCompatActivity implements View.OnClickL
 
             }
         });
+
+
+
+        int YearDiagnosis=patientData.getYear_diag();
+        TimeDignosis.setText(String.valueOf(YearDiagnosis));
+
+
         intaketime_spinner.setAdapter(intake_adapter);
         intaketime_spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -100,7 +116,7 @@ public class Profile2Activity extends AppCompatActivity implements View.OnClickL
                 onBackPressed();
                 break;
             case R.id.button_continue2:
-                String time_diagnosis = ((TextView)findViewById(R.id.time_diagnosis)).getText().toString();
+                String time_diagnosis = TimeDignosis.getText().toString();
                 if(!time_diagnosis.isEmpty()){
                     patientData.setYear_diag(Integer.valueOf(time_diagnosis));
                     patientData.setYear_diag(Integer.valueOf(time_diagnosis));
