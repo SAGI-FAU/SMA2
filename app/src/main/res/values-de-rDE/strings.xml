@@ -121,4 +121,8 @@
     <string name="Int_medicine">Medizin:</string>
     <string name="update_profile">Profil aktualisieren</string>
     <string name="Notification_time">Zeit für Benachrichtigungen</string>
+    <string name="export">Metadaten exportieren</string>
+    <string name="export_sucess">Metadatenexport war erfolgreich</string>
+    <string name="export_failed">Metadatenexport fehlgeschlagen</string>
+
 </resources>

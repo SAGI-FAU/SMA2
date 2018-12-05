@@ -124,6 +124,9 @@
     <string name="Int_medicine">Medicinas:</string>
     <string name="update_profile">Actualizar Perfil</string>
     <string name="Notification_time">Hora del recordatorio</string>
+    <string name="export">Exportar Metadatos</string>
+    <string name="export_sucess">Metadatos fueron exportados de forma exitosa</string>
+    <string name="export_failed">Fallo al exortar los metadatos</string>
 
 
 </resources>

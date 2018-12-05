@@ -235,7 +235,7 @@ public class Tapping_feature_Activity extends AppCompatActivity  implements View
         GraphView graph2 =findViewById(R.id.bar_perc2);
         graphManager.BarGraph(graph2, x2, y2, 101.0, 5, Title, Xlabel, Ylabel);
 
-        
+
 
 
     }

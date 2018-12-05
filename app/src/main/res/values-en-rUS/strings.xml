@@ -123,6 +123,8 @@
     <string name="Int_medicine">Medicine:</string>
     <string name="update_profile">Update Profile</string>
     <string name="Notification_time">Time for notifications</string>
-
+    <string name="export">Export Metadata</string>
+    <string name="export_sucess">Metadata export was successful</string>
+    <string name="export_failed">Metadata export failed</string>
 
 </resources>
