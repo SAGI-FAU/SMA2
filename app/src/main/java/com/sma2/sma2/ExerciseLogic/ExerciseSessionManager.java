@@ -23,6 +23,7 @@ import com.sma2.sma2.ExerciseFragments.Ex_Hand_To_Head_Rec;
 import com.sma2.sma2.ExerciseFragments.Ex_Walking_Rec;
 import com.sma2.sma2.ExerciseFragments.Ex_balance_Rec;
 import com.sma2.sma2.ExerciseFragments.Ex_postural_Rec;
+import com.sma2.sma2.R;
 
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -153,6 +154,7 @@ public class ExerciseSessionManager {
         String ExFrag;
         String ExDescr;
         String ExInstr;
+        String ExVideo;
         while ((instr = reader.readNext()) != null) {
             instr = parser.parseLine(TextUtils.join("", instr));
             ExID = Integer.parseInt(instr[0]);//The ID is always on the first position CSV.
@@ -162,6 +164,13 @@ public class ExerciseSessionManager {
             ExName = instr[locale];//Exercise name. The position depends on the detected language.
             ExDescr = instr[locale + 1];//Exercise description.
             ExInstr = instr[locale + 2];//Exercise instruction.
+            String videoName = instr[instr.length - 1];
+            if (videoName.length() != 0) {
+                ExVideo = languages[locale] + "_" + videoName;
+                ExVideo = "android.resource://" + context.getPackageName() + "/" + context.getResources().getIdentifier(ExVideo, "raw", context.getPackageName());
+            } else {
+                ExVideo = "None";
+            }
 
             //The following if-else statements are used to select the fragment of each task
             //ej: ExReadText.class only works for sentences.

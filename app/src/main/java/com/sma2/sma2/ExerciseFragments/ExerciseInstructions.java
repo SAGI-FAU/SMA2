@@ -67,7 +67,6 @@ public class ExerciseInstructions extends Fragment {
                     mStartClickedCallback.onExerciseStartClicked();
                 }
             }
-
         });
 
         return view;
