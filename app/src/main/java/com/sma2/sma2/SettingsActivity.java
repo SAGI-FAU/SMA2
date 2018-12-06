@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Environment;
+import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -60,7 +61,7 @@ public class SettingsActivity extends AppCompatActivity implements View.OnClickL
         notify_adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         SpinnerNotify.setAdapter(notify_adapter);
 
-        sharedPref =this.getPreferences(Context.MODE_PRIVATE);
+        sharedPref =PreferenceManager.getDefaultSharedPreferences(this);
         TimeNotification=sharedPref.getInt("Notification Time", 9);
 
 
@@ -76,6 +77,7 @@ public class SettingsActivity extends AppCompatActivity implements View.OnClickL
                 SharedPreferences.Editor editor = sharedPref.edit();
                 editor.putInt("Notification Time", TimeNotification);
                 editor.apply();
+
             }
 
             @Override
@@ -84,10 +86,7 @@ public class SettingsActivity extends AppCompatActivity implements View.OnClickL
             }
         });
 
-        Notifications notifications=new Notifications(this);
-        notifications.cancelReminder(this,AlarmReceiver.class);
-        notifications.setReminder(this, AlarmReceiver.class, TimeNotification-1, 0);
-    }
+   }
 
 
     @Override

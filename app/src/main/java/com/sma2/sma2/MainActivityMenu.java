@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -33,10 +34,11 @@ public class MainActivityMenu extends AppCompatActivity implements View.OnClickL
         ask_permissions();
 
         // create alarm notifications to make exercises
-        SharedPreferences sharedPref =this.getPreferences(Context.MODE_PRIVATE);
+        SharedPreferences sharedPref =PreferenceManager.getDefaultSharedPreferences(this);
+
         int TimeNotification=sharedPref.getInt("Notification Time", 9);
         Notifications notifications=new Notifications(this);
-        notifications.setReminder(this,AlarmReceiver.class, TimeNotification-1, 0);
+        notifications.setReminder(this,AlarmReceiver.class, TimeNotification, 0);
 
 
         // create alarm notifications to take the medicine
