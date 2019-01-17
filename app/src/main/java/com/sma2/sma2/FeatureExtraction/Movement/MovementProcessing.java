@@ -16,7 +16,7 @@ public class MovementProcessing {
 
 
     private float winlen = 3;//Default window length 40ms
-    private float winstep = 1;//Default window step 30ms;
+    private float winstep = 0.5f;//Default window step 30ms;
     private int maxf0=50;
     private double minf0=0.3;
     private int inilag, endlag;
