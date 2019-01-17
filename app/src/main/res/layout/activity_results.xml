@@ -112,7 +112,7 @@
             android:adjustViewBounds="true"
             android:background="@null"
             android:scaleType="fitCenter"
-            android:src="@drawable/smartphone_extended"
+            android:src="@drawable/smartphone_extended_small"
             app:layout_constraintDimensionRatio="1"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/txtSpeech"
@@ -171,6 +171,104 @@
 
 
 
+        <ImageButton
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginTop="8sp"
+            android:adjustViewBounds="true"
+            android:background="@null"
+            android:scaleType="fitCenter"
+            android:src="@drawable/smartphone_rotation_icon_small"
+            app:layout_constraintDimensionRatio="1"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/txtPosturalTremor"
+            app:layout_constraintWidth_percent="0.45"
+            android:id="@+id/bRotation"
+            />
+
+        <TextView
+            android:id="@+id/txtRotation"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8sp"
+            android:text="@string/pronation"
+            android:textSize="20sp"
+            android:textStyle="bold|italic"
+            app:layout_constraintTop_toBottomOf="@+id/bRotation"
+            app:layout_constraintEnd_toEndOf="@+id/bRotation"
+            app:layout_constraintStart_toStartOf="@+id/bRotation" />
+
+
+
+
+        <ImageButton
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginTop="8sp"
+            android:adjustViewBounds="true"
+            android:background="@null"
+            android:scaleType="fitCenter"
+            android:src="@drawable/smartphone_head_icon_small"
+            app:layout_constraintDimensionRatio="1"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/txtBalance"
+            app:layout_constraintWidth_percent="0.45"
+            android:id="@+id/bKinetic"
+            />
+
+        <TextView
+            android:id="@+id/txtKinetic"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8sp"
+            android:text="@string/kinetic"
+            android:textSize="23sp"
+            android:textStyle="bold|italic"
+            app:layout_constraintTop_toBottomOf="@+id/bKinetic"
+            app:layout_constraintEnd_toEndOf="@+id/bKinetic"
+            app:layout_constraintStart_toStartOf="@+id/bKinetic" />
+
+
+
+        <ImageButton
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginTop="8sp"
+            android:adjustViewBounds="true"
+            android:background="@null"
+            android:scaleType="fitCenter"
+            android:src="@drawable/smartphone_circling_small"
+            app:layout_constraintDimensionRatio="1"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/txtKinetic"
+            app:layout_constraintWidth_percent="0.45"
+            android:id="@+id/bCircling"
+            />
+
+        <TextView
+            android:id="@+id/txtCircling"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8sp"
+            android:text="@string/circling"
+            android:textSize="20sp"
+            android:textStyle="bold|italic"
+            app:layout_constraintTop_toBottomOf="@+id/bCircling"
+            app:layout_constraintEnd_toEndOf="@+id/bCircling"
+            app:layout_constraintStart_toStartOf="@+id/bCircling" />
+
 
         <Button
             android:text="@string/back"
@@ -187,7 +285,7 @@
             android:layout_marginTop="8dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/txtPosturalTremor"
+            app:layout_constraintTop_toBottomOf="@+id/txtCircling"
             />
 
 

@@ -62,6 +62,8 @@
             android:screenOrientation="portrait"/>
         <activity android:name=".FeatureExtraction.Movement.BalanceTremorFeatureActivity"
             android:screenOrientation="portrait"/>
+        <activity android:name=".FeatureExtraction.Movement.HandMovementFeatureActivity"
+            android:screenOrientation="portrait"/>
         <activity android:name=".FeatureExtraction.Speech.Speech_features_Activity"
             android:screenOrientation="portrait" />
 

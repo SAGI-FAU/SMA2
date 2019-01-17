@@ -130,8 +130,15 @@
     <string name="export">Export Metadata</string>
     <string name="export_sucess">Metadata export was successful</string>
     <string name="export_failed">Metadata export failed</string>
-
-
-
-
+    <string name="left_stability"> Stability Left Hand</string>
+    <string name="right_stability"> Stability Right Hand</string>
+    <string name="percentage">Percentage</string>
+    <string name="F0">Fundamental Frequency</string>
+    <string name="time">time [s]</string>
+    <string name="frequency">frequency [Hz]</string>
+    <string name="pronation">Hand Rotation</string>
+    <string name="kinetic">Kinetic Tremor</string>
+    <string name="circling">Circling</string>
+    <string name="perc_left_hand">Performance Left Hand</string>
+    <string name="perc_right_hand">Performance Right Hand</string>
 </resources>
