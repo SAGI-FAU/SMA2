@@ -187,7 +187,7 @@
             android:title="@string/TremorAmplitudeRight"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/bar_percTremorLeft"/>
+            app:layout_constraintTop_toBottomOf="@+id/textView_left_title"/>
 
 
         <Button

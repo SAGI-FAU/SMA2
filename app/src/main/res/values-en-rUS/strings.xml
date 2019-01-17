@@ -135,6 +135,6 @@
     <string name="kinetic">Kinetic Tremor</string>
     <string name="circling">Circling</string>
     <string name="perc_left_hand">Performance Left Hand</string>
-    <string name="perc_right_hand">Performance Left Hand</string>
+    <string name="perc_right_hand">Performance Right Hand</string>
 
 </resources>
