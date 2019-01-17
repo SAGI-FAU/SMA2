@@ -28,7 +28,6 @@
     <string name="record">Grabar</string>
     <string name="a_ex">a</string>
     <string name="instructions">Instrucciones</string>
-    <string name="ball_balance">Juego de balón en equilibrio</string>
     <string name="tapping_ex">Toques</string>
     <string name="tapping_1">Toque con un dedo</string>
     <string name="tapping_2">Toques con dos dedos</string>
@@ -127,6 +126,17 @@
     <string name="export">Exportar Metadatos</string>
     <string name="export_sucess">Metadatos fueron exportados de forma exitosa</string>
     <string name="export_failed">Fallo al exortar los metadatos</string>
+    <string name="left_stability">Estabilidad mano izquierda</string>
+    <string name="right_stability">Estabilidad mano derecha</string>
+    <string name="percentage">Porcentaje</string>
+    <string name="F0">Frecuencia fundamental</string>
+    <string name="time">tiempo (s)</string>
+    <string name="frequency">frecuencia (Hz)</string>
+    <string name="pronation">Rotación de la mano</string>
+    <string name="kinetic">Temblor de movimiento</string>
+    <string name="circling">Circulos</string>
+    <string name="perc_left_hand">Desempeño mano izquierda</string>
+    <string name="perc_right_hand">Desempeño mano derecha</string>
 
 
 </resources>

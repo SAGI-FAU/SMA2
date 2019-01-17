@@ -98,6 +98,30 @@ public class sigproc {
         return window;
     }
 
+
+
+    /**
+     * Windowing
+     * Applies windowing to the signal. The current method implements Hanning and Hamming windowing.
+     * @param win_sig - Short-time frame from the signal
+     * @param selwin - Flag used to select between hamming (selwin=0) or hanning (selwin=1) windowing
+     * @return Integer with the mean value of the array.
+     */
+    public double[] makeWindow(double win_sig[],int selwin) {
+
+        double[] window = new double[win_sig.length];
+        int n = win_sig.length;
+        for(int i = 0; i < window.length; i++)
+            if (selwin==0) {//Make a hamming window
+                window[i] = win_sig[i] * ((0.54 - 0.46 * Math.cos(2 * Math.PI * i / (n - 1))));
+            }
+            else if(selwin==1) {//Make hanning window
+                window[i] = win_sig[i] * ( (0.5 - 0.5 * Math.cos(2 * Math.PI * i / (n - 1))));
+            }
+        return window;
+    }
+
+
     /**
      * Power spectrum
      * Computes the power spectrum of a speech signal.

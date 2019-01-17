@@ -27,6 +27,8 @@ public class ExerciseInstructions extends Fragment {
     OnStartClickedListener mStartClickedCallback;
     private Exercise mExercise;
 
+    MediaController mediaController;
+
     public ExerciseInstructions() {}
 
     public static ExerciseInstructions newInstance(Exercise exercise) {
@@ -69,12 +71,7 @@ public class ExerciseInstructions extends Fragment {
                     mediaPlayer.setOnVideoSizeChangedListener(new MediaPlayer.OnVideoSizeChangedListener() {
                         @Override
                         public void onVideoSizeChanged(MediaPlayer mediaPlayer, int i, int i1) {
-                            MediaController mediaController = new MediaController(getContext(), false){
-                                @Override
-                                public void hide() {
-
-                                }
-                            };
+                            mediaController = new MediaController(getContext(), false);
                             videoView.setMediaController(mediaController);
                             mediaController.setAnchorView(videoView);
                             mediaController.show(0);
@@ -118,6 +115,7 @@ public class ExerciseInstructions extends Fragment {
     }
 
     public interface OnStartClickedListener {
+
         void onExerciseStartClicked();
     }
 }

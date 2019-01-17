@@ -41,6 +41,16 @@ public class array_manipulation {
         return means;
     }
 
+    public double[] dlisttoarray(List<Double> vals)
+    {
+        double [] means = new double[vals.size()];
+        for(int i=0;i<vals.size();i++)
+        {
+            means[i] = vals.get(i);
+        }
+        return means;
+    }
+
     /**
      * Calculate first order discrete difference from array.
      * @param x - Array
@@ -184,7 +194,7 @@ public class array_manipulation {
      * @param count count of output interpolated numbers
      * @return array of interpolated number with specified count
      */
-    public static float[] interpolate(float start, float end, int count) {
+    public float[] interpolate(float start, float end, int count) {
         if (count < 2) {
             throw new IllegalArgumentException("interpolate: illegal count!");
         }
