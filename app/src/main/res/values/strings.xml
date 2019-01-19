@@ -120,10 +120,10 @@
     <string name="postural">Postural Tremor</string>
     <string name="Hand_left">Left Hand</string>
     <string name="Hand_right">Right Hand</string>
-    <string name="TremorAmplitudeLeft">Tremor Amplitude Left Hand</string>
-    <string name="TremorAmplitudeRight">Tremor Amplitude Right Hand</string>
+    <string name="TremorAmplitudeLeft">% Performance Left Hand</string>
+    <string name="TremorAmplitudeRight">% Performance Right Hand</string>
     <string name="balance">Balancing</string>
-    <string name="TremorAmplitude">Tremor Amplitude</string>
+    <string name="TremorAmplitude">% Performance</string>
     <string name="Completed_Exercises">Completed Exercises</string>
     <string name="update_profile">Update Profile</string>
     <string name="Notification_time">Time for notifications</string>
@@ -141,4 +141,12 @@
     <string name="circling">Circling</string>
     <string name="perc_left_hand">Performance Left Hand</string>
     <string name="perc_right_hand">Performance Right Hand</string>
+    <string name="scheduler">Change exercise scheduler</string>
+    <string name="password">Password</string>
+    <string name="daily_exercises">Daily Exercises</string>
+    <string name="full_exercises">Full Exercises</string>
+    <string name="wrong_pass">Wrong password</string>
+
+
+
 </resources>

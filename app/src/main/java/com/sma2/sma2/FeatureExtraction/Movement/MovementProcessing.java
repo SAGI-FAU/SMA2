@@ -78,7 +78,7 @@ public class MovementProcessing {
 
         AccR=getAccR(AccXn, AccYn, AccZn);
 
-        return ComputePower(AccR);
+        return 100/(1+ComputePower(AccR));
 
 
     }
