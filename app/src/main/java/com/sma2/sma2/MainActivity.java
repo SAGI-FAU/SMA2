@@ -22,6 +22,7 @@ import com.sma2.sma2.DataAccess.DaoMaster;
 import com.sma2.sma2.DataAccess.DaoSession;
 import com.sma2.sma2.DataAccess.PatientDA;
 import com.sma2.sma2.DataAccess.PatientDataService;
+import com.sma2.sma2.ExerciseLogic.ExerciseSessionManager;
 
 
 import org.greenrobot.greendao.database.Database;
@@ -44,6 +45,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         SharedPreferences prefs = getSharedPreferences("LoginPref",this.MODE_PRIVATE);
         int login = prefs.getInt("UserCreated",0);
         if(login == 1){
+            ExerciseSessionManager sessionManager = new ExerciseSessionManager();
+            sessionManager.createExerciseSession(this);
             Intent intent = new Intent(MainActivity.this,MainActivityMenu.class);
             startActivity(intent);
             finish();
