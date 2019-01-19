@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@android:color/background_dark"
+    android:background="@android:color/white"
     tools:context=".Activities.SplashScreen">
 
     <ImageView
@@ -73,7 +73,7 @@
             android:shadowRadius="2.0"
             android:text="A"
             android:textAllCaps="true"
-            android:textColor="@android:color/background_light"
+            android:textColor="@color/colorPrimary"
             android:textSize="40sp"
             android:textStyle="bold" />
 
@@ -88,7 +88,7 @@
             android:shadowRadius="2.0"
             android:text="P"
             android:textAllCaps="true"
-            android:textColor="@android:color/background_light"
+            android:textColor="@color/colorPrimary"
             android:textSize="40sp"
             android:textStyle="bold" />
 
@@ -103,7 +103,7 @@
             android:shadowRadius="2.0"
             android:text="K"
             android:textAllCaps="true"
-            android:textColor="@android:color/background_light"
+            android:textColor="@color/colorPrimary"
             android:textSize="40sp"
             android:textStyle="bold" />
 
@@ -118,7 +118,7 @@
             android:shadowRadius="2.0"
             android:text="I"
             android:textAllCaps="true"
-            android:textColor="@android:color/background_light"
+            android:textColor="@color/colorPrimary"
             android:textSize="40sp"
             android:textStyle="bold" />
 
@@ -133,7 +133,7 @@
             android:shadowRadius="2.0"
             android:text="N"
             android:textAllCaps="true"
-            android:textColor="@android:color/background_light"
+            android:textColor="@color/colorPrimary"
             android:textSize="40sp"
             android:textStyle="bold" />
 
@@ -148,7 +148,7 @@
             android:shadowRadius="2.0"
             android:text="S"
             android:textAllCaps="true"
-            android:textColor="@android:color/background_light"
+            android:textColor="@color/colorPrimary"
             android:textSize="40sp"
             android:textStyle="bold" />
 
@@ -163,7 +163,7 @@
             android:shadowRadius="2.0"
             android:text="O"
             android:textAllCaps="true"
-            android:textColor="@android:color/background_light"
+            android:textColor="@color/colorPrimary"
             android:textSize="40sp"
             android:textStyle="bold" />
 
@@ -178,7 +178,7 @@
             android:shadowRadius="2.0"
             android:text="N"
             android:textAllCaps="true"
-            android:textColor="@android:color/background_light"
+            android:textColor="@color/colorPrimary"
             android:textSize="40sp"
             android:textStyle="bold" />
     </LinearLayout>

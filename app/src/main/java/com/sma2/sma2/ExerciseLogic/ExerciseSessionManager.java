@@ -1,7 +1,9 @@
 package com.sma2.sma2.ExerciseLogic;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.net.Uri;
+import android.preference.PreferenceManager;
 import android.text.TextUtils;
 import android.util.Log;
 
@@ -37,11 +39,12 @@ public class ExerciseSessionManager {
     private List<Exercise> _dummyExerciseList = new ArrayList<>();
     private List<Exercise> _ExerciseList = new ArrayList<>();
     private List<ScheduledExercise> _testList = new ArrayList<>();
-
+    SharedPreferences sharedPref;
 
     public void createExerciseSession(Context context) {
         Calendar c = Calendar.getInstance();
         int day = c.get(Calendar.DAY_OF_WEEK);
+        sharedPref=PreferenceManager.getDefaultSharedPreferences(context);
 
         // create Dummy List
         ScheduledExerciseDataService scheduledExerciseDataService = new ScheduledExerciseDataService(context);
@@ -61,29 +64,38 @@ public class ExerciseSessionManager {
 
 
         int[] exercisesIDs = new int[]{};
-        switch (day) {
-            case 1:
-                exercisesIDs = new int[]{1, 2, 11, 22, 33};
-                break;
-            case 2:
-                exercisesIDs = new int[]{3, 4, 12, 23, 24, 34};
-                break;
-            case 3:
-                exercisesIDs = new int[]{5, 6, 13, 25, 26, 33};
-                break;
-            case 4:
-                exercisesIDs = new int[]{7, 8, 14, 27, 28, 34};
-                break;
-            case 5:
-                exercisesIDs = new int[]{9, 10, 15, 29, 30, 35};
-                break;
-            case 6:
-                exercisesIDs = new int[]{16, 17, 20, 31, 35};
-                break;
-            case 7:
-                exercisesIDs = new int[]{18, 19, 21, 32, 33};
-                break;
 
+        String type_exercise=sharedPref.getString("exercises", "daily");
+
+
+        if (type_exercise.equals("daily")){
+            switch (day) {
+                case 1:
+                    exercisesIDs = new int[]{1, 2, 11, 22, 33};
+                    break;
+                case 2:
+                    exercisesIDs = new int[]{3, 4, 12, 23, 24, 34};
+                    break;
+                case 3:
+                    exercisesIDs = new int[]{5, 6, 13, 25, 26, 33};
+                    break;
+                case 4:
+                    exercisesIDs = new int[]{7, 8, 14, 27, 28, 34};
+                    break;
+                case 5:
+                    exercisesIDs = new int[]{9, 10, 15, 29, 30, 35};
+                    break;
+                case 6:
+                    exercisesIDs = new int[]{16, 17, 20, 31, 35};
+                    break;
+                case 7:
+                    exercisesIDs = new int[]{18, 19, 21, 32, 33};
+                    break;
+
+            }
+        }
+        else{
+            exercisesIDs = new int[]{1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35};
         }
 
 

@@ -115,10 +115,10 @@
     <string name="movement">Movimiento</string>
     <string name="Hand_right">Mano Derecha</string>
     <string name="postural">Temblor Postural</string>
-    <string name="TremorAmplitudeLeft">Temblor mano izquerda</string>
-    <string name="TremorAmplitudeRight">Temblor mano derecha</string>
+    <string name="TremorAmplitudeLeft">% desempeño mano izquerda</string>
+    <string name="TremorAmplitudeRight">% desempeño mano derecha</string>
     <string name="balance">Balanceo</string>
-    <string name="TremorAmplitude">Amplitud de Temblor</string>
+    <string name="TremorAmplitude">% desempeño</string>
     <string name="Completed_Exercises">Ejercicios completados</string>
     <string name="Int_medicine">Medicinas:</string>
     <string name="update_profile">Actualizar Perfil</string>
@@ -137,6 +137,11 @@
     <string name="circling">Circulos</string>
     <string name="perc_left_hand">Desempeño mano izquierda</string>
     <string name="perc_right_hand">Desempeño mano derecha</string>
+    <string name="scheduler">Cambiar planeación ejercicios</string>
+    <string name="password">Contraseña</string>
+    <string name="daily_exercises">Ejercicios Diarios</string>
+    <string name="full_exercises">Todos los ejercicios</string>
+    <string name="wrong_pass">Contraseña incorrecta</string>
 
 
 </resources>
