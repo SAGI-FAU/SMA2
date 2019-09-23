@@ -2,6 +2,8 @@ package com.sma2.sma2.DataAccess;
 
 import android.content.Context;
 
+import com.sma2.sma2.ExerciseLogic.DaoMaster;
+import com.sma2.sma2.ExerciseLogic.DaoSession;
 import com.sma2.sma2.ExerciseLogic.Exercise;
 import com.sma2.sma2.ExerciseLogic.ExerciseDao;
 

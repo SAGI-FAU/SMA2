@@ -5,8 +5,8 @@ import android.content.Context;
 import org.greenrobot.greendao.database.Database;
 import org.greenrobot.greendao.query.QueryBuilder;
 import com.sma2.sma2.DataAccess.MedicineDADao.Properties;
-import com.sma2.sma2.DataAccess.DaoMaster;
-import com.sma2.sma2.DataAccess.DaoSession;
+import com.sma2.sma2.ExerciseLogic.DaoMaster;
+import com.sma2.sma2.ExerciseLogic.DaoSession;
 import com.sma2.sma2.R;
 
 import java.util.List;

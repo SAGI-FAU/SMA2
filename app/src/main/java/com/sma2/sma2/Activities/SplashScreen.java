@@ -10,8 +10,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.sma2.sma2.ApplicationState;
-import com.sma2.sma2.DataAccess.DaoMaster;
-import com.sma2.sma2.DataAccess.DaoSession;
+import com.sma2.sma2.ExerciseLogic.DaoMaster;
+import com.sma2.sma2.ExerciseLogic.DaoSession;
 import com.sma2.sma2.ExerciseLogic.ExerciseSessionManager;
 import com.sma2.sma2.MainActivity;
 import com.sma2.sma2.MainActivityMenu;
@@ -33,7 +33,6 @@ public class SplashScreen extends AppCompatActivity {
         setContentView(R.layout.activity_splash_screen);
         //Skip splash screen if in dev-mode
         if (ApplicationState.appUnderDevelopment()) {
-            // TODO: Only for testing this creates a new Session on App restart
             ExerciseSessionManager sessionManager = new ExerciseSessionManager();
             sessionManager.createExerciseSession(this);
 

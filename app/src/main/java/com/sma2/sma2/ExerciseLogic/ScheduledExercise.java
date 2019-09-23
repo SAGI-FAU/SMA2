@@ -18,7 +18,6 @@ import java.util.Date;
 import org.greenrobot.greendao.annotation.Generated;
 import org.greenrobot.greendao.DaoException;
 import com.sma2.sma2.DataAccess.ScheduledExerciseDataService;
-import com.sma2.sma2.ExerciseLogic.DaoSession;
 
 @Entity
 public class ScheduledExercise implements Parcelable {
