@@ -10,6 +10,8 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.media.RingtoneManager;
 import android.net.Uri;
 import android.os.Build;
@@ -65,12 +67,29 @@ public class Notifications {
 
         PendingIntent pendingIntent = PendingIntent.getActivity(CONTEXT, DAILY_REMINDER_REQUEST_CODE, intent, 0);
 
+
+        String Title_notification=CONTEXT.getResources().getString(R.string.title_notif_med);
+        Bitmap icon;
+        if (title.equals(Title_notification)){
+            icon = BitmapFactory.decodeResource(CONTEXT.getResources(),
+                    R.drawable.pill);
+        }
+        else{
+            icon = BitmapFactory.decodeResource(CONTEXT.getResources(),
+                    R.drawable.btn_exercises);
+        }
+
+
         NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(CONTEXT, "ch10")
                 .setSmallIcon(R.drawable.tulip_elevated_binary)
                 .setContentTitle(title)
+                .setLargeIcon(icon)
                 .setContentText(text)
                 .setSound(alarmSound)
                 .setContentIntent(pendingIntent)
+                .setStyle(new NotificationCompat.BigPictureStyle()
+                        .bigPicture(icon)
+                        .bigLargeIcon(icon))
                 .setPriority(NotificationCompat.PRIORITY_DEFAULT);
 
         mBuilder.setAutoCancel(true);

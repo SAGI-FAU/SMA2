@@ -30,6 +30,9 @@ public class PhonFeatures {
 
         //Length of the f0 contour
         int N = f0.length;
+        if (N==0){
+            return 25.0f;
+        }
         //Find Max
         float[] temp = Arrays.copyOfRange(f0,0, f0.length);
         Arrays.sort(temp);

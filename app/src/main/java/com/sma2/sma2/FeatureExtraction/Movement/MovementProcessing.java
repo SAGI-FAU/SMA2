@@ -77,10 +77,15 @@ public class MovementProcessing {
         AccZn=RemoveGravity(AccZ);
 
         AccR=getAccR(AccXn, AccYn, AccZn);
+        double power= ComputePower(AccR);
 
-        return 100/(1+ComputePower(AccR));
+        return tremortoperc(power);
 
 
+    }
+
+    public double tremortoperc(double distance){
+        return 200/(1+Math.exp(0.2*distance));
     }
 
 
