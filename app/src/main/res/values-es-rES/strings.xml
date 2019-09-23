@@ -142,6 +142,8 @@
     <string name="daily_exercises">Ejercicios Diarios</string>
     <string name="full_exercises">Todos los ejercicios</string>
     <string name="wrong_pass">Contraseña incorrecta</string>
-
+    <string name="speech_exercises">Ejercicios de voz</string>
+    <string name="mov_exercises">Ejercicios de movimiento</string>
+    <string name="demo_exercises">Ejercicios para demo</string>
 
 </resources>

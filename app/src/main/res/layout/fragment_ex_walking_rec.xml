@@ -23,7 +23,7 @@
         android:text="TextView"
         android:textAlignment="center"
         android:textColor="@color/textColor"
-        android:textSize="100dp"
+        android:textSize="50sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
