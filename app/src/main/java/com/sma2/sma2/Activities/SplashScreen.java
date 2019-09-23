@@ -10,8 +10,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.sma2.sma2.ApplicationState;
-import com.sma2.sma2.ExerciseLogic.DaoMaster;
-import com.sma2.sma2.ExerciseLogic.DaoSession;
+import com.sma2.sma2.DataAccess.DaoMaster;
+import com.sma2.sma2.DataAccess.DaoSession;
 import com.sma2.sma2.ExerciseLogic.ExerciseSessionManager;
 import com.sma2.sma2.MainActivity;
 import com.sma2.sma2.MainActivityMenu;
