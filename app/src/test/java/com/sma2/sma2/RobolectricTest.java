@@ -4,8 +4,8 @@ import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
 import com.sma2.sma2.BuildConfig;
-import com.sma2.sma2.DataAccess.DaoMaster;
-import com.sma2.sma2.DataAccess.DaoSession;
+import com.sma2.sma2.ExerciseLogic.DaoMaster;
+import com.sma2.sma2.ExerciseLogic.DaoSession;
 import com.sma2.sma2.DataAccess.MedicineDA;
 import com.sma2.sma2.DataAccess.MedicineDADao;
 import com.sma2.sma2.DataAccess.MedicineDataService;
