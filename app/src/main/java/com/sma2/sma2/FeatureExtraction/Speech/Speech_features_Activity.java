@@ -126,7 +126,7 @@ public class Speech_features_Activity extends AppCompatActivity implements View.
             sumF0+=F0[i];
         }
         if (sumF0==0){
-            return 0;
+            return 450f;
         }
         else{
             List<float[]> Voiced=F0Detector.voiced(F0, Signal);

@@ -37,8 +37,8 @@ public class f0detector {
 
     public float[] sig_f0(float[] sig, int Fs) {
         //This function normalize the speech signal.
-        winlen = (float) 0.04;//Default window length 40ms
-        winstep = (float) 0.03;//Default window step 30ms;
+        winlen = (float) 0.03;//Default window length 40ms
+        winstep = (float) 0.015;//Default window step 30ms;
         fs = Fs;
         inilag = (int) Math.ceil(fs/maxf0);//lower bound lag
         endlag = (int) Math.ceil(fs/minf0);//upper bound lag
