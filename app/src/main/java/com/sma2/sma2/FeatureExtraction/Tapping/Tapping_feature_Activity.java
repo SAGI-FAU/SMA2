@@ -99,11 +99,12 @@ public class Tapping_feature_Activity extends AppCompatActivity  implements View
         double delay_hits_two= delay_hits_Tapping_one(Count_Touch_one,Delay_one);
         float Hist_Porcentage=Count_ladybug_one(Count_Touch_one);
         float dimention=pixeltomm((float)average_funtion(Distance_one));
-        float perc_distance=100/(1+dimention);
+        float perc_distance= (float) distancetoperc(dimention);
+
         String Distance_error=df.format(dimention);
         String Tapping_time_total=df.format(average_funtion(Delay_one));
 
-        float performancef=(Hist_Porcentage+perc_distance)/2;
+        float performancef=(Hist_Porcentage+(float)perc_distance)/2;
         String performaces=String.valueOf(df.format(performancef))+"%";
         if(path_tapping==null){
             tNumber_Taps.setText(R.string.Empty);
@@ -154,7 +155,7 @@ public class Tapping_feature_Activity extends AppCompatActivity  implements View
                 Count_Touch_one = read_csv(path_tapping_all.get(i), 0);// The index tells me which column I should access
                 Distance_one=read_csv(path_tapping,2);
                 dimention=pixeltomm((float)average_funtion(Distance_one));
-                perc_distance=100/(1+dimention);
+                perc_distance=(float) distancetoperc(dimention);
                 x.add(i+1);
                 y.add((perc_distance+Count_ladybug_one(Count_Touch_one))/2);
 
@@ -203,10 +204,10 @@ public class Tapping_feature_Activity extends AppCompatActivity  implements View
         ArrayList<Double> Count_Touch_right=separator_vector(Count_Touch2,2);
 
         float dimention_left=pixeltomm((float)average_funtion(Distance_left));
-        float perc_distance_left=100/(1+dimention_left);
+        float perc_distance_left=(float) distancetoperc(dimention_left);
 
         float dimention_right=pixeltomm((float)average_funtion(Distance_right));
-        float perc_distance_right=100/(1+dimention_right);
+        float perc_distance_right=(float) distancetoperc(dimention_right);
 
 
         float PercLeft=(Count_ladybug_one(Count_Touch_left)+perc_distance_left)/2;
@@ -245,9 +246,9 @@ public class Tapping_feature_Activity extends AppCompatActivity  implements View
                 Count_Touch_right=separator_vector(Count_Touch2,2);
 
                 dimention_left=pixeltomm((float)average_funtion(Distance_left));
-                perc_distance_left=100/(1+dimention_left);
+                perc_distance_left=(float) distancetoperc(dimention_left);
                 dimention_right=pixeltomm((float)average_funtion(Distance_right));
-                perc_distance_right=100/(1+dimention_right);
+                perc_distance_right=(float) distancetoperc(dimention_right);
 
 
                 x2.add(i+1);
@@ -353,6 +354,10 @@ public class Tapping_feature_Activity extends AppCompatActivity  implements View
         return delay_count/size_vector_new;
     }
 
+
+    public double distancetoperc(float distance){
+        return 200/(1+Math.exp(0.2*distance));
+    }
 
 
     public void image_control(float Hist_Perc, ImageView iEmojin){
