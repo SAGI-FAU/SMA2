@@ -76,8 +76,13 @@ if (project.hasProperty("sma2.signing") &&
 }
 
 greendao {
-    schemaVersion 2
-    targetGenDir "build/generated/source/greendao"
+    targetGenDir "src/main/java"
+}
+
+sourceSets{
+    main{
+        java.srcDirs = ['src/main/java','build/generated/source/greendao']
+    }
 }
 
 dependencies {
