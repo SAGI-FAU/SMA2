@@ -1,10 +1,8 @@
-package com.sma2.sma2.ExerciseLogic;
+package com.sma2.sma2.DataAccess;
 
 import android.net.Uri;
 import android.os.Parcel;
 import android.os.Parcelable;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentActivity;
 
 import com.sma2.sma2.ExerciseFragments.ExerciseFragment;
 

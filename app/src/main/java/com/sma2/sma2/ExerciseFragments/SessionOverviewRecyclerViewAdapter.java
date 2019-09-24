@@ -7,7 +7,7 @@ import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.TextView;
 
-import com.sma2.sma2.ExerciseLogic.ScheduledExercise;
+import com.sma2.sma2.DataAccess.ScheduledExercise;
 import com.sma2.sma2.R;
 
 import java.util.ArrayList;

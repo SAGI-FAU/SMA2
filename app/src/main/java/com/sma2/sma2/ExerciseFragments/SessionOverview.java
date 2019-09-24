@@ -10,8 +10,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
-import com.sma2.sma2.ExerciseLogic.ExerciseSessionManager;
-import com.sma2.sma2.ExerciseLogic.ScheduledExercise;
+import com.sma2.sma2.DataAccess.ExerciseSessionManager;
+import com.sma2.sma2.DataAccess.ScheduledExercise;
 import com.sma2.sma2.R;
 
 import java.util.ArrayList;

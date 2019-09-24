@@ -13,8 +13,8 @@ import com.sma2.sma2.ExerciseFragments.ExerciseFinished;
 import com.sma2.sma2.ExerciseFragments.ExerciseFragment;
 import com.sma2.sma2.ExerciseFragments.ExerciseInstructions;
 import com.sma2.sma2.ExerciseFragments.SessionOverview;
-import com.sma2.sma2.ExerciseLogic.ExerciseSessionManager;
-import com.sma2.sma2.ExerciseLogic.ScheduledExercise;
+import com.sma2.sma2.DataAccess.ExerciseSessionManager;
+import com.sma2.sma2.DataAccess.ScheduledExercise;
 
 
 public class ExercisesActivity extends AppCompatActivity implements ExerciseInstructions.OnStartClickedListener,

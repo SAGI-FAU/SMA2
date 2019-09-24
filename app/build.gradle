@@ -76,6 +76,7 @@ if (project.hasProperty("sma2.signing") &&
 }
 
 greendao{
+    daoPackage "com.sma2.sma2.DataAccess"
     targetGenDir "src/main/java"
 }
 

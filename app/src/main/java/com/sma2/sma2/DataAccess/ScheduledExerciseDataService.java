@@ -2,12 +2,6 @@ package com.sma2.sma2.DataAccess;
 
 import android.content.Context;
 
-import com.sma2.sma2.DataAccess.DaoMaster;
-import com.sma2.sma2.DataAccess.DaoSession;
-import com.sma2.sma2.ExerciseLogic.ScheduledExercise;
-
-import com.sma2.sma2.ExerciseLogic.ScheduledExerciseDao;
-
 import org.greenrobot.greendao.database.Database;
 
 import java.util.ArrayList;

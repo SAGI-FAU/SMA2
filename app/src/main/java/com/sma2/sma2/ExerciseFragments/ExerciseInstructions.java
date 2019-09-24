@@ -1,12 +1,9 @@
 package com.sma2.sma2.ExerciseFragments;
 
 import android.content.Context;
-import android.content.res.Resources;
 import android.media.MediaPlayer;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,11 +13,8 @@ import android.widget.MediaController;
 import android.widget.TextView;
 import android.widget.VideoView;
 
-import com.sma2.sma2.ExerciseLogic.Exercise;
-import com.sma2.sma2.ExerciseLogic.ScheduledExercise;
+import com.sma2.sma2.DataAccess.Exercise;
 import com.sma2.sma2.R;
-
-import us.feras.mdv.MarkdownView;
 
 public class ExerciseInstructions extends Fragment {
 

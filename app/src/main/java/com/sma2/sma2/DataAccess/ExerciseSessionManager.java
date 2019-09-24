@@ -1,4 +1,4 @@
-package com.sma2.sma2.ExerciseLogic;
+package com.sma2.sma2.DataAccess;
 
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -11,8 +11,6 @@ import com.opencsv.CSVParser;
 import com.opencsv.CSVParserBuilder;
 import com.opencsv.CSVReader;
 import com.opencsv.CSVReaderBuilder;
-import com.sma2.sma2.DataAccess.ExerciseDataService;
-import com.sma2.sma2.DataAccess.ScheduledExerciseDataService;
 import com.sma2.sma2.ExerciseFragments.ExAudioRec;
 import com.sma2.sma2.ExerciseFragments.ExImageDescription;
 import com.sma2.sma2.ExerciseFragments.ExOneFingerTapping;
@@ -25,8 +23,6 @@ import com.sma2.sma2.ExerciseFragments.Ex_Hand_To_Head_Rec;
 import com.sma2.sma2.ExerciseFragments.Ex_Walking_Rec;
 import com.sma2.sma2.ExerciseFragments.Ex_balance_Rec;
 import com.sma2.sma2.ExerciseFragments.Ex_postural_Rec;
-import com.sma2.sma2.Notifications;
-import com.sma2.sma2.R;
 
 import java.io.IOException;
 import java.io.InputStreamReader;
