@@ -42,12 +42,28 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
+import com.github.mikephil.charting.animation.Easing;
+import com.github.mikephil.charting.components.Legend;
+import com.github.mikephil.charting.components.XAxis;
+import com.github.mikephil.charting.components.YAxis;
+import com.github.mikephil.charting.formatter.IndexAxisValueFormatter;
+import com.github.mikephil.charting.charts.BarChart;
+import com.github.mikephil.charting.data.BarData;
+import com.github.mikephil.charting.data.BarDataSet;
+import com.github.mikephil.charting.data.BarEntry;
+import com.github.mikephil.charting.utils.ColorTemplate;
+import com.github.mikephil.charting.charts.RadarChart;
+import com.github.mikephil.charting.data.RadarData;
+import com.github.mikephil.charting.data.RadarDataSet;
+import com.github.mikephil.charting.data.RadarEntry;
+
 public class Tapping_feature_Activity extends AppCompatActivity  implements View.OnClickListener {
     TextView  tNumber_Taps,tTapping_time_hits,tMessage, tTapping_perc_hits, tTapping_perc_hits_left, tTapping_perc_hits_right;
     Button bBack;
     ImageView iEmojin, iEmojiLeft,iEmojiRight;;
-    String path_tapping = null, path_tapping2 = null;
+    String path_tapping = null, path_tapping2 = null, path_bar=null;
     List<String> path_tapping_all= new ArrayList<String>(), path_tapping_all2= new ArrayList<String>();
+    List<String> path_bar_all= new ArrayList<String>();
     private final String PATH = Environment.getExternalStorageDirectory() + "/Apkinson/MOVEMENT/";
 
     //"/storage/emulated/0/AppSpeechData/ACC/Tapping_example.csv";
@@ -72,7 +88,6 @@ public class Tapping_feature_Activity extends AppCompatActivity  implements View
         DecimalFormat df = new DecimalFormat("#.0");
 
         GraphManager graphManager=new GraphManager(this);
-
 
         int IDEx=33;
         GetExercises GetEx=new GetExercises(this);
@@ -99,12 +114,11 @@ public class Tapping_feature_Activity extends AppCompatActivity  implements View
         double delay_hits_two= delay_hits_Tapping_one(Count_Touch_one,Delay_one);
         float Hist_Porcentage=Count_ladybug_one(Count_Touch_one);
         float dimention=pixeltomm((float)average_funtion(Distance_one));
-        float perc_distance= (float) distancetoperc(dimention);
-
+        float perc_distance=100/(1+dimention);
         String Distance_error=df.format(dimention);
         String Tapping_time_total=df.format(average_funtion(Delay_one));
 
-        float performancef=(Hist_Porcentage+(float)perc_distance)/2;
+        float performancef=(Hist_Porcentage+perc_distance)/2;
         String performaces=String.valueOf(df.format(performancef))+"%";
         if(path_tapping==null){
             tNumber_Taps.setText(R.string.Empty);
@@ -145,8 +159,6 @@ public class Tapping_feature_Activity extends AppCompatActivity  implements View
         }
 
 
-
-
         ArrayList<Integer> x=new ArrayList<>();
         ArrayList<Float> y=new ArrayList<>();
         for (int i=0;i<5;i++){
@@ -155,7 +167,7 @@ public class Tapping_feature_Activity extends AppCompatActivity  implements View
                 Count_Touch_one = read_csv(path_tapping_all.get(i), 0);// The index tells me which column I should access
                 Distance_one=read_csv(path_tapping,2);
                 dimention=pixeltomm((float)average_funtion(Distance_one));
-                perc_distance=(float) distancetoperc(dimention);
+                perc_distance=100/(1+dimention);
                 x.add(i+1);
                 y.add((perc_distance+Count_ladybug_one(Count_Touch_one))/2);
 
@@ -173,10 +185,6 @@ public class Tapping_feature_Activity extends AppCompatActivity  implements View
         String Xlabel=getResources().getString(R.string.session);
         GraphView graph =findViewById(R.id.bar_perc);
         graphManager.BarGraph(graph, x, y, 101.0, 5, Title, Xlabel, Ylabel);
-
-
-
-
 
         IDEx=34;
         GetEx=new GetExercises(this);
@@ -196,7 +204,7 @@ public class Tapping_feature_Activity extends AppCompatActivity  implements View
             }
         }
 
-
+        float perc_tapp, vel_tapp, pos_error_tapp;
         ArrayList<Double> Count_Touch2=read_csv(path_tapping2,0);
         ArrayList<Double> Distance_left=read_csv(path_tapping2,2);
         ArrayList<Double> Distance_right=read_csv(path_tapping2,3);
@@ -204,17 +212,14 @@ public class Tapping_feature_Activity extends AppCompatActivity  implements View
         ArrayList<Double> Count_Touch_right=separator_vector(Count_Touch2,2);
 
         float dimention_left=pixeltomm((float)average_funtion(Distance_left));
-        float perc_distance_left=(float) distancetoperc(dimention_left);
+        float perc_distance_left=100/(1+dimention_left);
 
         float dimention_right=pixeltomm((float)average_funtion(Distance_right));
-        float perc_distance_right=(float) distancetoperc(dimention_right);
+        float perc_distance_right=100/(1+dimention_right);
 
 
         float PercLeft=(Count_ladybug_one(Count_Touch_left)+perc_distance_left)/2;
         float PercRight=(Count_ladybug_one(Count_Touch_right)+perc_distance_right)/2;
-
-
-
 
         if(path_tapping2==null){
             tTapping_perc_hits_left.setText(R.string.Empty);
@@ -227,9 +232,6 @@ public class Tapping_feature_Activity extends AppCompatActivity  implements View
 
         image_control(PercLeft,iEmojiLeft);
         image_control(PercRight,iEmojiRight);
-
-
-
 
         ArrayList<Integer> x2=new ArrayList<>();
         ArrayList<Float> y2=new ArrayList<>();
@@ -246,9 +248,9 @@ public class Tapping_feature_Activity extends AppCompatActivity  implements View
                 Count_Touch_right=separator_vector(Count_Touch2,2);
 
                 dimention_left=pixeltomm((float)average_funtion(Distance_left));
-                perc_distance_left=(float) distancetoperc(dimention_left);
+                perc_distance_left=100/(1+dimention_left);
                 dimention_right=pixeltomm((float)average_funtion(Distance_right));
-                perc_distance_right=(float) distancetoperc(dimention_right);
+                perc_distance_right=100/(1+dimention_right);
 
 
                 x2.add(i+1);
@@ -264,10 +266,122 @@ public class Tapping_feature_Activity extends AppCompatActivity  implements View
         GraphView graph2 =findViewById(R.id.bar_perc2);
         graphManager.BarGraph(graph2, x2, y2, 101.0, 5, Title, Xlabel, Ylabel);
 
+        perc_tapp=100*(Count_ladybug_one(Count_Touch_one)+Count_ladybug_one(Count_Touch2))/(Count_Touch_one.size()+
+                Count_Touch2.size());
+        vel_tapp=(Count_Touch_one.size()+Count_Touch2.size())/20;
+        //float taptotalerror=Distance_one.size()+Distance_left.size()+Distance_right.size();
+        pos_error_tapp = sumvector(Distance_one) + sumvector(Distance_left) + sumvector(Distance_right);
 
+        IDEx=35;
+        GetEx=new GetExercises(this);
+        name=GetEx.getNameExercise(IDEx);
+        List<SignalDA> signalbar=signalDataService.getSignalsbyname(name);
+        if (signalbar.size()>0){
+            path_bar=PATH+signalbar.get(signalbar.size()-1).getSignalPath();
+            if (signalbar.size()>4){
+                for (int i=signalbar.size()-4;i<signalbar.size();i++){
+                    path_bar_all.add(PATH+signalbar.get(i).getSignalPath());
+                }
+            }
+            else{
+                for (int i=0;i<signalbar.size();i++){
+                    path_bar_all.add(PATH+signalbar.get(i).getSignalPath());
+                }
+            }
+        }
+
+        float bar_hits;
+        ArrayList<Double> Position_bar=read_csv(path_bar,0);
+        ArrayList<Double> Reach_time=read_csv(path_bar,1);
+        bar_hits=Position_bar.size();
+
+        // Radar chart
+        RadarChart radarchart= findViewById(R.id.chartap);
+        radarchart.getDescription().setEnabled(false);
+        radarchart.animateXY(5000, 5000, Easing.EaseInOutQuad);
+
+        RadarData radardata;
+
+        float[] datos2={perc_tapp,fittopattern(vel_tapp,1.5667f),100-fittopattern(pos_error_tapp,21034f),
+                fittopattern(bar_hits,13.75f)}; // datos que se van a graficar
+        float[] datos1={100f,100f,100f,100f}; // datos de refeerencia
+        //double area1=0.5*(datos1[0]+datos1[2])*(datos1[1]+datos1[3]);
+        //double area2=0.5*(datos2[0]+datos2[2])*(datos2[1]+datos2[3]);
+        radardata=setdata(datos1,datos2);
+        String[] labels={"% Tapping hits","Tapping velocity", "Tapping distance error", "Sliding hits"};
+
+        XAxis xAxis=radarchart.getXAxis();
+        xAxis.setTextSize(12f);
+        xAxis.setTextColor(Color.BLACK);
+        xAxis.setValueFormatter(new IndexAxisValueFormatter(labels));
+        xAxis.setLabelRotationAngle(90f);
+
+        YAxis yAxis = radarchart.getYAxis();
+        yAxis.setAxisMinimum(0f);
+        yAxis.setAxisMaximum(80f);
+
+        Legend l = radarchart.getLegend();
+        l.setVerticalAlignment(Legend.LegendVerticalAlignment.BOTTOM);
+        l.setHorizontalAlignment(Legend.LegendHorizontalAlignment.CENTER);
+        l.setOrientation(Legend.LegendOrientation.HORIZONTAL);
+        l.setDrawInside(false);
+        l.setXEntrySpace(7f);
+        l.setYEntrySpace(5f);
+        l.setTextColor(Color.BLACK);
+        l.setTextSize(20f);
+
+        radarchart.setExtraOffsets(0,-400,0,-400);
+        //radarchart.setBackgroundColor(Color.WHITE);
+        radarchart.setScaleY(1f);
+        radarchart.setScaleX(1f);
+        radarchart.setData(radardata);
+        radarchart.invalidate(); // refresh
     }
 
 
+    private RadarData setdata(float[] datos1, float[] datos2) {
+        int cnt = datos1.length;
+        ArrayList<RadarEntry> entries1 = new ArrayList<RadarEntry>();
+        ArrayList<RadarEntry> entries2 = new ArrayList<RadarEntry>();
+
+        // NOTE: The order of the entries when being added to the entries array determines their position around the center of
+        // the chart.
+        for (int i = 0; i < cnt; i++) {
+            //float val1 = (float) (Math.random() * mul) + min;
+            entries1.add(new RadarEntry(datos1[i]));
+
+            //float val2 = (float) (Math.random() * mul) + min;
+            entries2.add(new RadarEntry(datos2[i]));
+        }
+
+        RadarDataSet set1 = new RadarDataSet(entries1, "Below Session");
+        set1.setColor(Color.rgb(255, 185, 0));
+        set1.setFillColor(Color.rgb(255, 185, 0));
+        set1.setDrawFilled(true);
+        set1.setFillAlpha(200);
+        set1.setLineWidth(2f);
+        set1.setValueTextColor(Color.rgb(255, 185, 0));
+        set1.setValueTextSize(15f);
+        set1.setDrawHighlightCircleEnabled(true);
+        set1.setDrawHighlightIndicators(false);
+
+        RadarDataSet set2 = new RadarDataSet(entries2, "Current Session");
+        set2.setColor(Color.rgb(0, 200, 200));
+        set2.setFillColor(Color.rgb(0, 200, 200));
+        set2.setDrawFilled(true);
+        set2.setFillAlpha(180);
+        set2.setLineWidth(2f);
+        set2.setDrawHighlightCircleEnabled(true);
+        set2.setDrawHighlightIndicators(false);
+        set2.setValueTextColor(Color.rgb(0, 200, 200));
+        set2.setValueTextSize(15f);
+
+        RadarData dataradar= new RadarData();
+
+        dataradar.addDataSet(set1);
+        dataradar.addDataSet(set2);
+        return dataradar;
+    }
 
 
     public ArrayList<Double> separator_vector(ArrayList<Double> v_validation, int bug) {
@@ -333,9 +447,19 @@ public class Tapping_feature_Activity extends AppCompatActivity  implements View
                 Count++;
             }
         }
-        Count=Count*100/vector.size();
+        //Count=Count*100/vector.size();
         return Count;
     }
+
+    public  static float sumvector(ArrayList<Double> vector){
+        float Sum=0;
+
+        for (int i = 0; i < vector.size(); i ++)
+            Sum+=vector.get(i);
+
+        return Sum;
+    }
+
     public float pixeltomm(float px ){
         float m_px = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_MM, 1,
                 getResources().getDisplayMetrics());
@@ -354,11 +478,15 @@ public class Tapping_feature_Activity extends AppCompatActivity  implements View
         return delay_count/size_vector_new;
     }
 
+    public float fittopattern(float value, float pattern){
+        float veltapp_perc=0;
+        if (value>pattern)
+            veltapp_perc=100;
+        else
+            veltapp_perc=100f*value/pattern;
 
-    public double distancetoperc(float distance){
-        return 200/(1+Math.exp(0.2*distance));
+        return veltapp_perc;
     }
-
 
     public void image_control(float Hist_Perc, ImageView iEmojin){
         if( Hist_Perc>= 70){
@@ -379,7 +507,6 @@ public class Tapping_feature_Activity extends AppCompatActivity  implements View
 
     }
 
-
     @Override
     public void onClick(View view) {
 
@@ -395,7 +522,5 @@ public class Tapping_feature_Activity extends AppCompatActivity  implements View
         startActivity(i);
 
     }
-
-
 
 }
