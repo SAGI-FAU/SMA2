@@ -76,14 +76,9 @@ if (project.hasProperty("sma2.signing") &&
 }
 
 greendao {
-    targetGenDir "src/main/java"
+    targetGenDir 'build/generated/source/greendao/com/sma2/sma2/DataAccess'
 }
 
-sourceSets{
-    main{
-        java.srcDirs = ['src/main/java','build/generated/source/greendao']
-    }
-}
 
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
