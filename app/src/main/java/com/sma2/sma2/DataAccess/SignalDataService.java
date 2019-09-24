@@ -2,8 +2,6 @@ package com.sma2.sma2.DataAccess;
 
 import android.content.Context;
 
-import com.sma2.sma2.DataAccess.DaoMaster;
-import com.sma2.sma2.DataAccess.DaoSession;
 import com.sma2.sma2.R;
 
 import org.greenrobot.greendao.database.Database;
