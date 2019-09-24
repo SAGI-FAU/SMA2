@@ -9,7 +9,7 @@ import uk.me.berndporr.iirj.Butterworth;
 public class StepDetector {
 
     private  final double PEAK_FILTER_THRESHOLD = 0.6f;
-    private final double SAMPLING_FRQUENCY_HZ = 100.0f;
+    private final double SAMPLING_FREQUENCY_HZ = 100.0f;
     private double filterCutoffHz = 5.0f;
     private int filterOder = 12;
     private Butterworth butterworth = null;
@@ -31,13 +31,21 @@ public class StepDetector {
 
     public StepDetector() {
         butterworth = new Butterworth();
-        butterworth.lowPass(this.filterOder,this.SAMPLING_FRQUENCY_HZ,this.filterCutoffHz);
+        butterworth.lowPass(this.filterOder,this.SAMPLING_FREQUENCY_HZ,this.filterCutoffHz);
     }
 
-    public List<Integer> detect(List<Double> data) {
+    public List<Integer> detect(List<Double> time, List<Double> data) {
+        List<Double> newTime = new ArrayList<Double>();
+        double end = time.get(0);
+        while (end < time.get(time.size() - 1)) {
+            newTime.add(end);
+            end += 1/ SAMPLING_FREQUENCY_HZ;
+        }
+
+        List<Double> newData = LinearInterpolation.interpolateLinear(time, data, newTime);
         List<Double> dataFilt = new ArrayList<Double>();
-        for(int i = 0; i < data.size(); i++) {
-            dataFilt.add(butterworth.filter(data.get(i)));
+        for(int i = 0; i < newData.size(); i++) {
+            dataFilt.add(butterworth.filter(newData.get(i)));
         }
         return PeakDetector.findPeakFiltered(dataFilt, PEAK_FILTER_THRESHOLD);
     }
