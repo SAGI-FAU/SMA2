@@ -75,6 +75,11 @@ if (project.hasProperty("sma2.signing") &&
     }
 }
 
+greendao {
+    schemaVersion 2
+    targetGenDir "build/generated/source/greendao"
+}
+
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation 'com.android.support:appcompat-v7:26.1.0'
