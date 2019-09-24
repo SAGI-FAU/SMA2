@@ -18,7 +18,9 @@ public class PeakDetector {
         return peakPairList;
     }
 
-    static List<Integer> findPeakFiltered(List<Pair<Integer, Double>> peakPairList, float thres) {
+    static List<Integer> findPeakFiltered(List<Double> data, double thres) {
+        List<Pair<Integer, Double>> peakPairList = findPeakAll(data);
+
         List<Integer> peakList = new ArrayList<Integer>();
 
         float meanPeakAmplitude = 0.0f;
