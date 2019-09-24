@@ -25,6 +25,7 @@ import com.sma2.sma2.DataAccess.PatientDataService;
 import com.sma2.sma2.ExerciseLogic.ExerciseSessionManager;
 
 
+
 import org.greenrobot.greendao.database.Database;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
