@@ -1,7 +1,5 @@
 package com.sma2.sma2.DataAccess;
 
-import com.sma2.sma2.ExerciseLogic.DaoSession;
-
 import org.greenrobot.greendao.annotation.Entity;
 import org.greenrobot.greendao.annotation.Id;
 import org.greenrobot.greendao.annotation.Property;
