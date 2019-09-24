@@ -1,5 +1,5 @@
-apply plugin: 'com.android.application'
 apply plugin: 'org.greenrobot.greendao' // apply plugin
+apply plugin: 'com.android.application'
 
 if (project.hasProperty("sma2.signing") &&
         rootProject.file("apikey.properties").exists()) {
