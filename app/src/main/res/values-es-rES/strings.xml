@@ -145,5 +145,6 @@
     <string name="speech_exercises">Ejercicios de voz</string>
     <string name="mov_exercises">Ejercicios de movimiento</string>
     <string name="demo_exercises">Ejercicios para demo</string>
+    <string name="progress">Progreso diario</string>
 
 </resources>

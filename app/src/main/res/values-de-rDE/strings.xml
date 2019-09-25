@@ -142,5 +142,7 @@
     <string name="daily_exercises">Tägliche Übungen</string>
     <string name="circling">Kreisen</string>
     <string name="F0">Grundfrequenz</string>
+    <string name="progress">Täglicher Fortschritt</string>
+    <string name="quick_start">Schnelle Übung</string>
 
 </resources>

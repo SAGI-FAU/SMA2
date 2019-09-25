@@ -1,138 +1,47 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@drawable/background_main_menu">
+    android:layout_height="match_parent">
 
-    <ImageButton
-        android:id="@+id/btnProfile"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_margin="0dp"
-        android:adjustViewBounds="true"
-        android:background="@android:color/background_light"
-        android:hapticFeedbackEnabled="true"
-        android:scaleType="fitCenter"
-        android:src="@drawable/btn_profile"
-        app:layout_constraintHeight_percent="0.49"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintWidth_percent="0.49" />
-
-    <ImageButton
-        android:id="@+id/btnSettings"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_margin="0dp"
-        android:adjustViewBounds="true"
-        android:background="@android:color/background_light"
-        android:gravity="bottom|center_horizontal"
-        android:hapticFeedbackEnabled="true"
-        android:scaleType="fitCenter"
-        android:src="@drawable/btn_settings"
+    <android.support.design.widget.FloatingActionButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="16dp"
+        android:scaleType="center"
+        android:src="@android:drawable/ic_menu_preferences"
+        app:fabSize="normal"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHeight_percent="0.49"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintWidth_percent="0.49" />
+        app:layout_constraintTop_toTopOf="parent" />
 
-    <ImageButton
-        android:id="@+id/btnExercises"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_margin="0dp"
-        android:adjustViewBounds="true"
-        android:background="@android:color/background_light"
-        android:gravity="bottom|center_horizontal"
-        android:hapticFeedbackEnabled="true"
-        android:scaleType="fitCenter"
-        android:src="@drawable/btn_exercises"
-        android:text="@string/btnExercisesText"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHeight_percent="0.49"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintWidth_percent="0.49" />
-
-    <ImageButton
-        android:id="@+id/btnResults"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_margin="0dp"
-        android:adjustViewBounds="true"
-        android:background="@android:color/background_light"
-        android:gravity="bottom|center_horizontal"
-        android:hapticFeedbackEnabled="true"
-        android:scaleType="fitCenter"
-        android:src="@drawable/btn_results"
-        android:text="@string/btnResultsText"
+    <android.support.design.widget.TabLayout
+        android:id="@+id/tabLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/cardview_light_background"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHeight_percent="0.49"
-        app:layout_constraintWidth_percent="0.49" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:tabBackground="@color/backgroundColor"
+        app:tabIndicatorColor="@color/colorPrimary"
+        app:tabIndicatorHeight="3dp">
 
-    <TextView
-        android:id="@+id/txtProfile"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginStart="8dp"
-        android:text="@string/btnProfileText"
-        android:textSize="@dimen/menu_text_size"
-        android:textStyle="bold|italic"
-        app:layout_constraintBottom_toBottomOf="@+id/btnProfile"
-        app:layout_constraintEnd_toEndOf="@+id/btnProfile"
-        app:layout_constraintStart_toStartOf="@+id/btnProfile" />
+        <android.support.design.widget.TabItem
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/btnResultsText" />
 
-    <TextView
-        android:id="@+id/txtSettings"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginStart="8dp"
-        android:text="@string/btnSettingsText"
-        android:textSize="@dimen/menu_text_size"
-        android:textStyle="bold|italic"
-        app:layout_constraintBottom_toBottomOf="@+id/btnSettings"
-        app:layout_constraintEnd_toEndOf="@+id/btnSettings"
-        app:layout_constraintStart_toStartOf="@+id/btnSettings" />
+        <android.support.design.widget.TabItem
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/btnProfileText" />
 
-    <TextView
-        android:id="@+id/txtExercises"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginStart="8dp"
-        android:text="@string/btnExercisesText"
-        android:textSize="@dimen/menu_text_size"
-        android:textStyle="bold|italic"
-        app:layout_constraintBottom_toBottomOf="@+id/btnExercises"
-        app:layout_constraintEnd_toEndOf="@+id/btnExercises"
-        app:layout_constraintStart_toStartOf="@+id/btnExercises" />
+        <android.support.design.widget.TabItem
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/btnExercisesText" />
+    </android.support.design.widget.TabLayout>
 
-    <TextView
-        android:id="@+id/txtResults"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginStart="8dp"
-        android:text="@string/btnResultsText"
-        android:textSize="@dimen/menu_text_size"
-        android:textStyle="bold|italic"
-        app:layout_constraintBottom_toBottomOf="@+id/btnResults"
-        app:layout_constraintEnd_toEndOf="@+id/btnResults"
-        app:layout_constraintStart_toStartOf="@+id/btnResults" />
 </android.support.constraint.ConstraintLayout>
