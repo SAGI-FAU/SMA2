@@ -1,9 +1,12 @@
 package com.sma2.sma2;
 
 import android.Manifest;
+import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 
 import android.content.pm.PackageManager;
+import android.support.constraint.ConstraintLayout;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 
@@ -11,8 +14,12 @@ import android.content.SharedPreferences;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.KeyEvent;
+import android.view.MotionEvent;
 import android.view.View;
 
+import android.view.inputmethod.EditorInfo;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -27,6 +34,8 @@ import com.sma2.sma2.DataAccess.ExerciseSessionManager;
 
 
 import org.greenrobot.greendao.database.Database;
+
+import static com.sma2.sma2.Utility.Helpers.hideKeyboard;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -43,19 +52,40 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        SharedPreferences prefs = getSharedPreferences("LoginPref",this.MODE_PRIVATE);
-        int login = prefs.getInt("UserCreated",0);
-        if(login == 1){
+        SharedPreferences prefs = getSharedPreferences("LoginPref", this.MODE_PRIVATE);
+        int login = prefs.getInt("UserCreated", 0);
+        if (login == 1) {
             ExerciseSessionManager sessionManager = new ExerciseSessionManager();
             sessionManager.createExerciseSession(this);
-            Intent intent = new Intent(MainActivity.this,MainActivityMenu.class);
+            Intent intent = new Intent(MainActivity.this, MainActivityMenu.class);
             startActivity(intent);
             finish();
         }
         setContentView(R.layout.activity_main);
+        ConstraintLayout layout = (ConstraintLayout) findViewById(R.id.layout_signin);
+        layout.setOnTouchListener(new View.OnTouchListener()
+        {
+            @Override
+            public boolean onTouch(View view, MotionEvent ev)
+            {
+                hideKeyboard(view);
+                return false;
+            }
+        });
         tv_username = findViewById(R.id.username);
         tv_userid = findViewById(R.id.userid);
         bt_create = findViewById(R.id.button_create);
+        tv_userid.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                boolean handled = false;
+                if (actionId == EditorInfo.IME_ACTION_DONE) {
+                    onClick(bt_create);
+                    handled = true;
+                }
+                return handled;
+            }
+        });
         setListeners();
         ask_permissions();
         DaoMaster.DevOpenHelper helper = new DaoMaster.DevOpenHelper(this, getString(R.string.databasename));
@@ -72,11 +102,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     public void onClick(View view) {
 
-        switch (view.getId()){
+        switch (view.getId()) {
             case R.id.button_create:
                 username = tv_username.getText().toString();
                 userid = tv_userid.getText().toString();
-                if(validate_data()){
+                if (validate_data()) {
                     PatientDataService pds = new PatientDataService(getApplicationContext());
                     pds.savePatient(patientData);
                     patientData = pds.getPatient();
@@ -88,32 +118,31 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private boolean validate_data() {
-        if(username.isEmpty()) {
+        if (username.isEmpty()) {
             Toast.makeText(this, R.string.user_empty, Toast.LENGTH_SHORT).show();
             return false;
-        } else if (userid.isEmpty()){
-            Toast.makeText(this,R.string.userid_empty,Toast.LENGTH_SHORT).show();
+        } else if (userid.isEmpty()) {
+            Toast.makeText(this, R.string.userid_empty, Toast.LENGTH_SHORT).show();
             return false;
-        }else{
+        } else {
             patientData = new PatientDA(username, userid);
             return true;
         }
     }
 
-    public void open_settings(){
-        Intent intent_settings =new Intent(this, SettingsActivity.class);
+    public void open_settings() {
+        Intent intent_settings = new Intent(this, SettingsActivity.class);
         startActivity(intent_settings);
     }
 
-    public void open_exercises(){
-        Intent intent_exercises =new Intent(this, ExercisesActivity.class);
+    public void open_exercises() {
+        Intent intent_exercises = new Intent(this, ExercisesActivity.class);
         startActivity(intent_exercises);
     }
 
 
-
-    public void ask_permissions(){
-        if (ContextCompat.checkSelfPermission(this, Manifest.permission.RECORD_AUDIO)!= PackageManager.PERMISSION_GRANTED) {
+    public void ask_permissions() {
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.RECORD_AUDIO) != PackageManager.PERMISSION_GRANTED) {
             if (ActivityCompat.shouldShowRequestPermissionRationale(this,
                     Manifest.permission.RECORD_AUDIO)) {
             } else {
@@ -136,9 +165,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
     }
 
-
-    public void open_profile1(){
-        Intent intent_profile1 = new Intent(this,Profile1Activity.class);
+    public void open_profile1() {
+        Intent intent_profile1 = new Intent(this, Profile1Activity.class);
         intent_profile1.putExtra("PatientData", patientData);
         startActivity(intent_profile1);
     }

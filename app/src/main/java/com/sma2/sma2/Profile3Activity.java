@@ -3,13 +3,17 @@ package com.sma2.sma2;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.support.constraint.ConstraintLayout;
 import android.support.v7.app.AppCompatActivity;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.sma2.sma2.DataAccess.PatientDA;
 import com.sma2.sma2.DataAccess.PatientDataService;
+
+import static com.sma2.sma2.Utility.Helpers.hideKeyboard;
 
 public class Profile3Activity extends AppCompatActivity implements View.OnClickListener {
 
@@ -24,7 +28,16 @@ public class Profile3Activity extends AppCompatActivity implements View.OnClickL
         setContentView(R.layout.activity_profile3);
         OtherDisordersView=findViewById(R.id.other_disorder);
         WeightView=findViewById(R.id.weight);
-
+        ConstraintLayout layout = findViewById(R.id.layout_p3);
+        layout.setOnTouchListener(new View.OnTouchListener()
+        {
+            @Override
+            public boolean onTouch(View view, MotionEvent ev)
+            {
+                hideKeyboard(view);
+                return false;
+            }
+        });
         HeightView=findViewById(R.id.height);
         patientData = (PatientDA) getIntent().getSerializableExtra("PatientData");
         findViewById(R.id.button_menu_settings).setOnClickListener(this);
@@ -37,15 +50,13 @@ public class Profile3Activity extends AppCompatActivity implements View.OnClickL
         }
 
         float Weight=patientData.getWeight();
-        if (Weight>=0){
+        if (Weight>0){
             WeightView.setText(String.valueOf(Weight));
         }
         int Height=patientData.getHeight();
-        if (Height>=0){
+        if (Height>0){
             HeightView.setText(String.valueOf(Height));
         }
-
-
     }
 
     @Override

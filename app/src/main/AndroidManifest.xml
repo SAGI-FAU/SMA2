@@ -69,6 +69,9 @@
             android:screenOrientation="portrait"/>
         <activity android:name=".FeatureExtraction.Speech.Speech_features_Activity"
             android:screenOrientation="portrait" />
+        <activity
+            android:name=".FeatureExtraction.Movement.WalkingFeatureActivity"
+            android:screenOrientation="portrait" />
 
         <!-- Register the Alarm Receiver -->
         <receiver android:name=".AlarmReceiver"

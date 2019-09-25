@@ -1,25 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/layout_p1"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
 
+    android:layout_height="match_parent"
     android:layout_marginLeft="16dp"
     android:layout_marginRight="16dp"
+    android:focusableInTouchMode="true"
     tools:context="com.sma2.sma2.MainActivity">
 
     <TextView
         android:id="@+id/username_create"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:backgroundTint="@color/colorPrimary"
+        android:gravity="center"
         android:hint="@string/name"
-        android:textSize="@dimen/menu_text_size"
+        android:textSize="36sp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/textView_name"
-        android:backgroundTint="@color/colorPrimary"/>
+        app:layout_constraintTop_toTopOf="parent" />
 
 
     <TextView
@@ -27,59 +30,59 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:layout_marginBottom="8dp"
         android:text="@string/birthdate"
         android:textColor="@color/colorPrimaryDark"
-        android:textSize="@dimen/textview_text_size"
+        android:textSize="30sp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/username_create" />
 
-    <EditText
+    <TextView
         android:id="@+id/age_create"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="@string/birthdate"
-        android:textSize="@dimen/textview_text_size"
-        app:layout_constraintTop_toBottomOf="@+id/textView_age"
-        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_marginTop="8dp"
         android:backgroundTint="@color/colorPrimary"
-        />
-
+        android:hint="01.01.1970"
+        android:imeOptions="actionDone"
+        android:inputType="date"
+        android:maxLines="1"
+        android:textSize="36sp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView_age" />
 
     <TextView
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:layout_marginBottom="8dp"
+        android:layout_marginTop="24dp"
         android:text="@string/gender"
         android:textColor="@color/colorPrimaryDark"
-        android:textSize="@dimen/textview_text_size"
-        app:layout_constraintTop_toBottomOf="@+id/age_create"
+        android:textSize="30sp"
         app:layout_constraintLeft_toLeftOf="parent"
-         />
+        app:layout_constraintTop_toBottomOf="@+id/age_create" />
 
 
-    <RadioGroup xmlns:android="http://schemas.android.com/apk/res/android"
+    <RadioGroup
         android:id="@+id/gender_radio"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_weight="1"
         android:orientation="horizontal"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        android:layout_weight="1"
-        app:layout_constraintTop_toBottomOf="@+id/textView"
-        >
+        app:layout_constraintTop_toBottomOf="@+id/textView">
 
         <RadioButton
             android:id="@+id/rbMale"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="0.5"
-            android:checked="true"
+            android:buttonTint="@color/colorPrimary"
+            android:checked="false"
+            android:scaleX="1"
+            android:scaleY="1"
             android:text="@string/male"
-            android:textSize="@dimen/RadioButton_size"
-            android:buttonTint="@color/colorPrimary"/>
+            android:textSize="@dimen/RadioButton_size" />
 
 
         <RadioButton
@@ -87,36 +90,33 @@
             android:layout_width="0sp"
             android:layout_height="wrap_content"
             android:layout_weight="0.5"
+            android:buttonTint="@color/colorPrimary"
             android:checked="false"
             android:text="@string/female"
-            android:textSize="@dimen/RadioButton_size"
-            android:buttonTint="@color/colorPrimary"/>
+            android:textSize="@dimen/RadioButton_size" />
     </RadioGroup>
 
     <TextView
         android:id="@+id/textView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:layout_marginBottom="8dp"
-        android:textColor="@color/colorPrimaryDark"
+        android:layout_marginTop="24dp"
         android:text="@string/hand"
-        app:layout_constraintTop_toBottomOf="@+id/gender_radio"
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="30sp"
         app:layout_constraintLeft_toLeftOf="parent"
-        android:textSize="@dimen/textview_text_size"
-        />
+        app:layout_constraintTop_toBottomOf="@+id/gender_radio" />
 
 
     <RadioGroup xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/hand_radio"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
         android:layout_weight="1"
+        android:orientation="horizontal"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView2"
-        >
+        app:layout_constraintTop_toBottomOf="@+id/textView2">
 
         <RadioButton
             android:id="@+id/rbLeft"
@@ -133,10 +133,10 @@
             android:layout_width="0sp"
             android:layout_height="wrap_content"
             android:layout_weight="0.5"
+            android:buttonTint="@color/colorPrimary"
             android:checked="true"
             android:text="@string/right"
-            android:textSize="@dimen/RadioButton_size"
-            android:buttonTint="@color/colorPrimary"/>
+            android:textSize="@dimen/RadioButton_size" />
 
     </RadioGroup>
 
@@ -144,78 +144,70 @@
         android:id="@+id/textView3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:layout_marginBottom="8dp"
-        android:textColor="@color/colorPrimaryDark"
+        android:layout_marginTop="24dp"
         android:text="@string/smoker"
-        app:layout_constraintTop_toBottomOf="@+id/hand_radio"
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="30sp"
         app:layout_constraintLeft_toLeftOf="parent"
-        android:textSize="@dimen/textview_text_size"
-        />
+        app:layout_constraintTop_toBottomOf="@+id/hand_radio" />
 
-    <RadioGroup xmlns:android="http://schemas.android.com/apk/res/android"
+    <RadioGroup
         android:id="@+id/smoker_radio"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView3"
-        >
-
-        <RadioButton
-            android:id="@+id/rbYess"
-            android:layout_width="0sp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:checked="true"
-            android:text="@string/yes"
-            android:textSize="@dimen/RadioButton_size"
-            android:buttonTint="@color/colorPrimary"/>
+        app:layout_constraintTop_toBottomOf="@+id/textView3">
 
         <RadioButton
             android:id="@+id/rbNos"
             android:layout_width="0sp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:checked="false"
+            android:buttonTint="@color/colorPrimary"
+            android:checked="true"
             android:text="@string/no"
-            android:textSize="@dimen/RadioButton_size"
-            android:buttonTint="@color/colorPrimary"/>
-    </RadioGroup>
+            android:textSize="@dimen/RadioButton_size" />
 
+        <RadioButton
+            android:id="@+id/rbYess"
+            android:layout_width="0sp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:buttonTint="@color/colorPrimary"
+            android:checked="false"
+            android:text="@string/yes"
+            android:textSize="@dimen/RadioButton_size" />
+    </RadioGroup>
 
 
     <Button
         android:id="@+id/button_back1"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        app:layout_constraintDimensionRatio="2.5"
-        app:layout_constraintWidth_percent="0.45"
-        android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
         android:layout_marginBottom="8dp"
         android:background="@color/colorPrimaryDark"
         android:text="@string/back"
         android:textSize="@dimen/button_text_size"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent" />
+        app:layout_constraintDimensionRatio="2.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintWidth_percent="0.45" />
 
     <Button
         android:id="@+id/button_continue"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        app:layout_constraintDimensionRatio="2.5"
-        app:layout_constraintWidth_percent="0.45"
         android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
         android:layout_marginBottom="8dp"
         android:background="@color/colorPrimaryDark"
         android:text="@string/next"
         android:textSize="@dimen/button_text_size"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintRight_toRightOf="parent" />
+        app:layout_constraintDimensionRatio="2.5"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintWidth_percent="0.45" />
 
 </android.support.constraint.ConstraintLayout>
