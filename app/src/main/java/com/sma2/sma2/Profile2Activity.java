@@ -5,8 +5,10 @@ import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.os.Bundle;
+import android.support.constraint.ConstraintLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -23,6 +25,8 @@ import com.sma2.sma2.DataAccess.PatientDA;
 import java.util.ArrayList;
 import java.util.Calendar;
 
+import static com.sma2.sma2.Utility.Helpers.hideKeyboard;
+
 public class Profile2Activity extends AppCompatActivity implements View.OnClickListener {
     TextView TimeDignosis;
     Spinner spinner;
@@ -37,6 +41,16 @@ public class Profile2Activity extends AppCompatActivity implements View.OnClickL
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile2);
         TimeDignosis=findViewById(R.id.time_diagnosis);
+        ConstraintLayout layout = findViewById(R.id.layout_p2);
+        layout.setOnTouchListener(new View.OnTouchListener()
+        {
+            @Override
+            public boolean onTouch(View view, MotionEvent ev)
+            {
+                hideKeyboard(view);
+                return false;
+            }
+        });
         patientData = (PatientDA) getIntent().getSerializableExtra("PatientData");
         MedicineDataService ds = new MedicineDataService(getApplicationContext());
         ds.getAllCurrentMedictation();
@@ -77,10 +91,10 @@ public class Profile2Activity extends AppCompatActivity implements View.OnClickL
         });
 
 
-
-        int YearDiagnosis=patientData.getYear_diag();
-        TimeDignosis.setText(String.valueOf(YearDiagnosis));
-
+        if (patientData.getYear_diag() != 0) {
+            int YearDiagnosis = patientData.getYear_diag();
+            TimeDignosis.setText(String.valueOf(YearDiagnosis));
+        }
 
         intaketime_spinner.setAdapter(intake_adapter);
         intaketime_spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
