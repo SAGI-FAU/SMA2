@@ -66,7 +66,7 @@ public class sigproc {
      * @param sig - Array with the signal.
      * @return Integer with the mean value of the array.
      */
-    private float meanval(float[] sig)
+    public float meanval(float[] sig)
     {
         //Find DC level
         float msig=0;
@@ -76,6 +76,31 @@ public class sigproc {
         msig = msig/sig.length;
         return msig;
     }
+
+
+    public static float calculatemean(float[] m) {
+        float sum = 0;
+        for (int i = 0; i < m.length; i++) {
+            sum += m[i];
+        }
+        return sum / m.length;
+    }
+
+    public static float calculateSD(float[] numArray)
+    {
+        double sum = 0.0, standardDeviation = 0.0;
+        int length = numArray.length;
+        for(double num : numArray) {
+            sum += num;
+        }
+        double mean = sum/length;
+        for(double num: numArray) {
+            standardDeviation += Math.pow(num - mean, 2);
+        }
+        return (float) Math.sqrt(standardDeviation/length);
+    }
+
+
 
     /**
      * Windowing
