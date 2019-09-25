@@ -124,5 +124,23 @@
     <string name="export">Metadaten exportieren</string>
     <string name="export_sucess">Metadatenexport war erfolgreich</string>
     <string name="export_failed">Metadatenexport fehlgeschlagen</string>
+    <string name="fill_dialog">Es fehlen noch wichtige Angaben!</string>
+    <string name="time">Zeit [s]</string>
+    <string name="wrong_pass">Falsches Passwort</string>
+    <string name="password">Passwort</string>
+    <string name="perc_left_hand">Leistung linke Hand</string>
+    <string name="perc_right_hand">Leistung rechte Hand</string>
+    <string name="percentage">Prozent</string>
+    <string name="pronation">Hand-Drehung</string>
+    <string name="right_stability">Stabilität rechte Hand</string>
+    <string name="scheduler">Übungsplaner wechseln</string>
+    <string name="left_stability">Stabilität linke Hand</string>
+    <string name="kinetic">Bewegungstremor</string>
+    <string name="instructions_long">Detailierte Anweisungen</string>
+    <string name="frequency">Frequenz [Hz]</string>
+    <string name="full_exercises">Alle Übungen</string>
+    <string name="daily_exercises">Tägliche Übungen</string>
+    <string name="circling">Kreisen</string>
+    <string name="F0">Grundfrequenz</string>
 
 </resources>

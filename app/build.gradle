@@ -101,13 +101,12 @@ dependencies {
     implementation 'us.feras.mdv:markdownview:1.1.0'
     implementation 'com.android.support:cardview-v7:26.1.0'
     testImplementation 'junit:junit:4.12'
+    implementation 'com.github.PhilJay:MPAndroidChart:v3.1.0'
 
     testImplementation 'com.android.support.test:runner:1.0.2'
     testImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
     testImplementation 'org.mockito:mockito-core:1.10.19'
     testImplementation 'org.robolectric:robolectric:3.4.2'
-    implementation 'com.github.PhilJay:MPAndroidChart:v3.1.0'
-
 }
 
 repositories {
