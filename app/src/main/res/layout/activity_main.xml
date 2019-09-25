@@ -1,24 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/layout_signin"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_marginLeft="16dp"
     android:layout_marginRight="16dp"
+    android:focusableInTouchMode="true"
     tools:context="com.sma2.sma2.MainActivity">
 
     <TextView
         android:id="@+id/textView_reg"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8sp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
         android:gravity="center"
         android:text="@string/register"
-        android:textSize="@dimen/menu_text_size"
+        android:textSize="36sp"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
@@ -29,33 +28,31 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:layout_marginBottom="8dp"
         android:text="@string/user_name"
         android:textColor="@color/colorPrimaryDark"
-        android:textSize="@dimen/textview_text_size"
+        android:textSize="30sp"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView_reg"/>
+        app:layout_constraintTop_toBottomOf="@+id/textView_reg" />
 
     <EditText
         android:id="@+id/username"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:inputType="text"
-        android:layout_marginBottom="8dp"
+        android:backgroundTint="@color/colorPrimary"
         android:hint="@string/name"
-        android:textSize="@dimen/textview_text_size"
-        app:layout_constraintTop_toBottomOf="@+id/textView_name"
+        android:imeOptions="actionNext"
+        android:inputType="text"
+        android:textSize="30sp"
         app:layout_constraintLeft_toLeftOf="parent"
-        android:backgroundTint="@color/colorPrimary"/>
+        app:layout_constraintTop_toBottomOf="@+id/textView_name" />
 
     <TextView
         android:id="@+id/textView_ID"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
         android:text="@string/user_id"
         android:textColor="@color/colorPrimaryDark"
-        android:textSize="@dimen/textview_text_size"
+        android:textSize="30sp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toBottomOf="@id/username" />
 
@@ -63,46 +60,47 @@
         android:id="@+id/userid"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:hint="@string/ID"
-        android:inputType="text"
-        android:textSize="@dimen/textview_text_size"
-        app:layout_constraintTop_toBottomOf="@+id/textView_ID"
-        app:layout_constraintLeft_toLeftOf="parent"
         android:backgroundTint="@color/colorPrimary"
-        />
+        android:hint="@string/ID"
+        android:imeOptions="actionDone"
+        android:inputType="text|phone"
+        android:phoneNumber="true"
+        android:textSize="30sp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView_ID" />
 
     <Button
         android:id="@+id/button_create"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        app:layout_constraintDimensionRatio="3"
-        app:layout_constraintWidth_percent="0.7"
-        android:layout_marginTop="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
         android:background="@color/colorPrimaryDark"
         android:text="@string/sign_up"
         android:textSize="@dimen/button_text_size"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintDimensionRatio="3"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintWidth_percent="0.7" />
 
     <ImageView
         android:id="@+id/Logo"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        app:layout_constraintWidth_percent="0.6"
-        app:layout_constraintDimensionRatio="1.2"
         android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp"
         android:layout_marginTop="0sp"
+        android:layout_marginEnd="8dp"
         android:src="@drawable/tulip_elevated"
+        app:layout_constraintBottom_toTopOf="@+id/button_create"
+        app:layout_constraintDimensionRatio="1.2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHeight_percent="0.5"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/userid"
-        />
+        app:layout_constraintWidth_percent="0.6" />
 
 
 </android.support.constraint.ConstraintLayout>
