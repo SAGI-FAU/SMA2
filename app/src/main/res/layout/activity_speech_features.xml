@@ -2,216 +2,63 @@
 
 <ScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:paddingTop="0dp"
     android:paddingLeft="0dp"
     android:paddingRight="0dp"
-    android:layout_gravity="center"
-    >
+    android:layout_gravity="center">
 
-
-
-<android.support.constraint.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_marginLeft="8dp"
-    android:layout_marginRight="8dp"
-    tools:context="com.sma2.sma2.MainActivity">
-
-
-    <TextView
-        android:id="@+id/phonation"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8sp"
-        android:layout_marginEnd="8sp"
-        android:layout_marginStart="8sp"
-        android:gravity="center"
-        android:text="@string/phonation"
-        android:textSize="@dimen/textview_text_size"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/jitter"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        app:layout_constraintWidth_percent="0.45"
-        app:layout_constraintDimensionRatio="5"
-        android:layout_marginTop="8sp"
-        android:layout_marginEnd="8sp"
-        android:layout_marginStart="8sp"
-        android:text="@string/jitter"
-        android:textColor="@color/colorPrimaryDark"
-        android:textSize="@dimen/textview_text_size"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/phonation" />
-
-    <TextView
-        android:id="@+id/tjitter"
-
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        app:layout_constraintWidth_percent="0.45"
-        app:layout_constraintDimensionRatio="5"
-        android:layout_marginTop="8sp"
-        android:layout_marginEnd="8sp"
-        android:layout_marginStart="8sp"
-        android:lines="1"
-        android:text=""
-        android:gravity="end"
-        android:textSize="@dimen/textview_text_size"
-        app:layout_constraintLeft_toRightOf="@+id/jitter"
-        app:layout_constraintTop_toBottomOf="@+id/phonation" />
-
-
-    <ImageView
-        android:id="@+id/iEmojin_phonation"
-        android:layout_width="35sp"
-        android:layout_height="35sp"
-        android:layout_marginTop="35sp"
-        android:layout_gravity="center"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/jitter"
-        />
-
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/tmessage_phonation"
-        android:layout_marginTop="35sp"
-        android:background="@color/colorPrimaryDark"
-        android:layout_gravity="center"
-        android:textSize="22sp"
-        android:text=""
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/iEmojin_phonation"
-        />
-
-
-    <com.jjoe64.graphview.GraphView
-        android:id="@+id/bar_perc_phonation"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        app:layout_constraintWidth_percent="0.95"
-        app:layout_constraintDimensionRatio="1.9"
-        app:seriesType="bar"
-        app:seriesColor="@color/colorPrimaryDark"
-        android:title="@string/jitter"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tmessage_phonation"/>
-
-    <TextView
-        android:id="@+id/articulation"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="15sp"
-        android:layout_marginEnd="8sp"
-        android:layout_marginStart="8sp"
-        android:gravity="center"
-        android:text="@string/articulation"
-        android:textSize="@dimen/textview_text_size"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/bar_perc_phonation"/>
-
-
-    <TextView
-        android:id="@+id/ddk_reg"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        app:layout_constraintWidth_percent="0.6"
-        app:layout_constraintDimensionRatio="5"
-        android:layout_marginTop="8sp"
-        android:layout_marginEnd="8sp"
-        android:layout_marginStart="8sp"
-        android:text="@string/ddk_reg"
-        android:textColor="@color/colorPrimaryDark"
-        android:textSize="@dimen/textview_text_size"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/articulation" />
-
-
-    <TextView
-        android:id="@+id/tddk_reg"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        app:layout_constraintWidth_percent="0.3"
-        app:layout_constraintDimensionRatio="3"
-        android:layout_marginTop="8sp"
-        android:layout_marginEnd="8sp"
-        android:layout_marginStart="8sp"
-        android:lines="1"
-        android:text=""
-        android:gravity="end"
-        android:textSize="@dimen/textview_text_size"
-        app:layout_constraintLeft_toRightOf="@+id/ddk_reg"
-        app:layout_constraintTop_toBottomOf="@+id/articulation" />
-
-
-    <ImageView
-        android:id="@+id/iEmojin_articulation"
-        android:layout_width="35sp"
-        android:layout_height="35sp"
-        android:layout_marginTop="35sp"
-        android:layout_gravity="center"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ddk_reg"
-        />
-
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/tmessage_articulation"
-        android:layout_marginTop="35sp"
-        android:background="@color/colorPrimaryDark"
-        android:layout_gravity="center"
-        android:textSize="22sp"
-        android:text=""
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/iEmojin_articulation"
-        />
-
-    <com.jjoe64.graphview.GraphView
-        android:id="@+id/bar_perc_articulation"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        app:layout_constraintWidth_percent="0.95"
-        app:layout_constraintDimensionRatio="1.9"
-        app:seriesType="bar"
-        app:seriesColor="@color/colorPrimaryDark"
-        android:title="@string/ddk_reg"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tmessage_articulation"/>
-
-    <Button
+    <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/back"
-        android:layout_marginTop="8sp"
-        android:textSize="@dimen/button_text_size"
-        android:background="@color/colorPrimaryDark"
-        android:id="@+id/button_back_speech"
-        app:layout_constraintTop_toBottomOf="@+id/bar_perc_articulation"/>
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        tools:context="com.sma2.sma2.MainActivity">
 
 
-</android.support.constraint.ConstraintLayout>
+        <TextView
+            android:id="@+id/RadarSpeech"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8sp"
+            android:layout_marginEnd="8sp"
+            android:layout_marginStart="8sp"
+            android:gravity="center"
+            android:text="@string/radarfigure"
+            android:textSize="@dimen/textview_text_size"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <com.github.mikephil.charting.charts.RadarChart
+            android:id="@+id/chart2"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:textSize="@dimen/button_text_size"
+            app:layout_constraintWidth_percent="1"
+            app:layout_constraintDimensionRatio="0.7"
+            app:seriesType="radarchart"
+            android:layout_marginTop="20sp"
+            app:seriesColor="@color/colorPrimaryDark"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/RadarSpeech"/>
+
+        <Button
+            android:id="@+id/button_back_result"
+            android:layout_width="250sp"
+            android:layout_height="wrap_content"
+            android:text="@string/back"
+            android:layout_marginTop="20sp"
+            android:textSize="@dimen/button_text_size"
+            android:background="@color/colorPrimaryDark"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/chart2"/>
+
+    </android.support.constraint.ConstraintLayout>
 </ScrollView>
-
-

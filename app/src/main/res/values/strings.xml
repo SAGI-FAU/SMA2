@@ -147,6 +147,16 @@
     <string name="full_exercises">Full Exercises</string>
     <string name="wrong_pass">Wrong password</string>
     <string name="fill_dialog">Some information is still missing!</string>
-
+    <string name="speech_exercises">Speech exercises</string>
+    <string name="mov_exercises">Movement exercises</string>
+    <string name="demo_exercises">Demo exercises</string>
+    <string name="radarfigure">Radar Figure</string>
+    <string name="pronunciation">Pronunciation</string>
+    <string name="stability">Stability</string>
+    <string name="rate">Rate</string>
+    <string name="intonation">Intonation</string>
+    <string name="intelligibility">Intelligibility</string>
+    <string name="patient">Patient</string>
+    <string name="control">Control</string>
 
 </resources>

@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
+import android.view.WindowManager;
 
 import com.sma2.sma2.DataAccess.PatientDA;
 import com.sma2.sma2.DataAccess.PatientDataService;
@@ -13,8 +14,8 @@ import com.sma2.sma2.ExerciseFragments.ExerciseFinished;
 import com.sma2.sma2.ExerciseFragments.ExerciseFragment;
 import com.sma2.sma2.ExerciseFragments.ExerciseInstructions;
 import com.sma2.sma2.ExerciseFragments.SessionOverview;
-import com.sma2.sma2.ExerciseLogic.ExerciseSessionManager;
-import com.sma2.sma2.ExerciseLogic.ScheduledExercise;
+import com.sma2.sma2.DataAccess.ExerciseSessionManager;
+import com.sma2.sma2.DataAccess.ScheduledExercise;
 
 
 public class ExercisesActivity extends AppCompatActivity implements ExerciseInstructions.OnStartClickedListener,
@@ -27,6 +28,8 @@ public class ExercisesActivity extends AppCompatActivity implements ExerciseInst
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        // Keep the screen on during any exercise. Otherwise background recordings will stop
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
 
         sessionManager = new ExerciseSessionManager();
         sessionManager.updateExerciseListFromDB(this);

@@ -11,7 +11,7 @@ import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.sma2.sma2.ExerciseLogic.ScheduledExercise;
+import com.sma2.sma2.DataAccess.ScheduledExercise;
 import com.sma2.sma2.R;
 
 

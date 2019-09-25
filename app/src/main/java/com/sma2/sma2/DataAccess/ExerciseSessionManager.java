@@ -1,4 +1,4 @@
-package com.sma2.sma2.ExerciseLogic;
+package com.sma2.sma2.DataAccess;
 
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -11,8 +11,6 @@ import com.opencsv.CSVParser;
 import com.opencsv.CSVParserBuilder;
 import com.opencsv.CSVReader;
 import com.opencsv.CSVReaderBuilder;
-import com.sma2.sma2.DataAccess.ExerciseDataService;
-import com.sma2.sma2.DataAccess.ScheduledExerciseDataService;
 import com.sma2.sma2.ExerciseFragments.ExAudioRec;
 import com.sma2.sma2.ExerciseFragments.ExImageDescription;
 import com.sma2.sma2.ExerciseFragments.ExOneFingerTapping;
@@ -25,7 +23,6 @@ import com.sma2.sma2.ExerciseFragments.Ex_Hand_To_Head_Rec;
 import com.sma2.sma2.ExerciseFragments.Ex_Walking_Rec;
 import com.sma2.sma2.ExerciseFragments.Ex_balance_Rec;
 import com.sma2.sma2.ExerciseFragments.Ex_postural_Rec;
-import com.sma2.sma2.R;
 
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -94,9 +91,21 @@ public class ExerciseSessionManager {
 
             }
         }
-        else{
+        else if (type_exercise.equals("full")){
             exercisesIDs = new int[]{1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35};
         }
+        else if (type_exercise.equals("speech")){
+            exercisesIDs = new int[]{1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21};
+        }
+        else if (type_exercise.equals("movement")){
+            exercisesIDs = new int[]{22,23,24,25,26,27,28,29,30,31,32,33,34,35};
+        }
+        else{
+            exercisesIDs = new int[]{1,2,11,14,18,25,26,34,35};
+
+        }
+
+
 
 
         for (int id : exercisesIDs) {
@@ -176,8 +185,13 @@ public class ExerciseSessionManager {
             ExInstr = instr[locale + 2];//Exercise instruction.
             String videoName = instr[instr.length - 1];
             if (videoName.length() != 0) {
-                //ExVideo = languages[locale] + videoName;
-                ExVideo = "en" + videoName;
+                if (languages[locale].contains("de")){
+                    ExVideo = "en" + videoName;
+                }
+                else{
+                    ExVideo = languages[locale] + videoName;
+                }
+                //
                 String test = ExVideo.split(".webm")[0];
                 ExVideo = "android.resource://" + context.getPackageName() + "/" + context.getResources().getIdentifier(ExVideo.split(".webm")[0], "raw", context.getPackageName());
             } else {

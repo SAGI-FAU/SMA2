@@ -30,6 +30,10 @@ public class PhonFeatures {
 
         //Length of the f0 contour
         int N = f0.length;
+        if (N==0){
+            return 25.0f;
+        }
+
         //Find Max
         float[] temp = Arrays.copyOfRange(f0,0, f0.length);
         Arrays.sort(temp);
@@ -43,25 +47,6 @@ public class PhonFeatures {
         jitt = (100*jitt)/(N*Mp);
         return jitt;
     }
-
-    public float fluency_cal(float[] f0) {
-        TransitionDectector transitionDectector = new TransitionDectector();
-        ArrayList<ArrayList<Integer>> data = transitionDectector.detect(f0);
-        ArrayList<Integer> index_array_onset = data.get(0);
-        ArrayList<Integer> index_array_offset = data.get(1);
-
-        ArrayList<Float> voiced_time = new ArrayList<Float>();
-        float duration;
-        float mean=0;
-        for(int i = 0; i < index_array_onset.size(); i++){
-            duration = (index_array_offset.get(i) - index_array_onset.get(i))*0.02f;
-            mean+=duration;
-            voiced_time.add(duration);
-        }
-        mean/=voiced_time.size();
-        return mean;
-    }
-
 
     public float calculateSD(List<Float> numArray)
     {

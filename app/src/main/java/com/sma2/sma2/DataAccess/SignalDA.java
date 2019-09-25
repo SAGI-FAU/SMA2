@@ -1,7 +1,5 @@
 package com.sma2.sma2.DataAccess;
 
-import com.sma2.sma2.ExerciseLogic.Exercise;
-
 import org.greenrobot.greendao.annotation.Entity;
 import org.greenrobot.greendao.annotation.Id;
 import org.greenrobot.greendao.annotation.Keep;
@@ -11,7 +9,6 @@ import org.greenrobot.greendao.annotation.ToOne;
 import java.util.Date;
 import org.greenrobot.greendao.annotation.Generated;
 import org.greenrobot.greendao.DaoException;
-import com.sma2.sma2.ExerciseLogic.ExerciseDao;
 
 @Entity
 public class SignalDA {
