@@ -1,9 +1,16 @@
 package com.sma2.sma2.FeatureExtraction.Movement;
 
+import android.util.Log;
+
 import com.sma2.sma2.FeatureExtraction.Speech.tools.FFT;
 import com.sma2.sma2.FeatureExtraction.Speech.tools.array_manipulation;
 import com.sma2.sma2.FeatureExtraction.Speech.tools.sigproc;
 
+
+import org.apache.commons.math3.complex.Complex;
+import org.apache.commons.math3.transform.DftNormalization;
+import org.apache.commons.math3.transform.FastFourierTransformer;
+import org.apache.commons.math3.transform.TransformType;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -508,4 +515,64 @@ public class MovementProcessing {
         return 10;
     }
 
+    public float freezeIndex(double[] sig, int Fs)
+    {
+        sigproc SigProc = new sigproc();
+
+
+
+        FastFourierTransformer fft1= new FastFourierTransformer(DftNormalization.STANDARD);
+
+        Complex[] spect = fft1.transform(sig, TransformType.FORWARD);
+
+
+        // Norm of the spect
+
+        float [] sig_fft=new float[spect.length/2];
+        for (int i = 0; i < (spect.length/2); i++) {
+
+            sig_fft[i]=(float) Math.sqrt(Math.pow(spect[i].getReal(),2)+ Math.pow(spect[i].getImaginary(),2));
+        }
+
+
+        // Bins to Freqs
+
+        // Each bin contains
+        double freqtoBin=  (Fs/2.0)/sig_fft.length;
+
+        //To compute the Freeze index we need two bands
+        // Locomotor Band: 0.5 to 3 Hz
+        int nBinsLB_init=(int) Math.round(0.5/freqtoBin);
+        int nBinsLB_end=(int) Math.round(3.0/freqtoBin);
+        int lenLB=nBinsLB_end- nBinsLB_init;
+
+
+        float [] powerLB=new float[nBinsLB_end- nBinsLB_init];
+        for (int i = nBinsLB_init; i < (nBinsLB_end); i++) {
+            powerLB[i-nBinsLB_init] = (float) (Math.pow(abs(sig_fft[i]), 2))/lenLB;
+        }
+
+        // Freeze band 3 to 8 Hz
+
+        int nBinsFB_init=(int) Math.round(3/freqtoBin);
+        int nBinsFB_end=(int) Math.round(8/freqtoBin);
+        int lenFB=nBinsFB_end- nBinsFB_init;
+
+        float [] powerFB=new float[nBinsFB_end- nBinsFB_init];
+        for (int i = nBinsFB_init; i < (nBinsFB_end); i++) {
+            powerFB[i-nBinsFB_init] = (float) (Math.pow(abs(sig_fft[i]), 2))/lenFB;
+        }
+
+        float powerFBM=SigProc.meanval(powerFB);
+        float powerLBM=SigProc.meanval(powerLB);
+
+        float freezeI=powerFBM/powerLBM;
+
+
+
+        return freezeI;
+    }
+
+
+    
 }
