@@ -15,6 +15,7 @@ import com.sma2.sma2.FeatureExtraction.GetExercises;
 import com.sma2.sma2.FeatureExtraction.GraphManager;
 import com.sma2.sma2.MainActivityMenu;
 import com.sma2.sma2.R;
+import com.sma2.sma2.RadarFigureManager;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;
@@ -45,6 +46,7 @@ public class WalkingFeatureActivity extends AppCompatActivity implements View.On
     List<String> path_movement_all = new ArrayList<>();
     TextView tWalking;
     TextView tVelocity;
+    private RadarFigureManager RadarManager;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -99,16 +101,8 @@ public class WalkingFeatureActivity extends AppCompatActivity implements View.On
             CSVFileReader.Signal GaitSignalaX = FileReader.ReadMovementSignal(path_movement, "aX [m/s^2]");
             CSVFileReader.Signal GaitSignalaY = FileReader.ReadMovementSignal(path_movement, "aY [m/s^2]");
             CSVFileReader.Signal GaitSignalaZ = FileReader.ReadMovementSignal(path_movement, "aZ [m/s^2]");
-            tremor = MovementProcessor.ComputeTremor(GaitSignalaX.Signal, GaitSignalaY.Signal, GaitSignalaZ.Signal);
-            movTremor = MovementProcessor.TremorMov(GaitSignalaX.Signal, GaitSignalaY.Signal, GaitSignalaZ.Signal);
 
-            tremor = MovementProcessor.ComputeTremor(GaitSignalaX.Signal, GaitSignalaY.Signal, GaitSignalaZ.Signal);
-            pitch = MovementProcessor.ComputeF0(GaitSignalaX.Signal, GaitSignalaY.Signal, GaitSignalaZ.Signal, 100);
-            power = MovementProcessor.ComputePower(GaitSignalaZ.Signal);
             accX = MovementProcessor.getAccX(GaitSignalaX.Signal);
-            accY = MovementProcessor.getAccX(GaitSignalaY.Signal);
-            timeX = MovementProcessor.getTime(accX);
-            timeY = MovementProcessor.getTime(accY);
 
             steps = MovementProcessor.getSteps(accX);
             velocity = MovementProcessor.getSteps(accX);
@@ -117,54 +111,20 @@ public class WalkingFeatureActivity extends AppCompatActivity implements View.On
             System.out.println(GaitSignalaX.Signal.size());
         }
 
-        GraphManager graphManager = new GraphManager(this);
-
-
-        String Title = getResources().getString(R.string.TremorAmplitude);
-        String Ylabel = getResources().getString(R.string.TremorAmplitude);
-        String Xlabel = getResources().getString(R.string.session);
-//        GraphView graph = findViewById(R.id.bar_TremorGait);
-//        graphManager.BarGraph(graph, x, y, 0, 5, Title, Xlabel, Ylabel);
-
+        RadarManager = new RadarFigureManager(this);
         // Radar chart
         RadarChart radarchart= findViewById(R.id.chart2);
-        radarchart.getDescription().setEnabled(false);
-        radarchart.animateXY(5000, 5000, Easing.EaseInOutQuad);
 
-        RadarData radardata= new RadarData();
-        float[] datos1={100f,20f,90f,80f}; // datos que se van a graficar
-        float[] datos2={(float)tremor,(float)movTremor,30f,(float)power};
-        double area1=0.5*(datos1[0]+datos1[2])*(datos1[1]+datos1[3]);
-        double area2=0.5*(datos2[0]+datos2[2])*(datos2[1]+datos2[3]);
-        radardata = setdata(datos1,datos2);
-        String[] labels={"Tremor", "Mov. Tremor", "Max. Velocity", "Energy"};
+        float[] data1={(float) 10,(float) 10,(float) 10,(float) 10}; // Patient
+        float[] data2={(float) 80,(float) 80,(float) 80,(float) 80}; // Healthy
 
-        XAxis xAxis=radarchart.getXAxis();
-        xAxis.setTextSize(12f);
-        xAxis.setTextColor(Color.BLACK);
-        xAxis.setValueFormatter(new IndexAxisValueFormatter(labels));
-        xAxis.setLabelRotationAngle(90f);
+        String Label_1 = getResources().getString(R.string.steps);
+        String Label_2 = getResources().getString(R.string.stability);
+        String Label_3 = getResources().getString(R.string.velocity);
+        String Label_4 = getResources().getString(R.string.tremor);
+        String[] labels={Label_1, Label_2, Label_3, Label_4};
 
-        YAxis yAxis = radarchart.getYAxis();
-        yAxis.setAxisMinimum(0f);
-        yAxis.setAxisMaximum(80f);
-
-        Legend l = radarchart.getLegend();
-        l.setVerticalAlignment(Legend.LegendVerticalAlignment.BOTTOM);
-        l.setHorizontalAlignment(Legend.LegendHorizontalAlignment.CENTER);
-        l.setOrientation(Legend.LegendOrientation.HORIZONTAL);
-        l.setDrawInside(false);
-        l.setXEntrySpace(7f);
-        l.setYEntrySpace(5f);
-        l.setTextColor(Color.BLACK);
-        l.setTextSize(20f);
-
-        radarchart.setExtraOffsets(0,-400,0,-400);
-        //radarchart.setBackgroundColor(Color.WHITE);
-        radarchart.setScaleY(1f);
-        radarchart.setScaleX(1f);
-        radarchart.setData(radardata);
-        radarchart.invalidate(); // refresh
+        RadarManager.PlotRadar(radarchart, data1, data2, labels);
 
     }
 
@@ -181,50 +141,6 @@ public class WalkingFeatureActivity extends AppCompatActivity implements View.On
     private void onButtonBack(){
         Intent i =new Intent(WalkingFeatureActivity.this, MainActivityMenu.class);
         startActivity(i);
-
     }
 
-    private RadarData setdata(float[] datos1, float[] datos2) {
-        int cnt = datos1.length;
-        ArrayList<RadarEntry> entries1 = new ArrayList<RadarEntry>();
-        ArrayList<RadarEntry> entries2 = new ArrayList<RadarEntry>();
-
-        // NOTE: The order of the entries when being added to the entries array determines their position around the center of
-        // the chart.
-        for (int i = 0; i < cnt; i++) {
-            //float val1 = (float) (Math.random() * mul) + min;
-            entries1.add(new RadarEntry(datos1[i]));
-
-            //float val2 = (float) (Math.random() * mul) + min;
-            entries2.add(new RadarEntry(datos2[i]));
-        }
-
-        RadarDataSet set1 = new RadarDataSet(entries1, "Healthy control");
-        set1.setColor(Color.rgb(255, 185, 0));
-        set1.setFillColor(Color.rgb(255, 185, 0));
-        set1.setDrawFilled(true);
-        set1.setFillAlpha(200);
-        set1.setLineWidth(2f);
-        set1.setValueTextColor(Color.rgb(255, 185, 0));
-        set1.setValueTextSize(15f);
-        set1.setDrawHighlightCircleEnabled(true);
-        set1.setDrawHighlightIndicators(false);
-
-        RadarDataSet set2 = new RadarDataSet(entries2, "Current session");
-        set2.setColor(Color.rgb(0, 200, 200));
-        set2.setFillColor(Color.rgb(0, 200, 200));
-        set2.setDrawFilled(true);
-        set2.setFillAlpha(180);
-        set2.setLineWidth(2f);
-        set2.setDrawHighlightCircleEnabled(true);
-        set2.setDrawHighlightIndicators(false);
-        set2.setValueTextColor(Color.rgb(0, 200, 200));
-        set2.setValueTextSize(15f);
-
-        RadarData dataradar = new RadarData();
-
-        dataradar.addDataSet(set1);
-        dataradar.addDataSet(set2);
-        return dataradar;
-    }
 }

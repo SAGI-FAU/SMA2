@@ -157,9 +157,11 @@
     <string name="intelligibility">Intelligibility</string>
     <string name="patient">Patient</string>
     <string name="control">Control</string>
+
     <string name="walking">Walking</string>
-    <string name="gaitAccelerometerX">Acceleration X</string>
-    <string name="gaitAccelerometerY">Acceleration Y</string>
+    <string name="steps">Steps</string>
+    <string name="velocity">Velocity</string>
+    <string name="tremor">Tremor</string>
 
 
 </resources>
