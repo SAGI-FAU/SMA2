@@ -1,8 +1,6 @@
 package com.sma2.sma2.FeatureExtraction.Movement;
 
 
-import android.util.Log;
-
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.math3.analysis.interpolation.LinearInterpolator;
 import org.apache.commons.math3.analysis.polynomials.PolynomialSplineFunction;
