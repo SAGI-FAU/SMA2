@@ -158,6 +158,10 @@
     <string name="intelligibility">Intelligibility</string>
     <string name="patient">Patient</string>
     <string name="control">Control</string>
+    <string name="tapPosition">Error Position</string>
+    <string name="tapHits">% Hits Ladybug</string>
+    <string name="barHits">% Hits Sliding</string>
+    <string name="tapVelocity">Tapping Velocity</string>
     <string name="walking">Walking</string>
     <string name="steps">Steps</string>
     <string name="velocity">Velocity</string>
