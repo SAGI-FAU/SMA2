@@ -1,5 +1,6 @@
 package com.sma2.sma2;
 
+import android.Manifest;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -22,7 +23,8 @@ public class MainActivityMenu extends AppCompatActivity implements View.OnClickL
     String[] PERMISSIONS = {
             android.Manifest.permission.READ_EXTERNAL_STORAGE,
             android.Manifest.permission.WRITE_EXTERNAL_STORAGE,
-            android.Manifest.permission.RECORD_AUDIO
+            android.Manifest.permission.RECORD_AUDIO,
+            Manifest.permission.CAMERA
     };
     private AlertDialog noPermissionsAlertDialog;
 
