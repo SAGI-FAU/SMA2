@@ -38,7 +38,7 @@ public class Speech_features_Activity extends AppCompatActivity implements View.
 
         SetListeners();
 
-        RadarManager=new RadarFigureManager(this);
+        RadarManager = new RadarFigureManager(this);
         // Radar chart
         RadarChart radarchart= findViewById(R.id.chart2);
 
@@ -55,7 +55,6 @@ public class Speech_features_Activity extends AppCompatActivity implements View.
 
 
         RadarManager.PlotRadar(radarchart, data1, data2, labels);
-
 
 
     }
