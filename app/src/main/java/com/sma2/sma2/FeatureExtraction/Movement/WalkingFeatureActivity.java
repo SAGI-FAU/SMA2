@@ -8,11 +8,9 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.jjoe64.graphview.GraphView;
 import com.sma2.sma2.DataAccess.SignalDA;
 import com.sma2.sma2.DataAccess.SignalDataService;
 import com.sma2.sma2.FeatureExtraction.GetExercises;
-import com.sma2.sma2.FeatureExtraction.GraphManager;
 import com.sma2.sma2.MainActivityMenu;
 import com.sma2.sma2.R;
 import com.sma2.sma2.RadarFigureManager;
@@ -21,22 +19,8 @@ import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.github.mikephil.charting.animation.Easing;
-import com.github.mikephil.charting.components.Legend;
-import com.github.mikephil.charting.components.XAxis;
-import com.github.mikephil.charting.components.YAxis;
-import com.github.mikephil.charting.formatter.IndexAxisValueFormatter;
-import com.github.mikephil.charting.charts.BarChart;
-import com.github.mikephil.charting.data.BarData;
-import com.github.mikephil.charting.data.BarDataSet;
-import com.github.mikephil.charting.data.BarEntry;
-import com.github.mikephil.charting.utils.ColorTemplate;
 import com.github.mikephil.charting.charts.RadarChart;
-import com.github.mikephil.charting.data.RadarData;
-import com.github.mikephil.charting.data.RadarDataSet;
-import com.github.mikephil.charting.data.RadarEntry;
 
-import android.graphics.Color;
 
 public class WalkingFeatureActivity extends AppCompatActivity implements View.OnClickListener {
 
