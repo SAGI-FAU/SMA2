@@ -1,6 +1,8 @@
 package com.sma2.sma2.FeatureExtraction.Movement;
 
 
+import android.util.Log;
+
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.math3.analysis.interpolation.LinearInterpolator;
 import org.apache.commons.math3.analysis.polynomials.PolynomialSplineFunction;
@@ -20,6 +22,16 @@ public class LinearInterpolation {
             newData.add(interpolator.value(newTime.get(i)));
         }
         return newData;
+    }
+
+    static public List<Double> interpolateLinearToSamplingRate(List<Double> data, List<Double> time, double samplingRateHz) {
+        List<Double> newTime = new ArrayList<>();
+        double end = time.get(0);
+        while (end <= time.get(time.size() - 1)) {
+            newTime.add(end);
+            end += 1 / samplingRateHz;
+        }
+        return interpolateLinear(data, time, newTime);
     }
 
 
