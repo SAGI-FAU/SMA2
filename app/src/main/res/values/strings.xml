@@ -146,6 +146,7 @@
     <string name="daily_exercises">Daily Exercises</string>
     <string name="full_exercises">Full Exercises</string>
     <string name="wrong_pass">Wrong password</string>
+    <string name="fill_dialog">Some information is still missing!</string>
     <string name="speech_exercises">Speech exercises</string>
     <string name="mov_exercises">Movement exercises</string>
     <string name="demo_exercises">Demo exercises</string>
@@ -161,6 +162,9 @@
     <string name="tapHits">% Hits Ladybug</string>
     <string name="barHits">% Hits Sliding</string>
     <string name="tapVelocity">Tapping Velocity</string>
-
+    <string name="walking">Walking</string>
+    <string name="steps">Steps</string>
+    <string name="velocity">Velocity</string>
+    <string name="tremor">Tremor</string>
 
 </resources>
