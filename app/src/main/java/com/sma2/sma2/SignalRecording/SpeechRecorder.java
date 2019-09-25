@@ -12,6 +12,7 @@ import android.media.MediaRecorder;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
+import android.os.Looper;
 import android.os.Message;
 import android.util.Log;
 
@@ -142,6 +143,17 @@ public class SpeechRecorder {
                 }
                 WavFileWriter wavFileWriter = new WavFileWriter(SAMPLING_RATE, FILE_PCM, FILE_WAV);
                 wavFileWriter.start();
+                try {
+                    wavFileWriter.join();
+                }catch (InterruptedException e){
+                    Log.e("HANDLER ERROR",e.getMessage());
+                }
+                Message message = HANDLER.obtainMessage();
+                Bundle data = new Bundle();
+                data.putString("State", "Finished");
+                data.putString("File", FILE_WAV.getAbsolutePath());
+                message.setData(data);
+                message.sendToTarget();
             }
         });
         recordingThread.start();
