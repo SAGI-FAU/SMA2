@@ -472,22 +472,6 @@ public class MovementProcessing {
         return 100/(1+ComputePower(AccNoise));
     }
 
-    public double stabVelocity(List<Double> AccX, List<Double> AccY, List<Double> AccZ){
-        List<Double> AccXn, AccYn, AccZn, AccR, VelR_aux, VelR;
-
-        AccXn=RemoveGravity(AccX);
-        AccYn=RemoveGravity(AccY);
-        AccZn=RemoveGravity(AccZ);
-
-        AccR=getAccR(AccXn, AccYn, AccZn);
-        VelR_aux=simpleIntegral(AccR);
-        VelR=removeTrends(VelR_aux);
-
-        return 100/(1+Math.sqrt(ComputePower(VelR)));
-    }
-
-    // The following function are for test only. It is necessary to
-    // calculate the features
 
     // Conversion de ArrayList<Double> to ArrayList<Float>
     public ArrayList<Float> getAccX(List<Double> signal){
@@ -510,23 +494,18 @@ public class MovementProcessing {
         return SignalOut;
     }
 
-    // Design the code to count steps
+    // Put the feature extraction code in the following functions
     public double getSteps(List<Float> signal){
         return 3;
     }
 
-    // Design the code to calculate velocity
     public double velocity(List<Float> signal){
         return 2;
     }
 
-    // Design the function for stability
     public int stability(List<Float> signal1, List<Float> signal2){
 
         return 10;
     }
-
-    //----------------------------------------------------------------------------------------------
-
-
+    
 }

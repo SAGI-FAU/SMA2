@@ -118,22 +118,7 @@ public class WalkingFeatureActivity extends AppCompatActivity implements View.On
         }
 
         GraphManager graphManager = new GraphManager(this);
-        /*ArrayList<Integer> x = new ArrayList<>();
-        ArrayList<Float> y = new ArrayList<>();
 
-        for (int i = 0; i < 5; i++){
-            if (i < path_movement_all.size()){
-                CSVFileReader.Signal GaitSignalaX2 = FileReader.ReadMovementSignal(path_movement_all.get(i), "aX [m/s^2]");
-                CSVFileReader.Signal GaitSignalaY2 = FileReader.ReadMovementSignal(path_movement_all.get(i), "aY [m/s^2]");
-                CSVFileReader.Signal GaitSignalaZ2 = FileReader.ReadMovementSignal(path_movement_all.get(i), "aZ [m/s^2]");
-                x.add(i+1);
-                y.add((float)tremor);
-            }
-            else{
-                x.add(i+1);
-                y.add((float) 0);
-            }
-        }*/
 
         String Title = getResources().getString(R.string.TremorAmplitude);
         String Ylabel = getResources().getString(R.string.TremorAmplitude);
