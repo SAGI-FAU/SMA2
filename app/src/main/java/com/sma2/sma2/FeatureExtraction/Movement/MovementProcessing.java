@@ -359,6 +359,7 @@ public class MovementProcessing {
 
 
         }
+        index=Math.round((float) (Fs*index*winStep));
 
         for(int i=index;i<sig.size();i++) {
 
