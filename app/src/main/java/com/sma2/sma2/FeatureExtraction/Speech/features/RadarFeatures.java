@@ -1,5 +1,6 @@
 package com.sma2.sma2.FeatureExtraction.Speech.features;
 
+import android.util.Log;
 import android.os.Environment;
 
 import com.sma2.sma2.DataAccess.MedicineDA;
@@ -78,28 +79,33 @@ public class RadarFeatures {
     }
 
 
-    public float voiceRate(String AudioFile) {
+    public static float voiceRate(String AudioFile) {
         WAVfileReader wavFileReader=new WAVfileReader();
         f0detector F0Detector =new f0detector();
 
         int[] InfoSig= wavFileReader.getdatainfo(AudioFile);
         float[] Signal=wavFileReader.readWAV(InfoSig[0]);
-        float datalen= InfoSig[0];
         sigproc SigProc = new sigproc();
         Signal = SigProc.normsig(Signal);
         float[] F0= F0Detector.sig_f0(Signal, InfoSig[1]);
         List VoicedSeg = F0Detector.voiced(F0, Signal);
+
         float vRate=0;
-        if(VoicedSeg.size()==0){
-            vRate=0;}
-        else{
-            vRate=InfoSig[1]*VoicedSeg.size()/datalen;}
+        if(VoicedSeg.size()==0)
+            vRate=0;
+        else
+            vRate = (float) InfoSig[1]*(float) VoicedSeg.size()/ (float) InfoSig[0];
+            // Reference (100%) = 6.25
+            // 4.61 (mean) + 1.64 (standart deviation)
+            // of VoiceRate For PCGITA controls
+
+            if(vRate >= 6.25f)
+                vRate = 100;
+            else
+                vRate = (vRate*100)/ 6.25f;
 
         return vRate;
     }
-
-
-
 
     public static void export_jitter(String name_file, float jitter, float perf) throws IOException {
 
@@ -136,7 +142,6 @@ public class RadarFeatures {
         } catch(IOException ie) {
             ie.printStackTrace();
         }
-
 
     }
 
