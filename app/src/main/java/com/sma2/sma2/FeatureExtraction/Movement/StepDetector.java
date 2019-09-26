@@ -1,5 +1,7 @@
 package com.sma2.sma2.FeatureExtraction.Movement;
 
+import android.util.Log;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -35,18 +37,12 @@ public class StepDetector {
     }
 
     public List<Integer> detect(List<Double> time, List<Double> data) {
-        /*List<Double> newTime = new ArrayList<Double>();
-        double end = time.get(0);
-        while (end < time.get(time.size() - 1)) {
-            newTime.add(end);
-            end += 1/ SAMPLING_FREQUENCY_HZ;
-        }
-
-        List<Double> newData = LinearInterpolation.interpolateLinear(time, data, newTime);*/
+        Log.d("step", time.toString());
+        List<Double> newData = LinearInterpolation.interpolateLinearToSamplingRate(time, data, SAMPLING_FREQUENCY_HZ);
 
         List<Double> dataFilt = new ArrayList<Double>();
-        for(int i = 0; i < data.size(); i++) {
-            dataFilt.add(butterworth.filter(data.get(i)));
+        for(int i = 0; i < newData.size(); i++) {
+            dataFilt.add(butterworth.filter(newData.get(i)));
         }
         return PeakDetector.findPeakFiltered(dataFilt, PEAK_FILTER_THRESHOLD);
     }
