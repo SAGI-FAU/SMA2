@@ -31,7 +31,7 @@ public class array_manipulation {
      * @param vals - List to be converted
      * @return Array converted from list
      */
-    public float[] listtofloat(List vals)
+    public float[] listtoarray(List vals)
     {
         float [] means = new float[vals.size()];
         for(int i=0;i<vals.size();i++)
@@ -51,13 +51,23 @@ public class array_manipulation {
         return means;
     }
 
+
     public float[] dlisttoarrayF(List<Double> vals)
     {
         float [] means = new float[vals.size()];
         double temp;
         for(int i=0;i<vals.size();i++)
         {
-            temp=  vals.get(i);
+            temp=  (double) vals.get(i);
+            means[i] = (float) temp;
+        }
+        return means;
+    }
+
+    public float[] listtofloat(List vals) {
+        float[] means = new float[vals.size()];
+        for (int i = 0; i < vals.size(); i++) {
+            double temp = (double) vals.get(i);
             means[i] = (float) temp;
         }
         return means;
