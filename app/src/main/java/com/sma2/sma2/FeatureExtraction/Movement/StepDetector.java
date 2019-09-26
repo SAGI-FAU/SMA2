@@ -2,6 +2,8 @@ package com.sma2.sma2.FeatureExtraction.Movement;
 
 import android.util.Log;
 
+import org.apache.commons.math3.analysis.polynomials.PolynomialSplineFunction;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -37,13 +39,15 @@ public class StepDetector {
     }
 
     public List<Integer> detect(List<Double> time, List<Double> data) {
-        Log.d("step", time.toString());
-        List<Double> newData = LinearInterpolation.interpolateLinearToSamplingRate(time, data, SAMPLING_FREQUENCY_HZ);
+        PolynomialSplineFunction interpolator = LinearInterpolation.getInterpolator(data, time);
+        List<Double> dataFilt = new ArrayList<>();
 
-        List<Double> dataFilt = new ArrayList<Double>();
-        for(int i = 0; i < newData.size(); i++) {
-            dataFilt.add(butterworth.filter(newData.get(i)));
+        double end = time.get(0);
+        while (end <= time.get(time.size() - 1)) {
+            dataFilt.add(butterworth.filter(interpolator.value(end)));
+            end += (1 / SAMPLING_FREQUENCY_HZ) * 1e9;
         }
+
         return PeakDetector.findPeakFiltered(dataFilt, PEAK_FILTER_THRESHOLD);
     }
 
