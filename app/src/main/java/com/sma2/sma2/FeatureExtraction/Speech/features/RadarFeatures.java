@@ -1,14 +1,25 @@
 package com.sma2.sma2.FeatureExtraction.Speech.features;
 
+import android.os.Environment;
+
+import com.sma2.sma2.DataAccess.MedicineDA;
+import com.sma2.sma2.DataAccess.MedicineDataService;
 import com.sma2.sma2.FeatureExtraction.Speech.tools.WAVfileReader;
 import com.sma2.sma2.FeatureExtraction.Speech.tools.array_manipulation;
 import com.sma2.sma2.FeatureExtraction.Speech.tools.f0detector;
 import com.sma2.sma2.FeatureExtraction.Speech.tools.sigproc;
+import com.sma2.sma2.SignalRecording.CSVFileWriter;
 
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 import static java.lang.Math.abs;
+import com.opencsv.CSVWriter;
+
 
 public class RadarFeatures {
 
@@ -85,6 +96,48 @@ public class RadarFeatures {
             vRate=InfoSig[1]*VoicedSeg.size()/datalen;}
 
         return vRate;
+    }
+
+
+
+
+    public static void export_jitter(String name_file, float jitter, float perf) throws IOException {
+
+        String directory = Environment.getExternalStorageDirectory() + "/Apkinson/FEATURES/";
+        String fileName = directory + "Jitter.csv";
+
+
+        File direct = new File(directory);
+        if (!direct.exists()) {
+            direct.mkdirs();
+        }
+        File file =new File(fileName);
+
+        CSVWriter writer;
+        FileWriter mFileWriter;
+        try {
+            if(file.exists() && !file.isDirectory()){
+                mFileWriter = new FileWriter(fileName , true) ;
+                writer = new CSVWriter(mFileWriter);
+            }
+            else {
+                writer = new CSVWriter(new FileWriter(fileName));
+                String[] header={"File", "Jitter", "Perf"};
+                writer.writeNext(header);
+            }
+            String name=name_file.substring(name_file.lastIndexOf("/")+1);
+            String[] row={"","",""};
+            row[0]=name;
+            row[1]=Float.toString(jitter);
+            row[2]=Float.toString(perf);
+
+            writer.writeNext(row);
+            writer.close();
+        } catch(IOException ie) {
+            ie.printStackTrace();
+        }
+
+
     }
 
 

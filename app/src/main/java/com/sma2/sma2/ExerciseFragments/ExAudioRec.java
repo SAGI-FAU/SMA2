@@ -4,23 +4,19 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v4.app.FragmentTransaction;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ProgressBar;
+import android.widget.Toast;
 
+import com.sma2.sma2.FeatureExtraction.Speech.features.RadarFeatures;
 import com.sma2.sma2.R;
 import com.sma2.sma2.SignalRecording.SpeechRecorder;
-
-import java.io.File;
-
 
 public class ExAudioRec extends ExerciseFragment implements ButtonFragment.OnButtonInteractionListener{
     private ProgressBar volumeBar;
     private SpeechRecorder recorder;
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -41,30 +37,6 @@ public class ExAudioRec extends ExerciseFragment implements ButtonFragment.OnBut
         super.onDetach();
         recorder.release();
     }
-
-/*
-            Thread deleteFile = new Thread() {
-                @Override
-                public void run() {
-                    File file = new File(filePath);
-                    int attempts =  0;
-                    while (!file.exists() && attempts < 10){
-                        try {
-                            sleep(100);
-                            attempts++;
-                        } catch (InterruptedException e) {
-                            e.printStackTrace();
-                        }
-                    }
-                    if (attempts < 10){
-                        file.delete();
-                    } else {
-                        Log.w("AUDIO_FILE", "No file could be deleted");
-                    }
-                }
-            };
-            deleteFile.start();
-*/
 
     @Override
     public void onButtonInteraction(boolean start) {
@@ -88,7 +60,23 @@ public class ExAudioRec extends ExerciseFragment implements ButtonFragment.OnBut
         }
     }
 
-    private static class VolumeHandler extends Handler{
+
+
+    private void  evaluate_features(){
+        if (mExercise.getId()==18){ // sustained vowel AH to compute jitter
+            float jitt_perc=RadarFeatures.jitter(filePath);
+            float jitt_perf=100f-jitt_perc;
+            try {
+                RadarFeatures.export_jitter(filePath, jitt_perc, jitt_perf);
+            }catch (Exception e) {
+                Toast.makeText(getActivity(),R.string.jitter_failed,Toast.LENGTH_SHORT).show();
+
+            }
+
+        }
+    }
+
+    private class VolumeHandler extends Handler{
         ProgressBar volumeBar;
 
         public VolumeHandler(ProgressBar bar){
@@ -98,7 +86,14 @@ public class ExAudioRec extends ExerciseFragment implements ButtonFragment.OnBut
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
             Bundle bundle = msg.getData();
-            final int currentVolume = (int) bundle.getDouble("Volume");
+            final int currentVolume = (int) bundle.getDouble("Volume", 0);
+            final String state = bundle.getString("State", "Empty");
+            if (state.equals("Finished")){
+
+                evaluate_features();
+
+            }
+
             post(new Runnable() {
                 @Override
                 public void run() {
