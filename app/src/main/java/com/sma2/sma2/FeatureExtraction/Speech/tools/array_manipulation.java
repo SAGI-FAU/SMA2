@@ -41,6 +41,17 @@ public class array_manipulation {
         return means;
     }
 
+    public float[] dlisttoarrayF(List<Double> vals)
+    {
+        float [] means = new float[vals.size()];
+        double temp;
+        for(int i=0;i<vals.size();i++)
+        {
+            temp=  (double) vals.get(i);
+            means[i] = (float) temp;
+        }
+        return means;
+    }
     public double[] dlisttoarray(List<Double> vals)
     {
         double [] means = new double[vals.size()];
