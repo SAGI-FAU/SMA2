@@ -47,7 +47,7 @@ public class RadarFigureManager {
         l.setTextColor(Color.BLACK);
         l.setTextSize(20f);
 
-        radarChart.setExtraOffsets(0,-400,0,-400);
+        radarChart.setExtraOffsets(0,-200,0,-200);
         //radarchart.setBackgroundColor(Color.WHITE);
         radarChart.setScaleY(1f);
         radarChart.setScaleX(1f);
@@ -105,6 +105,29 @@ public class RadarFigureManager {
         return data_radar;
     }
 
+
+    double get_area_chart(float[] data){
+
+        double[] angles= new double[data.length];
+        double[] x= new double[data.length+1];
+        double[] y= new double[data.length+1];
+        double pi=3.14159265;
+        float A=0f;
+        for (int k=0; k<data.length;k++){
+            angles[k]=2*pi*k/data.length;
+            x[k]=data[k]*Math.cos(angles[k]);
+            y[k]=data[k]*Math.sin(angles[k]);
+        }
+
+        x[data.length]=x[0];
+        y[data.length]=y[0];
+
+        for (int k=0; k<data.length;k++){
+            A+=Math.abs(x[k]*y[k+1]-x[k+1]*y[k]);
+        }
+        return A*0.5;
+
+    }
 
 
 }

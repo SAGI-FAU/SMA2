@@ -307,15 +307,134 @@ public class MovementProcessing {
         return 10;
     }
 
-    public float freezeIndex(double[] sig, int Fs)
+
+
+    public Double ComputePower2 (float[] signal){
+        Double Power=0.0;
+        for (int j=0;j<signal.length;j++){
+            Power+=Math.pow(signal[j],2);
+        }
+        return Power/(double)signal.length;
+    }
+
+
+    public float [] sigmoid(float [] sig){
+        float [] sig_sigmoid= new float[sig.length];
+        for (int j=0;j<sig.length;j++){
+            sig_sigmoid[j]= (float) (1/(1+Math.exp(-sig[j])));
+
+        }
+
+        return sig_sigmoid;
+    }
+
+    public List<Double> removeInitGait(List<Double> sig, int Fs, double winSize, double winStep){
+
+        array_manipulation Arr_man= new array_manipulation();
+        List<Double> newSig= new ArrayList<>();
+
+        float[] sig_array = Arr_man.dlisttoarrayF(sig);
+
+        sigproc SigProc= new sigproc();
+        List <float[]> AccR_framed = SigProc.sigframe(sig_array,Fs, (float) winSize, (float) winStep);
+        List <Double> PowerArr = new ArrayList<>();
+        for(int i=0;i<AccR_framed.size();i++)
+        {
+            Double Power = ComputePower2(AccR_framed.get(i));
+            PowerArr.add(Power);
+        }
+
+        float[] Power_Array = Arr_man.dlisttoarrayF(PowerArr);
+
+        float [] sigmoid=sigmoid(Power_Array);
+
+        float temp=sigmoid[0];
+        int index=0;
+        for(int i=1;i<sigmoid.length;i++){
+
+            if(sigmoid[i]<temp){
+                index=i;
+                temp=sigmoid[i];
+            }
+
+
+        }
+        index=Math.round((float) (Fs*index*winStep));
+
+        for(int i=index;i<sig.size();i++) {
+
+            newSig.add(sig.get(i));
+
+
+        }
+
+
+
+
+        return  newSig;
+    }
+
+
+
+    public float freezeIndex(List<Double> sig,List<Double> oldTime, int Fs)
     {
-        sigproc SigProc = new sigproc();
+
+        sigproc SigProc=new sigproc();
+        LinearInterpolation linearInterpolation= new LinearInterpolation();
+        List<Double> newTime = new ArrayList<>();
+        List<Double> AccR= new ArrayList<>();
+        //Extracting Time Stamp
+
+
+        //Old time is given in ns, we have to converted to ms
+
+        for (int i = 0; i < oldTime.size(); i++) {
+
+            newTime.add(oldTime.get(i)*Math.pow(10,-9));
+        }
+
+
+
+        AccR= linearInterpolation.interpolateLinearToSamplingRate(sig, newTime, Fs);
+
+        array_manipulation arrayMan= new array_manipulation();
+
+        double [] Signal=arrayMan.dlisttoarray(AccR);
+        //sigproc SG= new sigproc();
+
+
+        //double [] sig_win=SG.makeWindow(Signal,1);
+
+        int zpad = 2 * Signal.length;
+        //Append half a window length of zeroes
+        while ((zpad & (zpad - 1)) != 0)//Append zeroes until the number of samples is a power of two
+        {
+            zpad = zpad + 1;
+        }
+        double [] sig_win=new double[zpad];
+
+
+        for (int i = 0; i < AccR.size(); i++) {
+
+            sig_win[i] = (double) Signal[i];
+
+        }
+
+
+
+
+        for (int i = Signal.length; i < zpad; i++) {
+
+            sig_win[i] = 0;
+
+        }
 
 
 
         FastFourierTransformer fft1= new FastFourierTransformer(DftNormalization.STANDARD);
-
-        Complex[] spect = fft1.transform(sig, TransformType.FORWARD);
+        Log.e("gait", "señal orig"+String.valueOf(sig_win.length));
+        Complex[] spect = fft1.transform(sig_win, TransformType.FORWARD);
+        Log.e("gait", "señal fft"+String.valueOf(spect.length));
 
 
         // Norm of the spect
@@ -364,6 +483,7 @@ public class MovementProcessing {
 
         return freezeI;
     }
+
 
 
     
