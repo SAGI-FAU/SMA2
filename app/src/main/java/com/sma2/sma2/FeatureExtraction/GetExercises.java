@@ -36,7 +36,11 @@ public class GetExercises {
                 instr = parser.parseLine(TextUtils.join("", instr));
                 ExID = Integer.parseInt(instr[0]);//The ID is always on the first position CSV.
                 if (ExID==id){
-                    return instr[locale];
+                    if(id <= 10){
+                        return instr[locale]+"_"+languages[locale]+"1";
+                    }
+                    else
+                        return instr[locale];
                 }
             }
 
