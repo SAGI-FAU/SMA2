@@ -168,4 +168,5 @@
     <string name="steps">Steps</string>
     <string name="velocity">Velocity</string>
     <string name="tremor">Tremor</string>
+    <string name="jitter_failed">Jiiter could not be computed</string>
 </resources>
