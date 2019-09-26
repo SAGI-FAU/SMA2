@@ -41,17 +41,6 @@ public class array_manipulation {
         return means;
     }
 
-    public double[] dlisttoarray(List<Double> vals)
-    {
-        double [] means = new double[vals.size()];
-        for(int i=0;i<vals.size();i++)
-        {
-            means[i] = vals.get(i);
-        }
-        return means;
-    }
-
-
     public float[] dlisttoarrayF(List<Double> vals)
     {
         float [] means = new float[vals.size()];
@@ -60,6 +49,15 @@ public class array_manipulation {
         {
             temp=  (double) vals.get(i);
             means[i] = (float) temp;
+        }
+        return means;
+    }
+    public double[] dlisttoarray(List<Double> vals)
+    {
+        double [] means = new double[vals.size()];
+        for(int i=0;i<vals.size();i++)
+        {
+            means[i] = vals.get(i);
         }
         return means;
     }
@@ -72,7 +70,6 @@ public class array_manipulation {
         }
         return means;
     }
-
     /**
      * Calculate first order discrete difference from array.
      * @param x - Array
