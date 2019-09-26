@@ -5,7 +5,9 @@ import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.constraint.ConstraintLayout;
 import android.support.v7.app.AppCompatActivity;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.DatePicker;
 import android.widget.EditText;
@@ -22,15 +24,19 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
+import static com.sma2.sma2.Utility.Helpers.hideKeyboard;
+
 public class Profile1Activity extends AppCompatActivity implements View.OnClickListener {
 
     TextView tv_username;
     //TextView tv_userid;
-    EditText et_date;
+    TextView et_date;
     RadioGroup rg_gender, rg_hand, rg_smoker;
     PatientDA patientData;
     Calendar C = Calendar.getInstance();
-    int year, month, day;
+    int year = 1970;
+    int month = 1;
+    int day = 1;
     DatePickerDialog datePickerDialog;
     Date date = null;
     @Override
@@ -38,13 +44,29 @@ public class Profile1Activity extends AppCompatActivity implements View.OnClickL
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile1);
         patientData = (PatientDA) getIntent().getSerializableExtra("PatientData");
+        ConstraintLayout layout = findViewById(R.id.layout_p1);
+        et_date = findViewById(R.id.age_create);
+        layout.setOnTouchListener(new View.OnTouchListener()
+        {
+            @Override
+            public boolean onTouch(View view, MotionEvent ev)
+            {
+                hideKeyboard(view);
+                return false;
+            }
+        });
+        try {
+            date = new SimpleDateFormat("dd/MM/yyyy").parse(String.valueOf(day)+"/"+String.valueOf(month)+"/"+String.valueOf(year));
+            et_date.setText(DateFormat.getDateInstance().format(date));
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
         initialized();
     }
 
     private void initialized() {
         tv_username = findViewById(R.id.username_create);
         //tv_userid = findViewById(R.id.userid_create);
-        et_date = findViewById(R.id.age_create);
         et_date.setOnClickListener(this);
 
         tv_username.setText(patientData.getUsername());
@@ -57,9 +79,6 @@ public class Profile1Activity extends AppCompatActivity implements View.OnClickL
             et_date.setText(DateFormat.getDateInstance().format(Birthdate));
         }
 
-        year = C.get(Calendar.YEAR);
-        month = C.get(Calendar.MONTH);
-        day = C.get(Calendar.DAY_OF_MONTH);
         datePickerDialog = new DatePickerDialog(this, AlertDialog.THEME_HOLO_LIGHT, new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker datePicker, int mYear, int mMonth, int mDay) {
@@ -89,7 +108,12 @@ public class Profile1Activity extends AppCompatActivity implements View.OnClickL
                     rg_gender = findViewById(R.id.gender_radio);
                     rg_hand = findViewById(R.id.hand_radio);
                     rg_smoker = findViewById(R.id.smoker_radio);
-                    String gender = ((RadioButton) findViewById(rg_gender.getCheckedRadioButtonId())).getText().toString();
+                    RadioButton radio_button = findViewById(rg_gender.getCheckedRadioButtonId());
+                    if (radio_button == null) {
+                        Toast.makeText(getApplicationContext(), getString(R.string.fill_dialog), Toast.LENGTH_LONG).show();
+                        return;
+                    }
+                    String gender = radio_button.getText().toString();
                     String hand_string = ((RadioButton) findViewById(rg_hand.getCheckedRadioButtonId())).getText().toString();
                     String smoker_string = ((RadioButton) findViewById(rg_smoker.getCheckedRadioButtonId())).getText().toString();
                     patientData.setBirthday(date);
@@ -101,6 +125,9 @@ public class Profile1Activity extends AppCompatActivity implements View.OnClickL
                         case "Left":
                             patientData.setHand(1);
                             break;
+                        default:
+                            Toast.makeText(getApplicationContext(), getString(R.string.fill_dialog), Toast.LENGTH_LONG).show();
+                            return;
                     }
 
                     switch (smoker_string) {
@@ -110,6 +137,9 @@ public class Profile1Activity extends AppCompatActivity implements View.OnClickL
                         case "No":
                             patientData.setSmoker(false);
                             break;
+                        default:
+                            Toast.makeText(getApplicationContext(), getString(R.string.fill_dialog), Toast.LENGTH_LONG).show();
+                            return;
                     }
 
                     Intent intent = new Intent(Profile1Activity.this,Profile2Activity.class);

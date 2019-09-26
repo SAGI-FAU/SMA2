@@ -17,11 +17,10 @@ public class f0detector {
     private int fs;
     private sigproc SG = new sigproc();
     private array_manipulation ArrM = new array_manipulation();
-    private FFT fft;
-    private int zpad;
+    private int nfft;
     private float[] winRx;
-    private int minf0=75;//Minimum pitch (default 75Hz)
-    private int maxf0=500;//Maximum pitch (default 500Hz)
+    private float minf0=75;//Minimum pitch (default 75Hz)
+    private float maxf0=500;//Maximum pitch (default 500Hz)
     private int inilag;
     private int endlag;
     private int maxcandi = 15;//Max number of candidates
@@ -42,10 +41,12 @@ public class f0detector {
         fs = Fs;
         inilag = (int) Math.ceil(fs/maxf0);//lower bound lag
         endlag = (int) Math.ceil(fs/minf0);//upper bound lag
+        //Calculate the resolution of the FFT based on the length of the short-time signal
+        nfft = (int) (Math.pow(2,Math.ceil(Math.log((int) Math.ceil(winlen * fs)) / Math.log(2))));
         //Get f0 contour from signal
         //Log.e("F0", "Inicia");
-        //float[] pitchC = f0_cont(sig);
-        float[] pitchC = f0_cont_fast(sig);
+        float[] pitchC = f0_cont(sig);
+        //float[] pitchC = f0_cont_fast(sig);
 
         //Log.e("F0", "Listo");
 
@@ -71,6 +72,33 @@ public class f0detector {
         fs = Fs;
         inilag = (int) Math.ceil(fs/maxf0);//lower bound lag
         endlag = (int) Math.ceil(fs/minf0);//upper bound lag
+        //Calculate the resolution of the FFT based on the length of the short-time signal
+        nfft = (int) (Math.pow(2,Math.ceil(Math.log((int) Math.ceil(winlen * fs)) / Math.log(2))));
+        //Get f0 contour from signal
+        //Log.e("F0", "Inicia");
+        float[] pitchC = f0_cont(sig);
+        //Log.e("F0", "Listo");
+
+        //Fix contour.
+        pitchC = fixf0(pitchC);
+
+        //Set pitch zero for windows less than the analysis window
+        pitchC = zerof0(pitchC);
+
+        //Interpolate missing values
+        pitchC = interpf0(pitchC);
+        return pitchC;
+    }
+    public float[] sig_f0(float[] sig, int Fs, float sel_winlen, float sel_winstep, float minf0f, float maxf0f) {
+        winlen = sel_winlen;
+        winstep = sel_winstep;
+        fs = Fs;
+        inilag = (int) Math.ceil(fs/maxf0);//lower bound lag
+        endlag = (int) Math.ceil(fs/minf0);//upper bound lag
+        minf0 = minf0f;
+        maxf0 = maxf0f;
+        //Calculate the resolution of the FFT based on the length of the short-time signal
+        nfft = (int) (Math.pow(2,Math.ceil(Math.log((int) Math.ceil(winlen * fs)) / Math.log(2))));
         //Get f0 contour from signal
         //Log.e("F0", "Inicia");
         float[] pitchC = f0_cont(sig);
@@ -89,9 +117,6 @@ public class f0detector {
 
     //Pitch contour
     public float[] f0_cont(float[] signal) {
-        //sigproc SigProc = new sigproc();
-        //signal = SG.normalizesig(signal);
-
         //Find global absolute peak
         float[] temp = Arrays.copyOfRange(signal, 0, signal.length - 1);
         Arrays.sort(temp);
@@ -119,16 +144,8 @@ public class f0detector {
         }
         float sig_frame[] = copyOfRange(signal, ini_frame, end_frame);
         //-----------------------------------------------------------------------------------------
-        //Compute ACF using FFT
-        zpad = 2 * sig_frame.length;
-        //Append half a window length of zeroes
-        while ((zpad & (zpad - 1)) != 0)//Append zeroes until the number of samples is a power of two
-        {
-            zpad = zpad + 1;
-        }
-        fft = new FFT(zpad, fs);
         //Calculate ACF for hanning window. This is used to normalize the ACF (r_sig/r_win)
-        float[] winfun = new float[zpad];
+        float[] winfun = new float[nfft];
         Arrays.fill(winfun, 1);
         winfun = SG.makeWindow(winfun, 1);
         winRx = Arrays.copyOfRange(winfun, (int) Math.ceil(((winfun.length) / 2)), winfun.length);
@@ -194,16 +211,8 @@ public class f0detector {
         }
         float sig_frame[] = copyOfRange(signal, ini_frame, end_frame);
         //-----------------------------------------------------------------------------------------
-        //Compute ACF using FFT
-        zpad = 2 * sig_frame.length;
-        //Append half a window length of zeroes
-        while ((zpad & (zpad - 1)) != 0)//Append zeroes until the number of samples is a power of two
-        {
-            zpad = zpad + 1;
-        }
-        fft = new FFT(zpad, fs);
         //Calculate ACF for hanning window. This is used to normalize the ACF (r_sig/r_win)
-        float[] winfun = new float[zpad];
+        float[] winfun = new float[nfft];
         Arrays.fill(winfun, 1);
         winfun = SG.makeWindow(winfun, 1);
         winRx = Arrays.copyOfRange(winfun, (int) Math.ceil(((winfun.length) / 2)), winfun.length);
@@ -263,10 +272,9 @@ public class f0detector {
 
     //Calculated pitch according to Paul Boersma method(Praat)
     private float f0_boers(float[] sig_frame) {
-        //Apply hanning window to speech signal
-        float[] Hannsig = SG.makeWindow(sig_frame, 1);
+        float[] spec = SG.powerspec(sig_frame,nfft);
         //Calculate autocorrelation
-        float[] sigRx = fft.acf(Hannsig);
+        float[] sigRx = SG.acf(spec);
         //float[] sigRx = new float[sig_frame.length];
         //acf(Hannsig,sigRx);
         float f0 = 0;
@@ -301,36 +309,6 @@ public class f0detector {
             }
         }
         return f0;
-    }
-
-    //Autocorrelation (ACF). Convolution
-    public void acf(float[] x, float[] ac) {
-        Arrays.fill(ac, 0);
-        int n = x.length;
-        for (int j = 0; j < n; j++) {
-            for (int i = 0; i < n; i++) {
-                ac[j] += x[i] * x[(n + i - j) % n];
-            }
-        }
-    }
-
-    //Find first min of ACF
-    private int findmin(float[] rx)
-    {
-        //sigproc SG = new sigproc();
-        float[] d = ArrM.diff(rx);
-        int ind = 0;
-        for (int i=0;i<d.length;i++)
-        {
-            if (d[i]>0)
-            {
-                ind=i;
-                break;
-            }
-            else
-                ind = 0;
-        }
-        return ind;
     }
 
     //Fix contour
@@ -379,7 +357,7 @@ public class f0detector {
                 if ((cont[i] != 0) && (cont[i + 1] == 0)) {
                     posfin = i;
                     int diff = Math.abs(posfin - posIni)+1;
-                    int minseg = 4;//Minimum number of windows considered as unvoiced
+                    int minseg = 2;//Minimum number of windows considered as unvoiced
                     if (diff < minseg) {//If f0=0 in a non-unvoiced nor silence segment, then interpolate.
                         for (int j = 0; j <= diff; j++) {
                             cont[posIni + j] = 0;
@@ -438,6 +416,10 @@ public class f0detector {
         List<float[]> VoicedSeg = new ArrayList<float[]>();
         //sigproc SG = new sigproc();
         List pitchON = ArrM.find(f0,0f,5);//Find different than 0
+        if (pitchON.size()==0)
+        {
+            return VoicedSeg;
+        }
         //List to array
         float[] f0ON = new float[pitchON.size()];
         for(int i=0;i<pitchON.size();i++)

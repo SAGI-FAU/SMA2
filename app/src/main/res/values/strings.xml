@@ -146,6 +146,7 @@
     <string name="daily_exercises">Daily Exercises</string>
     <string name="full_exercises">Full Exercises</string>
     <string name="wrong_pass">Wrong password</string>
+    <string name="fill_dialog">Some information is still missing!</string>
     <string name="speech_exercises">Speech exercises</string>
     <string name="mov_exercises">Movement exercises</string>
     <string name="demo_exercises">Demo exercises</string>
@@ -157,6 +158,15 @@
     <string name="intelligibility">Intelligibility</string>
     <string name="patient">Patient</string>
     <string name="control">Control</string>
-
-
+    <string name="permission_request">This sample needs permission for camera and audio recording.</string>
+    <string name="camera_error">This device doesn\'t support Camera2 API.</string>
+    <string name="tapPosition">Error Position</string>
+    <string name="tapHits">% Hits Ladybug</string>
+    <string name="barHits">% Hits Sliding</string>
+    <string name="tapVelocity">Tapping Velocity</string>
+    <string name="walking">Walking</string>
+    <string name="steps">Steps</string>
+    <string name="velocity">Velocity</string>
+    <string name="tremor">Tremor</string>
+    <string name="jitter_failed">Jiiter could not be computed</string>
 </resources>

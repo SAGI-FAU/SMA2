@@ -141,9 +141,9 @@
     <string name="daily_exercises">Daily Exercises</string>
     <string name="full_exercises">Full Exercises</string>
     <string name="wrong_pass">Wrong password</string>
+    <string name="fill_dialog">Some information is still missing!</string>
     <string name="speech_exercises">Speech exercises</string>
     <string name="mov_exercises">Movement exercises</string>
     <string name="demo_exercises">Demo exercises</string>
-
 
 </resources>
