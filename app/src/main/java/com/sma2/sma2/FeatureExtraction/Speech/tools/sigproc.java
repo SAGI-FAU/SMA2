@@ -1,5 +1,10 @@
 package com.sma2.sma2.FeatureExtraction.Speech.tools;
 
+import org.apache.commons.math3.complex.Complex;
+import org.apache.commons.math3.transform.DftNormalization;
+import org.apache.commons.math3.transform.FastFourierTransformer;
+import org.apache.commons.math3.transform.TransformType;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -19,6 +24,7 @@ import static java.util.Arrays.copyOfRange;
  */
 
 public class sigproc {
+    private FastFourierTransformer fft = new FastFourierTransformer(DftNormalization.STANDARD);
     public sigproc(){
     }
 
@@ -124,29 +130,22 @@ public class sigproc {
     }
 
 
-
     /**
      * Windowing
-     * Applies windowing to the signal. The current method implements Hanning and Hamming windowing.
-     * @param win_sig - Short-time frame from the signal
-     * @param selwin - Flag used to select between hamming (selwin=0) or hanning (selwin=1) windowing
+     * Applies windowing to the signal. The current method implements Hanning. Returns Double
+     * @param win_sig - Short-time signal
      * @return Integer with the mean value of the array.
      */
-    public double[] makeWindow(double win_sig[],int selwin) {
+    public double[] makeWindow(float win_sig[]) {
 
         double[] window = new double[win_sig.length];
         int n = win_sig.length;
         for(int i = 0; i < window.length; i++)
-            if (selwin==0) {//Make a hamming window
-                window[i] = win_sig[i] * ((0.54 - 0.46 * Math.cos(2 * Math.PI * i / (n - 1))));
-            }
-            else if(selwin==1) {//Make hanning window
-                window[i] = win_sig[i] * ( (0.5 - 0.5 * Math.cos(2 * Math.PI * i / (n - 1))));
-            }
+            //Make hanning window
+            window[i] = win_sig[i] * ((float) (0.5 - 0.5 * Math.cos(2 * Math.PI * i / (n - 1))));
+
         return window;
     }
-
-
     /**
      * Power spectrum
      * Computes the power spectrum of a speech signal.
@@ -154,6 +153,7 @@ public class sigproc {
      * @param Fs - Sampling frequency.
      * @return Array with the power spectrum of the signal.
      */
+    /**
     public float[] signal_fft(float[] win_sig,int Fs)
     {
        //signal frame with window function applied
@@ -165,6 +165,43 @@ public class sigproc {
             sig_spec[i] = fft.getBand(i);
         }
         return sig_spec;
+    }**/
+
+    /**
+     * Computes the power spectrum of a signal
+     * @param sig_frame: Signal. The length should be equal to NFFT (see below).
+     * @param nfft: Resolution of the FFT. Should be a power of 2
+     * @return
+     */
+    public float[] powerspec(float[] sig_frame,int nfft)
+    {
+        double[] sig_win = makeWindow(sig_frame);
+        Complex[] spec = fft.transform(sig_win, TransformType.FORWARD);
+        //Periodogram. Take only half of the FFT. Only real values are being considered
+        float[] sig_fft = new float[nfft/2];
+        for (int i = 0; i < (sig_fft.length); i++) {
+            sig_fft[i] = (float) Math.pow(spec[i].getReal(), 2);
+        }
+        return sig_fft;
+    }
+
+
+    /*** Compute ACF using Fast Fourier Transform.
+     @param spec is the data.
+     @return acf is the result
+     ***/
+    public float[] acf(float [] spec)
+    {
+        double[] ac = new double[spec.length];
+        for (int i =0;i<spec.length;i++) {
+            ac[i] = Math.pow(spec[i],2);//Power density |X|^2
+        }
+        Complex[] ac_com = fft.transform(ac,TransformType.INVERSE);//real(IFFT(|X|^2))
+        float[] ac_final = new float[ac_com.length/2];
+        for (int i = 0; i < (ac_final.length); i++) {
+            ac_final[i] = (float) ac_com[i].getReal();
+        }
+        return ac_final;
     }
 
     /***
