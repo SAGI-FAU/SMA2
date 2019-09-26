@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import static java.lang.System.arraycopy;
 import static java.util.Arrays.copyOfRange;
 
 /**
@@ -19,17 +20,14 @@ public class f0detector {
     private array_manipulation ArrM = new array_manipulation();
     private int nfft;
     private float[] winRx;
-    private float minf0=75;//Minimum pitch (default 75Hz)
-    private float maxf0=500;//Maximum pitch (default 500Hz)
+    private int minf0=75;//Minimum pitch (default 75Hz)
+    private int maxf0=500;//Maximum pitch (default 500Hz)
     private int inilag;
     private int endlag;
     private int maxcandi = 15;//Max number of candidates
     private float silencetrehs = 0.03f;//Silence threshold
     private float vocingthres = 0.45f;//Vocing threshold
     private float unvocingthres = 0.3f;//Vocing threshold
-    private float octavec = 0.01f;//Octave cost
-    private float Octavejump = 0.35f;//Octave-jump cost
-    private float vuvcost = 0.14f;//Voiced/Unvoiced cost
 
     public f0detector() {
     }
@@ -44,11 +42,7 @@ public class f0detector {
         //Calculate the resolution of the FFT based on the length of the short-time signal
         nfft = (int) (Math.pow(2,Math.ceil(Math.log((int) Math.ceil(winlen * fs)) / Math.log(2))));
         //Get f0 contour from signal
-        //Log.e("F0", "Inicia");
         float[] pitchC = f0_cont(sig);
-        //float[] pitchC = f0_cont_fast(sig);
-
-        //Log.e("F0", "Listo");
 
         //Fix contour.
         pitchC = fixf0(pitchC);
@@ -58,10 +52,6 @@ public class f0detector {
 
         //Interpolate missing values
         pitchC = interpf0(pitchC);
-
-
-        //Voiced
-        //List VoicedSeg = voiced(pitchC,sig, (int) (winstep*fs));
 
         return pitchC;
     }
@@ -75,34 +65,7 @@ public class f0detector {
         //Calculate the resolution of the FFT based on the length of the short-time signal
         nfft = (int) (Math.pow(2,Math.ceil(Math.log((int) Math.ceil(winlen * fs)) / Math.log(2))));
         //Get f0 contour from signal
-        //Log.e("F0", "Inicia");
         float[] pitchC = f0_cont(sig);
-        //Log.e("F0", "Listo");
-
-        //Fix contour.
-        pitchC = fixf0(pitchC);
-
-        //Set pitch zero for windows less than the analysis window
-        pitchC = zerof0(pitchC);
-
-        //Interpolate missing values
-        pitchC = interpf0(pitchC);
-        return pitchC;
-    }
-    public float[] sig_f0(float[] sig, int Fs, float sel_winlen, float sel_winstep, float minf0f, float maxf0f) {
-        winlen = sel_winlen;
-        winstep = sel_winstep;
-        fs = Fs;
-        inilag = (int) Math.ceil(fs/maxf0);//lower bound lag
-        endlag = (int) Math.ceil(fs/minf0);//upper bound lag
-        minf0 = minf0f;
-        maxf0 = maxf0f;
-        //Calculate the resolution of the FFT based on the length of the short-time signal
-        nfft = (int) (Math.pow(2,Math.ceil(Math.log((int) Math.ceil(winlen * fs)) / Math.log(2))));
-        //Get f0 contour from signal
-        //Log.e("F0", "Inicia");
-        float[] pitchC = f0_cont(sig);
-        //Log.e("F0", "Listo");
 
         //Fix contour.
         pitchC = fixf0(pitchC);
@@ -127,8 +90,7 @@ public class f0detector {
         if (GAP < GAP2) {
             GAP = GAP2;
         }
-
-        //Frame speech signal
+        //Compute number of frames to frame the speech signal
         int numberOfsamples = (int) Math.ceil(winlen * fs);
         //Window step
         int windowshift = (int) Math.ceil(winstep * fs);
@@ -142,7 +104,6 @@ public class f0detector {
             float temp2 = winstep / winlen;
             numberOfframes = (int) (Math.floor((signal.length / numberOfsamples) / temp2));
         }
-        float sig_frame[] = copyOfRange(signal, ini_frame, end_frame);
         //-----------------------------------------------------------------------------------------
         //Calculate ACF for hanning window. This is used to normalize the ACF (r_sig/r_win)
         float[] winfun = new float[nfft];
@@ -153,7 +114,16 @@ public class f0detector {
         //-----------------------------------------------------------------------------------------
         float[] f0c = new float[numberOfframes];
         for (int i = 0; i < numberOfframes; i++) {
-            sig_frame = copyOfRange(signal, ini_frame, end_frame);
+            float[] sig_frame = copyOfRange(signal, ini_frame, end_frame);
+            //If the length of the signal is not a power of 2, then padd zeros until the lenth of the signal
+            //is equal to NFFT.
+            if (sig_frame.length!=nfft)
+            {
+                sig_frame = new float[nfft];
+                float temp_signal[] = copyOfRange(signal, ini_frame, end_frame);
+                arraycopy(temp_signal,0,sig_frame,0,temp_signal.length);
+            }
+
             //Voiceless candidate
             temp = copyOfRange(sig_frame, 0, sig_frame.length);//it is necessary
             Arrays.sort(temp);
@@ -178,105 +148,11 @@ public class f0detector {
     }
 
 
-
-    //Pitch contour
-    public float[] f0_cont_fast(float[] signal) {
-        //sigproc SigProc = new sigproc();
-        //signal = SG.normalizesig(signal);
-
-        //Find global absolute peak
-        float[] temp = Arrays.copyOfRange(signal, 0, signal.length - 1);
-        Arrays.sort(temp);
-        float GAP = temp[temp.length - 1];
-        GAP = Math.abs(GAP);//Global Absolute Peak
-        float GAP2 = temp[0];
-        GAP2 = Math.abs(GAP2);//in case the maximum is negative
-        if (GAP < GAP2) {
-            GAP = GAP2;
-        }
-
-        //Frame speech signal
-        int numberOfsamples = (int) Math.ceil(winlen * fs);
-        //Window step
-        int windowshift = (int) Math.ceil(winstep * fs);
-        int ini_frame = 0, end_frame = numberOfsamples;
-        //Number of frames to analyze
-        int numberOfframes;
-        if (windowshift == 0) { //if there is no window shift
-            numberOfframes = (int) (Math.floor(signal.length / numberOfsamples));
-            windowshift = numberOfframes;
-        } else {
-            float temp2 = winstep / winlen;
-            numberOfframes = (int) (Math.floor((signal.length / numberOfsamples) / temp2));
-        }
-        float sig_frame[] = copyOfRange(signal, ini_frame, end_frame);
-        //-----------------------------------------------------------------------------------------
-        //Calculate ACF for hanning window. This is used to normalize the ACF (r_sig/r_win)
-        float[] winfun = new float[nfft];
-        Arrays.fill(winfun, 1);
-        winfun = SG.makeWindow(winfun, 1);
-        winRx = Arrays.copyOfRange(winfun, (int) Math.ceil(((winfun.length) / 2)), winfun.length);
-        winRx = Arrays.copyOfRange(winRx,inilag,endlag);
-        //-----------------------------------------------------------------------------------------
-        float[] f0c = new float[numberOfframes];
-        for (int i = 0; i < numberOfframes; i++) {
-            f0c[i]=0;
-            if ((i % 2) == 0){
-                sig_frame = copyOfRange(signal, ini_frame, end_frame);
-                //Voiceless candidate
-                temp = copyOfRange(sig_frame, 0, sig_frame.length);//it is necessary
-                Arrays.sort(temp);
-                float LAP = temp[temp.length - 1];//Local Absolute Peak
-                LAP = Math.abs(LAP);
-                float LAP2 = temp[0];
-                LAP2 = Math.abs(LAP2);//in case that the maximum is negative
-                if (LAP < LAP2) {
-                    LAP = LAP2;
-                }
-
-                if (LAP < (silencetrehs * GAP)) {
-                    f0c[i] = 0;
-                } else {
-                    //Estimate pitch for each speech segment
-                    f0c[i] = f0_boers(sig_frame);
-                }
-
-            }
-            else{
-                if (i>2) {
-                    if (f0c[i - 3]!=0 &&  f0c[i - 1]!=0){
-                        f0c[i - 2] = (f0c[i - 3] + f0c[i - 1]) / 2;
-                    }
-                    else if (f0c[i - 3]==0 &&  f0c[i - 1]!=0){
-                        f0c[i - 2] = f0c[i - 1];
-                    }
-                    else if (f0c[i - 3]!=0 &&  f0c[i - 1]==0){
-                        f0c[i - 2] = f0c[i - 3];
-                    }
-                    else{
-                        f0c[i-2]=0;
-                    }
-
-                }
-            }
-
-            ini_frame = ini_frame + windowshift;
-            end_frame = end_frame + windowshift;
-        }
-        return f0c;
-    }
-
-
-
-
-
     //Calculated pitch according to Paul Boersma method(Praat)
     private float f0_boers(float[] sig_frame) {
         float[] spec = SG.powerspec(sig_frame,nfft);
         //Calculate autocorrelation
         float[] sigRx = SG.acf(spec);
-        //float[] sigRx = new float[sig_frame.length];
-        //acf(Hannsig,sigRx);
         float f0 = 0;
         if (sigRx[0] > vocingthres) {
 
@@ -315,8 +191,6 @@ public class f0detector {
     //Unusual variations in pitch in signals.
     //cont: f0cont
     private float[] fixf0(float[] cont) {
-        //List maxf0 = SG.find(cont, 500, 2);//Find pitch values greater than 500Hz
-        //List minf0 = SG.find(cont, 75, 0);//Find pitch values less than 75Hz
         float[] d = ArrM.diff(cont);
         float[] d_abs = ArrM.absArr(d);//Absolute value of differences
         List df0 = ArrM.find(d_abs, 80, 2);//Find pitch variations greater than 80Hz
@@ -327,18 +201,6 @@ public class f0detector {
                 int ind = (int) df0.get(i);
                 cont[ind+1] = 0;
             }}
-            /*
-            //Set to zero pitch values greater than 500Hz
-            for (int i = 0; i < maxf0.size(); i++) {
-                int ind = (int) maxf0.get(i);
-                cont[ind] = 0;
-            }
-            //Set to zero pitch values less than 75Hz
-            for (int i = 0; i < minf0.size(); i++) {
-                int ind = (int) minf0.get(i);
-                cont[ind] = 0;
-            }*/
-
         return cont;
     }
 
