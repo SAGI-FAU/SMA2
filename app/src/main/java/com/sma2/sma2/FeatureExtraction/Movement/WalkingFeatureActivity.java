@@ -4,10 +4,12 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Environment;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.github.mikephil.charting.charts.RadarChart;
 import com.sma2.sma2.DataAccess.SignalDA;
 import com.sma2.sma2.DataAccess.SignalDataService;
 import com.sma2.sma2.FeatureExtraction.GetExercises;
@@ -19,8 +21,6 @@ import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.github.mikephil.charting.charts.RadarChart;
-
 
 public class WalkingFeatureActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -31,6 +31,7 @@ public class WalkingFeatureActivity extends AppCompatActivity implements View.On
     TextView tWalking;
     TextView tVelocity;
     private RadarFigureManager RadarManager;
+    String TAG = this.getClass().getName();
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -72,7 +73,7 @@ public class WalkingFeatureActivity extends AppCompatActivity implements View.On
 
         }
 
-        ArrayList<Float> accX = new ArrayList<>();
+
         ArrayList<Float> accY = new ArrayList<>();
         ArrayList<Float> timeX = new ArrayList<>();
         ArrayList<Float> timeY = new ArrayList<>();
@@ -86,14 +87,21 @@ public class WalkingFeatureActivity extends AppCompatActivity implements View.On
             CSVFileReader.Signal GaitSignalaY = FileReader.ReadMovementSignal(path_movement, "aY [m/s^2]");
             CSVFileReader.Signal GaitSignalaZ = FileReader.ReadMovementSignal(path_movement, "aZ [m/s^2]");
 
-            accX = MovementProcessor.getAccX(GaitSignalaX.Signal);
+            CSVFileReader.Signal accNorm = MovementProcessor.getAccNorm(GaitSignalaX,GaitSignalaY,GaitSignalaZ);
 
-            steps = MovementProcessor.getSteps(accX);
-            velocity = MovementProcessor.getSteps(accX);
+            StepDetector stepDetector = new StepDetector();
+            List<Integer> stepIndex = stepDetector.detect(accNorm.TimeStamp,accNorm.Signal);
+
+
+            steps = stepIndex.size();
+            velocity = MovementProcessor.getStepTime(stepIndex);
             tWalking.setText(String.valueOf(df.format(steps)));
             tVelocity.setText(String.valueOf(df.format(velocity)));
             System.out.println(GaitSignalaX.Signal.size());
         }
+
+
+        Log.d(TAG, "Walking Activity Created");
 
         RadarManager = new RadarFigureManager(this);
         // Radar chart

@@ -10,7 +10,7 @@ public class StepDetector {
 
     private  final double PEAK_FILTER_THRESHOLD = 0.6f;
     private final double SAMPLING_FREQUENCY_HZ = 100.0f;
-    private double filterCutoffHz = 5.0f;
+    private double filterCutoffHz = 4.0f;
     private int filterOder = 12;
     private Butterworth butterworth = null;
     public int getFilterOder() {
@@ -35,17 +35,18 @@ public class StepDetector {
     }
 
     public List<Integer> detect(List<Double> time, List<Double> data) {
-        List<Double> newTime = new ArrayList<Double>();
+        /*List<Double> newTime = new ArrayList<Double>();
         double end = time.get(0);
         while (end < time.get(time.size() - 1)) {
             newTime.add(end);
             end += 1/ SAMPLING_FREQUENCY_HZ;
         }
 
-        List<Double> newData = LinearInterpolation.interpolateLinear(time, data, newTime);
+        List<Double> newData = LinearInterpolation.interpolateLinear(time, data, newTime);*/
+
         List<Double> dataFilt = new ArrayList<Double>();
-        for(int i = 0; i < newData.size(); i++) {
-            dataFilt.add(butterworth.filter(newData.get(i)));
+        for(int i = 0; i < data.size(); i++) {
+            dataFilt.add(butterworth.filter(data.get(i)));
         }
         return PeakDetector.findPeakFiltered(dataFilt, PEAK_FILTER_THRESHOLD);
     }
