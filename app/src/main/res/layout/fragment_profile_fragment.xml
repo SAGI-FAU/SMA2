@@ -5,7 +5,7 @@
     android:id="@+id/frameLayout2"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".profile_fragment" >
+    tools:context=".profile_fragment">
 
     <ImageView
         android:id="@+id/imageView2"
@@ -16,7 +16,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:srcCompat="@tools:sample/backgrounds/scenic[19]" />
+        tools:srcCompat="@drawable/wallpaper" />
 
     <TextView
         android:id="@+id/txt_profile_progress"
@@ -30,7 +30,7 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <RatingBar
-        android:id="@+id/ratingBar"
+        android:id="@+id/daily_progress_bar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toTopOf="@+id/txt_profile_progress"
@@ -46,16 +46,45 @@
         android:background="@android:drawable/btn_default"
         android:text="@string/quick_start"
         android:textSize="24sp"
-        app:layout_constraintBottom_toTopOf="@+id/ratingBar"
+        app:layout_constraintBottom_toTopOf="@+id/daily_progress_bar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
     <ImageView
-        android:id="@+id/imageView3"
+        android:id="@+id/imageView4"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:scaleX="1.1"
+        android:scaleY="1.1"
+        android:src="@color/colorPrimary"
+        app:layout_constraintBottom_toBottomOf="@+id/iv_profile_picture"
+        app:layout_constraintEnd_toEndOf="@+id/iv_profile_picture"
+        app:layout_constraintStart_toStartOf="@+id/iv_profile_picture"
+        app:layout_constraintTop_toTopOf="@+id/iv_profile_picture" />
+
+    <ImageView
+        android:id="@+id/iv_profile_picture"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@color/colorAccent"
+        app:layout_constraintBottom_toBottomOf="@id/imageView2"
+        app:layout_constraintDimensionRatio="1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHeight_percent="0.2"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView2"
+        tools:src="@drawable/dummy" />
+
+    <TextView
+        android:id="@+id/profile_txt_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="@id/imageView2"
+        android:layout_marginTop="16dp"
+        android:text="@string/user_name"
+        android:textSize="30sp"
+        android:textStyle="italic"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        tools:src="@tools:sample/avatars[11]" />
+        app:layout_constraintTop_toBottomOf="@+id/iv_profile_picture" />
+
 </android.support.constraint.ConstraintLayout>
