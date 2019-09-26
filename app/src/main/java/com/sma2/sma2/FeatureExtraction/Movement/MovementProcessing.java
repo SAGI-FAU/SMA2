@@ -365,6 +365,145 @@ public class MovementProcessing {
         return freezeI;
     }
 
+    // New movement functions for superior members
+
+    public float[] listtofloat(List vals) {
+        float[] means = new float[vals.size()];
+        for (int i = 0; i < vals.size(); i++) {
+            double temp = (double) vals.get(i);
+            means[i] = (float) temp;
+        }
+        return means;
+    }
+
+    public Double ComputePower2 (float[] signal){
+        Double Power=0.0;
+        for (int j=0;j<signal.length;j++){
+            Power+=Math.pow(signal[j],2);
+        }
+        return Power/(double)signal.length;
+    }
+
+    public double meanComputingFloat(float[] vector){
+        double mean=0.0;
+        int cont=0;
+        for(int i=0; i<vector.length; i++){
+
+            mean = mean + vector[i];
+            cont=cont+1;
+        }
+        mean=mean/cont;
+
+        return mean;
+    }
+
+    public double stdComputingFloat(float[] vector, double mean){
+
+        double  std=0.0;
+        int cont=0;
+        for(int i=0; i<vector.length; i++){
+            std = std + ((vector[i] - mean) * (vector[i] - mean));
+            cont=cont+1;
+        }
+        std=Math.sqrt(std/cont);
+
+        return std;
+    }
+
+    public Double ObtainValue(Double Signal){
+        Double value= 0.0;
+
+        value = 200/(1+Math.exp(0.2*Signal));
+        return value;
+    }
+
+    public double ComputeRegularity(List<Double> AccX, List<Double> AccY, List<Double> AccZ){
+        sigproc sigproccess = new sigproc();
+
+        List<Double> AccXn, AccYn, AccZn, AccR;
+
+        AccXn=RemoveGravity(AccX);
+        AccYn=RemoveGravity(AccY);
+        AccZn=RemoveGravity(AccZ);
+
+        AccR=getAccR(AccXn, AccYn, AccZn);
+
+        float[] AccR_aux = listtofloat(AccR);
+        int Fs=100;
+        //Divide the signal into frames
+        List <float[]> AccR_framed = sigproccess.sigframe(AccR_aux,Fs,(float) 0.4,(float) 0.01);
+        List <Double> PowerArr = new ArrayList<>();
+        for(int i=0;i<AccR_framed.size();i++)
+        {
+            Double Power = ComputePower2(AccR_framed.get(i));
+            PowerArr.add(Power);
+        }
+
+        float[] Power_Array = listtofloat(PowerArr);
+        double Mean_Power = meanComputingFloat(Power_Array);
+
+        int start = 400;
+        int cont = 0;
+        List<Float> New_Power = new ArrayList<>();
+
+        //Remove noise data: only movement data
+        for(int i=0;i<Power_Array.length;i++)
+        {
+            if ((i>=start) && ((Power_Array[i])>=Mean_Power)){
+                New_Power.add(Power_Array[i]);
+                cont = cont+1;
+            }
+        }
+
+        //Convert the List to float Array
+        float[] New_PowerArray = new float[New_Power.size()];
+        for (int i = 0; i < New_Power.size(); i++) {
+            New_PowerArray[i] = New_Power.get(i);
+        }
+
+        int w=3;//number of neighbor points
+        double meannew = meanComputingFloat(New_PowerArray);
+        double stdnew = stdComputingFloat(New_PowerArray,meannew);
+
+        List<Float> Time_Vector = new ArrayList<>();
+        Time_Vector.add(((float) 0/ (float) Fs));
+
+        for(int i=0;i<New_PowerArray.length;i++)
+        {
+            if((i>=w)&&(i<=New_PowerArray.length - w - 1)){
+                if((New_PowerArray[i]<New_PowerArray[i-3])&&
+                        (New_PowerArray[i]<New_PowerArray[i-2])&&
+                        (New_PowerArray[i]<New_PowerArray[i-1])&&
+                        (New_PowerArray[i]<New_PowerArray[i+1])&&
+                        (New_PowerArray[i]<New_PowerArray[i+2])&&
+                        (New_PowerArray[i]<New_PowerArray[i+3])&&
+                        (New_PowerArray[i]<(Mean_Power+stdnew))){
+                    Time_Vector.add(((float) i/ (float) Fs));
+                }
+            }
+
+        }
+        Time_Vector.add((float) ((float)(New_PowerArray.length - 1)/(float)Fs));
+
+        //Cnvert to float array
+        float[] Time_Vec_Array = new float[Time_Vector.size()];
+        for (int i = 0; i < Time_Vector.size(); i++) {
+            Time_Vec_Array[i] = (float) Time_Vector.get(i);
+        }
+
+        //Compute the difference between 2 consecutive points
+        float[] Final_Time_Array = new float[Time_Vec_Array.length - 1];
+        for(int i=1;i<Time_Vec_Array.length;i++) {
+            Final_Time_Array[i-1] = Time_Vec_Array[i] - Time_Vec_Array[i-1];
+        }
+
+        double meantime = meanComputingFloat(Final_Time_Array);
+        double stdtime = stdComputingFloat(Final_Time_Array,meantime);
+
+        double StandarDeviation = ObtainValue(stdtime);
+        return (StandarDeviation);
+    }
+
 
     
 }
