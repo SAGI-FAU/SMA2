@@ -19,7 +19,8 @@ import static java.util.Arrays.copyOfRange;
  * - Signal normalization (method: normsig).
  * - Mean of array (method: meanval). Private method.
  * - Windowing: Hamming and Hanning (method: makeWindow).
- * - Signal power spectrum (method: signal_fft).
+ * - Signal power spectrum (method: powerspec).
+ * - Autocorrelation using FFT (method: acf)
  * - Framing (method: sigframe).
  */
 
@@ -146,26 +147,7 @@ public class sigproc {
 
         return window;
     }
-    /**
-     * Power spectrum
-     * Computes the power spectrum of a speech signal.
-     * @param win_sig - Short-time frame extracted from the signal.
-     * @param Fs - Sampling frequency.
-     * @return Array with the power spectrum of the signal.
-     */
-    /**
-    public float[] signal_fft(float[] win_sig,int Fs)
-    {
-       //signal frame with window function applied
-       FFT fft = new FFT(win_sig.length,Fs);
-       fft.forward(win_sig);
-        float[] sig_spec = new float[fft.specSize()];
-        //Get spectrum of the signal (amplitudes)
-        for (int i =0;i<fft.specSize();i++) {
-            sig_spec[i] = fft.getBand(i);
-        }
-        return sig_spec;
-    }**/
+
 
     /**
      * Computes the power spectrum of a signal
@@ -197,7 +179,7 @@ public class sigproc {
             ac[i] = Math.pow(spec[i],2);//Power density |X|^2
         }
         Complex[] ac_com = fft.transform(ac,TransformType.INVERSE);//real(IFFT(|X|^2))
-        float[] ac_final = new float[ac_com.length/2];
+        float[] ac_final = new float[spec.length/2];
         for (int i = 0; i < (ac_final.length); i++) {
             ac_final[i] = (float) ac_com[i].getReal();
         }
