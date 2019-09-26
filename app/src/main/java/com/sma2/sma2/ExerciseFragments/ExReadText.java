@@ -11,11 +11,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.opencsv.CSVParser;
 import com.opencsv.CSVParserBuilder;
 import com.opencsv.CSVReader;
 import com.opencsv.CSVReaderBuilder;
+import com.sma2.sma2.FeatureExtraction.Speech.features.RadarFeatures;
 import com.sma2.sma2.R;
 import com.sma2.sma2.SignalRecording.SpeechRecorder;
 
@@ -118,7 +120,19 @@ public class ExReadText extends ExerciseFragment implements ButtonFragment.OnBut
         }
     }
 
-    private static class VolumeHandler extends Handler {
+    private void  evaluate_features(){
+        if (mExercise.getId()==7){ // Compute intonation from longest sentence.
+            float int_f0 = RadarFeatures.intonation(filePath);
+            try {
+                RadarFeatures.export_speech_feature(filePath,int_f0,"Intonation");
+            }catch (Exception e) {
+                Toast.makeText(getActivity(),R.string.jitter_failed,Toast.LENGTH_SHORT).show();
+
+            }
+
+        }
+    }
+    private class VolumeHandler extends Handler {
         ProgressBar volumeBar;
 
         public VolumeHandler(ProgressBar bar){
@@ -129,6 +143,14 @@ public class ExReadText extends ExerciseFragment implements ButtonFragment.OnBut
             super.handleMessage(msg);
             Bundle bundle = msg.getData();
             final int currentVolume = (int) bundle.getDouble("Volume");
+
+            final String state = bundle.getString("State", "Empty");
+            if (state.equals("Finished")){
+
+                evaluate_features();
+
+            }
+
             post(new Runnable() {
                 @Override
                 public void run() {

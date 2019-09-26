@@ -23,20 +23,23 @@ import com.opencsv.CSVWriter;
 
 
 public class RadarFeatures {
-
+    private static WAVfileReader wavFileReader = new WAVfileReader();
+    private static f0detector F0Detector = new f0detector();
+    private static sigproc SigProc = new sigproc();
     private static array_manipulation ArrM = new array_manipulation();
 
+    /**
+     * Computation of jitter (stability of vocal fold vibration). This must be independent of the
+     * vowel.
+     * @param AudioFile string with the location of the audio file to be used
+     * @return relative variation of f0.
+     */
     public static float jitter(String AudioFile) {
-
-        WAVfileReader wavFileReader=new WAVfileReader();
-        f0detector F0Detector =new f0detector();
-
-        int[]  InfoSig= wavFileReader.getdatainfo(AudioFile);
-        float[] SignalAh=wavFileReader.readWAV(InfoSig[0]);
+        int[]  InfoSig = wavFileReader.getdatainfo(AudioFile);
+        float[] SignalAh = wavFileReader.readWAV(InfoSig[0]);
         //Normalize signal
-        sigproc SigProc = new sigproc();
         SignalAh = SigProc.normsig(SignalAh);
-        float[] f0= F0Detector.sig_f0(SignalAh, InfoSig[1]);
+        float[] f0 = F0Detector.sig_f0(SignalAh, InfoSig[1]);
 
         //Ensure nonzero values in f0 contour
         List lf0 = ArrM.find(f0,0f,2);
@@ -55,8 +58,10 @@ public class RadarFeatures {
             return 25.0f;
         }
 
-        float value_mean = sigproc.calculatemean(f0);
-        float value_std = sigproc.calculateSD(f0);
+        //Compute mean value of f0
+        float value_mean = SigProc.meanval(f0);
+        //Compute standard deviation of f0
+        float value_std = SigProc.calculateSD(f0,value_mean);
 
         for(int i=0;i<f0.length;i++)
         {
@@ -75,19 +80,19 @@ public class RadarFeatures {
             jitt+= abs(f0[i] - Mp);
         }
         jitt = (100*jitt)/(N*Mp);
-        return jitt;
+        return 100-jitt;
     }
 
-
+    /**
+     * This function computes the voice rate from the pataka speech task.
+     * @param AudioFile Path of the wav file to be considered for computation of voice rate
+     * @return Voice rate as a relative measure.
+     */
     public static float voiceRate(String AudioFile) {
-        WAVfileReader wavFileReader=new WAVfileReader();
-        f0detector F0Detector =new f0detector();
-
-        int[] InfoSig= wavFileReader.getdatainfo(AudioFile);
-        float[] Signal=wavFileReader.readWAV(InfoSig[0]);
-        sigproc SigProc = new sigproc();
+        int[] InfoSig = wavFileReader.getdatainfo(AudioFile);
+        float[] Signal = wavFileReader.readWAV(InfoSig[0]);
         Signal = SigProc.normsig(Signal);
-        float[] F0= F0Detector.sig_f0(Signal, InfoSig[1]);
+        float[] F0 = F0Detector.sig_f0(Signal, InfoSig[1]);
         List VoicedSeg = F0Detector.voiced(F0, Signal);
 
         float vRate=0;
@@ -107,10 +112,43 @@ public class RadarFeatures {
         return vRate;
     }
 
-    public static void export_jitter(String name_file, float jitter, float perf) throws IOException {
+    /**
+     *  This function computes the amount of variation in the intonation of a speaker. Only the
+     *  longest sentence should be considered (7th sentence in main/assets/textExercise.csv).
+     * @param AudioFile String with the location (path) of the recording with the longest sentence.
+     * @return stdf0 which is the standard deviation of the f0 contour from the longest sentence.
+     */
+    public static float intonation(String AudioFile) {
+        //Read audio file
+        int[] InfoSig = wavFileReader.getdatainfo(AudioFile);
+        float[] Signal = wavFileReader.readWAV(InfoSig[0]);
 
+        //Eliminate any possible DC level and re-scale speech signal between -1 and 1
+        Signal = SigProc.normsig(Signal);
+
+        //Get F0 contour
+        float[] F0 = F0Detector.sig_f0(Signal, InfoSig[1]);
+
+        //Get non-zero f0 values
+        List<Float> nzf0 = new ArrayList<>();
+        for (int i = 0; i < F0.length;i++) {
+            if (F0[i] > 0) {
+                nzf0.add(F0[i]);
+            }
+        }
+        //Convert list into array of floats
+        float nonzf0[] = ArrM.listtofloat(nzf0);
+
+        //Compute standard deviation of non-zero f0 values
+        float stdf0 = SigProc.calculateSD(nonzf0);
+
+        //The reference value of the INTONATION IS MISSING. THIS IS NECESSARY TO GET THE RELATIVE VAL
+        return stdf0;
+    }
+
+    public static void export_speech_feature(String name_file, float feature, String feat_name) throws IOException {
         String directory = Environment.getExternalStorageDirectory() + "/Apkinson/FEATURES/";
-        String fileName = directory + "Jitter.csv";
+        String fileName = directory + feat_name+".csv";
 
 
         File direct = new File(directory);
@@ -128,14 +166,13 @@ public class RadarFeatures {
             }
             else {
                 writer = new CSVWriter(new FileWriter(fileName));
-                String[] header={"File", "Jitter", "Perf"};
+                String[] header={"File", feat_name};
                 writer.writeNext(header);
             }
             String name=name_file.substring(name_file.lastIndexOf("/")+1);
-            String[] row={"","",""};
+            String[] row={"",""};
             row[0]=name;
-            row[1]=Float.toString(jitter);
-            row[2]=Float.toString(perf);
+            row[1]=Float.toString(feature);
 
             writer.writeNext(row);
             writer.close();
@@ -144,7 +181,5 @@ public class RadarFeatures {
         }
 
     }
-
-
 
 }

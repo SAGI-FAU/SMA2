@@ -63,16 +63,24 @@ public class ExAudioRec extends ExerciseFragment implements ButtonFragment.OnBut
 
 
     private void  evaluate_features(){
-        if (mExercise.getId()==18){ // sustained vowel AH to compute jitter
-            float jitt_perc=RadarFeatures.jitter(filePath);
-            float jitt_perf=100f-jitt_perc;
+        if (mExercise.getId()==18||mExercise.getId()==19||mExercise.getId()==20){ // sustained vowel AH to compute jitter
+            float jitt_perc = RadarFeatures.jitter(filePath);
             try {
-                RadarFeatures.export_jitter(filePath, jitt_perc, jitt_perf);
+                RadarFeatures.export_speech_feature(filePath, jitt_perc,"Jitter");
             }catch (Exception e) {
                 Toast.makeText(getActivity(),R.string.jitter_failed,Toast.LENGTH_SHORT).show();
 
             }
+            }
+        else if (mExercise.getId()==11)
+        {
+            float vrate = RadarFeatures.voiceRate(filePath);
+            try {
+                RadarFeatures.export_speech_feature(filePath, vrate,"VRate");
+            }catch (Exception e) {
+                Toast.makeText(getActivity(),R.string.jitter_failed,Toast.LENGTH_SHORT).show();
 
+            }
         }
     }
 

@@ -84,29 +84,43 @@ public class sigproc {
         return msig;
     }
 
-
-    public static float calculatemean(float[] m) {
-        float sum = 0;
-        for (int i = 0; i < m.length; i++) {
-            sum += m[i];
-        }
-        return sum / m.length;
-    }
-
-    public static float calculateSD(float[] numArray)
+    /**
+     * Compute the standard deviation of an array of floats
+     * @param numArray Array of floats
+     * @return standard deviation of numArray
+     */
+    public float calculateSD(float[] numArray)
     {
-        double sum = 0.0, standardDeviation = 0.0;
+        //Get mean
+        float mean = meanval(numArray);
+        //Compute STD
+        float standardDeviation = 0;
         int length = numArray.length;
-        for(double num : numArray) {
-            sum += num;
-        }
-        double mean = sum/length;
-        for(double num: numArray) {
+
+        for(float num: numArray) {
             standardDeviation += Math.pow(num - mean, 2);
         }
         return (float) Math.sqrt(standardDeviation/length);
     }
 
+    /**
+     * Compute the standard deviation of an array of floats when the mean value was already
+     * computed.
+     * @param numArray Array of floats
+     * @param mean Mean value of numArray.
+     * @return standard deviation of numArray
+     */
+    public float calculateSD(float[] numArray,float mean)
+    {
+        //Compute STD
+        float standardDeviation = 0;
+        int length = numArray.length;
+
+        for(float num: numArray) {
+            standardDeviation += Math.pow(num - mean, 2);
+        }
+        return (float) Math.sqrt(standardDeviation/length);
+    }
 
 
     /**
