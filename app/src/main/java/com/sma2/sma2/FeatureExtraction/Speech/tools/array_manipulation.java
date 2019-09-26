@@ -51,6 +51,15 @@ public class array_manipulation {
         return means;
     }
 
+    public float[] listtofloat(List vals) {
+        float[] means = new float[vals.size()];
+        for (int i = 0; i < vals.size(); i++) {
+            double temp = (double) vals.get(i);
+            means[i] = (float) temp;
+        }
+        return means;
+    }
+
     /**
      * Calculate first order discrete difference from array.
      * @param x - Array
