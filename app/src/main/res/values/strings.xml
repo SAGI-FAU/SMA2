@@ -115,6 +115,8 @@
     <string name="jitter" translatable="false">Jitter (%) </string>
     <string name="articulation">Articulation </string>
     <string name="ddk_reg">DDK regularity (ms)</string>
+    <string name="regularity">Regularity</string>
+
     <string name="Speech">Speech</string>
     <string name="movement">Movement</string>
     <string name="postural">Postural Tremor</string>
@@ -172,8 +174,14 @@
     <string name="speech_performance">Speech performance</string>
     <string name="tapping_performance">Fine motor skills performance</string>
     <string name="history_speech">Historical performance</string>
+    <string name="history_mov">Historical performance</string>
+
     <string name="voicerate_failed">Voice Rate could not be computed</string>
     <string name="intonation_failed">Intonation could not be computed</string>
+    <string name="freezeIndex">FreezeIndex</string>
+    <string name="posture">Posture</string>
+    <string name="nStrides">Number of strides</string>
+    <string name="tStrides">Stride time</string>
     <string name="area_failed">Radar area could not be computed</string>
     <string name="interpre">Interpretation</string>
     <string name="SpeechHelp">- PRONUNCIATION: Capacity to correctly pronounce different sounds.
