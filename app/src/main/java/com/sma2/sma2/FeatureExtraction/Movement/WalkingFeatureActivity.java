@@ -270,15 +270,15 @@ public class WalkingFeatureActivity extends AppCompatActivity implements View.On
 
 
             //Computing the percentage based on controls
-            // Reference (100%) = 0.6 or less
+            // Reference (100%) = 0.07 or less
             //It must be replace to real values, it was computed based one woman and one men
 
-            if(fIndex >= 0.6)
-                fIndex = 100;
-            else
-                fIndex =(float) (fIndex*100)/ (float) 0.6;
+            float perc_fidex=(float) (200/(1+Math.exp(10*(fIndex-0.07))));
 
-        return fIndex;
+
+
+
+        return  perc_fidex;
 
 
     }
