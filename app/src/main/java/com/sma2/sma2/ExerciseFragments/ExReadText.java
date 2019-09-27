@@ -36,7 +36,7 @@ public class ExReadText extends ExerciseFragment implements ButtonFragment.OnBut
     private ProgressBar volumeBar;
     private TextExercise textExercise;
     private int Sentence;
-
+    SharedPreferences sharedPref;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -45,6 +45,8 @@ public class ExReadText extends ExerciseFragment implements ButtonFragment.OnBut
         recorder = SpeechRecorder.getInstance(getActivity().getApplicationContext(), new VolumeHandler(volumeBar));
         TextView text = view.findViewById(R.id.txtItemRT);
         textExercise = null;
+        sharedPref =PreferenceManager.getDefaultSharedPreferences(getActivity());
+
         Sentence =getArguments().getInt("sentence");
         try {
             textExercise = loadText();
@@ -131,7 +133,6 @@ public class ExReadText extends ExerciseFragment implements ButtonFragment.OnBut
                 Toast.makeText(getActivity(),R.string.intonation_failed,Toast.LENGTH_SHORT).show();
 
             }
-            SharedPreferences sharedPref =PreferenceManager.getDefaultSharedPreferences(getActivity());
             SharedPreferences.Editor editor = sharedPref.edit();
             editor.putBoolean("New Area Speech", true);
             editor.apply();

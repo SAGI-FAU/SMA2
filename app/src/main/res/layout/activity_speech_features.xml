@@ -60,10 +60,6 @@
             style="@style/MyProgressBar"
             android:progressDrawable="@drawable/seekbar_sliding"/>
 
-
-
-
-
             <ImageView
                 android:id="@+id/iEmojin_speech"
                 android:layout_width="35sp"

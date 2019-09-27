@@ -2,10 +2,12 @@ package com.sma2.sma2.ExerciseFragments;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.graphics.Point;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.os.Vibrator;
+import android.preference.PreferenceManager;
 import android.support.constraint.ConstraintLayout;
 import android.util.Log;
 import android.view.Display;
@@ -29,6 +31,7 @@ public class ExOneFingerTapping extends ExerciseFragment implements View.OnClick
     private long lastTime;
     private CountDownTimer timer;
     private static final long TOTAL_TIME =  10000;
+    SharedPreferences sharedPref;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -40,7 +43,7 @@ public class ExOneFingerTapping extends ExerciseFragment implements View.OnClick
         }catch (Exception e) {
             Log.e("Tapping1HeaderWriter", e.toString());
         }
-
+        sharedPref =PreferenceManager.getDefaultSharedPreferences(getActivity());
         filePath = tappingrecorder.TappingFileName();
         chronoText = view.findViewById(R.id.chronoTapOne);
         chronoText.setText(String.valueOf((float) TOTAL_TIME / 1000));
@@ -108,6 +111,12 @@ public class ExOneFingerTapping extends ExerciseFragment implements View.OnClick
                     Log.e("Tapping1CloseWriter", e.toString());
                 }
                 mListener.onExerciseFinished(filePath);
+
+                SharedPreferences.Editor editor = sharedPref.edit();
+                editor.putBoolean("New Area Tapping", true);
+                editor.apply();
+
+
             }
         };
     }

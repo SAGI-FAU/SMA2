@@ -170,6 +170,7 @@
     <string name="tremor">Tremor</string>
     <string name="jitter_failed">Jiiter could not be computed</string>
     <string name="speech_performance">Speech performance</string>
+    <string name="tapping_performance">Fine motor skills performance</string>
     <string name="history_speech">Historical performance</string>
     <string name="voicerate_failed">Voice Rate could not be computed</string>
     <string name="intonation_failed">Intonation could not be computed</string>
@@ -181,5 +182,6 @@
         \n- INTONATION: Capacity to change the tone in conversations.
         \n- INTELLIGIBILITY: Percentage of words that the phone understand you.</string>
     <string name="perform">Performance :</string>
-
+    <string name="tapping_failed">Tapping features could not be computed</string>
+    <string name="fine_motor">Fine motor skills</string>
 </resources>
