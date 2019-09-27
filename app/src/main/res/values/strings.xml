@@ -11,6 +11,7 @@
     <string name="gender">Gender</string>
     <string name="male">Male</string>
     <string name="female">Female</string>
+    <string name="otherGender">other</string>
     <string name="hand">Dominant hand</string>
     <string name="left">Left</string>
     <string name="right">Right</string>
