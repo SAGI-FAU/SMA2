@@ -86,7 +86,7 @@ public class ExAudioRec extends ExerciseFragment implements ButtonFragment.OnBut
             try {
                 RadarFeatures.export_speech_feature(filePath, vrate,"VRate");
             }catch (Exception e) {
-                Toast.makeText(getActivity(),R.string.jitter_failed,Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(),R.string.voicerate_failed,Toast.LENGTH_SHORT).show();
 
             }
 

@@ -128,7 +128,7 @@ public class ExReadText extends ExerciseFragment implements ButtonFragment.OnBut
             try {
                 RadarFeatures.export_speech_feature(filePath,int_f0,"Intonation");
             }catch (Exception e) {
-                Toast.makeText(getActivity(),R.string.jitter_failed,Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(),R.string.intonation_failed,Toast.LENGTH_SHORT).show();
 
             }
             SharedPreferences sharedPref =PreferenceManager.getDefaultSharedPreferences(getActivity());
