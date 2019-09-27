@@ -5,7 +5,6 @@ import android.widget.Toast;
 
 import com.opencsv.CSVReader;
 
-import java.io.File;
 import java.io.FileReader;
 import java.util.ArrayList;
 import java.util.List;
@@ -50,9 +49,7 @@ public class CSVFileReader {
 
 
 
-    public Signal ReadMovementSignal(String path, String header){
-
-
+    public Signal ReadMovementSignal(String path, String header) {
         List<Double> Signal_=new ArrayList<>();
         List<Double> TimeStamp=new ArrayList<>(), TimeStampZero=new ArrayList<>();
         List DataCSV=ReadMovementFile(path);
@@ -79,12 +76,11 @@ public class CSVFileReader {
         }
 
         return new Signal(TimeStampZero, Signal_);
-
     }
 
 
 
-    public class Signal {
+    static public class Signal {
         public final List<Double> TimeStamp;
         public final List<Double> Signal;
 
