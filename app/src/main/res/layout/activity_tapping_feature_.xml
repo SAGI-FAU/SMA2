@@ -35,6 +35,18 @@
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
+        <ImageButton
+            android:id="@+id/button_help"
+            android:layout_width="30sp"
+            android:layout_height="30sp"
+            android:layout_marginTop="8sp"
+            android:scaleType="centerCrop"
+            android:padding="0dp"
+            android:src="@drawable/btn_help"
+            app:layout_constraintRight_toRightOf="@id/textView_tapping1"
+            app:layout_constraintTop_toBottomOf="@+id/chart2"
+            app:layout_constraintTop_toTopOf="parent" />
+
 
         <ProgressBar
             android:splitTrack="false"
@@ -79,7 +91,7 @@
             android:layout_height="wrap_content"
             android:id="@+id/tmessage_tapping"
             android:layout_marginTop="8sp"
-            android:maxLines="1"
+            android:maxLines="2"
             android:background="@color/colorPrimaryDark"
             android:layout_gravity="center"
             android:textSize="22sp"
@@ -88,8 +100,6 @@
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tmessage_tapping_perc"
             />
-
-
 
         <com.github.mikephil.charting.charts.RadarChart
             android:id="@+id/chartap"

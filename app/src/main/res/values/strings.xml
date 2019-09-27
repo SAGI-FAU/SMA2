@@ -162,7 +162,7 @@
     <string name="control">Reference</string>
     <string name="permission_request">This sample needs permission for camera and audio recording.</string>
     <string name="camera_error">This device doesn\'t support Camera2 API.</string>
-    <string name="tapPosition">Error Position</string>
+    <string name="tapPosition">Precision</string>
     <string name="tapHits">% Hits Ladybug</string>
     <string name="barHits">% Hits Sliding</string>
     <string name="tapVelocity">Tapping Velocity</string>
@@ -192,4 +192,9 @@
     <string name="perform">Performance :</string>
     <string name="tapping_failed">Tapping features could not be computed</string>
     <string name="fine_motor">Fine motor skills</string>
+    <string name="TappingHelp">- % LADYBUGS: Accuracy hitting on insects.
+        \n- %SLIDING: Accuracy positioning the sliding bar.
+        \n- SPEED: Ladybugs per second.
+        \n- PRECISION: Proximity of insect hits.</string>
+
 </resources>
