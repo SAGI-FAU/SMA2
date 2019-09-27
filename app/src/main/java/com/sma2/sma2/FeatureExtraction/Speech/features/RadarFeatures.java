@@ -20,6 +20,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import static android.support.constraint.Constraints.TAG;
 import static java.lang.Math.abs;
 import com.opencsv.CSVWriter;
 
@@ -131,21 +132,31 @@ public class RadarFeatures {
         //Get F0 contour
         float[] F0 = F0Detector.sig_f0(Signal, InfoSig[1]);
 
-        //Get non-zero f0 values
-        List<Float> nzf0 = new ArrayList<>();
-        for (int i = 0; i < F0.length;i++) {
-            if (F0[i] > 0) {
-                nzf0.add(F0[i]);
-            }
+        //Ensure nonzero values in f0 contour
+        List lf0 = ArrM.find(F0,0f,2);
+
+        //Convert list to float array
+        //List to array
+        float[] newF0 = new float[lf0.size()];
+        for(int i=0;i<lf0.size();i++)
+        {
+            newF0[i] = F0[(int)lf0.get(i)];
         }
-        //Convert list into array of floats
-        float nonzf0[] = ArrM.listtofloat(nzf0);
+        float nonzf0[] = newF0;
 
         //Compute standard deviation of non-zero f0 values
         float stdf0 = SigProc.calculateSD(nonzf0);
 
-        //The reference value of the INTONATION IS MISSING. THIS IS NECESSARY TO GET THE RELATIVE VAL
-        return 100/(1+stdf0);
+        //The reference value
+        // Reference (100%) = 137.2 Hz
+        // of intonation For PCGITA controls
+
+        if(stdf0 >= 137.2f)
+            stdf0 = 100;
+        else
+            stdf0 = (stdf0*100)/ 137.2f;
+
+        return stdf0;
     }
 
     public static void export_speech_feature(String name_file, float feature, String feat_name) throws IOException {
