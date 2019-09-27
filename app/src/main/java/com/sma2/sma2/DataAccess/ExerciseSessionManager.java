@@ -21,6 +21,7 @@ import com.sma2.sma2.ExerciseFragments.Ex_Circling_Rec;
 import com.sma2.sma2.ExerciseFragments.Ex_Hand_Rotation_Rec;
 import com.sma2.sma2.ExerciseFragments.Ex_Hand_To_Head_Rec;
 import com.sma2.sma2.ExerciseFragments.Ex_Walking_Rec;
+import com.sma2.sma2.ExerciseFragments.ExFreeWalking;
 import com.sma2.sma2.ExerciseFragments.Ex_balance_Rec;
 import com.sma2.sma2.ExerciseFragments.Ex_postural_Rec;
 
@@ -59,7 +60,6 @@ public class ExerciseSessionManager {
             Log.e("CSV_READING", e.toString());
         }
 
-
         int[] exercisesIDs = new int[]{};
 
         String type_exercise=sharedPref.getString("exercises", "daily");
@@ -92,7 +92,7 @@ public class ExerciseSessionManager {
             }
         }
         else if (type_exercise.equals("full")){
-            exercisesIDs = new int[]{1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35};
+            exercisesIDs = new int[]{1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36};
         }
         else if (type_exercise.equals("speech")){
             exercisesIDs = new int[]{1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21};
@@ -104,9 +104,6 @@ public class ExerciseSessionManager {
             exercisesIDs = new int[]{1,2,11,14,18,25,26,34,35};
 
         }
-
-
-
 
         for (int id : exercisesIDs) {
             Exercise exercise = exerciseDataService.getExercise((long) id);
@@ -296,7 +293,7 @@ public class ExerciseSessionManager {
                         Uri.parse("Instruction/Path"),
                         Ex_postural_Rec.class));
             }
-            else if (ExFrag.equals("gait"))
+            else if (ExFrag.equals("gaitfourtimes"))
             {
                 _ExerciseList.add(new Exercise(
                         ExID,
@@ -307,6 +304,18 @@ public class ExerciseSessionManager {
                         Uri.parse(ExVideo),
                         Uri.parse("Instruction/Path"),
                         Ex_Walking_Rec.class));
+            }
+            else if (ExFrag.equals("gaittwomins"))
+            {
+                _ExerciseList.add(new Exercise(
+                        ExID,
+                        ExName,
+                        ExType,
+                        ExDescr,
+                        ExInstr,
+                        Uri.parse(ExVideo),
+                        Uri.parse("Instruction/Path"),
+                        ExFreeWalking.class));
             }
             else if (ExFrag.equals("finger1"))
             {
