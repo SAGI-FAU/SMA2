@@ -81,15 +81,6 @@ public class Speech_features_Activity extends AppCompatActivity implements View.
             inton_perf.add(0f);
         }
 
-        try {
-            area_perf=RadarFeatures.get_feat_perf("area speech");
-        }
-        catch(IOException ie) {
-            ie.printStackTrace();
-            area_perf.add(0f);
-        }
-
-
         float[] data1={(float) 60, jitter_perf.get(jitter_perf.size()-1),vrate_perf.get(vrate_perf.size()-1),inton_perf.get(inton_perf.size()-1), (float) 90}; // Patient
         float[] data2={(float) 86,(float) 98,(float) 73.7,(float) 55.4, (float) 100}; // Healthy
 
@@ -122,6 +113,13 @@ public class Speech_features_Activity extends AppCompatActivity implements View.
             }
         }
 
+        try {
+            area_perf=RadarFeatures.get_feat_perf("area speech");
+        }
+        catch(IOException ie) {
+            ie.printStackTrace();
+            area_perf.add(0f);
+        }
 
         ConstraintLayout.LayoutParams params_line= (ConstraintLayout.LayoutParams)  iEmojin.getLayoutParams();
         int xRandomBar= (int)(0.01*area_progress*screenWidth-45);
