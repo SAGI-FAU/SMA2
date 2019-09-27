@@ -1,5 +1,7 @@
 package com.sma2.sma2.FeatureExtraction.Movement;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Point;
@@ -214,7 +216,22 @@ public class WalkingFeatureActivity extends AppCompatActivity implements View.On
     }
 
     private void onButtonHelp() {
-        //TODO the help
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+
+        String Title = getResources().getString(R.string.interpre);
+        builder.setTitle(Title);
+
+        String Text = getResources().getString(R.string.MovementHelp);
+        builder.setMessage(Text);
+
+        builder.setNeutralButton(R.string.cancel, new DialogInterface.OnClickListener() { // define the 'Cancel' button
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
+            }
+        });
+
+        AlertDialog dialog = builder.create();
+        dialog.show();
     }
 
 
