@@ -1,8 +1,10 @@
 package com.sma2.sma2.ExerciseFragments;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.preference.PreferenceManager;
 import android.support.v4.app.FragmentTransaction;
 import android.text.TextUtils;
 import android.util.Log;
@@ -129,6 +131,10 @@ public class ExReadText extends ExerciseFragment implements ButtonFragment.OnBut
                 Toast.makeText(getActivity(),R.string.jitter_failed,Toast.LENGTH_SHORT).show();
 
             }
+            SharedPreferences sharedPref =PreferenceManager.getDefaultSharedPreferences(getActivity());
+            SharedPreferences.Editor editor = sharedPref.edit();
+            editor.putBoolean("New Area Speech", true);
+            editor.apply();
 
         }
     }

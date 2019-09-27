@@ -1,8 +1,10 @@
 package com.sma2.sma2.ExerciseFragments;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.preference.PreferenceManager;
 import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,6 +19,7 @@ import com.sma2.sma2.SignalRecording.SpeechRecorder;
 public class ExAudioRec extends ExerciseFragment implements ButtonFragment.OnButtonInteractionListener{
     private ProgressBar volumeBar;
     private SpeechRecorder recorder;
+    SharedPreferences sharedPref;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -26,7 +29,7 @@ public class ExAudioRec extends ExerciseFragment implements ButtonFragment.OnBut
         ButtonFragment buttonFragment = new ButtonFragment();
         buttonFragment.setmListener(this);
         FragmentTransaction transaction = getChildFragmentManager().beginTransaction();
-
+        sharedPref =PreferenceManager.getDefaultSharedPreferences(getActivity().getApplicationContext());
         transaction.replace(R.id.frameExSV, buttonFragment);
         transaction.commit();
         return view;
@@ -67,10 +70,15 @@ public class ExAudioRec extends ExerciseFragment implements ButtonFragment.OnBut
             float jitt_perc = RadarFeatures.jitter(filePath);
             try {
                 RadarFeatures.export_speech_feature(filePath, jitt_perc,"Jitter");
-            }catch (Exception e) {
+                }catch (Exception e) {
                 Toast.makeText(getActivity(),R.string.jitter_failed,Toast.LENGTH_SHORT).show();
 
-            }
+                }
+            SharedPreferences sharedPref =PreferenceManager.getDefaultSharedPreferences(getActivity());
+            SharedPreferences.Editor editor = sharedPref.edit();
+            editor.putBoolean("New Area Speech", true);
+            editor.apply();
+
             }
         else if (mExercise.getId()==11)
         {
@@ -81,6 +89,10 @@ public class ExAudioRec extends ExerciseFragment implements ButtonFragment.OnBut
                 Toast.makeText(getActivity(),R.string.jitter_failed,Toast.LENGTH_SHORT).show();
 
             }
+
+            SharedPreferences.Editor editor = sharedPref.edit();
+            editor.putBoolean("New Area Speech", true);
+            editor.apply();
         }
     }
 

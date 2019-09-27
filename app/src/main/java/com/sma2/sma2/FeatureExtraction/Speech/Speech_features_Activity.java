@@ -2,8 +2,10 @@ package com.sma2.sma2.FeatureExtraction.Speech;
 
 import android.app.ActionBar;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.Point;
+import android.preference.PreferenceManager;
 import android.support.constraint.ConstraintLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -16,7 +18,10 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.jjoe64.graphview.GraphView;
+import com.sma2.sma2.FeatureExtraction.GraphManager;
 import com.sma2.sma2.FeatureExtraction.Speech.features.RadarFeatures;
 import com.sma2.sma2.R;
 import com.github.mikephil.charting.animation.Easing;
@@ -63,20 +68,40 @@ public class Speech_features_Activity extends AppCompatActivity implements View.
         ArrayList<Float> jitter_perf=new ArrayList<>();
         ArrayList<Float> vrate_perf=new ArrayList<>();
         ArrayList<Float> inton_perf=new ArrayList<>();
+        ArrayList<Float> area_perf=new ArrayList<>();
         try {
             jitter_perf=RadarFeatures.get_feat_perf("Jitter");
+        }
+        catch(IOException ie) {
+            jitter_perf.add(0f);
+            ie.printStackTrace();
+        }
+        try {
             vrate_perf=RadarFeatures.get_feat_perf("VRate");
+        }
+        catch(IOException ie) {
+            vrate_perf.add(0f);
+            ie.printStackTrace();
+        }
+        try {
             inton_perf=RadarFeatures.get_feat_perf("Intonation");
-
         }
         catch(IOException ie) {
             ie.printStackTrace();
+            inton_perf.add(0f);
+        }
+
+        try {
+            area_perf=RadarFeatures.get_feat_perf("area speech");
+        }
+        catch(IOException ie) {
+            ie.printStackTrace();
+            area_perf.add(0f);
         }
 
 
-
-        float[] data1={(float) 10, jitter_perf.get(jitter_perf.size()-1),vrate_perf.get(vrate_perf.size()-1),inton_perf.get(inton_perf.size()-1), (float) 10}; // Patient
-        float[] data2={(float) 100,(float) 100,(float) 100,(float) 100, (float) 100}; // Healthy
+        float[] data1={(float) 60, jitter_perf.get(jitter_perf.size()-1),vrate_perf.get(vrate_perf.size()-1),inton_perf.get(inton_perf.size()-1), (float) 90}; // Patient
+        float[] data2={(float) 86,(float) 98,(float) 73.7,(float) 55.4, (float) 100}; // Healthy
 
         String Label_1 = getResources().getString(R.string.pronunciation);
         String Label_2 = getResources().getString(R.string.stability);
@@ -92,6 +117,23 @@ public class Speech_features_Activity extends AppCompatActivity implements View.
         double area=RadarManager.get_area_chart(data1);
         int area_progress=(int)(area*100/maxArea);
 
+        SharedPreferences sharedPref =PreferenceManager.getDefaultSharedPreferences(this);
+        boolean new_area_speech=sharedPref.getBoolean("New Area Speech", false);
+
+        if (new_area_speech){
+            SharedPreferences.Editor editor = sharedPref.edit();
+            editor.putBoolean("New Area Speech", false);
+            editor.apply();
+            try {
+                RadarFeatures.export_speech_feature("AreaSpeech", area_progress, "area speech");
+            }catch (Exception e) {
+                Toast.makeText(this,R.string.jitter_failed,Toast.LENGTH_SHORT).show();
+
+            }
+
+        }
+
+
 
         ConstraintLayout.LayoutParams params_line= (ConstraintLayout.LayoutParams)  iEmojin.getLayoutParams();
         int xRandomBar= (int)(0.01*area_progress*screenWidth-45);
@@ -105,7 +147,7 @@ public class Speech_features_Activity extends AppCompatActivity implements View.
 
 
         progressBarSpeech.setProgress(area_progress);
-        String msgp=String.valueOf(area_progress)+"%";
+        String msgp="Performance: "+String.valueOf(area_progress)+"%";
         tmessage_speech_perc.setText(msgp);
         if (area_progress >=66) {
             iEmojin.setImageResource(R.drawable.happy_emojin);
@@ -119,6 +161,18 @@ public class Speech_features_Activity extends AppCompatActivity implements View.
             iEmojin.setImageResource(R.drawable.sad_emoji);
             tmessage_speech.setText(R.string.Negative_message);
         }
+        GraphManager graphManager=new GraphManager(this);
+        String Title=getResources().getString(R.string.speech_performance);
+        String Ylabel=getResources().getString(R.string.percentage);
+        String Xlabel=getResources().getString(R.string.session);
+        GraphView graph =findViewById(R.id.plotlineSpeech);
+
+        ArrayList<Integer> xl= new ArrayList<>();
+        for (int i=0;i<area_perf.size();i++){
+            xl.add(i+1);
+        }
+        graphManager.LineGraph(graph, xl, area_perf, 105, xl.size(), Title, Xlabel, Ylabel);
+
 
     }
 

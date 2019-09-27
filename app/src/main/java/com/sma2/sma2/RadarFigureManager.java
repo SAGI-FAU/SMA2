@@ -12,6 +12,8 @@ import com.github.mikephil.charting.data.RadarData;
 import com.github.mikephil.charting.data.RadarDataSet;
 import com.github.mikephil.charting.data.RadarEntry;
 import com.github.mikephil.charting.formatter.IndexAxisValueFormatter;
+import com.sma2.sma2.DataAccess.PatientDA;
+import com.sma2.sma2.DataAccess.PatientDataService;
 
 import java.util.ArrayList;
 
@@ -73,7 +75,10 @@ public class RadarFigureManager {
             entries2.add(new RadarEntry(data2[i]));
         }
 
-        String Label_Patient = CONTEXT.getResources().getString(R.string.patient);
+        PatientDataService PatientData= new PatientDataService(CONTEXT);
+        PatientDA patient=PatientData.getPatient();
+
+        String Label_Patient = patient.getUsername();
         String Label_Control = CONTEXT.getResources().getString(R.string.control);
 
         RadarDataSet set1 = new RadarDataSet(entries1, Label_Patient);

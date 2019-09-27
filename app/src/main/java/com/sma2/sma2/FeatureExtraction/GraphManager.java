@@ -68,7 +68,7 @@ public class GraphManager {
         if (maxY>0){
             graph.getViewport().setMaxY(maxY);
         }
-        graph.getViewport().setMinX(0);
+        graph.getViewport().setMinX(1);
         graph.getViewport().setMaxX(maxX);
         graph.getViewport().setYAxisBoundsManual(true);
         graph.getViewport().setXAxisBoundsManual(true);
@@ -97,7 +97,7 @@ public class GraphManager {
         if (minY < 0){
             graph.getViewport().setMinY(minY);
         }
-        graph.getViewport().setMinX(0);
+        graph.getViewport().setMinX(1);
         graph.getViewport().setMaxX(maxX);
         graph.getViewport().setYAxisBoundsManual(true);
         graph.getViewport().setXAxisBoundsManual(true);
