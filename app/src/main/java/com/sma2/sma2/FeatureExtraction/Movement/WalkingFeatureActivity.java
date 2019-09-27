@@ -101,6 +101,116 @@ public class WalkingFeatureActivity extends AppCompatActivity implements View.On
 
         freezeValue=FreezeIndex();
 
+        //Upper tremor and regularity values
+
+        // Compute Tremor
+
+        ArrayList<Float> PostTremorRight=new ArrayList<>();
+        try {
+            PostTremorRight= RadarFeatures.get_feat_perf("Postural_Tremor_Right");
+        }
+        catch(IOException ie) {
+            PostTremorRight.add(0f);
+            ie.printStackTrace();
+        }
+
+        ArrayList<Float> PosturalTremorLeft=new ArrayList<>();
+        try {
+            PosturalTremorLeft= RadarFeatures.get_feat_perf("Postural_Tremor_Left");
+        }
+        catch(IOException ie) {
+            PosturalTremorLeft.add(0f);
+            ie.printStackTrace();
+        }
+
+        ArrayList<Float> KineticTremorRight=new ArrayList<>();
+        try {
+            KineticTremorRight= RadarFeatures.get_feat_perf("Kinetic_Tremor_Right");
+        }
+        catch(IOException ie) {
+            KineticTremorRight.add(0f);
+            ie.printStackTrace();
+        }
+
+        ArrayList<Float> KineticTremorLeft=new ArrayList<>();
+        try {
+            KineticTremorLeft= RadarFeatures.get_feat_perf("Kinetic_Tremor_Left");
+        }
+        catch(IOException ie) {
+            KineticTremorLeft.add(0f);
+            ie.printStackTrace();
+        }
+
+        float posturaltremorleft = PosturalTremorLeft.get(PosturalTremorLeft.size()-1);
+        float posturaltremorright = PostTremorRight.get(PostTremorRight.size()-1);
+        float movementtremorleft = KineticTremorLeft.get(KineticTremorLeft.size()-1);
+        float movementtremorright = KineticTremorRight.get(KineticTremorRight.size()-1);
+        tremorValue=(posturaltremorleft+posturaltremorright+movementtremorleft+movementtremorright)/4;
+
+        // Compute Regularity
+        ArrayList<Float> KineticRegularityRight=new ArrayList<>();
+        try {
+            KineticRegularityRight= RadarFeatures.get_feat_perf("Kinetic_Regularity_Right");
+        }
+        catch(IOException ie) {
+            KineticRegularityRight.add(0f);
+            ie.printStackTrace();
+        }
+
+        ArrayList<Float> KineticRegularityLeft=new ArrayList<>();
+        try {
+            KineticRegularityLeft= RadarFeatures.get_feat_perf("Kinetic_Regularity_Left");
+        }
+        catch(IOException ie) {
+            KineticRegularityLeft.add(0f);
+            ie.printStackTrace();
+        }
+
+        ArrayList<Float> RotationRegularityRight=new ArrayList<>();
+        try {
+            RotationRegularityRight= RadarFeatures.get_feat_perf("Regularity_Rotation_Right");
+        }
+        catch(IOException ie) {
+            RotationRegularityRight.add(0f);
+            ie.printStackTrace();
+        }
+
+        ArrayList<Float> RotationRegularityLeft=new ArrayList<>();
+        try {
+            RotationRegularityLeft= RadarFeatures.get_feat_perf("Regularity_Rotation_Left");
+        }
+        catch(IOException ie) {
+            RotationRegularityLeft.add(0f);
+            ie.printStackTrace();
+        }
+
+        ArrayList<Float> CirclesRegularityRight=new ArrayList<>();
+        try {
+            CirclesRegularityRight= RadarFeatures.get_feat_perf("Regularity_Circles_Right");
+        }
+        catch(IOException ie) {
+            CirclesRegularityRight.add(0f);
+            ie.printStackTrace();
+        }
+
+        ArrayList<Float> CirclesRegularityLeft=new ArrayList<>();
+        try {
+            CirclesRegularityLeft= RadarFeatures.get_feat_perf("Regularity_Circles_Left");
+        }
+        catch(IOException ie) {
+            CirclesRegularityLeft.add(0f);
+            ie.printStackTrace();
+        }
+
+        float StabKinLeft = KineticRegularityLeft.get(KineticRegularityLeft.size()-1);
+        float StabKinRight = KineticRegularityRight.get(KineticRegularityRight.size()-1);
+        float StabRotLeft = RotationRegularityLeft.get(RotationRegularityLeft.size()-1);
+        float StabRotRight = RotationRegularityRight.get(RotationRegularityRight.size()-1);
+        float StabCirLeft = CirclesRegularityLeft.get(CirclesRegularityLeft.size()-1);
+        float StabCirRigth = CirclesRegularityRight.get(CirclesRegularityRight.size()-1);
+        regularityValue = (StabKinLeft+StabKinRight+StabRotLeft+StabRotRight+StabCirLeft+StabCirRigth)/6;
+
+
         float[] data1 = {tremorValue, regularityValue, freezeValue, postureValue, nStridesValue, tStrideValues}; // Patient
 
 

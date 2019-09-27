@@ -22,8 +22,9 @@ public class CSVFileWriter {
     private final String DELIMITER = ";";
     private final String NEW_LINE = "\r\n";
     private final String FILE_ENDING = ".csv";
-    private final String PATH = Environment.getExternalStorageDirectory() + "/Apkinson/MOVEMENT/";
+    public final String PATH = Environment.getExternalStorageDirectory() + "/Apkinson/MOVEMENT/";
     private static final String TAG = CSVFileWriter.class.getSimpleName();
+    public static String file_path = Environment.getExternalStorageDirectory() + "/Apkinson/MOVEMENT/";
     private String filename;
     private BufferedWriter mBufferedWriter = null;
 
@@ -152,5 +153,9 @@ public class CSVFileWriter {
             e.printStackTrace();
             throw e;
         }
+    }
+
+    public static String getpath(){
+        return file_path;
     }
 }
