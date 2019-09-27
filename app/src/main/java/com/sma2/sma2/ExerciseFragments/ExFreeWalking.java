@@ -1,133 +1,133 @@
 package com.sma2.sma2.ExerciseFragments;
 
+import android.content.Context;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.os.Vibrator;
 import android.support.v4.app.FragmentTransaction;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.FrameLayout;
 import android.widget.TextView;
 
 import com.sma2.sma2.R;
 import com.sma2.sma2.SignalRecording.MovementRecorder;
 
-import java.io.IOException;
-
-
-public class ExFreeWalking extends ExerciseFragment implements ButtonFragment.OnButtonInteractionListener{
-    private static long COUNTDOWN = 10;
-    private static long WALK_TIME = 10;
-    private static final int SAMPLING_RATE = 100;
-    private TextView txtWalking;
-    private CountDownTimer timer;
+public class ExFreeWalking extends ExerciseFragment implements ButtonFragment.OnButtonInteractionListener {
     private MovementRecorder recorder;
+    private static long START_COUNTDOWN = 5;
+    private static long EXERCISE_TIME = 120;
+    private final int SAMPLING_FREQUENCY = 10000;
+    private String countdown_finished_txt;
     private long countdownStart;
-    private FrameLayout buttonFrame;
-
+    private CountDownTimer timer;
+    private TextView countdownTextView;
+    private boolean countdownIsRunning = false;
 
     public ExFreeWalking() {
-        // Required empty public constructor
-    }
 
-    public static ExFreeWalking newInstance(String param1, String param2) {
-        ExFreeWalking fragment = new ExFreeWalking();
-        return fragment;
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        try {
+            recorder = new MovementRecorder(this.getContext(), SAMPLING_FREQUENCY, mExercise.getName());
+            recorder.registerListeners();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_ex_free_walking, container, false);
-        txtWalking = view.findViewById(R.id.txtWalking);
-        txtWalking.setText(String.valueOf(COUNTDOWN));
-        buttonFrame = view.findViewById(R.id.frameExWalking);
+        View view = inflater.inflate(R.layout.fragment_ex_walking_rec, container, false);
         ButtonFragment buttonFragment = new ButtonFragment();
         buttonFragment.setmListener(this);
         FragmentTransaction transaction = getChildFragmentManager().beginTransaction();
 
-        transaction.replace(R.id.frameExWalking, buttonFragment);
+        transaction.replace(R.id.frameExSV, buttonFragment);
         transaction.commit();
+        countdown_finished_txt = getResources().getString(R.string.start2);
+        countdownTextView = view.findViewById(R.id.countdownTimerTextView);
+        countdownTextView.setText(String.valueOf(START_COUNTDOWN));
         return view;
     }
 
     @Override
     public void onDetach() {
         super.onDetach();
+        try {
+            recorder.stop();
+            recorder = null;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
-    private void startTimer() {
+    @Override
+    public void onButtonInteraction(boolean start) {
+        if (start) {
+            startInitialCountdownTimer();
+        } else {
+            if(countdownIsRunning) {
+                countdownIsRunning = false;
+                timer.cancel();
+                countdownTextView.setText(String.valueOf(START_COUNTDOWN));
+            } else {
+                try {
+                    recorder.stop();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+
+            }
+        }
+    }
+
+    private void startInitialCountdownTimer() {
+        countdownIsRunning = true;
         countdownStart = System.currentTimeMillis();
-        timer = new CountDownTimer(COUNTDOWN * 1000, 100) {
+        timer = new CountDownTimer(START_COUNTDOWN * 1000, 1000) {
             public void onTick(long millisUntilFinished) {
-                long newTime = Math.round(millisUntilFinished / 1000);
-                txtWalking.setText(String.valueOf(newTime));
+                int newTime =  Math.round(millisUntilFinished / 1000);
+                countdownTextView.setText(String.valueOf(newTime));
             }
             public void onFinish() {
+                countdownIsRunning = false;
                 this.cancel();
-                txtWalking.setText(String.valueOf(COUNTDOWN));
-                if((System.currentTimeMillis() - countdownStart) < COUNTDOWN * 1000){
-                    return;
-                } else {
-                    buttonFrame.setClickable(false);
-                    buttonFrame.setVisibility(View.INVISIBLE);
-                    CountDownTimer walkingTimer = getWalkingTimer();
-                    MediaPlayer mp = MediaPlayer.create(getContext(), R.raw.bell);
-                    mp.start();
-                    try {
-                        recorder = new MovementRecorder(getContext(), SAMPLING_RATE, mExercise.getName());
-                    } catch (IOException e){
-                        Log.e("MovementRecorder", e.toString());
-                    }
-                    filePath = recorder.getFileName();
-                    recorder.registerListeners();
-                    recorder.startLogging();
-                    View decorView = getActivity().getWindow().getDecorView();
-                    int uiOptions = View.SYSTEM_UI_FLAG_HIDE_NAVIGATION;
-                    decorView.setSystemUiVisibility(uiOptions);
-                    walkingTimer.start();
-                }
+                countdownTextView.setText(countdown_finished_txt);
+                MediaPlayer mp = MediaPlayer.create(getContext(), R.raw.bell);
+                mp.start();
+                Vibrator vib = (Vibrator) getContext().getSystemService(Context.VIBRATOR_SERVICE);
+                vib.vibrate(1000);
+                recorder.startLogging();
+                startSecondCountdownTimer();
             }
         }.start();
 
     }
 
-    private CountDownTimer getWalkingTimer() {
-        return new CountDownTimer(WALK_TIME * 1000, 1000) {
+    private void startSecondCountdownTimer() {
+        countdownIsRunning = true;
+        countdownStart = System.currentTimeMillis();
+        timer = new CountDownTimer(EXERCISE_TIME* 1000, 1000) {
             public void onTick(long millisUntilFinished) {
-                long newTime = Math.round(millisUntilFinished / 1000);
-                txtWalking.setText(String.valueOf(newTime));
+                int newTime =  Math.round(millisUntilFinished / 1000);
+                countdownTextView.setText(String.valueOf(newTime));
             }
             public void onFinish() {
-                try {
-                    recorder.stop();
-                } catch (IOException e) {
-                    Log.e("MovementRecorder", e.toString());
-                }
+                countdownIsRunning = false;
+                this.cancel();
+                //countdownTextView.setText(countdown_finished_txt);
+                mListener.onExerciseFinished(recorder.getFileName());
                 MediaPlayer mp = MediaPlayer.create(getContext(), R.raw.bell);
                 mp.start();
-                View decorView = getActivity().getWindow().getDecorView();
-                int uiOptions = View.SYSTEM_UI_FLAG_LAYOUT_STABLE;
-                decorView.setSystemUiVisibility(uiOptions);
-                txtWalking.setText(getString(R.string.done));
-                mListener.onExerciseFinished(filePath);
+                Vibrator vib = (Vibrator) getContext().getSystemService(Context.VIBRATOR_SERVICE);
+                vib.vibrate(1000);
             }
-        };
-    }
-
-    @Override
-    public void onButtonInteraction(boolean start) {
-        if(start){
-            startTimer();
-        } else {
-            timer.onFinish();
-        }
+        }.start();
     }
 }
