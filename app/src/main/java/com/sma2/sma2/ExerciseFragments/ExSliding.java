@@ -1,10 +1,12 @@
 package com.sma2.sma2.ExerciseFragments;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.graphics.Point;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.os.Vibrator;
+import android.preference.PreferenceManager;
 import android.support.constraint.ConstraintLayout;
 import android.util.Log;
 import android.view.Display;
@@ -30,6 +32,7 @@ public class ExSliding extends ExerciseFragment implements SeekBar.OnSeekBarChan
     private static final long TOTAL_TIME =  10000;
     private int threshold=30;
     private int seekBarFlag=1;
+    SharedPreferences sharedPref;
 
 
 
@@ -53,6 +56,8 @@ public class ExSliding extends ExerciseFragment implements SeekBar.OnSeekBarChan
         textView_limit=view.findViewById(R.id.textView_limit);
         getDisplayDimensions();
         timer = setTimer();
+        sharedPref =PreferenceManager.getDefaultSharedPreferences(getActivity());
+
         return view;
     }
 
@@ -76,6 +81,10 @@ public class ExSliding extends ExerciseFragment implements SeekBar.OnSeekBarChan
                     Log.e("SlidingCloseWriter", e.toString());
                 }
                 mListener.onExerciseFinished(filePath);
+
+                SharedPreferences.Editor editor = sharedPref.edit();
+                editor.putBoolean("New Area Tapping", true);
+                editor.apply();
             }
         };
     }
