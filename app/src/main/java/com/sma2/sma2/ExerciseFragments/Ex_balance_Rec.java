@@ -27,7 +27,6 @@ public class Ex_balance_Rec extends ExerciseFragment implements ButtonFragment.O
     private boolean countdownIsRunning = false;
 
     public Ex_balance_Rec() {
-
     }
 
     @Override

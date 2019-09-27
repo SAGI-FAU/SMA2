@@ -60,7 +60,6 @@ public class ExerciseSessionManager {
             Log.e("CSV_READING", e.toString());
         }
 
-
         int[] exercisesIDs = new int[]{};
 
         String type_exercise=sharedPref.getString("exercises", "daily");

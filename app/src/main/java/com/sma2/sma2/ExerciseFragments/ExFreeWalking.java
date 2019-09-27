@@ -14,7 +14,6 @@ import android.widget.TextView;
 import com.sma2.sma2.R;
 import com.sma2.sma2.SignalRecording.MovementRecorder;
 
-
 public class ExFreeWalking extends ExerciseFragment implements ButtonFragment.OnButtonInteractionListener {
     private MovementRecorder recorder;
     private static long START_COUNTDOWN = 5;

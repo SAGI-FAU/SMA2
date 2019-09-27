@@ -27,7 +27,6 @@ public class Ex_postural_Rec extends ExerciseFragment implements ButtonFragment.
     private boolean countdownIsRunning = false;
 
     public Ex_postural_Rec() {
-
     }
 
     @Override
