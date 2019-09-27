@@ -1,16 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/scrollView2"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_gravity="center"
-    android:paddingLeft="0dp"
     android:paddingTop="0dp"
-    android:paddingRight="0dp">
-
+    android:paddingLeft="0dp"
+    android:paddingRight="0dp"
+    android:layout_gravity="center">
 
     <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
@@ -21,14 +20,14 @@
 
 
         <TextView
-            android:id="@+id/textView_movement3"
+            android:id="@+id/RadarMov"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8sp"
             android:layout_marginTop="8sp"
             android:layout_marginEnd="8sp"
+            android:layout_marginStart="8sp"
             android:gravity="center"
-            android:text="@string/walking"
+            android:text="@string/movement"
             android:textSize="@dimen/textview_text_size"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintLeft_toLeftOf="parent"
@@ -36,91 +35,131 @@
             app:layout_constraintTop_toTopOf="parent" />
 
 
-        <TextView
-            android:id="@+id/tWalkingSteps"
-            android:layout_width="0dp"
+
+        <ImageButton
+            android:id="@+id/button_help_Mov"
+            android:layout_width="30sp"
+            android:layout_height="30sp"
+            android:layout_marginTop="8sp"
+            android:scaleType="centerCrop"
+            android:padding="0dp"
+            android:src="@drawable/btn_help"
+            app:layout_constraintRight_toRightOf="@id/RadarMov"
+            app:layout_constraintTop_toBottomOf="@+id/chart2"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ProgressBar
+            android:splitTrack="false"
+            android:id="@+id/bar_mov"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="8dp"
-            android:layout_marginTop="20dp"
-            android:gravity="center"
-            android:text="Steps"
-            android:textColor="@color/colorPrimaryDark"
-            android:textSize="@dimen/textview_text_size"
+            android:layout_marginTop="16sp"
+            android:progress="20"
+            app:layout_constraintTop_toBottomOf="@+id/RadarMov"
             app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView_movement3" />
+            style="@style/MyProgressBar"
+            android:progressDrawable="@drawable/seekbar_sliding"/>
+
+
+
+
+
+        <ImageView
+            android:id="@+id/iEmojin_Mov"
+            android:layout_width="35sp"
+            android:layout_height="35sp"
+            android:layout_marginTop="8sp"
+            android:layout_weight="1"
+            app:layout_constraintLeft_toLeftOf="parent"
+            android:layout_marginStart="35sp"
+            app:layout_constraintTop_toBottomOf="@+id/RadarMov"
+            />
+
 
         <TextView
-            android:id="@+id/tWalkingVelocity"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="8dp"
-            android:layout_marginTop="12dp"
-            android:gravity="center"
-            android:text="Velocity"
-            android:textColor="@color/colorPrimaryDark"
-            android:textSize="@dimen/textview_text_size"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tWalkingSteps" />
-
-
-        <TextView
-            android:id="@+id/tTremorWalking"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:layout_marginEnd="8dp"
-            android:gravity="end"
-            android:lines="1"
+            android:id="@+id/tmessage_mov_perc"
+            android:layout_marginTop="16sp"
+            android:background="@color/colorPrimaryDark"
+            android:layout_gravity="center"
+            android:textSize="22sp"
             android:text=""
-            android:textSize="@dimen/textview_text_size"
+            app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView_movement3" />
+            app:layout_constraintTop_toBottomOf="@+id/iEmojin_Mov"
+            />
 
         <TextView
-            android:id="@+id/tVelocityWalking"
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
-            android:layout_marginEnd="8dp"
-            android:gravity="end"
-            android:lines="1"
+            android:id="@+id/tmessage_mov"
+            android:layout_marginTop="8sp"
+            android:maxLines="1"
+            android:background="@color/colorPrimaryDark"
+            android:layout_gravity="center"
+            android:textSize="22sp"
             android:text=""
-            android:textSize="@dimen/textview_text_size"
+            app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tTremorWalking" />
+            app:layout_constraintTop_toBottomOf="@+id/tmessage_mov_perc"
+            />
+
 
 
         <com.github.mikephil.charting.charts.RadarChart
             android:id="@+id/chart2"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:layout_marginTop="4dp"
-            android:layout_marginBottom="4dp"
             android:textSize="@dimen/button_text_size"
-            app:layout_constraintBottom_toTopOf="@+id/button_back6"
-            app:layout_constraintDimensionRatio="0.78"
-            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintWidth_percent="1"
+            app:layout_constraintDimensionRatio="0.75"
+            app:seriesType="radarchart"
+            android:layout_marginTop="8sp"
+            app:seriesColor="@color/colorPrimaryDark"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tWalkingVelocity"
-            app:layout_constraintWidth_percent="1"
-            app:seriesColor="@color/colorPrimaryDark"
-            app:seriesType="radarchart" />
+            app:layout_constraintTop_toBottomOf="@+id/tmessage_mov"/>
+
+
+        <com.jjoe64.graphview.GraphView
+            android:id="@+id/plotlineMovement"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintWidth_percent="0.95"
+            app:layout_constraintDimensionRatio="1.6"
+            android:layout_marginTop="16sp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/history_movement"/>
+
+
+        <TextView
+            android:id="@+id/history_movement"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8sp"
+            android:layout_marginEnd="8sp"
+            android:layout_marginStart="8sp"
+            android:gravity="center"
+            android:text="@string/history_mov"
+            android:textSize="@dimen/textview_text_size"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/chart2"/>
 
         <Button
-            android:id="@+id/button_back6"
-            android:layout_width="match_parent"
+            android:id="@+id/button_back_result_mov"
+            android:layout_width="250sp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginBottom="4dp"
-            android:background="@color/colorPrimaryDark"
             android:text="@string/back"
+            android:layout_marginTop="20sp"
             android:textSize="@dimen/button_text_size"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="1.0"
-            app:layout_constraintStart_toStartOf="parent" />
-    </android.support.constraint.ConstraintLayout>
+            android:background="@color/colorPrimaryDark"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/plotlineMovement"/>
 
+    </android.support.constraint.ConstraintLayout>
 </ScrollView>

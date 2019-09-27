@@ -1,8 +1,10 @@
 package com.sma2.sma2.ExerciseFragments;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.preference.PreferenceManager;
 import android.support.v4.app.FragmentTransaction;
 import android.text.TextUtils;
 import android.util.Log;
@@ -11,11 +13,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.opencsv.CSVParser;
 import com.opencsv.CSVParserBuilder;
 import com.opencsv.CSVReader;
 import com.opencsv.CSVReaderBuilder;
+import com.sma2.sma2.FeatureExtraction.Speech.features.RadarFeatures;
 import com.sma2.sma2.R;
 import com.sma2.sma2.SignalRecording.SpeechRecorder;
 
@@ -32,7 +36,7 @@ public class ExReadText extends ExerciseFragment implements ButtonFragment.OnBut
     private ProgressBar volumeBar;
     private TextExercise textExercise;
     private int Sentence;
-
+    SharedPreferences sharedPref;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -41,6 +45,8 @@ public class ExReadText extends ExerciseFragment implements ButtonFragment.OnBut
         recorder = SpeechRecorder.getInstance(getActivity().getApplicationContext(), new VolumeHandler(volumeBar));
         TextView text = view.findViewById(R.id.txtItemRT);
         textExercise = null;
+        sharedPref =PreferenceManager.getDefaultSharedPreferences(getActivity());
+
         Sentence =getArguments().getInt("sentence");
         try {
             textExercise = loadText();
@@ -118,7 +124,22 @@ public class ExReadText extends ExerciseFragment implements ButtonFragment.OnBut
         }
     }
 
-    private static class VolumeHandler extends Handler {
+    private void  evaluate_features(){
+        if (mExercise.getId()==7){ // Compute intonation from longest sentence.
+            float int_f0 = RadarFeatures.intonation(filePath);
+            try {
+                RadarFeatures.export_speech_feature(filePath,int_f0,"Intonation");
+            }catch (Exception e) {
+                Toast.makeText(getActivity(),R.string.intonation_failed,Toast.LENGTH_SHORT).show();
+
+            }
+            SharedPreferences.Editor editor = sharedPref.edit();
+            editor.putBoolean("New Area Speech", true);
+            editor.apply();
+
+        }
+    }
+    private class VolumeHandler extends Handler {
         ProgressBar volumeBar;
 
         public VolumeHandler(ProgressBar bar){
@@ -129,6 +150,14 @@ public class ExReadText extends ExerciseFragment implements ButtonFragment.OnBut
             super.handleMessage(msg);
             Bundle bundle = msg.getData();
             final int currentVolume = (int) bundle.getDouble("Volume");
+
+            final String state = bundle.getString("State", "Empty");
+            if (state.equals("Finished")){
+
+                evaluate_features();
+
+            }
+
             post(new Runnable() {
                 @Override
                 public void run() {

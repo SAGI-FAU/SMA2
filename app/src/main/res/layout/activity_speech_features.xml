@@ -27,12 +27,81 @@
             android:layout_marginEnd="8sp"
             android:layout_marginStart="8sp"
             android:gravity="center"
-            android:text="@string/radarfigure"
+            android:text="@string/Speech"
             android:textSize="@dimen/textview_text_size"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
+
+
+        <ImageButton
+            android:id="@+id/button_help"
+            android:layout_width="30sp"
+            android:layout_height="30sp"
+            android:layout_marginTop="8sp"
+            android:scaleType="centerCrop"
+            android:padding="0dp"
+            android:src="@drawable/btn_help"
+            app:layout_constraintRight_toRightOf="@id/RadarSpeech"
+            app:layout_constraintTop_toBottomOf="@+id/chart2"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+        <ProgressBar
+            android:splitTrack="false"
+            android:id="@+id/bar_speech"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16sp"
+            android:progress="20"
+            app:layout_constraintTop_toBottomOf="@+id/RadarSpeech"
+            app:layout_constraintLeft_toLeftOf="parent"
+            style="@style/MyProgressBar"
+            android:progressDrawable="@drawable/seekbar_sliding"/>
+
+            <ImageView
+                android:id="@+id/iEmojin_speech"
+                android:layout_width="35sp"
+                android:layout_height="35sp"
+                android:layout_marginTop="8sp"
+                android:layout_weight="1"
+                app:layout_constraintLeft_toLeftOf="parent"
+                android:layout_marginStart="35sp"
+                app:layout_constraintTop_toBottomOf="@+id/RadarSpeech"
+/>
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/tmessage_speech_perc"
+            android:layout_marginTop="16sp"
+            android:background="@color/colorPrimaryDark"
+            android:layout_gravity="center"
+            android:textSize="22sp"
+            android:text=""
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/iEmojin_speech"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/tmessage_speech"
+            android:layout_marginTop="8sp"
+            android:maxLines="2"
+            android:background="@color/colorPrimaryDark"
+            android:layout_gravity="center"
+            android:textSize="22sp"
+            android:text=""
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tmessage_speech_perc"
+            />
+
+
 
         <com.github.mikephil.charting.charts.RadarChart
             android:id="@+id/chart2"
@@ -40,13 +109,41 @@
             android:layout_height="0dp"
             android:textSize="@dimen/button_text_size"
             app:layout_constraintWidth_percent="1"
-            app:layout_constraintDimensionRatio="0.7"
+            app:layout_constraintDimensionRatio="0.75"
             app:seriesType="radarchart"
-            android:layout_marginTop="20sp"
+            android:layout_marginTop="8sp"
             app:seriesColor="@color/colorPrimaryDark"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/RadarSpeech"/>
+            app:layout_constraintTop_toBottomOf="@+id/tmessage_speech"/>
+
+
+        <com.jjoe64.graphview.GraphView
+            android:id="@+id/plotlineSpeech"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintWidth_percent="0.95"
+            app:layout_constraintDimensionRatio="1.6"
+            android:layout_marginTop="16sp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/history_speech"/>
+
+
+        <TextView
+            android:id="@+id/history_speech"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8sp"
+            android:layout_marginEnd="8sp"
+            android:layout_marginStart="8sp"
+            android:gravity="center"
+            android:text="@string/history_speech"
+            android:textSize="@dimen/textview_text_size"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/chart2"/>
 
         <Button
             android:id="@+id/button_back_result"
@@ -58,7 +155,7 @@
             android:background="@color/colorPrimaryDark"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/chart2"/>
+            app:layout_constraintTop_toBottomOf="@+id/plotlineSpeech"/>
 
     </android.support.constraint.ConstraintLayout>
 </ScrollView>
