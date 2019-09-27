@@ -1,5 +1,7 @@
 package com.sma2.sma2.FeatureExtraction.Tapping;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Point;
@@ -11,6 +13,7 @@ import android.os.Bundle;
 import android.view.Display;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -31,6 +34,7 @@ import java.util.ArrayList;
 
 public class Tapping_feature_Activity extends AppCompatActivity  implements View.OnClickListener {
     Button bBack;
+    private ImageButton bHelp;
     private ProgressBar progressBarTapping;
     private ImageView iEmojin;
     private TextView tmessage_tapping, tmessage_tapping_perc;
@@ -47,7 +51,8 @@ public class Tapping_feature_Activity extends AppCompatActivity  implements View
         FeatureTapping feature= new FeatureTapping(this);
         setContentView(R.layout.activity_tapping_feature_);
         bBack=findViewById(R.id.button_back4);
-        bBack.setOnClickListener(this);
+        bHelp=findViewById(R.id.button_help);
+        SetListeners();
 
         progressBarTapping=findViewById(R.id.bar_tapping);
         iEmojin=findViewById(R.id.iEmojin_tapping);
@@ -74,9 +79,6 @@ public class Tapping_feature_Activity extends AppCompatActivity  implements View
         double maxArea=RadarManager.get_area_chart(data2);
         int area_progress=(int)(area*100/maxArea);
 
-
-
-
         SharedPreferences sharedPref =PreferenceManager.getDefaultSharedPreferences(this);
         boolean new_area_tapping=sharedPref.getBoolean("New Area Tapping", false);
 
@@ -101,21 +103,17 @@ public class Tapping_feature_Activity extends AppCompatActivity  implements View
             area_perf.add(0f);
         }
 
-
-
         ConstraintLayout.LayoutParams params_line= (ConstraintLayout.LayoutParams)  iEmojin.getLayoutParams();
         int xRandomBar= (int)(0.01*area_progress*screenWidth-45);
-
 
         params_line.setMarginStart(xRandomBar); // The indicator bar position
         params_line.leftMargin=xRandomBar;
         params_line.setMarginStart(xRandomBar);
         iEmojin.setLayoutParams(params_line);
 
-
-
         progressBarTapping.setProgress(area_progress);
-        String msgp="Performance: "+String.valueOf(area_progress)+"%";
+        String perform = getResources().getString(R.string.perform);
+        String msgp=perform+String.valueOf(area_progress)+"%";
         tmessage_tapping_perc.setText(msgp);
         if (area_progress >=66) {
             iEmojin.setImageResource(R.drawable.happy_emojin);
@@ -144,6 +142,11 @@ public class Tapping_feature_Activity extends AppCompatActivity  implements View
 
     }
 
+    private void SetListeners(){
+        bBack.setOnClickListener(this);
+        bHelp.setOnClickListener(this);
+    }
+
 
     private void getDisplayDimensions() {
         Display display = this.getWindowManager().getDefaultDisplay();
@@ -155,7 +158,6 @@ public class Tapping_feature_Activity extends AppCompatActivity  implements View
     }
 
 
-
     @Override
     public void onClick(View view) {
 
@@ -163,13 +165,37 @@ public class Tapping_feature_Activity extends AppCompatActivity  implements View
             case R.id.button_back4:
                 onButtonBack();
                 break;
+            case R.id.button_help:
+                onButtonHelp();
+                break;
         }
     }
+
 
     private void onButtonBack(){
         Intent i =new Intent(Tapping_feature_Activity.this, MainActivityMenu.class);
         startActivity(i);
 
+    }
+
+
+    private void onButtonHelp(){
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+
+        String Title = getResources().getString(R.string.interpre);
+        builder.setTitle(Title);
+
+        String Text = getResources().getString(R.string.TappingHelp);
+        builder.setMessage(Text);
+
+        builder.setNeutralButton(R.string.cancel, new DialogInterface.OnClickListener() { // define the 'Cancel' button
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
+            }
+        });
+
+        AlertDialog dialog = builder.create();
+        dialog.show();
     }
 
 }

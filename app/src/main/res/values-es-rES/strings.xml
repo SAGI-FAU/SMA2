@@ -159,5 +159,14 @@
     <string name="intelligibility">Inteligibilidad</string>
     <string name="control">Referencia</string>
     <string name="history_speech">Historia de rendimiento</string>
+    <string name="tapVelocity">Velocidad</string>
+    <string name="tapHits">% Insectos</string>
+    <string name="barHits">% Desplazamiento</string>
+    <string name="tapPosition">Precisión</string>
+    <string name="TappingHelp">- % INSECTOS: Acierto en insectos.
+        \n- VELOCIDAD: Insectos por segundo.
+        \n- PRECISIÓN: Proximidad al insecto.
+        \n- % DESPLAZAMIENTO: Acierto en la barra de desplazamiento.</string>
+    <string name="fine_motor">Destreza</string>
 
 </resources>
