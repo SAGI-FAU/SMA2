@@ -3,6 +3,7 @@ package com.sma2.sma2.FeatureExtraction.Speech.features;
 import android.util.Log;
 import android.os.Environment;
 
+import com.opencsv.CSVReader;
 import com.sma2.sma2.DataAccess.MedicineDA;
 import com.sma2.sma2.DataAccess.MedicineDataService;
 import com.sma2.sma2.FeatureExtraction.Speech.tools.WAVfileReader;
@@ -12,6 +13,7 @@ import com.sma2.sma2.FeatureExtraction.Speech.tools.sigproc;
 import com.sma2.sma2.SignalRecording.CSVFileWriter;
 
 import java.io.File;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -143,7 +145,7 @@ public class RadarFeatures {
         float stdf0 = SigProc.calculateSD(nonzf0);
 
         //The reference value of the INTONATION IS MISSING. THIS IS NECESSARY TO GET THE RELATIVE VAL
-        return stdf0;
+        return 100/(1+stdf0);
     }
 
     public static void export_speech_feature(String name_file, float feature, String feat_name) throws IOException {
@@ -180,6 +182,26 @@ public class RadarFeatures {
             ie.printStackTrace();
         }
 
+    }
+
+
+    public static ArrayList<Float> get_feat_perf(String feature) throws IOException {
+        String directory = Environment.getExternalStorageDirectory() + "/Apkinson/FEATURES/";
+        String fileName = directory + feature+".csv";
+
+        FileReader mFileReader=new FileReader(fileName);
+        CSVReader reader = new CSVReader(mFileReader);
+
+        List<String[]> records = reader.readAll();
+
+        reader.close();
+        int col=records.get(0).length-1;
+        ArrayList<Float> perf=new ArrayList<>();
+        for (int i=1;i<records.size();i++){
+            perf.add(Float.valueOf(records.get(i)[col]));
+        }
+
+        return perf;
     }
 
 }
