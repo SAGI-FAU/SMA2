@@ -101,8 +101,8 @@ public class Ex_postural_Rec extends ExerciseFragment implements ButtonFragment.
                 //countdownTextView.setText(countdown_finished_txt);
                 MediaPlayer mp = MediaPlayer.create(getContext(), R.raw.bell);
                 mp.start();
-                //Vibrator vib = (Vibrator) getContext().getSystemService(Context.VIBRATOR_SERVICE);
-                //vib.vibrate(1000);
+                Vibrator vib = (Vibrator) getContext().getSystemService(Context.VIBRATOR_SERVICE);
+                vib.vibrate(1000);
                 recorder.startLogging();
                 startSecondCountdownTimer();
             }

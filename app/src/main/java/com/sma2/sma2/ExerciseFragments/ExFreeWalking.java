@@ -102,8 +102,8 @@ public class ExFreeWalking extends ExerciseFragment implements ButtonFragment.On
                 countdownTextView.setText(countdown_finished_txt);
                 MediaPlayer mp = MediaPlayer.create(getContext(), R.raw.bell);
                 mp.start();
-                //Vibrator vib = (Vibrator) getContext().getSystemService(Context.VIBRATOR_SERVICE);
-                //vib.vibrate(1000);
+                Vibrator vib = (Vibrator) getContext().getSystemService(Context.VIBRATOR_SERVICE);
+                vib.vibrate(1000);
                 recorder.startLogging();
                 startSecondCountdownTimer();
             }
