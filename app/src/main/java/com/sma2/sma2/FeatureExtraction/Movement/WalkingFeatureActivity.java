@@ -122,9 +122,9 @@ public class WalkingFeatureActivity extends AppCompatActivity implements View.On
         int area_progress = (int) (area * 100 / maxArea);
 
         SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
-        boolean new_area_speech = sharedPref.getBoolean("New Area Mov", false);
+        boolean new_area_mov = sharedPref.getBoolean("New Area Mov", false);
 
-        if (new_area_speech) {
+        if (new_area_mov) {
             SharedPreferences.Editor editor = sharedPref.edit();
             editor.putBoolean("New Area Movement", false);
             editor.apply();
