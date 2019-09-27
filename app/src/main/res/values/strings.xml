@@ -11,11 +11,13 @@
     <string name="gender">Gender</string>
     <string name="male">Male</string>
     <string name="female">Female</string>
+    <string name="otherGender">other</string>
     <string name="hand">Dominant hand</string>
     <string name="left">Left</string>
     <string name="right">Right</string>
     <string name="yes">Yes</string>
     <string name="no">No</string>
+    <string name="dataDummy">dd/mm/yyyy</string>
     <string name="smoker">Smoker</string>
     <string name="next">Next</string>
     <string name="back">Back</string>
