@@ -82,7 +82,7 @@ public class Speech_features_Activity extends AppCompatActivity implements View.
         }
 
         float[] data1={(float) 60, jitter_perf.get(jitter_perf.size()-1),vrate_perf.get(vrate_perf.size()-1),inton_perf.get(inton_perf.size()-1), (float) 90}; // Patient
-        float[] data2={(float) 86,(float) 98,(float) 73.7,(float) 55.4, (float) 100}; // Healthy
+        float[] data2={(float) 86,(float) 98,(float) 82.2,(float) 55.4, (float) 100}; // Healthy
 
         String Label_1 = getResources().getString(R.string.pronunciation);
         String Label_2 = getResources().getString(R.string.stability);
