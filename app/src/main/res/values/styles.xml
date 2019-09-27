@@ -17,4 +17,12 @@
         <item name="android:progressTint">#388e3c</item>
         <item name="android:colorControlActivated">#c51162</item>
     </style>
+
+    <style name="MyProgressBar" parent="@style/Widget.AppCompat.ProgressBar.Horizontal">
+        <item name="android:progressBackgroundTint">@color/colorAccent</item>
+        <item name="android:progressTint">@color/colorPrimaryDark</item>
+        <item name="android:minWidth">200dp</item>
+    </style>
+
 </resources>
+

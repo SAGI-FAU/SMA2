@@ -158,6 +158,8 @@
     <string name="intelligibility">Intelligibility</string>
     <string name="patient">Patient</string>
     <string name="control">Control</string>
+    <string name="permission_request">This sample needs permission for camera and audio recording.</string>
+    <string name="camera_error">This device doesn\'t support Camera2 API.</string>
     <string name="tapPosition">Error Position</string>
     <string name="tapHits">% Hits Ladybug</string>
     <string name="barHits">% Hits Sliding</string>
@@ -166,5 +168,11 @@
     <string name="steps">Steps</string>
     <string name="velocity">Velocity</string>
     <string name="tremor">Tremor</string>
+    <string name="jitter_failed">Jiiter could not be computed</string>
+    <string name="voicerate_failed">Voice Rate could not be computed</string>
+    <string name="intonation_failed">Intonation could not be computed</string>
+
+
+
 
 </resources>
