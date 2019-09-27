@@ -192,12 +192,12 @@
         \n- INTONATION: Capacity to change the tone in conversations.
         \n- INTELLIGIBILITY: Percentage of words that the phone understand you.</string>
 
-    <string name="MovementHelp">- TREMOR: capacity to control involuntary movement.
-        \n- REGULARITY: stability of the movement.
-        \n- FREEZE INDEX: capacity to walk without freezing.
-        \n- POSTURE: capacity to stand in a fixed position.
-        \n- NUMBER OF STRIDES: .
-        \n- STRIDE TIME: .</string>
+    <string name="MovementHelp">- TREMOR: Capacity to control involuntary movement.
+        \n- REGULARITY: Stability of the movement.
+        \n- FREEZE INDEX: Capacity to walk without freezing.
+        \n- POSTURE: Capacity to stand in a fixed position.
+        \n- NUMBER OF STRIDES: Number of strides that you can achieve in 2 minutes walk.
+        \n- STRIDE TIME: Average walking speed.</string>
     <string name="perform">Performance :</string>
     <string name="tapping_failed">Tapping features could not be computed</string>
     <string name="fine_motor">Fine motor skills</string>

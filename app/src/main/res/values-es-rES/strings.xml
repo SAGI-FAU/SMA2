@@ -151,6 +151,13 @@
         \n- VELOCIDAD: Sílabas por segundo.
         \n- ENTONACIÓN: Tono de voz en frases.
         \n- INTELIGIBILIDAD: Porcentaje de palabras que el teléfono te entiende.</string>
+
+    <string name="MovementHelp">- TREMOR: Capacidad de controlar movimiento involuntarios.
+        \n- REGULARITY: Estabilidad del movimiento.
+        \n- FREEZE INDEX: Capacidad de caminar sin congelamiento.
+        \n- POSTURE: Capacidad de pararse en una posicion fija.
+        \n- NUMBER OF STRIDES: Numero de pasos que alcanzas en 2 minutos.
+        \n- STRIDE TIME: Velocidad media cuando caminas.</string>
     <string name="perform">Rendimiento :</string>
     <string name="pronunciation">Pronunciación</string>
     <string name="stability">Estabilidad</string>
