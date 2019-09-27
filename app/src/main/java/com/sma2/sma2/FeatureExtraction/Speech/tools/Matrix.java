@@ -50,7 +50,7 @@ import java.util.Locale;
  Complex matrices may be handled in a future version.
  <P>
  Five fundamental matrix decompositions, which consist of pairs or triples
- of matrices, permutation vectors, and the like, produce results in five
+ of matrices, permutation vectors, and the like, produce Results in five
  decomposition classes.  These decompositions are accessed by the Matrix
  class to compute solutions of simultaneous linear equations, determinants,
  inverses and other matrix functions.  The five decompositions are:
