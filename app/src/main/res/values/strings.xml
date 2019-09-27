@@ -100,7 +100,7 @@
     <string name="Hits_porcentage">Hits Percentage</string>
     <string name="Tapping_Time">Tapping Time </string>
     <string name="Positive_message">Good Job!! </string>
-    <string name="Medium_message">Good Job!!   But, You can do it better</string>
+    <string name="Medium_message">Good Job!! But, You can do it better</string>
     <string name="Negative_message">Let\'s improve!  Keep working</string>
     <string name="Empty">Empty</string>
     <string name="Title_notif">Make your therapy</string>
@@ -173,4 +173,13 @@
     <string name="history_speech">Historical performance</string>
     <string name="voicerate_failed">Voice Rate could not be computed</string>
     <string name="intonation_failed">Intonation could not be computed</string>
+    <string name="area_failed">Radar area could not be computed</string>
+    <string name="interpre">Interpretation</string>
+    <string name="SpeechHelp">- PRONUNCIATION: Capacity to correctly pronounce different sounds.
+        \n- STABILITY: Capacity to keep the tone in a sustained phonation.
+        \n- RATE: Syllables per second.
+        \n- INTONATION: Capacity to change the tone in conversations.
+        \n- INTELLIGIBILITY: Percentage of words that the phone understand you.</string>
+    <string name="perform">Performance :</string>
+
 </resources>
