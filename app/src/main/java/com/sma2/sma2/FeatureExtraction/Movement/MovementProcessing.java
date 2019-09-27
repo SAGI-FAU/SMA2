@@ -1,13 +1,13 @@
 package com.sma2.sma2.FeatureExtraction.Movement;
 
 import android.util.Log;
-
 import com.sma2.sma2.FeatureExtraction.Speech.tools.array_manipulation;
 import com.sma2.sma2.FeatureExtraction.Speech.tools.f0detector;
 import com.sma2.sma2.FeatureExtraction.Speech.tools.sigproc;
 
-
+import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.math3.complex.Complex;
+import org.apache.commons.math3.stat.descriptive.rank.Median;
 import org.apache.commons.math3.transform.DftNormalization;
 import org.apache.commons.math3.transform.FastFourierTransformer;
 import org.apache.commons.math3.transform.TransformType;
@@ -294,8 +294,13 @@ public class MovementProcessing {
     }
 
     // Put the feature extraction code in the following functions
-    public double getSteps(List<Float> signal){
-        return 3;
+    public double getStepTime(List<Integer> stepIndex) {
+        List<Double> stepTimes = new ArrayList<Double>();
+        for(int i = 1; i < stepIndex.size(); i++) {
+            stepTimes.add((stepIndex.get(i) - stepIndex.get(i-1))/100.0);
+        }
+        // convert List to array and calculate median
+        return new Median().evaluate(ArrayUtils.toPrimitive(stepTimes.toArray(new Double[stepTimes.size()])));
     }
 
     public double velocity(List<Float> signal){
@@ -482,6 +487,10 @@ public class MovementProcessing {
 
 
         return freezeI;
+    }
+
+    public CSVFileReader.Signal getAccNorm(CSVFileReader.Signal accX, CSVFileReader.Signal accY, CSVFileReader.Signal accZ) {
+        return new CSVFileReader.Signal(accX.TimeStamp,getAccR(accX.Signal,accY.Signal,accZ.Signal));
     }
 
 

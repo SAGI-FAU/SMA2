@@ -1,21 +1,19 @@
 package com.sma2.sma2.FeatureExtraction.Speech;
 
-import android.app.ActionBar;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.graphics.Color;
 import android.graphics.Point;
 import android.preference.PreferenceManager;
 import android.support.constraint.ConstraintLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Display;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -24,25 +22,16 @@ import com.jjoe64.graphview.GraphView;
 import com.sma2.sma2.FeatureExtraction.GraphManager;
 import com.sma2.sma2.FeatureExtraction.Speech.features.RadarFeatures;
 import com.sma2.sma2.R;
-import com.github.mikephil.charting.animation.Easing;
-import com.github.mikephil.charting.components.Legend;
-import com.github.mikephil.charting.components.XAxis;
-import com.github.mikephil.charting.components.YAxis;
-import com.github.mikephil.charting.formatter.IndexAxisValueFormatter;
 import com.github.mikephil.charting.charts.RadarChart;
-import com.github.mikephil.charting.data.RadarData;
-import com.github.mikephil.charting.data.RadarDataSet;
-import com.github.mikephil.charting.data.RadarEntry;
 import com.sma2.sma2.RadarFigureManager;
 import com.sma2.sma2.ResultsActivity;
 
 import java.io.IOException;
-import java.text.DecimalFormat;
 import java.util.ArrayList;
-import java.util.List;
 
 public class Speech_features_Activity extends AppCompatActivity implements View.OnClickListener {
     private Button bBack;
+    private ImageButton bHelp;
 
     private RadarFigureManager RadarManager;
     private double maxArea=23776;
@@ -55,6 +44,7 @@ public class Speech_features_Activity extends AppCompatActivity implements View.
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_speech_features);
         bBack=findViewById(R.id.button_back_result);
+        bHelp=findViewById(R.id.button_help);
         progressBarSpeech=findViewById(R.id.bar_speech);
         iEmojin=findViewById(R.id.iEmojin_speech);
         tmessage_speech=findViewById(R.id.tmessage_speech);
@@ -127,17 +117,14 @@ public class Speech_features_Activity extends AppCompatActivity implements View.
             try {
                 RadarFeatures.export_speech_feature("AreaSpeech", area_progress, "area speech");
             }catch (Exception e) {
-                Toast.makeText(this,R.string.jitter_failed,Toast.LENGTH_SHORT).show();
+                Toast.makeText(this,R.string.area_failed,Toast.LENGTH_SHORT).show();
 
             }
-
         }
-
 
 
         ConstraintLayout.LayoutParams params_line= (ConstraintLayout.LayoutParams)  iEmojin.getLayoutParams();
         int xRandomBar= (int)(0.01*area_progress*screenWidth-45);
-
 
         params_line.setMarginStart(xRandomBar); // The indicator bar position
         params_line.leftMargin=xRandomBar;
@@ -145,9 +132,9 @@ public class Speech_features_Activity extends AppCompatActivity implements View.
         iEmojin.setLayoutParams(params_line);
 
 
-
+        String perform = getResources().getString(R.string.perform);
         progressBarSpeech.setProgress(area_progress);
-        String msgp="Performance: "+String.valueOf(area_progress)+"%";
+        String msgp=perform+String.valueOf(area_progress)+"%";
         tmessage_speech_perc.setText(msgp);
         if (area_progress >=66) {
             iEmojin.setImageResource(R.drawable.happy_emojin);
@@ -173,7 +160,6 @@ public class Speech_features_Activity extends AppCompatActivity implements View.
         }
         graphManager.LineGraph(graph, xl, area_perf, 105, xl.size(), Title, Xlabel, Ylabel);
 
-
     }
 
 
@@ -188,6 +174,7 @@ public class Speech_features_Activity extends AppCompatActivity implements View.
 
     private void SetListeners(){
         bBack.setOnClickListener(this);
+        bHelp.setOnClickListener(this);
     }
 
     @Override
@@ -197,6 +184,9 @@ public class Speech_features_Activity extends AppCompatActivity implements View.
             case R.id.button_back_result:
                 onButtonBack();
                 break;
+            case R.id.button_help:
+                onButtonHelp();
+                break;
         }
     }
 
@@ -205,9 +195,23 @@ public class Speech_features_Activity extends AppCompatActivity implements View.
         startActivity(i);
     }
 
+    private void onButtonHelp(){
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
 
+        String Title = getResources().getString(R.string.interpre);
+        builder.setTitle(Title);
 
+        String Text = getResources().getString(R.string.SpeechHelp);
+        builder.setMessage(Text);
 
+        builder.setNeutralButton(R.string.cancel, new DialogInterface.OnClickListener() { // define the 'Cancel' button
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
+            }
+        });
 
+        AlertDialog dialog = builder.create();
+        dialog.show();
+    }
 
 }

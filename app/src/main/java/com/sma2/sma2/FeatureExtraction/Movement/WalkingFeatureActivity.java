@@ -18,6 +18,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.jjoe64.graphview.GraphView;
+import com.github.mikephil.charting.charts.RadarChart;
 import com.sma2.sma2.DataAccess.SignalDA;
 import com.sma2.sma2.DataAccess.SignalDataService;
 import com.sma2.sma2.FeatureExtraction.GetExercises;
@@ -37,7 +38,6 @@ import java.util.List;
 
 import com.github.mikephil.charting.charts.RadarChart;
 import com.sma2.sma2.ResultsActivity;
-
 
 public class WalkingFeatureActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -63,6 +63,7 @@ public class WalkingFeatureActivity extends AppCompatActivity implements View.On
     private ImageView iEmojin;
     private TextView tmessage_Mov, tmessage_Mov_perc;
     private RadarFigureManager RadarManager;
+    String TAG = this.getClass().getName();
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -231,6 +232,7 @@ public class WalkingFeatureActivity extends AppCompatActivity implements View.On
         }
 
 
+
         if (path_movement == null) {
             return (float) 0;
         }
@@ -251,6 +253,7 @@ public class WalkingFeatureActivity extends AppCompatActivity implements View.On
 
 
             CSVFileReader.Signal timeSteps = FileReader.ReadMovementSignal(path_movement, "Timestamp [ns]");
+
 
 
             List<Double> newAccR = new ArrayList<>();

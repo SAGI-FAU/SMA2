@@ -28,12 +28,68 @@
             android:layout_marginEnd="8sp"
             android:layout_marginStart="8sp"
             android:gravity="center"
-            android:text="@string/radarfigure"
+            android:text="@string/fine_motor"
             android:textSize="@dimen/textview_text_size"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
+
+
+        <ProgressBar
+            android:splitTrack="false"
+            android:id="@+id/bar_tapping"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16sp"
+            android:progress="20"
+            app:layout_constraintTop_toBottomOf="@+id/textView_tapping1"
+            app:layout_constraintLeft_toLeftOf="parent"
+            style="@style/MyProgressBar"
+            android:progressDrawable="@drawable/seekbar_sliding"/>
+
+        <ImageView
+            android:id="@+id/iEmojin_tapping"
+            android:layout_width="35sp"
+            android:layout_height="35sp"
+            android:layout_marginTop="8sp"
+            android:layout_weight="1"
+            app:layout_constraintLeft_toLeftOf="parent"
+            android:layout_marginStart="35sp"
+            app:layout_constraintTop_toBottomOf="@+id/textView_tapping1"
+            />
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/tmessage_tapping_perc"
+            android:layout_marginTop="16sp"
+            android:background="@color/colorPrimaryDark"
+            android:layout_gravity="center"
+            android:textSize="22sp"
+            android:text=""
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/iEmojin_tapping"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/tmessage_tapping"
+            android:layout_marginTop="8sp"
+            android:maxLines="1"
+            android:background="@color/colorPrimaryDark"
+            android:layout_gravity="center"
+            android:textSize="22sp"
+            android:text=""
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tmessage_tapping_perc"
+            />
+
+
 
         <com.github.mikephil.charting.charts.RadarChart
             android:id="@+id/chartap"
@@ -41,13 +97,45 @@
             android:layout_height="0dp"
             android:textSize="@dimen/button_text_size"
             app:layout_constraintWidth_percent="1"
-            app:layout_constraintDimensionRatio="0.78"
+            app:layout_constraintDimensionRatio="0.75"
             app:seriesType="radarchart"
             android:layout_marginTop="20sp"
             app:seriesColor="@color/colorPrimaryDark"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView_tapping1"/>
+            app:layout_constraintTop_toBottomOf="@+id/tmessage_tapping"/>
+
+
+        <com.jjoe64.graphview.GraphView
+            android:id="@+id/plotlineTapping"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintWidth_percent="0.95"
+            app:layout_constraintDimensionRatio="1.6"
+            android:layout_marginTop="16sp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/history_tapping"/>
+
+
+        <TextView
+            android:id="@+id/history_tapping"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8sp"
+            android:layout_marginEnd="8sp"
+            android:layout_marginStart="8sp"
+            android:gravity="center"
+            android:text="@string/history_speech"
+            android:textSize="@dimen/textview_text_size"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/chartap"/>
+
+
+
+
 
         <Button
             android:layout_width="match_parent"
@@ -57,7 +145,7 @@
             android:textSize="@dimen/button_text_size"
             android:background="@color/colorPrimaryDark"
             android:id="@+id/button_back4"
-            app:layout_constraintTop_toBottomOf="@+id/chartap"
+            app:layout_constraintTop_toBottomOf="@+id/plotlineTapping"
             />
 
     </android.support.constraint.ConstraintLayout>
