@@ -74,7 +74,6 @@ public class ExAudioRec extends ExerciseFragment implements ButtonFragment.OnBut
                 Toast.makeText(getActivity(),R.string.jitter_failed,Toast.LENGTH_SHORT).show();
 
                 }
-            SharedPreferences sharedPref =PreferenceManager.getDefaultSharedPreferences(getActivity());
             SharedPreferences.Editor editor = sharedPref.edit();
             editor.putBoolean("New Area Speech", true);
             editor.apply();
