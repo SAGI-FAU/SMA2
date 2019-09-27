@@ -34,6 +34,20 @@
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
+
+
+        <ImageButton
+            android:id="@+id/button_help_Mov"
+            android:layout_width="30sp"
+            android:layout_height="30sp"
+            android:layout_marginTop="8sp"
+            android:scaleType="centerCrop"
+            android:padding="0dp"
+            android:src="@drawable/btn_help"
+            app:layout_constraintRight_toRightOf="@id/RadarMov"
+            app:layout_constraintTop_toBottomOf="@+id/chart2"
+            app:layout_constraintTop_toTopOf="parent" />
+
         <ProgressBar
             android:splitTrack="false"
             android:id="@+id/bar_mov"

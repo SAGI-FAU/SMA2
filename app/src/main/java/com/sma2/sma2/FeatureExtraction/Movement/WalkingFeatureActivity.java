@@ -12,6 +12,7 @@ import android.util.Log;
 import android.view.Display;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -42,6 +43,8 @@ import com.sma2.sma2.ResultsActivity;
 public class WalkingFeatureActivity extends AppCompatActivity implements View.OnClickListener {
 
     Button bBack;
+    private ImageButton bHelp;
+
     private final String PATH = Environment.getExternalStorageDirectory() + "/Apkinson/MOVEMENT/";
     String path_movement = null;
     List<String> path_movement_all = new ArrayList<>();
@@ -69,6 +72,8 @@ public class WalkingFeatureActivity extends AppCompatActivity implements View.On
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_walking_feature);
         bBack = findViewById(R.id.button_back_result_mov);
+        bHelp=findViewById(R.id.button_help_Mov);
+
         progressBarMov = findViewById(R.id.bar_mov);
         iEmojin = findViewById(R.id.iEmojin_Mov);
         tmessage_Mov = findViewById(R.id.tmessage_mov);
@@ -186,6 +191,8 @@ public class WalkingFeatureActivity extends AppCompatActivity implements View.On
 
     private void SetListeners() {
         bBack.setOnClickListener(this);
+        bHelp.setOnClickListener(this);
+
     }
 
     @Override
@@ -195,12 +202,19 @@ public class WalkingFeatureActivity extends AppCompatActivity implements View.On
             case R.id.button_back_result:
                 onButtonBack();
                 break;
+            case R.id.button_help_Mov:
+                onButtonHelp();
+                break;
         }
     }
 
     private void onButtonBack() {
         Intent i = new Intent(WalkingFeatureActivity.this, ResultsActivity.class);
         startActivity(i);
+    }
+
+    private void onButtonHelp() {
+        //TODO the help
     }
 
 
@@ -238,7 +252,7 @@ public class WalkingFeatureActivity extends AppCompatActivity implements View.On
         }
 
 
-    else {
+        else {
 
             CSVFileReader.Signal GaitSignalaX = FileReader.ReadMovementSignal(path_movement, "aX [m/s^2]");
             CSVFileReader.Signal GaitSignalaY = FileReader.ReadMovementSignal(path_movement, "aY [m/s^2]");
@@ -281,11 +295,11 @@ public class WalkingFeatureActivity extends AppCompatActivity implements View.On
 
 
 
-        return  perc_fidex;
+            return  perc_fidex;
 
 
+        }
     }
-}
 
 }
 
