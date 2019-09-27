@@ -107,10 +107,10 @@ public class RadarFeatures {
             // 4.61 (mean) + 1.64 (standart deviation)
             // of VoiceRate For PCGITA controls
 
-            if(vRate >= 6.25f)
+            if(vRate >= 4.61f)
                 vRate = 100;
             else
-                vRate = (vRate*100)/ 6.25f;
+                vRate = (vRate*100)/ 4.61f;
 
         return vRate;
     }
