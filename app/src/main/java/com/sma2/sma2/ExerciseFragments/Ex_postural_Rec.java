@@ -21,8 +21,8 @@ import com.sma2.sma2.SignalRecording.MovementRecorder;
 
 public class Ex_postural_Rec extends ExerciseFragment implements ButtonFragment.OnButtonInteractionListener {
     private MovementRecorder recorder;
-    private static long START_COUNTDOWN = 3;
-    private static long EXERCISE_TIME = 30;
+    private static long START_COUNTDOWN = 5;
+    private static long EXERCISE_TIME = 10;
     private final int SAMPLING_FREQUENCY = 10000;
     private String countdown_finished_txt;
     private long countdownStart;
@@ -33,7 +33,6 @@ public class Ex_postural_Rec extends ExerciseFragment implements ButtonFragment.
     private MovementProcessing MovementProcessor = new MovementProcessing();
 
     public Ex_postural_Rec() {
-
     }
 
     @Override
@@ -78,7 +77,6 @@ public class Ex_postural_Rec extends ExerciseFragment implements ButtonFragment.
     @Override
     public void onButtonInteraction(boolean start) {
         if (start) {
-            recorder.startLogging();
             startInitialCountdownTimer();
         } else {
             if(countdownIsRunning) {
@@ -133,14 +131,36 @@ public class Ex_postural_Rec extends ExerciseFragment implements ButtonFragment.
             public void onFinish() {
                 countdownIsRunning = false;
                 this.cancel();
-                countdownTextView.setText(countdown_finished_txt);
+                //countdownTextView.setText(countdown_finished_txt);
                 MediaPlayer mp = MediaPlayer.create(getContext(), R.raw.bell);
                 mp.start();
                 Vibrator vib = (Vibrator) getContext().getSystemService(Context.VIBRATOR_SERVICE);
                 vib.vibrate(1000);
-
+                recorder.startLogging();
+                startSecondCountdownTimer();
             }
         }.start();
 
+    }
+
+    private void startSecondCountdownTimer() {
+        countdownIsRunning = true;
+        countdownStart = System.currentTimeMillis();
+        timer = new CountDownTimer(EXERCISE_TIME* 1000, 1000) {
+            public void onTick(long millisUntilFinished) {
+                int newTime =  Math.round(millisUntilFinished / 1000);
+                countdownTextView.setText(String.valueOf(newTime));
+            }
+            public void onFinish() {
+                countdownIsRunning = false;
+                this.cancel();
+                //countdownTextView.setText(countdown_finished_txt);
+                mListener.onExerciseFinished(recorder.getFileName());
+                MediaPlayer mp = MediaPlayer.create(getContext(), R.raw.bell);
+                mp.start();
+                Vibrator vib = (Vibrator) getContext().getSystemService(Context.VIBRATOR_SERVICE);
+                vib.vibrate(1000);
+            }
+        }.start();
     }
 }
