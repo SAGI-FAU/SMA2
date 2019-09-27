@@ -47,7 +47,7 @@ public class WalkingFeatureActivity extends AppCompatActivity implements View.On
     List<String> path_movement_all = new ArrayList<>();
     TextView tWalking;
     //private double maxArea = 23776; //Five features
-    private double maxArea = 2598.76; //Six features
+    private double maxArea = 25980.76; //Six features
 
     int screenWidth, screenHeight;
 
