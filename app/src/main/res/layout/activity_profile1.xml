@@ -36,15 +36,12 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/username_create" />
 
-    <EditText
+    <TextView
         android:id="@+id/age_create"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:backgroundTint="@color/colorPrimary"
-        android:hint="01.01.1970"
-        android:imeOptions="actionDone"
-        android:inputType="date"
         android:maxLines="1"
         android:textSize="36sp"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -144,7 +141,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="0.5"
             android:buttonTint="@color/colorPrimary"
-            android:checked="true"
+            android:checked="false"
             android:text="@string/right"
             android:textSize="@dimen/RadioButton_size" />
 
