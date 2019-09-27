@@ -19,6 +19,11 @@ import java.util.List;
 import static java.lang.Math.abs;
 import static java.util.Arrays.copyOfRange;
 
+import android.os.Environment;
+import com.sma2.sma2.DataAccess.SignalDataService;
+import com.sma2.sma2.FeatureExtraction.GetExercises;
+import com.sma2.sma2.DataAccess.SignalDA;
+
 public class MovementProcessing {
 
 
@@ -34,6 +39,7 @@ public class MovementProcessing {
     float vocingthres = 0.45f;
     private float unvocingthres = 0.3f;
 
+    private final String PATH = Environment.getExternalStorageDirectory() + "/Apkinson/MOVEMENT/";
     public MovementProcessing(){
 
     }
@@ -317,8 +323,7 @@ public class MovementProcessing {
         return Power/(double)signal.length;
     }
 
-
-    public float [] sigmoid(float [] sig){
+       public float [] sigmoid(float [] sig){
         float [] sig_sigmoid= new float[sig.length];
         for (int j=0;j<sig.length;j++){
             sig_sigmoid[j]= (float) (1/(1+Math.exp(-sig[j])));
@@ -484,6 +489,219 @@ public class MovementProcessing {
         return freezeI;
     }
 
+
+    // New movement functions for superior members
+
+    public float UppTremor(int IDEx,CSVFileReader FileReader,GetExercises GetEx,SignalDataService signalDataService){
+        double vtremor=0;
+        double Tremor=0;
+
+        String name=GetEx.getNameExercise(IDEx);
+
+        List<SignalDA> Signals=signalDataService.getSignalsbyname(name);
+
+        String path_movement = null;
+        List<String> path_movement_all= new ArrayList<String>();
+
+
+        if (Signals.size()>0){
+            path_movement=PATH+Signals.get(Signals.size()-1).getSignalPath();
+
+            if (Signals.size()>1){
+                for (int i=Signals.size()-1;i<Signals.size();i++){
+                    path_movement_all.add(PATH+Signals.get(i).getSignalPath());
+                }
+            }
+            else{
+                for (int i=0;i<Signals.size();i++){
+                    path_movement_all.add(PATH+Signals.get(i).getSignalPath());
+                }
+            }
+        }
+
+        if(path_movement==null){
+            vtremor=0;
+        }
+        else {
+            CSVFileReader.Signal TremorSignalaX2 = FileReader.ReadMovementSignal(path_movement, "aX [m/s^2]");
+            CSVFileReader.Signal TremorSignalaY2 = FileReader.ReadMovementSignal(path_movement, "aY [m/s^2]");
+            CSVFileReader.Signal TremorSignalaZ2 = FileReader.ReadMovementSignal(path_movement, "aZ [m/s^2]");
+            Tremor = ComputeTremor(TremorSignalaX2.Signal, TremorSignalaY2.Signal, TremorSignalaZ2.Signal);
+            vtremor = 100-Tremor;
+
+        }
+
+        return (float) vtremor;
+    }
+
+    public float UppRegularity(int IDEx,CSVFileReader FileReader,GetExercises GetEx,SignalDataService signalDataService){
+        double stabVel=0;
+
+        String name=GetEx.getNameExercise(IDEx);
+
+        List<SignalDA> Signals=signalDataService.getSignalsbyname(name);
+
+        String path_movement = null;
+        List<String> path_movement_all= new ArrayList<String>();
+
+
+        if (Signals.size()>0){
+            path_movement=PATH+Signals.get(Signals.size()-1).getSignalPath();
+
+            if (Signals.size()>1){
+                for (int i=Signals.size()-1;i<Signals.size();i++){
+                    path_movement_all.add(PATH+Signals.get(i).getSignalPath());
+                }
+            }
+            else{
+                for (int i=0;i<Signals.size();i++){
+                    path_movement_all.add(PATH+Signals.get(i).getSignalPath());
+                }
+            }
+        }
+
+        if(path_movement==null){
+            stabVel=0;
+        }
+        else {
+            CSVFileReader.Signal TremorSignalaX2 = FileReader.ReadMovementSignal(path_movement, "aX [m/s^2]");
+            CSVFileReader.Signal TremorSignalaY2 = FileReader.ReadMovementSignal(path_movement, "aY [m/s^2]");
+            CSVFileReader.Signal TremorSignalaZ2 = FileReader.ReadMovementSignal(path_movement, "aZ [m/s^2]");
+            stabVel = ComputeRegularity(TremorSignalaX2.Signal, TremorSignalaY2.Signal, TremorSignalaZ2.Signal);
+        }
+        return (float) stabVel;
+
+    }
+
+
+    public float[] listtofloat(List vals) {
+        float[] means = new float[vals.size()];
+        for (int i = 0; i < vals.size(); i++) {
+            double temp = (double) vals.get(i);
+            means[i] = (float) temp;
+        }
+        return means;
+    }
+
+    public double meanComputingFloat(float[] vector){
+        double mean=0.0;
+        int cont=0;
+        for(int i=0; i<vector.length; i++){
+
+            mean = mean + vector[i];
+            cont=cont+1;
+        }
+        mean=mean/cont;
+
+        return mean;
+    }
+
+    public double stdComputingFloat(float[] vector, double mean){
+
+        double  std=0.0;
+        int cont=0;
+        for(int i=0; i<vector.length; i++){
+            std = std + ((vector[i] - mean) * (vector[i] - mean));
+            cont=cont+1;
+        }
+        std=Math.sqrt(std/cont);
+
+        return std;
+    }
+
+    public Double ObtainValue(Double Signal){
+        Double value= 0.0;
+
+        value = 200/(1+Math.exp(0.2*Signal));
+        return value;
+    }
+
+    public double ComputeRegularity(List<Double> AccX, List<Double> AccY, List<Double> AccZ){
+        sigproc sigproccess = new sigproc();
+
+        List<Double> AccXn, AccYn, AccZn, AccR;
+
+        AccXn=RemoveGravity(AccX);
+        AccYn=RemoveGravity(AccY);
+        AccZn=RemoveGravity(AccZ);
+
+        AccR=getAccR(AccXn, AccYn, AccZn);
+
+        float[] AccR_aux = listtofloat(AccR);
+        int Fs=100;
+        //Divide the signal into frames
+        List <float[]> AccR_framed = sigproccess.sigframe(AccR_aux,Fs,(float) 0.4,(float) 0.02);
+        List <Double> PowerArr = new ArrayList<>();
+        for(int i=0;i<AccR_framed.size();i++)
+        {
+            Double Power = ComputePower2(AccR_framed.get(i));
+            PowerArr.add(Power);
+        }
+
+        float[] Power_Array = listtofloat(PowerArr);
+        double Mean_Power = meanComputingFloat(Power_Array);
+
+        int start = 400;
+        int cont = 0;
+        List<Float> New_Power = new ArrayList<>();
+
+        //Remove noise data: only movement data
+        for(int i=0;i<Power_Array.length;i++)
+        {
+            if ((i>=start) && ((Power_Array[i])>=Mean_Power)){
+                New_Power.add(Power_Array[i]);
+                cont = cont+1;
+            }
+        }
+
+        //Convert the List to float Array
+        float[] New_PowerArray = new float[New_Power.size()];
+        for (int i = 0; i < New_Power.size(); i++) {
+            New_PowerArray[i] = New_Power.get(i);
+        }
+
+        int w=3;//number of neighbor points
+        double meannew = meanComputingFloat(New_PowerArray);
+        double stdnew = stdComputingFloat(New_PowerArray,meannew);
+
+        List<Float> Time_Vector = new ArrayList<>();
+        Time_Vector.add(((float) 0/ (float) Fs));
+
+        for(int i=0;i<New_PowerArray.length;i++)
+        {
+            if((i>=w)&&(i<=New_PowerArray.length - w - 1)){
+                if((New_PowerArray[i]<New_PowerArray[i-3])&&
+                        (New_PowerArray[i]<New_PowerArray[i-2])&&
+                        (New_PowerArray[i]<New_PowerArray[i-1])&&
+                        (New_PowerArray[i]<New_PowerArray[i+1])&&
+                        (New_PowerArray[i]<New_PowerArray[i+2])&&
+                        (New_PowerArray[i]<New_PowerArray[i+3])&&
+                        (New_PowerArray[i]<(Mean_Power+stdnew))){
+                    Time_Vector.add(((float) i/ (float) Fs));
+                }
+            }
+
+        }
+        Time_Vector.add(((float)(New_PowerArray.length - 1)/(float)Fs));
+
+        //Cnvert to float array
+        float[] Time_Vec_Array = new float[Time_Vector.size()];
+        for (int i = 0; i < Time_Vector.size(); i++) {
+            Time_Vec_Array[i] = Time_Vector.get(i);
+        }
+
+        //Compute the difference between 2 consecutive points
+        float[] Final_Time_Array = new float[Time_Vec_Array.length - 1];
+        for(int i=1;i<Time_Vec_Array.length;i++) {
+            Final_Time_Array[i-1] = Time_Vec_Array[i] - Time_Vec_Array[i-1];
+        }
+
+        double meantime = meanComputingFloat(Final_Time_Array);
+        double stdtime = stdComputingFloat(Final_Time_Array,meantime);
+
+        double StandarDeviation = ObtainValue(stdtime);
+        return (StandarDeviation);
+    }
 
 
     

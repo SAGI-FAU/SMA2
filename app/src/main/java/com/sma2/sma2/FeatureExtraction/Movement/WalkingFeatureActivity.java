@@ -95,15 +95,31 @@ public class WalkingFeatureActivity extends AppCompatActivity implements View.On
             System.out.println(GaitSignalaX.Signal.size());
         }
 
+        // Compute Tremor
+        float posturaltremorleft = MovementProcessor.UppTremor(30,FileReader,GetEx,signalDataService);
+        float posturaltremorright = MovementProcessor.UppTremor(29,FileReader,GetEx,signalDataService);
+        float movementtremorleft = MovementProcessor.UppTremor(28,FileReader,GetEx,signalDataService);
+        float movementtremorright = MovementProcessor.UppTremor(27,FileReader,GetEx,signalDataService);
+        float Tremor_Posterior=(posturaltremorleft+posturaltremorright+movementtremorleft+movementtremorright)/4;
+
+        // Compute Regularity
+        float StabKinLeft = MovementProcessor.UppRegularity(28,FileReader,GetEx,signalDataService);
+        float StabKinRight = MovementProcessor.UppRegularity(27,FileReader,GetEx,signalDataService);
+        float StabRotLeft = MovementProcessor.UppRegularity(26,FileReader,GetEx,signalDataService);
+        float StabRotRight = MovementProcessor.UppRegularity(25,FileReader,GetEx,signalDataService);
+        float StabCirLeft = MovementProcessor.UppRegularity(24,FileReader,GetEx,signalDataService);
+        float StabCirRigth = MovementProcessor.UppRegularity(23,FileReader,GetEx,signalDataService);
+        double Regularity_Posterior = (StabKinLeft+StabKinRight+StabRotLeft+StabRotRight+StabCirLeft+StabCirRigth)/6;
+
         RadarManager = new RadarFigureManager(this);
         // Radar chart
         RadarChart radarchart= findViewById(R.id.chart2);
 
-        float[] data1={(float) 10,(float) 10,(float) 10,(float) 10}; // Patient
+        float[] data1={Tremor_Posterior,(float)Regularity_Posterior,(float) 10,(float) 10}; // Patient
         float[] data2={(float) 80,(float) 80,(float) 80,(float) 80}; // Healthy
 
-        String Label_1 = getResources().getString(R.string.steps);
-        String Label_2 = getResources().getString(R.string.stability);
+        String Label_1 = getResources().getString(R.string.tremorPosterior);
+        String Label_2 = getResources().getString(R.string.regularityPosterior);
         String Label_3 = getResources().getString(R.string.velocity);
         String Label_4 = getResources().getString(R.string.tremor);
         String[] labels={Label_1, Label_2, Label_3, Label_4};
