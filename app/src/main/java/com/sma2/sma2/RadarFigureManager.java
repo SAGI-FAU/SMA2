@@ -106,7 +106,7 @@ public class RadarFigureManager {
     }
 
 
-    double get_area_chart(float[] data){
+    public double get_area_chart(float[] data){
 
         double[] angles= new double[data.length];
         double[] x= new double[data.length+1];

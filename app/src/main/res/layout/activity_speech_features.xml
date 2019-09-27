@@ -34,6 +34,64 @@
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
+        <ProgressBar
+            android:splitTrack="false"
+            android:id="@+id/bar_speech"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16sp"
+            android:progress="20"
+            app:layout_constraintTop_toBottomOf="@+id/RadarSpeech"
+            app:layout_constraintLeft_toLeftOf="parent"
+            style="@style/MyProgressBar"
+            android:progressDrawable="@drawable/seekbar_sliding"/>
+
+
+
+
+
+            <ImageView
+                android:id="@+id/iEmojin_speech"
+                android:layout_width="35sp"
+                android:layout_height="35sp"
+                android:layout_marginTop="8sp"
+                android:layout_weight="1"
+                app:layout_constraintLeft_toLeftOf="parent"
+                android:layout_marginStart="35sp"
+                app:layout_constraintTop_toBottomOf="@+id/RadarSpeech"
+/>
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/tmessage_speech_perc"
+            android:layout_marginTop="16sp"
+            android:background="@color/colorPrimaryDark"
+            android:layout_gravity="center"
+            android:textSize="22sp"
+            android:text=""
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/iEmojin_speech"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/tmessage_speech"
+            android:layout_marginTop="8sp"
+            android:background="@color/colorPrimaryDark"
+            android:layout_gravity="center"
+            android:textSize="22sp"
+            android:text=""
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tmessage_speech_perc"
+            />
+
+
+
         <com.github.mikephil.charting.charts.RadarChart
             android:id="@+id/chart2"
             android:layout_width="0dp"
@@ -46,7 +104,7 @@
             app:seriesColor="@color/colorPrimaryDark"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/RadarSpeech"/>
+            app:layout_constraintTop_toBottomOf="@+id/tmessage_speech"/>
 
         <Button
             android:id="@+id/button_back_result"
