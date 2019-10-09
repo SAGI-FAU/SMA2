@@ -139,6 +139,12 @@
     <string name="scheduler">Change exercise scheduler</string>
     <string name="password">Password</string>
     <string name="daily_exercises">Daily Exercises</string>
+    <string name="MovementHelp">- TREMOR: Capacity to control involuntary movement.
+        \n- REGULARITY: Stability of the movement.
+        \n- FREEZE INDEX: Capacity to walk without freezing.
+        \n- POSTURE: Capacity to stand in a fixed position.
+        \n- NUMBER OF STRIDES: Number of strides that you can achieve in 2 minutes walk.
+        \n- STRIDE TIME: Average walking speed.</string>
     <string name="full_exercises">Full Exercises</string>
     <string name="wrong_pass">Wrong password</string>
     <string name="fill_dialog">Some information is still missing!</string>

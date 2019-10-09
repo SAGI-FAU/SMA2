@@ -11,11 +11,13 @@
     <string name="gender">Gender</string>
     <string name="male">Male</string>
     <string name="female">Female</string>
+    <string name="otherGender">other</string>
     <string name="hand">Dominant hand</string>
     <string name="left">Left</string>
     <string name="right">Right</string>
     <string name="yes">Yes</string>
     <string name="no">No</string>
+    <string name="dataDummy">dd/mm/yyyy</string>
     <string name="smoker">Smoker</string>
     <string name="next">Next</string>
     <string name="back">Back</string>
@@ -100,7 +102,7 @@
     <string name="Hits_porcentage">Hits Percentage</string>
     <string name="Tapping_Time">Tapping Time </string>
     <string name="Positive_message">Good Job!! </string>
-    <string name="Medium_message">Good Job!!   But, You can do it better</string>
+    <string name="Medium_message">Good Job!! But, You can do it better</string>
     <string name="Negative_message">Let\'s improve!  Keep working</string>
     <string name="Empty">Empty</string>
     <string name="Title_notif">Make your therapy</string>
@@ -115,6 +117,8 @@
     <string name="jitter" translatable="false">Jitter (%) </string>
     <string name="articulation">Articulation </string>
     <string name="ddk_reg">DDK regularity (ms)</string>
+    <string name="regularity">Regularity</string>
+
     <string name="Speech">Speech</string>
     <string name="movement">Movement</string>
     <string name="postural">Postural Tremor</string>
@@ -157,6 +161,7 @@
     <string name="intonation">Intonation</string>
     <string name="intelligibility">Intelligibility</string>
     <string name="patient">Patient</string>
+
     <string name="control">Control</string>
     <string name="progress">Daily Progress</string>
     <string name="quick_start">Quick Start</string>
@@ -164,4 +169,48 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
+    <string name="control">Reference</string>
+    <string name="permission_request">This sample needs permission for camera and audio recording.</string>
+    <string name="camera_error">This device doesn\'t support Camera2 API.</string>
+    <string name="tapPosition">Precision</string>
+    <string name="tapHits">% Hits Ladybug</string>
+    <string name="barHits">% Hits Sliding</string>
+    <string name="tapVelocity">Tapping Velocity</string>
+    <string name="walking">Walking</string>
+    <string name="steps">Steps</string>
+    <string name="velocity">Velocity</string>
+    <string name="tremor">Tremor</string>
+    <string name="jitter_failed">Jiiter could not be computed</string>
+    <string name="speech_performance">Speech performance</string>
+    <string name="tapping_performance">Fine motor skills performance</string>
+    <string name="history_speech">Historical performance</string>
+    <string name="history_mov">Historical performance</string>
+
+    <string name="voicerate_failed">Voice Rate could not be computed</string>
+    <string name="intonation_failed">Intonation could not be computed</string>
+    <string name="freezeIndex">FreezeIndex</string>
+    <string name="posture">Posture</string>
+    <string name="nStrides">Number of strides</string>
+    <string name="tStrides">Stride time</string>
+    <string name="area_failed">Radar area could not be computed</string>
+    <string name="interpre">Interpretation</string>
+    <string name="SpeechHelp">- PRONUNCIATION: Capacity to correctly pronounce different sounds.
+        \n- STABILITY: Capacity to keep the tone in a sustained phonation.
+        \n- RATE: Syllables per second.
+        \n- INTONATION: Capacity to change the tone in conversations.
+        \n- INTELLIGIBILITY: Percentage of words that the phone understand you.</string>
+
+    <string name="MovementHelp">- TREMOR: Capacity to control involuntary movement.
+        \n- REGULARITY: Stability of the movement.
+        \n- FREEZE INDEX: Capacity to walk without freezing.
+        \n- POSTURE: Capacity to stand in a fixed position.
+        \n- NUMBER OF STRIDES: Number of strides that you can achieve in 2 minutes walk.
+        \n- STRIDE TIME: Average walking speed.</string>
+    <string name="perform">Performance :</string>
+    <string name="tapping_failed">Tapping features could not be computed</string>
+    <string name="fine_motor">Fine motor skills</string>
+    <string name="TappingHelp">- % LADYBUGS: Accuracy hitting on insects.
+        \n- %SLIDING: Accuracy positioning the sliding bar.
+        \n- SPEED: Ladybugs per second.
+        \n- PRECISION: Proximity of insect hits.</string>
 </resources>

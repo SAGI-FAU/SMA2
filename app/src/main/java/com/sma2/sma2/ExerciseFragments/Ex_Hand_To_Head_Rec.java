@@ -10,8 +10,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.sma2.sma2.FeatureExtraction.Movement.CSVFileReader;
+import com.sma2.sma2.FeatureExtraction.Movement.MovementProcessing;
 import com.sma2.sma2.R;
+import com.sma2.sma2.SignalRecording.CSVFileWriter;
 import com.sma2.sma2.SignalRecording.MovementRecorder;
 
 
@@ -25,6 +29,8 @@ public class Ex_Hand_To_Head_Rec extends ExerciseFragment implements ButtonFragm
     private CountDownTimer timer;
     private TextView countdownTextView;
     private boolean countdownIsRunning = false;
+    private CSVFileReader FileReader;
+    private MovementProcessing MovementProcessor = new MovementProcessing();
 
     public Ex_Hand_To_Head_Rec() {
 
@@ -33,6 +39,8 @@ public class Ex_Hand_To_Head_Rec extends ExerciseFragment implements ButtonFragm
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        FileReader = new CSVFileReader(getActivity().getApplicationContext());
+
         try {
             recorder = new MovementRecorder(this.getContext(), SAMPLING_FREQUENCY, mExercise.getName());
             recorder.registerListeners();
@@ -84,11 +92,46 @@ public class Ex_Hand_To_Head_Rec extends ExerciseFragment implements ButtonFragm
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
+                EvaluateFeatures();
                 mListener.onExerciseFinished(recorder.getFileName());
             }
         }
     }
 
+    private void EvaluateFeatures() {
+        String Route= CSVFileWriter.getpath();
+        String final_route = Route +"/" + recorder.getFileName();
+
+        if(mExercise.getId() == 27){
+            float UppTremor = MovementProcessor.UppTremor(FileReader,final_route);
+            try {
+                MovementProcessor.export_movement_feature(final_route,UppTremor,"Kinetic_Tremor_Right");
+            }catch (Exception e) {
+                Toast.makeText(getActivity(),"Kinetic tremor of right hand failed",Toast.LENGTH_SHORT).show();
+            }
+            float UppRegularity = MovementProcessor.UppRegularity(FileReader,final_route);
+            try {
+                MovementProcessor.export_movement_feature(final_route,UppRegularity,"Kinetic_Regularity_Right");
+            }catch (Exception e) {
+                Toast.makeText(getActivity(),"Kinetic regularity of right hand failed",Toast.LENGTH_SHORT).show();
+            }
+        }
+
+        else if(mExercise.getId() == 28){
+            float UppTremor = MovementProcessor.UppTremor(FileReader,final_route);
+            try {
+                MovementProcessor.export_movement_feature(final_route,UppTremor,"Kinetic_Tremor_Left");
+            }catch (Exception e) {
+                Toast.makeText(getActivity(),"Kinetic tremor of left hand failed",Toast.LENGTH_SHORT).show();
+            }
+            float UppRegularity = MovementProcessor.UppRegularity(FileReader,final_route);
+            try {
+                MovementProcessor.export_movement_feature(final_route,UppRegularity,"Kinetic_Regularity_Left");
+            }catch (Exception e) {
+                Toast.makeText(getActivity(),"Kinetic regularity of left hand failed",Toast.LENGTH_SHORT).show();
+            }
+        }
+    }
     private void startInitialCountdownTimer() {
         countdownIsRunning = true;
         countdownStart = System.currentTimeMillis();

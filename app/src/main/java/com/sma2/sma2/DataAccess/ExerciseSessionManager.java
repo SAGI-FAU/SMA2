@@ -20,9 +20,14 @@ import com.sma2.sma2.ExerciseFragments.ExTwoFingerTapping;
 import com.sma2.sma2.ExerciseFragments.Ex_Circling_Rec;
 import com.sma2.sma2.ExerciseFragments.Ex_Hand_Rotation_Rec;
 import com.sma2.sma2.ExerciseFragments.Ex_Hand_To_Head_Rec;
+import com.sma2.sma2.ExerciseFragments.Ex_Happy;
+import com.sma2.sma2.ExerciseFragments.Ex_LeftWink;
+import com.sma2.sma2.ExerciseFragments.Ex_RightWink;
 import com.sma2.sma2.ExerciseFragments.Ex_Walking_Rec;
+import com.sma2.sma2.ExerciseFragments.ExFreeWalking;
 import com.sma2.sma2.ExerciseFragments.Ex_balance_Rec;
 import com.sma2.sma2.ExerciseFragments.Ex_postural_Rec;
+import com.sma2.sma2.ExerciseFragments.FerRecorder;
 
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -59,7 +64,6 @@ public class ExerciseSessionManager {
             Log.e("CSV_READING", e.toString());
         }
 
-
         int[] exercisesIDs = new int[]{};
 
         String type_exercise=sharedPref.getString("exercises", "daily");
@@ -68,7 +72,7 @@ public class ExerciseSessionManager {
         if (type_exercise.equals("daily")){
             switch (day) {
                 case 1:
-                    exercisesIDs = new int[]{1, 2, 11, 22, 33};
+                    exercisesIDs = new int[]{1, 2, 11, 22, 33,36};
                     break;
                 case 2:
                     exercisesIDs = new int[]{3, 4, 12, 23, 24, 34};
@@ -77,7 +81,7 @@ public class ExerciseSessionManager {
                     exercisesIDs = new int[]{5, 6, 13, 25, 26, 33};
                     break;
                 case 4:
-                    exercisesIDs = new int[]{7, 8, 14, 27, 28, 34};
+                    exercisesIDs = new int[]{7, 8, 14, 27, 28, 34,37};
                     break;
                 case 5:
                     exercisesIDs = new int[]{9, 10, 15, 29, 30, 35};
@@ -86,13 +90,15 @@ public class ExerciseSessionManager {
                     exercisesIDs = new int[]{16, 17, 20, 31, 35};
                     break;
                 case 7:
-                    exercisesIDs = new int[]{18, 19, 21, 32, 33};
+                    exercisesIDs = new int[]{18, 19, 21, 32, 33,38};
                     break;
 
             }
         }
         else if (type_exercise.equals("full")){
-            exercisesIDs = new int[]{1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35};
+
+            exercisesIDs = new int[]{1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38};
+
         }
         else if (type_exercise.equals("speech")){
             exercisesIDs = new int[]{1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21};
@@ -101,12 +107,9 @@ public class ExerciseSessionManager {
             exercisesIDs = new int[]{22,23,24,25,26,27,28,29,30,31,32,33,34,35};
         }
         else{
-            exercisesIDs = new int[]{1,2,11,14,18,25,26,34,35};
+            exercisesIDs = new int[]{1,2,11,14,18,25,26,34,35,36,37,38};
 
         }
-
-
-
 
         for (int id : exercisesIDs) {
             Exercise exercise = exerciseDataService.getExercise((long) id);
@@ -296,7 +299,7 @@ public class ExerciseSessionManager {
                         Uri.parse("Instruction/Path"),
                         Ex_postural_Rec.class));
             }
-            else if (ExFrag.equals("gait"))
+            else if (ExFrag.equals("gaitfourtimes"))
             {
                 _ExerciseList.add(new Exercise(
                         ExID,
@@ -307,6 +310,18 @@ public class ExerciseSessionManager {
                         Uri.parse(ExVideo),
                         Uri.parse("Instruction/Path"),
                         Ex_Walking_Rec.class));
+            }
+            else if (ExFrag.equals("gaittwomins"))
+            {
+                _ExerciseList.add(new Exercise(
+                        ExID,
+                        ExName,
+                        ExType,
+                        ExDescr,
+                        ExInstr,
+                        Uri.parse(ExVideo),
+                        Uri.parse("Instruction/Path"),
+                        ExFreeWalking.class));
             }
             else if (ExFrag.equals("finger1"))
             {
@@ -343,6 +358,45 @@ public class ExerciseSessionManager {
                         Uri.parse(ExVideo),
                         Uri.parse("Instruction/Path"),
                         ExSliding.class));
+            }
+            else if (ExFrag.equals("rightwink"))
+            {
+                _ExerciseList.add(new Exercise(
+                        ExID,
+                        ExName,
+                        ExType,
+                        ExDescr,
+                        ExInstr,
+                        Uri.parse(ExVideo),
+                        Uri.parse("Instruction/Path"),
+                        Ex_RightWink.class));
+                        //FerRecorder_RightWink.class));
+            }
+            else if (ExFrag.equals("leftwink"))
+            {
+                _ExerciseList.add(new Exercise(
+                        ExID,
+                        ExName,
+                        ExType,
+                        ExDescr,
+                        ExInstr,
+                        Uri.parse(ExVideo),
+                        Uri.parse("Instruction/Path"),
+                        Ex_LeftWink.class));
+                        //FerRecorder_LeftWink.class));
+            }
+            else if (ExFrag.equals("happy"))
+            {
+                _ExerciseList.add(new Exercise(
+                        ExID,
+                        ExName,
+                        ExType,
+                        ExDescr,
+                        ExInstr,
+                        Uri.parse(ExVideo),
+                        Uri.parse("Instruction/Path"),
+                        Ex_Happy.class));
+                //FerRecorder_LeftWink.class));
             }
         }
 

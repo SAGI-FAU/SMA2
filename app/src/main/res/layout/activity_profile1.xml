@@ -42,9 +42,6 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:backgroundTint="@color/colorPrimary"
-        android:hint="01.01.1970"
-        android:imeOptions="actionDone"
-        android:inputType="date"
         android:maxLines="1"
         android:textSize="36sp"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -73,7 +70,7 @@
         app:layout_constraintTop_toBottomOf="@+id/textView">
 
         <RadioButton
-            android:id="@+id/rbMale"
+            android:id="@+id/rbGenderMale"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="0.5"
@@ -86,13 +83,23 @@
 
 
         <RadioButton
-            android:id="@+id/rbFemale"
+            android:id="@+id/rbGenderFemale"
             android:layout_width="0sp"
             android:layout_height="wrap_content"
             android:layout_weight="0.5"
             android:buttonTint="@color/colorPrimary"
             android:checked="false"
             android:text="@string/female"
+            android:textSize="@dimen/RadioButton_size" />
+
+        <RadioButton
+            android:id="@+id/rbGenderOther"
+            android:layout_width="0sp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.5"
+            android:buttonTint="@color/colorPrimary"
+            android:checked="false"
+            android:text="@string/otherGender"
             android:textSize="@dimen/RadioButton_size" />
     </RadioGroup>
 
@@ -108,7 +115,7 @@
         app:layout_constraintTop_toBottomOf="@+id/gender_radio" />
 
 
-    <RadioGroup xmlns:android="http://schemas.android.com/apk/res/android"
+    <RadioGroup
         android:id="@+id/hand_radio"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -134,7 +141,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="0.5"
             android:buttonTint="@color/colorPrimary"
-            android:checked="true"
+            android:checked="false"
             android:text="@string/right"
             android:textSize="@dimen/RadioButton_size" />
 
@@ -166,7 +173,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:buttonTint="@color/colorPrimary"
-            android:checked="true"
+            android:checked="false"
             android:text="@string/no"
             android:textSize="@dimen/RadioButton_size" />
 

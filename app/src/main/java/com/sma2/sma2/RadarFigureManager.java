@@ -12,6 +12,8 @@ import com.github.mikephil.charting.data.RadarData;
 import com.github.mikephil.charting.data.RadarDataSet;
 import com.github.mikephil.charting.data.RadarEntry;
 import com.github.mikephil.charting.formatter.IndexAxisValueFormatter;
+import com.sma2.sma2.DataAccess.PatientDA;
+import com.sma2.sma2.DataAccess.PatientDataService;
 
 import java.util.ArrayList;
 
@@ -47,7 +49,7 @@ public class RadarFigureManager {
         l.setTextColor(Color.BLACK);
         l.setTextSize(20f);
 
-        radarChart.setExtraOffsets(0,-400,0,-400);
+        radarChart.setExtraOffsets(0,-200,0,-200);
         //radarchart.setBackgroundColor(Color.WHITE);
         radarChart.setScaleY(1f);
         radarChart.setScaleX(1f);
@@ -73,7 +75,10 @@ public class RadarFigureManager {
             entries2.add(new RadarEntry(data2[i]));
         }
 
-        String Label_Patient = CONTEXT.getResources().getString(R.string.patient);
+        PatientDataService PatientData= new PatientDataService(CONTEXT);
+        PatientDA patient=PatientData.getPatient();
+
+        String Label_Patient = patient.getUsername();
         String Label_Control = CONTEXT.getResources().getString(R.string.control);
 
         RadarDataSet set1 = new RadarDataSet(entries1, Label_Patient);
@@ -105,6 +110,29 @@ public class RadarFigureManager {
         return data_radar;
     }
 
+
+    public double get_area_chart(float[] data){
+
+        double[] angles= new double[data.length];
+        double[] x= new double[data.length+1];
+        double[] y= new double[data.length+1];
+        double pi=3.14159265;
+        float A=0f;
+        for (int k=0; k<data.length;k++){
+            angles[k]=2*pi*k/data.length;
+            x[k]=data[k]*Math.cos(angles[k]);
+            y[k]=data[k]*Math.sin(angles[k]);
+        }
+
+        x[data.length]=x[0];
+        y[data.length]=y[0];
+
+        for (int k=0; k<data.length;k++){
+            A+=Math.abs(x[k]*y[k+1]-x[k+1]*y[k]);
+        }
+        return A*0.5;
+
+    }
 
 
 }

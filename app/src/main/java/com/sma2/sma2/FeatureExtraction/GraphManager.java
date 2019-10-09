@@ -68,7 +68,7 @@ public class GraphManager {
         if (maxY>0){
             graph.getViewport().setMaxY(maxY);
         }
-        graph.getViewport().setMinX(0);
+        graph.getViewport().setMinX(1);
         graph.getViewport().setMaxX(maxX);
         graph.getViewport().setYAxisBoundsManual(true);
         graph.getViewport().setXAxisBoundsManual(true);
@@ -78,7 +78,34 @@ public class GraphManager {
         gridLabel.setVerticalAxisTitle(Ylabel);
     }
 
+    public void LineGraph(GraphView graph, ArrayList<Float> x, ArrayList<Float> y, double maxY, double minY, double maxX, String Title, String Xlabel, String Ylabel){
 
+        LineGraphSeries<DataPoint> series= new LineGraphSeries<>();
+
+        for (int i = 0; i < x.size(); i++) {
+            series.appendData(new DataPoint(x.get(i), y.get(i)), true, x.size());
+        }
+
+        graph.addSeries(series);
+
+        series.setColor(Color.rgb(255, 140, 0));
+        graph.getViewport().setMinY(0.0);
+        if (maxY > 0){
+            graph.getViewport().setMaxY(maxY);
+        }
+
+        if (minY < 0){
+            graph.getViewport().setMinY(minY);
+        }
+        graph.getViewport().setMinX(1);
+        graph.getViewport().setMaxX(maxX);
+        graph.getViewport().setYAxisBoundsManual(true);
+        graph.getViewport().setXAxisBoundsManual(true);
+        series.setTitle(Title);
+        GridLabelRenderer gridLabel = graph.getGridLabelRenderer();
+        gridLabel.setHorizontalAxisTitle(Xlabel);
+        gridLabel.setVerticalAxisTitle(Ylabel);
+    }
 
     public void LineGraph2lines(GraphView graph, float[] x1, float[] y1, float[] x2, float[] y2, double maxY, double maxX, String Title, String Xlabel, String Ylabel, String legend1, String legend2){
 
