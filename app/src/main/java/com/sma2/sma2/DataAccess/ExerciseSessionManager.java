@@ -418,7 +418,198 @@ public class ExerciseSessionManager {
         _ExerciseList = exerciseDataService.getAllExercises();
     }
 
-    private int getCurrentLocale(String[] languages) {
+    public static ArrayList<Exercise> getExerciseList(Context context) throws IOException {
+        ArrayList<Exercise> exList = new ArrayList();
+        InputStreamReader is;
+        is = new InputStreamReader(context.getAssets()
+                .open("instructions.csv"), "UTF-8");
+        CSVReader reader = new CSVReaderBuilder(is).build();
+        CSVParser parser = new CSVParserBuilder().withSeparator(';').build();
+        String[] languages = parser.parseLine(reader.readNext()[0]);
+        String[] instr;
+        int locale = getCurrentLocale(languages);
+        int ExID;
+        String ExName;
+        String ExType;
+        String ExFrag;
+        String ExDescr;
+        String ExInstr;
+        String ExVideo;
+        while ((instr = reader.readNext()) != null) {
+            instr = parser.parseLine(TextUtils.join("", instr));
+            ExID = Integer.parseInt(instr[0]);//The ID is always on the first position CSV.
+            ExType = instr[1];//The type of exercise is always on the second position of the CSV.
+            ExFrag = instr[2];//Used to select the fragment of a particular task (see if-else statements below)
+            //Name, description, and instruction.
+            ExName = instr[locale];//Exercise name. The position depends on the detected language.
+            ExDescr = instr[locale + 1];//Exercise description.
+            ExInstr = instr[locale + 2];//Exercise instruction.
+            String videoName = instr[instr.length - 1];
+            if (videoName.length() != 0) {
+                if (languages[locale].contains("de")){
+                    ExVideo = "en" + videoName;
+                }
+                else{
+                    ExVideo = languages[locale] + videoName;
+                }
+                //
+                String test = ExVideo.split(".webm")[0];
+                ExVideo = "android.resource://" + context.getPackageName() + "/" + context.getResources().getIdentifier(ExVideo.split(".webm")[0], "raw", context.getPackageName());
+            } else {
+                ExVideo = "None";
+            }
+
+            //The following if-else statements are used to select the fragment of each task
+            //ej: ExReadText.class only works for sentences.
+            if (ExFrag.equals("readtext"))
+            {
+                exList.add(new Exercise(
+                        ExID,
+                        ExName,
+                        ExType,
+                        ExDescr,
+                        ExInstr,
+                        Uri.parse(ExVideo),
+                        Uri.parse("Instruction/Path"),
+                        ExReadText.class));
+            }
+            else if (ExFrag.equals("audiorec"))
+            {
+                exList.add(new Exercise(
+                        ExID,
+                        ExName,
+                        ExType,
+                        ExDescr,
+                        ExInstr,
+                        Uri.parse(ExVideo),
+                        Uri.parse("Instruction/Path"),
+                        ExAudioRec.class));
+            }
+            else if (ExFrag.equals("imgdes"))
+            {
+                exList.add(new Exercise(
+                        ExID,
+                        ExName,
+                        ExType,
+                        ExDescr,
+                        ExInstr,
+                        Uri.parse(ExVideo),
+                        Uri.parse("Instruction/Path"),
+                        ExImageDescription.class));
+            }
+            else if (ExFrag.equals("balance"))
+            {
+                exList.add(new Exercise(
+                        ExID,
+                        ExName,
+                        ExType,
+                        ExDescr,
+                        ExInstr,
+                        Uri.parse(ExVideo),
+                        Uri.parse("Instruction/Path"),
+                        Ex_balance_Rec.class));
+            }
+            else if (ExFrag.equals("circling"))
+            {
+                exList.add(new Exercise(
+                        ExID,
+                        ExName,
+                        ExType,
+                        ExDescr,
+                        ExInstr,
+                        Uri.parse(ExVideo),
+                        Uri.parse("Instruction/Path"),
+                        Ex_Circling_Rec.class));
+            }
+            else if (ExFrag.equals("rotation"))
+            {
+                exList.add(new Exercise(
+                        ExID,
+                        ExName,
+                        ExType,
+                        ExDescr,
+                        ExInstr,
+                        Uri.parse(ExVideo),
+                        Uri.parse("Instruction/Path"),
+                        Ex_Hand_Rotation_Rec.class));
+            }
+            else if (ExFrag.equals("hand2nose"))
+            {
+                exList.add(new Exercise(
+                        ExID,
+                        ExName,
+                        ExType,
+                        ExDescr,
+                        ExInstr,
+                        Uri.parse(ExVideo),
+                        Uri.parse("Instruction/Path"),
+                        Ex_Hand_To_Head_Rec.class));
+            }
+            else if (ExFrag.equals("postural"))
+            {
+                exList.add(new Exercise(
+                        ExID,
+                        ExName,
+                        ExType,
+                        ExDescr,
+                        ExInstr,
+                        Uri.parse(ExVideo),
+                        Uri.parse("Instruction/Path"),
+                        Ex_postural_Rec.class));
+            }
+            else if (ExFrag.equals("gait"))
+            {
+                exList.add(new Exercise(
+                        ExID,
+                        ExName,
+                        ExType,
+                        ExDescr,
+                        ExInstr,
+                        Uri.parse(ExVideo),
+                        Uri.parse("Instruction/Path"),
+                        Ex_Walking_Rec.class));
+            }
+            else if (ExFrag.equals("finger1"))
+            {
+                exList.add(new Exercise(
+                        ExID,
+                        ExName,
+                        ExType,
+                        ExDescr,
+                        ExInstr,
+                        Uri.parse(ExVideo),
+                        Uri.parse("Instruction/Path"),
+                        ExOneFingerTapping.class));
+            }
+            else if (ExFrag.equals("finger2"))
+            {
+                exList.add(new Exercise(
+                        ExID,
+                        ExName,
+                        ExType,
+                        ExDescr,
+                        ExInstr,
+                        Uri.parse(ExVideo),
+                        Uri.parse("Instruction/Path"),
+                        ExTwoFingerTapping.class));
+            }
+            else if (ExFrag.equals("sliding"))
+            {
+                exList.add(new Exercise(
+                        ExID,
+                        ExName,
+                        ExType,
+                        ExDescr,
+                        ExInstr,
+                        Uri.parse(ExVideo),
+                        Uri.parse("Instruction/Path"),
+                        ExSliding.class));
+            }
+        }
+        return exList;
+    }
+
+    private static int getCurrentLocale(String[] languages) {
         Locale locale = Locale.getDefault();
         int defaultOption = 0;
         for (int i = 0; i < languages.length; i++) {

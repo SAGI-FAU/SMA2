@@ -1,5 +1,7 @@
 package com.sma2.sma2;
 
+
+import android.app.ActivityManager;
 import android.Manifest;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -8,17 +10,25 @@ import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.TabLayout;
 import android.support.v4.app.ActivityCompat;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 
 import com.sma2.sma2.DataAccess.MedicineDA;
 import com.sma2.sma2.DataAccess.MedicineDataService;
 
 import java.util.List;
 
-public class MainActivityMenu extends AppCompatActivity implements View.OnClickListener {
+public class MainActivityMenu extends AppCompatActivity{
     int PERMISSION_ALL = 1;
     String[] PERMISSIONS = {
             android.Manifest.permission.READ_EXTERNAL_STORAGE,
@@ -27,11 +37,26 @@ public class MainActivityMenu extends AppCompatActivity implements View.OnClickL
             Manifest.permission.CAMERA
     };
     private AlertDialog noPermissionsAlertDialog;
+    private ViewPager mViewPager;
+    private SectionsPagerAdapter sectionsPagerAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_menu);
+        TabLayout tabLayout = findViewById(R.id.tabLayout);
+        mViewPager = (ViewPager) findViewById(R.id.viewPager);
+        sectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
+        mViewPager.setAdapter(sectionsPagerAdapter);
+        tabLayout.setupWithViewPager(mViewPager);
+        mViewPager.setCurrentItem(1);
+        FloatingActionButton fab = findViewById(R.id.fab_settings);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                open_settings();
+            }
+        });
         noPermissionsAlertDialog= createAlertDialog();
         ask_permissions();
 
@@ -50,79 +75,14 @@ public class MainActivityMenu extends AppCompatActivity implements View.OnClickL
         for (int i = 0; i < Medicine.size(); i++) {
             CurrentMed=Medicine.get(i);
             notifications.setReminder(this,AlarmReceiverMedicine.class, CurrentMed.getIntakeTime(), 0);
-            }
-
-        setListeners();
-
-
-
-    }
-
-    private void setListeners() {
-        findViewById(R.id.btnProfile).setOnClickListener(this);
-        findViewById(R.id.btnSettings).setOnClickListener(this);
-        findViewById(R.id.btnExercises).setOnClickListener(this);
-        findViewById(R.id.btnResults).setOnClickListener(this);
-        findViewById(R.id.txtProfile).setOnClickListener(this);
-        findViewById(R.id.txtSettings).setOnClickListener(this);
-        findViewById(R.id.txtExercises).setOnClickListener(this);
-        findViewById(R.id.txtResults).setOnClickListener(this);
-    }
-
-    @Override
-    public void onClick(View view) {
-        switch (view.getId()){
-            case R.id.btnProfile:
-                open_profile();
-                break;
-            case R.id.txtProfile:
-                open_profile();
-                break;
-            case R.id.btnSettings:
-                open_settings();
-                break;
-            case R.id.txtSettings:
-                open_settings();
-                break;
-            case R.id.btnExercises:
-                open_exercises();
-                break;
-            case R.id.txtExercises:
-                open_exercises();
-                break;
-            case R.id.btnResults:
-                open_results();
-                break;
-            case R.id.txtResults:
-                open_results();
-                break;
-
         }
     }
 
     public void open_settings() {
+        //TODO: Implement as Dialog
         Intent intent_settings = new Intent(MainActivityMenu.this, SettingsActivity.class);
         startActivity(intent_settings);
     }
-
-    public void open_exercises() {
-        if(!hasPermissions(this, PERMISSIONS)){
-            noPermissionsAlertDialog.show();
-            return;
-        }
-        Intent intent_exercises = new Intent(MainActivityMenu.this, ExercisesActivity.class);
-        startActivity(intent_exercises);
-    }
-
-    public void open_profile(){
-        Intent intent_profile =new Intent(MainActivityMenu.this, ProfileActivity.class);
-        startActivity(intent_profile);
-    }
-    public void open_results(){
-        Intent intent_results =new Intent(MainActivityMenu.this, ResultsActivity.class);
-        startActivity(intent_results);
-    }
-
 
     public static boolean hasPermissions(Context context, String... permissions) {
         if (context != null && permissions != null) {
@@ -156,5 +116,80 @@ public class MainActivityMenu extends AppCompatActivity implements View.OnClickL
                     }
                 });
         return alertDialogBuilder.create();
+    }
+
+    public class SectionsPagerAdapter extends FragmentPagerAdapter {
+
+        public SectionsPagerAdapter(FragmentManager fm) {
+            super(fm);
+        }
+
+        @Override
+        public Fragment getItem(int position) {
+            // getItem is called to instantiate the fragment for the given page.
+            if (position == 0){
+                Results results = new Results();
+                return results;
+            }
+            if (position == 1){
+                Profile_fragment profile_fragment = new Profile_fragment();
+                return profile_fragment;
+            }
+            if (position == 2){
+                Exercise_list exercise_list = new Exercise_list();
+                return exercise_list;
+            }
+            // Return a PlaceholderFragment (defined as a static inner class below).
+            return PlaceholderFragment.newInstance(position + 1);
+        }
+
+        @Override
+        public int getCount() {
+            // Show 3 total pages.
+            return 3;
+        }
+
+        @Override
+        public CharSequence getPageTitle(int position) {
+            switch (position) {
+                case 0:
+                    return getString(R.string.btnResultsText);
+                case 1:
+                    return getString(R.string.btnProfileText);
+                case 2:
+                    return getString(R.string.btnExercisesText);
+            }
+            return null;
+        }
+    }
+
+    public static class PlaceholderFragment extends Fragment {
+        /**
+         * The fragment argument representing the section number for this
+         * fragment.
+         */
+        private static final String ARG_SECTION_NUMBER = "section_number";
+
+        public PlaceholderFragment() {
+        }
+
+        /**
+         * Returns a new instance of this fragment for the given section
+         * number.
+         */
+        public static PlaceholderFragment newInstance(int sectionNumber) {
+            PlaceholderFragment fragment = new PlaceholderFragment();
+            Bundle args = new Bundle();
+            args.putInt(ARG_SECTION_NUMBER, sectionNumber);
+            fragment.setArguments(args);
+            return fragment;
+        }
+
+        @Override
+        public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                                 Bundle savedInstanceState) {
+            View rootView = inflater.inflate(R.layout.fragment_profile_fragment, container, false);
+            return rootView;
+        }
     }
 }

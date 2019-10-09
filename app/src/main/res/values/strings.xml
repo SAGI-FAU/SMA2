@@ -161,6 +161,14 @@
     <string name="intonation">Intonation</string>
     <string name="intelligibility">Intelligibility</string>
     <string name="patient">Patient</string>
+
+    <string name="control">Control</string>
+    <string name="progress">Daily Progress</string>
+    <string name="quick_start">Quick Start</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
     <string name="control">Reference</string>
     <string name="permission_request">This sample needs permission for camera and audio recording.</string>
     <string name="camera_error">This device doesn\'t support Camera2 API.</string>
@@ -205,5 +213,4 @@
         \n- %SLIDING: Accuracy positioning the sliding bar.
         \n- SPEED: Ladybugs per second.
         \n- PRECISION: Proximity of insect hits.</string>
-
 </resources>

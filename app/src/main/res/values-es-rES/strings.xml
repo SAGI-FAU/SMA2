@@ -145,6 +145,7 @@
     <string name="speech_exercises">Ejercicios de voz</string>
     <string name="mov_exercises">Ejercicios de movimiento</string>
     <string name="demo_exercises">Ejercicios para demo</string>
+    <string name="progress">Progreso diario</string>
     <string name="interpre">Interpretación</string>
     <string name="SpeechHelp">- PRONUNCIACIÓN: Claridad en las palabras pronunciadas.
         \n- ESTABILIDAD: Tono de voz en vocales.
@@ -175,5 +176,4 @@
         \n- PRECISIÓN: Proximidad al insecto.
         \n- % DESPLAZAMIENTO: Acierto en la barra de desplazamiento.</string>
     <string name="fine_motor">Destreza</string>
-
 </resources>
