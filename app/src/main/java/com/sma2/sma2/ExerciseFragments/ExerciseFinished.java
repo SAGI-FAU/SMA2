@@ -9,10 +9,14 @@ import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.sma2.sma2.DataAccess.ExerciseSessionManager;
 import com.sma2.sma2.DataAccess.ScheduledExercise;
 import com.sma2.sma2.R;
+
+import java.util.List;
 
 
 public class ExerciseFinished extends Fragment {
@@ -46,6 +50,21 @@ public class ExerciseFinished extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_exercise_finished, container, false);
+        ProgressBar progress=view.findViewById(R.id.daily_progress_bar1);
+        TextView perc_txt=view.findViewById(R.id.Perc);
+
+        ExerciseSessionManager sessionManager= new ExerciseSessionManager();
+        sessionManager.updateExerciseListFromDB(getActivity().getApplicationContext());
+        List<ScheduledExercise> list_exercises= sessionManager.getScheduledExerciseList();
+
+        int Perc=sessionManager.getPercCompletedExercises(list_exercises);
+
+        progress.setProgress(Perc);
+
+        String Pers=String.valueOf(Perc)+"%";
+        perc_txt.setText(Pers);
+
+
         Button redoButton = view.findViewById(R.id.btnRedoExSV);
         redoButton.setOnClickListener(new View.OnClickListener() {
             @Override

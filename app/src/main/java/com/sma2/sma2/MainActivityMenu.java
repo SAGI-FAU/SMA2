@@ -163,6 +163,12 @@ public class MainActivityMenu extends AppCompatActivity{
         }
     }
 
+    @Override
+    public void onRestart() {
+        super.onRestart();
+
+    }
+
     public static class PlaceholderFragment extends Fragment {
         /**
          * The fragment argument representing the section number for this

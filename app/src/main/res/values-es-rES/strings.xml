@@ -176,4 +176,6 @@
         \n- PRECISIÓN: Proximidad al insecto.
         \n- % DESPLAZAMIENTO: Acierto en la barra de desplazamiento.</string>
     <string name="fine_motor">Destreza</string>
+    <string name="quick_start">Haz ejercicios</string>
+    <string name="posture">Postura</string>
 </resources>

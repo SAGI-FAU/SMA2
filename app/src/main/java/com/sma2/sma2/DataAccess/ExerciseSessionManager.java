@@ -142,6 +142,16 @@ public class ExerciseSessionManager {
         throw new IndexOutOfBoundsException("No exercises left");
     }
 
+    public boolean isSessionFinished(){
+        for (ScheduledExercise ex : getScheduledExerciseList()) {
+            if (ex.getCompletionDate() == -1) {
+                return false;
+            }
+        }
+        return true;
+
+    }
+
     public static boolean getSessionStarted(List<ScheduledExercise> scheduledExerciseList) {
         for (ScheduledExercise ex : scheduledExerciseList) {
             if (ex.getCompleted()) {
@@ -158,6 +168,23 @@ public class ExerciseSessionManager {
             }
         }
         return true;
+    }
+
+
+    public int getPercCompletedExercises(List<ScheduledExercise> scheduledExerciseList){
+        int N=scheduledExerciseList.size();
+
+        int completed=0;
+
+        for (ScheduledExercise ex : scheduledExerciseList) {
+            if (ex.getCompleted()) {
+                completed+=1;
+            }
+        }
+
+        return completed*100/N;
+
+
     }
 
 

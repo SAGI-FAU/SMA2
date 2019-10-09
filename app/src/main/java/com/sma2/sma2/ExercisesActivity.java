@@ -40,6 +40,9 @@ public class ExercisesActivity extends AppCompatActivity implements ExerciseInst
         setContentView(R.layout.activity_exercise);
 
         showSessionOverview();
+
+        //nextExercise = sessionManager.getNextExercise();
+        //open_exercise();
     }
 
     @Override
@@ -114,6 +117,15 @@ public class ExercisesActivity extends AppCompatActivity implements ExerciseInst
     @Override
     public void onDoneButtonClicked() {
         nextExercise.save(this);
-        showSessionOverview();
+
+        if (sessionManager.isSessionFinished()){
+            showSessionOverview();
+        }
+        else{
+            nextExercise = sessionManager.getNextExercise();
+            open_exercise();
+            //showSessionOverview();
+        }
+
     }
 }

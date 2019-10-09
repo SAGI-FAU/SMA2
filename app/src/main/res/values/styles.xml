@@ -24,5 +24,13 @@
         <item name="android:minWidth">200dp</item>
     </style>
 
+
+    <style name="DailyProgress" parent="@style/Widget.AppCompat.RatingBar">
+        <item name="android:progressBackgroundTint">@color/colorAccent</item>
+        <item name="android:progressTint">@color/colorPrimaryDark</item>
+        <item name="android:minWidth">245sp</item>
+    </style>
+
+
 </resources>
 

@@ -152,6 +152,8 @@
     <string name="mov_exercises">Movement exercises</string>
     <string name="demo_exercises">Demo exercises</string>
     <string name="progress">Daily Progress</string>
-    <string name="quick_start">Quick Exercise</string>
+    <string name="quick_start">Quick Start</string>
+    <string name="pronunciation">Pronunciation</string>
+    <string name="posture">Posture</string>
 
 </resources>
