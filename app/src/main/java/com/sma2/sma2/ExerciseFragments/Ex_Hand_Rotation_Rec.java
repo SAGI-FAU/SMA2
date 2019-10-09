@@ -10,8 +10,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.sma2.sma2.FeatureExtraction.Movement.CSVFileReader;
+import com.sma2.sma2.FeatureExtraction.Movement.MovementProcessing;
 import com.sma2.sma2.R;
+import com.sma2.sma2.SignalRecording.CSVFileWriter;
 import com.sma2.sma2.SignalRecording.MovementRecorder;
 
 
@@ -25,7 +29,8 @@ public class Ex_Hand_Rotation_Rec extends ExerciseFragment implements ButtonFrag
     private CountDownTimer timer;
     private TextView countdownTextView;
     private boolean countdownIsRunning = false;
-
+    private CSVFileReader FileReader;
+    private MovementProcessing MovementProcessor = new MovementProcessing();
     public Ex_Hand_Rotation_Rec() {
 
     }
@@ -33,6 +38,7 @@ public class Ex_Hand_Rotation_Rec extends ExerciseFragment implements ButtonFrag
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        FileReader = new CSVFileReader(getActivity().getApplicationContext());
         try {
             recorder = new MovementRecorder(this.getContext(), SAMPLING_FREQUENCY, mExercise.getName());
             recorder.registerListeners();
@@ -84,11 +90,34 @@ public class Ex_Hand_Rotation_Rec extends ExerciseFragment implements ButtonFrag
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
+                EvaluateFeatures();
                 mListener.onExerciseFinished(recorder.getFileName());
             }
         }
     }
 
+    private void EvaluateFeatures() {
+        String Route= CSVFileWriter.getpath();
+        String final_route = Route +"/" + recorder.getFileName();
+
+        if(mExercise.getId() == 25){
+            float UppRegularity = MovementProcessor.UppRegularity(FileReader,final_route);
+            try {
+                MovementProcessor.export_movement_feature(final_route,UppRegularity,"Regularity_Rotation_Right");
+            }catch (Exception e) {
+                Toast.makeText(getActivity(),"Regularity of rotation right hand failed",Toast.LENGTH_SHORT).show();
+            }
+        }
+
+        else if(mExercise.getId() == 26){
+            float UppRegularity = MovementProcessor.UppRegularity(FileReader,final_route);
+            try {
+                MovementProcessor.export_movement_feature(final_route,UppRegularity,"Regularity_Rotation_Left");
+            }catch (Exception e) {
+                Toast.makeText(getActivity(),"Regularity of rotation left hand failed",Toast.LENGTH_SHORT).show();
+            }
+        }
+    }
     private void startInitialCountdownTimer() {
         countdownIsRunning = true;
         countdownStart = System.currentTimeMillis();

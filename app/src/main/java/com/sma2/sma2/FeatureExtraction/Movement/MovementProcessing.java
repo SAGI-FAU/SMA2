@@ -12,12 +12,18 @@ import org.apache.commons.math3.transform.DftNormalization;
 import org.apache.commons.math3.transform.FastFourierTransformer;
 import org.apache.commons.math3.transform.TransformType;
 
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 import static java.lang.Math.abs;
 import static java.util.Arrays.copyOfRange;
+import android.os.Environment;
+import com.opencsv.CSVWriter;
+
 
 public class MovementProcessing {
 
@@ -491,6 +497,171 @@ public class MovementProcessing {
 
     public CSVFileReader.Signal getAccNorm(CSVFileReader.Signal accX, CSVFileReader.Signal accY, CSVFileReader.Signal accZ) {
         return new CSVFileReader.Signal(accX.TimeStamp,getAccR(accX.Signal,accY.Signal,accZ.Signal));
+    }
+
+
+    // New movement functions for superior members
+
+    public float UppTremor(CSVFileReader FileReader,String path_movement){
+        double vtremor=0;
+        double Tremor=0;
+
+        if(path_movement==null){
+            vtremor=0;
+        }
+        else {
+            CSVFileReader.Signal TremorSignalaX2 = FileReader.ReadMovementSignal(path_movement, "aX [m/s^2]");
+            CSVFileReader.Signal TremorSignalaY2 = FileReader.ReadMovementSignal(path_movement, "aY [m/s^2]");
+            CSVFileReader.Signal TremorSignalaZ2 = FileReader.ReadMovementSignal(path_movement, "aZ [m/s^2]");
+            Tremor = ComputeTremor(TremorSignalaX2.Signal, TremorSignalaY2.Signal, TremorSignalaZ2.Signal);
+            vtremor = 100-Tremor;
+
+        }
+
+        return (float) vtremor;
+    }
+
+    public float UppRegularity(CSVFileReader FileReader,String path_movement){
+        double stabVel=0;
+        if(path_movement==null){
+            stabVel=0;
+        }
+        else {
+            CSVFileReader.Signal TremorSignalaX2 = FileReader.ReadMovementSignal(path_movement, "aX [m/s^2]");
+            CSVFileReader.Signal TremorSignalaY2 = FileReader.ReadMovementSignal(path_movement, "aY [m/s^2]");
+            CSVFileReader.Signal TremorSignalaZ2 = FileReader.ReadMovementSignal(path_movement, "aZ [m/s^2]");
+            stabVel = ComputeRegularity(TremorSignalaX2.Signal, TremorSignalaY2.Signal, TremorSignalaZ2.Signal);
+        }
+        return (float) stabVel;
+    }
+
+
+    public Double ObtainValue(Double Signal){
+        Double value= 0.0;
+
+        value = 200/(1+Math.exp(5*Signal));
+        return value;
+    }
+
+
+    public double ComputeRegularity(List<Double> AccX, List<Double> AccY, List<Double> AccZ){
+        sigproc sigproccess = new sigproc();
+
+        List<Double> AccXn, AccYn, AccZn, AccR;
+
+        AccXn=RemoveGravity(AccX);
+        AccYn=RemoveGravity(AccY);
+        AccZn=RemoveGravity(AccZ);
+
+        AccR=getAccR(AccXn, AccYn, AccZn);
+
+        float[] AccR_aux = arrays.listtofloat(AccR);
+        int Fs=100;
+        //Divide the signal into frames
+        List <float[]> AccR_framed = sigproccess.sigframe(AccR_aux,Fs,(float) 0.4,(float) 0.02);
+        List <Double> PowerArr = new ArrayList<>();
+        for(int i=0;i<AccR_framed.size();i++)
+        {
+            Double Power = ComputePower2(AccR_framed.get(i));
+            PowerArr.add(Power);
+        }
+
+        float[] Power_Array = arrays.listtofloat(PowerArr);
+        double Mean_Power = sigproccess.meanval(Power_Array);
+
+        int start = 400;
+        List<Float> New_Power = new ArrayList<>();
+
+        //Remove noise data: only movement data
+        for(int i=0;i<Power_Array.length;i++)
+        {
+            if ((i>=start) && ((Power_Array[i])>=Mean_Power)){
+                New_Power.add(Power_Array[i]);
+            }
+        }
+
+        //Convert the List to float Array
+        float[] New_PowerArray = new float[New_Power.size()];
+        for (int i = 0; i < New_Power.size(); i++) {
+            New_PowerArray[i] = New_Power.get(i);
+        }
+
+        int w=3;//number of neighbor points
+        double stdnew = sigproccess.calculateSD(New_PowerArray);
+
+        List<Float> Time_Vector = new ArrayList<>();
+        Time_Vector.add(((float) 0/ (float) Fs));
+
+        for(int i=0;i<New_PowerArray.length;i++)
+        {
+            if((i>=w)&&(i<=New_PowerArray.length - w - 1)){
+                if((New_PowerArray[i]<New_PowerArray[i-3])&&
+                        (New_PowerArray[i]<New_PowerArray[i-2])&&
+                        (New_PowerArray[i]<New_PowerArray[i-1])&&
+                        (New_PowerArray[i]<New_PowerArray[i+1])&&
+                        (New_PowerArray[i]<New_PowerArray[i+2])&&
+                        (New_PowerArray[i]<New_PowerArray[i+3])&&
+                        (New_PowerArray[i]<(Mean_Power+stdnew))){
+                    Time_Vector.add(((float) i/ (float) Fs));
+                }
+            }
+
+        }
+        Time_Vector.add(((float)(New_PowerArray.length - 1)/(float)Fs));
+
+        //Convert to float array
+        float[] Time_Vec_Array = new float[Time_Vector.size()];
+        for (int i = 0; i < Time_Vector.size(); i++) {
+            Time_Vec_Array[i] = Time_Vector.get(i);
+        }
+
+        //Compute the difference between 2 consecutive points
+        float[] Final_Time_Array = new float[Time_Vec_Array.length - 1];
+        for(int i=1;i<Time_Vec_Array.length;i++) {
+            Final_Time_Array[i-1] = Time_Vec_Array[i] - Time_Vec_Array[i-1];
+        }
+
+        double stdtime = sigproccess.calculateSD(Final_Time_Array);
+
+        double StandarDeviation = ObtainValue(stdtime);
+        return (StandarDeviation);
+    }
+
+    public void export_movement_feature(String name_file, float feature, String feat_name) throws IOException {
+        String directory = Environment.getExternalStorageDirectory() + "/Apkinson/FEATURES/";
+        String fileName = directory + feat_name+".csv";
+
+
+        File direct = new File(directory);
+        if (!direct.exists()) {
+            direct.mkdirs();
+        }
+        File file =new File(fileName);
+
+        CSVWriter writer;
+        FileWriter mFileWriter;
+        try {
+            if(file.exists() && !file.isDirectory()){
+                mFileWriter = new FileWriter(fileName , true) ;
+                writer = new CSVWriter(mFileWriter);
+            }
+            else {
+                writer = new CSVWriter(new FileWriter(fileName));
+                String[] header={"File", feat_name};
+                writer.writeNext(header);
+            }
+            String name=name_file.substring(name_file.lastIndexOf("/")+1);
+            String[] row={"",""};
+            row[0]=name;
+            row[1]=Float.toString(feature);
+
+            writer.writeNext(row);
+            writer.close();
+        } catch(IOException ie) {
+            ie.printStackTrace();
+        }
+
+
     }
 
 
