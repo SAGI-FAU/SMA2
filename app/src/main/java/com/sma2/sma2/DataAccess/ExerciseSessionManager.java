@@ -41,7 +41,12 @@ public class ExerciseSessionManager {
     private List<Exercise> _dummyExerciseList = new ArrayList<>();
     private List<Exercise> _ExerciseList = new ArrayList<>();
     private List<ScheduledExercise> _testList = new ArrayList<>();
+
+
+
+
     SharedPreferences sharedPref;
+
 
     public void createExerciseSession(Context context) {
         Calendar c = Calendar.getInstance();
@@ -631,6 +636,45 @@ public class ExerciseSessionManager {
                         Uri.parse(ExVideo),
                         Uri.parse("Instruction/Path"),
                         ExSliding.class));
+            }
+            else if (ExFrag.equals("rightwink"))
+            {
+                exList.add(new Exercise(
+                        ExID,
+                        ExName,
+                        ExType,
+                        ExDescr,
+                        ExInstr,
+                        Uri.parse(ExVideo),
+                        Uri.parse("Instruction/Path"),
+                        Ex_RightWink.class));
+                //FerRecorder_RightWink.class));
+            }
+            else if (ExFrag.equals("leftwink"))
+            {
+                exList.add(new Exercise(
+                        ExID,
+                        ExName,
+                        ExType,
+                        ExDescr,
+                        ExInstr,
+                        Uri.parse(ExVideo),
+                        Uri.parse("Instruction/Path"),
+                        Ex_LeftWink.class));
+                //FerRecorder_LeftWink.class));
+            }
+            else if (ExFrag.equals("happy"))
+            {
+                exList.add(new Exercise(
+                        ExID,
+                        ExName,
+                        ExType,
+                        ExDescr,
+                        ExInstr,
+                        Uri.parse(ExVideo),
+                        Uri.parse("Instruction/Path"),
+                        Ex_Happy.class));
+                //FerRecorder_LeftWink.class));
             }
         }
         return exList;

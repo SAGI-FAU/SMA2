@@ -23,8 +23,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.sma2.sma2.DataAccess.Exercise;
 import com.sma2.sma2.DataAccess.MedicineDA;
 import com.sma2.sma2.DataAccess.MedicineDataService;
+import com.sma2.sma2.ExerciseFragments.ExerciseFragment;
+import com.sma2.sma2.ExerciseFragments.ExerciseInstructions;
+import com.sma2.sma2.ExerciseList.ArrayListAdapter;
 
 import java.util.List;
 
@@ -168,6 +172,8 @@ public class MainActivityMenu extends AppCompatActivity{
         super.onRestart();
 
     }
+
+
 
     public static class PlaceholderFragment extends Fragment {
         /**
