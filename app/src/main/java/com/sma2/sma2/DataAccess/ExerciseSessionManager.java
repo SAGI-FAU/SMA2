@@ -491,6 +491,7 @@ public class ExerciseSessionManager {
                 ExVideo = "None";
             }
 
+
             //The following if-else statements are used to select the fragment of each task
             //ej: ExReadText.class only works for sentences.
             if (ExFrag.equals("readtext"))

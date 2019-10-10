@@ -165,8 +165,8 @@
     <string name="progress">Daily Progress</string>
     <string name="quick_start">Quick Start</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="details">Detailed Results</string>
+    <string name="history">See History</string>
 
     <string name="control">Reference</string>
     <string name="permission_request">This sample needs permission for camera and audio recording.</string>
