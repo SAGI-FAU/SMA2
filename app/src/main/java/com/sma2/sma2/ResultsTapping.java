@@ -1,4 +1,4 @@
-package com.sma2.sma2.FeatureExtraction.Tapping;
+package com.sma2.sma2;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -15,6 +15,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -22,9 +23,7 @@ import android.widget.Toast;
 import com.jjoe64.graphview.GraphView;
 import com.sma2.sma2.FeatureExtraction.GraphManager;
 import com.sma2.sma2.FeatureExtraction.Speech.features.RadarFeatures;
-import com.sma2.sma2.MainActivityMenu;
-import com.sma2.sma2.R;
-import com.sma2.sma2.RadarFigureManager;
+import com.sma2.sma2.FeatureExtraction.Tapping.FeatureTapping;
 
 import com.github.mikephil.charting.charts.RadarChart;
 
@@ -32,8 +31,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 
-public class Tapping_feature_Activity extends AppCompatActivity  implements View.OnClickListener {
-    Button bBack;
+public class ResultsTapping extends AppCompatActivity  implements View.OnClickListener {
+    Button bHistory;
     private ImageButton bHelp;
     private ProgressBar progressBarTapping;
     private ImageView iEmojin;
@@ -50,8 +49,9 @@ public class Tapping_feature_Activity extends AppCompatActivity  implements View
         // general objects
         FeatureTapping feature= new FeatureTapping(this);
         setContentView(R.layout.activity_tapping_feature_);
-        bBack=findViewById(R.id.button_back4);
         bHelp=findViewById(R.id.button_help);
+        bHelp.bringToFront();
+        bHistory=findViewById(R.id.button_history);
         SetListeners();
 
         progressBarTapping=findViewById(R.id.bar_tapping);
@@ -62,7 +62,7 @@ public class Tapping_feature_Activity extends AppCompatActivity  implements View
 
         RadarFigureManager RadarManager = new RadarFigureManager(this);
         // Radar chart
-        RadarChart radarchart= findViewById(R.id.chartap);
+        RadarChart radarchart= findViewById(R.id.chart_tapping);
 
         float[] data1 =feature.totalfeatures(PATH);
         float[] data2={100f,100f,100f,100f};
@@ -81,6 +81,7 @@ public class Tapping_feature_Activity extends AppCompatActivity  implements View
 
         SharedPreferences sharedPref =PreferenceManager.getDefaultSharedPreferences(this);
         boolean new_area_tapping=sharedPref.getBoolean("New Area Tapping", false);
+
 
         if (new_area_tapping){
             SharedPreferences.Editor editor = sharedPref.edit();
@@ -103,7 +104,7 @@ public class Tapping_feature_Activity extends AppCompatActivity  implements View
             area_perf.add(0f);
         }
 
-        ConstraintLayout.LayoutParams params_line= (ConstraintLayout.LayoutParams)  iEmojin.getLayoutParams();
+        LinearLayout.LayoutParams params_line= (LinearLayout.LayoutParams)  iEmojin.getLayoutParams();
         int xRandomBar= (int)(0.01*area_progress*screenWidth-45);
 
         params_line.setMarginStart(xRandomBar); // The indicator bar position
@@ -112,8 +113,7 @@ public class Tapping_feature_Activity extends AppCompatActivity  implements View
         iEmojin.setLayoutParams(params_line);
 
         progressBarTapping.setProgress(area_progress);
-        String perform = getResources().getString(R.string.perform);
-        String msgp=perform+String.valueOf(area_progress)+"%";
+        String msgp=String.valueOf(area_progress)+"%";
         tmessage_tapping_perc.setText(msgp);
         if (area_progress >=66) {
             iEmojin.setImageResource(R.drawable.happy_emojin);
@@ -127,23 +127,14 @@ public class Tapping_feature_Activity extends AppCompatActivity  implements View
             iEmojin.setImageResource(R.drawable.sad_emoji);
             tmessage_tapping.setText(R.string.Negative_message);
         }
-        GraphManager graphManager=new GraphManager(this);
-        String Title=getResources().getString(R.string.tapping_performance);
-        String Ylabel=getResources().getString(R.string.percentage);
-        String Xlabel=getResources().getString(R.string.session);
-        GraphView graph =findViewById(R.id.plotlineTapping);
 
-        ArrayList<Integer> xl= new ArrayList<>();
-        for (int i=0;i<area_perf.size();i++){
-            xl.add(i+1);
-        }
-        graphManager.LineGraph(graph, xl, area_perf, 105, xl.size(), Title, Xlabel, Ylabel);
+
 
 
     }
 
     private void SetListeners(){
-        bBack.setOnClickListener(this);
+        bHistory.setOnClickListener(this);
         bHelp.setOnClickListener(this);
     }
 
@@ -162,8 +153,8 @@ public class Tapping_feature_Activity extends AppCompatActivity  implements View
     public void onClick(View view) {
 
         switch (view.getId()){
-            case R.id.button_back4:
-                onButtonBack();
+            case R.id.button_history:
+                //TODO: button history action
                 break;
             case R.id.button_help:
                 onButtonHelp();
@@ -171,12 +162,7 @@ public class Tapping_feature_Activity extends AppCompatActivity  implements View
         }
     }
 
-
-    private void onButtonBack(){
-        Intent i =new Intent(Tapping_feature_Activity.this, MainActivityMenu.class);
-        startActivity(i);
-
-    }
+    
 
 
     private void onButtonHelp(){

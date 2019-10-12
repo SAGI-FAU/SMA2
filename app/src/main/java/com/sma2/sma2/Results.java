@@ -1,12 +1,12 @@
 package com.sma2.sma2;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Point;
 import android.net.Uri;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
-import android.support.constraint.ConstraintLayout;
 import android.support.v4.app.Fragment;
 import android.view.Display;
 import android.view.LayoutInflater;
@@ -21,9 +21,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.github.mikephil.charting.charts.RadarChart;
+import com.sma2.sma2.FeatureExtraction.Movement.WalkingFeatureActivity;
 import com.sma2.sma2.FeatureExtraction.Speech.features.RadarFeatures;
-
-import java.io.IOException;
 
 
 /**
@@ -34,16 +33,17 @@ import java.io.IOException;
  * Use the {@link Results#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class Results extends Fragment {
+public class Results extends Fragment implements View.OnClickListener{
 
 
     private Button bHistory;
+    private ImageButton bSpeech, bMovement, bTapping;
     private RadarFigureManager RadarManager;
     private ProgressBar progressBar;
     private ImageView iEmojin;
     private TextView tmessage, tmessage_perc;
     int screenWidth, screenHeight;
-
+    private Results.OnFragmentInteractionListener mListener;
 
     public Results() {
         // Required empty public constructor
@@ -73,15 +73,19 @@ public class Results extends Fragment {
         iEmojin=view.findViewById(R.id.iEmojin_total);
         tmessage=view.findViewById(R.id.tmessage_all);
         tmessage_perc=view.findViewById(R.id.tmessage_all_perc);
-        getDisplayDimensions();
+        bSpeech=view.findViewById(R.id.bSpeech);
+        bMovement=view.findViewById(R.id.bWalking);
+        bTapping=view.findViewById(R.id.bTapping_one);
 
+        getDisplayDimensions();
+        setListeners();
         RadarManager = new RadarFigureManager(getActivity().getApplicationContext());
 
         RadarChart radarchart= view.findViewById(R.id.chart_total);
 
         float area_speech= RadarFeatures.get_last_area("speech");
         float area_tap= RadarFeatures.get_last_area("tapping");
-        float area_mov=0f;
+        float area_mov=0f; //TODO: compute movement area and display it here.
 
         float[] data1={area_speech,area_tap,area_mov};
         float[] data2={100f,100f,100f};
@@ -96,8 +100,6 @@ public class Results extends Fragment {
         double area=RadarManager.get_area_chart(data1);
         double max_area=RadarManager.get_area_chart(data2);
         int area_progress=(int)(area*100/max_area);
-
-
 
         SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(getActivity().getApplicationContext());
         boolean new_area_total=sharedPref.getBoolean("New Area Total", false);
@@ -123,8 +125,6 @@ public class Results extends Fragment {
         params_line.setMarginStart(xRandomBar);
         iEmojin.setLayoutParams(params_line);
 
-
-        String perform = getResources().getString(R.string.perform);
         progressBar.setProgress(area_progress);
         String msgp=String.valueOf(area_progress)+"%";
         tmessage_perc.setText(msgp);
@@ -147,7 +147,50 @@ public class Results extends Fragment {
 
 
 
-    private void getDisplayDimensions() {
+    private void setListeners() {
+        bSpeech.setOnClickListener(this);
+        bMovement.setOnClickListener(this);
+        bTapping.setOnClickListener(this);
+        bHistory.setOnClickListener(this);
+    }
+
+
+    @Override
+    public void onClick(View view) {
+        switch (view.getId()){
+            case R.id.bSpeech:
+                open_results_speech();
+                break;
+            case R.id.bWalking:
+                open_results_movement();
+                break;
+            case R.id.bTapping_one:
+                open_results_tapping();
+                break;
+            case R.id.button_history:
+                break;
+
+        }
+    }
+
+    void open_results_speech(){
+        Intent i =new Intent(getActivity().getApplicationContext(), ResultsSpeech.class);
+        startActivity(i);
+    }
+
+
+    void open_results_tapping(){
+        Intent i =new Intent(getActivity().getApplicationContext(), ResultsTapping.class);
+        startActivity(i);
+    }
+
+    void open_results_movement(){
+        Intent i =new Intent(getActivity().getApplicationContext(), WalkingFeatureActivity.class);
+        startActivity(i);
+    }
+
+
+    public void getDisplayDimensions() {
         Display display = getActivity().getWindowManager().getDefaultDisplay();
 
         Point size = new Point();
@@ -155,6 +198,9 @@ public class Results extends Fragment {
         screenWidth = size.x;
         screenHeight = size.y;
     }
+
+
+
 
 
     @Override

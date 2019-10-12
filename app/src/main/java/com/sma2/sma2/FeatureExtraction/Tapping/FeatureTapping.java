@@ -47,13 +47,7 @@ public class FeatureTapping {
         return Count;
     }
 
-    public static double average_function(ArrayList<Double> v) {
-        double prom = 0.0;
-        for (int i = 0; i < v.size(); i++)
-            prom += v.get(i);
 
-        return prom / (double) v.size();
-    }
     public String getDatos(int IDEx, String PATH){
         SignalDataService signalDataService =new SignalDataService(CONTEXT);
         String path_bar=null;

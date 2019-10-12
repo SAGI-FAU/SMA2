@@ -1,6 +1,10 @@
 package com.sma2.sma2.FeatureExtraction.Movement;
 
 import android.util.Log;
+
+import com.sma2.sma2.DataAccess.SignalDA;
+import com.sma2.sma2.DataAccess.SignalDataService;
+import com.sma2.sma2.FeatureExtraction.GetExercises;
 import com.sma2.sma2.FeatureExtraction.Speech.tools.array_manipulation;
 import com.sma2.sma2.FeatureExtraction.Speech.tools.f0detector;
 import com.sma2.sma2.FeatureExtraction.Speech.tools.sigproc;
@@ -15,6 +19,7 @@ import org.apache.commons.math3.transform.TransformType;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -662,6 +667,56 @@ public class MovementProcessing {
         }
 
 
+    }
+
+
+
+
+
+    //Temporal Functions
+    private float FreezeIndex(CSVFileReader FileReader,String path_movement) {
+
+
+        if (path_movement == null) {
+            return 0f;
+        }
+
+
+        else {
+
+            CSVFileReader.Signal GaitSignalaX = FileReader.ReadMovementSignal(path_movement, "aX [m/s^2]");
+            CSVFileReader.Signal GaitSignalaY = FileReader.ReadMovementSignal(path_movement, "aY [m/s^2]");
+            CSVFileReader.Signal GaitSignalaZ = FileReader.ReadMovementSignal(path_movement, "aZ [m/s^2]");
+
+            List<Double> AccXn, AccYn, AccZn, AccR;
+            AccXn = RemoveGravity(GaitSignalaX.Signal);
+            AccYn = RemoveGravity(GaitSignalaY.Signal);
+            AccZn = RemoveGravity(GaitSignalaZ.Signal);
+            AccR = getAccR(AccXn, AccYn, AccZn);
+            List<Double> oldTime = GaitSignalaX.TimeStamp;
+            List<Double> newAccR = removeInitGait(AccR, 100, 0.2, 0.02);
+            List<Double> newOldTime = new ArrayList<>();
+
+            for (int i = oldTime.size() - newAccR.size(); i < oldTime.size(); i++) {
+                newOldTime.add(oldTime.get(i));
+            }
+
+            float fIndex = freezeIndex(newAccR, newOldTime, (int) 100);
+
+
+            //Computing the percentage based on controls
+            // Reference (100%) = 0.07 or less
+            //It must be replace to real values, it was computed based one woman and one men
+
+            float perc_fidex=(float) (200/(1+Math.exp(10*(fIndex-0.07))));
+
+
+
+
+            return  perc_fidex;
+
+
+        }
     }
 
 

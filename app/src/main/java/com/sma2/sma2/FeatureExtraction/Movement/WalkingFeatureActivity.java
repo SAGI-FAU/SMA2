@@ -10,7 +10,6 @@ import android.os.Environment;
 import android.preference.PreferenceManager;
 import android.support.constraint.ConstraintLayout;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.Display;
 import android.view.View;
 import android.widget.Button;
@@ -22,25 +21,15 @@ import android.widget.Toast;
 
 import com.jjoe64.graphview.GraphView;
 import com.github.mikephil.charting.charts.RadarChart;
-import com.sma2.sma2.DataAccess.SignalDA;
-import com.sma2.sma2.DataAccess.SignalDataService;
-import com.sma2.sma2.FeatureExtraction.GetExercises;
 import com.sma2.sma2.FeatureExtraction.GraphManager;
-import com.sma2.sma2.FeatureExtraction.Speech.Speech_features_Activity;
 import com.sma2.sma2.FeatureExtraction.Speech.features.RadarFeatures;
 import com.sma2.sma2.MainActivityMenu;
 import com.sma2.sma2.R;
 import com.sma2.sma2.RadarFigureManager;
 
-import java.io.File;
-import java.io.FileReader;
 import java.io.IOException;
-import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
-
-import com.github.mikephil.charting.charts.RadarChart;
-import com.sma2.sma2.ResultsActivity;
 
 public class WalkingFeatureActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -99,7 +88,7 @@ public class WalkingFeatureActivity extends AppCompatActivity implements View.On
 
         //Feature Values
 
-        freezeValue=FreezeIndex();
+        freezeValue=0f;
 
         //Upper tremor and regularity values
 
@@ -321,7 +310,7 @@ public class WalkingFeatureActivity extends AppCompatActivity implements View.On
     }
 
     private void onButtonBack() {
-        Intent i = new Intent(WalkingFeatureActivity.this, ResultsActivity.class);
+        Intent i = new Intent(WalkingFeatureActivity.this, MainActivityMenu.class);
         startActivity(i);
     }
 
@@ -345,88 +334,6 @@ public class WalkingFeatureActivity extends AppCompatActivity implements View.On
     }
 
 
-    //Temporal Functions
-    private float FreezeIndex() {
-
-        SignalDataService signalDataService = new SignalDataService(this);
-        CSVFileReader FileReader = new CSVFileReader(this);
-        MovementProcessing movementProcessing = new MovementProcessing();
-        DecimalFormat df = new DecimalFormat("#.0");
-
-        int IDEx = 31;
-        GetExercises GetEx = new GetExercises(this);
-        String name = GetEx.getNameExercise(IDEx);
-        List<SignalDA> Signals = signalDataService.getSignalsbyname(name);
-        if (Signals.size() > 0) {
-            path_movement = PATH + Signals.get(Signals.size() - 1).getSignalPath();
-
-            if (Signals.size() > 4) {
-                for (int i = Signals.size() - 4; i < Signals.size(); i++) {
-                    path_movement_all.add(PATH + Signals.get(i).getSignalPath());
-                }
-            } else {
-                for (int i = 0; i < Signals.size(); i++) {
-                    path_movement_all.add(PATH + Signals.get(i).getSignalPath());
-                }
-            }
-
-        }
-
-
-
-        if (path_movement == null) {
-            return (float) 0;
-        }
-
-
-        else {
-
-            CSVFileReader.Signal GaitSignalaX = FileReader.ReadMovementSignal(path_movement, "aX [m/s^2]");
-            CSVFileReader.Signal GaitSignalaY = FileReader.ReadMovementSignal(path_movement, "aY [m/s^2]");
-            CSVFileReader.Signal GaitSignalaZ = FileReader.ReadMovementSignal(path_movement, "aZ [m/s^2]");
-
-            List<Double> AccXn, AccYn, AccZn, AccR;
-            AccXn = movementProcessing.RemoveGravity(GaitSignalaX.Signal);
-            AccYn = movementProcessing.RemoveGravity(GaitSignalaY.Signal);
-            AccZn = movementProcessing.RemoveGravity(GaitSignalaZ.Signal);
-            AccR = movementProcessing.getAccR(AccXn, AccYn, AccZn);
-            List<Double> oldTime = GaitSignalaX.TimeStamp;
-
-
-            CSVFileReader.Signal timeSteps = FileReader.ReadMovementSignal(path_movement, "Timestamp [ns]");
-
-
-
-            List<Double> newAccR = new ArrayList<>();
-            List<Double> newOldTime = new ArrayList<>();
-
-
-            newAccR = movementProcessing.removeInitGait(AccR, 100, 0.2, 0.02);
-            for (int i = oldTime.size() - newAccR.size(); i < oldTime.size(); i++) {
-
-                newOldTime.add(oldTime.get(i));
-
-
-            }
-
-
-            float fIndex = movementProcessing.freezeIndex(newAccR, newOldTime, (int) 100);
-
-
-            //Computing the percentage based on controls
-            // Reference (100%) = 0.07 or less
-            //It must be replace to real values, it was computed based one woman and one men
-
-            float perc_fidex=(float) (200/(1+Math.exp(10*(fIndex-0.07))));
-
-
-
-
-            return  perc_fidex;
-
-
-        }
-    }
 
 }
 

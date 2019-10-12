@@ -54,12 +54,14 @@
         <activity android:name=".MainActivityMenu" />
         <activity android:name=".ProfileActivity"
             android:screenOrientation="portrait" />
+        <activity android:name=".ResultsSpeech"
+            android:screenOrientation="portrait" />
+
         <activity android:name=".UpdateMedicine" />
         <activity android:name=".Modif_medicine" />
-        <activity android:name=".ResultsActivity" />
         <activity android:name=".ActivityChangeScheduler"
             android:screenOrientation="portrait"/>
-        <activity android:name=".FeatureExtraction.Tapping.Tapping_feature_Activity"
+        <activity android:name=".ResultsTapping"
             android:screenOrientation="portrait"/>
         <activity android:name=".FeatureExtraction.Movement.PosturalTremor_feature_Activity"
             android:screenOrientation="portrait"/>
@@ -67,8 +69,7 @@
             android:screenOrientation="portrait"/>
         <activity android:name=".FeatureExtraction.Movement.HandMovementFeatureActivity"
             android:screenOrientation="portrait"/>
-        <activity android:name=".FeatureExtraction.Speech.Speech_features_Activity"
-            android:screenOrientation="portrait" />
+
         <activity
             android:name=".FeatureExtraction.Movement.WalkingFeatureActivity"
             android:screenOrientation="portrait" />

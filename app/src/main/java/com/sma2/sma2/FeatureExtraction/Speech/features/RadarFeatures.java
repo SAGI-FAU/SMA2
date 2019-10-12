@@ -233,4 +233,22 @@ public class RadarFeatures {
     }
 
 
+
+    public static float get_last_feature(String feature){
+        float area=0f;
+        try {
+            ArrayList<Float> areas_all=get_feat_perf(feature);
+            area=areas_all.get(areas_all.size()-1);
+        }
+        catch(IOException ie) {
+            ie.printStackTrace();
+            return area;
+        }
+
+        return area;
+
+    }
+
+
+
 }

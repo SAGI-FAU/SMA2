@@ -212,4 +212,6 @@
         \n- %SLIDING: Accuracy positioning the sliding bar.
         \n- SPEED: Ladybugs per second.
         \n- PRECISION: Proximity of insect hits.</string>
+
+    <string name="Ex_help"> This is the number of exercises \n you completed so far. \n CONGRATULATIONS</string>
 </resources>
