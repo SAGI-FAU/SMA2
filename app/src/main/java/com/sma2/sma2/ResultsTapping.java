@@ -162,8 +162,6 @@ public class ResultsTapping extends AppCompatActivity  implements View.OnClickLi
         }
     }
 
-    
-
 
     private void onButtonHelp(){
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
