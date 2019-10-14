@@ -36,6 +36,14 @@ public class FeatureDA {
         this.feature_value = feature_value;
     }
 
+    public FeatureDA(String feature_name) {
+        this.id = null;
+        this.feature_name = feature_name;
+        this.feature_date = null;
+        this.feature_value = 0;
+    }
+
+
     @Generated(hash = 1688047980)
     public FeatureDA() {
     }

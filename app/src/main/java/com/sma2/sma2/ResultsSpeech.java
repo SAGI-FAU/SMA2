@@ -24,7 +24,12 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.github.mikephil.charting.charts.RadarChart;
+import com.sma2.sma2.DataAccess.FeatureDA;
+import com.sma2.sma2.DataAccess.FeatureDataService;
 import com.sma2.sma2.FeatureExtraction.Speech.features.RadarFeatures;
+
+import java.util.Calendar;
+import java.util.Date;
 
 
 public class ResultsSpeech extends AppCompatActivity implements View.OnClickListener{
@@ -38,6 +43,12 @@ public class ResultsSpeech extends AppCompatActivity implements View.OnClickList
     int screenWidth, screenHeight;
     private ImageButton bHelp;
     private double maxArea=23776;
+    FeatureDA jitter;
+    FeatureDA Vrate;
+    FeatureDA intonation;
+    FeatureDA wer;
+    FeatureDA pronunciation;
+    FeatureDataService feat_data_service;
 
 
 
@@ -59,13 +70,27 @@ public class ResultsSpeech extends AppCompatActivity implements View.OnClickList
         RadarManager = new RadarFigureManager(this);
         RadarChart radarchart= findViewById(R.id.chart_speech);
 
-        float jitter= RadarFeatures.get_last_feature("Jitter");
-        float Vrate= RadarFeatures.get_last_feature("VRate");
-        float intonation= RadarFeatures.get_last_feature("Intonation");
-        float wer= 0f; //TODO: wer from the server
-        float pron= 0f; //TODO: pron from the server
+        feat_data_service=new FeatureDataService(this);
 
-        float[] data1={pron, jitter,Vrate,intonation, wer}; // Patient
+
+        jitter= feat_data_service.get_last_feat_value(feat_data_service.jitter_name);
+        float jitterval=jitter.getFeature_value();
+
+        Vrate= feat_data_service.get_last_feat_value(feat_data_service.vrate_name);
+        float Vrateval=Vrate.getFeature_value();
+
+        intonation= feat_data_service.get_last_feat_value(feat_data_service.intonation_name);
+        float intonationval=intonation.getFeature_value();
+
+        wer= feat_data_service.get_last_feat_value(feat_data_service.wer_name);
+        float werval=wer.getFeature_value();
+
+        pronunciation= feat_data_service.get_last_feat_value(feat_data_service.pronun_name);
+        float pronunval=pronunciation.getFeature_value();
+
+
+
+        float[] data1={pronunval, jitterval,Vrateval,intonationval, werval}; // Patient
         float[] data2={86f,98f,82.2f,55.4f, 100f}; // Healthy
 
         String Label_1 = getResources().getString(R.string.pronunciation);
@@ -86,12 +111,9 @@ public class ResultsSpeech extends AppCompatActivity implements View.OnClickList
             SharedPreferences.Editor editor = sharedPref.edit();
             editor.putBoolean("New Area Speech", false);
             editor.apply();
-            try {
-                RadarFeatures.export_speech_feature("AreaSpeech", area_progress, "area speech");
-            }catch (Exception e) {
-                Toast.makeText(this,R.string.area_failed,Toast.LENGTH_SHORT).show();
-
-            }
+            Date current = Calendar.getInstance().getTime();
+            FeatureDA area_speech=new FeatureDA(feat_data_service.area_speech_name, current, (float)area_progress );
+            feat_data_service.save_feature(area_speech);
         }
 
         LinearLayout.LayoutParams params_line= (LinearLayout.LayoutParams)  iEmojin.getLayoutParams();

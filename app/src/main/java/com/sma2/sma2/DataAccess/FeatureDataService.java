@@ -107,7 +107,14 @@ public class FeatureDataService {
 
         List<FeatureDA> features=get_feature_by_name(feature_name);
 
-        if (features.size()<10) {
+        if (features.size()==0){
+            FeatureDA feat=new FeatureDA(feature_name);
+            List<FeatureDA> list_empty=new ArrayList<>();
+            list_empty.add(feat);
+            return list_empty;
+        }
+
+        else if (features.size()<10) {
 
             return features;
         }
@@ -127,11 +134,13 @@ public class FeatureDataService {
 
     public FeatureDA get_last_feat_value(String feature_name){
         List<FeatureDA> features=get_feature_by_name(feature_name);
-        List<FeatureDA> features_sorted=sort_feat_days(features);
-
-        return features_sorted.get(features.size()-1);
-
-
+        if (features.size()==0){
+            return new FeatureDA(feature_name);
+        }
+        else{
+            List<FeatureDA> features_sorted=sort_feat_days(features);
+            return features_sorted.get(features.size()-1);
+        }
     }
 
 
