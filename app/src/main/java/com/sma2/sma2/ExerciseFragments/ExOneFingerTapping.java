@@ -6,6 +6,7 @@ import android.content.SharedPreferences;
 import android.graphics.Point;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.os.Environment;
 import android.os.Vibrator;
 import android.preference.PreferenceManager;
 import android.support.constraint.ConstraintLayout;
@@ -40,6 +41,7 @@ public class ExOneFingerTapping extends ExerciseFragment implements View.OnClick
     SharedPreferences sharedPref;
     FeatureDataService FeatureDataService;
     FeatureTapping featureTapping;
+    final String PATH = Environment.getExternalStorageDirectory() + "/Apkinson/MOVEMENT/";
 
 
     @Override
@@ -66,6 +68,7 @@ public class ExOneFingerTapping extends ExerciseFragment implements View.OnClick
         change_button_position();
         FeatureDataService=new FeatureDataService(getActivity().getApplicationContext());
         featureTapping=new FeatureTapping(getActivity().getApplicationContext());
+
         return view;
     }
 
@@ -121,8 +124,8 @@ public class ExOneFingerTapping extends ExerciseFragment implements View.OnClick
                 }catch (Exception e) {
                     Log.e("Tapping1CloseWriter", e.toString());
                 }
-                mListener.onExerciseFinished(filePath);
                 EvaluateFeatures();
+                mListener.onExerciseFinished(filePath);
                 SharedPreferences.Editor editor = sharedPref.edit();
                 editor.putBoolean("New Area Tapping", true);
                 editor.apply();
@@ -190,10 +193,10 @@ public class ExOneFingerTapping extends ExerciseFragment implements View.OnClick
 
 
     private void EvaluateFeatures() {
-        File file = new File(filePath);
+        File file = new File(PATH+filePath);
         Date lastModDate = new Date(file.lastModified());
 
-        float[] features=featureTapping.feat_tapping_one(filePath);
+        float[] features=featureTapping.feat_tapping_one(PATH+filePath);
         FeatureDataService.save_feature(FeatureDataService.perc_tapping1_name, lastModDate, features[0]);
         FeatureDataService.save_feature(FeatureDataService.veloc_tapping1_name, lastModDate, features[1]);
         FeatureDataService.save_feature(FeatureDataService.precision_tapping1_name, lastModDate, features[2]);

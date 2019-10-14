@@ -179,4 +179,22 @@ public class FeatureDataService {
     }
 
 
+
+    public float get_avg_feat(List<FeatureDA> features){
+        int cont_great_zero=0;
+        float sum_feat=0;
+        FeatureDA featurec;
+        for (int i=0;i<features.size();i++){
+            featurec=features.get(i);
+
+            if (featurec.getFeature_value()!=0){
+              sum_feat+=featurec.getFeature_value();
+              cont_great_zero+=1;
+            }
+
+        }
+
+        return sum_feat/cont_great_zero;
+    }
+
 }

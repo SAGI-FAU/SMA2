@@ -5,6 +5,7 @@ import android.content.SharedPreferences;
 import android.graphics.Point;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.os.Environment;
 import android.os.Vibrator;
 import android.preference.PreferenceManager;
 import android.support.constraint.ConstraintLayout;
@@ -40,6 +41,7 @@ public class ExSliding extends ExerciseFragment implements SeekBar.OnSeekBarChan
     SharedPreferences sharedPref;
     FeatureTapping featureTapping;
     FeatureDataService FeatureDataService;
+    final String PATH = Environment.getExternalStorageDirectory() + "/Apkinson/MOVEMENT/";
 
 
 
@@ -89,12 +91,13 @@ public class ExSliding extends ExerciseFragment implements SeekBar.OnSeekBarChan
                 }catch (Exception e) {
                     Log.e("SlidingCloseWriter", e.toString());
                 }
-                mListener.onExerciseFinished(filePath);
 
                 SharedPreferences.Editor editor = sharedPref.edit();
                 editor.putBoolean("New Area Tapping", true);
                 editor.apply();
                 EvaluateFeatures();
+                mListener.onExerciseFinished(filePath);
+
             }
         };
     }
@@ -197,10 +200,10 @@ public class ExSliding extends ExerciseFragment implements SeekBar.OnSeekBarChan
     }
 
     private void EvaluateFeatures() {
-        File file = new File(filePath);
+        File file = new File(PATH+filePath);
         Date lastModDate = new Date(file.lastModified());
 
-        float features=featureTapping.feat_sliding(filePath);
+        float features=featureTapping.feat_sliding(PATH+filePath);
         FeatureDataService.save_feature(FeatureDataService.perc_sliding_name, lastModDate, features);
 
     }

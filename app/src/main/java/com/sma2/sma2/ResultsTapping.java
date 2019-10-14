@@ -21,6 +21,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.jjoe64.graphview.GraphView;
+import com.sma2.sma2.DataAccess.FeatureDA;
+import com.sma2.sma2.DataAccess.FeatureDataService;
 import com.sma2.sma2.FeatureExtraction.GraphManager;
 import com.sma2.sma2.FeatureExtraction.Speech.features.RadarFeatures;
 import com.sma2.sma2.FeatureExtraction.Tapping.FeatureTapping;
@@ -29,6 +31,9 @@ import com.github.mikephil.charting.charts.RadarChart;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.List;
 
 
 public class ResultsTapping extends AppCompatActivity  implements View.OnClickListener {
@@ -38,6 +43,14 @@ public class ResultsTapping extends AppCompatActivity  implements View.OnClickLi
     private ImageView iEmojin;
     private TextView tmessage_tapping, tmessage_tapping_perc;
     int screenWidth, screenHeight;
+    FeatureDA perc_tap1;
+    FeatureDA perc_tap2;
+    FeatureDA veloc_tap1;
+    FeatureDA veloc_tap2;
+    FeatureDA prec_tap1;
+    FeatureDA prec_tap2;
+    FeatureDA perc_sliding;
+    FeatureDataService feat_data_service;
 
     private final String PATH = Environment.getExternalStorageDirectory() + "/Apkinson/MOVEMENT/";
 
@@ -64,7 +77,28 @@ public class ResultsTapping extends AppCompatActivity  implements View.OnClickLi
         // Radar chart
         RadarChart radarchart= findViewById(R.id.chart_tapping);
 
-        float[] data1 =feature.totalfeatures(PATH);
+        feat_data_service=new FeatureDataService(this);
+
+        List<FeatureDA> perc_tap= new ArrayList<>();
+        perc_tap.add(feat_data_service.get_last_feat_value(feat_data_service.perc_tapping1_name));
+        perc_tap.add(feat_data_service.get_last_feat_value(feat_data_service.perc_tapping2_name));
+        float per_tap_val=feat_data_service.get_avg_feat(perc_tap);
+
+
+        List<FeatureDA> vel_tap= new ArrayList<>();
+        vel_tap.add(feat_data_service.get_last_feat_value(feat_data_service.veloc_tapping1_name));
+        vel_tap.add(feat_data_service.get_last_feat_value(feat_data_service.veloc_tapping2_name));
+        float vel_tap_val=feat_data_service.get_avg_feat(vel_tap);
+
+        List<FeatureDA> prec_tap= new ArrayList<>();
+        prec_tap.add(feat_data_service.get_last_feat_value(feat_data_service.precision_tapping1_name));
+        prec_tap.add(feat_data_service.get_last_feat_value(feat_data_service.precision_tapping2_name));
+        float prec_tap_val=feat_data_service.get_avg_feat(prec_tap);
+
+        perc_sliding =feat_data_service.get_last_feat_value(feat_data_service.perc_sliding_name);
+        float perc_slidingval=perc_sliding.getFeature_value();
+
+        float[] data1 ={per_tap_val, vel_tap_val, prec_tap_val, perc_slidingval};
         float[] data2={100f,100f,100f,100f};
 
         String Label_3 = getResources().getString(R.string.tapPosition);
@@ -87,22 +121,13 @@ public class ResultsTapping extends AppCompatActivity  implements View.OnClickLi
             SharedPreferences.Editor editor = sharedPref.edit();
             editor.putBoolean("New Area Tapping", false);
             editor.apply();
-            try {
-                RadarFeatures.export_speech_feature("area tapping", area_progress, "area tapping");
-            }catch (Exception e) {
-                Toast.makeText(this,R.string.tapping_failed,Toast.LENGTH_SHORT).show();
-
-            }
+            Date current = Calendar.getInstance().getTime();
+            FeatureDA area_tapping=new FeatureDA(feat_data_service.area_tapping_name, current, (float)area_progress );
+            feat_data_service.save_feature(area_tapping);
 
         }
-        ArrayList<Float> area_perf=new ArrayList<>();
-        try {
-            area_perf=RadarFeatures.get_feat_perf("area tapping");
-        }
-        catch(IOException ie) {
-            ie.printStackTrace();
-            area_perf.add(0f);
-        }
+
+
 
         LinearLayout.LayoutParams params_line= (LinearLayout.LayoutParams)  iEmojin.getLayoutParams();
         int xRandomBar= (int)(0.01*area_progress*screenWidth-45);

@@ -140,11 +140,7 @@ public class ResultsSpeech extends AppCompatActivity implements View.OnClickList
             tmessage.setText(R.string.Negative_message);
         }
 
-
     }
-
-
-
 
 
     private void setListeners() {
