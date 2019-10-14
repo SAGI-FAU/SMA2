@@ -19,13 +19,16 @@ import com.opencsv.CSVParser;
 import com.opencsv.CSVParserBuilder;
 import com.opencsv.CSVReader;
 import com.opencsv.CSVReaderBuilder;
+import com.sma2.sma2.DataAccess.FeatureDataService;
 import com.sma2.sma2.FeatureExtraction.Speech.features.RadarFeatures;
 import com.sma2.sma2.R;
 import com.sma2.sma2.SignalRecording.SpeechRecorder;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 import java.util.Random;
@@ -37,6 +40,8 @@ public class ExReadText extends ExerciseFragment implements ButtonFragment.OnBut
     private TextExercise textExercise;
     private int Sentence;
     SharedPreferences sharedPref;
+    FeatureDataService FeatureDataService;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -60,6 +65,8 @@ public class ExReadText extends ExerciseFragment implements ButtonFragment.OnBut
 
         transaction.replace(R.id.frameExRT, buttonFragment);
         transaction.commit();
+        FeatureDataService=new FeatureDataService(getActivity().getApplicationContext());
+
         return view;
     }
 
@@ -127,16 +134,9 @@ public class ExReadText extends ExerciseFragment implements ButtonFragment.OnBut
     private void  evaluate_features(){
         if (mExercise.getId()==7){ // Compute intonation from longest sentence.
             float int_f0 = RadarFeatures.intonation(filePath);
-            try {
-                RadarFeatures.export_speech_feature(filePath,int_f0,"Intonation");
-            }catch (Exception e) {
-                Toast.makeText(getActivity(),R.string.intonation_failed,Toast.LENGTH_SHORT).show();
-
-            }
-            SharedPreferences.Editor editor = sharedPref.edit();
-            editor.putBoolean("New Area Speech", true);
-            editor.apply();
-
+            File file = new File(filePath);
+            Date lastModDate = new Date(file.lastModified());
+            FeatureDataService.save_feature(FeatureDataService.intonation_name, lastModDate, int_f0);
         }
     }
     private class VolumeHandler extends Handler {

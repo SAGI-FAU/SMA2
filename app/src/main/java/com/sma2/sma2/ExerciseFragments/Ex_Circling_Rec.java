@@ -12,11 +12,15 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.sma2.sma2.DataAccess.FeatureDataService;
 import com.sma2.sma2.FeatureExtraction.Movement.CSVFileReader;
 import com.sma2.sma2.FeatureExtraction.Movement.MovementProcessing;
 import com.sma2.sma2.R;
 import com.sma2.sma2.SignalRecording.CSVFileWriter;
 import com.sma2.sma2.SignalRecording.MovementRecorder;
+
+import java.io.File;
+import java.util.Date;
 
 
 public class Ex_Circling_Rec extends ExerciseFragment implements ButtonFragment.OnButtonInteractionListener {
@@ -32,6 +36,7 @@ public class Ex_Circling_Rec extends ExerciseFragment implements ButtonFragment.
 
     private CSVFileReader FileReader;
     private MovementProcessing MovementProcessor = new MovementProcessing();
+    FeatureDataService FeatureDataService;
     public Ex_Circling_Rec() {
 
     }
@@ -61,6 +66,7 @@ public class Ex_Circling_Rec extends ExerciseFragment implements ButtonFragment.
         countdown_finished_txt = getResources().getString(R.string.start2);
         countdownTextView = view.findViewById(R.id.countdownTimerTextView);
         countdownTextView.setText(String.valueOf(START_COUNTDOWN));
+        FeatureDataService=new FeatureDataService(getActivity().getApplicationContext());
         return view;
     }
 
@@ -100,24 +106,19 @@ public class Ex_Circling_Rec extends ExerciseFragment implements ButtonFragment.
     private void EvaluateFeatures() {
         String Route= CSVFileWriter.getpath();
         String final_route = Route + recorder.getFileName();
+        float UppRegularity = MovementProcessor.UppRegularity(FileReader,final_route);
+        File file = new File(final_route);
+        Date lastModDate = new Date(file.lastModified());
 
         if(mExercise.getId() == 23){
-            float UppRegularity = MovementProcessor.UppRegularity(FileReader,final_route);
-            try {
-                MovementProcessor.export_movement_feature(final_route,UppRegularity,"Regularity_Circles_Right");
-            }catch (Exception e) {
-                Toast.makeText(getActivity(),"Regularity of circles right hand failed",Toast.LENGTH_SHORT).show();
-            }
+            String name=FeatureDataService.regularity_circles_right_name;
+            FeatureDataService.save_feature(name, lastModDate, UppRegularity);
+        }
+        else if(mExercise.getId() == 24){
+            String name=FeatureDataService.regularity_circles_left_name;
+            FeatureDataService.save_feature(name, lastModDate, UppRegularity);
         }
 
-        else if(mExercise.getId() == 24){
-            float UppRegularity = MovementProcessor.UppRegularity(FileReader,final_route);
-            try {
-                MovementProcessor.export_movement_feature(final_route,UppRegularity,"Regularity_Circles_Left");
-            }catch (Exception e) {
-                Toast.makeText(getActivity(),"Regularity of circles left hand failed",Toast.LENGTH_SHORT).show();
-            }
-        }
     }
 
     private void startInitialCountdownTimer() {

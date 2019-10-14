@@ -12,11 +12,16 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.sma2.sma2.DataAccess.FeatureDataService;
 import com.sma2.sma2.FeatureExtraction.Movement.CSVFileReader;
 import com.sma2.sma2.FeatureExtraction.Movement.MovementProcessing;
 import com.sma2.sma2.R;
 import com.sma2.sma2.SignalRecording.CSVFileWriter;
 import com.sma2.sma2.SignalRecording.MovementRecorder;
+import com.sma2.sma2.DataAccess.FeatureDataService;
+
+import java.io.File;
+import java.util.Date;
 
 
 public class Ex_postural_Rec extends ExerciseFragment implements ButtonFragment.OnButtonInteractionListener {
@@ -31,7 +36,7 @@ public class Ex_postural_Rec extends ExerciseFragment implements ButtonFragment.
     private boolean countdownIsRunning = false;
     private CSVFileReader FileReader;
     private MovementProcessing MovementProcessor = new MovementProcessing();
-
+    FeatureDataService FeatureDataService;
     public Ex_postural_Rec() {
     }
 
@@ -60,6 +65,7 @@ public class Ex_postural_Rec extends ExerciseFragment implements ButtonFragment.
         countdown_finished_txt = getResources().getString(R.string.start2);
         countdownTextView = view.findViewById(R.id.countdownTimerTextView);
         countdownTextView.setText(String.valueOf(START_COUNTDOWN));
+        FeatureDataService=new FeatureDataService(getActivity().getApplicationContext());
         return view;
     }
 
@@ -97,24 +103,18 @@ public class Ex_postural_Rec extends ExerciseFragment implements ButtonFragment.
 
     private void EvaluateFeatures() {
         String Route= CSVFileWriter.getpath();
-        String final_route = Route +"/" + recorder.getFileName();
+        String final_route = Route + recorder.getFileName();
+        float UppTremor = MovementProcessor.UppTremor(FileReader,final_route);
+        File file = new File(final_route);
+        Date lastModDate = new Date(file.lastModified());
 
         if(mExercise.getId() == 29){
-            float UppTremor = MovementProcessor.UppTremor(FileReader,final_route);
-            try {
-                MovementProcessor.export_movement_feature(final_route,UppTremor,"Postural_Tremor_Right");
-            }catch (Exception e) {
-                Toast.makeText(getActivity(),"Postural tremor of right hand failed",Toast.LENGTH_SHORT).show();
-            }
+            String name=FeatureDataService.tremor_right_name;
+            FeatureDataService.save_feature(name, lastModDate, UppTremor);
         }
-
         else if(mExercise.getId() == 30){
-            float UppTremor = MovementProcessor.UppTremor(FileReader,final_route);
-            try {
-                MovementProcessor.export_movement_feature(final_route,UppTremor,"Postural_Tremor_Left");
-            }catch (Exception e) {
-                Toast.makeText(getActivity(),"Postural tremor of left hand failed",Toast.LENGTH_SHORT).show();
-            }
+            String name=FeatureDataService.tremor_left_name;
+            FeatureDataService.save_feature(name, lastModDate, UppTremor);
         }
 
 

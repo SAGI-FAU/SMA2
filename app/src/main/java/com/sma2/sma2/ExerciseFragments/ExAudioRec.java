@@ -12,14 +12,21 @@ import android.view.ViewGroup;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
+import com.sma2.sma2.DataAccess.FeatureDataService;
 import com.sma2.sma2.FeatureExtraction.Speech.features.RadarFeatures;
 import com.sma2.sma2.R;
+import com.sma2.sma2.SignalRecording.CSVFileWriter;
 import com.sma2.sma2.SignalRecording.SpeechRecorder;
+
+import java.io.File;
+import java.util.Date;
 
 public class ExAudioRec extends ExerciseFragment implements ButtonFragment.OnButtonInteractionListener{
     private ProgressBar volumeBar;
     private SpeechRecorder recorder;
     SharedPreferences sharedPref;
+    FeatureDataService FeatureDataService;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -32,6 +39,8 @@ public class ExAudioRec extends ExerciseFragment implements ButtonFragment.OnBut
         sharedPref =PreferenceManager.getDefaultSharedPreferences(getActivity().getApplicationContext());
         transaction.replace(R.id.frameExSV, buttonFragment);
         transaction.commit();
+        FeatureDataService=new FeatureDataService(getActivity().getApplicationContext());
+
         return view;
     }
 
@@ -66,32 +75,23 @@ public class ExAudioRec extends ExerciseFragment implements ButtonFragment.OnBut
 
 
     private void  evaluate_features(){
-        if (mExercise.getId()==18||mExercise.getId()==19||mExercise.getId()==20){ // sustained vowel AH to compute jitter
-            float jitt_perc = RadarFeatures.jitter(filePath);
-            try {
-                RadarFeatures.export_speech_feature(filePath, jitt_perc,"Jitter");
-                }catch (Exception e) {
-                Toast.makeText(getActivity(),R.string.jitter_failed,Toast.LENGTH_SHORT).show();
 
-                }
-            SharedPreferences.Editor editor = sharedPref.edit();
-            editor.putBoolean("New Area Speech", true);
-            editor.apply();
+        if (mExercise.getId()==18||mExercise.getId()==19||mExercise.getId()==20){
+
+
+            float jitt_perc = RadarFeatures.jitter(filePath);
+
+            File file = new File(filePath);
+            Date lastModDate = new Date(file.lastModified());
+            FeatureDataService.save_feature(FeatureDataService.jitter_name, lastModDate, jitt_perc);
 
             }
         else if (mExercise.getId()==11)
         {
             float vrate = RadarFeatures.voiceRate(filePath);
-            try {
-                RadarFeatures.export_speech_feature(filePath, vrate,"VRate");
-            }catch (Exception e) {
-                Toast.makeText(getActivity(),R.string.voicerate_failed,Toast.LENGTH_SHORT).show();
-
-            }
-
-            SharedPreferences.Editor editor = sharedPref.edit();
-            editor.putBoolean("New Area Speech", true);
-            editor.apply();
+            File file = new File(filePath);
+            Date lastModDate = new Date(file.lastModified());
+            FeatureDataService.save_feature(FeatureDataService.vrate_name, lastModDate, vrate);
         }
     }
 

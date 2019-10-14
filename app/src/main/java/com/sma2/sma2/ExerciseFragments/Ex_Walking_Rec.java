@@ -10,9 +10,17 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.sma2.sma2.DataAccess.FeatureDataService;
+import com.sma2.sma2.FeatureExtraction.Movement.CSVFileReader;
+import com.sma2.sma2.FeatureExtraction.Movement.MovementProcessing;
 import com.sma2.sma2.R;
+import com.sma2.sma2.SignalRecording.CSVFileWriter;
 import com.sma2.sma2.SignalRecording.MovementRecorder;
+
+import java.io.File;
+import java.util.Date;
 
 
 public class Ex_Walking_Rec extends ExerciseFragment implements ButtonFragment.OnButtonInteractionListener {
@@ -25,6 +33,9 @@ public class Ex_Walking_Rec extends ExerciseFragment implements ButtonFragment.O
     private CountDownTimer timer;
     private TextView countdownTextView;
     private boolean countdownIsRunning = false;
+    private MovementProcessing MovementProcessor = new MovementProcessing();
+    private CSVFileReader FileReader;
+    FeatureDataService FeatureDataService;
 
     public Ex_Walking_Rec() {
 
@@ -33,6 +44,7 @@ public class Ex_Walking_Rec extends ExerciseFragment implements ButtonFragment.O
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        FileReader = new CSVFileReader(getActivity().getApplicationContext());
         try {
             recorder = new MovementRecorder(this.getContext(), SAMPLING_FREQUENCY, mExercise.getName());
             recorder.registerListeners();
@@ -54,6 +66,8 @@ public class Ex_Walking_Rec extends ExerciseFragment implements ButtonFragment.O
         countdown_finished_txt = getResources().getString(R.string.start2);
         countdownTextView = view.findViewById(R.id.countdownTimerTextView);
         countdownTextView.setText(String.valueOf(START_COUNTDOWN));
+        FeatureDataService=new FeatureDataService(getActivity().getApplicationContext());
+
         return view;
     }
 
@@ -84,9 +98,24 @@ public class Ex_Walking_Rec extends ExerciseFragment implements ButtonFragment.O
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
+                EvaluateFeatures();
                 mListener.onExerciseFinished(recorder.getFileName());
+
+
             }
         }
+    }
+
+    private void EvaluateFeatures() {
+        String Route= CSVFileWriter.getpath();
+        String final_route = Route +"/" + recorder.getFileName();
+        float[] walking_features = MovementProcessor.compute_walking_features(FileReader, final_route);
+        File file = new File(final_route);
+        Date lastModDate = new Date(file.lastModified());
+        FeatureDataService.save_feature(FeatureDataService.freeze_index_name, lastModDate, walking_features[0]);
+        FeatureDataService.save_feature(FeatureDataService.N_strides_name, lastModDate, walking_features[1]);
+        FeatureDataService.save_feature(FeatureDataService.duration_strides_name, lastModDate, walking_features[2]);
+
     }
 
     private void startInitialCountdownTimer() {

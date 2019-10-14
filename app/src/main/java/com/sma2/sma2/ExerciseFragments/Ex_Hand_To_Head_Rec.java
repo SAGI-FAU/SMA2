@@ -12,11 +12,15 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.sma2.sma2.DataAccess.FeatureDataService;
 import com.sma2.sma2.FeatureExtraction.Movement.CSVFileReader;
 import com.sma2.sma2.FeatureExtraction.Movement.MovementProcessing;
 import com.sma2.sma2.R;
 import com.sma2.sma2.SignalRecording.CSVFileWriter;
 import com.sma2.sma2.SignalRecording.MovementRecorder;
+
+import java.io.File;
+import java.util.Date;
 
 
 public class Ex_Hand_To_Head_Rec extends ExerciseFragment implements ButtonFragment.OnButtonInteractionListener {
@@ -31,6 +35,7 @@ public class Ex_Hand_To_Head_Rec extends ExerciseFragment implements ButtonFragm
     private boolean countdownIsRunning = false;
     private CSVFileReader FileReader;
     private MovementProcessing MovementProcessor = new MovementProcessing();
+    FeatureDataService FeatureDataService;
 
     public Ex_Hand_To_Head_Rec() {
 
@@ -62,6 +67,7 @@ public class Ex_Hand_To_Head_Rec extends ExerciseFragment implements ButtonFragm
         countdown_finished_txt = getResources().getString(R.string.start2);
         countdownTextView = view.findViewById(R.id.countdownTimerTextView);
         countdownTextView.setText(String.valueOf(START_COUNTDOWN));
+        FeatureDataService=new FeatureDataService(getActivity().getApplicationContext());
         return view;
     }
 
@@ -99,38 +105,22 @@ public class Ex_Hand_To_Head_Rec extends ExerciseFragment implements ButtonFragm
     }
 
     private void EvaluateFeatures() {
+
         String Route= CSVFileWriter.getpath();
-        String final_route = Route +"/" + recorder.getFileName();
+        String final_route = Route + recorder.getFileName();
+        float UppRegularity = MovementProcessor.UppRegularity(FileReader,final_route);
+        File file = new File(final_route);
+        Date lastModDate = new Date(file.lastModified());
 
         if(mExercise.getId() == 27){
-            float UppTremor = MovementProcessor.UppTremor(FileReader,final_route);
-            try {
-                MovementProcessor.export_movement_feature(final_route,UppTremor,"Kinetic_Tremor_Right");
-            }catch (Exception e) {
-                Toast.makeText(getActivity(),"Kinetic tremor of right hand failed",Toast.LENGTH_SHORT).show();
-            }
-            float UppRegularity = MovementProcessor.UppRegularity(FileReader,final_route);
-            try {
-                MovementProcessor.export_movement_feature(final_route,UppRegularity,"Kinetic_Regularity_Right");
-            }catch (Exception e) {
-                Toast.makeText(getActivity(),"Kinetic regularity of right hand failed",Toast.LENGTH_SHORT).show();
-            }
+            String name=FeatureDataService.regularity_kinetic_right_name;
+            FeatureDataService.save_feature(name, lastModDate, UppRegularity);
+        }
+        else if(mExercise.getId() == 28){
+            String name=FeatureDataService.regularity_kinetic_left_name;
+            FeatureDataService.save_feature(name, lastModDate, UppRegularity);
         }
 
-        else if(mExercise.getId() == 28){
-            float UppTremor = MovementProcessor.UppTremor(FileReader,final_route);
-            try {
-                MovementProcessor.export_movement_feature(final_route,UppTremor,"Kinetic_Tremor_Left");
-            }catch (Exception e) {
-                Toast.makeText(getActivity(),"Kinetic tremor of left hand failed",Toast.LENGTH_SHORT).show();
-            }
-            float UppRegularity = MovementProcessor.UppRegularity(FileReader,final_route);
-            try {
-                MovementProcessor.export_movement_feature(final_route,UppRegularity,"Kinetic_Regularity_Left");
-            }catch (Exception e) {
-                Toast.makeText(getActivity(),"Kinetic regularity of left hand failed",Toast.LENGTH_SHORT).show();
-            }
-        }
     }
     private void startInitialCountdownTimer() {
         countdownIsRunning = true;

@@ -84,6 +84,26 @@ public class sigproc {
         return msig;
     }
 
+
+    /**
+     * Mean of array
+     * Computes mean value from array (Signal). Used to remove DC level.
+     * @param sig - Array with the signal.
+     * @return Integer with the mean value of the array.
+     */
+    public float meanval(List<Float> sig)
+    {
+        //Find DC level
+        float msig=0;
+        for (float aSig : sig) {
+            msig = msig + aSig;
+        }
+        msig = msig/sig.size();
+        return msig;
+    }
+
+
+
     /**
      * Compute the standard deviation of an array of floats
      * @param numArray Array of floats

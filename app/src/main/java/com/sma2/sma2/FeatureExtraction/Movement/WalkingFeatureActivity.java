@@ -88,7 +88,28 @@ public class WalkingFeatureActivity extends AppCompatActivity implements View.On
 
         //Feature Values
 
-        freezeValue=0f;
+        ArrayList<Float> freeze=new ArrayList<>();
+        try {
+            freeze= RadarFeatures.get_feat_perf("Freezing index");
+        }
+        catch(IOException ie) {
+            freeze.add(0f);
+            ie.printStackTrace();
+        }
+
+        freezeValue=freeze.get(freeze.size()-1);
+
+
+        ArrayList<Float> balance=new ArrayList<>();
+        try {
+            balance= RadarFeatures.get_feat_perf("balance");
+        }
+        catch(IOException ie) {
+            balance.add(0f);
+            ie.printStackTrace();
+        }
+        postureValue=balance.get(balance.size()-1);
+
 
         //Upper tremor and regularity values
 
@@ -102,6 +123,7 @@ public class WalkingFeatureActivity extends AppCompatActivity implements View.On
             PostTremorRight.add(0f);
             ie.printStackTrace();
         }
+
 
         ArrayList<Float> PosturalTremorLeft=new ArrayList<>();
         try {
@@ -198,6 +220,31 @@ public class WalkingFeatureActivity extends AppCompatActivity implements View.On
         float StabCirLeft = CirclesRegularityLeft.get(CirclesRegularityLeft.size()-1);
         float StabCirRigth = CirclesRegularityRight.get(CirclesRegularityRight.size()-1);
         regularityValue = (StabKinLeft+StabKinRight+StabRotLeft+StabRotRight+StabCirLeft+StabCirRigth)/6;
+
+
+        ArrayList<Float> Nsteps=new ArrayList<>();
+        try {
+            Nsteps= RadarFeatures.get_feat_perf("N steps");
+        }
+        catch(IOException ie) {
+            Nsteps.add(0f);
+            ie.printStackTrace();
+        }
+        nStridesValue=Nsteps.get(Nsteps.size()-1);
+
+
+
+        ArrayList<Float> Duration=new ArrayList<>();
+        try {
+            Duration= RadarFeatures.get_feat_perf("duration");
+        }
+        catch(IOException ie) {
+            Duration.add(0f);
+            ie.printStackTrace();
+        }
+        tStrideValues=Duration.get(Duration.size()-1);
+
+
 
 
         float[] data1 = {tremorValue, regularityValue, freezeValue, postureValue, nStridesValue, tStrideValues}; // Patient

@@ -17,8 +17,13 @@ import android.widget.ImageView;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
+import com.sma2.sma2.DataAccess.FeatureDataService;
+import com.sma2.sma2.FeatureExtraction.Tapping.FeatureTapping;
 import com.sma2.sma2.R;
 import com.sma2.sma2.SignalRecording.SlidingRecorder;
+
+import java.io.File;
+import java.util.Date;
 
 public class ExSliding extends ExerciseFragment implements SeekBar.OnSeekBarChangeListener {
     private SlidingRecorder slidingrecorder;
@@ -33,6 +38,8 @@ public class ExSliding extends ExerciseFragment implements SeekBar.OnSeekBarChan
     private int threshold=30;
     private int seekBarFlag=1;
     SharedPreferences sharedPref;
+    FeatureTapping featureTapping;
+    FeatureDataService FeatureDataService;
 
 
 
@@ -57,6 +64,8 @@ public class ExSliding extends ExerciseFragment implements SeekBar.OnSeekBarChan
         getDisplayDimensions();
         timer = setTimer();
         sharedPref =PreferenceManager.getDefaultSharedPreferences(getActivity());
+        FeatureDataService=new FeatureDataService(getActivity().getApplicationContext());
+        featureTapping=new FeatureTapping(getActivity().getApplicationContext());
 
         return view;
     }
@@ -85,6 +94,7 @@ public class ExSliding extends ExerciseFragment implements SeekBar.OnSeekBarChan
                 SharedPreferences.Editor editor = sharedPref.edit();
                 editor.putBoolean("New Area Tapping", true);
                 editor.apply();
+                EvaluateFeatures();
             }
         };
     }
@@ -184,6 +194,15 @@ public class ExSliding extends ExerciseFragment implements SeekBar.OnSeekBarChan
             textView_limit.setLayoutParams(params_text);
 
         }
+    }
+
+    private void EvaluateFeatures() {
+        File file = new File(filePath);
+        Date lastModDate = new Date(file.lastModified());
+
+        float features=featureTapping.feat_sliding(filePath);
+        FeatureDataService.save_feature(FeatureDataService.perc_sliding_name, lastModDate, features);
+
     }
 
 

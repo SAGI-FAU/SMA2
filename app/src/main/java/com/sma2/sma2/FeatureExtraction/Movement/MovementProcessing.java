@@ -1,5 +1,6 @@
 package com.sma2.sma2.FeatureExtraction.Movement;
 
+import android.app.Activity;
 import android.util.Log;
 
 import com.sma2.sma2.DataAccess.SignalDA;
@@ -17,6 +18,7 @@ import org.apache.commons.math3.transform.FastFourierTransformer;
 import org.apache.commons.math3.transform.TransformType;
 
 import java.io.File;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.text.DecimalFormat;
@@ -27,6 +29,8 @@ import java.util.List;
 import static java.lang.Math.abs;
 import static java.util.Arrays.copyOfRange;
 import android.os.Environment;
+import android.widget.Toast;
+
 import com.opencsv.CSVWriter;
 
 
@@ -44,6 +48,10 @@ public class MovementProcessing {
     double low_th=0.03;
     float vocingthres = 0.45f;
     private float unvocingthres = 0.3f;
+    private float Fs=100;
+    private LinearInterpolation linearInterpolation= new LinearInterpolation();
+
+    private StepDetector stepDetector=new StepDetector();
 
     public MovementProcessing(){
 
@@ -107,6 +115,7 @@ public class MovementProcessing {
     }
 
 
+    //TODO: remove when refactoring all activities
     public float[] ComputeF0(List<Double> AccX, List<Double> AccY, List<Double> AccZ, int fs){
         List<Double> AccXn, AccYn, AccZn, AccR;
 
@@ -392,11 +401,8 @@ public class MovementProcessing {
 
 
 
-    public float freezeIndex(List<Double> sig,List<Double> oldTime, int Fs)
-    {
+    public float freezeIndex(List<Double> sig,List<Double> oldTime, int Fs) {
 
-        sigproc SigProc=new sigproc();
-        LinearInterpolation linearInterpolation= new LinearInterpolation();
         List<Double> newTime = new ArrayList<>();
         List<Double> AccR= new ArrayList<>();
         //Extracting Time Stamp
@@ -416,7 +422,6 @@ public class MovementProcessing {
         array_manipulation arrayMan= new array_manipulation();
 
         double [] Signal=arrayMan.dlisttoarray(AccR);
-        //sigproc SG= new sigproc();
 
 
         //double [] sig_win=SG.makeWindow(Signal,1);
@@ -490,18 +495,14 @@ public class MovementProcessing {
             powerFB[i-nBinsFB_init] = (float) (Math.pow(abs(sig_fft[i]), 2))/lenFB;
         }
 
-        float powerFBM=SigProc.meanval(powerFB);
-        float powerLBM=SigProc.meanval(powerLB);
+        float powerFBM=SG.meanval(powerFB);
+        float powerLBM=SG.meanval(powerLB);
 
         float freezeI=powerFBM/powerLBM;
 
 
 
         return freezeI;
-    }
-
-    public CSVFileReader.Signal getAccNorm(CSVFileReader.Signal accX, CSVFileReader.Signal accY, CSVFileReader.Signal accZ) {
-        return new CSVFileReader.Signal(accX.TimeStamp,getAccR(accX.Signal,accY.Signal,accZ.Signal));
     }
 
 
@@ -673,51 +674,68 @@ public class MovementProcessing {
 
 
 
-    //Temporal Functions
-    private float FreezeIndex(CSVFileReader FileReader,String path_movement) {
 
-
-        if (path_movement == null) {
-            return 0f;
-        }
-
-
-        else {
-
-            CSVFileReader.Signal GaitSignalaX = FileReader.ReadMovementSignal(path_movement, "aX [m/s^2]");
-            CSVFileReader.Signal GaitSignalaY = FileReader.ReadMovementSignal(path_movement, "aY [m/s^2]");
-            CSVFileReader.Signal GaitSignalaZ = FileReader.ReadMovementSignal(path_movement, "aZ [m/s^2]");
-
-            List<Double> AccXn, AccYn, AccZn, AccR;
-            AccXn = RemoveGravity(GaitSignalaX.Signal);
-            AccYn = RemoveGravity(GaitSignalaY.Signal);
-            AccZn = RemoveGravity(GaitSignalaZ.Signal);
-            AccR = getAccR(AccXn, AccYn, AccZn);
-            List<Double> oldTime = GaitSignalaX.TimeStamp;
-            List<Double> newAccR = removeInitGait(AccR, 100, 0.2, 0.02);
-            List<Double> newOldTime = new ArrayList<>();
-
-            for (int i = oldTime.size() - newAccR.size(); i < oldTime.size(); i++) {
-                newOldTime.add(oldTime.get(i));
-            }
-
-            float fIndex = freezeIndex(newAccR, newOldTime, (int) 100);
-
-
-            //Computing the percentage based on controls
-            // Reference (100%) = 0.07 or less
-            //It must be replace to real values, it was computed based one woman and one men
-
-            float perc_fidex=(float) (200/(1+Math.exp(10*(fIndex-0.07))));
-
-
-
-
-            return  perc_fidex;
-
-
-        }
+    public int get_nsteps(List<Integer> steps){
+        return steps.size();
     }
+
+
+
+
+    public float[]  compute_walking_features(CSVFileReader FileReader,String path_movement){
+
+        List<Double> accR=preproccess_gait(FileReader, path_movement);
+        CSVFileReader.Signal GaitSignalaX = FileReader.ReadMovementSignal(path_movement, "aX [m/s^2]");
+
+        List<Double> oldTime = GaitSignalaX.TimeStamp;
+        List<Double> newAccR = removeInitGait(accR, 100, 0.2, 0.02);
+        List<Double> newOldTime = new ArrayList<>();
+
+        for (int i = oldTime.size() - newAccR.size(); i < oldTime.size(); i++) {
+            newOldTime.add(oldTime.get(i));
+        }
+
+        float fIndex = freezeIndex(newAccR, newOldTime,  100);
+
+        float perc_fidex=(float) (200/(1+Math.exp(10*(fIndex-0.07))));
+
+
+        List<Integer> steps =stepDetector.detect(newOldTime, newAccR);
+
+
+        int n_steps=get_nsteps(steps);
+
+
+        double duration=getStepTime(steps);
+
+        float[] feature={perc_fidex, (float) n_steps, (float) duration};
+        return feature;
+
+    }
+
+
+
+
+    public List<Double> preproccess_gait(CSVFileReader FileReader, String path_movement){
+
+
+        CSVFileReader.Signal GaitSignalaX = FileReader.ReadMovementSignal(path_movement, "aX [m/s^2]");
+        CSVFileReader.Signal GaitSignalaY = FileReader.ReadMovementSignal(path_movement, "aY [m/s^2]");
+        CSVFileReader.Signal GaitSignalaZ = FileReader.ReadMovementSignal(path_movement, "aZ [m/s^2]");
+
+        List<Double> AccXn, AccYn, AccZn, AccR;
+        AccXn = RemoveGravity(GaitSignalaX.Signal);
+        AccYn = RemoveGravity(GaitSignalaY.Signal);
+        AccZn = RemoveGravity(GaitSignalaZ.Signal);
+        AccR = getAccR(AccXn, AccYn, AccZn);
+
+
+        return AccR;
+
+
+    }
+
+
 
 
 

@@ -18,8 +18,14 @@ import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
+import com.sma2.sma2.DataAccess.FeatureDataService;
+import com.sma2.sma2.FeatureExtraction.Tapping.FeatureTapping;
 import com.sma2.sma2.R;
+import com.sma2.sma2.SignalRecording.CSVFileWriter;
 import com.sma2.sma2.SignalRecording.TappingRecorder;
+
+import java.io.File;
+import java.util.Date;
 
 
 public class ExOneFingerTapping extends ExerciseFragment implements View.OnClickListener {
@@ -32,6 +38,9 @@ public class ExOneFingerTapping extends ExerciseFragment implements View.OnClick
     private CountDownTimer timer;
     private static final long TOTAL_TIME =  10000;
     SharedPreferences sharedPref;
+    FeatureDataService FeatureDataService;
+    FeatureTapping featureTapping;
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -55,6 +64,8 @@ public class ExOneFingerTapping extends ExerciseFragment implements View.OnClick
         setListener();
         timer = setTimer();
         change_button_position();
+        FeatureDataService=new FeatureDataService(getActivity().getApplicationContext());
+        featureTapping=new FeatureTapping(getActivity().getApplicationContext());
         return view;
     }
 
@@ -111,7 +122,7 @@ public class ExOneFingerTapping extends ExerciseFragment implements View.OnClick
                     Log.e("Tapping1CloseWriter", e.toString());
                 }
                 mListener.onExerciseFinished(filePath);
-
+                EvaluateFeatures();
                 SharedPreferences.Editor editor = sharedPref.edit();
                 editor.putBoolean("New Area Tapping", true);
                 editor.apply();
@@ -176,4 +187,18 @@ public class ExOneFingerTapping extends ExerciseFragment implements View.OnClick
         params_bug.setMarginStart(x);
         tapButton.setLayoutParams(params_bug);
     }
+
+
+    private void EvaluateFeatures() {
+        File file = new File(filePath);
+        Date lastModDate = new Date(file.lastModified());
+
+        float[] features=featureTapping.feat_tapping_one(filePath);
+        FeatureDataService.save_feature(FeatureDataService.perc_tapping1_name, lastModDate, features[0]);
+        FeatureDataService.save_feature(FeatureDataService.veloc_tapping1_name, lastModDate, features[1]);
+        FeatureDataService.save_feature(FeatureDataService.precision_tapping1_name, lastModDate, features[2]);
+
+    }
+
+
 }

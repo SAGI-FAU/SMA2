@@ -26,6 +26,7 @@ public class DaoMaster extends AbstractDaoMaster {
         MedicineDADao.createTable(db, ifNotExists);
         ExerciseDao.createTable(db, ifNotExists);
         SignalDADao.createTable(db, ifNotExists);
+        FeatureDADao.createTable(db, ifNotExists);
     }
 
     /** Drops underlying database table using DAOs. */
@@ -35,6 +36,7 @@ public class DaoMaster extends AbstractDaoMaster {
         MedicineDADao.dropTable(db, ifExists);
         ExerciseDao.dropTable(db, ifExists);
         SignalDADao.dropTable(db, ifExists);
+        FeatureDADao.dropTable(db, ifExists);
     }
 
     /**
@@ -58,6 +60,7 @@ public class DaoMaster extends AbstractDaoMaster {
         registerDaoClass(MedicineDADao.class);
         registerDaoClass(ExerciseDao.class);
         registerDaoClass(SignalDADao.class);
+        registerDaoClass(FeatureDADao.class);
     }
 
     public DaoSession newSession() {
