@@ -137,7 +137,14 @@ public class ExReadText extends ExerciseFragment implements ButtonFragment.OnBut
             File file = new File(filePath);
             Date lastModDate = new Date(file.lastModified());
             FeatureDataService.save_feature(FeatureDataService.intonation_name, lastModDate, int_f0);
+
+            SharedPreferences.Editor editor = sharedPref.edit();
+            editor.putBoolean("New Area Speech", true);
+            editor.apply();
+
         }
+
+
     }
     private class VolumeHandler extends Handler {
         ProgressBar volumeBar;

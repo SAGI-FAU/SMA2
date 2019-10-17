@@ -1,10 +1,12 @@
 package com.sma2.sma2.ExerciseFragments;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.os.Vibrator;
+import android.preference.PreferenceManager;
 import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -35,7 +37,7 @@ public class Ex_balance_Rec extends ExerciseFragment implements ButtonFragment.O
     private MovementProcessing MovementProcessor=new MovementProcessing();
     private CSVFileReader FileReader;
     FeatureDataService FeatureDataService;
-
+    SharedPreferences sharedPref;
     public Ex_balance_Rec() {
     }
 
@@ -59,6 +61,7 @@ public class Ex_balance_Rec extends ExerciseFragment implements ButtonFragment.O
         ButtonFragment buttonFragment = new ButtonFragment();
         buttonFragment.setmListener(this);
         FragmentTransaction transaction = getChildFragmentManager().beginTransaction();
+        sharedPref =PreferenceManager.getDefaultSharedPreferences(getActivity());
 
         transaction.replace(R.id.frameExSV, buttonFragment);
         transaction.commit();
@@ -129,6 +132,10 @@ public class Ex_balance_Rec extends ExerciseFragment implements ButtonFragment.O
         File file = new File(final_route);
         Date lastModDate = new Date(file.lastModified());
         FeatureDataService.save_feature(FeatureDataService.posture_name, lastModDate, balance);
+
+        SharedPreferences.Editor editor = sharedPref.edit();
+        editor.putBoolean("New Area Movement", true);
+        editor.apply();
 
     }
 

@@ -24,6 +24,7 @@ import com.jjoe64.graphview.GraphView;
 import com.sma2.sma2.DataAccess.FeatureDA;
 import com.sma2.sma2.DataAccess.FeatureDataService;
 import com.sma2.sma2.FeatureExtraction.GraphManager;
+import com.sma2.sma2.FeatureExtraction.Movement.MovementProcessing;
 import com.sma2.sma2.FeatureExtraction.Speech.features.RadarFeatures;
 import com.sma2.sma2.FeatureExtraction.Tapping.FeatureTapping;
 
@@ -45,17 +46,10 @@ public class ResultsMovement extends AppCompatActivity  implements View.OnClickL
     int screenWidth, screenHeight;
     FeatureDA freeze_index;
     FeatureDA posture;
-    FeatureDA postural_tremor_right;
-    FeatureDA postural_tremor_left;
-    FeatureDA kinetic_reg_right;
-    FeatureDA kinetic_reg_left;
-    FeatureDA rotation_reg_right;
-    FeatureDA rotation_reg_left;
-    FeatureDA circles_reg_right;
-    FeatureDA circles_reg_left;
     FeatureDA n_steps;
     FeatureDA duarion_steps;
     FeatureDataService feat_data_service;
+    MovementProcessing movementProcessing;
 
     private final String PATH = Environment.getExternalStorageDirectory() + "/Apkinson/MOVEMENT/";
 
@@ -70,6 +64,7 @@ public class ResultsMovement extends AppCompatActivity  implements View.OnClickL
         bHelp.bringToFront();
         bHistory=findViewById(R.id.button_history);
         SetListeners();
+        movementProcessing= new MovementProcessing();
 
         progressBarMovement=findViewById(R.id.bar_movement);
         iEmojin=findViewById(R.id.iEmojin_movement);
@@ -90,8 +85,13 @@ public class ResultsMovement extends AppCompatActivity  implements View.OnClickL
         float posture_value=posture.getFeature_value();
         n_steps=feat_data_service.get_last_feat_value(feat_data_service.N_strides_name);
         float n_steps_value=n_steps.getFeature_value();
+
+        float perc_steps_value= movementProcessing.n_steps2perc(n_steps_value);
+
         duarion_steps=feat_data_service.get_last_feat_value(feat_data_service.duration_strides_name);
         float duration_steps_value=duarion_steps.getFeature_value();
+        float perc_duration_value= movementProcessing.duration2perc(duration_steps_value);
+
 
         List<FeatureDA> tremor= new ArrayList<>();
         tremor.add(feat_data_service.get_last_feat_value(feat_data_service.tremor_left_name));
@@ -108,7 +108,7 @@ public class ResultsMovement extends AppCompatActivity  implements View.OnClickL
         float regularity_val=feat_data_service.get_avg_feat(regularity);
 
 
-        float[] data1 ={tremor_val, regularity_val, freeze_index_value, posture_value, n_steps_value, duration_steps_value};
+        float[] data1 ={tremor_val, regularity_val, freeze_index_value, posture_value, perc_steps_value, perc_duration_value};
         float[] data2={100f,100f,100f,100f, 100f, 100f};
 
         String Label_1 = getResources().getString(R.string.tremor);

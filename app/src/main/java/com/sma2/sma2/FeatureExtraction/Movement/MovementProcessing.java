@@ -643,6 +643,20 @@ public class MovementProcessing {
 
 
 
+    public float n_steps2perc(float n_steps){
+
+        return n_steps*100/210;
+    }
+
+
+
+    public float duration2perc(float duration){
+
+        return 100f-duration*100f/0.57f;
+    }
+
+
+
 
     public float[]  compute_walking_features(CSVFileReader FileReader,String path_movement){
 

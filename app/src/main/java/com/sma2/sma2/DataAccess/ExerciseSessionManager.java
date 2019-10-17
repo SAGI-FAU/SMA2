@@ -590,7 +590,7 @@ public class ExerciseSessionManager {
                         Uri.parse("Instruction/Path"),
                         Ex_postural_Rec.class));
             }
-            else if (ExFrag.equals("gait"))
+            else if (ExFrag.equals("gaitfourtimes"))
             {
                 exList.add(new Exercise(
                         ExID,
@@ -601,6 +601,18 @@ public class ExerciseSessionManager {
                         Uri.parse(ExVideo),
                         Uri.parse("Instruction/Path"),
                         Ex_Walking_Rec.class));
+            }
+            else if (ExFrag.equals("gaittwomins"))
+            {
+                exList.add(new Exercise(
+                        ExID,
+                        ExName,
+                        ExType,
+                        ExDescr,
+                        ExInstr,
+                        Uri.parse(ExVideo),
+                        Uri.parse("Instruction/Path"),
+                        ExFreeWalking.class));
             }
             else if (ExFrag.equals("finger1"))
             {

@@ -21,7 +21,12 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.github.mikephil.charting.charts.RadarChart;
+import com.sma2.sma2.DataAccess.FeatureDA;
+import com.sma2.sma2.DataAccess.FeatureDataService;
 import com.sma2.sma2.FeatureExtraction.Speech.features.RadarFeatures;
+
+import java.util.Calendar;
+import java.util.Date;
 
 
 /**
@@ -43,6 +48,9 @@ public class Results extends Fragment implements View.OnClickListener{
     private TextView tmessage, tmessage_perc;
     int screenWidth, screenHeight;
     private Results.OnFragmentInteractionListener mListener;
+    FeatureDA area_speech, area_mov, area_tapping;
+    FeatureDataService feat_data_service;
+
 
     public Results() {
         // Required empty public constructor
@@ -66,7 +74,7 @@ public class Results extends Fragment implements View.OnClickListener{
 
         View view = inflater.inflate(R.layout.fragment_results, container, false);
 
-
+        feat_data_service=new FeatureDataService(getActivity().getApplicationContext());
         bHistory=view.findViewById(R.id.button_history);
         progressBar=view.findViewById(R.id.bar_total);
         iEmojin=view.findViewById(R.id.iEmojin_total);
@@ -82,11 +90,18 @@ public class Results extends Fragment implements View.OnClickListener{
 
         RadarChart radarchart= view.findViewById(R.id.chart_total);
 
-        float area_speech= RadarFeatures.get_last_area("speech");
-        float area_tap= RadarFeatures.get_last_area("tapping");
-        float area_mov=0f; //TODO: compute movement area and display it here.
+        area_speech=feat_data_service.get_last_feat_value(feat_data_service.area_speech_name);
+        float area_speech_value=area_speech.getFeature_value();
 
-        float[] data1={area_speech,area_tap,area_mov};
+        area_mov=feat_data_service.get_last_feat_value(feat_data_service.area_movement_name);
+        float area_mov_value=area_mov.getFeature_value();
+
+        area_tapping=feat_data_service.get_last_feat_value(feat_data_service.area_tapping_name);
+        float area_tapping_value=area_tapping.getFeature_value();
+
+
+
+        float[] data1={area_speech_value,area_tapping_value,area_mov_value};
         float[] data2={100f,100f,100f};
 
         String Label_1 = getResources().getString(R.string.Speech);
@@ -107,12 +122,10 @@ public class Results extends Fragment implements View.OnClickListener{
             SharedPreferences.Editor editor = sharedPref.edit();
             editor.putBoolean("New Area Total", false);
             editor.apply();
-            try {
-                RadarFeatures.export_speech_feature("AreaTotal", area_progress, "area total");
-            }catch (Exception e) {
-                Toast.makeText(getActivity().getApplicationContext(),R.string.area_failed,Toast.LENGTH_SHORT).show();
 
-            }
+            Date current = Calendar.getInstance().getTime();
+            FeatureDA area_t=new FeatureDA(feat_data_service.area_total_name, current, (float)area_progress );
+            feat_data_service.save_feature(area_t);
         }
 
 

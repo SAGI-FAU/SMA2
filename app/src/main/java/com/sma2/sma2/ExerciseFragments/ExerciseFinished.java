@@ -85,6 +85,9 @@ public class ExerciseFinished extends Fragment {
         Animation animation2=AnimationUtils.loadAnimation(view.getContext(),R.anim.bounce);
         tMessage.startAnimation(animation2);
 
+
+
+
         return view;
     }
 

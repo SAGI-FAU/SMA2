@@ -1,10 +1,12 @@
 package com.sma2.sma2.ExerciseFragments;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.os.Vibrator;
+import android.preference.PreferenceManager;
 import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -37,6 +39,7 @@ public class Ex_Circling_Rec extends ExerciseFragment implements ButtonFragment.
     private CSVFileReader FileReader;
     private MovementProcessing MovementProcessor = new MovementProcessing();
     FeatureDataService FeatureDataService;
+    SharedPreferences sharedPref;
     public Ex_Circling_Rec() {
 
     }
@@ -60,6 +63,7 @@ public class Ex_Circling_Rec extends ExerciseFragment implements ButtonFragment.
         ButtonFragment buttonFragment = new ButtonFragment();
         buttonFragment.setmListener(this);
         FragmentTransaction transaction = getChildFragmentManager().beginTransaction();
+        sharedPref =PreferenceManager.getDefaultSharedPreferences(getActivity());
 
         transaction.replace(R.id.frameExSV, buttonFragment);
         transaction.commit();
@@ -97,7 +101,6 @@ public class Ex_Circling_Rec extends ExerciseFragment implements ButtonFragment.
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
-                EvaluateFeatures();
                 mListener.onExerciseFinished(recorder.getFileName());
             }
         }
@@ -119,6 +122,10 @@ public class Ex_Circling_Rec extends ExerciseFragment implements ButtonFragment.
             FeatureDataService.save_feature(name, lastModDate, UppRegularity);
         }
 
+        SharedPreferences.Editor editor = sharedPref.edit();
+        editor.putBoolean("New Area Movement", true);
+        editor.apply();
+
     }
 
     private void startInitialCountdownTimer() {
@@ -132,6 +139,8 @@ public class Ex_Circling_Rec extends ExerciseFragment implements ButtonFragment.
             public void onFinish() {
                 countdownIsRunning = false;
                 this.cancel();
+                EvaluateFeatures();
+                mListener.onExerciseFinished(recorder.getFileName());
                 countdownTextView.setText(countdown_finished_txt);
                 MediaPlayer mp = MediaPlayer.create(getContext(), R.raw.bell);
                 mp.start();

@@ -78,12 +78,15 @@ public class ExAudioRec extends ExerciseFragment implements ButtonFragment.OnBut
 
         if (mExercise.getId()==18||mExercise.getId()==19||mExercise.getId()==20){
 
-
             float jitt_perc = RadarFeatures.jitter(filePath);
 
             File file = new File(filePath);
             Date lastModDate = new Date(file.lastModified());
             FeatureDataService.save_feature(FeatureDataService.jitter_name, lastModDate, jitt_perc);
+
+            SharedPreferences.Editor editor = sharedPref.edit();
+            editor.putBoolean("New Area Speech", true);
+            editor.apply();
 
             }
         else if (mExercise.getId()==11)
@@ -92,7 +95,17 @@ public class ExAudioRec extends ExerciseFragment implements ButtonFragment.OnBut
             File file = new File(filePath);
             Date lastModDate = new Date(file.lastModified());
             FeatureDataService.save_feature(FeatureDataService.vrate_name, lastModDate, vrate);
+
+            SharedPreferences.Editor editor = sharedPref.edit();
+            editor.putBoolean("New Area Speech", true);
+            editor.apply();
         }
+
+
+
+
+
+
     }
 
     private class VolumeHandler extends Handler{
