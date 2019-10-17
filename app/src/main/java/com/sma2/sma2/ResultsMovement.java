@@ -36,14 +36,25 @@ import java.util.Date;
 import java.util.List;
 
 
-public class ResultsTapping extends AppCompatActivity  implements View.OnClickListener {
+public class ResultsMovement extends AppCompatActivity  implements View.OnClickListener {
     Button bHistory;
     private ImageButton bHelp;
-    private ProgressBar progressBarTapping;
+    private ProgressBar progressBarMovement;
     private ImageView iEmojin;
-    private TextView tmessage_tapping, tmessage_tapping_perc;
+    private TextView tmessage_movement, tmessage_movement_perc;
     int screenWidth, screenHeight;
-    FeatureDA perc_sliding;
+    FeatureDA freeze_index;
+    FeatureDA posture;
+    FeatureDA postural_tremor_right;
+    FeatureDA postural_tremor_left;
+    FeatureDA kinetic_reg_right;
+    FeatureDA kinetic_reg_left;
+    FeatureDA rotation_reg_right;
+    FeatureDA rotation_reg_left;
+    FeatureDA circles_reg_right;
+    FeatureDA circles_reg_left;
+    FeatureDA n_steps;
+    FeatureDA duarion_steps;
     FeatureDataService feat_data_service;
 
     private final String PATH = Environment.getExternalStorageDirectory() + "/Apkinson/MOVEMENT/";
@@ -54,52 +65,59 @@ public class ResultsTapping extends AppCompatActivity  implements View.OnClickLi
         super.onCreate(savedInstanceState);
 
         // general objects
-        FeatureTapping feature= new FeatureTapping(this);
-        setContentView(R.layout.activity_tapping_feature_);
+        setContentView(R.layout.activity_walking_feature);
         bHelp=findViewById(R.id.button_help);
         bHelp.bringToFront();
         bHistory=findViewById(R.id.button_history);
         SetListeners();
 
-        progressBarTapping=findViewById(R.id.bar_tapping);
-        iEmojin=findViewById(R.id.iEmojin_tapping);
-        tmessage_tapping=findViewById(R.id.tmessage_tapping);
-        tmessage_tapping_perc=findViewById(R.id.tmessage_tapping_perc);
+        progressBarMovement=findViewById(R.id.bar_movement);
+        iEmojin=findViewById(R.id.iEmojin_movement);
+        tmessage_movement=findViewById(R.id.tmessage_movement);
+        tmessage_movement_perc=findViewById(R.id.tmessage_movement_perc);
         getDisplayDimensions();
 
         RadarFigureManager RadarManager = new RadarFigureManager(this);
         // Radar chart
-        RadarChart radarchart= findViewById(R.id.chart_tapping);
+        RadarChart radarchart= findViewById(R.id.chart_movement);
 
         feat_data_service=new FeatureDataService(this);
 
-        List<FeatureDA> perc_tap= new ArrayList<>();
-        perc_tap.add(feat_data_service.get_last_feat_value(feat_data_service.perc_tapping1_name));
-        perc_tap.add(feat_data_service.get_last_feat_value(feat_data_service.perc_tapping2_name));
-        float per_tap_val=feat_data_service.get_avg_feat(perc_tap);
+
+        freeze_index=feat_data_service.get_last_feat_value(feat_data_service.freeze_index_name);
+        float freeze_index_value=freeze_index.getFeature_value();
+        posture=feat_data_service.get_last_feat_value(feat_data_service.posture_name);
+        float posture_value=posture.getFeature_value();
+        n_steps=feat_data_service.get_last_feat_value(feat_data_service.N_strides_name);
+        float n_steps_value=n_steps.getFeature_value();
+        duarion_steps=feat_data_service.get_last_feat_value(feat_data_service.duration_strides_name);
+        float duration_steps_value=duarion_steps.getFeature_value();
+
+        List<FeatureDA> tremor= new ArrayList<>();
+        tremor.add(feat_data_service.get_last_feat_value(feat_data_service.tremor_left_name));
+        tremor.add(feat_data_service.get_last_feat_value(feat_data_service.tremor_right_name));
+        float tremor_val=feat_data_service.get_avg_feat(tremor);
+
+        List<FeatureDA> regularity= new ArrayList<>();
+        regularity.add(feat_data_service.get_last_feat_value(feat_data_service.regularity_circles_left_name));
+        regularity.add(feat_data_service.get_last_feat_value(feat_data_service.regularity_circles_right_name));
+        regularity.add(feat_data_service.get_last_feat_value(feat_data_service.regularity_kinetic_left_name));
+        regularity.add(feat_data_service.get_last_feat_value(feat_data_service.regularity_kinetic_right_name));
+        regularity.add(feat_data_service.get_last_feat_value(feat_data_service.regularity_pronation_left_name));
+        regularity.add(feat_data_service.get_last_feat_value(feat_data_service.regularity_pronation_right_name));
+        float regularity_val=feat_data_service.get_avg_feat(regularity);
 
 
-        List<FeatureDA> vel_tap= new ArrayList<>();
-        vel_tap.add(feat_data_service.get_last_feat_value(feat_data_service.veloc_tapping1_name));
-        vel_tap.add(feat_data_service.get_last_feat_value(feat_data_service.veloc_tapping2_name));
-        float vel_tap_val=feat_data_service.get_avg_feat(vel_tap);
+        float[] data1 ={tremor_val, regularity_val, freeze_index_value, posture_value, n_steps_value, duration_steps_value};
+        float[] data2={100f,100f,100f,100f, 100f, 100f};
 
-        List<FeatureDA> prec_tap= new ArrayList<>();
-        prec_tap.add(feat_data_service.get_last_feat_value(feat_data_service.precision_tapping1_name));
-        prec_tap.add(feat_data_service.get_last_feat_value(feat_data_service.precision_tapping2_name));
-        float prec_tap_val=feat_data_service.get_avg_feat(prec_tap);
-
-        perc_sliding =feat_data_service.get_last_feat_value(feat_data_service.perc_sliding_name);
-        float perc_slidingval=perc_sliding.getFeature_value();
-
-        float[] data1 ={per_tap_val, vel_tap_val, prec_tap_val, perc_slidingval};
-        float[] data2={100f,100f,100f,100f};
-
-        String Label_3 = getResources().getString(R.string.tapPosition);
-        String Label_1 = getResources().getString(R.string.tapHits);
-        String Label_4 = getResources().getString(R.string.barHits);
-        String Label_2 = getResources().getString(R.string.tapVelocity);
-        String[] labels={Label_1, Label_2, Label_3, Label_4};
+        String Label_1 = getResources().getString(R.string.tremor);
+        String Label_2 = getResources().getString(R.string.regularity);
+        String Label_3 = getResources().getString(R.string.freezeIndex);
+        String Label_4 = getResources().getString(R.string.posture);
+        String Label_5 = getResources().getString(R.string.nStrides);
+        String Label_6 = getResources().getString(R.string.tStrides);
+        String[] labels={Label_1, Label_2, Label_3, Label_4, Label_5, Label_6};
 
         RadarManager.PlotRadar(radarchart, data1, data2, labels);
 
@@ -108,19 +126,18 @@ public class ResultsTapping extends AppCompatActivity  implements View.OnClickLi
         int area_progress=(int)(area*100/maxArea);
 
         SharedPreferences sharedPref =PreferenceManager.getDefaultSharedPreferences(this);
-        boolean new_area_tapping=sharedPref.getBoolean("New Area Tapping", false);
+        boolean new_area_movement=sharedPref.getBoolean("New Area Movement", false);
 
 
-        if (new_area_tapping){
+        if (new_area_movement){
             SharedPreferences.Editor editor = sharedPref.edit();
-            editor.putBoolean("New Area Tapping", false);
+            editor.putBoolean("New Area Movement", false);
             editor.apply();
             Date current = Calendar.getInstance().getTime();
-            FeatureDA area_tapping=new FeatureDA(feat_data_service.area_tapping_name, current, (float)area_progress );
-            feat_data_service.save_feature(area_tapping);
+            FeatureDA area_movement=new FeatureDA(feat_data_service.area_movement_name, current, (float)area_progress );
+            feat_data_service.save_feature(area_movement);
 
         }
-
 
 
         LinearLayout.LayoutParams params_line= (LinearLayout.LayoutParams)  iEmojin.getLayoutParams();
@@ -131,23 +148,21 @@ public class ResultsTapping extends AppCompatActivity  implements View.OnClickLi
         params_line.setMarginStart(xRandomBar);
         iEmojin.setLayoutParams(params_line);
 
-        progressBarTapping.setProgress(area_progress);
+        progressBarMovement.setProgress(area_progress);
         String msgp=String.valueOf(area_progress)+"%";
-        tmessage_tapping_perc.setText(msgp);
+        tmessage_movement_perc.setText(msgp);
         if (area_progress >=66) {
             iEmojin.setImageResource(R.drawable.happy_emojin);
-            tmessage_tapping.setText(R.string.Positive_message);
+            tmessage_movement.setText(R.string.Positive_message);
         }
         else if (area_progress>=33){
             iEmojin.setImageResource(R.drawable.medium_emojin);
-            tmessage_tapping.setText(R.string.Medium_message);
+            tmessage_movement.setText(R.string.Medium_message);
         }
         else{
             iEmojin.setImageResource(R.drawable.sad_emoji);
-            tmessage_tapping.setText(R.string.Negative_message);
+            tmessage_movement.setText(R.string.Negative_message);
         }
-
-
 
 
     }
@@ -156,7 +171,6 @@ public class ResultsTapping extends AppCompatActivity  implements View.OnClickLi
         bHistory.setOnClickListener(this);
         bHelp.setOnClickListener(this);
     }
-
 
     private void getDisplayDimensions() {
         Display display = this.getWindowManager().getDefaultDisplay();
@@ -188,7 +202,7 @@ public class ResultsTapping extends AppCompatActivity  implements View.OnClickLi
         String Title = getResources().getString(R.string.interpre);
         builder.setTitle(Title);
 
-        String Text = getResources().getString(R.string.TappingHelp);
+        String Text = getResources().getString(R.string.MovementHelp);
         builder.setMessage(Text);
 
         builder.setNeutralButton(R.string.cancel, new DialogInterface.OnClickListener() { // define the 'Cancel' button

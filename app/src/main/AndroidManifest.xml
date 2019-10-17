@@ -71,7 +71,7 @@
             android:screenOrientation="portrait"/>
 
         <activity
-            android:name=".FeatureExtraction.Movement.WalkingFeatureActivity"
+            android:name=".ResultsMovement"
             android:screenOrientation="portrait" />
 
         <!-- Register the Alarm Receiver -->

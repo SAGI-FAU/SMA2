@@ -509,22 +509,20 @@ public class MovementProcessing {
     // New movement functions for superior members
 
     public float UppTremor(CSVFileReader FileReader,String path_movement){
-        double vtremor=0;
         double Tremor=0;
 
         if(path_movement==null){
-            vtremor=0;
+            Tremor=0;
         }
         else {
             CSVFileReader.Signal TremorSignalaX2 = FileReader.ReadMovementSignal(path_movement, "aX [m/s^2]");
             CSVFileReader.Signal TremorSignalaY2 = FileReader.ReadMovementSignal(path_movement, "aY [m/s^2]");
             CSVFileReader.Signal TremorSignalaZ2 = FileReader.ReadMovementSignal(path_movement, "aZ [m/s^2]");
             Tremor = ComputeTremor(TremorSignalaX2.Signal, TremorSignalaY2.Signal, TremorSignalaZ2.Signal);
-            vtremor = 100-Tremor;
 
         }
 
-        return (float) vtremor;
+        return (float) Tremor;
     }
 
     public float UppRegularity(CSVFileReader FileReader,String path_movement){
@@ -633,42 +631,6 @@ public class MovementProcessing {
         return (StandarDeviation);
     }
 
-    public void export_movement_feature(String name_file, float feature, String feat_name) throws IOException {
-        String directory = Environment.getExternalStorageDirectory() + "/Apkinson/FEATURES/";
-        String fileName = directory + feat_name+".csv";
-
-
-        File direct = new File(directory);
-        if (!direct.exists()) {
-            direct.mkdirs();
-        }
-        File file =new File(fileName);
-
-        CSVWriter writer;
-        FileWriter mFileWriter;
-        try {
-            if(file.exists() && !file.isDirectory()){
-                mFileWriter = new FileWriter(fileName , true) ;
-                writer = new CSVWriter(mFileWriter);
-            }
-            else {
-                writer = new CSVWriter(new FileWriter(fileName));
-                String[] header={"File", feat_name};
-                writer.writeNext(header);
-            }
-            String name=name_file.substring(name_file.lastIndexOf("/")+1);
-            String[] row={"",""};
-            row[0]=name;
-            row[1]=Float.toString(feature);
-
-            writer.writeNext(row);
-            writer.close();
-        } catch(IOException ie) {
-            ie.printStackTrace();
-        }
-
-
-    }
 
 
 

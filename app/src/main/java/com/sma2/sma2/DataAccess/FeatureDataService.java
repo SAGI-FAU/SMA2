@@ -37,7 +37,6 @@ public class FeatureDataService {
 
     public String perc_sliding_name="perc sliding";
     public String area_tapping_name="area tapping";
-    public String tremor_name="tremor";
     public String regularity_circles_right_name="regularity_circles_right";
     public String regularity_circles_left_name="regularity_circles_left";
     public String regularity_pronation_right_name="regularity_pronation_right";

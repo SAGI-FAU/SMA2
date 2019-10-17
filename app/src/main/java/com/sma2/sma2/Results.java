@@ -21,7 +21,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.github.mikephil.charting.charts.RadarChart;
-import com.sma2.sma2.FeatureExtraction.Movement.WalkingFeatureActivity;
 import com.sma2.sma2.FeatureExtraction.Speech.features.RadarFeatures;
 
 
@@ -185,7 +184,7 @@ public class Results extends Fragment implements View.OnClickListener{
     }
 
     void open_results_movement(){
-        Intent i =new Intent(getActivity().getApplicationContext(), WalkingFeatureActivity.class);
+        Intent i =new Intent(getActivity().getApplicationContext(), ResultsMovement.class);
         startActivity(i);
     }
 
