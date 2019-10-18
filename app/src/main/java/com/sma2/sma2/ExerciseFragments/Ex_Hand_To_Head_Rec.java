@@ -102,6 +102,7 @@ public class Ex_Hand_To_Head_Rec extends ExerciseFragment implements ButtonFragm
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
+                EvaluateFeatures();
                 mListener.onExerciseFinished(recorder.getFileName());
             }
         }
@@ -140,7 +141,7 @@ public class Ex_Hand_To_Head_Rec extends ExerciseFragment implements ButtonFragm
             public void onFinish() {
                 countdownIsRunning = false;
                 this.cancel();
-                EvaluateFeatures();
+
 
                 countdownTextView.setText(countdown_finished_txt);
                 MediaPlayer mp = MediaPlayer.create(getContext(), R.raw.bell);

@@ -101,6 +101,7 @@ public class Ex_Walking_Rec extends ExerciseFragment implements ButtonFragment.O
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
+                EvaluateFeatures();
                 mListener.onExerciseFinished(recorder.getFileName());
 
 
@@ -135,8 +136,6 @@ public class Ex_Walking_Rec extends ExerciseFragment implements ButtonFragment.O
             public void onFinish() {
                 countdownIsRunning = false;
                 this.cancel();
-                EvaluateFeatures();
-
                 countdownTextView.setText(countdown_finished_txt);
                 MediaPlayer mp = MediaPlayer.create(getContext(), R.raw.bell);
                 mp.start();

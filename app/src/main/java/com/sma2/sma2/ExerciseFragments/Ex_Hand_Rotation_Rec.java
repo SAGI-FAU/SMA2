@@ -100,6 +100,8 @@ public class Ex_Hand_Rotation_Rec extends ExerciseFragment implements ButtonFrag
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
+                EvaluateFeatures();
+
                 mListener.onExerciseFinished(recorder.getFileName());
             }
         }

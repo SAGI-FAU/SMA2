@@ -89,7 +89,6 @@ public class ResultsSpeech extends AppCompatActivity implements View.OnClickList
         float pronunval=pronunciation.getFeature_value();
 
 
-
         float[] data1={pronunval, jitterval,Vrateval,intonationval, werval}; // Patient
         float[] data2={86f,98f,82.2f,55.4f, 100f}; // Healthy
 
@@ -99,9 +98,26 @@ public class ResultsSpeech extends AppCompatActivity implements View.OnClickList
         String Label_4 = getResources().getString(R.string.intonation);
         String Label_5 = getResources().getString(R.string.intelligibility);
         String[] labels={Label_1, Label_2, Label_3, Label_4, Label_5};
+        double area=0;
 
-        RadarManager.PlotRadar(radarchart, data1, data2, labels);
-        double area=RadarManager.get_area_chart(data1);
+
+        if (pronunval==0 && werval==0){
+            float[] data1_={jitterval,Vrateval,intonationval};
+            float[] data2_={98f,82.2f,55.4f};
+            float[] datamax_={100f,100f,100f};
+            String[] labels_={Label_2, Label_3, Label_4};
+            maxArea=RadarManager.get_area_chart(datamax_);
+            RadarManager.PlotRadar(radarchart, data1_, data2_, labels_);
+            area=RadarManager.get_area_chart(data1_);
+
+        }
+        else{
+            RadarManager.PlotRadar(radarchart, data1, data2, labels);
+            area=RadarManager.get_area_chart(data1);
+        }
+
+
+
         int area_progress=(int)(area*100/maxArea);
 
         SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
