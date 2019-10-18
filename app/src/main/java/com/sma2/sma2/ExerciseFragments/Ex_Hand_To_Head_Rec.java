@@ -141,16 +141,39 @@ public class Ex_Hand_To_Head_Rec extends ExerciseFragment implements ButtonFragm
             public void onFinish() {
                 countdownIsRunning = false;
                 this.cancel();
-
-
                 countdownTextView.setText(countdown_finished_txt);
                 MediaPlayer mp = MediaPlayer.create(getContext(), R.raw.bell);
                 mp.start();
                 Vibrator vib = (Vibrator) getContext().getSystemService(Context.VIBRATOR_SERVICE);
                 vib.vibrate(1000);
-
+                startSecondCountdownTimer();
             }
         }.start();
 
     }
+
+
+    private void startSecondCountdownTimer() {
+        countdownIsRunning = true;
+        countdownStart = System.currentTimeMillis();
+        timer = new CountDownTimer(EXERCISE_TIME* 1000, 1000) {
+            public void onTick(long millisUntilFinished) {
+                int newTime =  Math.round(millisUntilFinished / 1000);
+                countdownTextView.setText(String.valueOf(newTime));
+            }
+            public void onFinish() {
+                countdownIsRunning = false;
+                this.cancel();
+                //countdownTextView.setText(countdown_finished_txt);
+
+                EvaluateFeatures();
+                mListener.onExerciseFinished(recorder.getFileName());
+                MediaPlayer mp = MediaPlayer.create(getContext(), R.raw.bell);
+                mp.start();
+                Vibrator vib = (Vibrator) getContext().getSystemService(Context.VIBRATOR_SERVICE);
+                vib.vibrate(1000);
+            }
+        }.start();
+    }
+
 }
