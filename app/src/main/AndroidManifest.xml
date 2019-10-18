@@ -74,6 +74,10 @@
             android:name=".ResultsMovement"
             android:screenOrientation="portrait" />
 
+        <activity
+            android:name=".ResultsHistorical"
+            android:screenOrientation="portrait" />
+
         <!-- Register the Alarm Receiver -->
         <receiver android:name=".AlarmReceiver"
 

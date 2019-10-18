@@ -3,15 +3,22 @@ package com.sma2.sma2.FeatureExtraction;
 import android.content.Context;
 import android.graphics.Color;
 
+import com.jjoe64.graphview.DefaultLabelFormatter;
 import com.jjoe64.graphview.GraphView;
 import com.jjoe64.graphview.GridLabelRenderer;
 import com.jjoe64.graphview.LegendRenderer;
 import com.jjoe64.graphview.series.BarGraphSeries;
 import com.jjoe64.graphview.series.DataPoint;
 import com.jjoe64.graphview.series.LineGraphSeries;
+import com.sma2.sma2.DataAccess.FeatureDA;
 import com.sma2.sma2.R;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
+import java.util.List;
 
 public class GraphManager {
 
@@ -20,6 +27,7 @@ public class GraphManager {
     public GraphManager(Context context){
 
         CONTEXT=context;
+
 
     }
 
@@ -107,6 +115,64 @@ public class GraphManager {
         gridLabel.setVerticalAxisTitle(Ylabel);
     }
 
+
+
+
+    public void LineGraph(GraphView graph, List<FeatureDA> features, String Xlabel, String Ylabel){
+
+
+        LineGraphSeries<DataPoint> series= new LineGraphSeries<>();
+
+        float y=0;
+        long datef=0;
+        FeatureDA feature;
+        Date date;
+        final ArrayList<Long> dates=new ArrayList<>();
+        dates.clear();
+
+        int j=0;
+        for (int i = features.size()-1; i >=0; i--) {
+
+            feature=features.get(i);
+            y=feature.getFeature_value();
+            date=feature.getFeature_date();
+            datef=date.getTime();
+            dates.add(datef);
+            series.appendData(new DataPoint(j, y), true, features.size());
+            j+=1;
+        }
+
+
+        graph.addSeries(series);
+        series.setColor(Color.rgb(255, 140, 0));
+
+
+        GridLabelRenderer gridLabel = graph.getGridLabelRenderer();
+        gridLabel.setHorizontalAxisTitle(Xlabel);
+        gridLabel.setVerticalAxisTitle(Ylabel);
+        gridLabel.setHorizontalLabelsAngle(135);
+        gridLabel.setLabelFormatter(new DefaultLabelFormatter() {
+            SimpleDateFormat dateFormat =  new SimpleDateFormat("dd/MM");
+            @Override
+            public String formatLabel(double value, boolean isValueX) {
+                if (isValueX) {
+
+                    long datef=dates.get((int)value);
+                    Date d = new Date(datef);
+                    return (dateFormat.format(d));
+                }
+                return "" + (int) value;
+            }
+        });
+        graph.getViewport().setMaxY(102);
+        graph.getViewport().setMinY(0);
+        graph.getViewport().setYAxisBoundsManual(true);
+
+    }
+
+
+
+
     public void LineGraph2lines(GraphView graph, float[] x1, float[] y1, float[] x2, float[] y2, double maxY, double maxX, String Title, String Xlabel, String Ylabel, String legend1, String legend2){
 
 
@@ -141,5 +207,11 @@ public class GraphManager {
         gridLabel.setHorizontalAxisTitle(Xlabel);
         gridLabel.setVerticalAxisTitle(Ylabel);
     }
+
+
+
+
+
+
 
 }

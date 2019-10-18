@@ -151,6 +151,7 @@ public class Results extends Fragment implements View.OnClickListener{
                 open_results_tapping();
                 break;
             case R.id.button_history:
+                open_results_historical();
                 break;
 
         }
@@ -160,6 +161,12 @@ public class Results extends Fragment implements View.OnClickListener{
         Intent i =new Intent(getActivity().getApplicationContext(), ResultsSpeech.class);
         startActivity(i);
     }
+
+    void open_results_historical(){
+        Intent i =new Intent(getActivity().getApplicationContext(), ResultsHistorical.class);
+        startActivity(i);
+    }
+
 
 
     void open_results_tapping(){
