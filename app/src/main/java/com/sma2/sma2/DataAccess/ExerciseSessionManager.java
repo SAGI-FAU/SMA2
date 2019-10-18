@@ -491,7 +491,6 @@ public class ExerciseSessionManager {
                 ExVideo = "None";
             }
 
-
             //The following if-else statements are used to select the fragment of each task
             //ej: ExReadText.class only works for sentences.
             if (ExFrag.equals("readtext"))
@@ -502,8 +501,8 @@ public class ExerciseSessionManager {
                         ExType,
                         ExDescr,
                         ExInstr,
-                        Uri.parse(ExVideo),
                         Uri.parse("Instruction/Path"),
+                        Uri.parse(ExVideo),
                         ExReadText.class));
             }
             else if (ExFrag.equals("audiorec"))
@@ -514,8 +513,8 @@ public class ExerciseSessionManager {
                         ExType,
                         ExDescr,
                         ExInstr,
-                        Uri.parse(ExVideo),
                         Uri.parse("Instruction/Path"),
+                        Uri.parse(ExVideo),
                         ExAudioRec.class));
             }
             else if (ExFrag.equals("imgdes"))
@@ -526,8 +525,8 @@ public class ExerciseSessionManager {
                         ExType,
                         ExDescr,
                         ExInstr,
-                        Uri.parse(ExVideo),
                         Uri.parse("Instruction/Path"),
+                        Uri.parse(ExVideo),
                         ExImageDescription.class));
             }
             else if (ExFrag.equals("balance"))
@@ -538,8 +537,8 @@ public class ExerciseSessionManager {
                         ExType,
                         ExDescr,
                         ExInstr,
-                        Uri.parse(ExVideo),
                         Uri.parse("Instruction/Path"),
+                        Uri.parse(ExVideo),
                         Ex_balance_Rec.class));
             }
             else if (ExFrag.equals("circling"))
@@ -550,8 +549,8 @@ public class ExerciseSessionManager {
                         ExType,
                         ExDescr,
                         ExInstr,
-                        Uri.parse(ExVideo),
                         Uri.parse("Instruction/Path"),
+                        Uri.parse(ExVideo),
                         Ex_Circling_Rec.class));
             }
             else if (ExFrag.equals("rotation"))
@@ -562,8 +561,8 @@ public class ExerciseSessionManager {
                         ExType,
                         ExDescr,
                         ExInstr,
-                        Uri.parse(ExVideo),
                         Uri.parse("Instruction/Path"),
+                        Uri.parse(ExVideo),
                         Ex_Hand_Rotation_Rec.class));
             }
             else if (ExFrag.equals("hand2nose"))
@@ -574,8 +573,8 @@ public class ExerciseSessionManager {
                         ExType,
                         ExDescr,
                         ExInstr,
-                        Uri.parse(ExVideo),
                         Uri.parse("Instruction/Path"),
+                        Uri.parse(ExVideo),
                         Ex_Hand_To_Head_Rec.class));
             }
             else if (ExFrag.equals("postural"))
@@ -586,8 +585,8 @@ public class ExerciseSessionManager {
                         ExType,
                         ExDescr,
                         ExInstr,
-                        Uri.parse(ExVideo),
                         Uri.parse("Instruction/Path"),
+                        Uri.parse(ExVideo),
                         Ex_postural_Rec.class));
             }
             else if (ExFrag.equals("gaitfourtimes"))
@@ -598,8 +597,8 @@ public class ExerciseSessionManager {
                         ExType,
                         ExDescr,
                         ExInstr,
-                        Uri.parse(ExVideo),
                         Uri.parse("Instruction/Path"),
+                        Uri.parse(ExVideo),
                         Ex_Walking_Rec.class));
             }
             else if (ExFrag.equals("gaittwomins"))
@@ -610,8 +609,8 @@ public class ExerciseSessionManager {
                         ExType,
                         ExDescr,
                         ExInstr,
-                        Uri.parse(ExVideo),
                         Uri.parse("Instruction/Path"),
+                        Uri.parse(ExVideo),
                         ExFreeWalking.class));
             }
             else if (ExFrag.equals("finger1"))
@@ -622,8 +621,8 @@ public class ExerciseSessionManager {
                         ExType,
                         ExDescr,
                         ExInstr,
-                        Uri.parse(ExVideo),
                         Uri.parse("Instruction/Path"),
+                        Uri.parse(ExVideo),
                         ExOneFingerTapping.class));
             }
             else if (ExFrag.equals("finger2"))
@@ -634,8 +633,8 @@ public class ExerciseSessionManager {
                         ExType,
                         ExDescr,
                         ExInstr,
-                        Uri.parse(ExVideo),
                         Uri.parse("Instruction/Path"),
+                        Uri.parse(ExVideo),
                         ExTwoFingerTapping.class));
             }
             else if (ExFrag.equals("sliding"))
@@ -646,8 +645,8 @@ public class ExerciseSessionManager {
                         ExType,
                         ExDescr,
                         ExInstr,
-                        Uri.parse(ExVideo),
                         Uri.parse("Instruction/Path"),
+                        Uri.parse(ExVideo),
                         ExSliding.class));
             }
             else if (ExFrag.equals("rightwink"))
@@ -658,8 +657,8 @@ public class ExerciseSessionManager {
                         ExType,
                         ExDescr,
                         ExInstr,
-                        Uri.parse(ExVideo),
                         Uri.parse("Instruction/Path"),
+                        Uri.parse(ExVideo),
                         Ex_RightWink.class));
                 //FerRecorder_RightWink.class));
             }
@@ -671,8 +670,8 @@ public class ExerciseSessionManager {
                         ExType,
                         ExDescr,
                         ExInstr,
-                        Uri.parse(ExVideo),
                         Uri.parse("Instruction/Path"),
+                        Uri.parse(ExVideo),
                         Ex_LeftWink.class));
                 //FerRecorder_LeftWink.class));
             }
@@ -684,8 +683,8 @@ public class ExerciseSessionManager {
                         ExType,
                         ExDescr,
                         ExInstr,
-                        Uri.parse(ExVideo),
                         Uri.parse("Instruction/Path"),
+                        Uri.parse(ExVideo),
                         Ex_Happy.class));
                 //FerRecorder_LeftWink.class));
             }
