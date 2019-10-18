@@ -5,9 +5,11 @@ import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
 import android.view.WindowManager;
 
 import com.sma2.sma2.DataAccess.Exercise;
@@ -65,7 +67,22 @@ public class ExercisesActivity extends AppCompatActivity implements ExerciseInst
             open_exercise2(ex);
         }
 
+        FloatingActionButton fab = findViewById(R.id.fab_settings);
 
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                open_settings();
+            }
+        });
+
+
+    }
+
+    public void open_settings() {
+        //TODO: Implement as Dialog
+        Intent intent_settings = new Intent(ExercisesActivity.this, SettingsActivity.class);
+        startActivity(intent_settings);
     }
 
     @Override

@@ -16,7 +16,7 @@
         android:layout_height="0dp"
         app:layout_constraintBottom_toTopOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHeight_percent="0.12"
+        app:layout_constraintHeight_percent="0.05"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -37,7 +37,7 @@
         android:layout_height="0dp"
         app:layout_constraintWidth_percent="0.85"
         app:layout_constraintDimensionRatio="1.2"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="40sp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:textSize="@dimen/textview_text_size"
@@ -59,7 +59,7 @@
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:background="@color/colorPrimaryDark"
+        android:background="@color/colorPrimary"
         android:text="@string/session_start"
         android:textSize="@dimen/button_text_size"
         app:layout_constraintBottom_toBottomOf="parent"

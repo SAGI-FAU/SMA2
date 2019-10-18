@@ -70,7 +70,6 @@ public class ResultsMovement extends AppCompatActivity  implements View.OnClickL
         iEmojin=findViewById(R.id.iEmojin_movement);
         tmessage_movement=findViewById(R.id.tmessage_movement);
         tmessage_movement_perc=findViewById(R.id.tmessage_movement_perc);
-        getDisplayDimensions();
 
         RadarFigureManager RadarManager = new RadarFigureManager(this);
         // Radar chart
@@ -139,30 +138,7 @@ public class ResultsMovement extends AppCompatActivity  implements View.OnClickL
 
         }
 
-
-        LinearLayout.LayoutParams params_line= (LinearLayout.LayoutParams)  iEmojin.getLayoutParams();
-        int xRandomBar= (int)(0.01*area_progress*screenWidth-45);
-
-        params_line.setMarginStart(xRandomBar); // The indicator bar position
-        params_line.leftMargin=xRandomBar;
-        params_line.setMarginStart(xRandomBar);
-        iEmojin.setLayoutParams(params_line);
-
-        progressBarMovement.setProgress(area_progress);
-        String msgp=String.valueOf(area_progress)+"%";
-        tmessage_movement_perc.setText(msgp);
-        if (area_progress >=66) {
-            iEmojin.setImageResource(R.drawable.happy_emojin);
-            tmessage_movement.setText(R.string.Positive_message);
-        }
-        else if (area_progress>=33){
-            iEmojin.setImageResource(R.drawable.medium_emojin);
-            tmessage_movement.setText(R.string.Medium_message);
-        }
-        else{
-            iEmojin.setImageResource(R.drawable.sad_emoji);
-            tmessage_movement.setText(R.string.Negative_message);
-        }
+        RadarManager.put_emojin_and_message(iEmojin, tmessage_movement, tmessage_movement_perc, area_progress, progressBarMovement, this);
 
 
     }
@@ -172,14 +148,6 @@ public class ResultsMovement extends AppCompatActivity  implements View.OnClickL
         bHelp.setOnClickListener(this);
     }
 
-    private void getDisplayDimensions() {
-        Display display = this.getWindowManager().getDefaultDisplay();
-
-        Point size = new Point();
-        display.getSize(size);
-        screenWidth = size.x;
-        screenHeight = size.y;
-    }
 
 
     @Override

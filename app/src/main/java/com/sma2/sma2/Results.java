@@ -84,7 +84,6 @@ public class Results extends Fragment implements View.OnClickListener{
         bMovement=view.findViewById(R.id.bWalking);
         bTapping=view.findViewById(R.id.bTapping_one);
 
-        getDisplayDimensions();
         setListeners();
         RadarManager = new RadarFigureManager(getActivity().getApplicationContext());
 
@@ -122,42 +121,14 @@ public class Results extends Fragment implements View.OnClickListener{
             SharedPreferences.Editor editor = sharedPref.edit();
             editor.putBoolean("New Area Total", false);
             editor.apply();
-
             Date current = Calendar.getInstance().getTime();
             FeatureDA area_t=new FeatureDA(feat_data_service.area_total_name, current, (float)area_progress );
             feat_data_service.save_feature(area_t);
         }
 
-
-        LinearLayout.LayoutParams params_line= (LinearLayout.LayoutParams)  iEmojin.getLayoutParams();
-        int xRandomBar= (int)(0.01*area_progress*screenWidth-45);
-
-        params_line.setMarginStart(xRandomBar); // The indicator bar position
-        params_line.leftMargin=xRandomBar;
-        params_line.setMarginStart(xRandomBar);
-        iEmojin.setLayoutParams(params_line);
-
-        progressBar.setProgress(area_progress);
-        String msgp=String.valueOf(area_progress)+"%";
-        tmessage_perc.setText(msgp);
-        if (area_progress >=66) {
-            iEmojin.setImageResource(R.drawable.happy_emojin);
-            tmessage.setText(R.string.Positive_message);
-        }
-        else if (area_progress>=33){
-            iEmojin.setImageResource(R.drawable.medium_emojin);
-            tmessage.setText(R.string.Medium_message);
-        }
-        else{
-            iEmojin.setImageResource(R.drawable.sad_emoji);
-            tmessage.setText(R.string.Negative_message);
-        }
-
-
+        RadarManager.put_emojin_and_message(iEmojin, tmessage, tmessage_perc, area_progress, progressBar, getActivity());
         return view;
     }
-
-
 
     private void setListeners() {
         bSpeech.setOnClickListener(this);
@@ -202,14 +173,7 @@ public class Results extends Fragment implements View.OnClickListener{
     }
 
 
-    public void getDisplayDimensions() {
-        Display display = getActivity().getWindowManager().getDefaultDisplay();
 
-        Point size = new Point();
-        display.getSize(size);
-        screenWidth = size.x;
-        screenHeight = size.y;
-    }
 
 
 

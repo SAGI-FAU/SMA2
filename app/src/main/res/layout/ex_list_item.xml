@@ -8,9 +8,9 @@
     android:weightSum="1">
 
     <android.support.constraint.ConstraintLayout
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="0.85">
+        >
 
         <ImageView
             android:id="@+id/ex_icon_list"
@@ -19,10 +19,10 @@
             android:adjustViewBounds="true"
             android:background="@color/cardview_light_background"
             android:cropToPadding="false"
-            android:paddingStart="5dp"
-            android:paddingTop="5dp"
-            android:paddingEnd="5dp"
-            android:paddingBottom="5dp"
+            android:paddingStart="5sp"
+            android:paddingTop="5sp"
+            android:paddingEnd="5sp"
+            android:paddingBottom="5sp"
             android:saveEnabled="false"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintDimensionRatio="1"
@@ -48,7 +48,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="1dp"
                 android:layout_marginEnd="1dp"
-                android:layout_weight="0.8"
+                android:layout_weight="0.85"
                 android:background="@color/backgroundColor"
                 android:paddingStart="20dp"
                 android:text="TextView"
@@ -71,28 +71,12 @@
                 android:text="TextView"
                 android:textAlignment="viewStart"
                 android:textColor="@color/textColorDark"
-                android:textSize="14sp"
+                android:textSize="16sp"
                 app:autoSizeTextType="uniform" />
         </LinearLayout>
 
     </android.support.constraint.ConstraintLayout>
 
-    <LinearLayout
-        android:layout_width="0dp"
-        android:layout_height="match_parent"
-        android:layout_weight="0.15"
-        android:background="@color/cardview_light_background"
-        android:gravity="center"
-        android:orientation="horizontal">
 
-        <ImageButton
-            android:id="@+id/imageButton2"
-            style="@android:style/Widget.ImageButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:scaleType="center"
-            android:tint="@color/colorAccent"
-            app:srcCompat="@android:drawable/ic_media_play" />
-    </LinearLayout>
 
 </LinearLayout>

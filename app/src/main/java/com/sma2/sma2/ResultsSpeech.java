@@ -40,7 +40,6 @@ public class ResultsSpeech extends AppCompatActivity implements View.OnClickList
     private ProgressBar progressBar;
     private ImageView iEmojin;
     private TextView tmessage, tmessage_perc;
-    int screenWidth, screenHeight;
     private ImageButton bHelp;
     private double maxArea=23776;
     FeatureDA jitter;
@@ -65,7 +64,6 @@ public class ResultsSpeech extends AppCompatActivity implements View.OnClickList
         tmessage_perc=findViewById(R.id.tmessage_speech_perc);
         bHelp=findViewById(R.id.button_help);
         bHelp.bringToFront();
-        getDisplayDimensions();
         setListeners();
         RadarManager = new RadarFigureManager(this);
         RadarChart radarchart= findViewById(R.id.chart_speech);
@@ -132,29 +130,8 @@ public class ResultsSpeech extends AppCompatActivity implements View.OnClickList
             feat_data_service.save_feature(area_speech);
         }
 
-        LinearLayout.LayoutParams params_line= (LinearLayout.LayoutParams)  iEmojin.getLayoutParams();
-        int xRandomBar= (int)(0.01*area_progress*screenWidth-45);
+        RadarManager.put_emojin_and_message(iEmojin, tmessage, tmessage_perc, area_progress, progressBar, this);
 
-        params_line.setMarginStart(xRandomBar); // The indicator bar position
-        params_line.leftMargin=xRandomBar;
-        params_line.setMarginStart(xRandomBar);
-        iEmojin.setLayoutParams(params_line);
-
-        progressBar.setProgress(area_progress);
-        String msgp=String.valueOf(area_progress)+"%";
-        tmessage_perc.setText(msgp);
-        if (area_progress >=66) {
-            iEmojin.setImageResource(R.drawable.happy_emojin);
-            tmessage.setText(R.string.Positive_message);
-        }
-        else if (area_progress>=33){
-            iEmojin.setImageResource(R.drawable.medium_emojin);
-            tmessage.setText(R.string.Medium_message);
-        }
-        else{
-            iEmojin.setImageResource(R.drawable.sad_emoji);
-            tmessage.setText(R.string.Negative_message);
-        }
 
     }
 
@@ -198,13 +175,5 @@ public class ResultsSpeech extends AppCompatActivity implements View.OnClickList
     }
 
 
-    private void getDisplayDimensions() {
-        Display display = this.getWindowManager().getDefaultDisplay();
-
-        Point size = new Point();
-        display.getSize(size);
-        screenWidth = size.x;
-        screenHeight = size.y;
-    }
 
 }
