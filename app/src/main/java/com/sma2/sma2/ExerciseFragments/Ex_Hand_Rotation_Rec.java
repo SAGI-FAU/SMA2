@@ -28,7 +28,7 @@ import java.util.Date;
 public class Ex_Hand_Rotation_Rec extends ExerciseFragment implements ButtonFragment.OnButtonInteractionListener {
     private MovementRecorder recorder;
     private static long START_COUNTDOWN = 3;
-    private static long EXERCISE_TIME = 30;
+    private static long EXERCISE_TIME = 10;
     private final int SAMPLING_FREQUENCY = 10000;
     private String countdown_finished_txt;
     private long countdownStart;
