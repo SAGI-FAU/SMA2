@@ -2,22 +2,23 @@ package com.sma2.sma2.DataAccess;
 
 import android.content.Context;
 
-import com.alibaba.fastjson.parser.Feature;
 import com.sma2.sma2.R;
 
 import org.greenrobot.greendao.database.Database;
+import org.greenrobot.greendao.query.QueryBuilder;
 
-import java.text.ParseException;
+
+import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
-import java.util.Locale;
 
 public class FeatureDataService {
 
+    private DateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
 
     public String jitter_name="Jitter";
     public String vrate_name="vrate";
@@ -65,7 +66,13 @@ public class FeatureDataService {
 
     public void save_feature(String feature_name, Date feature_date, Float feature_value){
 
-        FeatureDA feature=new FeatureDA(feature_name, feature_date, feature_value);
+        Date dateflook=new Date();
+        try {
+            dateflook= formatter.parse(formatter.format(feature_date));
+        } catch (java.text.ParseException e) {
+            e.printStackTrace();
+        }
+        FeatureDA feature=new FeatureDA(feature_name, dateflook, feature_value);
         DaoMaster.DevOpenHelper helper = new DaoMaster.DevOpenHelper(invocationcontext, dbname);
         Database db = helper.getWritableDb();
         DaoSession session = new DaoMaster(db).newSession();
@@ -83,7 +90,7 @@ public class FeatureDataService {
 
 
 
-    public List<FeatureDA> get_feature_by_name(String feature_name){
+    private List<FeatureDA> get_feature_by_name(String feature_name){
 
 
         DaoMaster.DevOpenHelper helper = new DaoMaster.DevOpenHelper(invocationcontext, dbname);
@@ -91,7 +98,7 @@ public class FeatureDataService {
         DaoSession session = new DaoMaster(db).newSession();
         FeatureDADao dao = session.getFeatureDADao();
         List<FeatureDA> features = dao.queryBuilder()
-                .where(FeatureDADao.Properties.Feature_name.eq(feature_name))
+                .where(FeatureDADao.Properties.Feature_name.eq(feature_name)).orderAsc(FeatureDADao.Properties.Feature_date)
                 .list();
 
         db.close();
@@ -101,34 +108,51 @@ public class FeatureDataService {
     }
 
 
+    private List<FeatureDA> get_feature_by_date_and_name(String name, Date feature_date){
+
+
+        String dateflook= formatter.format(feature_date);
+
+        DaoMaster.DevOpenHelper helper = new DaoMaster.DevOpenHelper(invocationcontext, dbname);
+        Database db = helper.getReadableDb();
+        DaoSession session = new DaoMaster(db).newSession();
+        FeatureDADao dao = session.getFeatureDADao();
+        QueryBuilder<FeatureDA> qb = dao.queryBuilder();
+        qb.where(FeatureDADao.Properties.Feature_name.eq(name),
+        qb.and(FeatureDADao.Properties.Feature_name.eq(name),FeatureDADao.Properties.Feature_date_str.eq(dateflook)));
+        qb.orderAsc(FeatureDADao.Properties.Feature_date);
+        List<FeatureDA> features = qb.list();
+        db.close();
+
+        return features;
+
+    }
+
+
+
+
     public List<FeatureDA> get_last_10_features_by_name(String feature_name){
 
 
-        List<FeatureDA> features=get_feature_by_name(feature_name);
+        List<FeatureDA> features=get_avg_all_feat_per_day(feature_name);
 
-        if (features.size()==0){
-            FeatureDA feat=new FeatureDA(feature_name);
-            List<FeatureDA> list_empty=new ArrayList<>();
-            list_empty.add(feat);
-            return list_empty;
-        }
-
-        else if (features.size()<10) {
-
+        if (features.size()<10) {
             return features;
         }
         else{
 
-            List<FeatureDA> features_sorted=sort_feat_days(features);
             List<FeatureDA> features_sorted_10=new ArrayList<>();
 
-            for (int i=features_sorted.size()-1;i>features_sorted.size()-10;i--){
-                features_sorted_10.add(features_sorted.get(i));
+            for (int i=features.size()-1;i>features.size()-10;i--){
+                features_sorted_10.add(features.get(i));
             }
             return features_sorted_10;
         }
 
     }
+
+
+
 
 
     public FeatureDA get_last_feat_value(String feature_name){
@@ -137,45 +161,13 @@ public class FeatureDataService {
             return new FeatureDA(feature_name);
         }
         else{
-            List<FeatureDA> features_sorted=sort_feat_days(features);
-            return features_sorted.get(features.size()-1);
+            return features.get(features.size()-1);
         }
     }
 
 
 
 
-    public List<FeatureDA> sort_feat_days(List<FeatureDA> features){
-
-
-        ArrayList<Date>dateList=new ArrayList<>();
-        ArrayList<Date>dateList2=new ArrayList<>();
-        ArrayList<Float>values=new ArrayList<>();
-
-        for (int i=0;i<features.size();i++){
-            dateList.add(features.get(i).getFeature_date());
-            dateList2.add(features.get(i).getFeature_date());
-            values.add(features.get(i).getFeature_value());
-        }
-        Collections.sort(dateList, new Comparator<Date>(){
-            public int compare(Date date1, Date date2){
-                return date1.compareTo(date2);
-            }
-        });
-
-        List<FeatureDA> features_sorted=new ArrayList<>();
-        for (int i=0;i<dateList.size();i++){
-            int index=dateList.indexOf(dateList2.get(i));
-            Date date_=dateList2.get(i);
-
-            FeatureDA feat=new FeatureDA(features.get(i).getFeature_name(),date_, features.get(index).getFeature_value() );
-            features_sorted.add(feat);
-
-        }
-
-        return  features_sorted;
-
-    }
 
 
 
@@ -193,7 +185,54 @@ public class FeatureDataService {
 
         }
 
+        if (cont_great_zero==0){
+
+            return 0;
+        }
         return sum_feat/cont_great_zero;
+    }
+
+
+    public FeatureDA get_avg_feat_day(String feat_name, Date date){
+
+    List<FeatureDA>features_date=get_feature_by_date_and_name(feat_name, date);
+    float avgfeat=get_avg_feat(features_date);
+        return new FeatureDA(feat_name, date, avgfeat);
+    }
+
+
+
+    public List<FeatureDA> get_avg_all_feat_per_day(String feat_name){
+
+        List<FeatureDA> features=get_feature_by_name(feat_name);
+
+        if (features.size()==0){
+            return features;
+        }
+
+        FeatureDA feat0=features.get(0);
+        Date curr0=feat0.getFeature_date();
+        String curr0str=formatter.format(curr0);
+        List<FeatureDA> features_out=new ArrayList<>();
+        FeatureDA featday=get_avg_feat_day(feat_name, curr0);
+        features_out.add(featday);
+
+        for (int i=0;i<features.size();i++){
+            FeatureDA feat=features.get(i);
+
+            Date curr=feat.getFeature_date();
+            String currstr=formatter.format(curr);
+
+            if(!currstr.equals(curr0str)){
+
+                featday=get_avg_feat_day(feat_name, curr);
+                features_out.add(featday);
+                curr0str=currstr;
+
+            }
+
+        }
+        return features_out;
     }
 
 }

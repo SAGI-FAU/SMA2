@@ -1,20 +1,43 @@
 package com.sma2.sma2;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.Spinner;
 
+import com.jjoe64.graphview.DefaultLabelFormatter;
 import com.jjoe64.graphview.GraphView;
+import com.jjoe64.graphview.GridLabelRenderer;
+import com.jjoe64.graphview.series.DataPoint;
 import com.sma2.sma2.DataAccess.FeatureDA;
 import com.sma2.sma2.DataAccess.FeatureDataService;
 import com.sma2.sma2.FeatureExtraction.GraphManager;
 
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
-public class ResultsHistorical extends AppCompatActivity {
+public class ResultsHistorical extends AppCompatActivity implements View.OnClickListener {
 
+    ArrayList<Long> dates1;
+
+    Spinner spinner;
+    List<FeatureDA> Features;
+    FeatureDataService featureDataService;
+    GraphManager graphManager;
+    GraphView graph_total;
+    String[] list_features_names= new String[4];
+    private ImageButton bHelp;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -22,47 +45,137 @@ public class ResultsHistorical extends AppCompatActivity {
 
         setContentView(R.layout.activity_historical_results);
 
-        GraphView graph_total =findViewById(R.id.plotlineAll);
-        GraphView graph_speech =findViewById(R.id.plotlineSpec);
-        GraphView graph_mov =findViewById(R.id.plotlineMov);
-        GraphView graph_tap =findViewById(R.id.plotlineTap);
+        graph_total =findViewById(R.id.plotlineAll);
+        spinner = findViewById(R.id.spinnePlot);
+        graphManager=new GraphManager(this);
+        featureDataService=new FeatureDataService(this);
+        bHelp=findViewById(R.id.button_help);
+        bHelp.setOnClickListener(this);
+
+        Resources r = getResources();
+        String[] categories = new String[]{r.getString(R.string.global_results),r.getString(R.string.speech_results),r.getString(R.string.movement_results),r.getString(R.string.taping_results)};
+
+        list_features_names[0]=featureDataService.area_total_name;
+        list_features_names[1]=featureDataService.area_speech_name;
+        list_features_names[2]=featureDataService.area_movement_name;
+        list_features_names[3]=featureDataService.area_tapping_name;
+        Features=featureDataService.get_last_10_features_by_name(list_features_names[0]);
+
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, R.layout.spinner_item,categories);
+
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner.setAdapter(adapter);
+        spinner.setSelection(0);
 
 
-        GraphManager graphManager=new GraphManager(this);
-        FeatureDataService featureDataService=new FeatureDataService(this);
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+
+                Features=featureDataService.get_last_10_features_by_name(list_features_names[i]);
+                if (Features.size()>0){
+                    plot_history();
+
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+                Features=featureDataService.get_last_10_features_by_name(list_features_names[0]);
+                if (Features.size()>0){
+                    plot_history();
+
+                }
+            }
+        });
 
 
-        List<FeatureDA> area_total=featureDataService.get_last_10_features_by_name(featureDataService.area_total_name);
-        List<FeatureDA> area_speech=featureDataService.get_last_10_features_by_name(featureDataService.area_speech_name);
-        List<FeatureDA> area_movement=featureDataService.get_last_10_features_by_name(featureDataService.area_movement_name);
-        List<FeatureDA> area_tapping=featureDataService.get_last_10_features_by_name(featureDataService.area_tapping_name);
+    }
+
+    @Override
+    public void onClick(View view) {
+
+        switch (view.getId()){
+            case R.id.button_help:
+                open_help();
+                break;
+
+        }
+
+    }
+
+
+    private void open_help(){
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+
+        String Title = getResources().getString(R.string.interpre);
+        builder.setTitle(Title);
+
+        String Text = getResources().getString(R.string.HistoricHelp);
+        builder.setMessage(Text);
+
+        builder.setNeutralButton(R.string.cancel, new DialogInterface.OnClickListener() { // define the 'Cancel' button
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
+            }
+        });
+
+        AlertDialog dialog = builder.create();
+        dialog.show();
+    }
 
 
 
-        graphManager.LineGraph(graph_total, area_total, "Date", "Value");
+    ArrayList<Long> get_dates(List<FeatureDA> features){
+
+        ArrayList<Long> dates=new ArrayList<>();
+
+        for (int i = features.size()-1; i >=0; i--) {
+            Date date=features.get(i).getFeature_date();
+            long datef=date.getTime();
+            dates.add(datef);
+        }
+
+        return dates;
+    }
 
 
+    private void plot_history(){
+
+        GridLabelRenderer gridlabel1=graphManager.LineGraph(graph_total, Features, "Date", "Value");
+
+
+        dates1=get_dates(Features);
+
+        gridlabel1.setLabelFormatter(new DefaultLabelFormatter() {
+            SimpleDateFormat dateFormat1 =  new SimpleDateFormat("dd/MM");
+            @Override
+            public String formatLabel(double value, boolean isValueX) {
+                if (isValueX) {
+
+                    int val=(int) value;
+                    if (val<dates1.size()){
+                        long datef=dates1.get((int)value);
+                        Date d = new Date(datef);
+                        return (dateFormat1.format(d));
+                    }
+
+                }
+                return "";
+            }
+        });
 
         LinearLayout parent = findViewById(R.id.linear);
-
         parent.setOrientation(LinearLayout.HORIZONTAL);
-
-
-        ImageView[] views = new ImageView[area_total.size()];
-        for (int i=area_total.size()-1;i>=0;i--){
-
+        parent.removeAllViews();
+        ImageView[] views = new ImageView[Features.size()];
+        for (int i=Features.size()-1;i>=0;i--){
             ImageView iv = new ImageView(this);
-
-
             LinearLayout.LayoutParams param = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT
                     , ViewGroup.LayoutParams.WRAP_CONTENT);
-
-
             iv.setLayoutParams(param);
-
-            FeatureDA feature=area_total.get(i);
+            FeatureDA feature=Features.get(i);
             float y=feature.getFeature_value();
-
             if (y>66){
                 iv.setImageResource(R.drawable.happy_emojin);
             }
@@ -78,12 +191,7 @@ public class ResultsHistorical extends AppCompatActivity {
             parent.addView(iv);
         }
 
-        graphManager.LineGraph(graph_speech, area_speech, "Date", "Value");
-        //graphManager.LineGraph(graph_mov, area_movement, "Date", "Value");
-        graphManager.LineGraph(graph_tap, area_tapping, "Date", "Value");
-
-
-
 
     }
+
 }

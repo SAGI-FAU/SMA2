@@ -118,31 +118,23 @@ public class GraphManager {
 
 
 
-    public void LineGraph(GraphView graph, List<FeatureDA> features, String Xlabel, String Ylabel){
+    public GridLabelRenderer LineGraph(GraphView graph, List<FeatureDA> features, String Xlabel, String Ylabel){
 
 
         LineGraphSeries<DataPoint> series= new LineGraphSeries<>();
 
         float y=0;
-        long datef=0;
         FeatureDA feature;
-        Date date;
-        final ArrayList<Long> dates=new ArrayList<>();
-        dates.clear();
 
         int j=0;
         for (int i = features.size()-1; i >=0; i--) {
 
             feature=features.get(i);
             y=feature.getFeature_value();
-            date=feature.getFeature_date();
-            datef=date.getTime();
-            dates.add(datef);
             series.appendData(new DataPoint(j, y), true, features.size());
             j+=1;
         }
-
-
+        graph.removeAllSeries();
         graph.addSeries(series);
         series.setColor(Color.rgb(255, 140, 0));
 
@@ -151,22 +143,12 @@ public class GraphManager {
         gridLabel.setHorizontalAxisTitle(Xlabel);
         gridLabel.setVerticalAxisTitle(Ylabel);
         gridLabel.setHorizontalLabelsAngle(135);
-        gridLabel.setLabelFormatter(new DefaultLabelFormatter() {
-            SimpleDateFormat dateFormat =  new SimpleDateFormat("dd/MM");
-            @Override
-            public String formatLabel(double value, boolean isValueX) {
-                if (isValueX) {
 
-                    long datef=dates.get((int)value);
-                    Date d = new Date(datef);
-                    return (dateFormat.format(d));
-                }
-                return "" + (int) value;
-            }
-        });
         graph.getViewport().setMaxY(102);
         graph.getViewport().setMinY(0);
         graph.getViewport().setYAxisBoundsManual(true);
+
+        return gridLabel;
 
     }
 

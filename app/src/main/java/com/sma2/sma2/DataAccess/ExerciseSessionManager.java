@@ -187,7 +187,13 @@ public class ExerciseSessionManager {
             }
         }
 
-        return completed*100/N;
+        if (N==0){
+            return 0;
+        }
+        else{
+            return completed*100/N;
+
+        }
 
 
     }

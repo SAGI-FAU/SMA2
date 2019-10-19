@@ -25,7 +25,8 @@ public class FeatureDADao extends AbstractDao<FeatureDA, Long> {
         public final static Property Id = new Property(0, Long.class, "id", true, "_id");
         public final static Property Feature_name = new Property(1, String.class, "feature_name", false, "FEATURE_NAME");
         public final static Property Feature_date = new Property(2, java.util.Date.class, "feature_date", false, "FEATURE_DATE");
-        public final static Property Feature_value = new Property(3, float.class, "feature_value", false, "FEATURE_VALUE");
+        public final static Property Feature_date_str = new Property(3, String.class, "feature_date_str", false, "FEATURE_DATE_STR");
+        public final static Property Feature_value = new Property(4, float.class, "feature_value", false, "FEATURE_VALUE");
     }
 
 
@@ -44,7 +45,8 @@ public class FeatureDADao extends AbstractDao<FeatureDA, Long> {
                 "\"_id\" INTEGER PRIMARY KEY AUTOINCREMENT ," + // 0: id
                 "\"FEATURE_NAME\" TEXT," + // 1: feature_name
                 "\"FEATURE_DATE\" INTEGER," + // 2: feature_date
-                "\"FEATURE_VALUE\" REAL NOT NULL );"); // 3: feature_value
+                "\"FEATURE_DATE_STR\" TEXT," + // 3: feature_date_str
+                "\"FEATURE_VALUE\" REAL NOT NULL );"); // 4: feature_value
     }
 
     /** Drops the underlying database table. */
@@ -71,7 +73,12 @@ public class FeatureDADao extends AbstractDao<FeatureDA, Long> {
         if (feature_date != null) {
             stmt.bindLong(3, feature_date.getTime());
         }
-        stmt.bindDouble(4, entity.getFeature_value());
+ 
+        String feature_date_str = entity.getFeature_date_str();
+        if (feature_date_str != null) {
+            stmt.bindString(4, feature_date_str);
+        }
+        stmt.bindDouble(5, entity.getFeature_value());
     }
 
     @Override
@@ -92,7 +99,12 @@ public class FeatureDADao extends AbstractDao<FeatureDA, Long> {
         if (feature_date != null) {
             stmt.bindLong(3, feature_date.getTime());
         }
-        stmt.bindDouble(4, entity.getFeature_value());
+ 
+        String feature_date_str = entity.getFeature_date_str();
+        if (feature_date_str != null) {
+            stmt.bindString(4, feature_date_str);
+        }
+        stmt.bindDouble(5, entity.getFeature_value());
     }
 
     @Override
@@ -106,7 +118,8 @@ public class FeatureDADao extends AbstractDao<FeatureDA, Long> {
             cursor.isNull(offset + 0) ? null : cursor.getLong(offset + 0), // id
             cursor.isNull(offset + 1) ? null : cursor.getString(offset + 1), // feature_name
             cursor.isNull(offset + 2) ? null : new java.util.Date(cursor.getLong(offset + 2)), // feature_date
-            cursor.getFloat(offset + 3) // feature_value
+            cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3), // feature_date_str
+            cursor.getFloat(offset + 4) // feature_value
         );
         return entity;
     }
@@ -116,7 +129,8 @@ public class FeatureDADao extends AbstractDao<FeatureDA, Long> {
         entity.setId(cursor.isNull(offset + 0) ? null : cursor.getLong(offset + 0));
         entity.setFeature_name(cursor.isNull(offset + 1) ? null : cursor.getString(offset + 1));
         entity.setFeature_date(cursor.isNull(offset + 2) ? null : new java.util.Date(cursor.getLong(offset + 2)));
-        entity.setFeature_value(cursor.getFloat(offset + 3));
+        entity.setFeature_date_str(cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3));
+        entity.setFeature_value(cursor.getFloat(offset + 4));
      }
     
     @Override
