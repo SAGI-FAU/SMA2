@@ -18,6 +18,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.sma2.sma2.DataAccess.FeatureDataService;
 import com.sma2.sma2.FeatureExtraction.Tapping.FeatureTapping;
@@ -140,7 +141,13 @@ public class ExTwoFingerTapping extends ExerciseFragment implements View.OnClick
                 SharedPreferences.Editor editor = sharedPref.edit();
                 editor.putBoolean("New Area Tapping", true);
                 editor.apply();
-                EvaluateFeatures();
+
+                try {
+                    EvaluateFeatures();
+                }
+                catch (Exception e){
+                    Toast.makeText(getActivity().getApplicationContext(), getResources().getString(R.string.failed),Toast.LENGTH_SHORT).show();
+                }
                 mListener.onExerciseFinished(filePath);
 
             }

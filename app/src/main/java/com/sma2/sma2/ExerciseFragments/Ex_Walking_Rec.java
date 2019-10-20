@@ -101,7 +101,13 @@ public class Ex_Walking_Rec extends ExerciseFragment implements ButtonFragment.O
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
-                EvaluateFeatures();
+
+                try {
+                    EvaluateFeatures();
+                }
+                catch (Exception e){
+                    Toast.makeText(getActivity().getApplicationContext(), getResources().getString(R.string.failed),Toast.LENGTH_SHORT).show();
+                }
                 mListener.onExerciseFinished(recorder.getFileName());
 
 

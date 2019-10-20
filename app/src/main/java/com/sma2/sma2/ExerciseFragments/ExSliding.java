@@ -17,6 +17,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.SeekBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.sma2.sma2.DataAccess.FeatureDataService;
 import com.sma2.sma2.FeatureExtraction.Tapping.FeatureTapping;
@@ -95,7 +96,13 @@ public class ExSliding extends ExerciseFragment implements SeekBar.OnSeekBarChan
                 SharedPreferences.Editor editor = sharedPref.edit();
                 editor.putBoolean("New Area Tapping", true);
                 editor.apply();
-                EvaluateFeatures();
+
+                try {
+                    EvaluateFeatures();
+                }
+                catch (Exception e){
+                    Toast.makeText(getActivity().getApplicationContext(), getResources().getString(R.string.failed),Toast.LENGTH_SHORT).show();
+                }
                 mListener.onExerciseFinished(filePath);
 
             }

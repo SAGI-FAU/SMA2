@@ -179,6 +179,7 @@
     <string name="steps">Steps</string>
     <string name="velocity">Velocity</string>
     <string name="tremor">Tremor</string>
+    <string name="failed">Feature computation failed</string>
     <string name="jitter_failed">Jiiter could not be computed</string>
     <string name="speech_performance">Speech performance</string>
     <string name="tapping_performance">Fine motor skills performance</string>

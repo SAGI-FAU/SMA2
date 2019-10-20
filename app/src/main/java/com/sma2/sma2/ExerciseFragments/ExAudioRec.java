@@ -122,7 +122,14 @@ public class ExAudioRec extends ExerciseFragment implements ButtonFragment.OnBut
             final String state = bundle.getString("State", "Empty");
             if (state.equals("Finished")){
 
-                evaluate_features();
+
+                try {
+                    evaluate_features();
+
+                }
+                catch (Exception e){
+                    Toast.makeText(getActivity().getApplicationContext(), getResources().getString(R.string.failed),Toast.LENGTH_SHORT).show();
+                }
 
             }
 

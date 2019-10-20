@@ -164,9 +164,13 @@ public class Ex_Hand_To_Head_Rec extends ExerciseFragment implements ButtonFragm
             public void onFinish() {
                 countdownIsRunning = false;
                 this.cancel();
-                //countdownTextView.setText(countdown_finished_txt);
+                try {
+                    EvaluateFeatures();
+                }
+                catch (Exception e){
+                    Toast.makeText(getActivity().getApplicationContext(), getResources().getString(R.string.failed),Toast.LENGTH_SHORT).show();
+                }
 
-                EvaluateFeatures();
                 mListener.onExerciseFinished(recorder.getFileName());
                 MediaPlayer mp = MediaPlayer.create(getContext(), R.raw.bell);
                 mp.start();

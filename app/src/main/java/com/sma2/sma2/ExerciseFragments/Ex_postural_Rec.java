@@ -162,8 +162,13 @@ public class Ex_postural_Rec extends ExerciseFragment implements ButtonFragment.
             public void onFinish() {
                 countdownIsRunning = false;
                 this.cancel();
-                //countdownTextView.setText(countdown_finished_txt);
-                EvaluateFeatures();
+
+                try {
+                    EvaluateFeatures();
+                }
+                catch (Exception e){
+                    Toast.makeText(getActivity().getApplicationContext(), getResources().getString(R.string.failed),Toast.LENGTH_SHORT).show();
+                }
 
                 mListener.onExerciseFinished(recorder.getFileName());
                 MediaPlayer mp = MediaPlayer.create(getContext(), R.raw.bell);
