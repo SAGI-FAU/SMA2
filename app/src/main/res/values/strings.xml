@@ -17,7 +17,7 @@
     <string name="right">Right</string>
     <string name="yes">Yes</string>
     <string name="no">No</string>
-    <string name="dataDummy">dd/mm/yyyy</string>
+    <string name="dataDummy" translatable="false">dd/mm/yyyy</string>
     <string name="smoker">Smoker</string>
     <string name="next">Next</string>
     <string name="back">Back</string>
@@ -186,7 +186,7 @@
     <string name="history_mov">Historic results</string>
     <string name="voicerate_failed">Voice Rate could not be computed</string>
     <string name="intonation_failed">Intonation could not be computed</string>
-    <string name="freezeIndex">FreezeIndex</string>
+    <string name="freezeIndex" translatable="false">FreezeIndex</string>
     <string name="posture">Posture</string>
     <string name="nStrides">Number of strides</string>
     <string name="tStrides">Stride time</string>
@@ -220,5 +220,5 @@
             The figure indicates your evolution among consecutive days. \n Higher is better</string>
 
 
-    <string name="Ex_help"> This is the number of exercises \n you completed so far. \n CONGRATULATIONS</string>
+    <string name="Ex_help">This is the number of exercises   you completed so far.   CONGRATULATIONS</string>
 </resources>
