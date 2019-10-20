@@ -17,7 +17,7 @@
     <string name="right">Right</string>
     <string name="yes">Yes</string>
     <string name="no">No</string>
-    <string name="dataDummy">dd/mm/yyyy</string>
+    <string name="dataDummy" translatable="false">dd/mm/yyyy</string>
     <string name="smoker">Smoker</string>
     <string name="next">Next</string>
     <string name="back">Back</string>
@@ -165,8 +165,8 @@
     <string name="progress">Daily Progress</string>
     <string name="quick_start">Quick Start</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="details">Detailed Results</string>
+    <string name="history">See History</string>
 
     <string name="control">Reference</string>
     <string name="permission_request">This sample needs permission for camera and audio recording.</string>
@@ -179,20 +179,24 @@
     <string name="steps">Steps</string>
     <string name="velocity">Velocity</string>
     <string name="tremor">Tremor</string>
+    <string name="failed">Feature computation failed</string>
     <string name="jitter_failed">Jiiter could not be computed</string>
     <string name="speech_performance">Speech performance</string>
     <string name="tapping_performance">Fine motor skills performance</string>
-    <string name="history_speech">Historical performance</string>
-    <string name="history_mov">Historical performance</string>
-
+    <string name="history_speech">Historic results</string>
+    <string name="history_mov">Historic results</string>
     <string name="voicerate_failed">Voice Rate could not be computed</string>
     <string name="intonation_failed">Intonation could not be computed</string>
-    <string name="freezeIndex">FreezeIndex</string>
+    <string name="freezeIndex" translatable="false">FreezeIndex</string>
     <string name="posture">Posture</string>
     <string name="nStrides">Number of strides</string>
     <string name="tStrides">Stride time</string>
     <string name="area_failed">Radar area could not be computed</string>
     <string name="interpre">Interpretation</string>
+    <string name="global_results">Global results</string>
+    <string name="speech_results">Speech results</string>
+    <string name="movement_results">Movement results</string>
+    <string name="taping_results">Tapping results</string>
     <string name="SpeechHelp">- PRONUNCIATION: Capacity to correctly pronounce different sounds.
         \n- STABILITY: Capacity to keep the tone in a sustained phonation.
         \n- RATE: Syllables per second.
@@ -212,4 +216,12 @@
         \n- %SLIDING: Accuracy positioning the sliding bar.
         \n- SPEED: Ladybugs per second.
         \n- PRECISION: Proximity of insect hits.</string>
+
+    <string name="HistoricHelp">- You can select \n the result you want to see. \n
+            The figure indicates your evolution among consecutive days. \n Higher is better</string>
+
+
+    <string name="Ex_help">This is the number of exercises   you completed so far.   CONGRATULATIONS</string>
+    <string name="restart_session">Restart session</string>
+
 </resources>

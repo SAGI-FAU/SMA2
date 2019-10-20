@@ -189,7 +189,7 @@
         android:layout_height="0dp"
         android:alpha="1"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintDimensionRatio="2"
+        app:layout_constraintDimensionRatio="1.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintHeight_percent="0.15"
         app:srcCompat="@drawable/fau_logo" />
@@ -200,7 +200,7 @@
         android:layout_height="0dp"
         android:alpha="1"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintDimensionRatio="2"
+        app:layout_constraintDimensionRatio="1.5"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHeight_percent="0.15"
         app:srcCompat="@drawable/udea_logo" />

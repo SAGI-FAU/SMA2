@@ -31,7 +31,8 @@
         android:maxWidth="15sp"
         android:max="200"
         android:progress="20"
-        android:layout_marginTop="30sp"
+
+        android:layout_marginTop="80sp"
         app:layout_constraintTop_toBottomOf="@+id/chronoSliding"
         app:layout_constraintLeft_toLeftOf="parent"
         android:thumb="@drawable/thumb_seek"
@@ -44,7 +45,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         app:srcCompat="@drawable/limit_sliding"
-        android:layout_marginTop="10sp"
+        android:layout_marginTop="60sp"
         tools:layout_editor_absoluteX="200sp"
         android:layout_marginStart="170sp"
         app:layout_constraintLeft_toLeftOf="parent"

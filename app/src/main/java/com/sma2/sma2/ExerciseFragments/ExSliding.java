@@ -5,6 +5,7 @@ import android.content.SharedPreferences;
 import android.graphics.Point;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.os.Environment;
 import android.os.Vibrator;
 import android.preference.PreferenceManager;
 import android.support.constraint.ConstraintLayout;
@@ -16,9 +17,15 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.SeekBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.sma2.sma2.DataAccess.FeatureDataService;
+import com.sma2.sma2.FeatureExtraction.Tapping.FeatureTapping;
 import com.sma2.sma2.R;
 import com.sma2.sma2.SignalRecording.SlidingRecorder;
+
+import java.io.File;
+import java.util.Date;
 
 public class ExSliding extends ExerciseFragment implements SeekBar.OnSeekBarChangeListener {
     private SlidingRecorder slidingrecorder;
@@ -33,6 +40,9 @@ public class ExSliding extends ExerciseFragment implements SeekBar.OnSeekBarChan
     private int threshold=30;
     private int seekBarFlag=1;
     SharedPreferences sharedPref;
+    FeatureTapping featureTapping;
+    FeatureDataService FeatureDataService;
+    final String PATH = Environment.getExternalStorageDirectory() + "/Apkinson/MOVEMENT/";
 
 
 
@@ -57,6 +67,8 @@ public class ExSliding extends ExerciseFragment implements SeekBar.OnSeekBarChan
         getDisplayDimensions();
         timer = setTimer();
         sharedPref =PreferenceManager.getDefaultSharedPreferences(getActivity());
+        FeatureDataService=new FeatureDataService(getActivity().getApplicationContext());
+        featureTapping=new FeatureTapping(getActivity().getApplicationContext());
 
         return view;
     }
@@ -80,11 +92,19 @@ public class ExSliding extends ExerciseFragment implements SeekBar.OnSeekBarChan
                 }catch (Exception e) {
                     Log.e("SlidingCloseWriter", e.toString());
                 }
-                mListener.onExerciseFinished(filePath);
 
                 SharedPreferences.Editor editor = sharedPref.edit();
                 editor.putBoolean("New Area Tapping", true);
                 editor.apply();
+
+                try {
+                    EvaluateFeatures();
+                }
+                catch (Exception e){
+                    Toast.makeText(getActivity().getApplicationContext(), getResources().getString(R.string.failed),Toast.LENGTH_SHORT).show();
+                }
+                mListener.onExerciseFinished(filePath);
+
             }
         };
     }
@@ -184,6 +204,15 @@ public class ExSliding extends ExerciseFragment implements SeekBar.OnSeekBarChan
             textView_limit.setLayoutParams(params_text);
 
         }
+    }
+
+    private void EvaluateFeatures() {
+        File file = new File(PATH+filePath);
+        Date lastModDate = new Date(file.lastModified());
+
+        float features=featureTapping.feat_sliding(PATH+filePath);
+        FeatureDataService.save_feature(FeatureDataService.perc_sliding_name, lastModDate, features);
+
     }
 
 

@@ -1,7 +1,9 @@
 package com.sma2.sma2;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.TextView;
@@ -30,8 +32,10 @@ public class ThanksActivity extends AppCompatActivity implements View.OnClickLis
         String message=getString(R.string.completed)+" "+String.valueOf(NSignals)+" "+getString(R.string.btnExercisesText);
         MessageTextView.setText(message);
 
-
-
+        SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
+        SharedPreferences.Editor editor = sharedPref.edit();
+        editor.putBoolean("New Area Total", true);
+        editor.apply();
 
     }
 
@@ -55,8 +59,6 @@ public class ThanksActivity extends AppCompatActivity implements View.OnClickLis
     public void open_results(){
         Intent intent_results=new Intent(this, MainActivityMenu.class);
         startActivity(intent_results);
-        //TODO: transitions to the dashboard screen
-
     }
 
 

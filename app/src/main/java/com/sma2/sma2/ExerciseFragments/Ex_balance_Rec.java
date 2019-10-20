@@ -1,18 +1,28 @@
 package com.sma2.sma2.ExerciseFragments;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.os.Vibrator;
+import android.preference.PreferenceManager;
 import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.sma2.sma2.DataAccess.FeatureDataService;
+import com.sma2.sma2.FeatureExtraction.Movement.CSVFileReader;
+import com.sma2.sma2.FeatureExtraction.Movement.MovementProcessing;
 import com.sma2.sma2.R;
+import com.sma2.sma2.SignalRecording.CSVFileWriter;
 import com.sma2.sma2.SignalRecording.MovementRecorder;
+
+import java.io.File;
+import java.util.Date;
 
 
 public class Ex_balance_Rec extends ExerciseFragment implements ButtonFragment.OnButtonInteractionListener {
@@ -25,7 +35,10 @@ public class Ex_balance_Rec extends ExerciseFragment implements ButtonFragment.O
     private CountDownTimer timer;
     private TextView countdownTextView;
     private boolean countdownIsRunning = false;
-
+    private MovementProcessing MovementProcessor=new MovementProcessing();
+    private CSVFileReader FileReader;
+    FeatureDataService FeatureDataService;
+    SharedPreferences sharedPref;
     public Ex_balance_Rec() {
     }
 
@@ -33,6 +46,7 @@ public class Ex_balance_Rec extends ExerciseFragment implements ButtonFragment.O
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         try {
+
             recorder = new MovementRecorder(this.getContext(), SAMPLING_FREQUENCY, mExercise.getName());
             recorder.registerListeners();
         } catch (Exception e) {
@@ -43,16 +57,19 @@ public class Ex_balance_Rec extends ExerciseFragment implements ButtonFragment.O
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        FileReader = new CSVFileReader(getActivity().getApplicationContext());
         View view = inflater.inflate(R.layout.fragment_ex_balance, container, false);
         ButtonFragment buttonFragment = new ButtonFragment();
         buttonFragment.setmListener(this);
         FragmentTransaction transaction = getChildFragmentManager().beginTransaction();
+        sharedPref =PreferenceManager.getDefaultSharedPreferences(getActivity());
 
         transaction.replace(R.id.frameExSV, buttonFragment);
         transaction.commit();
         countdown_finished_txt = getResources().getString(R.string.start2);
         countdownTextView = view.findViewById(R.id.countdownTimerTextView);
         countdownTextView.setText(String.valueOf(START_COUNTDOWN));
+        FeatureDataService=new FeatureDataService(getActivity().getApplicationContext());
         return view;
     }
 
@@ -107,6 +124,22 @@ public class Ex_balance_Rec extends ExerciseFragment implements ButtonFragment.O
             }
         }.start();
     }
+
+
+    private void EvaluateFeatures(){
+        String Route= CSVFileWriter.getpath();
+        String final_route = Route +"/" + recorder.getFileName();
+        float balance = MovementProcessor.UppTremor(FileReader,final_route);
+        File file = new File(final_route);
+        Date lastModDate = new Date(file.lastModified());
+        FeatureDataService.save_feature(FeatureDataService.posture_name, lastModDate, balance);
+
+        SharedPreferences.Editor editor = sharedPref.edit();
+        editor.putBoolean("New Area Movement", true);
+        editor.apply();
+
+    }
+
     private void startSecondCountdownTimer() {
         countdownIsRunning = true;
         countdownStart = System.currentTimeMillis();
@@ -118,7 +151,14 @@ public class Ex_balance_Rec extends ExerciseFragment implements ButtonFragment.O
             public void onFinish() {
                 countdownIsRunning = false;
                 this.cancel();
-                //countdownTextView.setText(countdown_finished_txt);
+
+                try {
+                    EvaluateFeatures();
+                }
+                catch (Exception e){
+                    Toast.makeText(getActivity().getApplicationContext(), getResources().getString(R.string.failed),Toast.LENGTH_SHORT).show();
+                }
+
                 mListener.onExerciseFinished(recorder.getFileName());
                 MediaPlayer mp = MediaPlayer.create(getContext(), R.raw.bell);
                 mp.start();

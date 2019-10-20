@@ -6,6 +6,7 @@ import android.content.SharedPreferences;
 import android.graphics.Point;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.os.Environment;
 import android.os.Vibrator;
 import android.preference.PreferenceManager;
 import android.support.constraint.ConstraintLayout;
@@ -17,9 +18,15 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.sma2.sma2.DataAccess.FeatureDataService;
+import com.sma2.sma2.FeatureExtraction.Tapping.FeatureTapping;
 import com.sma2.sma2.R;
 import com.sma2.sma2.SignalRecording.TappingRecorder;
+
+import java.io.File;
+import java.util.Date;
 
 
 public class ExTwoFingerTapping extends ExerciseFragment implements View.OnClickListener{
@@ -33,6 +40,9 @@ public class ExTwoFingerTapping extends ExerciseFragment implements View.OnClick
     private CountDownTimer timer;
     private static final long TOTAL_TIME =  10000;
     SharedPreferences sharedPref;
+    FeatureDataService FeatureDataService;
+    FeatureTapping featureTapping;
+    final String PATH = Environment.getExternalStorageDirectory() + "/Apkinson/MOVEMENT/";
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -62,6 +72,9 @@ public class ExTwoFingerTapping extends ExerciseFragment implements View.OnClick
         timer = setTimer();
         change_button_position(tapButton_left, 0);
         change_button_position(tapButton_right, 1);
+        FeatureDataService=new FeatureDataService(getActivity().getApplicationContext());
+        featureTapping=new FeatureTapping(getActivity().getApplicationContext());
+
         return view;
     }
 
@@ -125,10 +138,17 @@ public class ExTwoFingerTapping extends ExerciseFragment implements View.OnClick
                 }catch (Exception e) {
                     Log.e("Tapping2CloseWriter", e.toString());
                 }
-                mListener.onExerciseFinished(filePath);
                 SharedPreferences.Editor editor = sharedPref.edit();
                 editor.putBoolean("New Area Tapping", true);
                 editor.apply();
+
+                try {
+                    EvaluateFeatures();
+                }
+                catch (Exception e){
+                    Toast.makeText(getActivity().getApplicationContext(), getResources().getString(R.string.failed),Toast.LENGTH_SHORT).show();
+                }
+                mListener.onExerciseFinished(filePath);
 
             }
         };
@@ -219,6 +239,17 @@ public class ExTwoFingerTapping extends ExerciseFragment implements View.OnClick
                     break;
             }
         }
+    }
+
+    private void EvaluateFeatures() {
+        File file = new File(PATH+filePath);
+        Date lastModDate = new Date(file.lastModified());
+
+        float[] features=featureTapping.feat_tapping_two(PATH+filePath);
+        FeatureDataService.save_feature(FeatureDataService.perc_tapping2_name, lastModDate, features[0]);
+        FeatureDataService.save_feature(FeatureDataService.veloc_tapping2_name, lastModDate, features[1]);
+        FeatureDataService.save_feature(FeatureDataService.precision_tapping2_name, lastModDate, features[2]);
+
     }
 
 

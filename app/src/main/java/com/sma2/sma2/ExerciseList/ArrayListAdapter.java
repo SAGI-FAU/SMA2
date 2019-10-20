@@ -2,7 +2,11 @@ package com.sma2.sma2.ExerciseList;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.media.MediaPlayer;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +15,11 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.sma2.sma2.DataAccess.Exercise;
+import com.sma2.sma2.DataAccess.ScheduledExercise;
+import com.sma2.sma2.ExerciseFragments.ExerciseFragment;
+import com.sma2.sma2.ExerciseFragments.ExerciseInstructions;
+import com.sma2.sma2.ExercisesActivity;
+import com.sma2.sma2.MainActivityMenu;
 import com.sma2.sma2.R;
 
 import java.util.ArrayList;
@@ -18,12 +27,13 @@ import java.util.ArrayList;
 /**
  * Created by Philipp on 18.08.2016.
  */
-public class ArrayListAdapter extends ArrayAdapter<Exercise> {
+public class  ArrayListAdapter extends ArrayAdapter<Exercise> {
     private Context context;
     private ArrayList<Exercise> exercises;
     MediaPlayer player;
     View playerView;
     Activity activity;
+    Exercise current_exercise;
 
 
     public ArrayListAdapter(Context context, ArrayList<Exercise> exercises, Activity activity) {
@@ -34,7 +44,7 @@ public class ArrayListAdapter extends ArrayAdapter<Exercise> {
     }
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
+    public View getView(final int position, View convertView, ViewGroup parent) {
         LayoutInflater inflater = (LayoutInflater) context
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View listItemView = inflater.inflate(R.layout.ex_list_item, parent, false);
@@ -47,15 +57,31 @@ public class ArrayListAdapter extends ArrayAdapter<Exercise> {
             ex_icon.setImageResource(R.drawable.speech_results);
         } else if (exercises.get(position).getExerciseType().equals("Movement")){
             ex_icon.setImageResource(R.drawable.walking_icon);
+        } else if (exercises.get(position).getExerciseType().equals("Facial")){
+            ex_icon.setImageResource(R.drawable.portrait);
         } else {
             ex_icon.setImageResource(R.drawable.bug);
         }
         listItemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //TODO:Start Exercise here
+                current_exercise=exercises.get(position);
+                ScheduledExercise ex = new ScheduledExercise(current_exercise, 0);
+                open_exercises(current_exercise);
+
+
+
             }
         });
         return listItemView;
     }
+
+    public void open_exercises(Exercise ex) {
+        Intent intent_exercises = new Intent(context, ExercisesActivity.class);
+        intent_exercises.putExtra("Exercise", ex);
+        context.startActivity(intent_exercises);
+    }
+
+
+
 }

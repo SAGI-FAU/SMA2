@@ -47,13 +47,7 @@ public class FeatureTapping {
         return Count;
     }
 
-    public static double average_function(ArrayList<Double> v) {
-        double prom = 0.0;
-        for (int i = 0; i < v.size(); i++)
-            prom += v.get(i);
 
-        return prom / (double) v.size();
-    }
     public String getDatos(int IDEx, String PATH){
         SignalDataService signalDataService =new SignalDataService(CONTEXT);
         String path_bar=null;
@@ -90,6 +84,45 @@ public class FeatureTapping {
                 fittopattern(bar_hits,13.75f)};
         return data1;
     }
+
+
+    public float feat_sliding(String path){
+        ArrayList<Double> Position_bar=read_csv(path,0);
+        float bar_hits=Position_bar.size();
+        return fittopattern(bar_hits,13.75f);
+    }
+
+
+    public float[] feat_tapping_one(String path_tapping){
+        ArrayList<Double> Count_Touch_one=read_csv(path_tapping,0);// The index tells me which column I should access
+        ArrayList<Double> Distance_one=read_csv(path_tapping,2);
+        float perc_tapp=100*Count_ladybug_one(Count_Touch_one)/Count_Touch_one.size();
+        float vel_tapp=(Count_Touch_one.size())/10;
+        float vel_perc=fittopattern(vel_tapp,1.5667f);
+        float pos_error_tapp = sumvector(Distance_one);
+        float error_perc=100-fittopattern(pos_error_tapp,21034f);
+        float[] feat_tap1={perc_tapp, vel_perc, error_perc};
+        return feat_tap1;
+    }
+
+
+    public float[] feat_tapping_two(String path_tapping){
+        ArrayList<Double> Count_Touch2=read_csv(path_tapping,0);
+        ArrayList<Double> Distance_left=read_csv(path_tapping,2);
+        ArrayList<Double> Distance_right=read_csv(path_tapping,3);
+
+        float perc_tapp=100*Count_ladybug_one(Count_Touch2)/Count_Touch2.size();
+        float vel_tapp=(Count_Touch2.size())/10;
+
+        float vel_perc=fittopattern(vel_tapp,1.5667f);
+        float pos_error_tapp = sumvector(Distance_left) + sumvector(Distance_right);
+        float error_perc=100-fittopattern(pos_error_tapp,21034f);
+        float[] feat_tap2={perc_tapp, vel_perc, error_perc};
+        return feat_tap2;
+    }
+
+
+
 
     public static ArrayList<Double> read_csv(String path, int indice) {
         int Count_band=0;

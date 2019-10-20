@@ -22,6 +22,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.sma2.sma2.DataAccess.ExerciseSessionManager;
 import com.sma2.sma2.DataAccess.MedicineDA;
 import com.sma2.sma2.DataAccess.MedicineDataService;
 import com.sma2.sma2.DataAccess.PatientDA;
@@ -58,9 +59,9 @@ public class SettingsActivity extends AppCompatActivity implements View.OnClickL
     private void setListeners() {
         findViewById(R.id.button_update_profile).setOnClickListener(this);
         findViewById(R.id.button_update_medicine).setOnClickListener(this);
-        findViewById(R.id.button_menu_settings).setOnClickListener(this);
         findViewById(R.id.button_export_metadata).setOnClickListener(this);
         findViewById(R.id.button_change_scheduler).setOnClickListener(this);
+        findViewById(R.id.button_restart_session).setOnClickListener(this);
 
         SpinnerNotify = findViewById(R.id.SpinnerNotifications);
         String[] hours = new String[]{"00:00","01:00","02:00","03:00","04:00","05:00","06:00","07:00","08:00","09:00","10:00","11:00","12:00","13:00","14:00","15:00","16:00","17:00","18:00","19:00","20:00","21:00","22:00","23:00"};
@@ -102,9 +103,6 @@ public class SettingsActivity extends AppCompatActivity implements View.OnClickL
             case R.id.button_update_medicine:
                 open_update();
                 break;
-            case R.id.button_menu_settings:
-                open_main();
-                break;
             case R.id.button_update_profile:
                 open_profile();
                 break;
@@ -123,14 +121,13 @@ public class SettingsActivity extends AppCompatActivity implements View.OnClickL
 
                 }
                 break;
+            case R.id.button_restart_session:
+
+                restart_session();
         }
 
     }
 
-    public void open_main(){
-        Intent intent_main =new Intent(this, MainActivityMenu.class);
-        startActivity(intent_main);
-    }
 
     private void open_update() {
         Intent intent_update =new Intent(this, UpdateMedicine.class);
@@ -142,6 +139,14 @@ public class SettingsActivity extends AppCompatActivity implements View.OnClickL
         Intent intent_update =new Intent(this, Profile1Activity.class);
         intent_update.putExtra("PatientData", patientData);
         startActivity(intent_update);
+    }
+
+
+
+    private void restart_session(){
+        ExerciseSessionManager sessionManager = new ExerciseSessionManager();
+        sessionManager.createExerciseSession(this);
+
     }
 
 

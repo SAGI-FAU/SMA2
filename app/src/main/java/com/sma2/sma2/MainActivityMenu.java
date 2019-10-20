@@ -9,6 +9,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.os.Environment;
 import android.preference.PreferenceManager;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.TabLayout;
@@ -23,9 +24,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.sma2.sma2.DataAccess.Exercise;
 import com.sma2.sma2.DataAccess.MedicineDA;
 import com.sma2.sma2.DataAccess.MedicineDataService;
+import com.sma2.sma2.ExerciseFragments.ExerciseFragment;
+import com.sma2.sma2.ExerciseFragments.ExerciseInstructions;
+import com.sma2.sma2.ExerciseList.ArrayListAdapter;
 
+import java.io.File;
 import java.util.List;
 
 public class MainActivityMenu extends AppCompatActivity{
@@ -168,6 +174,8 @@ public class MainActivityMenu extends AppCompatActivity{
         super.onRestart();
 
     }
+
+
 
     public static class PlaceholderFragment extends Fragment {
         /**

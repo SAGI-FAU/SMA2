@@ -1,6 +1,8 @@
 package com.sma2.sma2;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -61,8 +63,6 @@ public class Profile_fragment extends Fragment implements View.OnClickListener{
         TextView ExercisesText= view.findViewById(R.id.n_exercises);
         ProgressBar daily_progress_bar=view.findViewById(R.id.daily_progress_bar);
 
-
-
         PatientDataService PatientData = new PatientDataService(getActivity().getApplicationContext());
         PatientDA patient = PatientData.getPatient();
         txt_user_name.setText(patient.getUsername());
@@ -84,7 +84,7 @@ public class Profile_fragment extends Fragment implements View.OnClickListener{
 
         list_exercises= sessionManager.getScheduledExerciseList();
 
-        int Perc=sessionManager.getPercCompletedExercises(list_exercises);
+        int Perc=sessionManager.getPercCompletedExercises(list_exercises, 0);
 
         daily_progress_bar.setProgress(Perc);
         return view;
@@ -100,9 +100,30 @@ public class Profile_fragment extends Fragment implements View.OnClickListener{
                 open_exercises();
                 break;
             case R.id.crown:
+                open_help();
                 break;
 
         }
+    }
+
+
+    void open_help(){
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+
+        String Title = getResources().getString(R.string.Completed_Exercises);
+        builder.setTitle(Title);
+
+        String Text = getResources().getString(R.string.Ex_help);
+        builder.setMessage(Text);
+
+        builder.setNeutralButton(R.string.cancel, new DialogInterface.OnClickListener() { // define the 'Cancel' button
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
+            }
+        });
+
+        AlertDialog dialog = builder.create();
+        dialog.show();
     }
 
 

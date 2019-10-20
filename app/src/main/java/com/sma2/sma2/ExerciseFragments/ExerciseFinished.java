@@ -57,7 +57,7 @@ public class ExerciseFinished extends Fragment {
         sessionManager.updateExerciseListFromDB(getActivity().getApplicationContext());
         List<ScheduledExercise> list_exercises= sessionManager.getScheduledExerciseList();
 
-        int Perc=sessionManager.getPercCompletedExercises(list_exercises);
+        int Perc=sessionManager.getPercCompletedExercises(list_exercises, 1);
 
         progress.setProgress(Perc);
 
@@ -84,6 +84,9 @@ public class ExerciseFinished extends Fragment {
         TextView tMessage=view.findViewById(R.id.motivationMessage);
         Animation animation2=AnimationUtils.loadAnimation(view.getContext(),R.anim.bounce);
         tMessage.startAnimation(animation2);
+
+
+
 
         return view;
     }

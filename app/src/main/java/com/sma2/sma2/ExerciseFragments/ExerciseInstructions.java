@@ -56,6 +56,7 @@ public class ExerciseInstructions extends Fragment {
 
         // Set Instruction Video
         final VideoView videoView = view.findViewById(R.id.videoView);
+        String videoptah=mExercise.getInstructionVideoPath().getPath();
         Log.d("VIDEO_PATH", mExercise.getInstructionVideoPath().getPath());
         if(!mExercise.getInstructionVideoPath().getPath().equals("None")) {
             videoView.setVideoURI(mExercise.getInstructionVideoPath());

@@ -2,89 +2,141 @@
 
 <ScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:paddingTop="0dp"
     android:paddingLeft="0dp"
     android:paddingRight="0dp"
-    android:layout_gravity="center"
-    >
+    android:layout_gravity="center">
 
     <android.support.constraint.ConstraintLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
+
+        android:id="@+id/frameLayout_tapping"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
-        tools:context="com.sma2.sma2.MainActivity">
 
-        <TextView
-            android:id="@+id/textView_tapping1"
+        tools:context=".ResultsTapping" >
+
+
+        <ImageView
+            android:id="@+id/imageView3"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8sp"
-            android:layout_marginEnd="8sp"
-            android:layout_marginStart="8sp"
+            android:adjustViewBounds="true"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/wallpaper2"
+            tools:srcCompat="@drawable/wallpaper2" />
+
+        <TextView
+            android:id="@+id/textViewResultsTapping"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@android:color/background_light"
             android:gravity="center"
             android:text="@string/fine_motor"
-            android:textSize="@dimen/textview_text_size"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
+            android:textColor="@color/textColor"
+            android:textSize="36sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHeight_percent="0.08"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
+
+
 
         <ImageButton
             android:id="@+id/button_help"
             android:layout_width="30sp"
             android:layout_height="30sp"
             android:layout_marginTop="8sp"
+            android:layout_marginEnd="30sp"
             android:scaleType="centerCrop"
             android:padding="0dp"
             android:src="@drawable/btn_help"
-            app:layout_constraintRight_toRightOf="@id/textView_tapping1"
-            app:layout_constraintTop_toBottomOf="@+id/chart2"
-            app:layout_constraintTop_toTopOf="parent" />
-
-
-        <ProgressBar
-            android:splitTrack="false"
-            android:id="@+id/bar_tapping"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16sp"
-            android:progress="20"
-            app:layout_constraintTop_toBottomOf="@+id/textView_tapping1"
-            app:layout_constraintLeft_toLeftOf="parent"
-            style="@style/MyProgressBar"
-            android:progressDrawable="@drawable/seekbar_sliding"/>
-
-        <ImageView
-            android:id="@+id/iEmojin_tapping"
-            android:layout_width="35sp"
-            android:layout_height="35sp"
-            android:layout_marginTop="8sp"
-            android:layout_weight="1"
-            app:layout_constraintLeft_toLeftOf="parent"
-            android:layout_marginStart="35sp"
-            app:layout_constraintTop_toBottomOf="@+id/textView_tapping1"
-            />
-
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/tmessage_tapping_perc"
-            android:layout_marginTop="16sp"
-            android:background="@color/colorPrimaryDark"
-            android:layout_gravity="center"
-            android:textSize="22sp"
-            android:text=""
-            app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/iEmojin_tapping"
-            />
+            app:layout_constraintTop_toBottomOf="@+id/chart_tapping"
+            app:layout_constraintTop_toTopOf="@+id/chart_tapping" />
+
+        <android.support.v7.widget.CardView
+            android:id="@+id/card"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="65sp"
+            app:layout_constraintWidth_percent="0.9"
+            app:layout_constraintDimensionRatio="5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textViewResultsTapping">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:weightSum="2">
+
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="0dp"
+                    android:layout_weight="1.6"
+                    android:layout_height="match_parent">
+
+                    <ProgressBar
+                        android:splitTrack="false"
+                        android:id="@+id/bar_tapping"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:layout_marginTop="20sp"
+                        android:layout_marginStart="10sp"
+                        android:layout_marginEnd="10sp"
+                        android:progress="20"
+                        style="@style/MyProgressBar"
+                        android:progressDrawable="@drawable/seekbar_sliding"/>
+
+                    <ImageView
+                        android:id="@+id/iEmojin_tapping"
+                        android:layout_width="35sp"
+                        android:layout_height="35sp"
+                        android:layout_marginTop="-25sp"
+                        android:layout_marginStart="35sp"
+
+                        />
+
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:layout_width="0dp"
+                    android:layout_weight="0.4"
+                    android:layout_height="match_parent">
+
+
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/tmessage_tapping_perc"
+                        android:layout_marginTop="1sp"
+                        android:layout_gravity="center"
+                        android:textSize="22sp"
+                        android:text="0%"
+
+                        />
+
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+        </android.support.v7.widget.CardView>
+
+
 
         <TextView
             android:layout_width="wrap_content"
@@ -98,66 +150,26 @@
             android:text=""
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tmessage_tapping_perc"
+            app:layout_constraintTop_toBottomOf="@+id/card"
             />
 
+
+
         <com.github.mikephil.charting.charts.RadarChart
-            android:id="@+id/chartap"
+            android:id="@+id/chart_tapping"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:textSize="@dimen/button_text_size"
-            app:layout_constraintWidth_percent="1"
+            app:layout_constraintWidth_percent="0.9"
             app:layout_constraintDimensionRatio="0.75"
             app:seriesType="radarchart"
-            android:layout_marginTop="20sp"
+            android:layout_marginTop="8sp"
             app:seriesColor="@color/colorPrimaryDark"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tmessage_tapping"/>
 
 
-        <com.jjoe64.graphview.GraphView
-            android:id="@+id/plotlineTapping"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            app:layout_constraintWidth_percent="0.95"
-            app:layout_constraintDimensionRatio="1.6"
-            android:layout_marginTop="16sp"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/history_tapping"/>
-
-
-        <TextView
-            android:id="@+id/history_tapping"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8sp"
-            android:layout_marginEnd="8sp"
-            android:layout_marginStart="8sp"
-            android:gravity="center"
-            android:text="@string/history_speech"
-            android:textSize="@dimen/textview_text_size"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/chartap"/>
-
-
-
-
-
-        <Button
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/back"
-            android:layout_marginTop="35sp"
-            android:textSize="@dimen/button_text_size"
-            android:background="@color/colorPrimaryDark"
-            android:id="@+id/button_back4"
-            app:layout_constraintTop_toBottomOf="@+id/plotlineTapping"
-            />
 
     </android.support.constraint.ConstraintLayout>
-
 </ScrollView>

@@ -41,7 +41,12 @@ public class ExerciseSessionManager {
     private List<Exercise> _dummyExerciseList = new ArrayList<>();
     private List<Exercise> _ExerciseList = new ArrayList<>();
     private List<ScheduledExercise> _testList = new ArrayList<>();
+
+
+
+
     SharedPreferences sharedPref;
+
 
     public void createExerciseSession(Context context) {
         Calendar c = Calendar.getInstance();
@@ -171,10 +176,10 @@ public class ExerciseSessionManager {
     }
 
 
-    public int getPercCompletedExercises(List<ScheduledExercise> scheduledExerciseList){
+    public int getPercCompletedExercises(List<ScheduledExercise> scheduledExerciseList, int ini){
         int N=scheduledExerciseList.size();
 
-        int completed=0;
+        int completed=ini;
 
         for (ScheduledExercise ex : scheduledExerciseList) {
             if (ex.getCompleted()) {
@@ -182,7 +187,13 @@ public class ExerciseSessionManager {
             }
         }
 
-        return completed*100/N;
+        if (N==0){
+            return 0;
+        }
+        else{
+            return completed*100/N;
+
+        }
 
 
     }
@@ -496,8 +507,8 @@ public class ExerciseSessionManager {
                         ExType,
                         ExDescr,
                         ExInstr,
-                        Uri.parse(ExVideo),
                         Uri.parse("Instruction/Path"),
+                        Uri.parse(ExVideo),
                         ExReadText.class));
             }
             else if (ExFrag.equals("audiorec"))
@@ -508,8 +519,8 @@ public class ExerciseSessionManager {
                         ExType,
                         ExDescr,
                         ExInstr,
-                        Uri.parse(ExVideo),
                         Uri.parse("Instruction/Path"),
+                        Uri.parse(ExVideo),
                         ExAudioRec.class));
             }
             else if (ExFrag.equals("imgdes"))
@@ -520,8 +531,8 @@ public class ExerciseSessionManager {
                         ExType,
                         ExDescr,
                         ExInstr,
-                        Uri.parse(ExVideo),
                         Uri.parse("Instruction/Path"),
+                        Uri.parse(ExVideo),
                         ExImageDescription.class));
             }
             else if (ExFrag.equals("balance"))
@@ -532,8 +543,8 @@ public class ExerciseSessionManager {
                         ExType,
                         ExDescr,
                         ExInstr,
-                        Uri.parse(ExVideo),
                         Uri.parse("Instruction/Path"),
+                        Uri.parse(ExVideo),
                         Ex_balance_Rec.class));
             }
             else if (ExFrag.equals("circling"))
@@ -544,8 +555,8 @@ public class ExerciseSessionManager {
                         ExType,
                         ExDescr,
                         ExInstr,
-                        Uri.parse(ExVideo),
                         Uri.parse("Instruction/Path"),
+                        Uri.parse(ExVideo),
                         Ex_Circling_Rec.class));
             }
             else if (ExFrag.equals("rotation"))
@@ -556,8 +567,8 @@ public class ExerciseSessionManager {
                         ExType,
                         ExDescr,
                         ExInstr,
-                        Uri.parse(ExVideo),
                         Uri.parse("Instruction/Path"),
+                        Uri.parse(ExVideo),
                         Ex_Hand_Rotation_Rec.class));
             }
             else if (ExFrag.equals("hand2nose"))
@@ -568,8 +579,8 @@ public class ExerciseSessionManager {
                         ExType,
                         ExDescr,
                         ExInstr,
-                        Uri.parse(ExVideo),
                         Uri.parse("Instruction/Path"),
+                        Uri.parse(ExVideo),
                         Ex_Hand_To_Head_Rec.class));
             }
             else if (ExFrag.equals("postural"))
@@ -580,11 +591,11 @@ public class ExerciseSessionManager {
                         ExType,
                         ExDescr,
                         ExInstr,
-                        Uri.parse(ExVideo),
                         Uri.parse("Instruction/Path"),
+                        Uri.parse(ExVideo),
                         Ex_postural_Rec.class));
             }
-            else if (ExFrag.equals("gait"))
+            else if (ExFrag.equals("gaitfourtimes"))
             {
                 exList.add(new Exercise(
                         ExID,
@@ -592,9 +603,21 @@ public class ExerciseSessionManager {
                         ExType,
                         ExDescr,
                         ExInstr,
-                        Uri.parse(ExVideo),
                         Uri.parse("Instruction/Path"),
+                        Uri.parse(ExVideo),
                         Ex_Walking_Rec.class));
+            }
+            else if (ExFrag.equals("gaittwomins"))
+            {
+                exList.add(new Exercise(
+                        ExID,
+                        ExName,
+                        ExType,
+                        ExDescr,
+                        ExInstr,
+                        Uri.parse("Instruction/Path"),
+                        Uri.parse(ExVideo),
+                        ExFreeWalking.class));
             }
             else if (ExFrag.equals("finger1"))
             {
@@ -604,8 +627,8 @@ public class ExerciseSessionManager {
                         ExType,
                         ExDescr,
                         ExInstr,
-                        Uri.parse(ExVideo),
                         Uri.parse("Instruction/Path"),
+                        Uri.parse(ExVideo),
                         ExOneFingerTapping.class));
             }
             else if (ExFrag.equals("finger2"))
@@ -616,8 +639,8 @@ public class ExerciseSessionManager {
                         ExType,
                         ExDescr,
                         ExInstr,
-                        Uri.parse(ExVideo),
                         Uri.parse("Instruction/Path"),
+                        Uri.parse(ExVideo),
                         ExTwoFingerTapping.class));
             }
             else if (ExFrag.equals("sliding"))
@@ -628,9 +651,48 @@ public class ExerciseSessionManager {
                         ExType,
                         ExDescr,
                         ExInstr,
-                        Uri.parse(ExVideo),
                         Uri.parse("Instruction/Path"),
+                        Uri.parse(ExVideo),
                         ExSliding.class));
+            }
+            else if (ExFrag.equals("rightwink"))
+            {
+                exList.add(new Exercise(
+                        ExID,
+                        ExName,
+                        ExType,
+                        ExDescr,
+                        ExInstr,
+                        Uri.parse("Instruction/Path"),
+                        Uri.parse(ExVideo),
+                        Ex_RightWink.class));
+                //FerRecorder_RightWink.class));
+            }
+            else if (ExFrag.equals("leftwink"))
+            {
+                exList.add(new Exercise(
+                        ExID,
+                        ExName,
+                        ExType,
+                        ExDescr,
+                        ExInstr,
+                        Uri.parse("Instruction/Path"),
+                        Uri.parse(ExVideo),
+                        Ex_LeftWink.class));
+                //FerRecorder_LeftWink.class));
+            }
+            else if (ExFrag.equals("happy"))
+            {
+                exList.add(new Exercise(
+                        ExID,
+                        ExName,
+                        ExType,
+                        ExDescr,
+                        ExInstr,
+                        Uri.parse("Instruction/Path"),
+                        Uri.parse(ExVideo),
+                        Ex_Happy.class));
+                //FerRecorder_LeftWink.class));
             }
         }
         return exList;

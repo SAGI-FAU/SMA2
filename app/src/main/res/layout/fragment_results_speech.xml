@@ -13,12 +13,11 @@
 
     <android.support.constraint.ConstraintLayout
 
-        android:id="@+id/frameLayout_tapping"
+        android:id="@+id/frameLayout_speech"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
 
-        tools:context=".ResultsTapping" >
-
+        tools:context=".ResultsSpeech" >
 
         <ImageView
             android:id="@+id/imageView3"
@@ -31,13 +30,16 @@
             app:srcCompat="@drawable/wallpaper2"
             tools:srcCompat="@drawable/wallpaper2" />
 
+
+
+
         <TextView
-            android:id="@+id/textViewResultsMovement"
+            android:id="@+id/textViewResultsSpeech"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@android:color/background_light"
             android:gravity="center"
-            android:text="@string/movement"
+            android:text="@string/Speech"
             android:textColor="@color/textColor"
             android:textSize="36sp"
             app:layout_constraintEnd_toEndOf="parent"
@@ -56,8 +58,8 @@
             android:padding="0dp"
             android:src="@drawable/btn_help"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/chart_movement"
-            app:layout_constraintTop_toTopOf="@+id/chart_movement" />
+            app:layout_constraintTop_toBottomOf="@+id/chart_speech"
+            app:layout_constraintTop_toTopOf="@+id/chart_speech" />
 
         <android.support.v7.widget.CardView
             android:id="@+id/card"
@@ -69,7 +71,8 @@
             app:layout_constraintDimensionRatio="5"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textViewResultsMovement">
+            app:layout_constraintTop_toBottomOf="@+id/textViewResultsSpeech">
+
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -85,7 +88,7 @@
 
                     <ProgressBar
                         android:splitTrack="false"
-                        android:id="@+id/bar_movement"
+                        android:id="@+id/bar_speech"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:gravity="center"
@@ -97,7 +100,7 @@
                         android:progressDrawable="@drawable/seekbar_sliding"/>
 
                     <ImageView
-                        android:id="@+id/iEmojin_movement"
+                        android:id="@+id/iEmojin_speech"
                         android:layout_width="35sp"
                         android:layout_height="35sp"
                         android:layout_marginTop="-25sp"
@@ -120,7 +123,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:id="@+id/tmessage_movement_perc"
+                        android:id="@+id/tmessage_speech_perc"
                         android:layout_marginTop="1sp"
                         android:layout_gravity="center"
                         android:textSize="22sp"
@@ -140,7 +143,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/tmessage_movement"
+            android:id="@+id/tmessage_speech"
             android:layout_marginTop="8sp"
             android:maxLines="2"
             android:background="@color/colorPrimaryDark"
@@ -153,8 +156,9 @@
             />
 
 
+
         <com.github.mikephil.charting.charts.RadarChart
-            android:id="@+id/chart_movement"
+            android:id="@+id/chart_speech"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:textSize="@dimen/button_text_size"
@@ -165,8 +169,7 @@
             app:seriesColor="@color/colorPrimaryDark"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tmessage_movement"/>
-
+            app:layout_constraintTop_toBottomOf="@+id/tmessage_speech"/>
 
 
 

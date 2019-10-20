@@ -1,4 +1,4 @@
-package com.sma2.sma2.FeatureExtraction.Tapping;
+package com.sma2.sma2;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -15,30 +15,34 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.jjoe64.graphview.GraphView;
+import com.sma2.sma2.DataAccess.FeatureDA;
+import com.sma2.sma2.DataAccess.FeatureDataService;
 import com.sma2.sma2.FeatureExtraction.GraphManager;
 import com.sma2.sma2.FeatureExtraction.Speech.features.RadarFeatures;
-import com.sma2.sma2.MainActivityMenu;
-import com.sma2.sma2.R;
-import com.sma2.sma2.RadarFigureManager;
+import com.sma2.sma2.FeatureExtraction.Tapping.FeatureTapping;
 
 import com.github.mikephil.charting.charts.RadarChart;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.List;
 
 
-public class Tapping_feature_Activity extends AppCompatActivity  implements View.OnClickListener {
-    Button bBack;
+public class ResultsTapping extends AppCompatActivity  implements View.OnClickListener {
     private ImageButton bHelp;
     private ProgressBar progressBarTapping;
     private ImageView iEmojin;
     private TextView tmessage_tapping, tmessage_tapping_perc;
-    int screenWidth, screenHeight;
+    FeatureDA perc_sliding;
+    FeatureDataService feat_data_service;
 
     private final String PATH = Environment.getExternalStorageDirectory() + "/Apkinson/MOVEMENT/";
 
@@ -50,21 +54,41 @@ public class Tapping_feature_Activity extends AppCompatActivity  implements View
         // general objects
         FeatureTapping feature= new FeatureTapping(this);
         setContentView(R.layout.activity_tapping_feature_);
-        bBack=findViewById(R.id.button_back4);
         bHelp=findViewById(R.id.button_help);
+        bHelp.bringToFront();
         SetListeners();
 
         progressBarTapping=findViewById(R.id.bar_tapping);
         iEmojin=findViewById(R.id.iEmojin_tapping);
         tmessage_tapping=findViewById(R.id.tmessage_tapping);
         tmessage_tapping_perc=findViewById(R.id.tmessage_tapping_perc);
-        getDisplayDimensions();
 
         RadarFigureManager RadarManager = new RadarFigureManager(this);
         // Radar chart
-        RadarChart radarchart= findViewById(R.id.chartap);
+        RadarChart radarchart= findViewById(R.id.chart_tapping);
 
-        float[] data1 =feature.totalfeatures(PATH);
+        feat_data_service=new FeatureDataService(this);
+
+        List<FeatureDA> perc_tap= new ArrayList<>();
+        perc_tap.add(feat_data_service.get_last_feat_value(feat_data_service.perc_tapping1_name));
+        perc_tap.add(feat_data_service.get_last_feat_value(feat_data_service.perc_tapping2_name));
+        float per_tap_val=feat_data_service.get_avg_feat(perc_tap);
+
+
+        List<FeatureDA> vel_tap= new ArrayList<>();
+        vel_tap.add(feat_data_service.get_last_feat_value(feat_data_service.veloc_tapping1_name));
+        vel_tap.add(feat_data_service.get_last_feat_value(feat_data_service.veloc_tapping2_name));
+        float vel_tap_val=feat_data_service.get_avg_feat(vel_tap);
+
+        List<FeatureDA> prec_tap= new ArrayList<>();
+        prec_tap.add(feat_data_service.get_last_feat_value(feat_data_service.precision_tapping1_name));
+        prec_tap.add(feat_data_service.get_last_feat_value(feat_data_service.precision_tapping2_name));
+        float prec_tap_val=feat_data_service.get_avg_feat(prec_tap);
+
+        perc_sliding =feat_data_service.get_last_feat_value(feat_data_service.perc_sliding_name);
+        float perc_slidingval=perc_sliding.getFeature_value();
+
+        float[] data1 ={per_tap_val, vel_tap_val, prec_tap_val, perc_slidingval};
         float[] data2={100f,100f,100f,100f};
 
         String Label_3 = getResources().getString(R.string.tapPosition);
@@ -82,100 +106,42 @@ public class Tapping_feature_Activity extends AppCompatActivity  implements View
         SharedPreferences sharedPref =PreferenceManager.getDefaultSharedPreferences(this);
         boolean new_area_tapping=sharedPref.getBoolean("New Area Tapping", false);
 
+
         if (new_area_tapping){
             SharedPreferences.Editor editor = sharedPref.edit();
             editor.putBoolean("New Area Tapping", false);
             editor.apply();
-            try {
-                RadarFeatures.export_speech_feature("area tapping", area_progress, "area tapping");
-            }catch (Exception e) {
-                Toast.makeText(this,R.string.tapping_failed,Toast.LENGTH_SHORT).show();
-
-            }
+            Date current = Calendar.getInstance().getTime();
+            FeatureDA area_tapping=new FeatureDA(feat_data_service.area_tapping_name, current, (float)area_progress );
+            feat_data_service.save_feature(area_tapping);
 
         }
-        ArrayList<Float> area_perf=new ArrayList<>();
-        try {
-            area_perf=RadarFeatures.get_feat_perf("area tapping");
-        }
-        catch(IOException ie) {
-            ie.printStackTrace();
-            area_perf.add(0f);
-        }
 
-        ConstraintLayout.LayoutParams params_line= (ConstraintLayout.LayoutParams)  iEmojin.getLayoutParams();
-        int xRandomBar= (int)(0.01*area_progress*screenWidth-45);
 
-        params_line.setMarginStart(xRandomBar); // The indicator bar position
-        params_line.leftMargin=xRandomBar;
-        params_line.setMarginStart(xRandomBar);
-        iEmojin.setLayoutParams(params_line);
 
-        progressBarTapping.setProgress(area_progress);
-        String perform = getResources().getString(R.string.perform);
-        String msgp=perform+String.valueOf(area_progress)+"%";
-        tmessage_tapping_perc.setText(msgp);
-        if (area_progress >=66) {
-            iEmojin.setImageResource(R.drawable.happy_emojin);
-            tmessage_tapping.setText(R.string.Positive_message);
-        }
-        else if (area_progress>=33){
-            iEmojin.setImageResource(R.drawable.medium_emojin);
-            tmessage_tapping.setText(R.string.Medium_message);
-        }
-        else{
-            iEmojin.setImageResource(R.drawable.sad_emoji);
-            tmessage_tapping.setText(R.string.Negative_message);
-        }
-        GraphManager graphManager=new GraphManager(this);
-        String Title=getResources().getString(R.string.tapping_performance);
-        String Ylabel=getResources().getString(R.string.percentage);
-        String Xlabel=getResources().getString(R.string.session);
-        GraphView graph =findViewById(R.id.plotlineTapping);
+        RadarManager.put_emojin_and_message(iEmojin, tmessage_tapping, tmessage_tapping_perc, area_progress, progressBarTapping, this);
 
-        ArrayList<Integer> xl= new ArrayList<>();
-        for (int i=0;i<area_perf.size();i++){
-            xl.add(i+1);
-        }
-        graphManager.LineGraph(graph, xl, area_perf, 105, xl.size(), Title, Xlabel, Ylabel);
+
+
 
 
     }
 
     private void SetListeners(){
-        bBack.setOnClickListener(this);
         bHelp.setOnClickListener(this);
     }
 
 
-    private void getDisplayDimensions() {
-        Display display = this.getWindowManager().getDefaultDisplay();
-
-        Point size = new Point();
-        display.getSize(size);
-        screenWidth = size.x;
-        screenHeight = size.y;
-    }
 
 
     @Override
     public void onClick(View view) {
 
         switch (view.getId()){
-            case R.id.button_back4:
-                onButtonBack();
-                break;
             case R.id.button_help:
                 onButtonHelp();
                 break;
         }
-    }
-
-
-    private void onButtonBack(){
-        Intent i =new Intent(Tapping_feature_Activity.this, MainActivityMenu.class);
-        startActivity(i);
-
     }
 
 

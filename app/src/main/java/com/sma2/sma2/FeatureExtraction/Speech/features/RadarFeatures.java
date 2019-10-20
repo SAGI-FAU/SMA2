@@ -215,4 +215,40 @@ public class RadarFeatures {
         return perf;
     }
 
+
+    public static float get_last_area(String feature){
+        String area_feat="area "+feature;
+        float area=0f;
+        try {
+            ArrayList<Float> areas_all=get_feat_perf(area_feat);
+            area=areas_all.get(areas_all.size()-1);
+        }
+        catch(IOException ie) {
+            ie.printStackTrace();
+            return area;
+        }
+
+        return area;
+
+    }
+
+
+
+    public static float get_last_feature(String feature){
+        float area=0f;
+        try {
+            ArrayList<Float> areas_all=get_feat_perf(feature);
+            area=areas_all.get(areas_all.size()-1);
+        }
+        catch(IOException ie) {
+            ie.printStackTrace();
+            return area;
+        }
+
+        return area;
+
+    }
+
+
+
 }

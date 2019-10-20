@@ -1,10 +1,12 @@
 package com.sma2.sma2.ExerciseFragments;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.os.Vibrator;
+import android.preference.PreferenceManager;
 import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,11 +14,16 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.sma2.sma2.DataAccess.FeatureDataService;
 import com.sma2.sma2.FeatureExtraction.Movement.CSVFileReader;
 import com.sma2.sma2.FeatureExtraction.Movement.MovementProcessing;
 import com.sma2.sma2.R;
 import com.sma2.sma2.SignalRecording.CSVFileWriter;
 import com.sma2.sma2.SignalRecording.MovementRecorder;
+import com.sma2.sma2.DataAccess.FeatureDataService;
+
+import java.io.File;
+import java.util.Date;
 
 
 public class Ex_postural_Rec extends ExerciseFragment implements ButtonFragment.OnButtonInteractionListener {
@@ -31,6 +38,8 @@ public class Ex_postural_Rec extends ExerciseFragment implements ButtonFragment.
     private boolean countdownIsRunning = false;
     private CSVFileReader FileReader;
     private MovementProcessing MovementProcessor = new MovementProcessing();
+    FeatureDataService FeatureDataService;
+    SharedPreferences sharedPref;
 
     public Ex_postural_Rec() {
     }
@@ -54,12 +63,14 @@ public class Ex_postural_Rec extends ExerciseFragment implements ButtonFragment.
         ButtonFragment buttonFragment = new ButtonFragment();
         buttonFragment.setmListener(this);
         FragmentTransaction transaction = getChildFragmentManager().beginTransaction();
+        sharedPref =PreferenceManager.getDefaultSharedPreferences(getActivity());
 
         transaction.replace(R.id.frameExSV, buttonFragment);
         transaction.commit();
         countdown_finished_txt = getResources().getString(R.string.start2);
         countdownTextView = view.findViewById(R.id.countdownTimerTextView);
         countdownTextView.setText(String.valueOf(START_COUNTDOWN));
+        FeatureDataService=new FeatureDataService(getActivity().getApplicationContext());
         return view;
     }
 
@@ -89,7 +100,6 @@ public class Ex_postural_Rec extends ExerciseFragment implements ButtonFragment.
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
-                EvaluateFeatures();
                 mListener.onExerciseFinished(recorder.getFileName());
             }
         }
@@ -97,25 +107,22 @@ public class Ex_postural_Rec extends ExerciseFragment implements ButtonFragment.
 
     private void EvaluateFeatures() {
         String Route= CSVFileWriter.getpath();
-        String final_route = Route +"/" + recorder.getFileName();
+        String final_route = Route + recorder.getFileName();
+        float UppTremor = MovementProcessor.UppTremor(FileReader,final_route);
+        File file = new File(final_route);
+        Date lastModDate = new Date(file.lastModified());
 
         if(mExercise.getId() == 29){
-            float UppTremor = MovementProcessor.UppTremor(FileReader,final_route);
-            try {
-                MovementProcessor.export_movement_feature(final_route,UppTremor,"Postural_Tremor_Right");
-            }catch (Exception e) {
-                Toast.makeText(getActivity(),"Postural tremor of right hand failed",Toast.LENGTH_SHORT).show();
-            }
+            String name=FeatureDataService.tremor_right_name;
+            FeatureDataService.save_feature(name, lastModDate, UppTremor);
         }
-
         else if(mExercise.getId() == 30){
-            float UppTremor = MovementProcessor.UppTremor(FileReader,final_route);
-            try {
-                MovementProcessor.export_movement_feature(final_route,UppTremor,"Postural_Tremor_Left");
-            }catch (Exception e) {
-                Toast.makeText(getActivity(),"Postural tremor of left hand failed",Toast.LENGTH_SHORT).show();
-            }
+            String name=FeatureDataService.tremor_left_name;
+            FeatureDataService.save_feature(name, lastModDate, UppTremor);
         }
+        SharedPreferences.Editor editor = sharedPref.edit();
+        editor.putBoolean("New Area Movement", true);
+        editor.apply();
 
 
     }
@@ -131,6 +138,7 @@ public class Ex_postural_Rec extends ExerciseFragment implements ButtonFragment.
             public void onFinish() {
                 countdownIsRunning = false;
                 this.cancel();
+
                 //countdownTextView.setText(countdown_finished_txt);
                 MediaPlayer mp = MediaPlayer.create(getContext(), R.raw.bell);
                 mp.start();
@@ -154,7 +162,14 @@ public class Ex_postural_Rec extends ExerciseFragment implements ButtonFragment.
             public void onFinish() {
                 countdownIsRunning = false;
                 this.cancel();
-                //countdownTextView.setText(countdown_finished_txt);
+
+                try {
+                    EvaluateFeatures();
+                }
+                catch (Exception e){
+                    Toast.makeText(getActivity().getApplicationContext(), getResources().getString(R.string.failed),Toast.LENGTH_SHORT).show();
+                }
+
                 mListener.onExerciseFinished(recorder.getFileName());
                 MediaPlayer mp = MediaPlayer.create(getContext(), R.raw.bell);
                 mp.start();
