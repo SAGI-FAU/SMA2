@@ -84,7 +84,7 @@ public class Profile_fragment extends Fragment implements View.OnClickListener{
 
         list_exercises= sessionManager.getScheduledExerciseList();
 
-        int Perc=sessionManager.getPercCompletedExercises(list_exercises);
+        int Perc=sessionManager.getPercCompletedExercises(list_exercises, 0);
 
         daily_progress_bar.setProgress(Perc);
         return view;

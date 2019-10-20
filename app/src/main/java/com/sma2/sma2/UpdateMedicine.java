@@ -53,7 +53,7 @@ public class UpdateMedicine extends AppCompatActivity implements View.OnClickLis
                 add_medicine();
                 break;
             case R.id.button_back1:
-                Intent intent=new Intent(UpdateMedicine.this, ProfileActivity.class);
+                Intent intent=new Intent(UpdateMedicine.this, MainActivityMenu.class);
                 startActivity(intent);
                 break;
         }

@@ -57,7 +57,7 @@ public class ExerciseFinished extends Fragment {
         sessionManager.updateExerciseListFromDB(getActivity().getApplicationContext());
         List<ScheduledExercise> list_exercises= sessionManager.getScheduledExerciseList();
 
-        int Perc=sessionManager.getPercCompletedExercises(list_exercises);
+        int Perc=sessionManager.getPercCompletedExercises(list_exercises, 1);
 
         progress.setProgress(Perc);
 

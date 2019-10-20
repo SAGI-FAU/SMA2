@@ -52,7 +52,7 @@
         <activity android:name=".Profile3Activity"
             android:screenOrientation="portrait" />
         <activity android:name=".MainActivityMenu" />
-        <activity android:name=".ProfileActivity"
+
             android:screenOrientation="portrait" />
         <activity android:name=".ResultsSpeech"
             android:screenOrientation="portrait" />

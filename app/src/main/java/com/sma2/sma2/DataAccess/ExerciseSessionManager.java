@@ -176,10 +176,10 @@ public class ExerciseSessionManager {
     }
 
 
-    public int getPercCompletedExercises(List<ScheduledExercise> scheduledExerciseList){
+    public int getPercCompletedExercises(List<ScheduledExercise> scheduledExerciseList, int ini){
         int N=scheduledExerciseList.size();
 
-        int completed=0;
+        int completed=ini;
 
         for (ScheduledExercise ex : scheduledExerciseList) {
             if (ex.getCompleted()) {
