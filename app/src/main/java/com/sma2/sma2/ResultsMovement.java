@@ -38,12 +38,10 @@ import java.util.List;
 
 
 public class ResultsMovement extends AppCompatActivity  implements View.OnClickListener {
-    Button bHistory;
     private ImageButton bHelp;
     private ProgressBar progressBarMovement;
     private ImageView iEmojin;
     private TextView tmessage_movement, tmessage_movement_perc;
-    int screenWidth, screenHeight;
     FeatureDA freeze_index;
     FeatureDA posture;
     FeatureDA n_steps;
@@ -53,7 +51,6 @@ public class ResultsMovement extends AppCompatActivity  implements View.OnClickL
 
     private final String PATH = Environment.getExternalStorageDirectory() + "/Apkinson/MOVEMENT/";
 
-    //"/storage/emulated/0/AppSpeechData/ACC/Tapping_example.csv";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -62,7 +59,6 @@ public class ResultsMovement extends AppCompatActivity  implements View.OnClickL
         setContentView(R.layout.activity_walking_feature);
         bHelp=findViewById(R.id.button_help);
         bHelp.bringToFront();
-        bHistory=findViewById(R.id.button_history);
         SetListeners();
         movementProcessing= new MovementProcessing();
 
@@ -144,7 +140,6 @@ public class ResultsMovement extends AppCompatActivity  implements View.OnClickL
     }
 
     private void SetListeners(){
-        bHistory.setOnClickListener(this);
         bHelp.setOnClickListener(this);
     }
 
@@ -154,9 +149,6 @@ public class ResultsMovement extends AppCompatActivity  implements View.OnClickL
     public void onClick(View view) {
 
         switch (view.getId()){
-            case R.id.button_history:
-                //TODO: button history action
-                break;
             case R.id.button_help:
                 onButtonHelp();
                 break;

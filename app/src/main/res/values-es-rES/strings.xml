@@ -207,4 +207,5 @@
     <string name="velocity">Velocidad</string>
     <string name="voicerate_failed">Veloc didad de la voz no pudo ser calculada</string>
     <string name="walking">Caminar</string>
+    <string name="restart_session">Reiniciar sesion</string>
 </resources>

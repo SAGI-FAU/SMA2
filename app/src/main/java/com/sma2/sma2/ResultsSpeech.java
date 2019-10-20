@@ -35,7 +35,6 @@ import java.util.Date;
 public class ResultsSpeech extends AppCompatActivity implements View.OnClickListener{
 
     private Results.OnFragmentInteractionListener mListener;
-    private Button bHistory;
     private RadarFigureManager RadarManager;
     private ProgressBar progressBar;
     private ImageView iEmojin;
@@ -57,7 +56,6 @@ public class ResultsSpeech extends AppCompatActivity implements View.OnClickList
 
         setContentView(R.layout.fragment_results_speech);
 
-        bHistory=findViewById(R.id.button_history);
         progressBar=findViewById(R.id.bar_speech);
         iEmojin=findViewById(R.id.iEmojin_speech);
         tmessage=findViewById(R.id.tmessage_speech);
@@ -138,7 +136,6 @@ public class ResultsSpeech extends AppCompatActivity implements View.OnClickList
 
     private void setListeners() {
         bHelp.setOnClickListener(this);
-        bHistory.setOnClickListener(this);
     }
 
     @Override
@@ -147,8 +144,6 @@ public class ResultsSpeech extends AppCompatActivity implements View.OnClickList
         switch (view.getId()){
             case R.id.button_help:
                 open_help();
-                break;
-            case R.id.button_history:
                 break;
 
         }

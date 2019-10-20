@@ -2,8 +2,10 @@ package com.sma2.sma2;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.res.Resources;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,6 +16,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
 
+import com.alibaba.fastjson.parser.Feature;
 import com.jjoe64.graphview.DefaultLabelFormatter;
 import com.jjoe64.graphview.GraphView;
 import com.jjoe64.graphview.GridLabelRenderer;
@@ -38,6 +41,7 @@ public class ResultsHistorical extends AppCompatActivity implements View.OnClick
     GraphView graph_total;
     String[] list_features_names= new String[4];
     private ImageButton bHelp;
+    FloatingActionButton fab;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -50,7 +54,10 @@ public class ResultsHistorical extends AppCompatActivity implements View.OnClick
         graphManager=new GraphManager(this);
         featureDataService=new FeatureDataService(this);
         bHelp=findViewById(R.id.button_help);
+        fab = findViewById(R.id.fab_settings);
+
         bHelp.setOnClickListener(this);
+        fab.setOnClickListener(this);
 
         Resources r = getResources();
         String[] categories = new String[]{r.getString(R.string.global_results),r.getString(R.string.speech_results),r.getString(R.string.movement_results),r.getString(R.string.taping_results)};
@@ -99,11 +106,18 @@ public class ResultsHistorical extends AppCompatActivity implements View.OnClick
             case R.id.button_help:
                 open_help();
                 break;
+            case R.id.fab_settings:
+                open_settings();
+                break;
 
         }
 
     }
 
+    public void open_settings() {
+        Intent intent_settings = new Intent(ResultsHistorical.this, SettingsActivity.class);
+        startActivity(intent_settings);
+    }
 
     private void open_help(){
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
@@ -130,7 +144,7 @@ public class ResultsHistorical extends AppCompatActivity implements View.OnClick
 
         ArrayList<Long> dates=new ArrayList<>();
 
-        for (int i = features.size()-1; i >=0; i--) {
+        for (int i = 0; i <features.size(); i++) {
             Date date=features.get(i).getFeature_date();
             long datef=date.getTime();
             dates.add(datef);
@@ -153,9 +167,9 @@ public class ResultsHistorical extends AppCompatActivity implements View.OnClick
             public String formatLabel(double value, boolean isValueX) {
                 if (isValueX) {
 
-                    int val=(int) value;
+                    int val=(int) Math.round(value);
                     if (val<dates1.size()){
-                        long datef=dates1.get((int)value);
+                        long datef=dates1.get((val));
                         Date d = new Date(datef);
                         return (dateFormat1.format(d));
                     }
@@ -169,10 +183,11 @@ public class ResultsHistorical extends AppCompatActivity implements View.OnClick
         parent.setOrientation(LinearLayout.HORIZONTAL);
         parent.removeAllViews();
         ImageView[] views = new ImageView[Features.size()];
-        for (int i=Features.size()-1;i>=0;i--){
+        for (int i=0;i<Features.size();i++){
             ImageView iv = new ImageView(this);
             LinearLayout.LayoutParams param = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT
                     , ViewGroup.LayoutParams.WRAP_CONTENT);
+            param.weight=10/ Features.size();
             iv.setLayoutParams(param);
             FeatureDA feature=Features.get(i);
             float y=feature.getFeature_value();

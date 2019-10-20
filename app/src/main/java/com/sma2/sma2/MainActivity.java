@@ -35,6 +35,8 @@ import com.sma2.sma2.DataAccess.ExerciseSessionManager;
 
 import org.greenrobot.greendao.database.Database;
 
+import java.util.Calendar;
+
 import static com.sma2.sma2.Utility.Helpers.hideKeyboard;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
@@ -55,14 +57,26 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         SharedPreferences prefs = getSharedPreferences("LoginPref", this.MODE_PRIVATE);
         int login = prefs.getInt("UserCreated", 0);
         if (login == 1) {
-            ExerciseSessionManager sessionManager = new ExerciseSessionManager();
-            sessionManager.createExerciseSession(this);
+
+            SharedPreferences sharedPreferences = getSharedPreferences("Last day", Context.MODE_PRIVATE);
+            Calendar c = Calendar.getInstance();
+            int thisDay = c.get(Calendar.DAY_OF_YEAR); // GET THE CURRENT DAY OF THE YEAR
+            int lastDay = sharedPreferences.getInt("Last day", 0);
+
+            if (lastDay!=thisDay){
+                ExerciseSessionManager sessionManager = new ExerciseSessionManager();
+                sessionManager.createExerciseSession(this);
+                SharedPreferences.Editor editor = sharedPreferences.edit();
+                editor.putInt("Last day", thisDay);
+                editor.apply();
+            }
+
             Intent intent = new Intent(MainActivity.this, MainActivityMenu.class);
             startActivity(intent);
             finish();
         }
         setContentView(R.layout.activity_main);
-        ConstraintLayout layout = (ConstraintLayout) findViewById(R.id.layout_signin);
+        ConstraintLayout layout = findViewById(R.id.layout_signin);
         layout.setOnTouchListener(new View.OnTouchListener()
         {
             @Override
@@ -128,16 +142,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             patientData = new PatientDA(username, userid);
             return true;
         }
-    }
-
-    public void open_settings() {
-        Intent intent_settings = new Intent(this, SettingsActivity.class);
-        startActivity(intent_settings);
-    }
-
-    public void open_exercises() {
-        Intent intent_exercises = new Intent(this, ExercisesActivity.class);
-        startActivity(intent_exercises);
     }
 
 

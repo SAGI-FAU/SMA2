@@ -46,11 +46,13 @@ public class Results extends Fragment implements View.OnClickListener{
     private ProgressBar progressBar;
     private ImageView iEmojin;
     private TextView tmessage, tmessage_perc;
-    int screenWidth, screenHeight;
     private Results.OnFragmentInteractionListener mListener;
     FeatureDA area_speech, area_mov, area_tapping;
     FeatureDataService feat_data_service;
+    float[] data1=new float[3], data2={100f,100f,100f};
 
+    String[] labels=new String[3];
+    int area_progress;
 
     public Results() {
         // Required empty public constructor
@@ -65,29 +67,10 @@ public class Results extends Fragment implements View.OnClickListener{
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-    }
 
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-
-        View view = inflater.inflate(R.layout.fragment_results, container, false);
-
-        feat_data_service=new FeatureDataService(getActivity().getApplicationContext());
-        bHistory=view.findViewById(R.id.button_history);
-        progressBar=view.findViewById(R.id.bar_total);
-        iEmojin=view.findViewById(R.id.iEmojin_total);
-        tmessage=view.findViewById(R.id.tmessage_all);
-        tmessage_perc=view.findViewById(R.id.tmessage_all_perc);
-        bSpeech=view.findViewById(R.id.bSpeech);
-        bMovement=view.findViewById(R.id.bWalking);
-        bTapping=view.findViewById(R.id.bTapping_one);
-
-        setListeners();
         RadarManager = new RadarFigureManager(getActivity().getApplicationContext());
+        feat_data_service=new FeatureDataService(getActivity().getApplicationContext());
 
-        RadarChart radarchart= view.findViewById(R.id.chart_total);
 
         area_speech=feat_data_service.get_last_feat_value(feat_data_service.area_speech_name);
         float area_speech_value=area_speech.getFeature_value();
@@ -98,21 +81,19 @@ public class Results extends Fragment implements View.OnClickListener{
         area_tapping=feat_data_service.get_last_feat_value(feat_data_service.area_tapping_name);
         float area_tapping_value=area_tapping.getFeature_value();
 
+        data1[0]=area_speech_value;
+        data1[1]=area_tapping_value;
+        data1[2]=area_mov_value;
 
-
-        float[] data1={area_speech_value,area_tapping_value,area_mov_value};
-        float[] data2={100f,100f,100f};
-
-        String Label_1 = getResources().getString(R.string.Speech);
-        String Label_2 = getResources().getString(R.string.tapping_ex);
-        String Label_3 = getResources().getString(R.string.movement);
-        String[] labels={Label_1, Label_2, Label_3};
-        RadarManager.PlotRadar(radarchart, data1, data2, labels);
+        labels[0] = getResources().getString(R.string.Speech);
+        labels[1]= getResources().getString(R.string.tapping_ex);
+        labels[2] = getResources().getString(R.string.movement);
 
 
         double area=RadarManager.get_area_chart(data1);
         double max_area=RadarManager.get_area_chart(data2);
-        int area_progress=(int)(area*100/max_area);
+        area_progress=(int)(area*100/max_area);
+
 
         SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(getActivity().getApplicationContext());
         boolean new_area_total=sharedPref.getBoolean("New Area Total", false);
@@ -126,7 +107,28 @@ public class Results extends Fragment implements View.OnClickListener{
             feat_data_service.save_feature(area_t);
         }
 
+
+    }
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        // Inflate the layout for this fragment
+
+        View view = inflater.inflate(R.layout.fragment_results, container, false);
+        bHistory=view.findViewById(R.id.button_history);
+        progressBar=view.findViewById(R.id.bar_total);
+        iEmojin=view.findViewById(R.id.iEmojin_total);
+        tmessage=view.findViewById(R.id.tmessage_all);
+        tmessage_perc=view.findViewById(R.id.tmessage_all_perc);
+        bSpeech=view.findViewById(R.id.bSpeech);
+        bMovement=view.findViewById(R.id.bWalking);
+        bTapping=view.findViewById(R.id.bTapping_one);
+        RadarChart radarchart= view.findViewById(R.id.chart_total);
+        RadarManager.PlotRadar(radarchart, data1, data2, labels);
         RadarManager.put_emojin_and_message(iEmojin, tmessage, tmessage_perc, area_progress, progressBar, getActivity());
+        setListeners();
+
         return view;
     }
 
@@ -178,9 +180,6 @@ public class Results extends Fragment implements View.OnClickListener{
         Intent i =new Intent(getActivity().getApplicationContext(), ResultsMovement.class);
         startActivity(i);
     }
-
-
-
 
 
 

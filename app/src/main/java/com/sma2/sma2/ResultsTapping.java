@@ -37,7 +37,6 @@ import java.util.List;
 
 
 public class ResultsTapping extends AppCompatActivity  implements View.OnClickListener {
-    Button bHistory;
     private ImageButton bHelp;
     private ProgressBar progressBarTapping;
     private ImageView iEmojin;
@@ -57,7 +56,6 @@ public class ResultsTapping extends AppCompatActivity  implements View.OnClickLi
         setContentView(R.layout.activity_tapping_feature_);
         bHelp=findViewById(R.id.button_help);
         bHelp.bringToFront();
-        bHistory=findViewById(R.id.button_history);
         SetListeners();
 
         progressBarTapping=findViewById(R.id.bar_tapping);
@@ -130,7 +128,6 @@ public class ResultsTapping extends AppCompatActivity  implements View.OnClickLi
     }
 
     private void SetListeners(){
-        bHistory.setOnClickListener(this);
         bHelp.setOnClickListener(this);
     }
 
@@ -141,9 +138,6 @@ public class ResultsTapping extends AppCompatActivity  implements View.OnClickLi
     public void onClick(View view) {
 
         switch (view.getId()){
-            case R.id.button_history:
-                //TODO: button history action
-                break;
             case R.id.button_help:
                 onButtonHelp();
                 break;

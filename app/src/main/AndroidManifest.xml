@@ -63,12 +63,7 @@
             android:screenOrientation="portrait"/>
         <activity android:name=".ResultsTapping"
             android:screenOrientation="portrait"/>
-        <activity android:name=".FeatureExtraction.Movement.PosturalTremor_feature_Activity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".FeatureExtraction.Movement.BalanceTremorFeatureActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".FeatureExtraction.Movement.HandMovementFeatureActivity"
-            android:screenOrientation="portrait"/>
+
 
         <activity
             android:name=".ResultsMovement"

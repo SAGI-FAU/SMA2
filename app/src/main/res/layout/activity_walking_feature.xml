@@ -141,7 +141,6 @@
             />
 
 
-
         <com.github.mikephil.charting.charts.RadarChart
             android:id="@+id/chart_movement"
             android:layout_width="0dp"
@@ -159,23 +158,6 @@
 
 
 
-
-        <Button
-            android:id="@+id/button_history"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginBottom="4dp"
-            android:background="@color/colorPrimary"
-            android:text="@string/history"
-            android:textSize="@dimen/button_text_size"
-            app:layout_constraintDimensionRatio="4"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/chart_movement"
-            app:layout_constraintWidth_percent="0.7" />
 
 
 

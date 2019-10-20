@@ -126,13 +126,11 @@ public class GraphManager {
         float y=0;
         FeatureDA feature;
 
-        int j=0;
-        for (int i = features.size()-1; i >=0; i--) {
+        for (int i = 0; i <features.size(); i++) {
 
             feature=features.get(i);
             y=feature.getFeature_value();
-            series.appendData(new DataPoint(j, y), true, features.size());
-            j+=1;
+            series.appendData(new DataPoint(i, y), true, features.size());
         }
         graph.removeAllSeries();
         graph.addSeries(series);
