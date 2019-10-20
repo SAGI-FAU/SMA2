@@ -19,6 +19,18 @@
 
         tools:context=".ResultsTapping" >
 
+
+        <ImageView
+            android:id="@+id/imageView3"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:adjustViewBounds="true"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/wallpaper2"
+            tools:srcCompat="@drawable/wallpaper2" />
+
         <TextView
             android:id="@+id/textViewResultsMovement"
             android:layout_width="wrap_content"
@@ -52,7 +64,7 @@
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="36sp"
+            android:layout_marginTop="65sp"
             app:layout_constraintWidth_percent="0.9"
             app:layout_constraintDimensionRatio="5"
             app:layout_constraintStart_toStartOf="parent"
