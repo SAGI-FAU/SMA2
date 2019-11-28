@@ -111,6 +111,7 @@ dependencies {
     implementation 'com.android.support:design:26.1.0'
 
     implementation 'com.android.support:support-annotations:27.1.1'
+    implementation 'com.mcxiaoke.volley:library:1.0.19'
 
 }
 

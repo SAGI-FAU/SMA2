@@ -1,5 +1,6 @@
 package com.sma2.sma2.ExerciseFragments;
 
+import android.app.Application;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -11,10 +12,13 @@ import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.sma2.sma2.DataAccess.ExerciseSessionManager;
 import com.sma2.sma2.DataAccess.ScheduledExercise;
 import com.sma2.sma2.R;
+import com.sma2.sma2.SendData.ConectionWifi;
+import com.sma2.sma2.SendData.SendDataService;
 
 import java.util.List;
 
@@ -77,13 +81,19 @@ public class ExerciseFinished extends Fragment {
             @Override
             public void onClick(View v) {
                 mListener.onDoneButtonClicked();
+
+
+
             }
+
         });
 
 
         TextView tMessage=view.findViewById(R.id.motivationMessage);
         Animation animation2=AnimationUtils.loadAnimation(view.getContext(),R.anim.bounce);
         tMessage.startAnimation(animation2);
+        sendData();
+
 
 
 
@@ -112,4 +122,32 @@ public class ExerciseFinished extends Fragment {
         void onRedoButtonClicked();
         void onDoneButtonClicked();
     }
+
+    public void sendData() {
+
+
+        // función a ejecutar
+        ConectionWifi cW= new ConectionWifi(getContext());
+        boolean conection = cW.checkConnection(cW);
+        if (conection==true) {
+
+            SendDataService sds= new SendDataService(getContext());
+            sds.uploadMetadata(sds);
+
+            sds.uploadMedicine(sds);
+            sds.uploadAudio(sds);
+            sds.uploadMovement(sds);
+            sds.uploadVideo(sds);
+
+        }
+        else{
+            Toast.makeText(getContext(), "Conectate a una red WIFI", Toast.LENGTH_SHORT).show();
+        }
+
+
+
+    }
+
+
+
 }
