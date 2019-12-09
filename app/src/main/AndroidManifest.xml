@@ -53,7 +53,6 @@
             android:screenOrientation="portrait" />
         <activity android:name=".MainActivityMenu" />
 
-            android:screenOrientation="portrait" />
         <activity android:name=".ResultsSpeech"
             android:screenOrientation="portrait" />
 
