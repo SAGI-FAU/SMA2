@@ -12,8 +12,14 @@ import android.media.MediaRecorder;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
+import android.os.Looper;
 import android.os.Message;
 import android.util.Log;
+
+import com.sma2.sma2.DataAccess.PatientDataService;
+import com.sma2.sma2.DataAccess.SignalDA;
+import com.sma2.sma2.DataAccess.SignalDataService;
+import com.sma2.sma2.R;
 
 import java.io.BufferedOutputStream;
 import java.io.DataOutputStream;
@@ -26,7 +32,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
-class SpeechRecorder {
+public class SpeechRecorder {
     private static Context CONTEXT;
     private static Handler HANDLER;
 
@@ -38,12 +44,16 @@ class SpeechRecorder {
     private static File FILE_PCM;
     private static File FILE_WAV;
 
+    private SignalDataService signalDataService;
+    private SignalDA signalDA;
+
     private int minBufferSize;
 
     private SpeechRecorder(Context context, Handler handler){
         CONTEXT = context;
+        signalDataService = new SignalDataService(context);
         HANDLER = handler;
-        AUDIO_FOLDER = new File(Environment.getExternalStorageDirectory() + File.separator + "APP_NAME" + File.separator + "AUDIO");
+        AUDIO_FOLDER = new File(Environment.getExternalStorageDirectory() + File.separator + CONTEXT.getString(R.string.app_name) + File.separator + "AUDIO");
         if(!AUDIO_FOLDER.exists()){
             AUDIO_FOLDER.mkdirs();
         }
@@ -73,6 +83,7 @@ class SpeechRecorder {
         String date = getCurrentDateAsString();
         FILE_PCM  = new File(AUDIO_FOLDER.getAbsolutePath() + File.separator + date + "_" + exercise + ".pcm");
         FILE_WAV  = new File(AUDIO_FOLDER.getAbsolutePath() + File.separator + date + "_" + exercise + ".wav");
+        signalDA = new SignalDA(exercise,AUDIO_FOLDER.getAbsolutePath() + File.separator + date + "_" + exercise + ".wav");
         try {
             FILE_PCM.createNewFile();
         } catch (IOException e) {
@@ -96,37 +107,57 @@ class SpeechRecorder {
      * @return String whether recording was successful
      */
     public String record(){
-        short[] shorts = new short[minBufferSize];
-        AUDIO_RECORD.startRecording();
-        while (AUDIO_RECORD.getRecordingState() == AudioRecord.RECORDSTATE_RECORDING){
-            int size = AUDIO_RECORD.read(shorts, 0, minBufferSize);
-            double max = max(shorts);
-            int maxPercent = (int) (max / Short.MAX_VALUE * 100);
-            Message message = HANDLER.obtainMessage();
-            Bundle data = new Bundle();
-            data.putDouble("Volume", maxPercent);
-            message.setData(data);
-            message.sendToTarget();
-            for (int i = 0; i < size; i++){
+        Thread recordingThread = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                short[] shorts = new short[minBufferSize];
+                AUDIO_RECORD.startRecording();
+                while (AUDIO_RECORD.getRecordingState() == AudioRecord.RECORDSTATE_RECORDING){
+                    int size = AUDIO_RECORD.read(shorts, 0, minBufferSize);
+                    double max = max(shorts);
+                    int maxPercent = (int) (max / Short.MAX_VALUE * 100);
+                    Message message = HANDLER.obtainMessage();
+                    Bundle data = new Bundle();
+                    data.putDouble("Volume", maxPercent);
+                    message.setData(data);
+                    message.sendToTarget();
+                    for (int i = 0; i < size; i++){
+                        try {
+                            DATA_OUTPUT_STREAM.writeShort(shorts[i]);
+                        } catch (IOException e) {
+                            Log.e("SpeechRecorder", e.toString());
+                            AUDIO_RECORD.stop();
+                            try {
+                                DATA_OUTPUT_STREAM.close();
+                            } catch (IOException e1) {
+                                Log.e("SpeechRecorder", e.toString());
+                            }
+                            return;
+                        }
+                    }
+                }
                 try {
-                    DATA_OUTPUT_STREAM.writeShort(shorts[i]);
+                    DATA_OUTPUT_STREAM.close();
                 } catch (IOException e) {
                     Log.e("SpeechRecorder", e.toString());
-                    AUDIO_RECORD.stop();
-                    return "ERROR: Could not write audio data to pcm file";
                 }
+                WavFileWriter wavFileWriter = new WavFileWriter(SAMPLING_RATE, FILE_PCM, FILE_WAV);
+                wavFileWriter.start();
+                try {
+                    wavFileWriter.join();
+                }catch (InterruptedException e){
+                    Log.e("HANDLER ERROR",e.getMessage());
+                }
+                Message message = HANDLER.obtainMessage();
+                Bundle data = new Bundle();
+                data.putString("State", "Finished");
+                data.putString("File", FILE_WAV.getAbsolutePath());
+                message.setData(data);
+                message.sendToTarget();
             }
-        }
-        AUDIO_RECORD.stop();
-        try {
-            DATA_OUTPUT_STREAM.close();
-        } catch (IOException e) {
-            Log.e("SpeechRecorder", e.toString());
-            return "ERROR: Could not close DataOutputStream";
-        }
-        WavFileWriter wavFileWriter = new WavFileWriter(SAMPLING_RATE, FILE_PCM, FILE_WAV);
-        wavFileWriter.start();
-        return "Successful recording";
+        });
+        recordingThread.start();
+        return "Recording started";
     }
 
     /**
@@ -137,6 +168,10 @@ class SpeechRecorder {
         if (AUDIO_RECORD.getRecordingState() != AudioRecord.RECORDSTATE_RECORDING){
             return "Cannot stop recording. Not recording at the moment.";
         }
+        AUDIO_RECORD.stop();
+        PatientDataService pd = new PatientDataService(CONTEXT);
+        signalDA.setPatientDAId(pd.getPatient().getUserId());
+        signalDataService.saveSignal(signalDA);
         return "Stopped recording";
     }
 
@@ -166,7 +201,7 @@ class SpeechRecorder {
         return dateFormat.format(date);
     }
 
-    public static double max(short[] m) {
+    private static double max(short[] m) {
         double max = 0;
         for (int i = 0; i < m.length; i++) {
             if (Math.abs(m[i]) > max) {

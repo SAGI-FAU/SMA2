@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<resources xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <string name="app_name" translatable="false">Apkinson</string>
+    <string name="databasename" translatable="false">apkinsondb</string>
+    <string name="name">Nazwa użytkownika</string>
+    <string name="ID">numer telefonu</string>
+    <string name="Login">LOGIN</string>
+    <string name="or">lub</string>
+    <string name="register">Zarejestruj</string>
+    <string name="sign_up">Utwórz konto</string>
+    <string name="age">Wiek</string>
+    <string name="gender">Płeć</string>
+    <string name="male">Mężczyzna</string>
+    <string name="female">Kobieta</string>
+    <string name="otherGender">inny</string>
+    <string name="hand">Dominująca ręka</string>
+    <string name="left">Lewa</string>
+    <string name="right">Prawa</string>
+    <string name="yes">Tak</string>
+    <string name="no">Nie</string>
+    <string name="dataDummy" translatable="false">dd/mm/yyyy</string>
+    <string name="smoker">Palacz</string>
+    <string name="next">Następny</string>
+    <string name="back">Wróć</string>
+    <string name="education">Poziom edukacji</string>
+    <string name="tod">Lata po diagnozie</string>
+    <string name="todinput">Rok</string>
+    <string name="med">Lek</string>
+    <string name="med_name">Nazwa leku</string>
+    <string name="med_dose">Dawka (mg)</string>
+    <string name="med_time">Czas podania leku</string>
+    <string name="other1">Czy masz problemy z mową lub motoryką?</string>
+    <string name="___" translatable="false">------ ------ ------</string>
+    <string name="start2">START</string>
+    <string name="record">Nagrywaj</string>
+    <string name="a_ex">a</string>
+    <string name="ddk_ex" translatable="false">ddk</string>
+    <string name="instructions">Instrukcje</string>
+    <string name="instructions_long">Szczegółowa instrukcja</string>
+    <string name="instructions_video">Prezentacja wideo</string>
+    <string name="volume">Głośność</string>
+    <string name="ball_balance" translatable="false">Gra w balans piłkami</string>
+    <string name="tapping_ex">Naciskanie</string>
+    <string name="tapping_1">Naciskanie 1 palcem</string>
+    <string name="tapping_2">Naciskanie 2 palcami</string>
+    <string name="sliding">Przesuwanie</string>
+    <string name="done">Gotowe! </string>
+    <string name="btnProfileText">Profil</string>
+    <string name="btnSettingsText">Ustawienia</string>
+    <string name="btnExercisesText">Ćwiczenia</string>
+    <string name="btnResultsText">Wyniki</string>
+    <string name="target">Wynik docelowy</string>
+    <string name="thanks">Dziękuję!!!</string>
+    <string name="results">Zobacz wyniki</string>
+    <string name="birthdate">Data urodzenia</string>
+    <string name="language">Język</string>
+    <string name="add">DODAJ</string>
+    <string name="save_med">ZAPISZ LEK</string>
+    <string name="update">ZAKTUALIZUJ LEK</string>
+    <string name="weight">Waga (kg)</string>
+    <string name="height">Wysokość (cm)</string>
+    <string name="user_empty">Proszę, uzupełnij nazwę użytkownika</string>
+    <string name="userid_empty">Proszę, uzupełnij numer telefonu</string>
+    <string name="log_in">Logowanie zakończone sukcesem</string>
+    <string name="log_error">Nazwa użytkownika lub numer telefonu nie zostały odnalezione</string>
+    <string name="brith_date_error">Proszę, uzupełnij datę urodzin</string>
+    <string name="none_item">Brak</string>
+    <string name="elem_item">Wykształcenie podstawowe</string>
+    <string name="high_item">Wykształcenie zawodowe</string>
+    <string name="under_item">Wykształcenie średnie</string>
+    <string name="post">Wyksztacenie wyższe</string>
+    <string name="medicine_empty">Proszę, uzupełnij nazwę leku</string>
+    <string name="dose_empty">Proszę, uzupełnij dawkę leku</string>
+    <string name="add_medice_error">Lek został uprzednio dodany</string>
+    <string name="medicine_added">Dodanie zakończone sukcesem</string>
+    <string name="time_diagnosis_error">Proszę, uzupełnij czas podania leku</string>
+    <string name="weight_error">Proszę, uzupełnij wagę</string>
+    <string name="height_eror">Proszę, uzupełnij wzrost</string>
+    <string name="again">Ponownie</string>
+    <string name="stop">Stop</string>
+    <string name="session_start">Zacznij pierwsze ćwiczenie</string>
+    <string name="session_continue">Zacznij kolejne ćwiczenie </string>
+    <string name="session_finish">Powrót do menu głównego</string>
+    <string name="exercise_start">Zacznij ćwiczenie</string>
+    <string name="Session">Dzisiejsze ćwiczenie</string>
+    <string name="missing_permissions_title">Brak uprawnień!</string>
+    <string name="missing_permissions_text">Musisz wyrazić zgodę na nagrywanie głosu aby móc wykonywać ćwiczenia! </string>
+    <string name="OK">OK</string>
+    <string name="user_name">Imię:</string>
+    <string name="user_id">Telefon:</string>
+    <string name="S_record">Nagrane sesje</string>
+    <string name="Int_medicine">Lek:</string>
+    <string name="upd_medicine">Zaktualizuj lek</string>
+    <string name="add_medicine">DODAJ LEK</string>
+    <string name="delete">USUŃ</string>
+    <string name="cancel">ANULUJ</string>
+    <string name="save">ZAPISZ</string>
+    <string name="motivate">Świetna robota! </string>
+    <string name="Number_Taps">Liczba naciśnięć</string>
+    <string name="Time_Tapping_His">"Czas  "</string>
+    <string name="Finger_left">Lewy palec</string>
+    <string name="Finger_right">Prawy palec</string>
+    <string name="Hits_porcentage">Procent naciśnięć</string>
+    <string name="Tapping_Time">Czas naciśnięć</string>
+    <string name="Positive_message">Świeta robota!!</string>
+    <string name="Medium_message">Świeta robota!! Na pewno możesz  jeszczelepiej! </string>
+    <string name="Negative_message">Spróbujmy jeszcze raz! Powodzenia! </string>
+    <string name="Empty">Puste</string>
+    <string name="Title_notif">Rozpocznij terapię</string>
+    <string name="Content_notif">Proszę pamiętaj o ćwiczeniach dzisiaj</string>
+    <string name="title_notif_med">Weź swój lek</string>
+    <string name="content_notif_med">Pamiętaj aby zażyć swój lek</string>
+    <string name="session">Sesja</string>
+    <string name="Perc_Tapping_Hits">% naciśnięć</string>
+    <string name="completed">Zakończyłeś z wynikiem </string>
+    <string name="keep">Spróbuj najlepiej jak potrafisz! </string>
+    <string name="phonation">Fonacja</string>
+    <string name="jitter" translatable="false">Jitter (%)</string>
+    <string name="articulation">Artykulacja</string>
+    <string name="ddk_reg">DDK regularność (ms)</string>
+    <string name="regularity">Regularność</string>
+    <string name="Speech">Mowa</string>
+    <string name="movement">Ruch</string>
+    <string name="postural">Drżenie postawy</string>
+    <string name="Hand_left">Lewa ręka</string>
+    <string name="Hand_right">Prawa ręka</string>
+    <string name="TremorAmplitudeLeft">% Wynik Lewej Ręki</string>
+    <string name="TremorAmplitudeRight">% Wynik Prawej Ręki</string>
+    <string name="balance">Balansowanie</string>
+    <string name="TremorAmplitude">% Wynik</string>
+    <string name="Completed_Exercises">Zakończone Ćwiczenie</string>
+    <string name="update_profile">Zaktualizuj profil</string>
+    <string name="Notification_time">Czas powiadomień</string>
+    <string name="export">Eksportuj MetaDane</string>
+    <string name="export_sucess">Eksport MetaDanych zakończony sukcesem! </string>
+    <string name="export_failed">Eksport MetaDanych nie udany. </string>
+    <string name="left_stability">Stabilność Lewej Ręki</string>
+    <string name="right_stability">Stabilność Prawej Ręki</string>
+    <string name="percentage">Procent</string>
+    <string name="F0">Częstotliwość podstawowa</string>
+    <string name="time">czas [s]</string>
+    <string name="frequency">częstotliwość [Hz]</string>
+    <string name="pronation">Rotacja ręki</string>
+    <string name="kinetic">Drżenie kinetyczne</string>
+    <string name="circling">Krążenie</string>
+    <string name="perc_left_hand">Wynik Lewej Ręki</string>
+    <string name="perc_right_hand">Wynik Prawej Ręki</string>
+    <string name="scheduler">Zmień grafik ćwiczeń</string>
+    <string name="password">Hasło</string>
+    <string name="daily_exercises">Codzienne Ćwiczenia</string>
+    <string name="full_exercises">Wszystkie Ćwiczenia</string>
+    <string name="wrong_pass">Złe hasło</string>
+    <string name="fill_dialog">Nadal brakuje niektórych informacji!</string>
+    <string name="speech_exercises">Ćwiczenie mowy</string>
+    <string name="mov_exercises">Ćwiczenia ruchowe</string>
+    <string name="demo_exercises">Przykładowe ćwiczenia</string>
+    <string name="radarfigure">Wykres radarowy</string>
+    <string name="pronunciation">Wymowa</string>
+    <string name="stability">Stabilność</string>
+    <string name="rate">Ułamek</string>
+    <string name="intonation">Intonacja</string>
+    <string name="intelligibility">Zrozumiałość</string>
+    <string name="patient">Pacjent</string>
+    <string name="progress">Postęp dzienny</string>
+    <string name="quick_start">Szybki start</string>
+    <string name="details">Szczegółowe wyniki</string>
+    <string name="history">Zobacz Historię</string>
+    <string name="control">Odnośnik</string>
+    <string name="permission_request">Niezbędna jest zgoda na udostępnienie kamery oraz mikrofonu</string>
+    <string name="camera_error">To urządzenie nie wspiera Kamera2 API</string>
+    <string name="tapPosition">Precyzja</string>
+    <string name="tapHits">% dotknięć biedronki</string>
+    <string name="barHits">% dotknięć suwaka</string>
+    <string name="tapVelocity">Prędkość dotknięć</string>
+    <string name="walking">Marsz</string>
+    <string name="steps">Kroki</string>
+    <string name="velocity">Prędkość</string>
+    <string name="tremor">Drżenie</string>
+    <string name="failed">Policzenie cech zakończone błędem</string>
+    <string name="jitter_failed">Jiiter nie mógł zostać policzony</string>
+    <string name="speech_performance">Analiza mowy</string>
+    <string name="tapping_performance">Dobra zdolność motoryczna</string>
+    <string name="history_speech">Wyniki historyczne mowy</string>
+    <string name="history_mov">Wyniki historyczne ruchu</string>
+    <string name="voicerate_failed">Szybkość głosu nie mogła zostać wyznaczona</string>
+    <string name="intonation_failed">Intonacja nie mogła zostać wyznaczona</string>
+    <string name="freezeIndex" translatable="false">IndexZamrożenia</string>
+    <string name="posture">Postawa</string>
+    <string name="nStrides">Liczba kroków</string>
+    <string name="tStrides">Czas kroków</string>
+    <string name="area_failed">Obszar radaru nie mógł zostać obliczony</string>
+    <string name="interpre">Interpretacja</string>
+    <string name="global_results">Wynik globalny</string>
+    <string name="speech_results">Wyniki analizy mowy</string>
+    <string name="movement_results">Wyniki analizy ruchu</string>
+    <string name="taping_results">Wynik naciśnięć</string>
+    <string name="SpeechHelp">- PRONUNCIATION: Capacity to correctly pronounce different sounds.
+        \n- STABILITY: Capacity to keep the tone in a sustained phonation.
+        \n- RATE: Syllables per second.
+        \n- INTONATION: Capacity to change the tone in conversations.
+        \n- INTELLIGIBILITY: Percentage of words that the phone understand you.</string>
+    <string name="MovementHelp">- TREMOR: Capacity to control involuntary movement.
+        \n- REGULARITY: Stability of the movement.
+        \n- FREEZE INDEX: Capacity to walk without freezing.
+        \n- POSTURE: Capacity to stand in a fixed position.
+        \n- NUMBER OF STRIDES: Number of strides that you can achieve in 2 minutes walk.
+        \n- STRIDE TIME: Average walking speed.</string>
+    <string name="perform">Wynik :</string>
+    <string name="tapping_failed">Cechy naciśnięć nie mogły zostać obliczone</string>
+    <string name="fine_motor">Umiejętności motoryczne</string>
+    <string name="TappingHelp">- % BIEDRONKA: Dokładność dotknięć owada.
+        \n- %SUWAK: Dokładność pozycjonowania suwaka.
+        \n- PRĘDKOŚĆ: Biedronki na sekundę.
+        \n- PRECYZJA: Bliskość dotknięcia owada.</string>
+    <string name="HistoricHelp">- Możesz wybrać \n wynik, który chcesz zobaczyć. \n
+            Rysunek wskazuje Twoje postępy w kolejnych dniach. \n Im wyżej tym lepiej.</string>
+    <string name="Ex_help">Liczba ćwiczeń   które zakończyłeś dotychczas.   GRATULACJE.</string>
+    <string name="restart_session">Zacznij sesję</string>
+</resources>

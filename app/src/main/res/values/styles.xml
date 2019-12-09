@@ -8,10 +8,29 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <style name="RadioButton" parent="@android:style/Widget.CompoundButton.RadioButton">
+        <item name="android:textSize">@dimen/RadioButton_size</item>
+    </style>
 
     <style name="MySeekBar" parent="Widget.AppCompat.SeekBar">
         <item name="android:progressBackgroundTint">#f4511e</item>
         <item name="android:progressTint">#388e3c</item>
         <item name="android:colorControlActivated">#c51162</item>
     </style>
+
+    <style name="MyProgressBar" parent="@style/Widget.AppCompat.ProgressBar.Horizontal">
+        <item name="android:progressBackgroundTint">@color/colorAccent</item>
+        <item name="android:progressTint">@color/colorPrimaryDark</item>
+        <item name="android:minWidth">200dp</item>
+    </style>
+
+
+    <style name="DailyProgress" parent="@style/Widget.AppCompat.RatingBar">
+        <item name="android:progressBackgroundTint">@color/colorAccent</item>
+        <item name="android:progressTint">@color/colorPrimaryDark</item>
+        <item name="android:minWidth">245sp</item>
+    </style>
+
+
 </resources>
+

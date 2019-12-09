@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingTop="0dp"
+    android:paddingLeft="0dp"
+    android:paddingRight="0dp"
+    android:layout_gravity="center">
+
+    <android.support.constraint.ConstraintLayout
+
+        android:id="@+id/frameLayout_tapping"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        tools:context=".ResultsTapping" >
+
+
+        <ImageView
+            android:id="@+id/imageView3"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:adjustViewBounds="true"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/wallpaper2"
+            tools:srcCompat="@drawable/wallpaper2" />
+
+        <TextView
+            android:id="@+id/textViewResultsMovement"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@android:color/background_light"
+            android:gravity="center"
+            android:text="@string/movement"
+            android:textColor="@color/textColor"
+            android:textSize="30sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHeight_percent="0.08"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+        <ImageButton
+            android:id="@+id/button_help"
+            android:layout_width="30sp"
+            android:layout_height="30sp"
+            android:layout_marginTop="8sp"
+            android:layout_marginEnd="30sp"
+            android:scaleType="centerCrop"
+            android:padding="0dp"
+            android:src="@drawable/btn_help"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/chart_movement"
+            app:layout_constraintTop_toTopOf="@+id/chart_movement" />
+
+        <android.support.v7.widget.CardView
+            android:id="@+id/card"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="10sp"
+            app:layout_constraintWidth_percent="0.9"
+            app:layout_constraintDimensionRatio="5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textViewResultsMovement">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:weightSum="2">
+
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="0dp"
+                    android:layout_weight="1.6"
+                    android:layout_height="match_parent">
+
+                    <ProgressBar
+                        android:splitTrack="false"
+                        android:id="@+id/bar_movement"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:layout_marginTop="20sp"
+                        android:layout_marginStart="10sp"
+                        android:layout_marginEnd="10sp"
+                        android:progress="20"
+                        style="@style/MyProgressBar"
+                        android:progressDrawable="@drawable/seekbar_sliding"/>
+
+                    <ImageView
+                        android:id="@+id/iEmojin_movement"
+                        android:layout_width="35sp"
+                        android:layout_height="35sp"
+                        android:layout_marginTop="-25sp"
+                        android:layout_marginStart="35sp"
+
+                        />
+
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:layout_width="0dp"
+                    android:layout_weight="0.4"
+                    android:layout_height="match_parent">
+
+
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/tmessage_movement_perc"
+                        android:layout_marginTop="1sp"
+                        android:layout_gravity="center"
+                        android:textSize="22sp"
+                        android:text="0%"
+
+                        />
+
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+        </android.support.v7.widget.CardView>
+
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/tmessage_movement"
+            android:layout_marginTop="8sp"
+            android:maxLines="2"
+            android:background="@color/colorPrimaryDark"
+            android:layout_gravity="center"
+            android:textSize="22sp"
+            android:text=""
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/card"
+            />
+
+
+        <com.github.mikephil.charting.charts.RadarChart
+            android:id="@+id/chart_movement"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:textSize="@dimen/button_text_size"
+            app:layout_constraintWidth_percent="0.9"
+            app:layout_constraintDimensionRatio="0.8"
+            app:seriesType="radarchart"
+            android:layout_marginTop="8sp"
+            app:seriesColor="@color/colorPrimaryDark"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tmessage_movement"/>
+
+
+
+
+
+
+
+    </android.support.constraint.ConstraintLayout>
+</ScrollView>

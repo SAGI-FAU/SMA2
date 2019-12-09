@@ -1,3 +1,7 @@
+Master: [![Build Status](https://travis-ci.org/jcvasquezc/SMA2.svg?branch=master)](https://travis-ci.org/jcvasquezc/SMA2)
+
+Develop: [![Build Status](https://travis-ci.org/jcvasquezc/SMA2.svg?branch=develop)](https://travis-ci.org/jcvasquezc/SMA2)
+
 # SMA2
 
 Android app for the project 
@@ -10,7 +14,3 @@ At the end of the exercise session, Apkinson evaluates the performance of the pa
 ![alt text](https://jcvasquezc.github.io/software/apkinson/Apkinson1.png)
 
 ![alt text](https://jcvasquezc.github.io/software/apkinson/Apkinson2.png)
-
-
-
-

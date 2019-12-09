@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/frameLayout2"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Profile_fragment">
+
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="0dp"
+        app:layout_constraintWidth_percent="1"
+        app:layout_constraintHeight_percent="0.25"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@android:color/transparent"
+        tools:srcCompat="@android:color/transparent" />
+
+    <TextView
+        android:id="@+id/txt_profile_progress"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="24dp"
+        android:text="@string/progress"
+        android:textSize="@dimen/textview_text_size"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+
+
+    <ProgressBar
+        android:splitTrack="false"
+        android:id="@+id/daily_progress_bar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16sp"
+        android:progress="20"
+        app:layout_constraintBottom_toTopOf="@+id/txt_profile_progress"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        style="@style/DailyProgress"
+        />
+
+
+
+    <Button
+        android:id="@+id/btn_profile_quickstart"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="24dp"
+        android:background="@color/colorPrimary"
+        android:text="@string/quick_start"
+        android:textSize="@dimen/button_text_size"
+        app:layout_constraintBottom_toTopOf="@+id/daily_progress_bar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <ImageView
+        android:id="@+id/imageView4"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:scaleX="1.1"
+        android:scaleY="1.1"
+        android:src="@color/colorPrimary"
+        app:layout_constraintBottom_toBottomOf="@+id/iv_profile_picture"
+        app:layout_constraintEnd_toEndOf="@+id/iv_profile_picture"
+        app:layout_constraintStart_toStartOf="@+id/iv_profile_picture"
+        app:layout_constraintTop_toTopOf="@+id/iv_profile_picture" />
+
+    <ImageView
+        android:id="@+id/iv_profile_picture"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="30sp"
+        android:background="@color/colorAccent"
+        app:layout_constraintBottom_toBottomOf="@id/imageView2"
+        app:layout_constraintDimensionRatio="1"
+        app:layout_constraintHeight_percent="0.2"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView2"
+        app:srcCompat="@drawable/dummy"
+        tools:src="@drawable/dummy"
+        tools:srcCompat="@drawable/dummy" />
+
+
+
+
+
+
+
+    <ImageView
+        android:id="@+id/imageView5"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:scaleX="1.05"
+        android:scaleY="1.05"
+        android:src="@color/colorPrimary"
+        app:layout_constraintBottom_toBottomOf="@+id/crown"
+        app:layout_constraintEnd_toEndOf="@+id/crown"
+        app:layout_constraintStart_toStartOf="@+id/crown"
+        app:layout_constraintTop_toTopOf="@+id/crown" />
+
+    <ImageButton
+        android:id="@+id/crown"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginEnd="30sp"
+        app:layout_constraintBottom_toBottomOf="@id/imageView2"
+        app:layout_constraintDimensionRatio="1"
+        app:layout_constraintHeight_percent="0.2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView2"
+        android:scaleType="centerCrop"
+        app:srcCompat="@drawable/crown"
+        tools:src="@drawable/crown"
+        tools:srcCompat="@drawable/crown"/>
+
+
+    <TextView
+        android:id="@+id/n_exercises"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="0"
+        android:textSize="30sp"
+        android:textStyle="italic"
+        app:layout_constraintEnd_toEndOf="@+id/crown"
+        app:layout_constraintStart_toStartOf="@+id/crown"
+        app:layout_constraintBottom_toBottomOf="@id/crown"
+        app:layout_constraintTop_toTopOf="@id/crown"
+        />
+
+    <TextView
+        android:id="@+id/profile_txt_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="@string/user_name"
+        android:textSize="30sp"
+        android:textStyle="italic"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/iv_profile_picture" />
+
+</android.support.constraint.ConstraintLayout>

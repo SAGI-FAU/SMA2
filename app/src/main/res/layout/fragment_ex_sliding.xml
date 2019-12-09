@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/backgroundExTapOne"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ExerciseFragments.ExSliding">
+
+
+    <TextView
+        android:id="@+id/chronoSliding"
+        android:textSize="50sp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="00"
+        android:layout_marginTop="30sp"
+        android:textColor="@color/colorPrimaryDark"
+        app:layout_constraintTop_toTopOf="parent"
+        />
+
+    <SeekBar
+        android:splitTrack="false"
+        android:id="@+id/bar_sliding"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:minHeight="70sp"
+        android:minWidth="15sp"
+        android:maxHeight="70sp"
+        android:maxWidth="15sp"
+        android:max="200"
+        android:progress="20"
+
+        android:layout_marginTop="80sp"
+        app:layout_constraintTop_toBottomOf="@+id/chronoSliding"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:thumb="@drawable/thumb_seek"
+        android:progressDrawable="@drawable/seekbar_sliding"/>
+
+
+
+    <ImageView
+        android:id="@+id/imageView_limit"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:srcCompat="@drawable/limit_sliding"
+        android:layout_marginTop="60sp"
+        tools:layout_editor_absoluteX="200sp"
+        android:layout_marginStart="170sp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/chronoSliding"
+        />
+
+
+    <TextView
+        android:id="@+id/textView_limit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/target"
+        android:layout_marginTop="0dp"
+        app:layout_constraintTop_toBottomOf="@+id/imageView_limit"
+        android:layout_marginStart="130sp"
+        android:textSize="30sp"
+        android:gravity="center"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:textColor="@color/colorSeek"
+
+         />
+
+
+</android.support.constraint.ConstraintLayout>

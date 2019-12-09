@@ -5,9 +5,21 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_marginLeft="16dp"
-    android:layout_marginRight="16dp"
+    android:layout_marginLeft="0sp"
+    android:layout_marginRight="0sp"
     tools:context="com.sma2.sma2.SettingsActivity">
+
+
+    <ImageView
+        android:id="@+id/imageView3"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:adjustViewBounds="true"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/wallpaper3_"
+        tools:srcCompat="@drawable/wallpaper3_" />
 
 
     <TextView
@@ -15,99 +27,141 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/btnSettingsText"
-        android:layout_marginTop="0dp"
+        android:layout_marginTop="4dp"
         app:layout_constraintTop_toTopOf="parent"
         android:lines="1"
-        android:textSize="30sp"
+        android:textSize="36sp"
         android:gravity="center"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent" />
 
+
+
+
     <TextView
-        android:id="@+id/textView_lang"
-        android:layout_width="match_parent"
+        android:id="@+id/textViewNotifications"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="@string/language"
-        android:layout_marginTop="20dp"
+        android:text="@string/Notification_time"
+        android:layout_marginTop="100sp"
+        android:layout_marginStart="8sp"
         app:layout_constraintTop_toBottomOf="@+id/textView8"
         android:lines="1"
-        android:textSize="30sp"
-        android:gravity="left"
-        app:layout_constraintLeft_toLeftOf="parent"
-         />
+        android:textSize="@dimen/textview_text_size"
+        app:layout_constraintStart_toStartOf="parent"/>
+
+    <Spinner
+        android:id="@+id/SpinnerNotifications"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintDimensionRatio="4"
+        app:layout_constraintWidth_percent="0.35"
+        android:layout_marginTop="100sp"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:hint="@string/med_time"
+        android:textSize="@dimen/textview_text_size"
+        app:layout_constraintTop_toBottomOf="@+id/textView8"
+        />
 
 
 
-    <RadioGroup xmlns:android="http://schemas.android.com/apk/res/android"
-        android:id="@+id/language_radio"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="0dp"
-        android:orientation="horizontal"
-        android:layout_gravity="center"
-        app:layout_constraintTop_toBottomOf="@+id/textView_lang"
-        >
-
-        <RadioButton
-            android:id="@+id/rbSpanish"
-            android:layout_width="100sp"
-            android:layout_height="80sp"
-            android:layout_marginRight="10sp"
-            android:layout_marginEnd="10sp"
-            android:background="@drawable/spanish"
-            android:checked="true"
-            android:textSize="30sp"
-            android:button="@null"
-            />
+    <Button
+        android:id="@+id/button_update_profile"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintDimensionRatio="4"
+        app:layout_constraintWidth_percent="0.7"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="20sp"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:background="@color/colorPrimary"
+        android:text="@string/update_profile"
+        android:textSize="@dimen/button_text_size"
+        app:layout_constraintTop_toBottomOf="@+id/textViewNotifications" />
 
 
-        <RadioButton
-            android:id="@+id/rbGerman"
-            android:layout_width="100sp"
-            android:layout_height="80sp"
-            android:layout_marginRight="10sp"
-            android:layout_marginEnd="10sp"
-            android:background="@drawable/german"
-            android:checked="true"
-            android:textSize="30sp"
-            android:button="@null"
-            />
-
-        <RadioButton
-            android:id="@+id/rbEnglish"
-            android:layout_width="100sp"
-            android:layout_height="80sp"
-            android:layout_marginRight="10sp"
-            android:layout_marginEnd="10sp"
-            android:background="@drawable/english"
-            android:checked="true"
-            android:textSize="30sp"
-            android:button="@null"
-            />
-    </RadioGroup>
 
 
     <Button
         android:id="@+id/button_update_medicine"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@color/colorPrimaryDark"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintDimensionRatio="4"
+        app:layout_constraintWidth_percent="0.7"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:background="@color/colorPrimary"
         android:text="@string/update"
-        android:textSize="30sp"
-        app:layout_constraintTop_toBottomOf="@+id/language_radio"
-        android:layout_marginTop="50sp"
-        app:layout_constraintLeft_toLeftOf="parent" />
+        android:textSize="@dimen/button_text_size"
+        app:layout_constraintTop_toBottomOf="@+id/button_update_profile" />
+
+
+
+
 
 
     <Button
-        android:id="@+id/button_menu_settings"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@color/colorPrimaryDark"
-        android:text="@string/next"
-        android:textSize="50sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintRight_toRightOf="parent" />
+        android:id="@+id/button_export_metadata"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintDimensionRatio="4"
+        app:layout_constraintWidth_percent="0.7"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:background="@color/colorPrimary"
+        android:text="@string/export"
+        android:textSize="@dimen/button_text_size"
+        app:layout_constraintTop_toBottomOf="@+id/button_update_medicine" />
+
+
+    <Button
+        android:id="@+id/button_change_scheduler"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintDimensionRatio="4"
+        app:layout_constraintWidth_percent="0.7"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:background="@color/colorPrimary"
+        android:text="@string/scheduler"
+        android:textSize="@dimen/button_text_size"
+        app:layout_constraintTop_toBottomOf="@+id/button_export_metadata" />
+
+
+    <Button
+        android:id="@+id/button_restart_session"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintDimensionRatio="4"
+        app:layout_constraintWidth_percent="0.7"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:background="@color/colorPrimary"
+        android:text="@string/restart_session"
+        android:textSize="@dimen/button_text_size"
+        app:layout_constraintTop_toBottomOf="@+id/button_change_scheduler" />
+
+
 
 
 </android.support.constraint.ConstraintLayout>

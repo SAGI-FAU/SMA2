@@ -1,23 +1,224 @@
-<?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">SMA2</string>
+    <string name="app_name" translatable="false">Apkinson</string>
+    <string name="databasename" translatable="false">apkinsondb</string>
     <string name="name">User name</string>
-    <string name="ID">ID number</string>
+    <string name="ID">Telephone number</string>
     <string name="Login">LOGIN</string>
     <string name="or">OR</string>
-    <string name="sign_up">CREATE AN ACCOUNT</string>
+    <string name="register">Register</string>
+    <string name="sign_up">Create account</string>
     <string name="age">Age</string>
     <string name="gender">Gender</string>
     <string name="male">Male</string>
     <string name="female">Female</string>
+    <string name="otherGender">other</string>
     <string name="hand">Dominant hand</string>
     <string name="left">Left</string>
     <string name="right">Right</string>
     <string name="yes">Yes</string>
     <string name="no">No</string>
+    <string name="dataDummy" translatable="false">dd/mm/yyyy</string>
     <string name="smoker">Smoker</string>
     <string name="next">Next</string>
     <string name="back">Back</string>
     <string name="education">Education Level</string>
-    <string name="tod">Time of Diagnosis (years)</string>
+    <string name="tod">Year of diagnosis</string>
+    <string name="todinput">Year</string>
+    <string name="med">Medicine</string>
+    <string name="med_name">Medicine name</string>
+    <string name="med_dose">Dose (mg)</string>
+    <string name="med_time">Intake time</string>
+    <string name="other1">Do you have any speech or movement disorder?</string>
+    <string name="___" translatable="false">------ ------ ------</string>
+    <string name="start2">START</string>
+    <string name="record">Record</string>
+    <string name="a_ex">a</string>
+    <string name="ddk_ex" translatable="false">ddk</string>
+    <string name="instructions">Instructions</string>
+    <string name="instructions_long">Detailed Instructions</string>
+    <string name="instructions_video">Video Demonstration</string>
+    <string name="volume">Volume</string>
+    <string name="ball_balance" translatable="false">Ball balance Game</string>
+    <string name="tapping_ex">Tapping</string>
+    <string name="tapping_1">one finger tapping</string>
+    <string name="tapping_2">two finger tapping</string>
+    <string name="sliding">Sliding</string>
+    <string name="done">Done!</string>
+    <string name="btnProfileText">Profile</string>
+    <string name="btnSettingsText">Settings</string>
+    <string name="btnExercisesText">Exercises</string>
+    <string name="btnResultsText">Results</string>
+    <string name="target">TARGET</string>
+    <string name="thanks">Thank you!!!</string>
+    <string name="results">See the results</string>
+    <string name="birthdate">Birth date</string>
+    <string name="language">Language</string>
+    <string name="add">ADD</string>
+    <string name="save_med">SAVE MEDICINE</string>
+    <string name="update">UPDATE MEDICINE</string>
+    <string name="weight">Weight (kg)</string>
+    <string name="height">Height (cm)</string>
+    <string name="user_empty">Please, fill username field</string>
+    <string name="userid_empty">Please, fill telephone field</string>
+    <string name="log_in">Log in successful</string>
+    <string name="log_error">Username and/or User telephone not found</string>
+    <string name="brith_date_error">Please, fill birth date</string>
+    <string name="none_item">None</string>
+    <string name="elem_item">Elementary school</string>
+    <string name="high_item">High school</string>
+    <string name="under_item">Undergraduate</string>
+    <string name="post">Postgraduate</string>
+    <string name="medicine_empty">Please, fill medicine name field</string>
+    <string name="dose_empty">Please, fill dose field</string>
+    <string name="add_medice_error">Medicine was already added</string>
+    <string name="medicine_added">Added successful</string>
+    <string name="time_diagnosis_error">Please, fill diagnosis time field</string>
+    <string name="weight_error">Please, fill weight field</string>
+    <string name="height_eror">Please, fill height field</string>
+    <string name="again">Again</string>
+    <string name="stop">Stop</string>
+    <string name="session_start">Start First Exercise</string>
+    <string name="session_continue">Start Next Exercise</string>
+    <string name="session_finish">Back To Main Menu</string>
+    <string name="exercise_start">Start Exercise</string>
+    <string name="Session">Today\'s exercise</string>
+    <string name="missing_permissions_title">Missing Permissions!</string>
+    <string name="missing_permissions_text">You must grant permissions to record audio and write to storage to use the exercises!</string>
+    <string name="OK">OK</string>
+    <string name="user_name">Name: </string>
+    <string name="user_id">Telephone: </string>
+    <string name="S_record">Recorded sessions </string>
+    <string name="Int_medicine">Medicine: </string>
+    <string name="upd_medicine">Update medicine</string>
+    <string name="add_medicine">ADD MEDICINE</string>
+    <string name="delete">REMOVE</string>
+    <string name="cancel">CANCEL</string>
+    <string name="save">SAVE</string>
+    <string name="motivate">Good Job!!</string>
+    <string name="Number_Taps">Number of Taps  </string>
+    <string name="Time_Tapping_His">"Time  "</string>
+    <string name="Finger_left">Left Finger</string>
+    <string name="Finger_right">Right Finger</string>
+    <string name="Hits_porcentage">Hits Percentage</string>
+    <string name="Tapping_Time">Tapping Time </string>
+    <string name="Positive_message">Good Job!! </string>
+    <string name="Medium_message">Good Job!! But, You can do it better</string>
+    <string name="Negative_message">Let\'s improve!  Keep working</string>
+    <string name="Empty">Empty</string>
+    <string name="Title_notif">Make your therapy</string>
+    <string name="Content_notif">Please remind your exercises today</string>
+    <string name="title_notif_med">Take your medicine</string>
+    <string name="content_notif_med">Remember to take your medicine: </string>
+    <string name="session">Session </string>
+    <string name="Perc_Tapping_Hits">% Taps </string>
+    <string name="completed">You have finished a total of </string>
+    <string name="keep">Keep doing your best </string>
+    <string name="phonation">Phonation </string>
+    <string name="jitter" translatable="false">Jitter (%) </string>
+    <string name="articulation">Articulation </string>
+    <string name="ddk_reg">DDK regularity (ms)</string>
+    <string name="regularity">Regularity</string>
+
+    <string name="Speech">Speech</string>
+    <string name="movement">Movement</string>
+    <string name="postural">Postural Tremor</string>
+    <string name="Hand_left">Left Hand</string>
+    <string name="Hand_right">Right Hand</string>
+    <string name="TremorAmplitudeLeft">% Performance Left Hand</string>
+    <string name="TremorAmplitudeRight">% Performance Right Hand</string>
+    <string name="balance">Balancing</string>
+    <string name="TremorAmplitude">% Performance</string>
+    <string name="Completed_Exercises">Completed Exercises</string>
+    <string name="update_profile">Update Profile</string>
+    <string name="Notification_time">Time for notifications</string>
+    <string name="export">Export Metadata</string>
+    <string name="export_sucess">Metadata export was successful</string>
+    <string name="export_failed">Metadata export failed</string>
+    <string name="left_stability"> Stability Left Hand</string>
+    <string name="right_stability"> Stability Right Hand</string>
+    <string name="percentage">Percentage</string>
+    <string name="F0">Fundamental Frequency</string>
+    <string name="time">time [s]</string>
+    <string name="frequency">frequency [Hz]</string>
+    <string name="pronation">Hand Rotation</string>
+    <string name="kinetic">Kinetic Tremor</string>
+    <string name="circling">Circling</string>
+    <string name="perc_left_hand">Performance Left Hand</string>
+    <string name="perc_right_hand">Performance Right Hand</string>
+    <string name="scheduler">Change exercise scheduler</string>
+    <string name="password">Password</string>
+    <string name="daily_exercises">Daily Exercises</string>
+    <string name="full_exercises">Full Exercises</string>
+    <string name="wrong_pass">Wrong password</string>
+    <string name="fill_dialog">Some information is still missing!</string>
+    <string name="speech_exercises">Speech exercises</string>
+    <string name="mov_exercises">Movement exercises</string>
+    <string name="demo_exercises">Demo exercises</string>
+    <string name="radarfigure">Radar Figure</string>
+    <string name="pronunciation">Pronunciation</string>
+    <string name="stability">Stability</string>
+    <string name="rate">Rate</string>
+    <string name="intonation">Intonation</string>
+    <string name="intelligibility">Intelligibility</string>
+    <string name="patient">Patient</string>
+
+    <string name="progress">Daily Progress</string>
+    <string name="quick_start">Quick Start</string>
+
+    <string name="details">Detailed Results</string>
+    <string name="history">See History</string>
+
+    <string name="control">Reference</string>
+    <string name="permission_request">This sample needs permission for camera and audio recording.</string>
+    <string name="camera_error">This device doesn\'t support Camera2 API.</string>
+    <string name="tapPosition">Precision</string>
+    <string name="tapHits">% Hits Ladybug</string>
+    <string name="barHits">% Hits Sliding</string>
+    <string name="tapVelocity">Tapping Velocity</string>
+    <string name="walking">Walking</string>
+    <string name="steps">Steps</string>
+    <string name="velocity">Velocity</string>
+    <string name="tremor">Tremor</string>
+    <string name="jitter_failed">Jiiter could not be computed</string>
+    <string name="speech_performance">Speech performance</string>
+    <string name="tapping_performance">Fine motor skills performance</string>
+    <string name="history_speech">Historic results</string>
+    <string name="history_mov">Historic results</string>
+    <string name="voicerate_failed">Voice Rate could not be computed</string>
+    <string name="intonation_failed">Intonation could not be computed</string>
+    <string name="freezeIndex" translatable="false">FreezeIndex</string>
+    <string name="posture">Posture</string>
+    <string name="nStrides">Number of strides</string>
+    <string name="tStrides">Stride time</string>
+    <string name="area_failed">Radar area could not be computed</string>
+    <string name="interpre">Interpretation</string>
+    <string name="global_results">Global results</string>
+    <string name="speech_results">Speech results</string>
+    <string name="movement_results">Movement results</string>
+    <string name="taping_results">Tapping results</string>
+    <string name="SpeechHelp">- PRONUNCIATION: Capacity to correctly pronounce different sounds.
+        \n- STABILITY: Capacity to keep the tone in a sustained phonation.
+        \n- RATE: Syllables per second.
+        \n- INTONATION: Capacity to change the tone in conversations.
+        \n- INTELLIGIBILITY: Percentage of words that the phone understand you.</string>
+
+    <string name="MovementHelp">- TREMOR: Capacity to control involuntary movement.
+        \n- REGULARITY: Stability of the movement.
+        \n- FREEZE INDEX: Capacity to walk without freezing.
+        \n- POSTURE: Capacity to stand in a fixed position.
+        \n- NUMBER OF STRIDES: Number of strides that you can achieve in 2 minutes walk.
+        \n- STRIDE TIME: Average walking speed.</string>
+    <string name="perform">Performance :</string>
+    <string name="tapping_failed">Tapping features could not be computed</string>
+    <string name="fine_motor">Fine motor skills</string>
+    <string name="TappingHelp">- % LADYBUGS: Accuracy hitting on insects.
+        \n- %SLIDING: Accuracy positioning the sliding bar.
+        \n- SPEED: Ladybugs per second.
+        \n- PRECISION: Proximity of insect hits.</string>
+
+    <string name="HistoricHelp">- You can select \n the result you want to see. \n
+            The figure indicates your evolution among consecutive days. \n Higher is better</string>
+
+
+    <string name="Ex_help">This is the number of exercises   you completed so far.   CONGRATULATIONS</string>
 </resources>

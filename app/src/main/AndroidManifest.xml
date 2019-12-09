@@ -1,79 +1,92 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.sma2.sma2">
 
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <!-- permission required to automatically restart a repeating alarm if the user reboots the device -->
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
+
     <application
-        android:allowBackup="true"
+        android:allowBackup="false"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
+        android:theme="@style/AppTheme"
+        tools:replace="android:allowBackup">
 
-
-        <activity android:name=".MainActivity">
+        <activity
+            android:name=".Activities.SplashScreen"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".MainActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".SettingsActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ExercisesActivity"
+            android:exported="true"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ThanksActivity"
+            android:screenOrientation="portrait" />
+        <activity android:name=".Profile1Activity"
+            android:screenOrientation="portrait" />
+        <activity android:name=".Profile2Activity"
+            android:screenOrientation="portrait" />
+        <activity android:name=".Profile3Activity"
+            android:screenOrientation="portrait" />
+        <activity android:name=".MainActivityMenu" />
+
+        <activity android:name=".ResultsSpeech"
+            android:screenOrientation="portrait" />
+
+        <activity android:name=".UpdateMedicine" />
+        <activity android:name=".Modif_medicine" />
+        <activity android:name=".ActivityChangeScheduler"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".ResultsTapping"
+            android:screenOrientation="portrait"/>
 
 
         <activity
-            android:name=".SettingsActivity">
-        </activity>
+            android:name=".ResultsMovement"
+            android:screenOrientation="portrait" />
 
         <activity
-            android:name=".Start_exercises_Activity">
-        </activity>
+            android:name=".ResultsHistorical"
+            android:screenOrientation="portrait" />
 
-        <activity
-            android:name=".Ex_speech1">
-        </activity>
+        <!-- Register the Alarm Receiver -->
+        <receiver android:name=".AlarmReceiver"
 
-        <activity
-            android:name=".Ex_speech2">
-        </activity>
-        <activity
-            android:name=".Ex_speech3">
-        </activity>
+            android:enabled="false">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+            </intent-filter>
+        </receiver>
+        <receiver android:name=".AlarmReceiverMedicine"
 
-        <activity
-            android:name=".Ex_walking">
-        </activity>
-        <activity
-            android:name=".Ex_mov_hands">
-        </activity>
-        <activity
-            android:name=".Ex_tapping">
-        </activity>
-        <activity
-            android:name=".Tapping1">
-        </activity>
-
-        <activity
-            android:name=".Tapping2">
-        </activity>
-        <activity
-            android:name=".Sliding">
-        </activity>
-        <activity
-            android:name=".ThanksActivity">
-        </activity>
-        <activity
-            android:name=".Record_speech">
-        </activity>
-        <activity
-            android:name=".Record_speech_image">
-        </activity>
-        <activity
-            android:name=".Record_movement">
-        </activity>
-        <activity
-            android:name=".Record_mov_ball_balance">
-        </activity>
-
+            android:enabled="false">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+            </intent-filter>
+        </receiver>
 
     </application>
 
