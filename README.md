@@ -14,8 +14,3 @@ At the end of the exercise session, Apkinson evaluates the performance of the pa
 ![alt text](https://jcvasquezc.github.io/software/apkinson/Apkinson1.png)
 
 ![alt text](https://jcvasquezc.github.io/software/apkinson/Apkinson2.png)
-
-
-
-
-
