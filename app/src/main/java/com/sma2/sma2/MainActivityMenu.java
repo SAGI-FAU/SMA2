@@ -225,8 +225,8 @@ public class MainActivityMenu extends AppCompatActivity{
 
                     SendDataService sds= new SendDataService(context);
                     sds.uploadMetadata(sds);
-
                     sds.uploadMedicine(sds);
+
 
 
                 }

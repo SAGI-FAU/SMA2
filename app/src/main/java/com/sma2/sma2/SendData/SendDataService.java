@@ -24,11 +24,18 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class SendDataService {
+    //public String url_base="http://192.168.1.114:8000/apkinson_mobile/";
+    public String url_base="https://gita.udea.edu.co:28080/apkinson_mobile/";
+
     private Context invocationcontext;
     String _audioBase64;
 
@@ -62,13 +69,70 @@ public class SendDataService {
         return _audioBase64;
     }
 
+    public void loadResults(final SendDataService sds) {
+        RequestQueue queue = Volley.newRequestQueue(sds.invocationcontext);
+
+        //String url = "https://gita.udea.edu.co:28080/apkinson_mobile/CreateMedicine/";
+        String url = url_base+"LoadResults/";
+        Log.d("url", url);
+        final String[] WER = {"0"};
+        final DatabaseHelper databaseHelper = new DatabaseHelper(sds.invocationcontext);
+        databaseHelper.addData("WER:"+"0");
+        Toast.makeText(sds.invocationcontext, "WER aún no esta disponible", Toast.LENGTH_SHORT).show();
+// Request a string response from the provided URL.
+/*        StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        // Display the first 500 characters of the response string.
+                        Toast.makeText(sds.invocationcontext, response, Toast.LENGTH_SHORT).show();
+                        databaseHelper.addData("WER:"+"0");
+                        //WER[0] =response;
+                        //progressBar.setVisibility(View.INVISIBLE);
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(sds.invocationcontext, "No response", Toast.LENGTH_SHORT).show();
+                databaseHelper.addData("WER:"+"0");
+                //WER[0]="0";
+                //progressBar.setVisibility(View.INVISIBLE);
+
+            }
+        }){
+            @Override
+            protected Map<String, String> getParams() {
+                Map<String, String> params = new HashMap<String, String>();
+                PatientDataService PatientData = new PatientDataService(sds.invocationcontext);
+
+                Long NumPatients = PatientData.countPatients();
+                if (NumPatients > 0) {
+                    PatientDA Patient = PatientData.getPatient();
+                    params.put("id_name", Patient.getGovtId());
+                    Log.d("id_name", Patient.getGovtId());
+                }
+
+                return params;
+            }
+        };
+        //time out 10seg
+        stringRequest.setRetryPolicy(new DefaultRetryPolicy(
+                10000000,
+                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+        queue.add(stringRequest);
+
+*/
+        //return WER[0];
+    }
+
     public void uploadMetadata(final SendDataService sds) {
         //progressBar.setVisibility(View.VISIBLE);
 
         RequestQueue queue = Volley.newRequestQueue(sds.invocationcontext);
 
         //String url = "https://gita.udea.edu.co:28080/apkinson_mobile/CreatePacient/";
-        String url = "http://192.168.1.206:8000/apkinson_mobile/CreatePacient/";
+        String url = url_base+"CreatePacient/";
         Log.d("url", url);
 
 // Request a string response from the provided URL.
@@ -109,6 +173,7 @@ public class SendDataService {
                     params.put("height", String.valueOf(Patient.getHeight()));
 
                     params.put("birthday", Patient.getBirthday().toString());
+                    Log.d("fecha",Patient.getBirthday().toString());
 
 
                 }
@@ -133,7 +198,7 @@ public class SendDataService {
         RequestQueue queue = Volley.newRequestQueue(sds.invocationcontext);
 
         //String url = "https://gita.udea.edu.co:28080/apkinson_mobile/CreateMedicine/";
-        String url = "http://192.168.1.206:8000/apkinson_mobile/CreateMedicine/";
+        String url = url_base+"CreateMedicine/";
         Log.d("url", url);
 
 // Request a string response from the provided URL.
@@ -148,7 +213,8 @@ public class SendDataService {
                 }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Toast.makeText(sds.invocationcontext, "No response", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(sds.invocationcontext, "No response", Toast.LENGTH_SHORT).show();
+
                 //progressBar.setVisibility(View.INVISIBLE);
 
             }
@@ -193,23 +259,25 @@ public class SendDataService {
     }
 
     public void uploadAudio(final SendDataService sds) {
-
+        final List<String> file_aux=new ArrayList<String>();
 
         RequestQueue queue = Volley.newRequestQueue(sds.invocationcontext);
 
         //String url = "https://gita.udea.edu.co:28080/apkinson_mobile/";
-        String url = "http://192.168.1.206:8000/apkinson_mobile/";
+        String url = url_base;
 
         StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-
+                        files_send_ok(file_aux,sds);
                     }
                 }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Toast.makeText(sds.invocationcontext, "No response", Toast.LENGTH_SHORT).show();
+
+                //Toast.makeText(sds.invocationcontext, "No response", Toast.LENGTH_SHORT).show();
+
             }
         }) {
             @Override
@@ -226,6 +294,8 @@ public class SendDataService {
 
                 File[] files = f.listFiles();
 
+
+
                 DatabaseHelper databaseHelper = new DatabaseHelper(sds.invocationcontext);
 
 
@@ -238,13 +308,14 @@ public class SendDataService {
                     List<String> names = databaseHelper.loadData();
                     if (names.size() == 0) {
                         params.put(file.getName(), convert_File_string(path_internal_storage + "/Apkinson/AUDIO/" + file.getName()));
-                        databaseHelper.addData(file.getName());
+                        //databaseHelper.addData(file.getName());
+                        file_aux.add(file.getName());
                     } else {
                         for (String temp : names) {
                             if (file.getName().equals(temp)) {
-
                                 System.out.println("Debug: Existe");
                                 System.out.println("Ya esta: " + file.getName());
+
                                 flag = true;
                                 break;
                             }
@@ -252,7 +323,10 @@ public class SendDataService {
                         }
                         if (!flag) {
                             params.put(file.getName(), convert_File_string(path_internal_storage + "/Apkinson/AUDIO/" + file.getName()));
-                            databaseHelper.addData(file.getName());
+
+
+                            //databaseHelper.addData(file.getName());
+                            file_aux.add(file.getName());
                             System.out.println("Debug: Super");
                             System.out.println("Agregado: " + file.getName());
 
@@ -267,17 +341,19 @@ public class SendDataService {
 
                 params.put("number_session", "1");
                 params.put("id_name", Patient.getGovtId());
-                Log.d("id_name", Patient.getGovtId());
+
 
                 return params;
             }
         };
+
         //time out 10seg
         stringRequest.setRetryPolicy(new DefaultRetryPolicy(
                 100000,
                 DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
                 DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
         queue.add(stringRequest);
+
 
 
     }
@@ -288,7 +364,7 @@ public class SendDataService {
         RequestQueue queue = Volley.newRequestQueue(sds.invocationcontext);
 
         //String url = "https://gita.udea.edu.co:28080/apkinson_mobile/";
-        String url = "http://192.168.1.206:8000/apkinson_mobile/UploadMovement/";
+        String url = url_base+"UploadMovement/";
 
         StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
                 new Response.Listener<String>() {
@@ -299,7 +375,7 @@ public class SendDataService {
                 }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Toast.makeText(sds.invocationcontext, "No response", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(sds.invocationcontext, "No response", Toast.LENGTH_SHORT).show();
             }
         }) {
             @Override
@@ -378,7 +454,7 @@ public class SendDataService {
         RequestQueue queue = Volley.newRequestQueue(sds.invocationcontext);
 
         //String url = "https://gita.udea.edu.co:28080/apkinson_mobile/";
-        String url = "http://192.168.1.206:8000/apkinson_mobile/UploadVideo/";
+        String url = url_base+"UploadVideo/";
 
         StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
                 new Response.Listener<String>() {
@@ -389,7 +465,7 @@ public class SendDataService {
                 }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Toast.makeText(sds.invocationcontext, "No response", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(sds.invocationcontext, "No response", Toast.LENGTH_SHORT).show();
             }
         }) {
             @Override
@@ -461,6 +537,21 @@ public class SendDataService {
 
 
     }
+
+    public void files_send_ok(List<String> files, final SendDataService sds ){
+
+        DatabaseHelper databaseHelper = new DatabaseHelper(sds.invocationcontext);
+
+        for (int i = 0; i < files.size(); i++) {
+
+            String file=files.get(i);
+
+            databaseHelper.addData(file);
+        }
+
+    }
+
+
 }
 
 

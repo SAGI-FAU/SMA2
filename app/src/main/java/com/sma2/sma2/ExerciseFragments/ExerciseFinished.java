@@ -82,7 +82,7 @@ public class ExerciseFinished extends Fragment {
             public void onClick(View v) {
                 mListener.onDoneButtonClicked();
 
-
+                sendData();
 
             }
 
@@ -92,7 +92,7 @@ public class ExerciseFinished extends Fragment {
         TextView tMessage=view.findViewById(R.id.motivationMessage);
         Animation animation2=AnimationUtils.loadAnimation(view.getContext(),R.anim.bounce);
         tMessage.startAnimation(animation2);
-        sendData();
+
 
 
 
@@ -132,9 +132,6 @@ public class ExerciseFinished extends Fragment {
         if (conection==true) {
 
             SendDataService sds= new SendDataService(getContext());
-            sds.uploadMetadata(sds);
-
-            sds.uploadMedicine(sds);
             sds.uploadAudio(sds);
             sds.uploadMovement(sds);
             sds.uploadVideo(sds);
