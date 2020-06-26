@@ -89,8 +89,14 @@ public class ResultsSpeech extends AppCompatActivity implements View.OnClickList
         float pronunval=pronunciation.getFeature_value();
 
 
-        
-        sendData();
+        SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
+
+        boolean server_enabled=sharedPref.getBoolean("WIFI enabled", true);
+
+        if (server_enabled){
+            sendData();
+
+        }
         String WER="0";
         DatabaseHelper databaseHelper = new DatabaseHelper(this);
 
@@ -117,25 +123,38 @@ public class ResultsSpeech extends AppCompatActivity implements View.OnClickList
 
 
         }
-
-
-        float[] data1 ={jitterval,Vrateval,intonationval, Float.parseFloat(WER) };
-        float[] data2={86f,98f,82.2f,27f};
-
         String Label_1 = getResources().getString(R.string.pronunciation);
         String Label_2 = getResources().getString(R.string.stability);
         String Label_3 = getResources().getString(R.string.rate);
         String Label_4 = getResources().getString(R.string.intonation);
         String Label_5 = getResources().getString(R.string.intelligibility);
-        String[] labels={Label_2, Label_3, Label_4, Label_5};
+        int area_progress=0;
+        if (WER.equals("0")){
+            float[] data1 ={jitterval,Vrateval,intonationval};
+            float[] data2={86f,98f,82.2f};
 
-        RadarManager.PlotRadar(radarchart, data1, data2, labels);
-        double area=RadarManager.get_area_chart(data1);
-        double maxArea=RadarManager.get_area_chart(data2);
-        int area_progress=(int)(area*100/maxArea);
+            String[] labels={Label_2, Label_3, Label_4};
 
 
-        SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
+            RadarManager.PlotRadar(radarchart, data1, data2, labels);
+            double area=RadarManager.get_area_chart(data1);
+            double maxArea=RadarManager.get_area_chart(data2);
+            area_progress=(int)(area*100/maxArea);
+        }
+        else{
+            float[] data1 ={jitterval,Vrateval,intonationval, 100f-Float.parseFloat(WER) };
+            float[] data2={86f,98f,82.2f,73f};
+
+            String[] labels={Label_2, Label_3, Label_4, Label_5};
+
+
+            RadarManager.PlotRadar(radarchart, data1, data2, labels);
+            double area=RadarManager.get_area_chart(data1);
+            double maxArea=RadarManager.get_area_chart(data2);
+            area_progress=(int)(area*100/maxArea);
+        }
+
+
         boolean new_area_speech=sharedPref.getBoolean("New Area Speech", false);
 
         if (new_area_speech){
@@ -194,7 +213,7 @@ public class ResultsSpeech extends AppCompatActivity implements View.OnClickList
         // función a ejecutar
         ConectionWifi cW= new ConectionWifi(this);
         boolean conection = cW.checkConnection(cW);
-        if (conection==true) {
+        if (conection) {
 
             SendDataService sds= new SendDataService(this);
             sds.loadResults(sds);

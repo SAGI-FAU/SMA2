@@ -2,7 +2,9 @@ package com.sma2.sma2.ExerciseFragments;
 
 import android.app.Application;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -81,8 +83,14 @@ public class ExerciseFinished extends Fragment {
             @Override
             public void onClick(View v) {
                 mListener.onDoneButtonClicked();
+                SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(getContext());
 
-                sendData();
+                boolean server_enabled=sharedPref.getBoolean("WIFI enabled", true);
+
+                if (server_enabled){
+                    sendData();
+
+                }
 
             }
 

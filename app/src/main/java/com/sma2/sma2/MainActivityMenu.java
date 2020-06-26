@@ -89,7 +89,12 @@ public class MainActivityMenu extends AppCompatActivity{
             notifications.setReminder(this,AlarmReceiverMedicine.class, CurrentMed.getIntakeTime(), 0);
         }
 
-        synchronizeServer(this);
+        boolean server_enabled=sharedPref.getBoolean("WIFI enabled", true);
+
+        if (server_enabled){
+            synchronizeServer(this);
+
+        }
     }
 
     public void open_settings() {
