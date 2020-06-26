@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Environment;
 import android.preference.PreferenceManager;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Gravity;
@@ -23,6 +22,8 @@ import android.widget.Spinner;
 import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.sma2.sma2.DataAccess.ExerciseSessionManager;
 import com.sma2.sma2.DataAccess.MedicineDA;
@@ -50,11 +51,9 @@ public class SettingsActivity extends AppCompatActivity implements View.OnClickL
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         setContentView(R.layout.activity_settings);
         PDS= new PatientDataService(this);
         patientData = PDS.getPatient();
-
         setListeners();
     }
 
@@ -65,6 +64,18 @@ public class SettingsActivity extends AppCompatActivity implements View.OnClickL
         findViewById(R.id.button_change_scheduler).setOnClickListener(this);
         findViewById(R.id.button_restart_session).setOnClickListener(this);
         Switch sw = findViewById(R.id.switch_wifi);
+
+        sharedPref =PreferenceManager.getDefaultSharedPreferences(this);
+
+        sw.setTextOff("OFF");
+        sw.setTextOn("ON");
+        if(sharedPref.contains("WIFI enabled")){
+            boolean server_enabled=sharedPref.getBoolean("WIFI enabled", true);
+            sw.setChecked(server_enabled);
+        }
+        else{
+            sw.setChecked(false);
+        }
 
         SpinnerNotify = findViewById(R.id.SpinnerNotifications);
         String[] hours = new String[]{"00:00","01:00","02:00","03:00","04:00","05:00","06:00","07:00","08:00","09:00","10:00","11:00","12:00","13:00","14:00","15:00","16:00","17:00","18:00","19:00","20:00","21:00","22:00","23:00"};

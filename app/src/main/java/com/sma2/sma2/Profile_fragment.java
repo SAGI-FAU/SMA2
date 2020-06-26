@@ -6,15 +6,15 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ProgressBar;
-import android.widget.RatingBar;
 import android.widget.TextView;
+
+import androidx.fragment.app.Fragment;
 
 import com.sma2.sma2.DataAccess.ExerciseSessionManager;
 import com.sma2.sma2.DataAccess.PatientDA;
@@ -22,7 +22,6 @@ import com.sma2.sma2.DataAccess.PatientDataService;
 import com.sma2.sma2.DataAccess.ScheduledExercise;
 import com.sma2.sma2.DataAccess.SignalDA;
 import com.sma2.sma2.DataAccess.SignalDataService;
-import com.sma2.sma2.ExerciseFragments.SessionOverview;
 
 import java.util.ArrayList;
 import java.util.List;

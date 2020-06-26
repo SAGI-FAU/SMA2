@@ -2,7 +2,8 @@ package com.sma2.sma2.ExerciseFragments;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
+
+import androidx.fragment.app.Fragment;
 
 import com.sma2.sma2.DataAccess.Exercise;
 

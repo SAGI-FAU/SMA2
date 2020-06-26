@@ -2,12 +2,13 @@ package com.sma2.sma2.Activities;
 
 import android.content.Intent;
 import android.os.Handler;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.sma2.sma2.ApplicationState;
 import com.sma2.sma2.DataAccess.DaoMaster;

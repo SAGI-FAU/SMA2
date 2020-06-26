@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/frameLayout"
@@ -12,6 +12,7 @@
         android:layout_height="0dp"
         app:layout_constraintDimensionRatio="1.778"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
     <View
@@ -21,9 +22,10 @@
         android:background="@color/colorPrimary"
         app:layout_constraintBottom_toTopOf="@+id/divider"
         app:layout_constraintTop_toBottomOf="@+id/videoView"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintWidth_percent="0.04" />
 
-    <android.support.v7.widget.AppCompatTextView
+    <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/exerciseTitle"
         android:layout_width="0dp"
         android:layout_height="0dp"
@@ -42,7 +44,7 @@
         app:layout_constraintStart_toEndOf="@+id/bar"
         app:layout_constraintTop_toBottomOf="@+id/videoView" />
 
-    <android.support.v7.widget.AppCompatTextView
+    <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/exerciseDescription"
         android:layout_width="0dp"
         android:layout_height="0dp"
@@ -66,7 +68,7 @@
         android:background="@android:drawable/bottom_bar"
         app:layout_constraintTop_toBottomOf="@+id/exerciseDescription" />
 
-    <android.support.v7.widget.AppCompatTextView
+    <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/exerciseInstruction"
         android:layout_width="0dp"
         android:layout_height="0dp"
@@ -99,4 +101,4 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
-</android.support.constraint.ConstraintLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

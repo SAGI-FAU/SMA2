@@ -3,7 +3,6 @@ package com.sma2.sma2.ExerciseFragments;
 import android.content.Context;
 import android.media.MediaPlayer;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,6 +11,8 @@ import android.widget.Button;
 import android.widget.MediaController;
 import android.widget.TextView;
 import android.widget.VideoView;
+
+import androidx.fragment.app.Fragment;
 
 import com.sma2.sma2.DataAccess.Exercise;
 import com.sma2.sma2.R;

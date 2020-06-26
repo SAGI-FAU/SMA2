@@ -5,17 +5,17 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.preference.PreferenceManager;
-import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
+import androidx.fragment.app.FragmentTransaction;
+
 import com.sma2.sma2.DataAccess.FeatureDataService;
 import com.sma2.sma2.FeatureExtraction.Speech.features.RadarFeatures;
 import com.sma2.sma2.R;
-import com.sma2.sma2.SignalRecording.CSVFileWriter;
 import com.sma2.sma2.SignalRecording.SpeechRecorder;
 
 import java.io.File;

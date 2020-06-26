@@ -1,16 +1,12 @@
 package com.sma2.sma2.FeatureExtraction.Speech.features;
 
-import android.util.Log;
 import android.os.Environment;
 
 import com.opencsv.CSVReader;
-import com.sma2.sma2.DataAccess.MedicineDA;
-import com.sma2.sma2.DataAccess.MedicineDataService;
 import com.sma2.sma2.FeatureExtraction.Speech.tools.WAVfileReader;
 import com.sma2.sma2.FeatureExtraction.Speech.tools.array_manipulation;
 import com.sma2.sma2.FeatureExtraction.Speech.tools.f0detector;
 import com.sma2.sma2.FeatureExtraction.Speech.tools.sigproc;
-import com.sma2.sma2.SignalRecording.CSVFileWriter;
 
 import java.io.File;
 import java.io.FileReader;
@@ -20,7 +16,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import static android.support.constraint.Constraints.TAG;
 import static java.lang.Math.abs;
 import com.opencsv.CSVWriter;
 

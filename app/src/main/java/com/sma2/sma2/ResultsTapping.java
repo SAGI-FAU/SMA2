@@ -2,34 +2,23 @@ package com.sma2.sma2;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.content.SharedPreferences;
-import android.graphics.Point;
 import android.os.Environment;
 import android.preference.PreferenceManager;
-import android.support.constraint.ConstraintLayout;
-import android.support.v7.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.Display;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.jjoe64.graphview.GraphView;
 import com.sma2.sma2.DataAccess.FeatureDA;
 import com.sma2.sma2.DataAccess.FeatureDataService;
-import com.sma2.sma2.FeatureExtraction.GraphManager;
-import com.sma2.sma2.FeatureExtraction.Speech.features.RadarFeatures;
 import com.sma2.sma2.FeatureExtraction.Tapping.FeatureTapping;
 
 import com.github.mikephil.charting.charts.RadarChart;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;

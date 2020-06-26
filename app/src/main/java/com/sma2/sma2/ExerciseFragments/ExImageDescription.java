@@ -3,29 +3,17 @@ package com.sma2.sma2.ExerciseFragments;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.support.v4.app.FragmentTransaction;
-import android.text.TextUtils;
-import android.util.Log;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
-import android.widget.TextView;
 
-import com.opencsv.CSVParser;
-import com.opencsv.CSVParserBuilder;
-import com.opencsv.CSVReader;
-import com.opencsv.CSVReaderBuilder;
+import androidx.fragment.app.FragmentTransaction;
+
 import com.sma2.sma2.R;
 import com.sma2.sma2.SignalRecording.SpeechRecorder;
-
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Locale;
-import java.util.Random;
 
 
 public class ExImageDescription extends ExerciseFragment implements ButtonFragment.OnButtonInteractionListener {

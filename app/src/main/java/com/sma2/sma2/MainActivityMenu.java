@@ -1,7 +1,6 @@
 package com.sma2.sma2;
 
 
-import android.app.ActivityManager;
 import android.Manifest;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -9,36 +8,32 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
-import android.os.Environment;
 import android.os.Handler;
 import android.preference.PreferenceManager;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.TabLayout;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentPagerAdapter;
-import android.support.v4.view.ViewPager;
-import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
+
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentPagerAdapter;
+import androidx.viewpager.widget.ViewPager;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
-import com.sma2.sma2.DataAccess.Exercise;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.tabs.TabLayout;
 import com.sma2.sma2.DataAccess.MedicineDA;
 import com.sma2.sma2.DataAccess.MedicineDataService;
-import com.sma2.sma2.ExerciseFragments.ExerciseFragment;
-import com.sma2.sma2.ExerciseFragments.ExerciseInstructions;
-import com.sma2.sma2.ExerciseList.ArrayListAdapter;
 import com.sma2.sma2.SendData.ConectionWifi;
 import com.sma2.sma2.SendData.SendDataService;
 
-import java.io.File;
 import java.util.List;
 
-public class MainActivityMenu extends AppCompatActivity{
+public class MainActivityMenu extends AppCompatActivity {
     int PERMISSION_ALL = 1;
     private final int TIEMPO = 30000;// agregado Daniel Server
     Handler handler = new Handler(); // agregado daniel Server

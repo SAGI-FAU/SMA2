@@ -9,7 +9,6 @@ import android.os.CountDownTimer;
 import android.os.Environment;
 import android.os.Vibrator;
 import android.preference.PreferenceManager;
-import android.support.constraint.ConstraintLayout;
 import android.util.Log;
 import android.view.Display;
 import android.view.LayoutInflater;
@@ -20,10 +19,11 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.constraintlayout.widget.ConstraintLayout;
+
 import com.sma2.sma2.DataAccess.FeatureDataService;
 import com.sma2.sma2.FeatureExtraction.Tapping.FeatureTapping;
 import com.sma2.sma2.R;
-import com.sma2.sma2.SignalRecording.CSVFileWriter;
 import com.sma2.sma2.SignalRecording.TappingRecorder;
 
 import java.io.File;
