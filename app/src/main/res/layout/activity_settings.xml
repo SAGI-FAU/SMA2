@@ -65,12 +65,31 @@
         />
 
 
+    <Switch
+        android:id="@+id/switch_wifi"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintDimensionRatio="7"
+        app:layout_constraintWidth_percent="1"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:switchMinWidth="56sp"
+        android:textOff="OFF"
+        android:textOn="ON"
+        android:text="@string/send_data"
+        android:checked="true"
+        android:textSize="@dimen/textview_text_size"
+        app:layout_constraintTop_toBottomOf="@+id/SpinnerNotifications" />
+
 
     <Button
         android:id="@+id/button_update_profile"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        app:layout_constraintDimensionRatio="4"
+        app:layout_constraintDimensionRatio="5"
         app:layout_constraintWidth_percent="0.7"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
@@ -81,7 +100,7 @@
         android:background="@color/colorPrimary"
         android:text="@string/update_profile"
         android:textSize="@dimen/button_text_size"
-        app:layout_constraintTop_toBottomOf="@+id/textViewNotifications" />
+        app:layout_constraintTop_toBottomOf="@+id/switch_wifi" />
 
 
 
@@ -90,7 +109,7 @@
         android:id="@+id/button_update_medicine"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        app:layout_constraintDimensionRatio="4"
+        app:layout_constraintDimensionRatio="5"
         app:layout_constraintWidth_percent="0.7"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
@@ -112,7 +131,7 @@
         android:id="@+id/button_export_metadata"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        app:layout_constraintDimensionRatio="4"
+        app:layout_constraintDimensionRatio="5"
         app:layout_constraintWidth_percent="0.7"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
@@ -130,7 +149,7 @@
         android:id="@+id/button_change_scheduler"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        app:layout_constraintDimensionRatio="4"
+        app:layout_constraintDimensionRatio="5"
         app:layout_constraintWidth_percent="0.7"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
@@ -148,7 +167,7 @@
         android:id="@+id/button_restart_session"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        app:layout_constraintDimensionRatio="4"
+        app:layout_constraintDimensionRatio="5"
         app:layout_constraintWidth_percent="0.7"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
@@ -160,7 +179,6 @@
         android:text="@string/restart_session"
         android:textSize="@dimen/button_text_size"
         app:layout_constraintTop_toBottomOf="@+id/button_change_scheduler" />
-
 
 
 

@@ -224,5 +224,6 @@
 
     <string name="wifi">Connect to a WIFI network to upload the data to our servers</string>
     <string name="wifi2">Connect to a WIFI network to get the most updated results</string>
+    <string name="send_data">Send and receive data from server</string>
 
 </resources>

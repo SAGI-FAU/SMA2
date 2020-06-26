@@ -14,11 +14,13 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.RadioButton;
 import android.widget.Spinner;
+import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -62,6 +64,7 @@ public class SettingsActivity extends AppCompatActivity implements View.OnClickL
         findViewById(R.id.button_export_metadata).setOnClickListener(this);
         findViewById(R.id.button_change_scheduler).setOnClickListener(this);
         findViewById(R.id.button_restart_session).setOnClickListener(this);
+        Switch sw = findViewById(R.id.switch_wifi);
 
         SpinnerNotify = findViewById(R.id.SpinnerNotifications);
         String[] hours = new String[]{"00:00","01:00","02:00","03:00","04:00","05:00","06:00","07:00","08:00","09:00","10:00","11:00","12:00","13:00","14:00","15:00","16:00","17:00","18:00","19:00","20:00","21:00","22:00","23:00"};
@@ -93,6 +96,22 @@ public class SettingsActivity extends AppCompatActivity implements View.OnClickL
 
             }
         });
+
+        sw.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked) {
+                    SharedPreferences.Editor editor = sharedPref.edit();
+                    editor.putBoolean("WIFI enabled", true);
+                    editor.apply();
+                } else {
+                    SharedPreferences.Editor editor = sharedPref.edit();
+                    editor.putBoolean("WIFI enabled", false);
+                    editor.apply();
+                }
+            }
+        });
+
+
 
    }
 
