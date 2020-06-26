@@ -10,6 +10,7 @@ import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.os.Environment;
+import android.os.Handler;
 import android.preference.PreferenceManager;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.TabLayout;
@@ -23,6 +24,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.sma2.sma2.DataAccess.Exercise;
 import com.sma2.sma2.DataAccess.MedicineDA;
@@ -30,12 +32,16 @@ import com.sma2.sma2.DataAccess.MedicineDataService;
 import com.sma2.sma2.ExerciseFragments.ExerciseFragment;
 import com.sma2.sma2.ExerciseFragments.ExerciseInstructions;
 import com.sma2.sma2.ExerciseList.ArrayListAdapter;
+import com.sma2.sma2.SendData.ConectionWifi;
+import com.sma2.sma2.SendData.SendDataService;
 
 import java.io.File;
 import java.util.List;
 
 public class MainActivityMenu extends AppCompatActivity{
     int PERMISSION_ALL = 1;
+    private final int TIEMPO = 30000;// agregado Daniel Server
+    Handler handler = new Handler(); // agregado daniel Server
     String[] PERMISSIONS = {
             android.Manifest.permission.READ_EXTERNAL_STORAGE,
             android.Manifest.permission.WRITE_EXTERNAL_STORAGE,
@@ -82,6 +88,8 @@ public class MainActivityMenu extends AppCompatActivity{
             CurrentMed=Medicine.get(i);
             notifications.setReminder(this,AlarmReceiverMedicine.class, CurrentMed.getIntakeTime(), 0);
         }
+
+        synchronizeServer(this);
     }
 
     public void open_settings() {
@@ -206,4 +214,29 @@ public class MainActivityMenu extends AppCompatActivity{
             return rootView;
         }
     }
+    public void synchronizeServer(final Context context) {
+        handler.postDelayed(new Runnable() {
+            public void run() {
+
+                // función a ejecutar
+                ConectionWifi cW= new ConectionWifi(context);
+                boolean conection = cW.checkConnection(cW);
+                if (conection) {
+
+                    SendDataService sds= new SendDataService(context);
+                    sds.uploadMetadata(sds);
+                    sds.uploadMedicine(sds);
+
+
+
+                }
+                else{
+                    Toast.makeText(context, getString(R.string.wifi), Toast.LENGTH_SHORT).show();
+                }
+                handler.postDelayed(this, TIEMPO);
+            }
+
+        }, TIEMPO);
+    }
+
 }

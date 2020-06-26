@@ -3,6 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.sma2.sma2">
 
+
+
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.VIBRATE" />
@@ -51,8 +53,8 @@
             android:screenOrientation="portrait" />
         <activity android:name=".Profile3Activity"
             android:screenOrientation="portrait" />
-        <activity android:name=".MainActivityMenu" />
-
+        <activity android:name=".MainActivityMenu"
+            android:screenOrientation="portrait" />
         <activity android:name=".ResultsSpeech"
             android:screenOrientation="portrait" />
 
