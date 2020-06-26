@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.sma2.sma2">
+    package="com.sma2.apkinson">
 
 
 
@@ -26,7 +26,7 @@
         tools:replace="android:allowBackup">
 
         <activity
-            android:name=".Activities.SplashScreen"
+            android:name="com.sma2.apkinson.Activities.SplashScreen"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -35,54 +35,54 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".MainActivity"
+            android:name="com.sma2.apkinson.MainActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".SettingsActivity"
+            android:name="com.sma2.apkinson.SettingsActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".ExercisesActivity"
+            android:name="com.sma2.apkinson.ExercisesActivity"
             android:exported="true"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".ThanksActivity"
+            android:name="com.sma2.apkinson.ThanksActivity"
             android:screenOrientation="portrait" />
-        <activity android:name=".Profile1Activity"
+        <activity android:name="com.sma2.apkinson.Profile1Activity"
             android:screenOrientation="portrait" />
-        <activity android:name=".Profile2Activity"
+        <activity android:name="com.sma2.apkinson.Profile2Activity"
             android:screenOrientation="portrait" />
-        <activity android:name=".Profile3Activity"
+        <activity android:name="com.sma2.apkinson.Profile3Activity"
             android:screenOrientation="portrait" />
-        <activity android:name=".MainActivityMenu"
+        <activity android:name="com.sma2.apkinson.MainActivityMenu"
             android:screenOrientation="portrait" />
-        <activity android:name=".ResultsSpeech"
+        <activity android:name="com.sma2.apkinson.ResultsSpeech"
             android:screenOrientation="portrait" />
 
-        <activity android:name=".UpdateMedicine" />
-        <activity android:name=".Modif_medicine" />
-        <activity android:name=".ActivityChangeScheduler"
+        <activity android:name="com.sma2.apkinson.UpdateMedicine" />
+        <activity android:name="com.sma2.apkinson.Modif_medicine" />
+        <activity android:name="com.sma2.apkinson.ActivityChangeScheduler"
             android:screenOrientation="portrait"/>
-        <activity android:name=".ResultsTapping"
+        <activity android:name="com.sma2.apkinson.ResultsTapping"
             android:screenOrientation="portrait"/>
 
 
         <activity
-            android:name=".ResultsMovement"
+            android:name="com.sma2.apkinson.ResultsMovement"
             android:screenOrientation="portrait" />
 
         <activity
-            android:name=".ResultsHistorical"
+            android:name="com.sma2.apkinson.ResultsHistorical"
             android:screenOrientation="portrait" />
 
         <!-- Register the Alarm Receiver -->
-        <receiver android:name=".AlarmReceiver"
+        <receiver android:name="com.sma2.apkinson.AlarmReceiver"
 
             android:enabled="false">
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
             </intent-filter>
         </receiver>
-        <receiver android:name=".AlarmReceiverMedicine"
+        <receiver android:name="com.sma2.apkinson.AlarmReceiverMedicine"
 
             android:enabled="false">
             <intent-filter>

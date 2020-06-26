@@ -20,7 +20,7 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
-        tools:context="com.sma2.sma2.MainActivity">
+        tools:context="com.sma2.apkinson.MainActivity">
 
 
 

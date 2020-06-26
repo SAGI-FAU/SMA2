@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:layout_marginLeft="0sp"
     android:layout_marginRight="0sp"
-    tools:context="com.sma2.sma2.SettingsActivity">
+    tools:context="com.sma2.apkinson.SettingsActivity">
 
 
     <ImageView

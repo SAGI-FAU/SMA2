@@ -6,7 +6,7 @@
 
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.sma2.sma2.ExercisesActivity">
+    tools:context="com.sma2.apkinson.ExercisesActivity">
 
 <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/linearLayout"

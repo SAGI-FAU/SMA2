@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
 
 
-    tools:context="com.sma2.sma2.MainActivity">
+    tools:context="com.sma2.apkinson.MainActivity">
 
 
 

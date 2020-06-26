@@ -9,7 +9,7 @@
     android:layout_marginLeft="16dp"
     android:layout_marginRight="16dp"
     android:focusableInTouchMode="true"
-    tools:context="com.sma2.sma2.MainActivity">
+    tools:context="com.sma2.apkinson.MainActivity">
 
     <TextView
         android:id="@+id/textView_reg"
