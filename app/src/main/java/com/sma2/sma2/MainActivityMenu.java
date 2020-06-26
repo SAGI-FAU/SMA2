@@ -221,7 +221,7 @@ public class MainActivityMenu extends AppCompatActivity{
                 // función a ejecutar
                 ConectionWifi cW= new ConectionWifi(context);
                 boolean conection = cW.checkConnection(cW);
-                if (conection==true) {
+                if (conection) {
 
                     SendDataService sds= new SendDataService(context);
                     sds.uploadMetadata(sds);
@@ -231,7 +231,7 @@ public class MainActivityMenu extends AppCompatActivity{
 
                 }
                 else{
-                    Toast.makeText(context, "Conectate a una red WIFI", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(context, getString(R.string.wifi), Toast.LENGTH_SHORT).show();
                 }
                 handler.postDelayed(this, TIEMPO);
             }

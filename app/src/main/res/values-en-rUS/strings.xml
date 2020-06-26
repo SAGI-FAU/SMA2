@@ -221,4 +221,8 @@
 
 
     <string name="Ex_help">This is the number of exercises   you completed so far.   CONGRATULATIONS</string>
+
+    <string name="wifi">Connect to a WIFI network to upload the data to our servers</string>
+    <string name="wifi2">Connect to a WIFI network to get the most updated results</string>
+
 </resources>

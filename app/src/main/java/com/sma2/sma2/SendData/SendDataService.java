@@ -47,8 +47,6 @@ public class SendDataService {
 
 
         File file = new File(path);
-        //Toast.makeText(MainActivity.this,path,Toast.LENGTH_SHORT).show();
-        Log.d("hola", path);
 
         byte[] audioBytes;
         try {
@@ -78,52 +76,7 @@ public class SendDataService {
         final String[] WER = {"0"};
         final DatabaseHelper databaseHelper = new DatabaseHelper(sds.invocationcontext);
         databaseHelper.addData("WER:"+"0");
-        Toast.makeText(sds.invocationcontext, "WER aún no esta disponible", Toast.LENGTH_SHORT).show();
-// Request a string response from the provided URL.
-/*        StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
-                new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
-                        // Display the first 500 characters of the response string.
-                        Toast.makeText(sds.invocationcontext, response, Toast.LENGTH_SHORT).show();
-                        databaseHelper.addData("WER:"+"0");
-                        //WER[0] =response;
-                        //progressBar.setVisibility(View.INVISIBLE);
-                    }
-                }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                Toast.makeText(sds.invocationcontext, "No response", Toast.LENGTH_SHORT).show();
-                databaseHelper.addData("WER:"+"0");
-                //WER[0]="0";
-                //progressBar.setVisibility(View.INVISIBLE);
-
-            }
-        }){
-            @Override
-            protected Map<String, String> getParams() {
-                Map<String, String> params = new HashMap<String, String>();
-                PatientDataService PatientData = new PatientDataService(sds.invocationcontext);
-
-                Long NumPatients = PatientData.countPatients();
-                if (NumPatients > 0) {
-                    PatientDA Patient = PatientData.getPatient();
-                    params.put("id_name", Patient.getGovtId());
-                    Log.d("id_name", Patient.getGovtId());
-                }
-
-                return params;
-            }
-        };
-        //time out 10seg
-        stringRequest.setRetryPolicy(new DefaultRetryPolicy(
-                10000000,
-                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
-                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
-        queue.add(stringRequest);
-
-*/
-        //return WER[0];
+        Toast.makeText(sds.invocationcontext, "WER not available yet", Toast.LENGTH_SHORT).show();
     }
 
     public void uploadMetadata(final SendDataService sds) {
@@ -288,7 +241,6 @@ public class SendDataService {
 
 
                 String path_internal_storage = Environment.getExternalStorageDirectory().getAbsolutePath();
-                Log.d("direccion", path_internal_storage);
                 File f = new File(path_internal_storage + "/Apkinson/AUDIO/");
                 //int session_not_send = sesion_phone - sesion;
 
@@ -386,7 +338,6 @@ public class SendDataService {
 
 
                 String path_internal_storage = Environment.getExternalStorageDirectory().getAbsolutePath();
-                Log.d("direccion", path_internal_storage);
                 File f = new File(path_internal_storage + "/Apkinson/MOVEMENT/");
                 //int session_not_send = sesion_phone - sesion;
 
@@ -409,8 +360,6 @@ public class SendDataService {
                         for (String temp : names) {
                             if (file.getName().equals(temp)) {
 
-                                System.out.println("Debug: Existe");
-                                System.out.println("Ya esta: " + file.getName());
                                 flag = true;
                                 break;
                             }
@@ -419,8 +368,6 @@ public class SendDataService {
                         if (!flag) {
                             params.put(file.getName(), convert_File_string(path_internal_storage + "/Apkinson/MOVEMENT/" + file.getName()));
                             databaseHelper.addData(file.getName());
-                            System.out.println("Debug: Super");
-                            System.out.println("Agregado: " + file.getName());
 
                         }
 
@@ -474,16 +421,13 @@ public class SendDataService {
                 PatientDataService PatientData = new PatientDataService(sds.invocationcontext);
                 PatientDA Patient = PatientData.getPatient();
 
-
                 String path_internal_storage = Environment.getExternalStorageDirectory().getAbsolutePath();
-                Log.d("direccion", path_internal_storage);
                 File f = new File(path_internal_storage + "/Apkinson/VIDEOS/");
                 //int session_not_send = sesion_phone - sesion;
 
                 File[] files = f.listFiles();
 
                 DatabaseHelper databaseHelper = new DatabaseHelper(sds.invocationcontext);
-
 
 
                 for (int i = 0; i < files.length; i++) {
@@ -499,8 +443,6 @@ public class SendDataService {
                         for (String temp : names) {
                             if (file.getName().equals(temp)) {
 
-                                System.out.println("Debug: Existe");
-                                System.out.println("Ya esta: " + file.getName());
                                 flag = true;
                                 break;
                             }
@@ -509,14 +451,10 @@ public class SendDataService {
                         if (!flag) {
                             params.put(file.getName(), convert_File_string(path_internal_storage + "/Apkinson/VIDEOS/" + file.getName()));
                             databaseHelper.addData(file.getName());
-                            System.out.println("Debug: Super");
-                            System.out.println("Agregado: " + file.getName());
 
                         }
 
-
                     }
-
 
                 }
 

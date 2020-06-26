@@ -21,22 +21,22 @@ public class DaoMaster extends AbstractDaoMaster {
 
     /** Creates underlying database table using DAOs. */
     public static void createAllTables(Database db, boolean ifNotExists) {
-        SignalDADao.createTable(db, ifNotExists);
         FeatureDADao.createTable(db, ifNotExists);
+        PatientDADao.createTable(db, ifNotExists);
         ScheduledExerciseDao.createTable(db, ifNotExists);
         MedicineDADao.createTable(db, ifNotExists);
         ExerciseDao.createTable(db, ifNotExists);
-        PatientDADao.createTable(db, ifNotExists);
+        SignalDADao.createTable(db, ifNotExists);
     }
 
     /** Drops underlying database table using DAOs. */
     public static void dropAllTables(Database db, boolean ifExists) {
-        SignalDADao.dropTable(db, ifExists);
         FeatureDADao.dropTable(db, ifExists);
+        PatientDADao.dropTable(db, ifExists);
         ScheduledExerciseDao.dropTable(db, ifExists);
         MedicineDADao.dropTable(db, ifExists);
         ExerciseDao.dropTable(db, ifExists);
-        PatientDADao.dropTable(db, ifExists);
+        SignalDADao.dropTable(db, ifExists);
     }
 
     /**
@@ -55,12 +55,12 @@ public class DaoMaster extends AbstractDaoMaster {
 
     public DaoMaster(Database db) {
         super(db, SCHEMA_VERSION);
-        registerDaoClass(SignalDADao.class);
         registerDaoClass(FeatureDADao.class);
+        registerDaoClass(PatientDADao.class);
         registerDaoClass(ScheduledExerciseDao.class);
         registerDaoClass(MedicineDADao.class);
         registerDaoClass(ExerciseDao.class);
-        registerDaoClass(PatientDADao.class);
+        registerDaoClass(SignalDADao.class);
     }
 
     public DaoSession newSession() {

@@ -93,11 +93,6 @@ public class ExerciseFinished extends Fragment {
         Animation animation2=AnimationUtils.loadAnimation(view.getContext(),R.anim.bounce);
         tMessage.startAnimation(animation2);
 
-
-
-
-
-
         return view;
     }
 
@@ -125,11 +120,10 @@ public class ExerciseFinished extends Fragment {
 
     public void sendData() {
 
-
         // función a ejecutar
         ConectionWifi cW= new ConectionWifi(getContext());
         boolean conection = cW.checkConnection(cW);
-        if (conection==true) {
+        if (conection) {
 
             SendDataService sds= new SendDataService(getContext());
             sds.uploadAudio(sds);
@@ -138,7 +132,7 @@ public class ExerciseFinished extends Fragment {
 
         }
         else{
-            Toast.makeText(getContext(), "Conectate a una red WIFI", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getContext(), getString(R.string.wifi), Toast.LENGTH_SHORT).show();
         }
 
 

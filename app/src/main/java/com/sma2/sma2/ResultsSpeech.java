@@ -97,16 +97,14 @@ public class ResultsSpeech extends AppCompatActivity implements View.OnClickList
         List<String> names = databaseHelper.loadData();
         boolean flag = false;
         if (names.size() == 0) {
-            Toast.makeText(this, "WER no calculado", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "WER error", Toast.LENGTH_SHORT).show();
         }
         else {
             for (String temp : names) {
-                Log.d("dato=",temp);
 
                 if ("WER".equals(temp.substring(0,3))) {
 
                     WER=temp.substring(4,temp.length());
-                    Log.d("dato2=",WER);
                     flag=true;
                 }
                 else {
@@ -121,41 +119,6 @@ public class ResultsSpeech extends AppCompatActivity implements View.OnClickList
         }
 
 
-/*
-        float[] data1={pronunval, jitterval,Vrateval,intonationval, werval}; // Patient
-        float[] data2={86f,98f,82.2f,55.4f, 100f}; // Healthy
-
-        String Label_1 = getResources().getString(R.string.pronunciation);
-        String Label_2 = getResources().getString(R.string.stability);
-        String Label_3 = getResources().getString(R.string.rate);
-        String Label_4 = getResources().getString(R.string.intonation);
-        String Label_5 = getResources().getString(R.string.intelligibility);
-        String Label_6 = "WER";
-        String[] labels={Label_1, Label_2, Label_3, Label_4, Label_5,Label_6};
-        double area=0;
-
-
-        if (pronunval==0 && werval==0){
-            //float[] data1_={jitterval,Vrateval,intonationval};
-            //float[] data2_={98f,82.2f,55.4f,50f};
-            //float[] datamax_={100f,100f,100f,100f};
-
-            float[] data1_={jitterval,Vrateval,intonationval,33};
-
-            String[] labels_={Label_2, Label_3, Label_4,Label_6};
-            maxArea=RadarManager.get_area_chart(datamax_);
-            RadarManager.PlotRadar(radarchart, data1_, data2_, labels_);
-            area=RadarManager.get_area_chart(data1_);
-
-        }
-        else{
-            RadarManager.PlotRadar(radarchart, data1, data2, labels);
-            area=RadarManager.get_area_chart(data1);
-        }
-
-
-*/
-
         float[] data1 ={jitterval,Vrateval,intonationval, Float.parseFloat(WER) };
         float[] data2={86f,98f,82.2f,27f};
 
@@ -164,16 +127,13 @@ public class ResultsSpeech extends AppCompatActivity implements View.OnClickList
         String Label_3 = getResources().getString(R.string.rate);
         String Label_4 = getResources().getString(R.string.intonation);
         String Label_5 = getResources().getString(R.string.intelligibility);
-        String Label_6 = "WER";
-        String[] labels={Label_2, Label_3, Label_4, Label_6};
+        String[] labels={Label_2, Label_3, Label_4, Label_5};
 
         RadarManager.PlotRadar(radarchart, data1, data2, labels);
         double area=RadarManager.get_area_chart(data1);
         double maxArea=RadarManager.get_area_chart(data2);
         int area_progress=(int)(area*100/maxArea);
 
-
-        //int area_progress=(int)(area*100/maxArea);
 
         SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
         boolean new_area_speech=sharedPref.getBoolean("New Area Speech", false);
@@ -242,7 +202,7 @@ public class ResultsSpeech extends AppCompatActivity implements View.OnClickList
         }
         else{
 
-            Toast.makeText(this, "Conectate a una red WIFI", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, getString(R.string.wifi2), Toast.LENGTH_SHORT).show();
         }
 
 

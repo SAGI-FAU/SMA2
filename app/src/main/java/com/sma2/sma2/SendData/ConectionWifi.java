@@ -31,7 +31,6 @@ public class ConectionWifi {
             }
 
         } else {
-            Log.d("Internet", "no ok");
             return false;
         }
     }
