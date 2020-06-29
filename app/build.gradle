@@ -107,11 +107,9 @@ dependencies {
     implementation 'com.alibaba:fastjson:1.1.70.android'
     implementation 'us.feras.mdv:markdownview:1.1.0'
     implementation 'androidx.cardview:cardview:1.0.0'
-    testImplementation 'junit:junit:4.12'
     implementation 'com.github.PhilJay:MPAndroidChart:v3.1.0'
 
-    testImplementation 'androidx.test.ext:junit:1.1.1'
-    testImplementation 'androidx.test.espresso:espresso-core:3.1.0'
+
     testImplementation 'org.mockito:mockito-core:1.10.19'
     testImplementation 'org.robolectric:robolectric:3.4.2'
     implementation 'com.google.android.material:material:1.0.0'

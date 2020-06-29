@@ -9,10 +9,7 @@ import org.greenrobot.greendao.annotation.ToOne;
 import java.util.Date;
 import org.greenrobot.greendao.annotation.Generated;
 import org.greenrobot.greendao.DaoException;
-import com.sma2.apkinson.DataAccess.DaoSession;
-import com.sma2.apkinson.DataAccess.ExerciseDao;
-import com.sma2.apkinson.DataAccess.PatientDADao;
-import com.sma2.apkinson.DataAccess.SignalDADao;
+
 
 @Entity
 public class SignalDA {
