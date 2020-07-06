@@ -179,7 +179,7 @@
     <string name="steps">Steps</string>
     <string name="velocity">Velocity</string>
     <string name="tremor">Tremor</string>
-    <string name="jitter_failed">Jiiter could not be computed</string>
+    <string name="jitter_failed">Jitter could not be computed</string>
     <string name="speech_performance">Speech performance</string>
     <string name="tapping_performance">Fine motor skills performance</string>
     <string name="history_speech">Historic results</string>
@@ -225,5 +225,7 @@
     <string name="wifi">Connect to a WIFI network to upload the data to our servers</string>
     <string name="wifi2">Connect to a WIFI network to get the most updated results</string>
     <string name="send_data">Send and receive data from server</string>
+    <string name="restart_session">Restart session</string>
+    <string name="failed">Feature computation failed</string>
 
 </resources>
