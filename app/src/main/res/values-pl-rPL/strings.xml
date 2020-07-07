@@ -177,7 +177,7 @@
     <string name="velocity">Prędkość</string>
     <string name="tremor">Drżenie</string>
     <string name="failed">Policzenie cech zakończone błędem</string>
-    <string name="jitter_failed">Jiiter nie mógł zostać policzony</string>
+    <string name="jitter_failed">Jitter nie mógł zostać policzony</string>
     <string name="speech_performance">Analiza mowy</string>
     <string name="tapping_performance">Dobra zdolność motoryczna</string>
     <string name="history_speech">Wyniki historyczne mowy</string>

@@ -180,7 +180,7 @@
     <string name="velocity">Velocity</string>
     <string name="tremor">Tremor</string>
     <string name="failed">Feature computation failed</string>
-    <string name="jitter_failed">Jiiter could not be computed</string>
+    <string name="jitter_failed">Jitter could not be computed</string>
     <string name="speech_performance">Speech performance</string>
     <string name="tapping_performance">Fine motor skills performance</string>
     <string name="history_speech">Historic results</string>
@@ -203,12 +203,7 @@
         \n- INTONATION: Capacity to change the tone in conversations.
         \n- INTELLIGIBILITY: Percentage of words that the phone understand you.</string>
 
-    <string name="MovementHelp">- TREMOR: Capacity to control involuntary movement.
-        \n- REGULARITY: Stability of the movement.
-        \n- FREEZE INDEX: Capacity to walk without freezing.
-        \n- POSTURE: Capacity to stand in a fixed position.
-        \n- NUMBER OF STRIDES: Number of strides that you can achieve in 2 minutes walk.
-        \n- STRIDE TIME: Average walking speed.</string>
+    <string name="MovementHelp">- TREMOR: Capacity to control involuntary movement.          - REGULARITY: Stability of the movement.          - FREEZE INDEX: Capacity to walk without freezing.          - POSTURE: Capacity to stand in a fixed position.          - NUMBER OF STRIDES: Number of strides that you can achieve in 2 minutes walk.          - STRIDE TIME: Average walking speed.</string>
     <string name="perform">Performance :</string>
     <string name="tapping_failed">Tapping features could not be computed</string>
     <string name="fine_motor">Fine motor skills</string>
@@ -217,11 +212,15 @@
         \n- SPEED: Ladybugs per second.
         \n- PRECISION: Proximity of insect hits.</string>
 
-    <string name="HistoricHelp">- You can select \n the result you want to see. \n
-            The figure indicates your evolution among consecutive days. \n Higher is better</string>
+    <string name="HistoricHelp">- You can select   the result you want to see.               The figure indicates your evolution among consecutive days.   Higher is better</string>
 
 
     <string name="Ex_help">This is the number of exercises   you completed so far.   CONGRATULATIONS</string>
     <string name="restart_session">Restart session</string>
+
+    <string name="wifi">Connect to a WIFI network to upload the data to our servers</string>
+    <string name="wifi2">Connect to a WIFI network to get the most updated results</string>
+
+    <string name="send_data">Send and receive data from server</string>
 
 </resources>

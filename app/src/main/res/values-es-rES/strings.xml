@@ -208,4 +208,9 @@
     <string name="voicerate_failed">Veloc didad de la voz no pudo ser calculada</string>
     <string name="walking">Caminar</string>
     <string name="restart_session">Reiniciar sesion</string>
+    <string name="wifi">Conectate a una red WIFI para subir tus datos a nuestro servidor</string>
+    <string name="wifi2">Conectate a una red WIFI para tener los resultados actualizados</string>
+    <string name="send_data">Enviar y recibir dtos de servidor</string>
+    <string name="failed">Las medidas no se calcularon</string>
+
 </resources>

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
+<androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -8,7 +8,7 @@
 
     android:layout_marginLeft="0dp"
     android:layout_marginRight="0dp"
-    tools:context="com.sma2.sma2.MainActivity">
+    tools:context="com.sma2.apkinson.MainActivity">
 
     <ImageView
         android:id="@+id/imageView"
@@ -57,4 +57,4 @@
         android:layout_marginStart="250sp"/>
 
 
-</android.support.constraint.ConstraintLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
