@@ -1,5 +1,6 @@
 package com.sma2.apkinson.Activities;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Handler;
 import android.os.Bundle;
@@ -7,6 +8,7 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -16,15 +18,18 @@ import com.sma2.apkinson.DataAccess.DaoSession;
 import com.sma2.apkinson.DataAccess.ExerciseSessionManager;
 import com.sma2.apkinson.MainActivity;
 import com.sma2.apkinson.R;
-
+import com.sma2.apkinson.SendData.ConectionWifi;
+import com.sma2.apkinson.SendData.SendDataService;
+import android.content.SharedPreferences;
 import org.greenrobot.greendao.database.Database;
 
 public class SplashScreen extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
 
+        super.onCreate(savedInstanceState);
+        synchronizeServer(this);
         DaoMaster.DevOpenHelper helper = new DaoMaster.DevOpenHelper(this, "apkinsondb");
         Database db = helper.getWritableDb();
         DaoSession daoSession = new DaoMaster(db).newSession();
@@ -83,5 +88,35 @@ public class SplashScreen extends AppCompatActivity {
                 }
             }, 6000);
         }
+
+
+
     }
+
+    public void synchronizeServer(final Context context) {
+
+            // función a ejecutar
+            ConectionWifi cW= new ConectionWifi(context);
+            boolean conection = cW.checkConnection(cW);
+            if (conection) {
+
+                SendDataService sds= new SendDataService(context);
+                sds.uploadMetadata(sds);
+                sds.uploadMedicine(sds);
+                sds.uploadAudio(sds);
+                sds.uploadMovement(sds);
+                sds.uploadVideo(sds);
+
+
+
+            }
+            else{
+                Toast.makeText(context, getString(R.string.wifi), Toast.LENGTH_SHORT).show();
+            }
+
+    }
+
 }
+
+
+

@@ -29,6 +29,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import static java.lang.Math.min;
+
 public class SendDataService {
     //public String url_base="http://192.168.1.114:8000/apkinson_mobile/";
     public String url_base="https://gita.udea.edu.co:28080/apkinson_mobile/";
@@ -246,51 +248,37 @@ public class SendDataService {
 
 
                 DatabaseHelper databaseHelper = new DatabaseHelper(sds.invocationcontext);
+                List<String> names = databaseHelper.loadData();
+
+                List<String> names_to_send = new ArrayList<String>();
 
 
 
-                for (int i = 0; i < files.length; i++) {
-                    boolean flag = false;
+                external_loop: for (int i = 0; i < files.length; i++) {
                     File file = files[i];
-                    System.out.println("file: " + file.getName());
-                    //Sacamos del array files un fichero
-                    List<String> names = databaseHelper.loadData();
-                    if (names.size() == 0) {
-                        params.put(file.getName(), convert_File_string(path_internal_storage + "/Apkinson/AUDIO/" + file.getName()));
-                        //databaseHelper.addData(file.getName());
-                        file_aux.add(file.getName());
-                    } else {
-                        for (String temp : names) {
-                            if (file.getName().equals(temp)) {
-                                System.out.println("Debug: Existe");
-                                System.out.println("Ya esta: " + file.getName());
 
-                                flag = true;
-                                break;
-                            }
-
+                    for (String temp : names) {
+                        if (file.getName().equals(temp)) {
+                            continue external_loop;
                         }
-                        if (!flag) {
-                            params.put(file.getName(), convert_File_string(path_internal_storage + "/Apkinson/AUDIO/" + file.getName()));
-
-
-                            //databaseHelper.addData(file.getName());
-                            file_aux.add(file.getName());
-                            System.out.println("Debug: Super");
-                            System.out.println("Agregado: " + file.getName());
-
-                        }
-
-
                     }
 
+                    names_to_send.add(file.getName());
 
                 }
+                int ValueMin = min(names_to_send.size(),5);
 
-
+                for (int i = 0; i < ValueMin; i++) {
+                    boolean flag = false;
+                    String filename = names_to_send.get(i);
+                    System.out.println("file: " + filename);
+                    //Sacamos del array files un fichero
+                    params.put(filename, convert_File_string(path_internal_storage + "/Apkinson/AUDIO/" + filename));
+                    //databaseHelper.addData(file.getName());
+                    file_aux.add(filename);
+                    }
                 params.put("number_session", "1");
                 params.put("id_name", Patient.getGovtId());
-
 
                 return params;
             }
@@ -341,40 +329,35 @@ public class SendDataService {
                 File[] files = f.listFiles();
 
                 DatabaseHelper databaseHelper = new DatabaseHelper(sds.invocationcontext);
+                List<String> names = databaseHelper.loadData();
+
+                List<String> names_to_send = new ArrayList<String>();
 
 
 
-                for (int i = 0; i < files.length; i++) {
-                    boolean flag = false;
+                external_loop: for (int i = 0; i < files.length; i++) {
                     File file = files[i];
-                    System.out.println("file: " + file.getName());
-                    //Sacamos del array files un fichero
-                    List<String> names = databaseHelper.loadData();
-                    if (names.size() == 0) {
-                        params.put(file.getName(), convert_File_string(path_internal_storage + "/Apkinson/MOVEMENT/" + file.getName()));
-                        databaseHelper.addData(file.getName());
-                    } else {
-                        for (String temp : names) {
-                            if (file.getName().equals(temp)) {
 
-                                flag = true;
-                                break;
-                            }
-
+                    for (String temp : names) {
+                        if (file.getName().equals(temp)) {
+                            continue external_loop;
                         }
-                        if (!flag) {
-                            params.put(file.getName(), convert_File_string(path_internal_storage + "/Apkinson/MOVEMENT/" + file.getName()));
-                            databaseHelper.addData(file.getName());
-
-                        }
-
-
                     }
 
+                    names_to_send.add(file.getName());
 
                 }
+                int ValueMin = min(names_to_send.size(),10);
 
+                for (int i = 0; i < ValueMin; i++) {
+                    boolean flag = false;
+                    String filename = names_to_send.get(i);
+                    System.out.println("file: " + filename);
+                    //Sacamos del array files un fichero
+                    params.put(filename, convert_File_string(path_internal_storage + "/Apkinson/MOVEMENT/" + filename));
+                    databaseHelper.addData(filename);
 
+                }
                 params.put("number_session", "1");
                 params.put("id_name", Patient.getGovtId());
                 //Log.d("id_name", Patient.getGovtId());
@@ -425,33 +408,34 @@ public class SendDataService {
                 File[] files = f.listFiles();
 
                 DatabaseHelper databaseHelper = new DatabaseHelper(sds.invocationcontext);
+                List<String> names = databaseHelper.loadData();
+
+                List<String> names_to_send = new ArrayList<String>();
 
 
-                for (int i = 0; i < files.length; i++) {
-                    boolean flag = false;
+
+                external_loop: for (int i = 0; i < files.length; i++) {
                     File file = files[i];
-                    System.out.println("file: " + file.getName());
-                    //Sacamos del array files un fichero
-                    List<String> names = databaseHelper.loadData();
-                    if (names.size() == 0) {
-                        params.put(file.getName(), convert_File_string(path_internal_storage + "/Apkinson/VIDEOS/" + file.getName()));
-                        databaseHelper.addData(file.getName());
-                    } else {
-                        for (String temp : names) {
-                            if (file.getName().equals(temp)) {
 
-                                flag = true;
-                                break;
-                            }
-
+                    for (String temp : names) {
+                        if (file.getName().equals(temp)) {
+                            continue external_loop;
                         }
-                        if (!flag) {
-                            params.put(file.getName(), convert_File_string(path_internal_storage + "/Apkinson/VIDEOS/" + file.getName()));
-                            databaseHelper.addData(file.getName());
-
-                        }
-
                     }
+
+                    names_to_send.add(file.getName());
+
+                }
+                int ValueMin = min(names_to_send.size(),2);
+
+                for (int i = 0; i < ValueMin; i++) {
+                    boolean flag = false;
+                    String filename = names_to_send.get(i);
+                    System.out.println("file: " + filename);
+                    //Sacamos del array files un fichero
+                    params.put(filename, convert_File_string(path_internal_storage + "/Apkinson/VIDEOS/" + filename));
+                    databaseHelper.addData(filename);
+
 
                 }
 
