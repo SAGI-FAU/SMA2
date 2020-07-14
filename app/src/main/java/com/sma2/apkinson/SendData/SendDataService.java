@@ -226,7 +226,7 @@ public class SendDataService {
             @Override
             public void onErrorResponse(VolleyError error) {
 
-                //Toast.makeText(sds.invocationcontext, "No response", Toast.LENGTH_SHORT).show();
+                Toast.makeText(sds.invocationcontext, "No server response", Toast.LENGTH_SHORT).show();
 
             }
         }) {
@@ -377,7 +377,7 @@ public class SendDataService {
 
                 params.put("number_session", "1");
                 params.put("id_name", Patient.getGovtId());
-                Log.d("id_name", Patient.getGovtId());
+                //Log.d("id_name", Patient.getGovtId());
 
                 return params;
             }

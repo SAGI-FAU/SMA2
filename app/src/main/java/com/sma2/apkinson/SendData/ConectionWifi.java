@@ -3,6 +3,8 @@ package com.sma2.apkinson.SendData;
 import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.net.wifi.WifiInfo;
+import android.net.wifi.WifiManager;
 
 
 public class ConectionWifi {
@@ -15,23 +17,32 @@ public class ConectionWifi {
 
         }
 
+
+
+
     public boolean checkConnection(ConectionWifi cW) {
+        WifiManager wifiMgr = (WifiManager) cW.invocationcontext.getSystemService(Context.WIFI_SERVICE);
 
-        ConnectivityManager connectivityManager = (ConnectivityManager) cW.invocationcontext.getSystemService(Context.CONNECTIVITY_SERVICE);
-        NetworkInfo networkInfo = connectivityManager.getActiveNetworkInfo();
-        if (networkInfo != null && networkInfo.isConnected()) {
+        if (wifiMgr.isWifiEnabled()) { // Wi-Fi adapter is ON
 
-            String name = networkInfo.getTypeName();
-            if (name.equals("mobile")) {
+            WifiInfo wifiInfo = wifiMgr.getConnectionInfo();
 
-                return false;
-            } else {
-                return true;
+
+            String supState = wifiInfo.getSupplicantState().name();
+            if( supState.equals("COMPLETED")){
+                return true; // Not connected to an access point
             }
+            else {
+                return false; // Connected to an access point
 
-        } else {
-            return false;
+            }
+        }
+        else {
+            return false; // Wi-Fi adapter is OFF
         }
     }
 
 }
+
+
+
