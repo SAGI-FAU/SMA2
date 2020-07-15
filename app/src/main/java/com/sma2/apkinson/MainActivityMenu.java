@@ -35,7 +35,7 @@ import java.util.List;
 
 public class MainActivityMenu extends AppCompatActivity {
     int PERMISSION_ALL = 1;
-    private final int TIEMPO = 30000;// agregado Daniel Server
+    private final int TIEMPO = 7200000;// agregado Daniel Server
     Handler handler = new Handler(); // agregado daniel Server
     String[] PERMISSIONS = {
             android.Manifest.permission.READ_EXTERNAL_STORAGE,
@@ -226,6 +226,9 @@ public class MainActivityMenu extends AppCompatActivity {
                     SendDataService sds= new SendDataService(context);
                     sds.uploadMetadata(sds);
                     sds.uploadMedicine(sds);
+                    sds.uploadAudio(sds);
+                    sds.uploadMovement(sds);
+                    sds.uploadVideo(sds);
 
 
 
